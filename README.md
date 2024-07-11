@@ -6,16 +6,17 @@ Demo [play around](https://www.demo.myissue.dk)
 
 ### About
 
-Introducing the **Free Page Builder**
+Introducing the **Free Website & Page Builder**
+Create and enhance digital experiences with Vue on any backend.
 
 ### Key Features
 
 Includes:
-- **Page Builder**: Drag & Drop Page Builder.
-- **Customizable Design**: Tailor the look and feel of your site to match your brand.
+- **Page Builder**: Click & Drop Page Builder.
+- **Customizable Design**: Tailor the look to match your brand.
   
 The Page Builder is packed with features:
-- **Drag & Drop**: Easily rearrange elements on your page.
+- **Click & Drop**: Easily rearrange elements on your page.
 - **Reordering**: Change the order of your content without hassle.
 - **True Visual Editing**: See your changes in real-time as you make them.
 - **Media Library**: Access and manage your media files effortlessly.
@@ -31,7 +32,7 @@ Empower users to create the perfect content with the Page Builder.
 ### Technical Details
 
 - **Frameworks**: Vue 3.
-- **Features**: Drag & Drop Page Builder.
+- **Features**: Click & Drop Page Builder.
 
 ## Installation
 
@@ -54,7 +55,7 @@ bun install
 ### Technical Details
 
 - **Frameworks**: Vue 3, Tailwind CSS, HTML.
-- **Features**: Drag & Drop Page Builder.
+- **Features**: Click & Drop Page Builder.
 
 ## Contributing
 
