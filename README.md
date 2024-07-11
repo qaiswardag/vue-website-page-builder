@@ -10,7 +10,7 @@ Introducing the **Free Page Builder**
 
 ### Key Features
 
-This theme includes:
+Includes:
 - **Page Builder**: Drag & Drop Page Builder.
 - **Customizable Design**: Tailor the look and feel of your site to match your brand.
   
