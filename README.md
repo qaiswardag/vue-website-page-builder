@@ -6,7 +6,7 @@ Demo [play around](https://www.demo.myissue.dk)
 
 ### About
 
-Introducing the **Free Page Builder
+Introducing the **Free Page Builder**
 
 ### Key Features
 
