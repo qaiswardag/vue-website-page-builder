@@ -1,4 +1,4 @@
-# Free Website & Page Builder
+# Free Vue Website & Page Builder
 
 Demo [play around](https://www.demo.myissue.dk)
 
