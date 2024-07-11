@@ -1,4 +1,4 @@
-# Free Vue Website & Page Builder
+# Free Vue Click & Drop Page Builder
 
 Demo [play around](https://www.demo.myissue.dk)
 
@@ -6,7 +6,7 @@ Demo [play around](https://www.demo.myissue.dk)
 
 ### About
 
-Introducing the **Free Website & Page Builder**
+Introducing the **Free Click & Drop Page Builder**
 Create and enhance digital experiences with Vue on any backend.
 
 ### Key Features
