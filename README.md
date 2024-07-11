@@ -1,4 +1,4 @@
-# Free Page Builder, Listing Directory, Blog, and Job Board Theme
+# Free Website & Page Builder
 
 Demo [play around](https://www.demo.myissue.dk)
 
