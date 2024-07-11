@@ -2,8 +2,6 @@
 
 Demo [play around](https://www.demo.myissue.dk)
 
-Laravel & Vue backend [repository](https://github.com/qaiswardag/laravel_vue_directory_and_job_board_theme)
-
 ## Introduction
 
 ### About
