@@ -51,42 +51,6 @@ yarn install
 bun install
 ```
 
-### Development Server
-
-Start the development server on `http://localhost`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
-```
-
-### Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-
-# bun
-bun run build
-```
-
 ### Technical Details
 
 - **Frameworks**: Vue 3, Tailwind CSS, HTML.
