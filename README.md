@@ -12,10 +12,12 @@ Create and enhance digital experiences with Vue on any backend.
 ### Key Features
 
 Includes:
+
 - **Page Builder**: Click & Drop Page Builder.
 - **Customizable Design**: Tailor the look to match your brand.
-  
+
 The Page Builder is packed with features:
+
 - **Click & Drop**: Easily rearrange elements on your page.
 - **Reordering**: Change the order of your content without hassle.
 - **True Visual Editing**: See your changes in real-time as you make them.
@@ -25,7 +27,6 @@ The Page Builder is packed with features:
 - **Font Customization**: Choose the perfect fonts to match your style.
 - **Undo & Redo**: Experiment confidently with the ability to revert changes.
 - **YouTube Videos**: Integrate video content smoothly.
-
 
 Empower users to create the perfect content with the Page Builder.
 
@@ -54,7 +55,7 @@ bun install
 
 ### Technical Details
 
-- **Frameworks**: Vue 3, Tailwind CSS, HTML.
+- **Frameworks**: Vue 3, Pinia, Tailwind CSS, HTML.
 - **Features**: Click & Drop Page Builder.
 
 ## Contributing
