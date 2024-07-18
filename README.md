@@ -58,6 +58,15 @@ bun install
 - **Frameworks**: Vue 3, Pinia, Tailwind CSS, HTML.
 - **Features**: Click & Drop Page Builder.
 
+### New GitHub Releases
+
+```
+git add .
+git commit -m ""
+git tag v0.0.0
+git push origin main --tags
+```
+
 ## Contributing
 
 Thank you for considering contributing to this project!
