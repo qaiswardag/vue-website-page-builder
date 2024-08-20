@@ -158,88 +158,39 @@ const handleDraftForUpdate = async function () {
     </div>
   </nav>
 
-  <div class="myPrimaryMainPageHeaderParagraph">
-    <h1 class="myPrimaryMainPageHeaderNotLoggedIn">
-      Build stunning pages with Vue
-      <br />
-      using an easy interface
-    </h1>
-    <p class="myPrimaryMainPageParagraphNotLoggedIn">
-      Power your vision and build impressive pages with ease using an intuitive
-      Vue.js drag-and-drop page builder.
-      <br />
-      <a
-        class="text-myPrimaryLinkColor"
-        href="https://github.com/qaiswardag/vue-website-page-builder"
-        target="_blank"
-      >
-        GitHub repository.
-      </a>
-    </p>
-    <div class="flex justify-center gap-2 my-8">
-      <div>
-        <button
-          @click="handlePageBuilder"
-          class="myPrimaryButton"
-        >
-          Start Builder
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="myPrimaryContentSection">
-    <p class="myPrimaryParagraph font-normal">
-      myself is the largest and most exclusive fashion directory in the United
-      Arab Emirates, gathering all fashion brands in one searchable solution.
-    </p>
-  </div>
-  <div class="myPrimaryContentSection">
-    <div
-      class="rounded-lg mt-4 border-2 border-dashed border-gray-300 p-8 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-    >
-      <button
-        type="button"
-        @click="handlePageBuilder"
-      >
-        <span class="myMediumIcon material-symbols-outlined"> stacks </span>
-      </button>
-
-      <h3 class="mt-2 text-sm font-medium text-gray-900">
-        Build your Job by adding Components
-      </h3>
-      <p class="mt-1 text-sm text-gray-500">
-        Get started by adding components using the drag & drop Page Builder.
-      </p>
-      <div class="mt-6">
-        <button
-          @click="handlePageBuilder"
-          type="button"
-          class="myPrimaryButton"
-        >
-          <span class="myMediumIcon material-symbols-outlined"> stacks </span>
-          Open Page Builder
-        </button>
-      </div>
-    </div>
-  </div>
   <div class="myPrimaryWidthScreenModule bg-red-50 lg:block hidden">
     <div class="myPrimaryContentSection">
       <h2 class="mySecondaryHeader">
-        <!--[-->Customize the design the way you want
-        <!--]-->
+        Power your vision and build impressive pages with ease using an
+        intuitive drag-and-drop page builder.
       </h2>
       <p class="myPrimaryParagraph font-normal">
-        <!--[-->
-        Design stores, jobs or campaigns your way with our intuitive page
-        builder. Customize layouts, colors, and fonts to achieve the perfect
-        design. myself is like a digital shopping window, focusing on your brand
-        image, authenticity and credibility! Just like on a shopping site
-        customers can search for anything they are looking for.
-        <!--]-->
+        Build responsive pages like listings, jobs or blog posts and manage
+        content easily using the free drag-and-drop page builder. Elevate your
+        creative vision and create pages using an intuitive drag-and-drop Page
+        Builder.
+        <br />
+        <a
+          class="text-myPrimaryLinkColor font-medium"
+          href="https://github.com/qaiswardag/vue-drag-and-drop-page-builder"
+          target="_blank"
+        >
+          Go to the GitHub repository
+        </a>
+        or
+        <a
+          class="text-myPrimaryLinkColor font-medium"
+          href="https://www.builder-demo.myissue.dk"
+          target="_blank"
+        >
+          play around with the page builder.
+        </a>
       </p>
     </div>
-    <div class="myPrimaryContentSection">
-      <!--[-->
+    <div
+      @click="handlePageBuilder"
+      class="myPrimaryContentSection cursor-pointer"
+    >
       <div
         class="relative overflow-hidden bg-cover bg-no-repeat grid grid-cols-12 h-[68rem] rounded-2xl shadow-sm outline outline-2 outline-offset-4 outline-myPrimaryLinkColor hover:outline-myPrimaryLinkColor/50"
         style="background-image: url('/home/page-builder-example.jpg')"

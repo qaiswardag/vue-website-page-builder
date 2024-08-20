@@ -43,12 +43,12 @@ The Page Builder is packed with features:
 
 Empower users to create the perfect content with the Page Builder.
 
-# Technical Details
+## Technical Details
 
-- **Frameworks**: Vue 3.
+- **Tech**: Vue 3, JavaScript, Pinia, Tailwind CSS, HTML.
 - **Features**: Click & Drop Page Builder.
 
-## Installation
+## ## Getting started & installation
 
 Make sure to install the dependencies:
 
@@ -66,62 +66,17 @@ yarn install
 bun install
 ```
 
-<p align="center" dir="auto">
-<img width="200" style="max-width: 100%;" src="public/logo-myissue.svg" alt="Logo">
-</p>
-
-## Technologies and Frameworks
-
-Built using cutting-Edge Technologies and Frameworks.
-Developed with Vue 3, Vite, Vuex and Tailwind CSS.
-
-## Getting started
-
-Clone the repository locally:
-
-```
-git clone https://github.com/qaiswardag/vue-website-page-builder.git
-```
-
-Install packages:
-
-```
-npm install
-```
-
-Run App
-
-```
-npm run dev
-```
-
 ## Required Software Installation
 
 Please note that these instructions assume you have PHP, Composer, and Node.js installed
 
-# Features
-
-- Live Drag & Drop Builder: Easily drag and drop content on a page to bring it to life.
-
-- Technologies and Frameworks: Built using cutting-edge technologies like Vue 3, Vuex, Composition API, and Tailwind CSS.
-
-- Set Brand and Link Colors in One Place: Centralize the color settings and apply them across the entire platform effortlessly.
-
-- Mobile-First Approach: Developed with a Mobile-First approach to ensure a seamless experience on various devices.
-
-- Media Library: Enjoy a beautiful and user-friendly media library for easy image management and updates.
-
-- Minimal and Intuitive Design: Engage users with an elegant and intuitive design that enhances their visual experience.
-
 ## Documentation
-
-### Customizing the page builder
 
 I have separated all the logic for manipulating the HTML elements into its own Designer class, which can be found at the path: `src/composables/PageBuilder.js`.
 
 Customizing the page builder is made simple since all the logic resides in the Designer Class.
 
-### Unsplash
+## Unsplash
 
 Please note that if you want to use Unsplash, simply create an .env file in your root folder and enter your Unsplash API key and value.
 
@@ -137,20 +92,6 @@ If you are familiar with Laravel, you can integrate the page builder with my ope
 [Demo & repo](https://github.com/qaiswardag/myissue-admin).
 
 By utilizing a backend Framework, the HTML components, currently stored in a JSON file at `public/components.json`, can be easily stored in the database, resulting in better management of HTML components.
-
-## Technical Details
-
-- **Frameworks**: Vue 3, Pinia, Tailwind CSS, HTML.
-- **Features**: Click & Drop Page Builder.
-
-## New GitHub Releases
-
-```
-git add .
-git commit -m ""
-git tag v0.0.0
-git push origin main --tags
-```
 
 ## Contributing
 
