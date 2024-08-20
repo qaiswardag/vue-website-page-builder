@@ -1,4 +1,4 @@
-import './index.css';
+import './css/app.css';
 // remove store / vuex from here
 import store from './store/index';
 
