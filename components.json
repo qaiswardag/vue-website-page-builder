@@ -1,0 +1,277 @@
+{
+  "component_categories": [
+    {
+      "id": 1,
+      "name": "Articles & Contents",
+      "created_at": "2024-08-18T11:02:19.000000Z",
+      "updated_at": "2024-08-18T11:02:19.000000Z"
+    },
+    {
+      "id": 2,
+      "name": "Images",
+      "created_at": "2024-08-18T11:02:19.000000Z",
+      "updated_at": "2024-08-18T11:02:19.000000Z"
+    },
+    {
+      "id": 3,
+      "name": "Images with Text",
+      "created_at": "2024-08-18T11:02:19.000000Z",
+      "updated_at": "2024-08-18T11:02:19.000000Z"
+    }
+  ],
+  "components": {
+    "current_page": 1,
+    "data": [
+      {
+        "id": 1,
+        "deleted_at": null,
+        "user_id": 1,
+        "title": "4 Images and Descriptions",
+        "html_code": "<section><div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\"><div class=\"mx-auto max-w-7xl\"><div class=\"myPrimaryGap grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"> <div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"> <div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"> <div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"><div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div> </div> </div> </div></section>",
+        "published": 1,
+        "created_at": "2024-08-18T11:02:19.000000Z",
+        "updated_at": "2024-08-18T11:02:19.000000Z",
+        "cover_images": [
+          {
+            "id": 1,
+            "user_id": 1,
+            "team_id": 1,
+            "name": "1",
+            "path": "/page-builder/placeholder.jpg",
+            "thumbnail_path": "/page-builder/placeholder.jpg",
+            "medium_path": "/page-builder/placeholder.jpg",
+            "large_path": "/page-builder/placeholder.jpg",
+            "size": "1000",
+            "width": "1000",
+            "height": "1000",
+            "extension": "jpg",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 1,
+              "media_library_id": 1,
+              "primary": 0
+            }
+          }
+        ],
+        "categories": [
+          {
+            "id": 1,
+            "name": "Articles & Contents",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 1,
+              "category_id": 1
+            }
+          },
+          {
+            "id": 3,
+            "name": "Images with Text",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 1,
+              "category_id": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": 2,
+        "deleted_at": null,
+        "user_id": 1,
+        "title": "3 Images and Descriptions",
+        "html_code": "<section><div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\"><div class=\"mx-auto max-w-7xl\"><div class=\"myPrimaryGap grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"> <div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"> <div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"> <div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div>  </div> </div> </div></section>",
+        "published": 1,
+        "created_at": "2024-08-18T11:02:19.000000Z",
+        "updated_at": "2024-08-18T11:02:19.000000Z",
+        "cover_images": [
+          {
+            "id": 2,
+            "user_id": 1,
+            "team_id": 1,
+            "name": "2",
+            "path": "/page-builder/placeholder.jpg",
+            "thumbnail_path": "/page-builder/placeholder.jpg",
+            "medium_path": "/page-builder/placeholder.jpg",
+            "large_path": "/page-builder/placeholder.jpg",
+            "size": "1000",
+            "width": "1000",
+            "height": "1000",
+            "extension": "jpg",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 2,
+              "media_library_id": 2,
+              "primary": 0
+            }
+          }
+        ],
+        "categories": [
+          {
+            "id": 2,
+            "name": "Images",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 2,
+              "category_id": 2
+            }
+          },
+          {
+            "id": 3,
+            "name": "Images with Text",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 2,
+              "category_id": 3
+            }
+          }
+        ]
+      },
+      {
+        "id": 3,
+        "deleted_at": null,
+        "user_id": 1,
+        "title": "2 Images and Descriptions",
+        "html_code": "<section><div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\"><div class=\"mx-auto max-w-7xl\"><div class=\"myPrimaryGap grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"> <div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"> <div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div>   </div> </div> </div></section>",
+        "published": 1,
+        "created_at": "2024-08-18T11:02:19.000000Z",
+        "updated_at": "2024-08-18T11:02:19.000000Z",
+        "cover_images": [
+          {
+            "id": 3,
+            "user_id": 1,
+            "team_id": 1,
+            "name": "3",
+            "path": "/page-builder/placeholder.jpg",
+            "thumbnail_path": "/page-builder/placeholder.jpg",
+            "medium_path": "/page-builder/placeholder.jpg",
+            "large_path": "/page-builder/placeholder.jpg",
+            "size": "1000",
+            "width": "1000",
+            "height": "1000",
+            "extension": "jpg",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 3,
+              "media_library_id": 3,
+              "primary": 0
+            }
+          }
+        ],
+        "categories": [
+          {
+            "id": 1,
+            "name": "Articles & Contents",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 3,
+              "category_id": 1
+            }
+          },
+          {
+            "id": 2,
+            "name": "Images",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 3,
+              "category_id": 2
+            }
+          }
+        ]
+      },
+      {
+        "id": 4,
+        "deleted_at": null,
+        "user_id": 1,
+        "title": "Single Image and Description",
+        "html_code": "<section>\n                <div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\"><div class=\"mx-auto max-w-7xl\"><div class=\"myPrimaryGap grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"> <div class=\"break-words py-2\"><p>Layouts and visual.</p><p>Ullamcorper dignissim cras tincidunt.</p></div> </div>    </div> </div> </div>\n                </section>",
+        "published": 1,
+        "created_at": "2024-08-18T11:02:19.000000Z",
+        "updated_at": "2024-08-18T11:02:19.000000Z",
+        "cover_images": [
+          {
+            "id": 4,
+            "user_id": 1,
+            "team_id": 1,
+            "name": "4",
+            "path": "/page-builder/placeholder.jpg",
+            "thumbnail_path": "/page-builder/placeholder.jpg",
+            "medium_path": "/page-builder/placeholder.jpg",
+            "large_path": "/page-builder/placeholder.jpg",
+            "size": "1000",
+            "width": "1000",
+            "height": "1000",
+            "extension": "jpg",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 4,
+              "media_library_id": 4,
+              "primary": 0
+            }
+          }
+        ],
+        "categories": [
+          {
+            "id": 3,
+            "name": "Images with Text",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 4,
+              "category_id": 3
+            }
+          },
+          {
+            "id": 2,
+            "name": "Images",
+            "created_at": "2024-08-18T11:02:19.000000Z",
+            "updated_at": "2024-08-18T11:02:19.000000Z",
+            "pivot": {
+              "component_id": 4,
+              "category_id": 2
+            }
+          }
+        ]
+      }
+    ],
+    "first_page_url": "http://localhost:7000/components/index?category%5Bname%5D=All&page=1",
+    "from": 1,
+    "last_page": 1,
+    "last_page_url": "http://localhost:7000/components/index?category%5Bname%5D=All&page=1",
+    "links": [
+      {
+        "url": null,
+        "label": "Prev",
+        "active": false
+      },
+      {
+        "url": "http://localhost:7000/components/index?category%5Bname%5D=All&page=1",
+        "label": "1",
+        "active": true
+      },
+      {
+        "url": null,
+        "label": "Next",
+        "active": false
+      }
+    ],
+    "next_page_url": null,
+    "path": "http://localhost:7000/components/index",
+    "per_page": 10,
+    "prev_page_url": null,
+    "to": 4,
+    "total": 4
+  },
+  "oldInput": {
+    "search_query": null
+  }
+}
