@@ -12,6 +12,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 // new version
 import { useStore } from 'vuex';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
+import SidebarUnsplash from '@/Components/MediaLibrary/SidebarUnsplash.vue';
 import Unsplash from '@/Components/MediaLibrary/Unsplash.vue';
 import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vue';
 
@@ -94,11 +95,6 @@ const thirdButton = function () {
 const changeSelectedMenuTab = function (clicked) {
   selected.value = clicked;
 };
-//
-//
-//
-
-//
 </script>
 
 <template>
@@ -310,7 +306,7 @@ const changeSelectedMenuTab = function (clicked) {
                       <div
                         class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
-                        aside for unsplash
+                        <SidebarUnsplash></SidebarUnsplash>
                       </div>
                     </aside>
                     <!-- Details sidebar - unsplash end-->
@@ -320,10 +316,52 @@ const changeSelectedMenuTab = function (clicked) {
                   <!--content media library - end-->
 
                   <!-- Actions # start -->
-                  <template v-if="selected === 'Media library'">
-                    <div>actions section</div>
+                  <template v-if="selected === 'Unsplash'">
+                    <div
+                      v-if="getCurrentImage && getCurrentImage.file"
+                      class="bg-slate-50 px-2 py-4 flex sm:justify-end justify-center"
+                    >
+                      <div
+                        class="sm:grid-cols-3 sm:items-end justify-end flex sm:flex-row myPrimaryGap sm:w-5/6 w-full"
+                      >
+                        <div v-if="firstButtonText">
+                          <button
+                            ref="firstButtonRef"
+                            class="mySecondaryButton"
+                            type="button"
+                            @click="firstButton"
+                          >
+                            {{ firstButtonText }}
+                          </button>
+                        </div>
+
+                        <div v-if="secondButtonText">
+                          <button
+                            class="myPrimaryButton"
+                            type="button"
+                            @click="secondButton"
+                          >
+                            {{ secondButtonText }}
+                          </button>
+                        </div>
+
+                        <div
+                          v-if="thirdButtonText"
+                          class="w-full"
+                        >
+                          <button
+                            class="myPrimaryDeleteButton"
+                            type="button"
+                            @click="thirdButton"
+                          >
+                            {{ thirdButtonText }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                     <!-- Actions # end -->
                   </template>
+                  <!-- Actions # end -->
                 </div>
               </div>
             </div>

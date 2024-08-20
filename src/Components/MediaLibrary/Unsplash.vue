@@ -25,9 +25,8 @@ const getUnsplashImages = computed(() => {
 //
 //
 const handleImageClick = function (file, imageDetails) {
-  console.log(`"you clicked me.."`);
-  // store.commit('mediaLibrary/setCurrentImage', null);
-  // store.commit('mediaLibrary/setCurrentPreviewImage', null);
+  store.commit('mediaLibrary/setCurrentImage', { file });
+  store.commit('mediaLibrary/setCurrentPreviewImage', null);
 };
 //
 //
@@ -237,7 +236,7 @@ onMounted(() => {
       </div>
     </nav>
     <div
-      class="overflow-y-scroll md:min-h-[38.6rem] md:max-h-[38.6rem] min-h-[15rem] max-h-[15rem] pr-1 rounded"
+      class="overflow-y-scroll md:min-h-[20rem] md:max-h-[20em] min-h-[15rem] max-h-[15rem] pr-1 rounded"
     >
       <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-2">
         <div

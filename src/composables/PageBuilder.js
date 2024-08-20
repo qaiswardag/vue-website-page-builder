@@ -1151,21 +1151,24 @@ class PageBuilder {
     return false;
   }
   //
-  async updateBasePrimaryImage() {
+  async updateBasePrimaryImage(data) {
     if (this.showRunningMethodLogs) {
       console.log('updateBasePrimaryImage');
     }
 
     if (!this.getElement.value) return;
 
-    if (this.getCurrentImage.value.currentImage?.mediaLibrary?.path) {
-      await this.nextTick;
-      this.store.commit(
-        'pageBuilderState/setBasePrimaryImage',
-        `/storage/uploads/${this.getCurrentImage.value.currentImage.mediaLibrary.path}`
-      );
+    if (data.type === 'unsplash') {
+      if (this.getCurrentImage.value.file) {
+        await this.nextTick;
+        this.store.commit(
+          'pageBuilderState/setBasePrimaryImage',
+          `${this.getCurrentImage.value.file}`
+        );
+      }
     }
   }
+
   showBasePrimaryImage() {
     if (this.showRunningMethodLogs) {
       console.log('showBasePrimaryImage');
