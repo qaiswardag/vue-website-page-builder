@@ -7,31 +7,11 @@ import ComponentTopMenu from '@/Components/PageBuilder/EditorMenu/Editables/Comp
 import EditGetElement from '@/Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue';
 import SearchComponents from '@/Components/Search/SearchComponents.vue';
 
-import {
-  Bars3Icon,
-  XMarkIcon,
-  EyeIcon,
-  BellIcon,
-  EyeSlashIcon,
-  AdjustmentsVerticalIcon,
-  Square3Stack3DIcon,
-  Squares2X2Icon,
-  XCircleIcon,
-  BoltSlashIcon,
-  FolderPlusIcon,
-  DevicePhoneMobileIcon,
-} from '@heroicons/vue/24/outline';
 import { useStore } from 'vuex';
 import OptionsDropdown from '@/Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue';
 import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebarEditor.vue';
 
 const emit = defineEmits(['previewCurrentDesign']);
-
-const props = defineProps({
-  team: {
-    required: false,
-  },
-});
 
 const store = useStore();
 const pageBuilder = new PageBuilder(store);
@@ -135,7 +115,6 @@ onMounted(async () => {
   <SearchComponents
     v-if="showModalAddComponent"
     :show="showModalAddComponent"
-    :team="team"
     :firstButtonText="firstButtonTextSearchComponents"
     :title="titleModalAddComponent"
     @firstModalButtonSearchComponentsFunction="
@@ -328,7 +307,6 @@ onMounted(async () => {
         class="h-full duration-300 z-20 flex-shrink-0 overflow-hidden shadow-2xl rounded-l-2xl bg-white"
       >
         <RightSidebarEditor
-          :team="team"
           @closeEditor="store.commit('pageBuilderState/setMenuRight', false)"
         >
         </RightSidebarEditor>

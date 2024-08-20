@@ -3,16 +3,12 @@ import Modal from '@/Components/Modals/Modal.vue';
 import { ref, computed, onMounted, onBeforeMount, nextTick } from 'vue';
 import { TailwindPagination } from 'laravel-vue-pagination';
 import componentHelpers from '@/utils/builder/html-elements/componentHelpers';
-import ThumbnailSmallImageSlider from '@/Components/ImageSliders/ThumbnailSmallImageSlider.vue';
 import PageBuilder from '@/composables/PageBuilder';
 import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vue';
 
 import { useStore } from 'vuex';
 
 const props = defineProps({
-  team: {
-    required: true,
-  },
   firstButtonText: {
     required: true,
   },
@@ -177,7 +173,7 @@ onMounted(async () => {
                   class="overflow-scroll min-h-[25rem] max-h-[25rem] grid myPrimaryGap md:grid-cols-2 grid-cols-2 w-full myPrimaryGap px-2 p-4 border border-myPrimaryLightGrayColor rounded-lg"
                 >
                   <div
-                    class="overflow-hidden whitespace-pre-line flex-1 h-auto rounded border border-gray-300 lg:py-10 py-8 px-2"
+                    class="overflow-hidden whitespace-pre-line flex-1 h-auto rounded-lg border border-gray-200 lg:py-10 py-8 px-2"
                     v-for="component in getFetchedComponents &&
                     getFetchedComponents.fetchedData &&
                     getFetchedComponents.fetchedData.components &&
@@ -188,17 +184,13 @@ onMounted(async () => {
                     :key="component.id"
                   >
                     <div class="relative">
-                      <template v-if="component && component.cover_images">
-                        <ThumbnailSmallImageSlider
-                          :images="component.cover_images"
-                          imageSize="medium_path"
-                          imageHeight="max-h-72"
-                          imageWidth="w-full cursor-pointer object-contain bg-white"
-                          :roundedFull="false"
-                          :squareButtons="true"
-                          @firstButtonClick="handleDropComponent(component)"
-                          :imageClickable="true"
-                        ></ThumbnailSmallImageSlider>
+                      <template v-if="component && component.cover_image">
+                        <img
+                          :src="component.cover_image"
+                          alt="placeholder"
+                          class="max-h-72 cursor-pointer object-contain bg-white rounded-lg mx-auto"
+                          @click="handleDropComponent(component)"
+                        />
                       </template>
                     </div>
                   </div>

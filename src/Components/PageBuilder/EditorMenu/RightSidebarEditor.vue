@@ -1,5 +1,4 @@
 <script setup>
-import { XMarkIcon } from '@heroicons/vue/24/outline';
 import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 
@@ -19,12 +18,6 @@ import TipTap from '@/Components/TipTap/TipTap.vue';
 const store = useStore();
 // emit
 const emit = defineEmits(['closeEditor']);
-
-const props = defineProps({
-  team: {
-    required: true,
-  },
-});
 
 const reactiveGetElement = ref(null);
 
@@ -73,7 +66,7 @@ const isHeadingElement = computed(() => {
       <div class="pl-3 pr-3 mb-4 overflow-y-scroll md:pb-24 pb-12">
         <div v-show="isHeadingElement === true">
           <article>
-            <ImageEditor :team="team"> </ImageEditor>
+            <ImageEditor> </ImageEditor>
           </article>
           <article>
             <TipTap></TipTap>

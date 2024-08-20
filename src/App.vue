@@ -18,27 +18,6 @@ import {
   ListboxOptions,
 } from '@headlessui/vue';
 
-import {
-  ArrowPathIcon,
-  CheckIcon,
-  ChevronUpDownIcon,
-  LockClosedIcon,
-  LockOpenIcon,
-  SquaresPlusIcon,
-  TrashIcon,
-  UserIcon,
-  UserPlusIcon,
-  XMarkIcon,
-  Squares2X2Icon,
-  NewspaperIcon,
-  PhotoIcon,
-  MapPinIcon,
-  GlobeAmericasIcon,
-  MinusIcon,
-  PlusIcon,
-  FolderPlusIcon,
-} from '@heroicons/vue/24/outline';
-
 const openDesignerModal = ref(false);
 
 // use designer model
@@ -151,38 +130,6 @@ const handleDraftForUpdate = async function () {
     store.commit('user/setIsLoading', false);
   }
 };
-
-const team = {
-  id: 2,
-  user_id: 1,
-  name: 'Hermès',
-  address: null,
-  contact_page_url: null,
-  slug: 'hermes',
-  content: null,
-  public: 1,
-  personal_team: false,
-  created_at: '2024-08-18T11:02:18.000000Z',
-  updated_at: '2024-08-18T11:02:18.000000Z',
-  monday_opening_time: '10:00:00',
-  monday_closing_time: '22:00:00',
-  tuesday_opening_time: '10:00:00',
-  tuesday_closing_time: '22:00:00',
-  wednesday_opening_time: '10:00:00',
-  wednesday_closing_time: '22:00:00',
-  thursday_opening_time: '10:00:00',
-  thursday_closing_time: '22:00:00',
-  friday_opening_time: '10:00:00',
-  friday_closing_time: '22:00:00',
-  saturday_opening_time: '10:00:00',
-  saturday_closing_time: '22:00:00',
-  sunday_opening_time: '10:00:00',
-  sunday_closing_time: '22:00:00',
-  time_zone: 'Asia/Dubai',
-  coverImagesWithLogos: { cover_images: [], logos: [] },
-  cover_images_relationship: [],
-  logos_relationship: [],
-};
 </script>
 
 <template>
@@ -196,7 +143,7 @@ const team = {
     @secondDesignerModalButtonFunction="secondDesignerModalButtonFunction"
     @handleDraftForUpdate="handleDraftForUpdate"
   >
-    <PageBuilderView :team="team"></PageBuilderView>
+    <PageBuilderView></PageBuilderView>
   </PageBuilderModal>
 
   <div class="myPrimaryContentSection">

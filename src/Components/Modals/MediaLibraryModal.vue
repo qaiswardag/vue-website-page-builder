@@ -8,7 +8,6 @@ import {
   TransitionRoot,
 } from '@headlessui/vue';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
-import { TrashIcon } from '@heroicons/vue/24/outline';
 
 // new version
 import { useStore } from 'vuex';
@@ -61,12 +60,6 @@ const tabs = ref([
 ]);
 
 const props = defineProps({
-  team: {
-    required: false,
-  },
-  user: {
-    required: false,
-  },
   title: {
     type: String,
     required: true,
@@ -191,8 +184,7 @@ const uploadOnSuccess = function () {
                   as="h3"
                   class="tertiaryHeader my-0 py-0"
                 >
-                  {{ title }} {{ team?.name ? 'for' : '' }}
-                  {{ team?.name ? team?.name : '' }}
+                  {{ title }}
                 </DialogTitle>
 
                 <div class="flex-end">

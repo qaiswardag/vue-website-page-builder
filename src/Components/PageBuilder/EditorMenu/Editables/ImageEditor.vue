@@ -5,12 +5,6 @@ import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue';
 import PageBuilder from '@/composables/PageBuilder';
 
-const props = defineProps({
-  team: {
-    required: true,
-  },
-});
-
 const store = useStore();
 const pageBuilder = new PageBuilder(store);
 
@@ -77,7 +71,6 @@ const handleAddImage = function () {
     />
   </div>
   <MediaLibraryModal
-    :team="team"
     :open="showMediaLibraryModal"
     :title="titleMedia"
     :description="descriptionMedia"

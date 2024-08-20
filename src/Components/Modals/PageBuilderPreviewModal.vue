@@ -1,6 +1,5 @@
 <script setup>
 import Modal from '@/Components/Modals/Modal.vue';
-import { CheckIcon, BellIcon } from '@heroicons/vue/24/outline';
 import { delay } from '@/helpers/delay';
 
 import {

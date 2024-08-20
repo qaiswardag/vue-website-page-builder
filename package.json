@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.16",
-    "@heroicons/vue": "^2.0.18",
     "@tiptap/extension-bold": "^2.1.10",
     "@tiptap/extension-heading": "^2.1.10",
     "@tiptap/extension-link": "^2.1.10",

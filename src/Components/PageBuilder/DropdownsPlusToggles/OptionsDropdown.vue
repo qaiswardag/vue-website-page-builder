@@ -1,13 +1,5 @@
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
-import {
-  AdjustmentsVerticalIcon,
-  ArrowUturnRightIcon,
-  CheckIcon,
-  ChevronDownIcon,
-  EyeIcon,
-  TrashIcon,
-} from '@heroicons/vue/24/outline';
 import PageBuilder from '@/composables/PageBuilder';
 import { ref, computed } from 'vue';
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue';
