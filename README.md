@@ -48,7 +48,7 @@ Empower users to create the perfect content with the Page Builder.
 - **Tech**: Vue 3, JavaScript, Pinia, Tailwind CSS, HTML.
 - **Features**: Click & Drop Page Builder.
 
-## ## Getting started & installation
+## Getting started & installation
 
 Make sure to install the dependencies:
 

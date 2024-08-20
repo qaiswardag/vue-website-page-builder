@@ -172,7 +172,7 @@ const handleDraftForUpdate = async function () {
         <br />
         <a
           class="text-myPrimaryLinkColor font-medium"
-          href="https://github.com/qaiswardag/vue-drag-and-drop-page-builder"
+          href="https://github.com/qaiswardag/vue-website-page-builder"
           target="_blank"
         >
           Go to the GitHub repository
