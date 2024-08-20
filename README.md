@@ -12,7 +12,7 @@ To star the repository, simply click on the **Star** button located at the top-r
 
 ## Introduction
 
-If you find this project useful or interesting, I would greatly appreciate if you could star ⭐ the [GitHub repository](https://github.com/qaiswardag/vue-website-page-builder). It helps to boost the project's visibility and encourages me to continue adding new features.
+If you find this project useful or interesting, I would greatly appreciate if you could star ⭐ the repository. It helps to boost the project's visibility and encourages me to continue adding new features.
 
 ## Demo
 
