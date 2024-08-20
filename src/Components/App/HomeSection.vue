@@ -453,13 +453,15 @@ const features = [
       </div>
     </div>
 
-    <div class="myPrimaryWidthScreenModule bg-green-50 lg:block hidden">
+    <div class="myPrimaryWidthScreenModule bg-gray-100 lg:block hidden">
       <div class="myPrimaryContentSection">
-        <span class="block">
-          Build responsive pages and manage content easily pages with ease using
-          an intuitive Vue drag-and-drop page builder. Elevate your creative
-          vision and effortlessly create pages using an intuitive Vue.js
-          drag-and-drop Page Builder.
+        <h2 class="mySecondaryHeader">Break free from design limitations</h2>
+        <p class="myPrimaryParagraph font-normal">
+          Build your website pages with hundreds of ready-made components.
+          Designed to fit your every need, fully customizable & always
+          responsive. Elevate your creative vision and effortlessly create pages
+          using an intuitive Vue.js drag-and-drop page builder. Break free from
+          design limitations and turn your visions into reality.
           <br />
           <a
             class="text-myPrimaryLinkColor font-medium"
@@ -476,11 +478,13 @@ const features = [
           >
             play around with the page builder.
           </a>
-        </span>
+        </p>
 
-        <div class="grid grid-cols-1 lg:gap-16 gap-24 lg:grid-cols-3">
+        <div
+          class="grid grid-cols-1 lg:gap-16 gap-24 lg:grid-cols-3 mt-12 pt-8 border-t border-red-300"
+        >
           <div>
-            <h2 class="myTertiaryHeader">Everything you need</h2>
+            <h2 class="myTertiaryHeader mt-0">Everything you need</h2>
             <p class="mt-2 myPrimaryParagraph font-medium">
               Power your vision and build impressive pages with ease using an
               intuitive Vue drag-and-drop page builder, and achieve stunning
@@ -488,16 +492,18 @@ const features = [
             </p>
           </div>
           <dl
-            class="col-span-2 grid grid-cols-1 gap-x-8 gap-y-10 text-base leading-7 text-gray-600 sm:grid-cols-2 lg:gap-y-16"
+            class="col-span-2 grid grid-cols-1 gap-x-8 gap-y-10 text-base leading-7 sm:grid-cols-2 lg:gap-y-16"
           >
             <div
               v-for="feature in features"
               :key="feature.name"
               class="relative pl-9"
             >
-              <dt class="myFourthHeader">
+              <dt class="myFourthHeader flex items-center gap-2">
                 <span class="material-symbols-outlined"> check </span>
-                {{ feature.name }}
+                <span>
+                  {{ feature.name }}
+                </span>
               </dt>
               <dd class="mt-2 myPrimaryParagraph">
                 {{ feature.description }}
