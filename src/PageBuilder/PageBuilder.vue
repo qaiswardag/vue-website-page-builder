@@ -2,7 +2,7 @@
 import { onMounted, computed, ref, watch, nextTick } from 'vue';
 import PageBuilder from '@/composables/PageBuilder';
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue';
-import Preview from '@/PageBuilder/PageBuilder/Preview.vue';
+import Preview from '@/PageBuilder/Preview.vue';
 import ComponentTopMenu from '@/Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue';
 import EditGetElement from '@/Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue';
 import SearchComponents from '@/Components/Search/SearchComponents.vue';

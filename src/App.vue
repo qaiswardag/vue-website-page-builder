@@ -2,7 +2,7 @@
 import { ref, computed, onBeforeMount, watch, onMounted, nextTick } from 'vue';
 import { useStore } from 'vuex';
 import PageBuilderModal from '@/Components/Modals/PageBuilderModal.vue';
-import PageBuilderView from '@/PageBuilder/PageBuilder/PageBuilder.vue';
+import PageBuilderView from '@/PageBuilder/PageBuilder.vue';
 import PageBuilder from '@/composables/PageBuilder';
 import { delay } from '@/helpers/delay';
 import VueDatePicker from '@vuepic/vue-datepicker';

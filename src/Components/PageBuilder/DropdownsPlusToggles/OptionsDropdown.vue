@@ -3,7 +3,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import PageBuilder from '@/composables/PageBuilder';
 import { ref, computed } from 'vue';
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue';
-import Preview from '@/PageBuilder/PageBuilder/Preview.vue';
+import Preview from '@/PageBuilder/Preview.vue';
 import SlideOverRight from '@/Components/PageBuilder/Slidebars/SlideOverRight.vue';
 import DesignerSettings from '@/Components/PageBuilder/Settings/DesignerSettings.vue';
 

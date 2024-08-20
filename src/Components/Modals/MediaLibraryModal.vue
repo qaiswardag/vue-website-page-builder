@@ -17,21 +17,6 @@ import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vu
 // store
 const store = useStore();
 
-const modalShowDeleteImage = ref(false);
-
-// modal content
-const typeModal = ref('');
-const gridColumnModal = ref(Number(1));
-const titleModal = ref('');
-const descriptionModal = ref('');
-const firstButtonModal = ref('');
-const secondButtonModal = ref(null);
-const thirdButtonModal = ref(null);
-// set dynamic modal handle functions
-const firstModalButtonFunction = ref(null);
-const secondModalButtonFunction = ref(null);
-const thirdModalButtonFunction = ref(null);
-
 const getCurrentImage = computed(() => {
   return store.getters['mediaLibrary/getCurrentImage'];
 });
@@ -44,18 +29,20 @@ const getCurrentPreviewImage = computed(() => {
   return store.getters['mediaLibrary/getCurrentPreviewImage'];
 });
 
-const search_query = ref('');
-
-const selected = ref('Media library');
+const selected = ref('Unsplash');
 
 const tabs = ref([
   {
     name: 'Upload',
-    current: true,
+    current: false,
   },
   {
     name: 'Media library',
     current: false,
+  },
+  {
+    name: 'Unsplash',
+    current: true,
   },
 ]);
 
@@ -107,9 +94,6 @@ const changeSelectedMenuTab = function (clicked) {
   selected.value = clicked;
 };
 //
-const uploadOnSuccess = function () {
-  selected.value = 'Media library';
-};
 //
 //
 
@@ -163,23 +147,7 @@ const uploadOnSuccess = function () {
               <div
                 class="flex gap-2 justify-between items-center border-b border-gray-200 p-4 mb-2"
               >
-                <DynamicModal
-                  :show="modalShowDeleteImage"
-                  :type="typeModal"
-                  disabledWhichButton="thirdButton"
-                  :gridColumnAmount="gridColumnModal"
-                  :title="titleModal"
-                  :description="descriptionModal"
-                  :firstButtonText="firstButtonModal"
-                  :secondButtonText="secondButtonModal"
-                  :thirdButtonText="thirdButtonModal"
-                  @firstModalButtonFunction="firstModalButtonFunction"
-                  @secondModalButtonFunction="secondModalButtonFunction"
-                  @thirdModalButtonFunction="thirdModalButtonFunction"
-                >
-                  <header></header>
-                  <main></main>
-                </DynamicModal>
+                modal show delete image here..
                 <DialogTitle
                   as="h3"
                   class="tertiaryHeader my-0 py-0"
@@ -207,8 +175,107 @@ const uploadOnSuccess = function () {
                   >
                     <!-- Main content - start-->
 
+                    <div class="pb-4 max-w-7xl mx-auto w-full">
+                      <!-- Tabs -->
+                      <div class="mb-4">
+                        <!-- Tabs Mobile -->
+                        <div class="sm:hidden">
+                          <label
+                            for="tabs"
+                            class="sr-only"
+                            >Select a tab</label
+                          >
+                          <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+
+                          <select
+                            v-model="selected"
+                            id="tabs"
+                            class="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-myPrimaryLinkColor focus:border-myPrimaryLinkColor sm:text-sm rounded-md"
+                          >
+                            <option>Upload</option>
+                            <option>Media library</option>
+                            <option>Unsplash</option>
+                          </select>
+                        </div>
+                        <div class="hidden sm:block">
+                          <div
+                            class="flex myPrimaryGap items-center overflow-x-auto bg-myPrimaryLightGrayColor px-2 pt-3 pb-2 rounded-full"
+                          >
+                            <nav
+                              class="flex-1 -mb-px flex space-x-2 xl:space-x-4"
+                              aria-label="Tabs"
+                            >
+                              <button
+                                @click="changeSelectedMenuTab(tab.name)"
+                                v-for="tab in tabs"
+                                :key="tab.name"
+                                :aria-current="tab.current ? 'page' : undefined"
+                                class="py-2 px-3 my-1 text-xs cursor-pointer font-medium"
+                                :class="[
+                                  tab.name === selected
+                                    ? 'myPrimaryButton'
+                                    : 'mySecondaryButton',
+                                  'whitespace-nowrap',
+                                ]"
+                              >
+                                <span
+                                  v-if="tab.name === 'Upload'"
+                                  class="material-symbols-outlined"
+                                >
+                                  cloud_upload
+                                </span>
+                                <span
+                                  v-if="tab.name === 'Media library'"
+                                  class="myMediumIcon material-symbols-outlined"
+                                >
+                                  perm_media
+                                </span>
+                                <span
+                                  v-if="tab.name === 'Unsplash'"
+                                  class="myMediumIcon material-symbols-outlined"
+                                >
+                                  filter_hdr
+                                </span>
+                                <span>
+                                  {{ tab.name }}
+                                </span>
+                              </button>
+                            </nav>
+                          </div>
+                        </div>
+                      </div>
+
+                      <template v-if="selected === 'Upload'">
+                        <!-- image upload - start -->
+                        upload iamge form
+                        <!-- image upload - end -->
+                      </template>
+                      <template v-if="selected === 'Media library'">
+                        <!-- image gallary - start -->
+                        MediaLibraryGalleryList here...
+                        <!-- image gallary - end -->
+                      </template>
+                      <template v-if="selected === 'Unsplash'">
+                        <!-- image gallary - start -->
+                        Unsplash here...
+                        <!-- image gallary - end -->
+                      </template>
+                    </div>
+
                     <!-- Main content - end-->
 
+                    <!-- Details sidebar - upload start-->
+                    <aside
+                      v-if="selected === 'Upload'"
+                      aria-label="sidebar"
+                      class="rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
+                    >
+                      <div
+                        class="rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
+                      >
+                        aside for upload
+                      </div>
+                    </aside>
                     <!-- Details sidebar - media library start-->
                     <aside
                       v-if="selected === 'Media library'"
@@ -222,18 +289,20 @@ const uploadOnSuccess = function () {
                       </div>
                     </aside>
                     <!-- Details sidebar - media library end-->
-                    <!-- Details sidebar - upload start-->
+                    <!-- Details sidebar - unsplash start-->
                     <aside
-                      v-if="selected === 'Upload'"
+                      v-if="selected === 'Unsplash'"
                       aria-label="sidebar"
-                      class="rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
+                      class="md:w-72"
                     >
                       <div
                         class="rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
-                        aside for upload
+                        aside for unsplash
                       </div>
                     </aside>
+                    <!-- Details sidebar - unsplash end-->
+
                     <!-- Details sidebar end-->
                   </div>
                   <!--content media library - end-->
