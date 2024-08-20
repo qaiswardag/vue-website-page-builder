@@ -147,7 +147,6 @@ const changeSelectedMenuTab = function (clicked) {
               <div
                 class="flex gap-2 justify-between items-center border-b border-gray-200 p-4 mb-2"
               >
-                modal show delete image here..
                 <DialogTitle
                   as="h3"
                   class="tertiaryHeader my-0 py-0"
@@ -247,17 +246,29 @@ const changeSelectedMenuTab = function (clicked) {
 
                       <template v-if="selected === 'Upload'">
                         <!-- image upload - start -->
-                        upload iamge form
+                        <div
+                          class="w-full border border-gray-200 rounded-lg py-4 px-2"
+                        >
+                          upload iamge form
+                        </div>
                         <!-- image upload - end -->
                       </template>
                       <template v-if="selected === 'Media library'">
                         <!-- image gallary - start -->
-                        MediaLibraryGalleryList here...
+                        <div
+                          class="w-full border border-gray-200 rounded-lg py-4 px-2"
+                        >
+                          MediaLibraryGalleryList here...
+                        </div>
                         <!-- image gallary - end -->
                       </template>
                       <template v-if="selected === 'Unsplash'">
                         <!-- image gallary - start -->
-                        Unsplash here...
+                        <div
+                          class="w-full border border-gray-200 rounded-lg py-4 px-2"
+                        >
+                          Unsplash here...
+                        </div>
                         <!-- image gallary - end -->
                       </template>
                     </div>
@@ -268,10 +279,10 @@ const changeSelectedMenuTab = function (clicked) {
                     <aside
                       v-if="selected === 'Upload'"
                       aria-label="sidebar"
-                      class="rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
+                      class="md:w-72"
                     >
                       <div
-                        class="rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
+                        class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
                         aside for upload
                       </div>
@@ -283,7 +294,7 @@ const changeSelectedMenuTab = function (clicked) {
                       class="md:w-72"
                     >
                       <div
-                        class="rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
+                        class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
                         aside for media library
                       </div>
@@ -296,7 +307,7 @@ const changeSelectedMenuTab = function (clicked) {
                       class="md:w-72"
                     >
                       <div
-                        class="rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
+                        class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
                         aside for unsplash
                       </div>
