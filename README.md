@@ -12,17 +12,17 @@ To star the repository, simply click on the **Star** button located at the top-r
 
 ## Introduction
 
-If you find this project useful or interesting, I would greatly appreciate if you could star ⭐ the repository. It helps to boost the project's visibility and encourages me to continue adding new features.
-
-## Demo
-
 Free Vue Click & Drop Page Builder.
 Introducing the **Free Vue Click & Drop Page Builder**
 Create and enhance digital experiences with Vue on any backend.
 
+If you find this project useful or interesting, I would greatly appreciate if you could star ⭐ the repository. It helps to boost the project's visibility and encourages me to continue adding new features.
+
+## Demo
+
 [Play around with the page builder](https://www.builder-demo.myissue.dk)
 
-### Key Features
+## Features
 
 Includes:
 
@@ -43,7 +43,7 @@ The Page Builder is packed with features:
 
 Empower users to create the perfect content with the Page Builder.
 
-### Technical Details
+# Technical Details
 
 - **Frameworks**: Vue 3.
 - **Features**: Click & Drop Page Builder.
@@ -70,14 +70,10 @@ bun install
 <img width="200" style="max-width: 100%;" src="public/logo-myissue.svg" alt="Logo">
 </p>
 
-# Intro
-
 ## Technologies and Frameworks
 
 Built using cutting-Edge Technologies and Frameworks.
 Developed with Vue 3, Vite, Vuex and Tailwind CSS.
-
-# Installation
 
 ## Getting started
 
@@ -117,7 +113,7 @@ Please note that these instructions assume you have PHP, Composer, and Node.js i
 
 - Minimal and Intuitive Design: Engage users with an elegant and intuitive design that enhances their visual experience.
 
-# Documentation
+## Documentation
 
 ### Customizing the page builder
 
@@ -133,7 +129,7 @@ Example: VITE_UNSPLASH_KEY="your-unsplash-api-key-here"
 
 [Get your unsplash api key here](https://unsplash.com/developers).
 
-# Use with Backend
+## Use with Backend
 
 The Page builder's capabilities become infinite when integrated with a backend framework like Laravel or Express.js.
 
@@ -142,12 +138,12 @@ If you are familiar with Laravel, you can integrate the page builder with my ope
 
 By utilizing a backend Framework, the HTML components, currently stored in a JSON file at `public/components.json`, can be easily stored in the database, resulting in better management of HTML components.
 
-### Technical Details
+## Technical Details
 
 - **Frameworks**: Vue 3, Pinia, Tailwind CSS, HTML.
 - **Features**: Click & Drop Page Builder.
 
-### New GitHub Releases
+## New GitHub Releases
 
 ```
 git add .
