@@ -2,7 +2,7 @@
 <img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo">
 </p>
 
-# Free Vue Click & Drop Page Builder
+# Free Click & Drop Page Builder
 
 [Play around with the page builder](https://www.builder-demo.myissue.dk)
 
@@ -10,15 +10,10 @@ This app was born out of my desire to make a minimalst page builder with a elega
 
 To star the repository, simply click on the **Star** button located at the top-right corner of the GitHub page. Thank you in advance for your support! 🙌
 
-## Introduction
-
-Free Vue Click & Drop Page Builder.
-Introducing the **Free Vue Click & Drop Page Builder**
-Create and enhance digital experiences with Vue on any backend.
-
-If you find this project useful or interesting, I would greatly appreciate if you could star ⭐ the repository. It helps to boost the project's visibility and encourages me to continue adding new features.
-
 ## Demo
+
+Introducing the **Free Vue Click & Drop Page Builder**
+create and enhance digital experiences with Vue on any backend.
 
 [Play around with the page builder](https://www.builder-demo.myissue.dk)
 
