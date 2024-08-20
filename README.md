@@ -68,9 +68,9 @@ Please note that these instructions assume you have Node.js installed
 
 ## Documentation
 
-I have separated all the logic for manipulating the HTML elements into its own Designer class, which can be found at the path: `src/composables/PageBuilder.js`.
+I have separated all the logic for manipulating the HTML elements into its own PageBuilder class, which can be found at the path: `src/composables/PageBuilder.js`.
 
-Customizing the page builder is made simple since all the logic resides in the Designer Class.
+Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
 
 ## Unsplash
 
