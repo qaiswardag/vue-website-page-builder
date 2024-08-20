@@ -23,14 +23,6 @@ const getCurrentImage = computed(() => {
   return store.getters['mediaLibrary/getCurrentImage'];
 });
 
-const getCurrentMedia = computed(() => {
-  return store.getters['mediaLibrary/getCurrentMedia'];
-});
-
-const getCurrentPreviewImage = computed(() => {
-  return store.getters['mediaLibrary/getCurrentPreviewImage'];
-});
-
 const selected = ref('Unsplash');
 
 const tabs = ref([

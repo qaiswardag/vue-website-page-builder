@@ -14,9 +14,6 @@ export default {
     getCurrentImage(state) {
       return state.currentImage;
     },
-    getCurrentMedia(state) {
-      return state.currentMedia;
-    },
     getCurrentPreviewImage(state) {
       return state.currentPreviewImage;
     },
@@ -29,9 +26,7 @@ export default {
     setCurrentImage(state, payload) {
       state.currentImage = payload;
     },
-    setCurrentMedia(state, payload) {
-      state.currentMedia = payload;
-    },
+
     setCurrentPreviewImage(state, payload) {
       state.currentPreviewImage = payload;
     },
