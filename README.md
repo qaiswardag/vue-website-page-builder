@@ -6,22 +6,21 @@
 
 [Play around with the page builder](https://www.builder-demo.myissue.dk)
 
+This app was born out of my desire to make a minimalst page builder with a elegant and intuitive design.
+
 To star the repository, simply click on the **Star** button located at the top-right corner of the GitHub page. Thank you in advance for your support! 🙌
 
 ## Introduction
 
 If you find this project useful or interesting, I would greatly appreciate if you could star ⭐ the [GitHub repository](https://github.com/qaiswardag/vue-website-page-builder). It helps to boost the project's visibility and encourages me to continue adding new features.
 
-## About and demo
+## Demo
 
-This app was born out of my desire to make a minimalst page builder with a elegant and intuitive design.
+Free Vue Click & Drop Page Builder.
+Introducing the **Free Vue Click & Drop Page Builder**
+Create and enhance digital experiences with Vue on any backend.
 
 [Play around with the page builder](https://www.builder-demo.myissue.dk)
-
-### About
-
-Introducing the **Free Click & Drop Page Builder**
-Create and enhance digital experiences with Vue on any backend.
 
 ### Key Features
 
@@ -66,14 +65,6 @@ yarn install
 # bun
 bun install
 ```
-
-# old one start
-
-# old one start
-
-# old one start
-
-# old one start
 
 <p align="center" dir="auto">
 <img width="200" style="max-width: 100%;" src="public/logo-myissue.svg" alt="Logo">
