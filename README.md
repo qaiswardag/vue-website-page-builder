@@ -4,6 +4,8 @@
 
 # Free Vue Click & Drop Page Builder
 
+[Play around with the page builder](https://www.builder-demo.myissue.dk)
+
 To star the repository, simply click on the **Star** button located at the top-right corner of the GitHub page. Thank you in advance for your support! 🙌
 
 ## Introduction
