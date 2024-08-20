@@ -64,7 +64,7 @@ bun install
 
 ## Required Software Installation
 
-Please note that these instructions assume you have PHP, Composer, and Node.js installed
+Please note that these instructions assume you have Node.js installed
 
 ## Documentation
 
