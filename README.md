@@ -84,8 +84,8 @@ Example: VITE_UNSPLASH_KEY="your-unsplash-api-key-here"
 
 The Page builder's capabilities become infinite when integrated with a backend framework like Laravel or Express.js.
 
-If you are familiar with Laravel, you can integrate the page builder with my open-source Laravel Admin Panel available at:
-[Demo & repo](https://github.com/qaiswardag/myissue-admin).
+If you're familiar with Laravel, the Page Builder is already integrated with the open-source Laravel Free Listing Directory, Blog & Job Board Theme, which is available at:
+[Demo & repo](https://github.com/qaiswardag/laravel_vue_directory_and_job_board_theme).
 
 By utilizing a backend Framework, the HTML components, currently stored in a JSON file at `public/components.json`, can be easily stored in the database, resulting in better management of HTML components.
 
