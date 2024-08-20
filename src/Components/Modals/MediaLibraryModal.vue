@@ -12,6 +12,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 // new version
 import { useStore } from 'vuex';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
+import Unsplash from '@/Components/MediaLibrary/Unsplash.vue';
 import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vue';
 
 // store
@@ -267,7 +268,7 @@ const changeSelectedMenuTab = function (clicked) {
                         <div
                           class="w-full border border-gray-200 rounded-lg py-4 px-2"
                         >
-                          Unsplash here...
+                          <Unsplash></Unsplash>
                         </div>
                         <!-- image gallary - end -->
                       </template>
