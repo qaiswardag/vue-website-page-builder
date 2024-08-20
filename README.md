@@ -6,7 +6,7 @@
 
 [Play around with the page builder](https://www.builder-demo.myissue.dk)
 
-This app was born out of my desire to make a minimalst page builder with a elegant and intuitive design.
+This app was born out of my desire to create a minimalist page builder with an elegant and intuitive design.
 
 To star the repository, simply click on the **Star** button located at the top-right corner of the GitHub page. Thank you in advance for your support! 🙌
 
@@ -30,6 +30,7 @@ The Page Builder is packed with features:
 - **Reordering**: Change the order of your content without hassle.
 - **True Visual Editing**: See your changes in real-time as you make them.
 - **Media Library**: Access and manage your media files effortlessly.
+- **Unsplash**: Unsplash Integration.
 - **Responsive Editing**: Ensure your site looks great on all devices.
 - **Text Editing**: Customize your text with ease.
 - **Font Customization**: Choose the perfect fonts to match your style.
