@@ -23,7 +23,7 @@ const handleButton = function () {
     <div class="flex lg:gap-x-12 myPrimaryGap">
       <p
         @click="handleButton"
-        class="text-sm font-medium text-myPrimaryDarkGrayColor flex gap-2 items-center cursor-pointer"
+        class="text-lg font-medium text-myPrimaryDarkGrayColor flex gap-2 items-center cursor-pointer"
       >
         Start Builder
       </p>

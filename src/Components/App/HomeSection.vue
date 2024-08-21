@@ -41,7 +41,7 @@ const features = [
 
 <template>
   <div>
-    <div class="myPrimaryWidthScreenModule bg-red-50 lg:block hidden">
+    <div class="myPrimaryWidthScreenModule bg-red-50 lg:block">
       <div class="myPrimaryContentSection">
         <h2 class="mySecondaryHeader">
           Power your vision and build impressive pages with ease using an
@@ -453,7 +453,7 @@ const features = [
       </div>
     </div>
 
-    <div class="myPrimaryWidthScreenModule bg-gray-100 lg:block hidden">
+    <div class="myPrimaryWidthScreenModule bg-gray-100 lg:block">
       <div class="myPrimaryContentSection">
         <h2 class="mySecondaryHeader">Break free from design limitations</h2>
         <p class="myPrimaryParagraph font-normal">
@@ -481,7 +481,7 @@ const features = [
         </p>
 
         <div
-          class="grid grid-cols-1 lg:gap-16 gap-24 lg:grid-cols-3 mt-12 pt-8 border-t border-red-300"
+          class="grid grid-cols-1 lg:gap-16 gap-24 lg:grid-cols-3 mt-12 pt-12 border-t border-red-300"
         >
           <div>
             <h2 class="myTertiaryHeader mt-0">Everything you need</h2>
@@ -497,7 +497,7 @@ const features = [
             <div
               v-for="feature in features"
               :key="feature.name"
-              class="relative pl-9"
+              class="relative"
             >
               <dt class="myFourthHeader flex items-center gap-2">
                 <span class="material-symbols-outlined"> check </span>
