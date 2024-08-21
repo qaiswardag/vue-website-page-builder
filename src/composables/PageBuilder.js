@@ -301,6 +301,7 @@ class PageBuilder {
    * intersection of a target element with an ancestor element or with a top-level document's viewport.
    */
   synchronizeDOMAndComponents = async () => {
+    console.log(`denne 1`);
     if (this.showRunningMethodLogs) {
       console.log('synchronizeDOMAndComponents');
     }
@@ -392,6 +393,14 @@ class PageBuilder {
     if (section) {
       // Generate a unique ID using uuidv4() and assign it to the section
       section.dataset.componentid = uuidv4();
+
+      // Find all images within elements with "flex" or "grid" classes inside the section
+      const images = section.querySelectorAll('img');
+
+      // Add a unique ID as a data attribute to each image element
+      images.forEach((image) => {
+        image.setAttribute('data-image', uuidv4());
+      });
     }
 
     // Update the clonedComponent id with the newly generated unique ID
@@ -1173,8 +1182,6 @@ class PageBuilder {
     if (this.showRunningMethodLogs) {
       console.log('showBasePrimaryImage');
     }
-
-    console.log(`køøøøøre...`);
 
     const currentImageContainer = document.createElement('div');
 

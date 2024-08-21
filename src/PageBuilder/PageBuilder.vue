@@ -66,6 +66,7 @@ const getComponents = computed(() => {
 const getComponent = computed(() => {
   return store.getters['pageBuilderState/getComponent'];
 });
+
 const getElement = computed(() => {
   return store.getters['pageBuilderState/getElement'];
 });
@@ -81,6 +82,7 @@ const getElementAttributes = computed(() => {
     href: getElement.value.getAttribute('href'),
     style: getElement.value.getAttribute('style'),
     class: getElement.value.getAttribute('class'),
+    dataImage: getElement.value.getAttribute('data-image'),
   };
 
   return attributesToWatch;
@@ -92,7 +94,8 @@ watch(getElementAttributes, (newAttributes, oldAttributes) => {
     newAttributes?.src !== oldAttributes?.src ||
     newAttributes?.href !== oldAttributes?.href ||
     newAttributes?.style !== oldAttributes?.style ||
-    newAttributes?.class !== oldAttributes?.class
+    newAttributes?.class !== oldAttributes?.class ||
+    newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
     // Trigger your method when any of the specified attributes change
     pageBuilder.handlePageBuilderMethods();

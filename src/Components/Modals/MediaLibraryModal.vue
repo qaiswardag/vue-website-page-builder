@@ -295,9 +295,9 @@ const changeSelectedMenuTab = function (clicked) {
                           >
                             <div class="myInputGroup p-4 mt-4">
                               <div class="col-span-3 mb-4">
-                                <h3 class="tertiaryHeader my-0 py-0">
+                                <p class="myPrimaryParagraph my-0 py-0">
                                   Media Library
-                                </h3>
+                                </p>
                               </div>
                             </div>
                           </div>
