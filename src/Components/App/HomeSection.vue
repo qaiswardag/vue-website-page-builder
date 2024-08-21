@@ -318,12 +318,11 @@ const features = [
                     <div class="myPrimaryParagraph text-xs font-medium w-1/3">
                       Font Family
                     </div>
-                    <div class="flex justify-end w-full">
-                      <div
-                        class="shadow h-8 w-14 rounded-lg flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                      >
-                        <span class="material-symbols-outlined"> aq </span>
-                      </div>
+                    <div
+                      class="border border-myPrimaryDarkGrayColor hover:border-gray-400 h-10 flex items-center justify-between px-2 shadow rounded-lg w-2/3"
+                    >
+                      <p class="myPrimaryParagraph text-xs">Jost</p>
+                      <div class="material-symbols-outlined">expand_more</div>
                     </div>
                   </div>
                 </div>

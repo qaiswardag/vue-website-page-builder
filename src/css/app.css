@@ -2,579 +2,592 @@
 @tailwind components;
 @tailwind utilities;
 @layer components {
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Widgets
     |--------------------------------------------------------------------------
     */
-    .myPrimaryWidget {
-        @apply py-8 px-4 border border-myPrimaryLightGrayColor rounded-md bg-white;
-    }
+  .myPrimaryWidget {
+    @apply py-8 px-4 border border-myPrimaryLightGrayColor rounded-md bg-white;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Modules
     |--------------------------------------------------------------------------
     */
 
-    .myModulePyMargin {
-        @apply md:mb-0 mb-0;
-    }
-    .myModulePadding {
-        @apply md:py-28 py-16;
-    }
+  .myModulePyMargin {
+    @apply md:mb-0 mb-0;
+  }
+  .myModulePadding {
+    @apply md:py-28 py-16;
+  }
 
-    .myPrimaryWidthScreenModule {
-        @apply myModulePyMargin myModulePadding;
-    }
-    .myPrimaryModule {
-        @apply max-w-7xl mx-auto myModulePyMargin myModulePadding;
-    }
-    .myPrimaryContentSection {
-        @apply max-w-7xl mx-auto md:px-4 px-4 lg:pb-10 md:pb-8 pb-6;
-    }
+  .myPrimaryWidthScreenModule {
+    @apply myModulePyMargin myModulePadding;
+  }
+  .myPrimaryModule {
+    @apply max-w-7xl mx-auto myModulePyMargin myModulePadding;
+  }
+  .myPrimaryContentSection {
+    @apply max-w-7xl mx-auto md:px-4 px-4 lg:pb-10 md:pb-8 pb-6;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Helpers
     |--------------------------------------------------------------------------
     */
-    .myPrimarySection {
-        @apply lg:pb-8 lg:pt-20 md:py-8 py-8;
-    }
+  .myPrimarySection {
+    @apply lg:pb-8 lg:pt-20 md:py-8 py-8;
+  }
 
-    .myPrimaryWarningAlertMessage {
-        @apply myPrimarySection myTertiaryHeader text-yellow-400 text-center;
-    }
-    .myFocus {
-        @apply focus-within:border-2 focus-within:border-myPrimaryBrandColor;
-    }
-    .myActiveLinkColor {
-        @apply text-myPrimaryBrandColor;
-    }
+  .myPrimaryWarningAlertMessage {
+    @apply myPrimarySection myTertiaryHeader text-yellow-400 text-center;
+  }
+  .myFocus {
+    @apply focus-within:border-2 focus-within:border-myPrimaryBrandColor;
+  }
+  .myActiveLinkColor {
+    @apply text-myPrimaryBrandColor;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Tags
     |--------------------------------------------------------------------------
     */
-    .myPrimaryTag {
-        @apply min-h-[3rem] my-2 px-3 py-2
+  .myPrimaryTag {
+    @apply min-h-[3rem] my-2 px-3 py-2
         text-xs break-all 
         inline-flex gap-1 items-center justify-center 
         rounded-full border border-transparent
         text-myPrimaryDarkGrayColor bg-myPrimaryLightMediumGrayColor 
         sm:w-auto shadow-sm hover:shadow;
-    }
-    /*
+  }
+  /*
     |--------------------------------------------------------------------------
     | Thumbnail
     |--------------------------------------------------------------------------
     */
-    .myPrimarythumbnailLogo {
-        @apply mx-auto block mt-2 mb-6 w-40 transition-all rounded-md object-cover cursor-pointer;
-    }
-    .myPrimarythumbnailInsertPreview {
-        @apply block md:h-16 md:w-16 h-16 w-16 hover:shadow-sm transition-all cursor-pointer rounded-full object-cover;
-    }
-    /*
+  .myPrimarythumbnailLogo {
+    @apply mx-auto block mt-2 mb-6 w-40 transition-all rounded-md object-cover cursor-pointer;
+  }
+  .myPrimarythumbnailInsertPreview {
+    @apply block md:h-16 md:w-16 h-16 w-16 hover:shadow-sm transition-all cursor-pointer rounded-full object-cover;
+  }
+  /*
     |--------------------------------------------------------------------------
     | Primary paragraphs
     |--------------------------------------------------------------------------
     */
-    .myPrimaryParagraph {
-        @apply font-normal text-myPrimaryDarkGrayColor lg:text-base text-sm;
-    }
+  .myPrimaryParagraph {
+    @apply font-normal text-myPrimaryDarkGrayColor lg:text-base text-sm;
+  }
 
-    .myPrimaryParagraphError {
-        @apply myPrimaryParagraph mt-1 italic text-myPrimaryErrorColor;
-    }
+  .myPrimaryParagraphError {
+    @apply myPrimaryParagraph mt-1 italic text-myPrimaryErrorColor;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Headers
     |--------------------------------------------------------------------------
     */
 
-    .myPrimaryHeader {
-        @apply lg:text-7xl md:text-6xl text-5xl font-medium break-words lg:mb-8 md:mb-4 mb-2 text-myPrimaryDarkGrayColor;
-    }
+  .myPrimaryHeader {
+    @apply lg:text-7xl md:text-6xl text-5xl font-medium break-words lg:mb-8 md:mb-4 mb-2 text-myPrimaryDarkGrayColor;
+  }
 
-    .mySecondaryHeader {
-        @apply font-['Cormorant'] font-medium break-words lg:text-5xl md:text-4xl text-3xl lg:mb-8 md:mb-4 mb-2 text-myPrimaryDarkGrayColor;
-    }
+  .mySecondaryHeader {
+    @apply font-['Cormorant'] font-medium break-words lg:text-5xl md:text-4xl text-3xl lg:mb-8 md:mb-4 mb-2 text-myPrimaryDarkGrayColor;
+  }
 
-    .myTertiaryHeader {
-        @apply font-medium break-words lg:text-3xl md:text-2xl text-2xl lg:mb-8 md:mb-4 mb-2 text-myPrimaryDarkGrayColor;
-    }
+  .myTertiaryHeader {
+    @apply font-medium break-words lg:text-3xl md:text-2xl text-2xl lg:mb-8 md:mb-4 mb-2 text-myPrimaryDarkGrayColor;
+  }
 
-    .myQuaternaryHeader {
-        @apply font-medium break-words lg:text-xl md:text-lg text-base lg:mb-4 md:mb-2 mb-2 text-myPrimaryDarkGrayColor;
-    }
+  .myQuaternaryHeader {
+    @apply font-medium break-words lg:text-xl md:text-lg text-base lg:mb-4 md:mb-2 mb-2 text-myPrimaryDarkGrayColor;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Links
     |--------------------------------------------------------------------------
     */
-    .myPrimaryLink {
-        @apply text-myPrimaryLinkColor 
+  .myPrimaryLink {
+    @apply text-myPrimaryLinkColor 
         focus:outline-none
         focus:ring-0 focus:ring-myPrimaryLinkColor
         focus-visible:ring-0 focus-visible:ring-myPrimaryLinkColor cursor-pointer;
-    }
+  }
 
-    .myPrimaryActiveLink {
-        @apply text-red-600 text-sm
+  .myPrimaryActiveLink {
+    @apply text-red-600 text-sm
         focus:outline-none
         focus:ring-0 focus:ring-red-500
         focus-visible:ring-0 focus-visible:ring-red-500;
-    }
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Buttons
     |--------------------------------------------------------------------------
     */
 
-    .myPrimaryMenuTextButton {
-        @apply lg:flex lg:gap-2 lg:items-center focus:outline-none cursor-pointer rounded-full px-1.5 py-1.5 font-medium;
-    }
-    .myRadio {
-        @apply w-5 h-5 text-myPrimaryBrandColor bg-myPrimaryLightGrayColor border-gray-300 focus:ring-myPrimaryBrandColor dark:focus:ring-myPrimaryBrandColor dark:ring-offset-gray-800 focus:ring-2 dark:bg-myPrimaryDarkGrayColor dark:border-gray-600;
-    }
+  .myPrimaryMenuTextButton {
+    @apply lg:flex lg:gap-2 lg:items-center focus:outline-none cursor-pointer rounded-full px-1.5 py-1.5 font-medium;
+  }
+  .myRadio {
+    @apply w-5 h-5 text-myPrimaryBrandColor bg-myPrimaryLightGrayColor border-gray-300 focus:ring-myPrimaryBrandColor dark:focus:ring-myPrimaryBrandColor dark:ring-offset-gray-800 focus:ring-2 dark:bg-myPrimaryDarkGrayColor dark:border-gray-600;
+  }
 
-    .myPrimaryButton {
-        @apply min-h-[3rem] lg:px-4 lg:py-3 px-3 py-3
+  .myPrimaryButton {
+    @apply min-h-[3rem] lg:px-4 lg:py-3 px-3 py-3
         sm:text-sm text-xs whitespace-nowrap break-keep font-medium inline-flex gap-1 items-center justify-center rounded-full border border-transparent bg-myPrimaryLinkColor text-white shadow-sm hover:bg-myPrimaryLinkColor sm:w-auto
         focus:outline-none focus:ring-2 focus:ring-myPrimaryLinkColor focus:ring-offset-2
         focus-visible:ring-2 focus-visible:ring-myPrimaryLinkColor;
-    }
+  }
 
-    .mySecondaryButton {
-        @apply myPrimaryButton bg-myPrimaryLightMediumGrayColor hover:bg-myPrimaryLightMediumGrayColor hover:bg-opacity-90 focus:ring-myPrimaryLightGrayColor text-myPrimaryDarkGrayColor hover:text-myPrimaryDarkGrayColor shadow-sm;
-    }
+  .mySecondaryButton {
+    @apply myPrimaryButton bg-myPrimaryLightMediumGrayColor hover:bg-myPrimaryLightMediumGrayColor hover:bg-opacity-90 focus:ring-myPrimaryLightGrayColor text-myPrimaryDarkGrayColor hover:text-myPrimaryDarkGrayColor shadow-sm;
+  }
 
-    .myPrimaryDeleteButton {
-        @apply myPrimaryButton bg-myPrimaryErrorColor hover:bg-myPrimaryErrorColor focus:ring-myPrimaryErrorColor;
-    }
+  .myPrimaryDeleteButton {
+    @apply myPrimaryButton bg-myPrimaryErrorColor hover:bg-myPrimaryErrorColor focus:ring-myPrimaryErrorColor;
+  }
 
-    .myPrimaryToggleButton {
-        @apply w-full inline-flex items-center justify-center px-4 py-2 sm:text-sm text-sm font-semibold text-myPrimaryDarkGrayColor shadow-sm focus:outline-none focus:ring-2 focus:ring-myPrimaryBrandColor focus:ring-offset-2 bg-myPrimaryLightGrayColor hover:bg-myPrimaryBrandColor hover:text-white;
-    }
-    /*
+  .myPrimaryToggleButton {
+    @apply w-full inline-flex items-center justify-center px-4 py-2 sm:text-sm text-sm font-semibold text-myPrimaryDarkGrayColor shadow-sm focus:outline-none focus:ring-2 focus:ring-myPrimaryBrandColor focus:ring-offset-2 bg-myPrimaryLightGrayColor hover:bg-myPrimaryBrandColor hover:text-white;
+  }
+  /*
     |--------------------------------------------------------------------------
     | Buttons With no background
     |--------------------------------------------------------------------------
     */
 
-    .myPrimaryButtonNoBackground {
-        @apply myPrimaryParagraph font-medium  text-myPrimaryBrandColor 
+  .myPrimaryButtonNoBackground {
+    @apply myPrimaryParagraph font-medium  text-myPrimaryBrandColor 
         focus:outline-none cursor-pointer;
-    }
-    /*
+  }
+  /*
     |--------------------------------------------------------------------------
     | Icons
     |--------------------------------------------------------------------------
     */
-    .mySmallIcon {
-        @apply shrink-0 h-4 w-4 m-2 stroke-[1.5px] flex justify-center items-center;
-    }
-    .myMediumIcon {
-        @apply shrink-0 h-6 w-6 stroke-[1.5px] flex justify-center items-center;
-    }
+  .mySmallIcon {
+    @apply shrink-0 h-4 w-4 m-2 stroke-[1.5px] flex justify-center items-center;
+  }
+  .myMediumIcon {
+    @apply shrink-0 h-6 w-6 stroke-[1.5px] flex justify-center items-center;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Tables
     |--------------------------------------------------------------------------
     */
 
-    .myTableContainerPlusScrollButton {
-        @apply relative p-2 border-gray-400 border rounded;
-    }
-    .myScrollButtonContainer {
-        @apply sticky z-10 h-12 top-16 left-0 right-0 flex items-center justify-center myPrimaryGap bg-myPrimaryLightGrayColor bg-opacity-50;
-    }
-    .myTableContainer {
-        @apply overflow-x-auto myPrimarySection py-0 px-0;
-    }
-    .myTableSubContainer {
-        @apply min-w-full align-middle;
-    }
-    .myPrimaryTable {
-        @apply text-sm divide-y divide-myPrimaryLightGrayColor table-fixed min-w-full text-left mb-20;
-    }
-    .myPrimaryTableCaption {
-        @apply bg-white myPrimaryParagraph py-4;
-    }
-    .myPrimaryTableTHead {
-        @apply bg-gray-50;
-    }
-    .myPrimaryTableTr {
-        @apply divide-x divide-gray-300;
-    }
-    .myPrimaryTableTh {
-        @apply px-6 py-4 font-normal text-gray-900;
-    }
-    .myPrimaryTableTBody {
-        @apply divide-y divide-gray-100 border-t border-gray-100 bg-white;
-    }
-    .myPrimaryTableTBodyTr {
-        @apply divide-x myPrimaryParagraph bg-white hover:bg-red-50;
-    }
-    .myPrimaryTableTBodyTd {
-        @apply px-6 py-4 whitespace-pre myPrimaryParagraph;
-    }
-    .myPrimaryResourceTableBodyTdTitle {
-        @apply whitespace-normal;
-    }
+  .myTableContainerPlusScrollButton {
+    @apply relative p-2 border-gray-400 border rounded;
+  }
+  .myScrollButtonContainer {
+    @apply sticky z-10 h-12 top-16 left-0 right-0 flex items-center justify-center myPrimaryGap bg-myPrimaryLightGrayColor bg-opacity-50;
+  }
+  .myTableContainer {
+    @apply overflow-x-auto myPrimarySection py-0 px-0;
+  }
+  .myTableSubContainer {
+    @apply min-w-full align-middle;
+  }
+  .myPrimaryTable {
+    @apply text-sm divide-y divide-myPrimaryLightGrayColor table-fixed min-w-full text-left mb-20;
+  }
+  .myPrimaryTableCaption {
+    @apply bg-white myPrimaryParagraph py-4;
+  }
+  .myPrimaryTableTHead {
+    @apply bg-gray-50;
+  }
+  .myPrimaryTableTr {
+    @apply divide-x divide-gray-300;
+  }
+  .myPrimaryTableTh {
+    @apply px-6 py-4 font-normal text-gray-900;
+  }
+  .myPrimaryTableTBody {
+    @apply divide-y divide-gray-100 border-t border-gray-100 bg-white;
+  }
+  .myPrimaryTableTBodyTr {
+    @apply divide-x myPrimaryParagraph bg-white hover:bg-red-50;
+  }
+  .myPrimaryTableTBodyTd {
+    @apply px-6 py-4 whitespace-pre myPrimaryParagraph;
+  }
+  .myPrimaryResourceTableBodyTdTitle {
+    @apply whitespace-normal;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Grid
     |--------------------------------------------------------------------------
     */
-    .myPrimaryGap {
-        @apply gap-4;
-    }
+  .myPrimaryGap {
+    @apply gap-4;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Breadcrumbs
     |--------------------------------------------------------------------------
     */
 
-    .myBreadcrumbsContainer {
-        @apply flex items-center justify-start gap-1 py-2 pl-4 pr-2 font-medium;
-    }
+  .myBreadcrumbsContainer {
+    @apply flex items-center justify-start gap-1 py-2 pl-4 pr-2 font-medium;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Search Bars
     |--------------------------------------------------------------------------
     */
 
-    .mysearchBarWithOptions {
-        @apply flex gap-2 pl-4 rounded-full border border-gray-200 bg-myPrimaryLightGrayColor;
-    }
+  .mysearchBarWithOptions {
+    @apply flex gap-2 pl-4 rounded-full border border-gray-200 bg-myPrimaryLightGrayColor;
+  }
 
-    .myPrimarySearchInput {
-        @apply myPrimaryInput text-sm py-4 border-none outline-none pl-10 h-full bg-transparent focus:ring-0 focus:ring-offset-0 focus:border-none focus:bg-transparent focus:outline-none shadow-none;
-    }
+  .myPrimarySearchInput {
+    @apply myPrimaryInput text-sm py-4 border-none outline-none pl-10 h-full bg-transparent focus:ring-0 focus:ring-offset-0 focus:border-none focus:bg-transparent focus:outline-none shadow-none;
+  }
 
-    .myPrimarySearchButton {
-        @apply rounded-r-full text-sm lg:pl-8 lg:pr-10 pl-4 pr-4 text-center border-l border-gray-300 font-medium hover:bg-gray-200;
-    }
+  .myPrimarySearchButton {
+    @apply rounded-r-full text-sm lg:pl-8 lg:pr-10 pl-4 pr-4 text-center border-l border-gray-300 font-medium hover:bg-gray-200;
+  }
 
-    /*
+  /*
     |--------------------------------------------------------------------------
     | Forms
     |--------------------------------------------------------------------------
     */
-    .myPrimaryFormWithActions {
-        @apply flex flex-col myPrimaryGap md:pb-4  px-2 rounded;
-    }
-    .myPrimaryContentLayout {
-        @apply md:flex md:flex-row flex flex-col myPrimaryGap;
-    }
+  .myPrimaryFormWithActions {
+    @apply flex flex-col myPrimaryGap md:pb-4  px-2 rounded;
+  }
+  .myPrimaryContentLayout {
+    @apply md:flex md:flex-row flex flex-col myPrimaryGap;
+  }
 
-    .myPrimaryFormTitleDescription {
-        @apply flex flex-col w-full;
-    }
+  .myPrimaryFormTitleDescription {
+    @apply flex flex-col w-full;
+  }
 
-    .myPrimaryFormMain {
-        @apply md:w-8/12 flex flex-col myPrimaryGap;
-    }
-    .myPrimaryFormSidebar {
-        @apply md:w-4/12 flex flex-col myPrimaryGap;
-    }
-    .myPrimaryActions {
-        @apply px-4 py-6 rounded bg-myPrimaryLightGrayColor shadow-sm;
-    }
+  .myPrimaryFormMain {
+    @apply md:w-8/12 flex flex-col myPrimaryGap;
+  }
+  .myPrimaryFormSidebar {
+    @apply md:w-4/12 flex flex-col myPrimaryGap;
+  }
+  .myPrimaryActions {
+    @apply px-4 py-6 rounded bg-myPrimaryLightGrayColor shadow-sm;
+  }
 
-    .myInputsOrganization {
-        @apply px-4 pt-4 pb-4 bg-white rounded-lg border border-gray-200;
-    }
+  .myInputsOrganization {
+    @apply px-4 pt-4 pb-4 bg-white rounded-lg border border-gray-200;
+  }
 
-    .myPrimaryFormOrganizationHeaderDescriptionSection {
-        @apply mb-4;
-    }
-    .myPrimaryFormOrganizationHeader {
-        @apply myQuaternaryHeader m-0 pt-4;
-    }
+  .myPrimaryFormOrganizationHeaderDescriptionSection {
+    @apply mb-4;
+  }
+  .myPrimaryFormOrganizationHeader {
+    @apply myQuaternaryHeader m-0 pt-4;
+  }
 
-    .myInputsFamily {
-        @apply flex items-center myPrimaryGap;
-    }
+  .myInputsFamily {
+    @apply flex items-center myPrimaryGap;
+  }
 
-    .myInputGroup {
-        @apply w-full self-start mb-2;
-    }
-    .myDoActionButtonSection {
-        @apply px-4 py-4 border border-myPrimaryLightGrayColor rounded sm:px-6 text-right mt-1 bg-gray-50;
-    }
+  .myInputGroup {
+    @apply w-full self-start mb-2;
+  }
+  .myDoActionButtonSection {
+    @apply px-4 py-4 border border-myPrimaryLightGrayColor rounded sm:px-6 text-right mt-1 bg-gray-50;
+  }
 
-    .myPrimaryInputLabel {
-        @apply my-0 block text-sm font-normal text-myPrimaryDarkGrayColor text-left mb-2;
-    }
+  .myPrimaryInputLabel {
+    @apply my-0 block text-sm font-normal text-myPrimaryDarkGrayColor text-left mb-2;
+  }
 
-    .myPrimaryFormFocus {
-        @apply focus:ring-2 focus:ring-myPrimaryLinkColor  focus:ring-offset-2 focus:border focus:border-gray-200;
-    }
-    .myPrimaryInput {
-        @apply block pr-8 text-left bg-white w-full sm:text-sm font-normal text-myPrimaryDarkGrayColor placeholder:font-normal placeholder:accent-gray-300  focus:bg-white rounded-md py-3 px-3  border border-gray-300 shadow-sm focus:outline-none myPrimaryFormFocus h-full;
-    }
-    .myPrimaryInputNoBorder {
-        @apply myPrimaryInput placeholder:accent-gray-300  focus:bg-none rounded-md py-3 px-3  border-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-none shadow-none;
-    }
-    .myPrimaryInputReadonly {
-        @apply myPrimaryInput bg-gray-50 focus:ring-0 focus:bg-myPrimaryLightGrayColor focus:border-myPrimaryMediumGrayColor;
-    }
+  .myPrimaryFormFocus {
+    @apply focus:ring-2 focus:ring-myPrimaryLinkColor  focus:ring-offset-2 focus:border focus:border-gray-200;
+  }
+  .myPrimaryInput {
+    @apply block pr-8 text-left bg-white w-full sm:text-sm font-normal text-myPrimaryDarkGrayColor placeholder:font-normal placeholder:accent-gray-300  focus:bg-white rounded-md py-3 px-3  border border-gray-300 shadow-sm focus:outline-none myPrimaryFormFocus h-full;
+  }
+  .myPrimaryInputNoBorder {
+    @apply myPrimaryInput placeholder:accent-gray-300  focus:bg-none rounded-md py-3 px-3  border-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-none shadow-none;
+  }
+  .myPrimaryInputReadonly {
+    @apply myPrimaryInput bg-gray-50 focus:ring-0 focus:bg-myPrimaryLightGrayColor focus:border-myPrimaryMediumGrayColor;
+  }
 
-    .myPrimaryInputError {
-        @apply mt-1 myPrimaryParagraph block font-normal text-myPrimaryErrorColor text-left;
-    }
+  .myPrimaryInputError {
+    @apply mt-1 myPrimaryParagraph block font-normal text-myPrimaryErrorColor text-left;
+  }
 
-    .myPrimaryHiddenInputField {
-        @apply px-0;
-    }
+  .myPrimaryHiddenInputField {
+    @apply px-0;
+  }
 
-    .myPrimaryTextArea {
-        @apply block w-full sm:text-sm font-normal text-myPrimaryDarkGrayColor placeholder:font-normal placeholder:accent-gray-400 bg-gray-50 focus:bg-white rounded-md py-3 px-3 border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-myPrimaryLinkColor focus:border-transparent;
-    }
+  .myPrimaryTextArea {
+    @apply block w-full sm:text-sm font-normal text-myPrimaryDarkGrayColor placeholder:font-normal placeholder:accent-gray-400 bg-gray-50 focus:bg-white rounded-md py-3 px-3 border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-myPrimaryLinkColor focus:border-transparent;
+  }
 
-    .myPrimaryCheckbox {
-        @apply focus:ring-myPrimaryBrandColor h-5 w-5 text-myPrimaryBrandColor border-gray-400 rounded-md;
-    }
+  .myPrimaryCheckbox {
+    @apply focus:ring-myPrimaryBrandColor h-5 w-5 text-myPrimaryBrandColor border-gray-400 rounded-md;
+  }
 
-    .myPrimarySelect {
-        @apply relative myPrimaryInput w-full;
-    }
-    .myPrimaryFakeSelect {
-        @apply hover:ring-myPrimaryLinkColor border border-gray-300 flex flex-row justify-between items-center myPrimaryGap py-2.5 pl-3 pr-1 cursor-pointer hover:border-transparent hover:ring-2 rounded-md;
-    }
-    .myPrimaryFakeSelectNoHover {
-        @apply myPrimaryFakeSelect focus:outline-none focus:border-transparent hover:border-transparent;
-    }
+  .myPrimarySelect {
+    @apply relative myPrimaryInput w-full;
+  }
+  .myPrimaryFakeSelect {
+    @apply hover:ring-myPrimaryLinkColor border border-gray-300 flex flex-row justify-between items-center myPrimaryGap py-2.5 pl-3 pr-1 cursor-pointer hover:border-transparent hover:ring-2 rounded-md;
+  }
+  .myPrimaryFakeSelectNoHover {
+    @apply myPrimaryFakeSelect focus:outline-none focus:border-transparent hover:border-transparent;
+  }
 
-    .myPrimaryColorPreview {
-        @apply aspect-square  border border-gray-200 cursor-pointer  min-h-[1.5rem] rounded-sm;
-    }
+  .myPrimaryColorPreview {
+    @apply aspect-square  border border-gray-200 cursor-pointer  min-h-[1.5rem] rounded-sm;
+  }
 }
 
 /* CSS styles for VueQuill - start */
 .ql-toolbar.ql-snow {
-    border-top-right-radius: 10px 10px;
-    border-top-left-radius: 10px 10px;
+  border-top-right-radius: 10px 10px;
+  border-top-left-radius: 10px 10px;
 }
 
 .ql-editor {
-    min-height: 200px;
+  min-height: 200px;
 }
 
 /* example 1 */
 /* table transitions */
 .table-enter-active,
 .table-leave-active {
-    transition: opacity 0.3s ease;
+  transition: opacity 0.3s ease;
 }
 
 .table-enter-from,
 .table-leave-to {
-    opacity: 0;
+  opacity: 0;
 }
 
 /* example 2 */
 /* tags transitions */
 .tags-enter-from {
-    opacity: 0.6;
-    transform: translateX(10px);
+  opacity: 0.6;
+  transform: translateX(10px);
 }
 
 .tags-enter-active {
-    /*animation: wobble 0.5s ease;*/
-    transition: all 0.2s ease;
+  /*animation: wobble 0.5s ease;*/
+  transition: all 0.2s ease;
 }
 
 .tags-leave-to {
-    opacity: 0.1;
-    transform: translateX(5px);
+  opacity: 0.1;
+  transform: translateX(5px);
 }
 
 .tags-leave-active {
-    transition: all 0.1s ease;
-    position: absolute; /* for move transition after item leaves */
+  transition: all 0.1s ease;
+  position: absolute; /* for move transition after item leaves */
 }
 
 .tags-move {
-    transition: all 0.1s ease;
+  transition: all 0.1s ease;
 }
 
 /* Scrollbar Styles  - start */
 /* Firefox */
 * {
-    scrollbar-width: thin;
-    scrollbar-color: black transparent;
+  scrollbar-width: thin;
+  scrollbar-color: black transparent;
 }
 
 *::-webkit-scrollbar-track {
-    background: transparent;
-    border-radius: 25px;
+  background: transparent;
+  border-radius: 25px;
 }
 
 /* Chrome, Edge, and Safari */
 *::-webkit-scrollbar {
-    width: 6px;
-    height: 6px; /* Add height for horizontal scrollbar */
+  width: 6px;
+  height: 6px; /* Add height for horizontal scrollbar */
 }
 
 *::-webkit-scrollbar-thumb {
-    background-color: black;
-    border-radius: 25px;
-    border: none;
+  background-color: black;
+  border-radius: 25px;
+  border: none;
 }
 
 /* Add overflow-x property to enable horizontal scrollbar */
 .scrollable {
-    overflow-x: auto;
-    overflow-y: auto;
-    /* Add any other desired styles for the scrollable element */
+  overflow-x: auto;
+  overflow-y: auto;
+  /* Add any other desired styles for the scrollable element */
 }
 /* Scrollbar Styles  - end */
 
 .tailwind-pagination-package {
-    box-shadow: none !important;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 6px 0px;
-    justify-content: center;
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 6px 0px;
+  justify-content: center;
 }
 .tailwind-pagination-package > :first-child,
 .tailwind-pagination-package > :last-child {
-    border-radius: 100%;
+  border-radius: 100%;
 }
 
 .smooth-transition {
-    transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
 }
 
 /* Manage P, Link, H1, H2 # start */
 p {
-    @apply font-normal lg:text-base text-base;
+  @apply font-normal lg:text-base text-base;
 }
 
 a {
-    @apply text-myPrimaryLinkColor;
+  @apply text-myPrimaryLinkColor;
 }
 
 h2 {
-    @apply text-3xl mt-4 mb-3 font-medium;
+  @apply text-3xl mt-4 mb-3 font-medium;
 }
 h3 {
-    @apply text-2xl mt-4 mb-3 font-medium;
+  @apply text-2xl mt-4 mb-3 font-medium;
 }
 /* Manage P, Link, H1, H2 # end */
 
 /* CSS for content inside page builder # start */
 #page-builder-editor-editable-area a {
-    pointer-events: none;
-    /* display: block;
+  pointer-events: none;
+  /* display: block;
     width: 100%; */
+}
+
+#page-builder-editor-editable-area #youtube-video::before {
+  content: 'Select video element';
+  font-family: 'Jost';
+  display: inline-block;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+#page-builder-editor-editable-area #youtube-video:hover::before {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 #page-builder-editor a,
 #page-builder-editor-editable-area a {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 #page-builder-editor #linktree p,
 #page-builder-editor-editable-area #linktree p {
-    width: 100%;
+  width: 100%;
 }
 
 #page-builder-editor #linktree a,
 #page-builder-editor-editable-area #linktree a {
-    @apply py-4 px-2 block w-full;
+  @apply py-4 px-2 block w-full;
 }
 
 #page-builder-editor #linktree a,
 #page-builder-editor-editable-area #linktree a {
-    text-decoration: none;
-    font-weight: 500;
-    color: inherit !important;
-    width: 100%;
-    cursor: pointer;
+  text-decoration: none;
+  font-weight: 500;
+  color: inherit !important;
+  width: 100%;
+  cursor: pointer;
 }
 #page-builder-editor strong,
 #page-builder-editor-editable-area strong {
-    font-weight: 500;
+  font-weight: 500;
 }
 
 #page-builder-editor ol,
 #page-builder-editor-editable-area ol,
 #page-builder-editor ul,
 #page-builder-editor-editable-area ul {
-    list-style: disc !important;
-    padding: 1rem 0rem;
+  list-style: disc !important;
+  padding: 1rem 0rem;
 }
 
 #page-builder-editor li,
 #page-builder-editor-editable-area li {
-    line-height: 2.2rem;
-    margin-left: 1.5em; /* Adjust this value as needed */
+  line-height: 2.2rem;
+  margin-left: 1.5em; /* Adjust this value as needed */
 }
 /* CSS for content inside page builder #end*/
 
 /* CSS for Vue datepicker # start */
 :root {
-    /*General*/
-    --dp-font-family: "Jost", blinkmacsystemfont, "Segoe UI", roboto, oxygen,
-        ubuntu, cantarell, "Open Sans", "Helvetica Neue", sans-serif !important;
-    --dp-border-radius: 40px; /*Configurable border-radius*/
-    --dp-cell-border-radius: 4px; /*Specific border radius for the calendar cell*/
-    --dp-common-transition: all 0.1s ease-in; /*Generic transition applied on buttons and calendar cells*/
+  /*General*/
+  --dp-font-family: 'Jost', blinkmacsystemfont, 'Segoe UI', roboto, oxygen,
+    ubuntu, cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  --dp-border-radius: 40px; /*Configurable border-radius*/
+  --dp-cell-border-radius: 4px; /*Specific border radius for the calendar cell*/
+  --dp-common-transition: all 0.1s ease-in; /*Generic transition applied on buttons and calendar cells*/
 }
 
 .dp__action_row {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center;
-    margin: 0 0 10px 0;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+  margin: 0 0 10px 0;
 }
 .dp__today {
-    background: transparent !important;
-    border: 2px solid #ff5252 !important;
-    color: #ff5252 !important;
-    border-radius: 100% !important;
+  background: transparent !important;
+  border: 2px solid #ff5252 !important;
+  color: #ff5252 !important;
+  border-radius: 100% !important;
 }
 
 .dp__active_date {
-    background: #ff5252 !important;
-    border: #ff5252 !important;
-    color: #fff !important;
-    border-radius: 100% !important;
+  background: #ff5252 !important;
+  border: #ff5252 !important;
+  color: #fff !important;
+  border-radius: 100% !important;
 }
 
 .dp__date_hover:hover {
-    background: #f1f1f1 !important;
-    border: #f1f1f1 !important;
-    color: #000 !important;
-    border-radius: 100% !important;
+  background: #f1f1f1 !important;
+  border: #f1f1f1 !important;
+  color: #000 !important;
+  border-radius: 100% !important;
 }
 
 .dp__action_button {
-    background: #ff5252 !important;
-    border: #000 !important;
-    color: #fff !important;
-    border-radius: 8px !important;
-    padding: 1rem 1rem !important;
-    font-weight: 500;
+  background: #ff5252 !important;
+  border: #000 !important;
+  color: #fff !important;
+  border-radius: 8px !important;
+  padding: 1rem 1rem !important;
+  font-weight: 500;
 }
 .dp__overlay_cell_active {
-    background: #ff5252 !important;
-    border: #000 !important;
-    color: #fff !important;
+  background: #ff5252 !important;
+  border: #000 !important;
+  color: #fff !important;
 }
+
 /* CSS for Vue datepicker # end */

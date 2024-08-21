@@ -2,8 +2,8 @@
 //
 //
 const componentHelpers = [
-    {
-        html_code: `
+  {
+    html_code: `
         <section>
         <div class="relative py-4">
         <div class="mx-auto max-w-7xl lg:px-4 px-2">
@@ -18,40 +18,40 @@ const componentHelpers = [
         </div>
         </div>
         </section>`,
-        id: null,
-        title: "Text",
-        icon: `
+    id: null,
+    title: 'Text',
+    icon: `
         <span class="material-symbols-outlined">
         text_fields
         </span>
         `,
-    },
-    {
-        html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h2>Consequat mauris nunc congue</h2></div></div></div></section>`,
-        id: null,
-        title: "Header H2",
-        icon: `
+  },
+  {
+    html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h2>Consequat mauris nunc congue</h2></div></div></div></section>`,
+    id: null,
+    title: 'Header H2',
+    icon: `
         <span class="material-symbols-outlined">
         format_h2
         </span>
         `,
-    },
-    {
-        html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h3>Consequat mauris nunc congue</h3></div></div></div></section>`,
-        id: null,
-        title: "Header H3",
-        icon: `
+  },
+  {
+    html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h3>Consequat mauris nunc congue</h3></div></div></div></section>`,
+    id: null,
+    title: 'Header H3',
+    icon: `
         <span class="material-symbols-outlined">
         format_h3
         </span>
         `,
-    },
-    {
-        html_code: `
+  },
+  {
+    html_code: `
         <section>
         <div class="py-4">
         <div class="mx-auto max-w-7xl lg:px-4 px-2">
-        <div class="w-full aspect-video bg-slate-100 border border-slate-200 rounded-xl lg:p-8 md:p-6 p-4">
+        <div id="youtube-video" class="w-full aspect-video bg-slate-100 border border-slate-200 rounded-xl lg:p-8 md:p-6 p-4">
      
         <iframe
         frameborder="0" 
@@ -64,24 +64,24 @@ const componentHelpers = [
         </div>
         </div>
         </section>`,
-        id: null,
-        title: "YouTube Video",
-        icon: `
+    id: null,
+    title: 'YouTube Video',
+    icon: `
         <span class="material-symbols-outlined">
         play_circle
         </span>
         `,
-    },
-    {
-        html_code: `<section><div class="relative py-8"><div class="absolute inset-0 flex items-center" aria-hidden="true"><div class="w-full border-4 border-gray-800 leading-none"></div></div><div class="relative flex justify-start"></div></div></section>`,
-        id: null,
-        title: "Break Divider",
-        icon: `
+  },
+  {
+    html_code: `<section><div class="relative py-8"><div class="absolute inset-0 flex items-center" aria-hidden="true"><div class="w-full border-4 border-gray-800 leading-none"></div></div><div class="relative flex justify-start"></div></div></section>`,
+    id: null,
+    title: 'Break Divider',
+    icon: `
         <span class="material-symbols-outlined">
         horizontal_rule
         </span>
         `,
-    },
+  },
 ];
 
 export default componentHelpers;

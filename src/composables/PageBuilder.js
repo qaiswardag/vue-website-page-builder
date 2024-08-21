@@ -301,7 +301,6 @@ class PageBuilder {
    * intersection of a target element with an ancestor element or with a top-level document's viewport.
    */
   synchronizeDOMAndComponents = async () => {
-    console.log(`denne 1`);
     if (this.showRunningMethodLogs) {
       console.log('synchronizeDOMAndComponents');
     }

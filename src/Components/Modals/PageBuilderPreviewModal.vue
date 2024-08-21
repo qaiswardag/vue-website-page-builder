@@ -108,7 +108,11 @@ const handleEscapeKey = function () {
                   <span class="myPrimaryParagraph font-medium">
                     Close Preview
                   </span>
-                  <span class="material-symbols-outlined"> close </span>
+                  <div
+                    class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                  >
+                    <span class="material-symbols-outlined"> close </span>
+                  </div>
                 </div>
               </div>
               <slot></slot>
