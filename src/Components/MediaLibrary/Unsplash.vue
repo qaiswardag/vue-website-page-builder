@@ -259,7 +259,7 @@ onMounted(() => {
       </div>
 
       <div v-if="getUnsplashImages.fetchedMedia.results.length < 1">
-        <p class="myPrimaryParagraph">
+        <p class="myPrimaryParagraph py-4 px-4">
           <span v-if="currentPage === 1">
             We did not find any images. Make a new search.
           </span>
