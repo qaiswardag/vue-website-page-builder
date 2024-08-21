@@ -109,6 +109,7 @@ const handleAddImage = function () {
   secondMediaButtonFunction.value = function () {
     isLoading.value = true;
     pageBuilder.updateBasePrimaryImage({ type: 'unsplash' });
+
     // close media library modal
     showMediaLibraryModal.value = false;
     isLoading.value = false;

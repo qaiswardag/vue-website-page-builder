@@ -4,7 +4,6 @@ export default {
   // state
   state: {
     currentImage: {},
-    currentMedia: null,
     currentPreviewImage: null,
     // end state
   },
@@ -26,7 +25,6 @@ export default {
     setCurrentImage(state, payload) {
       state.currentImage = payload;
     },
-
     setCurrentPreviewImage(state, payload) {
       state.currentPreviewImage = payload;
     },

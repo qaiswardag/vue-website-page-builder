@@ -195,7 +195,7 @@ onMounted(() => {
               </DynamicModal>
               <div
                 @click="store.commit('pageBuilderState/setComponent', null)"
-                class="px-4 h-[10vh] flex items-center justify-between border-b border-gray-200 bg-white"
+                class="px-4 h-[14vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
                 <div
                   class="flex justify-start divide-x divide-gray-200 myPrimaryGap"

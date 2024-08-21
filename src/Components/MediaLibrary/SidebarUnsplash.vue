@@ -49,8 +49,8 @@ const getCurrentPreviewImage = computed(() => {
           <div
             class="py-3 flex justify-between text-sm font-normal items-center"
           >
-            <dt class="text-gray-500">Dimensions</dt>
-            <dd class="text-gray-900">somthing here</dd>
+            <dt class="text-gray-500">From</dt>
+            <dd class="text-gray-900">Unsplash</dd>
           </div>
         </dl>
       </div>

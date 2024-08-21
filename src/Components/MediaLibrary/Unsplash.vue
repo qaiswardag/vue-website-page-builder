@@ -1,4 +1,5 @@
 <script setup>
+import PageBuilder from '@/composables/PageBuilder';
 import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 
@@ -24,8 +25,9 @@ const getUnsplashImages = computed(() => {
 });
 //
 //
+
 const handleImageClick = function (file, imageDetails) {
-  store.commit('mediaLibrary/setCurrentImage', { file });
+  store.commit('mediaLibrary/setCurrentImage', { file, imageDetails });
   store.commit('mediaLibrary/setCurrentPreviewImage', null);
 };
 //
@@ -236,17 +238,17 @@ onMounted(() => {
       </div>
     </nav>
     <div
-      class="overflow-y-scroll md:min-h-[20rem] md:max-h-[20em] min-h-[15rem] max-h-[15rem] pr-1 rounded"
+      class="overflow-y-scroll pr-1 border border-gray-200 rounded-lg md:min-h-[25rem] md:max-h-[25em] min-h-[20rem] max-h-[20rem]"
     >
       <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-2">
         <div
           v-for="image in getUnsplashImages.fetchedMedia.results"
           :key="image.id"
           @click="handleImageClick(image.urls.regular, image)"
-          class="border border-myPrimaryLightGrayColor rounded px-2 p-2 cursor-pointer bg-gray-50"
+          class="border border-myPrimaryLightGrayColor rounded-lg px-2 p-2 cursor-pointer bg-gray-50"
         >
           <img
-            alt="image"
+            :alt="image.user.name"
             class="group aspect-w-10 aspect-h-7 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-myPrimaryBrandColor focus-within:ring-offset-2 focus-within:ring-offset-gray-100 cursor-pointer"
             :src="image.urls.thumb"
           />

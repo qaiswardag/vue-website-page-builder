@@ -235,19 +235,72 @@ const changeSelectedMenuTab = function (clicked) {
 
                       <template v-if="selected === 'Upload'">
                         <!-- image upload - start -->
-                        <div
-                          class="w-full border border-gray-200 rounded-lg py-4 px-2"
-                        >
-                          upload iamge form
+                        <div class="w-full">
+                          <div
+                            class="overflow-y-scroll pr-1 border border-gray-200 rounded-lg md:min-h-[25rem] md:max-h-[25em] min-h-[20rem] max-h-[20rem]"
+                          >
+                            <div class="myInputGroup p-4 mt-4">
+                              <div class="col-span-3 mb-4">
+                                <div
+                                  class="relativeflex flex-col items-center justify-center"
+                                >
+                                  <label
+                                    class="myPrimaryInputLabel myPrimaryParagraph text-center w-full inset-0 block text-base cursor-pointer"
+                                    for="images"
+                                  >
+                                    <header>
+                                      <div
+                                        class="p-2 rounded-full border-2 border-dashed border-myPrimaryLinkColor hover:border-2 hover:border-opacity-50 hover:border-dashed hover:border-myPrimaryLinkColor"
+                                      >
+                                        <div
+                                          class="myPrimaryParagraph rounded-full bg-myPrimaryLightGrayColor text-center w-full inset-0 text-base pt-6 pb-6 px-2 flex items-center justify-center p-2"
+                                        >
+                                          <div
+                                            class="myPrimaryButton hover:shadow gap-3"
+                                          >
+                                            <span
+                                              class="material-symbols-outlined"
+                                            >
+                                              cloud_upload </span
+                                            ><span> PNG, JPG, up to 2MB </span>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </header></label
+                                  ><input
+                                    id="images"
+                                    type="file"
+                                    multiple=""
+                                    class="sr-only"
+                                  />
+                                </div>
+                              </div>
+                              <div
+                                class="min-h-[1.5rem] flex items-center justify-start"
+                              >
+                                <p
+                                  class="myPrimaryInputError mt-2 mb-0 py-0 self-start"
+                                ></p>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <!-- image upload - end -->
                       </template>
                       <template v-if="selected === 'Media library'">
                         <!-- image gallary - start -->
-                        <div
-                          class="w-full border border-gray-200 rounded-lg py-4 px-2"
-                        >
-                          MediaLibraryGalleryList here...
+                        <div class="w-full">
+                          <div
+                            class="overflow-y-scroll pr-1 border border-gray-200 rounded-lg md:min-h-[25rem] md:max-h-[25em] min-h-[20rem] max-h-[20rem]"
+                          >
+                            <div class="myInputGroup p-4 mt-4">
+                              <div class="col-span-3 mb-4">
+                                <h3 class="tertiaryHeader my-0 py-0">
+                                  Media Library
+                                </h3>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         <!-- image gallary - end -->
                       </template>
@@ -273,7 +326,7 @@ const changeSelectedMenuTab = function (clicked) {
                       <div
                         class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
-                        aside for upload
+                        No image has been selected.
                       </div>
                     </aside>
                     <!-- Details sidebar - media library start-->
@@ -285,7 +338,7 @@ const changeSelectedMenuTab = function (clicked) {
                       <div
                         class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
-                        aside for media library
+                        No image has been selected.
                       </div>
                     </aside>
                     <!-- Details sidebar - media library end-->

@@ -1174,6 +1174,8 @@ class PageBuilder {
       console.log('showBasePrimaryImage');
     }
 
+    console.log(`køøøøøre...`);
+
     const currentImageContainer = document.createElement('div');
 
     currentImageContainer.innerHTML = this.getElement.value.outerHTML;
