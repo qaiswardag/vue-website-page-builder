@@ -198,10 +198,21 @@ onMounted(() => {
                 class="px-4 h-[10vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
                 <div
-                  class="flex justify-start divide-x divide-gray-200 myPrimaryGap"
+                  class="flex items-center justify-start divide-x divide-gray-200"
                 >
                   <button
-                    class="myPrimaryButton lg:text-sm text-[12px] lg:py-3 py-3 min-h-2"
+                    type="button"
+                    @click="firstButton"
+                    class="border-r border-gray-200 pr-6"
+                  >
+                    <img
+                      class="h-6"
+                      src="/logo/logo.svg"
+                      alt="Logo"
+                    />
+                  </button>
+                  <button
+                    class="myPrimaryButton lg:text-sm text-[12px] lg:py-3 py-3 min-h-2 ml-4"
                     @click="secondButton"
                     type="button"
                   >

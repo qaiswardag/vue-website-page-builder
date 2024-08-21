@@ -91,6 +91,16 @@ const handleEscapeKey = function () {
               <div
                 class="px-4 h-[10vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
+                <button
+                  type="button"
+                  @click="firstButton"
+                >
+                  <img
+                    class="h-6"
+                    src="/logo/logo.svg"
+                    alt="Logo"
+                  />
+                </button>
                 <div
                   @click="firstButton"
                   class="flex items-center justify-center gap-1 cursor-pointer"
