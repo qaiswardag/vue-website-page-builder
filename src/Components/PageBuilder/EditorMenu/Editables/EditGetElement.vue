@@ -8,6 +8,10 @@ import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue';
 import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue';
 import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue';
 
+import { usePageBuilderStateStore } from './stores/page-builder-state';
+
+const pageBuilderStateStore = usePageBuilderStateStore();
+
 // store
 const store = useStore();
 const pageBuilder = new PageBuilder(store);
@@ -45,7 +49,8 @@ const secondModalButtonFunction = ref(null);
 const thirdModalButtonFunction = ref(null);
 
 const handleModalPreviewTiptap = function () {
-  store.commit('pageBuilderState/setShowModalTipTap', true);
+  pageBuilderStateStore.setShowModalTipTap(true);
+
   // set modal standards
   typeModal.value = 'success';
   gridColumnModal.value = 2;
@@ -59,12 +64,12 @@ const handleModalPreviewTiptap = function () {
 
   firstModalButtonFunction.value = function () {
     // set open modal
-    store.commit('pageBuilderState/setShowModalTipTap', false);
+    pageBuilderStateStore.setShowModalTipTap(false);
   };
 
   thirdModalButtonFunction.value = function () {
     // set open modal
-    store.commit('pageBuilderState/setShowModalTipTap', false);
+    pageBuilderStateStore.setShowModalTipTap(false);
   };
 };
 

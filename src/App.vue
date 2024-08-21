@@ -10,6 +10,10 @@ import PageBuilder from '@/composables/PageBuilder';
 import { delay } from '@/helpers/delay';
 import FullScreenSpinner from '@/Components/Loaders/FullScreenSpinner.vue';
 
+import { usePageBuilderStateStore } from './stores/page-builder-state';
+
+const pageBuilderStateStore = usePageBuilderStateStore();
+
 const openDesignerModal = ref(false);
 
 // use designer model
@@ -34,7 +38,7 @@ const handlePageBuilder = async function () {
   openDesignerModal.value = true;
 
   if (formType.value === 'create') {
-    store.commit('pageBuilderState/setComponents', []);
+    pageBuilderStateStore.setComponents([]);
 
     // local storage for page builder
     if (pageBuilder.areComponentsStoredInLocalStorage()) {

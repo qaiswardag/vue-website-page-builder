@@ -4,6 +4,7 @@ export default {
   // state
   state: {
     currentImage: {},
+
     currentPreviewImage: null,
     // end state
   },

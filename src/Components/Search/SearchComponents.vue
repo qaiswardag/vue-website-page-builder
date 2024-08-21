@@ -8,6 +8,10 @@ import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vu
 
 import { useStore } from 'vuex';
 
+import { usePageBuilderStateStore } from './stores/page-builder-state';
+
+const pageBuilderStateStore = usePageBuilderStateStore();
+
 const props = defineProps({
   firstButtonText: {
     required: true,
@@ -54,7 +58,7 @@ const handleDropComponent = async function (componentObject) {
 
   await nextTick();
 
-  store.commit('pageBuilderState/setPushComponents', {
+  pageBuilderStateStore.setPushComponents({
     component: clonedComponent,
     componentArrayAddMethod: getComponentArrayAddMethod.value,
   });
@@ -74,7 +78,8 @@ const handleAddHelperComponent = async function (helperComponentObject) {
   });
 
   await nextTick();
-  store.commit('pageBuilderState/setPushComponents', {
+
+  pageBuilderStateStore.setPushComponents({
     component: clonedComponent,
     componentArrayAddMethod: getComponentArrayAddMethod.value,
   });

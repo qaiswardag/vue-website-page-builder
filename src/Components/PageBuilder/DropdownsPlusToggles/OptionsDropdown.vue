@@ -10,6 +10,10 @@ import DesignerSettings from '@/Components/PageBuilder/Settings/DesignerSettings
 import { useStore } from 'vuex';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
 
+import { usePageBuilderStateStore } from './stores/page-builder-state';
+
+const pageBuilderStateStore = usePageBuilderStateStore();
+
 const store = useStore();
 const pageBuilder = new PageBuilder(store);
 const emit = defineEmits(['previewCurrentDesign']);
@@ -66,7 +70,7 @@ const deleteAllComponents = function () {
   // handle click
   thirdModalButtonFunction.value = function () {
     pageBuilder.deleteAllComponents();
-    store.commit('pageBuilderState/setComponent', null);
+    pageBuilderStateStore.setComponents(null);
     showModalDeleteAllComponents.value = false;
   };
   // end modal
@@ -74,14 +78,14 @@ const deleteAllComponents = function () {
 
 // handle slideover window
 const handleSettingsSlideOver = function () {
-  store.commit('pageBuilderState/setComponent', null);
+  pageBuilderStateStore.setComponents(null);
 
   titleSettingsSlideOverRight.value = 'Settings';
   showSettingsSlideOverRight.value = true;
 };
 // handle slideover window
 const settingsSlideOverButton = function () {
-  store.commit('pageBuilderState/setComponent', null);
+  pageBuilderStateStore.setComponents(null);
 
   showSettingsSlideOverRight.value = false;
 };

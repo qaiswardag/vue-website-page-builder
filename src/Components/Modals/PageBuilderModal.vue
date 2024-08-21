@@ -15,6 +15,10 @@ import {
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { computed, onMounted, ref } from 'vue';
 
+import { usePageBuilderStateStore } from './stores/page-builder-state';
+
+const pageBuilderStateStore = usePageBuilderStateStore();
+
 defineProps({
   show: {
     type: Boolean,
@@ -194,7 +198,7 @@ onMounted(() => {
                 <main></main>
               </DynamicModal>
               <div
-                @click="store.commit('pageBuilderState/setComponent', null)"
+                @click="pageBuilderStateStore.setComponent(null)"
                 class="px-4 h-[10vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
                 <div

@@ -5,6 +5,10 @@ import PageBuilder from '@/composables/PageBuilder';
 import TipTapInput from '@/Components/TipTap/TipTapInput.vue';
 import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue';
 
+import { usePageBuilderStateStore } from './stores/page-builder-state';
+
+const pageBuilderStateStore = usePageBuilderStateStore();
+
 const store = useStore();
 
 const pageBuilder = new PageBuilder(store);
@@ -18,7 +22,7 @@ const pageBuilder = new PageBuilder(store);
         >
           <div class="px-2 flex items-center justify-start gap-2">
             <button
-              @click="store.commit('pageBuilderState/setShowModalTipTap', true)"
+              @click="pageBuilderStateStore.setShowModalTipTap(true)"
               type="button"
               class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
             >
