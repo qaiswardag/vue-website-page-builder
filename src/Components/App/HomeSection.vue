@@ -10,7 +10,12 @@ const features = [
   {
     name: 'Live Drag & Drop Builder',
     description:
-      'Drag-and-drop content on a page and watch your pages come to life.',
+      'Drag-and-drop content on a page and watch your pages come to life. Bring your vision to life and create impressive pages using a drag-and-drop page builder',
+  },
+  {
+    name: 'True Visual Editing',
+    description:
+      'See your changes in real-time as you make them. Elevate your creative vision and effortlessly create pages using an intuitive Vue.js drag-and-drop page builder. Break free from design limitations and turn your visions into reality.',
   },
   {
     name: 'Technologies and Frameworks',
@@ -32,6 +37,15 @@ const features = [
       'A beautiful and user-friendly media library that allows you to effortlessly change and update images.',
   },
   {
+    name: 'Unsplash',
+    description:
+      'Unsplash Integration allows you to change and update images from Unsplash.',
+  },
+  {
+    name: 'YouTube Videos',
+    description: 'YouTube Videosm, integrate video content smoothly.',
+  },
+  {
     name: 'Minimal and Intuitive Design',
     description:
       'Beautiful, elegant and intuitive design. Enhance user engagement with amazing visual experience.',
@@ -44,14 +58,12 @@ const features = [
     <div class="myPrimaryWidthScreenModule bg-red-50 lg:block">
       <div class="myPrimaryContentSection">
         <h2 class="mySecondaryHeader">
-          Power your vision and build impressive pages with ease using an
-          intuitive drag-and-drop page builder.
+          Bring your vision to life and create impressive pages using a
+          drag-and-drop page builder
         </h2>
         <p class="myPrimaryParagraph font-normal">
           Build responsive pages like listings, jobs or blog posts and manage
-          content easily using the free drag-and-drop page builder. Elevate your
-          creative vision and create pages using an intuitive drag-and-drop Page
-          Builder.
+          content easily using the free drag-and-drop page builder.
           <br />
           <a
             class="text-myPrimaryLinkColor font-medium"
@@ -100,14 +112,20 @@ const features = [
               <div class="flex justify-center items-center gap-2">
                 <button
                   type="button"
-                  class="mySecondaryButton text-[10px] py-2 px-6 cursor-default min-h-2"
+                  class="mySecondaryButton text-[10px] py-2 px-6 cursor-default min-h-2 lg:block hidden"
                 >
                   Save</button
                 ><button
                   type="button"
-                  class="myPrimaryButton text-[10px] py-2 px-6 cursor-default min-h-2"
+                  class="mySecondaryButton text-[10px] py-2 px-6 cursor-default min-h-2"
                 >
                   Publish
+                </button>
+                <button
+                  type="button"
+                  class="myPrimaryButton text-[10px] py-2 px-6 min-h-2 cursor-pointer"
+                >
+                  Demo
                 </button>
               </div>
               <div class="lg:flex hidden justify-center items-center gap-2">
@@ -453,15 +471,18 @@ const features = [
       </div>
     </div>
 
-    <div class="myPrimaryWidthScreenModule bg-gray-100 lg:block">
+    <div
+      class="myPrimaryWidthScreenModule bg-gray-100 lg:block"
+      style="background-image: url('/home/features.jpg')"
+    >
       <div class="myPrimaryContentSection">
-        <h2 class="mySecondaryHeader">Break free from design limitations</h2>
+        <h2 class="mySecondaryHeader">
+          Everything you need. Break free from design limitations
+        </h2>
         <p class="myPrimaryParagraph font-normal">
           Build your website pages with hundreds of ready-made components.
           Designed to fit your every need, fully customizable & always
-          responsive. Elevate your creative vision and effortlessly create pages
-          using an intuitive Vue.js drag-and-drop page builder. Break free from
-          design limitations and turn your visions into reality.
+          responsive.
           <br />
           <a
             class="text-myPrimaryLinkColor font-medium"
@@ -481,25 +502,19 @@ const features = [
         </p>
 
         <div
-          class="grid grid-cols-1 lg:gap-16 gap-24 lg:grid-cols-3 mt-12 pt-12 border-t border-red-300"
+          class="grid grid-cols-1 lg:gap-16 gap-24 lg:grid-cols-3 mt-12 pt-12 border-t"
         >
-          <div>
-            <h2 class="myTertiaryHeader mt-0">Everything you need</h2>
-            <p class="mt-2 myPrimaryParagraph font-medium">
-              Power your vision and build impressive pages with ease using an
-              intuitive Vue drag-and-drop page builder, and achieve stunning
-              results.
-            </p>
-          </div>
           <dl
-            class="col-span-2 grid grid-cols-1 gap-x-8 gap-y-10 text-base leading-7 sm:grid-cols-2 lg:gap-y-16"
+            class="col-span-3 grid grid-cols-1 gap-x-8 gap-y-10 text-base leading-7 sm:grid-cols-2 lg:gap-y-16"
           >
             <div
               v-for="feature in features"
               :key="feature.name"
-              class="relative"
+              class="relative px-4 py-6 rounded-2xl shadow-sm outline outline-2 outline-offset-4 outline-myPrimaryLinkColor hover:outline-myPrimaryLinkColor/50"
             >
-              <dt class="myFourthHeader flex items-center gap-2">
+              <dt
+                class="myPrimaryParagraph font-medium flex items-center gap-2 mb-4"
+              >
                 <span class="material-symbols-outlined"> check </span>
                 <span>
                   {{ feature.name }}
