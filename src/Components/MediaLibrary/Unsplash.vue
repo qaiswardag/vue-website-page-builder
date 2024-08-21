@@ -238,9 +238,9 @@ onMounted(() => {
       </div>
     </nav>
     <div
-      class="overflow-y-scroll pr-1 border border-gray-200 rounded-lg md:min-h-[25rem] md:max-h-[25em] min-h-[20rem] max-h-[20rem]"
+      class="overflow-y-scroll pr-1 border border-gray-200 rounded-lg md:min-h-[15rem] md:max-h-[15em] min-h-[20rem] max-h-[20rem]"
     >
-      <div class="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 gap-2">
+      <div class="grid md:grid-cols-6 sm:grid-cols-4 grid-cols-1 gap-2">
         <div
           v-for="image in getUnsplashImages.fetchedMedia.results"
           :key="image.id"
