@@ -69,7 +69,7 @@ const getElement = computed(() => {
 });
 
 const getElementAttributes = computed(() => {
-  if (!getElement.value) {
+  if (!getElement.value || !(getElement.value instanceof HTMLElement)) {
     return new Object();
   }
 
@@ -209,6 +209,8 @@ onMounted(async () => {
                 @click="
                   () => {
                     pageBuilderStateStore.setMenuRight(false);
+                    pageBuilderStateStore.setElement(null);
+                    pageBuilderStateStore.setComponent(null);
                     handleDesignerPreview();
                   }
                 "

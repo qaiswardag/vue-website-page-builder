@@ -342,6 +342,7 @@ const handleModalIframeSrc = function () {
       <template
         v-if="
           getElement &&
+          Object.keys(getElement).length !== 0 &&
           !getBasePrimaryImage &&
           !pageBuilder.ElOrFirstChildIsIframe()
         "
@@ -365,7 +366,13 @@ const handleModalIframeSrc = function () {
         </div>
       </template>
 
-      <template v-if="getElement && !getRestoredElement">
+      <template
+        v-if="
+          getElement &&
+          Object.keys(getElement).length !== 0 &&
+          !getRestoredElement
+        "
+      >
         <div class="px-2 flex items-center justify-start gap-2">
           <button
             @click="pageBuilder.handleDeleteElement"
