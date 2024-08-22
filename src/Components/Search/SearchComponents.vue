@@ -190,7 +190,7 @@ onMounted(async () => {
                         <img
                           :src="component.cover_image"
                           alt="placeholder"
-                          class="max-h-72 cursor-pointer object-contain bg-white rounded-lg mx-auto"
+                          class="max-h-72 cursor-pointer object-contain bg-white mx-auto"
                           @click="handleDropComponent(component)"
                         />
                       </template>
