@@ -1,8 +1,6 @@
 <script setup>
 import tailwindColors from '@/utils/builder/tailwaind-colors';
 import PageBuilder from '@/composables/PageBuilder';
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue';
-import { useStore } from 'vuex';
 import { computed, ref, watch } from 'vue';
 import {
   Listbox,
@@ -11,21 +9,22 @@ import {
   ListboxOption,
   ListboxOptions,
 } from '@headlessui/vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-const store = useStore();
-
-const pageBuilder = new PageBuilder(store);
-
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const textColor = ref(null);
-
 const getTextColor = computed(() => {
-  return store.getters['pageBuilderState/getTextColor'];
+  return pageBuilderStateStore.getTextColor;
 });
 
 watch(
   getTextColor,
   (newValue) => {
     textColor.value = newValue;
+    pageBuilder.handlePageBuilderMethods();
   },
   { immediate: true }
 );

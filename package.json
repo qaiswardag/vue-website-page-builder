@@ -24,7 +24,6 @@
     "laravel-vue-pagination": "^4.1.1",
     "slugify": "^1.6.6",
     "uuid": "^9.0.0",
-    "vuex": "^4.1.0",
     "pinia": "^2.1.7",
     "vue": "^3.4.29"
   },

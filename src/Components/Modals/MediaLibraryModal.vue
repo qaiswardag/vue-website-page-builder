@@ -10,17 +10,17 @@ import {
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 
 // new version
-import { useStore } from 'vuex';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
 import SidebarUnsplash from '@/Components/MediaLibrary/SidebarUnsplash.vue';
 import Unsplash from '@/Components/MediaLibrary/Unsplash.vue';
 import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vue';
 
-// store
-const store = useStore();
+import { useMediaLibraryStore } from '@/stores/media-library';
+
+const mediaLibraryStore = useMediaLibraryStore();
 
 const getCurrentImage = computed(() => {
-  return store.getters['mediaLibrary/getCurrentImage'];
+  return mediaLibraryStore.getCurrentImage;
 });
 
 const selected = ref('Unsplash');

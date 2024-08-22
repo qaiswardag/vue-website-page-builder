@@ -6,24 +6,21 @@ import Preview from '@/PageBuilder/Preview.vue';
 import ComponentTopMenu from '@/Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue';
 import EditGetElement from '@/Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue';
 import SearchComponents from '@/Components/Search/SearchComponents.vue';
-
-import { useStore } from 'vuex';
 import OptionsDropdown from '@/Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue';
 import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebarEditor.vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
 const emit = defineEmits(['previewCurrentDesign']);
-
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
-
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const getMenuRight = computed(() => {
-  return store.getters['pageBuilderState/getMenuRight'];
+  return pageBuilderStateStore.getMenuRight;
 });
-
 const previewCurrentDesign = function () {
   pageBuilder.previewCurrentDesign();
 };
-
 const openDesignerPreviewModal = ref(false);
 const firstDesignerPreviewModalButtonFunction = ref(null);
 
@@ -45,7 +42,7 @@ const firstButtonTextSearchComponents = ref('');
 const firstModalButtonSearchComponentsFunction = ref(null);
 
 const handleAddComponent = function () {
-  store.commit('pageBuilderState/setComponent', null);
+  pageBuilderStateStore.setComponent(null);
 
   //
   titleModalAddComponent.value = 'Add Components to Page';
@@ -61,14 +58,14 @@ const handleAddComponent = function () {
 };
 
 const getComponents = computed(() => {
-  return store.getters['pageBuilderState/getComponents'];
+  return pageBuilderStateStore.getComponents;
 });
 const getComponent = computed(() => {
-  return store.getters['pageBuilderState/getComponent'];
+  return pageBuilderStateStore.getComponent;
 });
 
 const getElement = computed(() => {
-  return store.getters['pageBuilderState/getElement'];
+  return pageBuilderStateStore.getElement;
 });
 
 const getElementAttributes = computed(() => {
@@ -104,7 +101,7 @@ watch(getElementAttributes, (newAttributes, oldAttributes) => {
 });
 
 const handleSelectComponent = function (componentObject) {
-  store.commit('pageBuilderState/setComponent', componentObject);
+  pageBuilderStateStore.setComponent(componentObject);
 };
 
 const draggableZone = ref(null);
@@ -138,7 +135,7 @@ onMounted(async () => {
   >
     <div class="relative h-full flex">
       <div
-        @click.self="store.commit('pageBuilderState/setComponent', null)"
+        @click.self="pageBuilderStateStore.setComponent(null)"
         class="min-w-[3.5rem] pt-6 pb-2 my-2 mx-2 bg-myPrimaryLightGrayColor rounded-full shadow"
       >
         <div class="mx-2 flex flex-col myPrimaryGap">
@@ -147,10 +144,7 @@ onMounted(async () => {
               type="button"
               @click="
                 () => {
-                  store.commit(
-                    'pageBuilderState/setComponentArrayAddMethod',
-                    'unshift'
-                  );
+                  pageBuilderStateStore.setComponentArrayAddMethod('unshift');
                   handleAddComponent();
                 }
               "
@@ -160,9 +154,7 @@ onMounted(async () => {
             </button>
           </div>
 
-          <div
-            @click.self="store.commit('pageBuilderState/setComponent', null)"
-          >
+          <div @click.self="pageBuilderStateStore.setComponent(null)">
             <ComponentTopMenu v-if="getElement"></ComponentTopMenu>
           </div>
         </div>
@@ -174,7 +166,7 @@ onMounted(async () => {
           class="flex items-center justify-between primary-gap rounded-t-2xl bg-myPrimaryLightGrayColor"
         >
           <div
-            @click.self="store.commit('pageBuilderState/setComponent', null)"
+            @click.self="pageBuilderStateStore.setComponent(null)"
             class="w-4/12 flex justify-start items-center py-2 pl-2 h-full"
           >
             <div class="flex gap-2">
@@ -185,7 +177,7 @@ onMounted(async () => {
           </div>
 
           <div
-            @click.self="store.commit('pageBuilderState/setComponent', null)"
+            @click.self="pageBuilderStateStore.setComponent(null)"
             class="w-4/12 flex justify-center py-2"
           >
             <OptionsDropdown
@@ -194,7 +186,7 @@ onMounted(async () => {
           </div>
 
           <div
-            @click.self="store.commit('pageBuilderState/setComponent', null)"
+            @click.self="pageBuilderStateStore.setComponent(null)"
             class="w-4/12 flex justify-end py-2 pr-2"
           >
             <div class="flex items-center justify-center gap-2">
@@ -202,10 +194,7 @@ onMounted(async () => {
                 type="button"
                 @click="
                   () => {
-                    store.commit(
-                      'pageBuilderState/setComponentArrayAddMethod',
-                      'unshift'
-                    );
+                    pageBuilderStateStore.setComponentArrayAddMethod('unshift');
                     handleAddComponent();
                   }
                 "
@@ -219,7 +208,7 @@ onMounted(async () => {
                 type="button"
                 @click="
                   () => {
-                    store.commit('pageBuilderState/setMenuRight', false);
+                    pageBuilderStateStore.setMenuRight(false);
                     handleDesignerPreview();
                   }
                 "
@@ -231,7 +220,7 @@ onMounted(async () => {
               <button
                 type="button"
                 v-if="getMenuRight === false"
-                @click="store.commit('pageBuilderState/setMenuRight', true)"
+                @click="pageBuilderStateStore.setMenuRight(true)"
                 class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
               >
                 <span class="material-symbols-outlined"> gesture </span>
@@ -242,7 +231,7 @@ onMounted(async () => {
 
         <EditGetElement></EditGetElement>
         <div
-          @click="store.commit('pageBuilderState/setComponent', null)"
+          @click="pageBuilderStateStore.setComponent(null)"
           id="contains-pagebuilder"
           class="pl-4 pr-4 pb-4 overflow-y-auto h-screen pt-1"
         >
@@ -281,10 +270,7 @@ onMounted(async () => {
                 <button
                   @click="
                     () => {
-                      store.commit(
-                        'pageBuilderState/setComponentArrayAddMethod',
-                        'push'
-                      );
+                      pageBuilderStateStore.setComponentArrayAddMethod('push');
                       handleAddComponent();
                     }
                   "
@@ -310,7 +296,7 @@ onMounted(async () => {
         class="h-full duration-300 z-20 flex-shrink-0 overflow-hidden shadow-2xl rounded-l-2xl bg-white"
       >
         <RightSidebarEditor
-          @closeEditor="store.commit('pageBuilderState/setMenuRight', false)"
+          @closeEditor="pageBuilderStateStore.setMenuRight(false)"
         >
         </RightSidebarEditor>
       </aside>

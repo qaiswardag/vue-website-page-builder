@@ -11,10 +11,10 @@ export const useUserStore = defineStore('user', {
   },
   actions: {
     setIsLoading(payload) {
-      this.isLoading = payload; // Use `this` to access state
+      this.isLoading = payload;
     },
     setUserSettings(payload) {
-      this.userSettings = payload; // Use `this` to access state
+      this.userSettings = payload;
     },
   },
 });

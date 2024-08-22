@@ -1,5 +1,4 @@
 <script setup>
-import { useStore } from 'vuex';
 import { computed, onMounted, watch } from 'vue';
 import PageBuilder from '@/composables/PageBuilder';
 import { ref } from 'vue';
@@ -11,20 +10,22 @@ import {
   ListboxOption,
   ListboxOptions,
 } from '@headlessui/vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
-
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const opacityVueModel = ref(null);
-
 const getOpacity = computed(() => {
-  return store.getters['pageBuilderState/getOpacity'];
+  return pageBuilderStateStore.getOpacity;
 });
 
 watch(
   getOpacity,
   (newValue) => {
     opacityVueModel.value = newValue;
+    pageBuilder.handlePageBuilderMethods();
   },
   { immediate: true }
 );

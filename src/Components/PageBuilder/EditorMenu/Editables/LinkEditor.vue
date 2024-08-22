@@ -1,46 +1,41 @@
 <script setup>
 import PageBuilder from '@/composables/PageBuilder';
 import EditorAccordion from '../EditorAccordion.vue';
-import { useStore } from 'vuex';
 import { computed, nextTick, ref, watch } from 'vue';
 import { Switch } from '@headlessui/vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-import { usePageBuilderStateStore } from './stores/page-builder-state';
-
+const mediaLibraryStore = useMediaLibraryStore();
 const pageBuilderStateStore = usePageBuilderStateStore();
-
-const store = useStore();
-
-const pageBuilder = new PageBuilder(store);
-
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const hyperlinkEnable = ref(false);
 const urlInput = ref(null);
 const openHyperlinkInNewTab = ref(false);
-
 const getElementContainsHyperlink = computed(() => {
-  return store.getters['pageBuilderState/getElementContainsHyperlink'];
+  return pageBuilderStateStore.getElementContainsHyperlink;
 });
 const getHyperlinkAbility = computed(() => {
-  return store.getters['pageBuilderState/getHyperlinkAbility'];
+  return pageBuilderStateStore.getHyperlinkAbility;
 });
 const getHyperlinkMessage = computed(() => {
-  return store.getters['pageBuilderState/getHyperlinkMessage'];
+  return pageBuilderStateStore.getHyperlinkMessage;
 });
 const getHyperlinkError = computed(() => {
-  return store.getters['pageBuilderState/getHyperlinkError'];
+  return pageBuilderStateStore.getHyperlinkError;
 });
 const getHyperlinkInput = computed(() => {
-  return store.getters['pageBuilderState/getHyperlinkInput'];
+  return pageBuilderStateStore.getHyperlinkInput;
 });
 const getHyberlinkEnable = computed(() => {
-  return store.getters['pageBuilderState/getHyberlinkEnable'];
+  return pageBuilderStateStore.getHyberlinkEnable;
 });
 
 const getOpenHyperlinkInNewTab = computed(() => {
-  return store.getters['pageBuilderState/getOpenHyperlinkInNewTab'];
+  return pageBuilderStateStore.getOpenHyperlinkInNewTab;
 });
 const getElement = computed(() => {
-  return store.getters['pageBuilderState/getElement'];
+  return pageBuilderStateStore.getElement;
 });
 
 watch(getHyperlinkInput, (newValue) => {

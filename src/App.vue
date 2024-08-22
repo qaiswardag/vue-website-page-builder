@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, nextTick } from 'vue';
-import { useStore } from 'vuex';
 import PageBuilderModal from '@/Components/Modals/PageBuilderModal.vue';
 import HomeSection from '@/Components/App/HomeSection.vue';
 import Footer from '@/Components/App/Footer.vue';
@@ -9,29 +8,27 @@ import PageBuilderView from '@/PageBuilder/PageBuilder.vue';
 import PageBuilder from '@/composables/PageBuilder';
 import { delay } from '@/helpers/delay';
 import FullScreenSpinner from '@/Components/Loaders/FullScreenSpinner.vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useUserStore } from '@/stores/user';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-import { usePageBuilderStateStore } from './stores/page-builder-state';
-
+const mediaLibraryStore = useMediaLibraryStore();
 const pageBuilderStateStore = usePageBuilderStateStore();
-
+const userStore = useUserStore();
 const openDesignerModal = ref(false);
-
 // use designer model
 const firstDesignerModalButtonFunction = ref(null);
 const secondDesignerModalButtonFunction = ref(null);
-
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
-
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const formType = ref('create'); // create or update
 
 const getIsLoading = computed(() => {
-  return store.getters['user/getIsLoading'];
+  return userStore.getIsLoading;
 });
 
 const handlePageBuilder = async function () {
   // set modal standards
-  store.commit('user/setIsLoading', true);
+  userStore.setIsLoading(true);
 
   await delay();
   await nextTick();
@@ -54,7 +51,7 @@ const handlePageBuilder = async function () {
 
   // handle click
   firstDesignerModalButtonFunction.value = async function () {
-    store.commit('user/setIsLoading', true);
+    userStore.setIsLoading(true);
 
     if (formType.value === 'update') {
       await nextTick();
@@ -64,12 +61,12 @@ const handlePageBuilder = async function () {
 
     // set open modal
     openDesignerModal.value = false;
-    store.commit('user/setIsLoading', false);
+    userStore.setIsLoading(false);
   };
 
   // handle click
   secondDesignerModalButtonFunction.value = async function () {
-    store.commit('user/setIsLoading', true);
+    userStore.setIsLoading(true);
 
     // save to local storage if new resource
     if (formType.value === 'create') {
@@ -104,16 +101,16 @@ const handlePageBuilder = async function () {
 
     openDesignerModal.value = false;
     await delay();
-    store.commit('user/setIsLoading', false);
+    userStore.setIsLoading(false);
   };
 
-  store.commit('user/setIsLoading', false);
+  userStore.setIsLoading(false);
 
   // end modal
 };
 // Builder # End
 const handleDraftForUpdate = async function () {
-  store.commit('user/setIsLoading', true);
+  userStore.setIsLoading(true);
 
   if (formType.value === 'update') {
     await nextTick();
@@ -122,7 +119,7 @@ const handleDraftForUpdate = async function () {
     pageBuilder.setEventListenersForElements();
 
     await delay();
-    store.commit('user/setIsLoading', false);
+    userStore.setIsLoading(false);
   }
 };
 </script>

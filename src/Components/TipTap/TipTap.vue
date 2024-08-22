@@ -1,18 +1,13 @@
 <script setup>
-import { computed, onBeforeMount, onMounted, ref, watch } from 'vue';
-import { useStore } from 'vuex';
 import PageBuilder from '@/composables/PageBuilder';
-import TipTapInput from '@/Components/TipTap/TipTapInput.vue';
-import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-import { usePageBuilderStateStore } from './stores/page-builder-state';
-
+const mediaLibraryStore = useMediaLibraryStore();
 const pageBuilderStateStore = usePageBuilderStateStore();
-
-const store = useStore();
-
-const pageBuilder = new PageBuilder(store);
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 </script>
+
 <template>
   <div>
     <div class="blockease-linear duration-200 block ease-linear">

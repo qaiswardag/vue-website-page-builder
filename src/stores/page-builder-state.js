@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { vueFetch } from '@/composables/vueFetch';
+import PageBuilder from '@/composables/PageBuilder';
 
 // get components
 const {
@@ -11,6 +12,8 @@ const {
   isLoading: isLoadingComponents,
   isSuccess: isSuccessComponents,
 } = vueFetch();
+
+const pageBuilder = new PageBuilder(null);
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
   state: () => ({
@@ -333,7 +336,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       if (!payload) {
         this.element = null;
         this.component = null;
-        // Assuming `pageBuilder` is globally available, adjust as necessary
         pageBuilder.removeHoveredAndSelected(null);
         return;
       }
@@ -358,15 +360,24 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     setFetchedComponents(payload) {
       this.fetchedComponents = payload;
     },
-    async loadComponents(data) {
+
+    async setLoadComponents(data) {
+      this.setFetchedComponents({
+        fetchedData: null,
+        isError: null,
+        error: null,
+        errors: null,
+        isLoading: true,
+        isSuccess: null,
+      });
+
       data.search_query = data.search_query || '';
       data.page = data.page || '';
 
-      // Handle the fetch logic
       await handlefetchComponents(
         '/components.json',
         {},
-        { additionalCallTime: 100 }
+        { additionalCallTime: 500 }
       );
 
       this.setFetchedComponents({

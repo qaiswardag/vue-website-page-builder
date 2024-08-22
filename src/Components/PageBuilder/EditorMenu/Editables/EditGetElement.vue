@@ -1,5 +1,4 @@
 <script setup>
-import { useStore } from 'vuex';
 import { computed, ref } from 'vue';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
 import TipTapInput from '@/Components/TipTap/TipTapInput.vue';
@@ -7,21 +6,17 @@ import PageBuilder from '@/composables/PageBuilder';
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue';
 import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue';
 import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-import { usePageBuilderStateStore } from './stores/page-builder-state';
-
+const mediaLibraryStore = useMediaLibraryStore();
 const pageBuilderStateStore = usePageBuilderStateStore();
-
-// store
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
-
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const getElement = computed(() => {
-  return store.getters['pageBuilderState/getElement'];
+  return pageBuilderStateStore.getElement;
 });
-
 const getShowModalTipTap = computed(() => {
-  const result = store.getters['pageBuilderState/getShowModalTipTap'];
+  const result = pageBuilderStateStore.getShowModalTipTap;
 
   if (result) {
     handleModalPreviewTiptap();
@@ -30,7 +25,7 @@ const getShowModalTipTap = computed(() => {
 });
 
 const getRestoredElement = computed(() => {
-  return store.getters['pageBuilderState/getRestoredElement'];
+  return pageBuilderStateStore.getRestoredElement;
 });
 
 // hanlde Tip Tap modal
@@ -76,7 +71,7 @@ const handleModalPreviewTiptap = function () {
 // handle image
 // get current image from store
 const getBasePrimaryImage = computed(() => {
-  return store.getters['pageBuilderState/getBasePrimaryImage'];
+  return pageBuilderStateStore.getBasePrimaryImage;
 });
 
 const isLoading = ref(false);

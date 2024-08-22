@@ -2,7 +2,6 @@
 import tailwindBorderStyleWidthPlusColor from '@/utils/builder/tailwind-border-style-width-color';
 import PageBuilder from '@/composables/PageBuilder';
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue';
-import { useStore } from 'vuex';
 import { computed, ref, watch } from 'vue';
 import {
   Listbox,
@@ -11,29 +10,30 @@ import {
   ListboxOption,
   ListboxOptions,
 } from '@headlessui/vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-const store = useStore();
-
-const pageBuilder = new PageBuilder(store);
-
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const borderStyle = ref(null);
 const borderWidth = ref(null);
 const borderColor = ref(null);
-
 const getBorderStyle = computed(() => {
-  return store.getters['pageBuilderState/getBorderStyle'];
+  return pageBuilderStateStore.getBorderStyle;
 });
 const getBorderWidth = computed(() => {
-  return store.getters['pageBuilderState/getBorderWidth'];
+  return pageBuilderStateStore.getBorderWidth;
 });
 const getBorderColor = computed(() => {
-  return store.getters['pageBuilderState/getBorderColor'];
+  return pageBuilderStateStore.getBorderColor;
 });
 
 watch(
   getBorderStyle,
   (newValue) => {
     borderStyle.value = newValue;
+    pageBuilder.handlePageBuilderMethods();
   },
   { immediate: true }
 );
@@ -41,6 +41,7 @@ watch(
   getBorderWidth,
   (newValue) => {
     borderWidth.value = newValue;
+    pageBuilder.handlePageBuilderMethods();
   },
   { immediate: true }
 );
@@ -48,6 +49,7 @@ watch(
   getBorderColor,
   (newValue) => {
     borderColor.value = newValue;
+    pageBuilder.handlePageBuilderMethods();
   },
   { immediate: true }
 );

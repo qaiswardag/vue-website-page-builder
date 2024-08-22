@@ -6,16 +6,13 @@ import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal
 import Preview from '@/PageBuilder/Preview.vue';
 import SlideOverRight from '@/Components/PageBuilder/Slidebars/SlideOverRight.vue';
 import DesignerSettings from '@/Components/PageBuilder/Settings/DesignerSettings.vue';
-
-import { useStore } from 'vuex';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-import { usePageBuilderStateStore } from './stores/page-builder-state';
-
+const mediaLibraryStore = useMediaLibraryStore();
 const pageBuilderStateStore = usePageBuilderStateStore();
-
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const emit = defineEmits(['previewCurrentDesign']);
 
 const showModalDeleteAllComponents = ref(false);

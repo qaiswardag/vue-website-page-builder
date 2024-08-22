@@ -1,30 +1,11 @@
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue';
-import {
-  Dialog,
-  DialogOverlay,
-  DialogTitle,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue';
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import { computed } from 'vue';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-// new version
-import { useStore } from 'vuex';
-import DynamicModal from '@/Components/Modals/DynamicModal.vue';
-import SidebarUnsplash from '@/Components/MediaLibrary/SidebarUnsplash.vue';
-import Unsplash from '@/Components/MediaLibrary/Unsplash.vue';
-import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vue';
-
-// store
-const store = useStore();
+const mediaLibraryStore = useMediaLibraryStore();
 
 const getCurrentImage = computed(() => {
-  return store.getters['mediaLibrary/getCurrentImage'];
-});
-
-const getCurrentPreviewImage = computed(() => {
-  return store.getters['mediaLibrary/getCurrentPreviewImage'];
+  return mediaLibraryStore.getCurrentImage;
 });
 </script>
 
