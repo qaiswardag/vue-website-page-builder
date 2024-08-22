@@ -6,10 +6,6 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue';
-import { useStore } from 'vuex';
-import { computed } from 'vue';
-
-import { ref, watch } from 'vue';
 
 // props
 const props = defineProps({

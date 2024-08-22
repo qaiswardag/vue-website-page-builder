@@ -1,5 +1,4 @@
 <script setup>
-import { useStore } from 'vuex';
 import { computed, ref } from 'vue';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
 import TipTapInput from '@/Components/TipTap/TipTapInput.vue';
@@ -7,17 +6,17 @@ import PageBuilder from '@/composables/PageBuilder';
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue';
 import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue';
 import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-// store
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
-
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const getElement = computed(() => {
-  return store.getters['pageBuilderState/getElement'];
+  return pageBuilderStateStore.getElement;
 });
-
 const getShowModalTipTap = computed(() => {
-  const result = store.getters['pageBuilderState/getShowModalTipTap'];
+  const result = pageBuilderStateStore.getShowModalTipTap;
 
   if (result) {
     handleModalPreviewTiptap();
@@ -26,7 +25,7 @@ const getShowModalTipTap = computed(() => {
 });
 
 const getRestoredElement = computed(() => {
-  return store.getters['pageBuilderState/getRestoredElement'];
+  return pageBuilderStateStore.getRestoredElement;
 });
 
 // hanlde Tip Tap modal
@@ -45,7 +44,8 @@ const secondModalButtonFunction = ref(null);
 const thirdModalButtonFunction = ref(null);
 
 const handleModalPreviewTiptap = function () {
-  store.commit('pageBuilderState/setShowModalTipTap', true);
+  pageBuilderStateStore.setShowModalTipTap(true);
+
   // set modal standards
   typeModal.value = 'success';
   gridColumnModal.value = 2;
@@ -59,19 +59,19 @@ const handleModalPreviewTiptap = function () {
 
   firstModalButtonFunction.value = function () {
     // set open modal
-    store.commit('pageBuilderState/setShowModalTipTap', false);
+    pageBuilderStateStore.setShowModalTipTap(false);
   };
 
   thirdModalButtonFunction.value = function () {
     // set open modal
-    store.commit('pageBuilderState/setShowModalTipTap', false);
+    pageBuilderStateStore.setShowModalTipTap(false);
   };
 };
 
 // handle image
 // get current image from store
 const getBasePrimaryImage = computed(() => {
-  return store.getters['pageBuilderState/getBasePrimaryImage'];
+  return pageBuilderStateStore.getBasePrimaryImage;
 });
 
 const isLoading = ref(false);

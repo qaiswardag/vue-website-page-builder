@@ -2,7 +2,6 @@
 import Modal from '@/Components/Modals/Modal.vue';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
 import PageBuilder from '@/composables/PageBuilder';
-import { useStore } from 'vuex';
 import { delay } from '@/helpers/delay';
 
 import {
@@ -14,6 +13,13 @@ import {
 } from '@headlessui/vue';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
 import { computed, onMounted, ref } from 'vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useUserStore } from '@/stores/user';
+import { useMediaLibraryStore } from '@/stores/media-library';
+
+const mediaLibraryStore = useMediaLibraryStore();
+const userStore = useUserStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
 
 defineProps({
   show: {
@@ -26,9 +32,7 @@ defineProps({
   },
 });
 
-// store
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 
 const hideDraftButton = ref(true);
 
@@ -82,12 +86,9 @@ const firstButton = function () {
     emit('firstDesignerModalButtonFunction');
 
     pageBuilder.removeHoveredAndSelected();
-
-    store.commit('user/setIsLoading', true);
-
+    userStore.setIsLoading(true);
     await delay();
-
-    store.commit('user/setIsLoading', false);
+    userStore.setIsLoading(false);
   };
   //
   // end modal
@@ -106,7 +107,7 @@ const secondButton = function () {
 //
 //
 const getLocalStorageItemNameUpdate = computed(() => {
-  return store.getters['pageBuilderState/getLocalStorageItemNameUpdate'];
+  return pageBuilderStateStore.getLocalStorageItemNameUpdate;
 });
 //
 const handleDraftForUpdate = function () {
@@ -194,7 +195,7 @@ onMounted(() => {
                 <main></main>
               </DynamicModal>
               <div
-                @click="store.commit('pageBuilderState/setComponent', null)"
+                @click="pageBuilderStateStore.setComponent(null)"
                 class="px-4 h-[10vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
                 <div

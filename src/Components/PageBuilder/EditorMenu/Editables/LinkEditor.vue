@@ -1,3 +1,87 @@
+<script setup>
+import PageBuilder from '@/composables/PageBuilder';
+import EditorAccordion from '../EditorAccordion.vue';
+import { computed, nextTick, ref, watch } from 'vue';
+import { Switch } from '@headlessui/vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
+
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
+const hyperlinkEnable = ref(false);
+const urlInput = ref(null);
+const openHyperlinkInNewTab = ref(false);
+const getElementContainsHyperlink = computed(() => {
+  return pageBuilderStateStore.getElementContainsHyperlink;
+});
+const getHyperlinkAbility = computed(() => {
+  return pageBuilderStateStore.getHyperlinkAbility;
+});
+const getHyperlinkMessage = computed(() => {
+  return pageBuilderStateStore.getHyperlinkMessage;
+});
+const getHyperlinkError = computed(() => {
+  return pageBuilderStateStore.getHyperlinkError;
+});
+const getHyperlinkInput = computed(() => {
+  return pageBuilderStateStore.getHyperlinkInput;
+});
+const getHyberlinkEnable = computed(() => {
+  return pageBuilderStateStore.getHyberlinkEnable;
+});
+
+const getOpenHyperlinkInNewTab = computed(() => {
+  return pageBuilderStateStore.getOpenHyperlinkInNewTab;
+});
+const getElement = computed(() => {
+  return pageBuilderStateStore.getElement;
+});
+
+watch(getHyperlinkInput, (newValue) => {
+  urlInput.value = newValue;
+});
+watch(getHyberlinkEnable, (newValue) => {
+  hyperlinkEnable.value = newValue;
+});
+watch(getOpenHyperlinkInNewTab, (newValue) => {
+  openHyperlinkInNewTab.value = newValue;
+});
+
+// remove hyperlink
+watch(hyperlinkEnable, (hyperlinkEnableNewValue) => {
+  hyperlinkEnable.value = hyperlinkEnableNewValue;
+  pageBuilderStateStore.setHyberlinkEnable(hyperlinkEnable.value);
+});
+
+const handleToggleHyperlinkEnable = async function (data) {
+  await nextTick();
+
+  // remove hyperlink
+  if (hyperlinkEnable.value === false) {
+    pageBuilder.handleHyperlink(hyperlinkEnable.value, data);
+  }
+};
+// add hyperlink
+const handleHyperlink = function () {
+  pageBuilder.handleHyperlink(
+    hyperlinkEnable.value,
+    urlInput.value,
+    openHyperlinkInNewTab.value
+  );
+};
+
+const handleToggleOpenHyperlinkInNewTab = async function () {
+  await nextTick();
+
+  pageBuilder.handleHyperlink(
+    hyperlinkEnable.value,
+    urlInput.value,
+    openHyperlinkInNewTab.value
+  );
+};
+</script>
+
 <template>
   <EditorAccordion>
     <template #title>Link</template>
@@ -258,88 +342,3 @@
     </template>
   </EditorAccordion>
 </template>
-
-<script setup>
-import PageBuilder from '@/composables/PageBuilder';
-import EditorAccordion from '../EditorAccordion.vue';
-import { useStore } from 'vuex';
-import { computed, nextTick, ref, watch } from 'vue';
-import { Switch } from '@headlessui/vue';
-
-const store = useStore();
-
-const pageBuilder = new PageBuilder(store);
-
-const hyperlinkEnable = ref(false);
-const urlInput = ref(null);
-const openHyperlinkInNewTab = ref(false);
-
-const getElementContainsHyperlink = computed(() => {
-  return store.getters['pageBuilderState/getElementContainsHyperlink'];
-});
-const getHyperlinkAbility = computed(() => {
-  return store.getters['pageBuilderState/getHyperlinkAbility'];
-});
-const getHyperlinkMessage = computed(() => {
-  return store.getters['pageBuilderState/getHyperlinkMessage'];
-});
-const getHyperlinkError = computed(() => {
-  return store.getters['pageBuilderState/getHyperlinkError'];
-});
-const getHyperlinkInput = computed(() => {
-  return store.getters['pageBuilderState/getHyperlinkInput'];
-});
-const getHyberlinkEnable = computed(() => {
-  return store.getters['pageBuilderState/getHyberlinkEnable'];
-});
-
-const getOpenHyperlinkInNewTab = computed(() => {
-  return store.getters['pageBuilderState/getOpenHyperlinkInNewTab'];
-});
-const getElement = computed(() => {
-  return store.getters['pageBuilderState/getElement'];
-});
-
-watch(getHyperlinkInput, (newValue) => {
-  urlInput.value = newValue;
-});
-watch(getHyberlinkEnable, (newValue) => {
-  hyperlinkEnable.value = newValue;
-});
-watch(getOpenHyperlinkInNewTab, (newValue) => {
-  openHyperlinkInNewTab.value = newValue;
-});
-
-// remove hyperlink
-watch(hyperlinkEnable, (hyperlinkEnableNewValue) => {
-  hyperlinkEnable.value = hyperlinkEnableNewValue;
-  store.commit('pageBuilderState/setHyberlinkEnable', hyperlinkEnable.value);
-});
-
-const handleToggleHyperlinkEnable = async function (data) {
-  await nextTick();
-
-  // remove hyperlink
-  if (hyperlinkEnable.value === false) {
-    pageBuilder.handleHyperlink(hyperlinkEnable.value, data);
-  }
-};
-// add hyperlink
-const handleHyperlink = function () {
-  pageBuilder.handleHyperlink(
-    hyperlinkEnable.value,
-    urlInput.value,
-    openHyperlinkInNewTab.value
-  );
-};
-
-const handleToggleOpenHyperlinkInNewTab = async function () {
-  await nextTick();
-
-  pageBuilder.handleHyperlink(
-    hyperlinkEnable.value,
-    urlInput.value,
-    openHyperlinkInNewTab.value
-  );
-};
-</script>

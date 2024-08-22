@@ -1,15 +1,16 @@
 <script setup>
 import { computed, watch, ref } from 'vue';
-import { useStore } from 'vuex';
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue';
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue';
 import PageBuilder from '@/composables/PageBuilder';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
-
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const isLoading = ref(false);
-//
+
 // use media library
 const showMediaLibraryModal = ref(false);
 // modal content
@@ -28,7 +29,7 @@ const thirdMediaButtonFunction = ref(null);
 //
 // get current image from store
 const getBasePrimaryImage = computed(() => {
-  return store.getters['pageBuilderState/getBasePrimaryImage'];
+  return pageBuilderStateStore.getBasePrimaryImage;
 });
 //
 //

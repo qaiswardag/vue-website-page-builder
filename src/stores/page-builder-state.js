@@ -1,7 +1,8 @@
+import { defineStore } from 'pinia';
 import { vueFetch } from '@/composables/vueFetch';
 import PageBuilder from '@/composables/PageBuilder';
 
-// get images
+// get components
 const {
   handleData: handlefetchComponents,
   fetchedData: fetchedComponents,
@@ -14,29 +15,21 @@ const {
 
 const pageBuilder = new PageBuilder(null);
 
-export default {
-  namespaced: true,
-
-  // state
-  state: {
+export const usePageBuilderStateStore = defineStore('pageBuilderState', {
+  state: () => ({
     componentArrayAddMethod: null,
     localStorageItemName: null,
     localStorageItemNameUpdate: null,
     showModalTipTap: false,
     menuRight: true,
-    // border style, width & color / start
     borderStyle: null,
     borderWidth: null,
     borderColor: null,
-    // border style, width & color / end
-    // border radius / start
     borderRadiusGlobal: null,
     borderRadiusTopLeft: null,
     borderRadiusTopRight: null,
     borderRadiusBottomleft: null,
     borderRadiusBottomRight: null,
-    // border radius / end
-    // hyperlink / start
     elementContainsHyperlink: null,
     hyperlinkAbility: null,
     hyperlinkInput: null,
@@ -44,7 +37,6 @@ export default {
     hyperlinkError: null,
     hyberlinkEnable: false,
     openHyperlinkinkInNewTab: null,
-    // hyperlink / end
     opacity: null,
     backgroundOpacity: null,
     textAreaVueModel: null,
@@ -63,18 +55,14 @@ export default {
     fontDesktop: null,
     fontTablet: null,
     fontMobile: null,
-    // colors / start
     backgroundColor: null,
     textColor: null,
-    // colors / end
     element: null,
     component: null,
     components: [],
     basePrimaryImage: null,
     fetchedComponents: [],
-  },
-
-  // getters
+  }),
   getters: {
     getComponentArrayAddMethod(state) {
       return state.componentArrayAddMethod;
@@ -88,12 +76,9 @@ export default {
     getShowModalTipTap(state) {
       return state.showModalTipTap;
     },
-
     getMenuRight(state) {
       return state.menuRight;
     },
-
-    // border style, width & color / start
     getBorderStyle(state) {
       return state.borderStyle;
     },
@@ -103,9 +88,6 @@ export default {
     getBorderColor(state) {
       return state.borderColor;
     },
-    // border style, width & color / end
-
-    // border radius / start
     getBorderRadiusGlobal(state) {
       return state.borderRadiusGlobal;
     },
@@ -121,8 +103,6 @@ export default {
     getBorderRadiusBottomRight(state) {
       return state.borderRadiusBottomRight;
     },
-    // border radius / end
-    // hyperlink / start
     getElementContainsHyperlink(state) {
       return state.elementContainsHyperlink;
     },
@@ -144,7 +124,6 @@ export default {
     getOpenHyperlinkInNewTab(state) {
       return state.openHyperlinkinkInNewTab;
     },
-    // hyperlink / end
     getOpacity(state) {
       return state.opacity;
     },
@@ -214,7 +193,6 @@ export default {
     getComponents(state) {
       return state.components;
     },
-    //
     getBasePrimaryImage(state) {
       return state.basePrimaryImage;
     },
@@ -222,214 +200,187 @@ export default {
       return state.fetchedComponents;
     },
   },
-
-  mutations: {
-    setComponentArrayAddMethod(state, payload) {
-      state.componentArrayAddMethod = payload;
+  actions: {
+    setComponentArrayAddMethod(payload) {
+      this.componentArrayAddMethod = payload;
     },
-    setLocalStorageItemName(state, payload) {
-      state.localStorageItemName = payload;
+    setLocalStorageItemName(payload) {
+      this.localStorageItemName = payload;
     },
-    setLocalStorageItemNameUpdate(state, payload) {
-      state.localStorageItemNameUpdate = payload;
+    setLocalStorageItemNameUpdate(payload) {
+      this.localStorageItemNameUpdate = payload;
     },
-    setShowModalTipTap(state, payload) {
-      state.showModalTipTap = payload;
+    setShowModalTipTap(payload) {
+      this.showModalTipTap = payload;
     },
-    setMenuRight(state, payload) {
-      state.menuRight = payload;
+    setMenuRight(payload) {
+      this.menuRight = payload;
     },
-    // border style, width & color / start
-    setBorderStyle(state, payload) {
-      state.borderStyle = payload;
+    setBorderStyle(payload) {
+      this.borderStyle = payload;
     },
-    setBorderWidth(state, payload) {
-      state.borderWidth = payload;
+    setBorderWidth(payload) {
+      this.borderWidth = payload;
     },
-    setBorderColor(state, payload) {
-      state.borderColor = payload;
+    setBorderColor(payload) {
+      this.borderColor = payload;
     },
-    // border style, width & color / end
-
-    // border radius / start
-    setBorderRadiusGlobal(state, payload) {
-      state.borderRadiusGlobal = payload;
+    setBorderRadiusGlobal(payload) {
+      this.borderRadiusGlobal = payload;
     },
-    setBorderRadiusTopLeft(state, payload) {
-      state.borderRadiusTopLeft = payload;
+    setBorderRadiusTopLeft(payload) {
+      this.borderRadiusTopLeft = payload;
     },
-    setBorderRadiusTopRight(state, payload) {
-      state.borderRadiusTopRight = payload;
+    setBorderRadiusTopRight(payload) {
+      this.borderRadiusTopRight = payload;
     },
-    setBorderRadiusBottomleft(state, payload) {
-      state.borderRadiusBottomleft = payload;
+    setBorderRadiusBottomleft(payload) {
+      this.borderRadiusBottomleft = payload;
     },
-    setBorderRadiusBottomRight(state, payload) {
-      state.borderRadiusBottomRight = payload;
+    setBorderRadiusBottomRight(payload) {
+      this.borderRadiusBottomRight = payload;
     },
-    // hyperlink / start
-    setElementContainsHyperlink(state, payload) {
-      state.elementContainsHyperlink = payload;
+    setElementContainsHyperlink(payload) {
+      this.elementContainsHyperlink = payload;
     },
-    setHyperlinkAbility(state, payload) {
-      state.hyperlinkAbility = payload;
+    setHyperlinkAbility(payload) {
+      this.hyperlinkAbility = payload;
     },
-    setHyperlinkInput(state, payload) {
-      state.hyperlinkInput = payload;
+    setHyperlinkInput(payload) {
+      this.hyperlinkInput = payload;
     },
-    setHyperlinkMessage(state, payload) {
-      state.hyperlinkMessage = payload;
+    setHyperlinkMessage(payload) {
+      this.hyperlinkMessage = payload;
     },
-    setHyperlinkError(state, payload) {
-      state.hyperlinkError = payload;
+    setHyperlinkError(payload) {
+      this.hyperlinkError = payload;
     },
-    setHyberlinkEnable(state, payload) {
-      state.hyberlinkEnable = payload;
+    setHyberlinkEnable(payload) {
+      this.hyberlinkEnable = payload;
     },
-    setOpenHyperlinkInNewTab(state, payload) {
-      state.openHyperlinkinkInNewTab = payload;
+    setOpenHyperlinkInNewTab(payload) {
+      this.openHyperlinkinkInNewTab = payload;
     },
-    // hyperlink / end
-    setOpacity(state, payload) {
-      state.opacity = payload;
+    setOpacity(payload) {
+      this.opacity = payload;
     },
-    setBackgroundOpacity(state, payload) {
-      state.backgroundOpacity = payload;
+    setBackgroundOpacity(payload) {
+      this.backgroundOpacity = payload;
     },
-    setTextAreaVueModel(state, payload) {
-      state.textAreaVueModel = payload;
+    setTextAreaVueModel(payload) {
+      this.textAreaVueModel = payload;
     },
-    setNextSibling(state, payload) {
-      state.nextSibling = payload;
+    setNextSibling(payload) {
+      this.nextSibling = payload;
     },
-    setParentElement(state, payload) {
-      state.parentElement = payload;
+    setParentElement(payload) {
+      this.parentElement = payload;
     },
-    setRestoredElement(state, payload) {
-      state.restoredElement = payload;
+    setRestoredElement(payload) {
+      this.restoredElement = payload;
     },
-    setClass(state, payload) {
-      state.currentClasses = [...state.currentClasses, payload];
+    setClass(payload) {
+      this.currentClasses = [...this.currentClasses, payload];
     },
-    removeClass(state, payload) {
-      state.currentClasses = state.currentClasses.filter(
+    removeClass(payload) {
+      this.currentClasses = this.currentClasses.filter(
         (cls) => cls !== payload
       );
     },
-    setCurrentClasses(state, payload) {
-      state.currentClasses = Array.from(payload);
+    setCurrentClasses(payload) {
+      this.currentClasses = Array.from(payload);
     },
-    setFontVerticalPadding(state, payload) {
-      state.fontVerticalPadding = payload;
+    setFontVerticalPadding(payload) {
+      this.fontVerticalPadding = payload;
     },
-    setFontHorizontalPadding(state, payload) {
-      state.fontHorizontalPadding = payload;
+    setFontHorizontalPadding(payload) {
+      this.fontHorizontalPadding = payload;
     },
-    setFontVerticalMargin(state, payload) {
-      state.fontVerticalMargin = payload;
+    setFontVerticalMargin(payload) {
+      this.fontVerticalMargin = payload;
     },
-    setFontHorizontalMargin(state, payload) {
-      state.fontHorizontalMargin = payload;
+    setFontHorizontalMargin(payload) {
+      this.fontHorizontalMargin = payload;
     },
-    setFontStyle(state, payload) {
-      state.fontStyle = payload;
+    setFontStyle(payload) {
+      this.fontStyle = payload;
     },
-    setFontFamily(state, payload) {
-      state.fontFamily = payload;
+    setFontFamily(payload) {
+      this.fontFamily = payload;
     },
-    setFontWeight(state, payload) {
-      state.fontWeight = payload;
+    setFontWeight(payload) {
+      this.fontWeight = payload;
     },
-    setFontBase(state, payload) {
-      state.fontBase = payload;
+    setFontBase(payload) {
+      this.fontBase = payload;
     },
-    setFontDesktop(state, payload) {
-      state.fontDesktop = payload;
+    setFontDesktop(payload) {
+      this.fontDesktop = payload;
     },
-    setFontTablet(state, payload) {
-      state.fontTablet = payload;
+    setFontTablet(payload) {
+      this.fontTablet = payload;
     },
-    setFontMobile(state, payload) {
-      state.fontMobile = payload;
+    setFontMobile(payload) {
+      this.fontMobile = payload;
     },
-    setBackgroundColor(state, payload) {
-      state.backgroundColor = payload;
+    setBackgroundColor(payload) {
+      this.backgroundColor = payload;
     },
-    setTextColor(state, payload) {
-      state.textColor = payload;
+    setTextColor(payload) {
+      this.textColor = payload;
     },
-    setElement(state, payload) {
-      state.element = {};
-      state.element = payload;
+    setElement(payload) {
+      this.element = payload || {};
     },
-    setComponent(state, payload) {
+    setComponent(payload) {
       if (!payload) {
-        state.element = null;
-        state.component = null;
+        this.element = null;
+        this.component = null;
         pageBuilder.removeHoveredAndSelected(null);
         return;
       }
-
-      state.component = {};
-      state.component = payload;
+      this.component = payload || {};
     },
-    setComponents(state, payload) {
-      state.components = {};
-      state.components = payload;
+    setComponents(payload) {
+      this.components = payload || [];
     },
-
-    setPushComponents(state, payload) {
-      // unshift or push array add method
-      const componentArrayAddMethod = payload.componentArrayAddMethod
-        ? payload.componentArrayAddMethod
-        : 'push';
-
-      // payload
-      state.components[componentArrayAddMethod](payload.component);
+    setPushComponents(payload) {
+      const method = payload.componentArrayAddMethod || 'push';
+      this.components[method](payload.component);
     },
-
-    setBasePrimaryImage(state, payload) {
-      state.element.src = payload;
-      state.basePrimaryImage = payload;
+    setBasePrimaryImage(payload) {
+      if (this.element) {
+        this.element.src = payload;
+      }
+      this.basePrimaryImage = payload;
     },
-    setCurrentLayoutPreview(state, payload) {
+    setCurrentLayoutPreview(payload) {
       localStorage.setItem('preview', payload);
     },
-    setFetchedComponents(state, payload) {
-      state.fetchedComponents = payload;
+    setFetchedComponents(payload) {
+      this.fetchedComponents = payload;
     },
-  },
 
-  // actions
-  actions: {
-    // context & send to mutation
+    async setLoadComponents(data) {
+      this.setFetchedComponents({
+        fetchedData: null,
+        isError: null,
+        error: null,
+        errors: null,
+        isLoading: true,
+        isSuccess: null,
+      });
 
-    //
-    //
-    //
-    // load components
-    loadComponents(context, data) {
-      if (data.search_query === undefined) {
-        data.search_query = '';
-      }
-      if (data.page === undefined) {
-        data.page = '';
-      }
-      //
-      //
-      //
-      //
-      //
-      handlefetchComponents(
+      data.search_query = data.search_query || '';
+      data.page = data.page || '';
+
+      await handlefetchComponents(
         '/components.json',
         {},
-        {
-          additionalCallTime: 100,
-        }
+        { additionalCallTime: 500 }
       );
 
-      // context & send to mutation
-      context.commit('setFetchedComponents', {
+      this.setFetchedComponents({
         fetchedData: fetchedComponents,
         isError: isErrorComponents,
         error: errorComponents,
@@ -439,4 +390,4 @@ export default {
       });
     },
   },
-};
+});

@@ -1,37 +1,26 @@
 <script setup>
-import PageBuilder from '@/composables/PageBuilder';
 import { ref, computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
-
-// store
-const store = useStore();
+import { useUnsplashStore } from '@/stores/unsplash';
+import { useMediaLibraryStore } from '@/stores/media-library';
+const mediaLibraryStore = useMediaLibraryStore();
+const unsplashStore = useUnsplashStore();
 const searchQuery = ref('');
 const currentPage = ref(1);
 const orientation = ref(null);
 
-// getters
-const getCurrentPageNumber = computed(() => {
-  return store.getters['unsplash/getCurrentPageNumber'];
-});
-const getOrientationValue = computed(() => {
-  return store.getters['unsplash/getOrientationValue'];
-});
 const getSearchTerm = computed(() => {
-  return store.getters['unsplash/getSearchTerm'];
+  return unsplashStore.getSearchTerm;
 });
 // unspalsh images
 const getUnsplashImages = computed(() => {
-  return store.getters['unsplash/getUnsplashImages'];
+  return unsplashStore.getUnsplashImages;
 });
-//
-//
 
-const handleImageClick = function (file, imageDetails) {
-  store.commit('mediaLibrary/setCurrentImage', { file, imageDetails });
-  store.commit('mediaLibrary/setCurrentPreviewImage', null);
+const handleImageClick = function (file) {
+  mediaLibraryStore.setCurrentImage({ file });
+  mediaLibraryStore.setCurrentPreviewImage(null);
 };
-//
-//
+
 // search by orientation
 const searchByOrientation = function (orientationParameter) {
   // check if search term length is more than 0
@@ -66,12 +55,12 @@ const searchUnsplash = function () {
   ) {
     currentPage.value = 1;
   }
+
   // set values in store
-  store.commit('unsplash/setSearchTerm', searchQuery.value);
-  store.commit('unsplash/setSearchTerm', searchQuery.value);
-  store.commit('unsplash/setCurrentPageNumber', currentPage.value);
-  store.commit('unsplash/setOrientationValue', orientation.value);
-  store.dispatch('unsplash/loadUnsplashImages', {
+  unsplashStore.setSearchTerm(searchQuery.value);
+  unsplashStore.setCurrentPageNumber(currentPage.value);
+  unsplashStore.setOrientationValue(orientation.value);
+  unsplashStore.setLoadUnsplashImages({
     searchTerm: getSearchTerm.value,
     currentPage: currentPage.value,
     orientation: orientation.value,
@@ -174,9 +163,9 @@ onMounted(() => {
   <div
     v-if="
       getUnsplashImages &&
-      getUnsplashImages.isLoading === false &&
-      getUnsplashImages.isError === true &&
-      getUnsplashImages.isSuccess === false
+      !getUnsplashImages.isLoading &&
+      getUnsplashImages.isError &&
+      getUnsplashImages.isSuccess
     "
   >
     <p class="myPrimaryParagraphError">{{ getUnsplashImages.error }}</p>
@@ -187,8 +176,8 @@ onMounted(() => {
       getUnsplashImages &&
       getUnsplashImages.fetchedMedia &&
       getUnsplashImages.fetchedMedia.results &&
-      getUnsplashImages.isLoading === false &&
-      getUnsplashImages.isError === false
+      !getUnsplashImages.isLoading &&
+      !getUnsplashImages.isError
     "
     class="mt-2 pb-16"
   >
@@ -244,7 +233,7 @@ onMounted(() => {
         <div
           v-for="image in getUnsplashImages.fetchedMedia.results"
           :key="image.id"
-          @click="handleImageClick(image.urls.regular, image)"
+          @click="handleImageClick(image.urls.regular)"
           class="border border-myPrimaryLightGrayColor rounded-lg px-2 p-2 cursor-pointer bg-gray-50"
         >
           <img
@@ -278,14 +267,13 @@ onMounted(() => {
   <div
     v-if="
       getUnsplashImages &&
-      getUnsplashImages.isLoading === true &&
-      getUnsplashImages.isError === false
+      getUnsplashImages.isLoading &&
+      !getUnsplashImages.isError
     "
   >
     <div class="flex items-center justify-center">
       <div
         class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-        role="status"
       >
         <span
           class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"

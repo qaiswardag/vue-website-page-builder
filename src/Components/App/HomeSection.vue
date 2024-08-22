@@ -20,7 +20,7 @@ const features = [
   {
     name: 'Technologies and Frameworks',
     description:
-      'Cutting-Edge Technologies and Frameworks. Developed with Vue 3, Vuex, Composition API, and Tailwind CSS.',
+      'Cutting-Edge Technologies and Frameworks. Developed with Vue 3, Pinia, Composition API, and Tailwind CSS.',
   },
   {
     name: 'Set Brand and Link Colors one place',

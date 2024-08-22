@@ -1,12 +1,13 @@
 <script setup>
-import { useStore } from 'vuex';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
 import PageBuilder from '@/composables/PageBuilder';
+import { ref } from 'vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-import { ref, computed } from 'vue';
-
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
 const showModalDeleteComponent = ref(false);
-
 // use dynamic model
 const typeModal = ref('');
 const gridColumnModal = ref(Number(1));
@@ -19,9 +20,7 @@ const thirdButtonModal = ref(null);
 const firstModalButtonFunction = ref(null);
 const secondModalButtonFunction = ref(null);
 const thirdModalButtonFunction = ref(null);
-
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 
 // remove component
 const deleteComponent = function (e) {

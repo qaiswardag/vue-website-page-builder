@@ -10,8 +10,9 @@ import {
   TransitionRoot,
 } from '@headlessui/vue';
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+import { useUserStore } from '@/stores/user';
 
-import { useStore } from 'vuex';
+const userStore = useUserStore();
 
 defineProps({
   show: {
@@ -23,16 +24,13 @@ defineProps({
 
 const emit = defineEmits(['firstDesignerPreviewModalButtonFunction']);
 
-const store = useStore();
-
 // first button function
 const firstButton = async function () {
   emit('firstDesignerPreviewModalButtonFunction');
 
-  store.commit('user/setIsLoading', true);
+  userStore.setIsLoading(true);
   await delay();
-
-  store.commit('user/setIsLoading', false);
+  userStore.setIsLoading(false);
 };
 
 const handleEscapeKey = function () {

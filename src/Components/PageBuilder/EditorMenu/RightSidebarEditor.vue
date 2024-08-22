@@ -1,7 +1,5 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
-import { useStore } from 'vuex';
-
 import ClassEditor from '@/Components/PageBuilder/EditorMenu/Editables/ClassEditor.vue';
 import ImageEditor from '@/Components/PageBuilder/EditorMenu/Editables/ImageEditor.vue';
 import OpacityEditor from '@/Components/PageBuilder/EditorMenu/Editables/OpacityEditor.vue';
@@ -13,21 +11,16 @@ import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables
 import Borders from '@/Components/PageBuilder/EditorMenu/Editables/Borders.vue';
 import LinkEditor from '@/Components/PageBuilder/EditorMenu/Editables/LinkEditor.vue';
 import TipTap from '@/Components/TipTap/TipTap.vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
 
-// store
-const store = useStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
+
 // emit
 const emit = defineEmits(['closeEditor']);
 
-const reactiveGetElement = ref(null);
-
 // get current element tag
 const getElement = computed(() => {
-  return store.getters['pageBuilderState/getElement'];
-});
-
-const getRestoredElement = computed(() => {
-  return store.getters['pageBuilderState/getRestoredElement'];
+  return pageBuilderStateStore.getElement;
 });
 
 // Get tagName of element

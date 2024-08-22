@@ -6,12 +6,13 @@ import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal
 import Preview from '@/PageBuilder/Preview.vue';
 import SlideOverRight from '@/Components/PageBuilder/Slidebars/SlideOverRight.vue';
 import DesignerSettings from '@/Components/PageBuilder/Settings/DesignerSettings.vue';
-
-import { useStore } from 'vuex';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const emit = defineEmits(['previewCurrentDesign']);
 
 const showModalDeleteAllComponents = ref(false);
@@ -66,7 +67,7 @@ const deleteAllComponents = function () {
   // handle click
   thirdModalButtonFunction.value = function () {
     pageBuilder.deleteAllComponents();
-    store.commit('pageBuilderState/setComponent', null);
+    pageBuilderStateStore.setComponents(null);
     showModalDeleteAllComponents.value = false;
   };
   // end modal
@@ -74,14 +75,14 @@ const deleteAllComponents = function () {
 
 // handle slideover window
 const handleSettingsSlideOver = function () {
-  store.commit('pageBuilderState/setComponent', null);
+  pageBuilderStateStore.setComponents(null);
 
   titleSettingsSlideOverRight.value = 'Settings';
   showSettingsSlideOverRight.value = true;
 };
 // handle slideover window
 const settingsSlideOverButton = function () {
-  store.commit('pageBuilderState/setComponent', null);
+  pageBuilderStateStore.setComponents(null);
 
   showSettingsSlideOverRight.value = false;
 };

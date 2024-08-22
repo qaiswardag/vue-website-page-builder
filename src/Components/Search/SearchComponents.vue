@@ -5,9 +5,11 @@ import { TailwindPagination } from 'laravel-vue-pagination';
 import componentHelpers from '@/utils/builder/html-elements/componentHelpers';
 import PageBuilder from '@/composables/PageBuilder';
 import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vue';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import { useMediaLibraryStore } from '@/stores/media-library';
 
-import { useStore } from 'vuex';
-
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
 const props = defineProps({
   firstButtonText: {
     required: true,
@@ -21,7 +23,6 @@ const props = defineProps({
     required: true,
   },
 });
-
 const emit = defineEmits(['firstModalButtonSearchComponentsFunction']);
 
 // first button function
@@ -34,15 +35,15 @@ const categorySelected = ref(
   { name: 'All', id: null },
   { name: 'HTML Elements', id: null }
 );
-const store = useStore();
-const pageBuilder = new PageBuilder(store);
+
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 
 const getFetchedComponents = computed(() => {
-  return store.getters['pageBuilderState/getFetchedComponents'];
+  return pageBuilderStateStore.getFetchedComponents;
 });
 
 const getComponentArrayAddMethod = computed(() => {
-  return store.getters['pageBuilderState/getComponentArrayAddMethod'];
+  return pageBuilderStateStore.getComponentArrayAddMethod;
 });
 
 const handleDropComponent = async function (componentObject) {
@@ -54,7 +55,7 @@ const handleDropComponent = async function (componentObject) {
 
   await nextTick();
 
-  store.commit('pageBuilderState/setPushComponents', {
+  pageBuilderStateStore.setPushComponents({
     component: clonedComponent,
     componentArrayAddMethod: getComponentArrayAddMethod.value,
   });
@@ -74,7 +75,8 @@ const handleAddHelperComponent = async function (helperComponentObject) {
   });
 
   await nextTick();
-  store.commit('pageBuilderState/setPushComponents', {
+
+  pageBuilderStateStore.setPushComponents({
     component: clonedComponent,
     componentArrayAddMethod: getComponentArrayAddMethod.value,
   });
@@ -93,8 +95,7 @@ const fetchComponents = function (page) {
       getFetchedComponents.value?.fetchedData?.oldInput?.search_query;
   }
   //
-  // dispatch
-  store.dispatch('pageBuilderState/loadComponents', {
+  pageBuilderStateStore.setLoadComponents({
     page: page,
     search_query: search_query.value,
     category: categorySelected.value,
@@ -115,6 +116,7 @@ onMounted(async () => {
     minHeight=""
     maxHeight=""
   >
+    <p>den er: {{ getFetchedComponents && getFetchedComponents.isLoading }}</p>
     <div
       class="w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
     >
@@ -145,7 +147,7 @@ onMounted(async () => {
         <!--  -->
 
         <!-- Loading # start -->
-        <template v-if="getFetchedComponents.isLoading">
+        <template v-if="getFetchedComponents && getFetchedComponents.isLoading">
           <SmallUniversalSpinner
             class="h-40"
             width="w-6"

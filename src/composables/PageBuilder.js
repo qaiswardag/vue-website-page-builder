@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { delay } from '@/helpers/delay';
 
 class PageBuilder {
-  constructor(store) {
+  constructor(pageBuilderStateStore, mediaLibraryStore) {
     /**
      * Initialize an instance variable 'elementsWithListeners' as a WeakSet.
      *
@@ -30,46 +30,44 @@ class PageBuilder {
     this.containsPagebuilder = document.querySelector('#contains-pagebuilder');
 
     this.timer = null;
-    this.store = store;
+    this.pageBuilderStateStore = pageBuilderStateStore;
+    this.mediaLibraryStore = mediaLibraryStore;
+
     this.getTextAreaVueModel = computed(
-      () => this.store.getters['pageBuilderState/getTextAreaVueModel']
+      () => this.pageBuilderStateStore.getTextAreaVueModel
     );
     this.getLocalStorageItemName = computed(
-      () => this.store.getters['pageBuilderState/getLocalStorageItemName']
+      () => this.pageBuilderStateStore.getLocalStorageItemName
     );
     this.getLocalStorageItemNameUpdate = computed(
-      () => this.store.getters['pageBuilderState/getLocalStorageItemNameUpdate']
+      () => this.pageBuilderStateStore.getLocalStorageItemNameUpdate
     );
 
     this.getCurrentImage = computed(
-      () => this.store.getters['mediaLibrary/getCurrentImage']
+      () => this.mediaLibraryStore.getCurrentImage
     );
     this.getHyberlinkEnable = computed(
-      () => this.store.getters['pageBuilderState/getHyberlinkEnable']
+      () => this.pageBuilderStateStore.getHyberlinkEnable
     );
     this.getComponents = computed(
-      () => this.store.getters['pageBuilderState/getComponents']
+      () => this.pageBuilderStateStore.getComponents
     );
 
-    this.getComponent = computed(
-      () => this.store.getters['pageBuilderState/getComponent']
-    );
+    this.getComponent = computed(() => this.pageBuilderStateStore.getComponent);
 
-    this.getElement = computed(
-      () => this.store.getters['pageBuilderState/getElement']
-    );
+    this.getElement = computed(() => this.pageBuilderStateStore.getElement);
     this.getNextSibling = computed(
-      () => this.store.getters['pageBuilderState/getNextSibling']
+      () => this.pageBuilderStateStore.getNextSibling
     );
     this.getParentElement = computed(
-      () => this.store.getters['pageBuilderState/getParentElement']
+      () => this.pageBuilderStateStore.getParentElement
     );
     this.getRestoredElement = computed(
-      () => this.store.getters['pageBuilderState/getRestoredElement']
+      () => this.pageBuilderStateStore.getRestoredElement
     );
 
     this.getComponentArrayAddMethod = computed(
-      () => this.store.getters['pageBuilderState/getComponentArrayAddMethod']
+      () => this.pageBuilderStateStore.getComponentArrayAddMethod
     );
 
     this.headerTags = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'IFRAME'];
@@ -133,7 +131,7 @@ class PageBuilder {
     // set to 'none' if undefined
     let elementClass = currentCSS || 'none';
 
-    this.store.commit(`pageBuilderState/${mutationName}`, elementClass);
+    this.pageBuilderStateStore[mutationName](elementClass);
 
     if (typeof selectedCSS === 'string' && selectedCSS !== 'none') {
       if (
@@ -154,8 +152,8 @@ class PageBuilder {
       elementClass = selectedCSS;
     }
 
-    this.store.commit(`pageBuilderState/${mutationName}`, elementClass);
-    this.store.commit('pageBuilderState/setElement', this.getElement.value);
+    this.pageBuilderStateStore[mutationName](elementClass);
+    this.pageBuilderStateStore.setElement(this.getElement.value);
 
     return currentCSS;
   }
@@ -204,7 +202,7 @@ class PageBuilder {
 
     if (!pagebuilder) return;
 
-    this.store.commit('pageBuilderState/setMenuRight', true);
+    this.pageBuilderStateStore.setMenuRight(true);
 
     if (pagebuilder.querySelector('[selected]') !== null) {
       pagebuilder.querySelector('[selected]').removeAttribute('selected');
@@ -214,7 +212,7 @@ class PageBuilder {
 
     element.setAttribute('selected', '');
 
-    this.store.commit('pageBuilderState/setElement', element);
+    this.pageBuilderStateStore.setElement(element);
   };
 
   #handleMouseOver = (e, element) => {
@@ -305,7 +303,7 @@ class PageBuilder {
       console.log('synchronizeDOMAndComponents');
     }
     if (!this.getComponents.value) {
-      this.store.commit('pageBuilderState/setComponents', []);
+      this.pageBuilderStateStore.setComponents([]);
     }
 
     if (document.querySelector('[hovered]') !== null) {
@@ -437,7 +435,7 @@ class PageBuilder {
     let classListArray = Array.from(this.getElement.value.classList);
 
     // commit array to store
-    this.store.commit('pageBuilderState/setCurrentClasses', classListArray);
+    this.pageBuilderStateStore.setCurrentClasses(classListArray);
   }
 
   handleAddClasses(userSelectedClass) {
@@ -459,9 +457,9 @@ class PageBuilder {
 
       this.getElement.value.classList.add(cleanedClass);
 
-      this.store.commit('pageBuilderState/setElement', this.getElement.value);
+      this.pageBuilderStateStore.setElement(this.getElement.value);
 
-      this.store.commit('pageBuilderState/setClass', userSelectedClass);
+      this.pageBuilderStateStore.setClass(userSelectedClass);
     }
   }
   handleRemoveClasses(userSelectedClass) {
@@ -475,8 +473,8 @@ class PageBuilder {
     if (this.getElement.value.classList.contains(userSelectedClass)) {
       this.getElement.value.classList.remove(userSelectedClass);
 
-      this.store.commit('pageBuilderState/setElement', this.getElement.value);
-      this.store.commit('pageBuilderState/removeClass', userSelectedClass);
+      this.pageBuilderStateStore.setElement(this.getElement.value);
+      this.pageBuilderStateStore.removeClass(userSelectedClass);
     }
   }
 
@@ -491,25 +489,21 @@ class PageBuilder {
     if (!element) return;
 
     if (!element?.parentNode) {
-      this.store.commit('pageBuilderState/setComponent', null);
-      this.store.commit('pageBuilderState/setElement', null);
+      this.pageBuilderStateStore.setComponent(null);
+      this.pageBuilderStateStore.setElement(null);
       return;
     }
 
     // Store the parent of the deleted element
     // if parent element tag is section remove the hole component
     if (element.parentElement?.tagName !== 'SECTION') {
-      this.store.commit(
-        'pageBuilderState/setParentElement',
-        element.parentNode
-      );
+      this.pageBuilderStateStore.setParentElement(element.parentNode);
+
       // Store the outerHTML of the deleted element
-      this.store.commit(
-        'pageBuilderState/setRestoredElement',
-        element.outerHTML
-      );
+      this.pageBuilderStateStore.setRestoredElement(element.outerHTML);
+
       // Store the next sibling of the deleted element
-      this.store.commit('pageBuilderState/setNextSibling', element.nextSibling);
+      this.pageBuilderStateStore.setNextSibling(element.nextSibling);
     }
 
     // if parent element tag is section remove the hole component
@@ -519,9 +513,8 @@ class PageBuilder {
 
     // Remove the element from the DOM
     element.remove();
-
-    this.store.commit('pageBuilderState/setComponent', null);
-    this.store.commit('pageBuilderState/setElement', null);
+    this.pageBuilderStateStore.setComponent(null);
+    this.pageBuilderStateStore.setElement(null);
   }
 
   handleRestoreElement() {
@@ -544,10 +537,11 @@ class PageBuilder {
     }
 
     // Clear
-    this.store.commit('pageBuilderState/setParentElement', null);
-    this.store.commit('pageBuilderState/setRestoredElement', null);
-    this.store.commit('pageBuilderState/setComponent', null);
-    this.store.commit('pageBuilderState/setElement', null);
+
+    this.pageBuilderStateStore.setParentElement(null);
+    this.pageBuilderStateStore.setRestoredElement(null);
+    this.pageBuilderStateStore.setComponent(null);
+    this.pageBuilderStateStore.setElement(null);
 
     this.setEventListenersForElements();
   }
@@ -674,6 +668,7 @@ class PageBuilder {
       'setBackgroundColor'
     );
   }
+
   handleTextColor(color) {
     this.#applyElementClassChanges(
       color,
@@ -776,22 +771,22 @@ class PageBuilder {
     }
 
     // set fonts
-    this.store.commit('pageBuilderState/setFontBase', fontBase);
-    this.store.commit('pageBuilderState/setFontDesktop', fontDesktop);
-    this.store.commit('pageBuilderState/setFontTablet', fontTablet);
-    this.store.commit('pageBuilderState/setFontMobile', fontMobile);
+    this.pageBuilderStateStore.setFontBase(fontBase);
+    this.pageBuilderStateStore.setFontDesktop(fontDesktop);
+    this.pageBuilderStateStore.setFontTablet(fontTablet);
+    this.pageBuilderStateStore.setFontMobile(fontMobile);
 
     const getFontBase = computed(() => {
-      return this.store.getters['pageBuilderState/getFontBase'];
+      return this.pageBuilderStateStore.getFontBase;
     });
     const getFontDesktop = computed(() => {
-      return this.store.getters['pageBuilderState/getFontDesktop'];
+      return this.pageBuilderStateStore.getFontDesktop;
     });
     const getFontTablet = computed(() => {
-      return this.store.getters['pageBuilderState/getFontTablet'];
+      return this.pageBuilderStateStore.getFontTablet;
     });
     const getFontMobile = computed(() => {
-      return this.store.getters['pageBuilderState/getFontMobile'];
+      return this.pageBuilderStateStore.getFontMobile;
     });
 
     if (userSelectedFontSize !== undefined) {
@@ -805,7 +800,7 @@ class PageBuilder {
           this.getElement.value.classList.add(userSelectedFontSize);
         }
 
-        this.store.commit('pageBuilderState/setFontBase', userSelectedFontSize);
+        this.pageBuilderStateStore.setFontBase(userSelectedFontSize);
       }
       if (userSelectedFontSize.includes('lg:')) {
         this.getElement.value.classList.remove(getFontDesktop.value);
@@ -813,10 +808,7 @@ class PageBuilder {
           this.getElement.value.classList.add(userSelectedFontSize);
         }
 
-        this.store.commit(
-          'pageBuilderState/setFontDesktop',
-          userSelectedFontSize
-        );
+        this.pageBuilderStateStore.setFontDesktop(userSelectedFontSize);
       }
       if (userSelectedFontSize.includes('md:')) {
         this.getElement.value.classList.remove(getFontTablet.value);
@@ -824,10 +816,7 @@ class PageBuilder {
           this.getElement.value.classList.add(userSelectedFontSize);
         }
 
-        this.store.commit(
-          'pageBuilderState/setFontTablet',
-          userSelectedFontSize
-        );
+        this.pageBuilderStateStore.setFontTablet(userSelectedFontSize);
       }
       if (userSelectedFontSize.includes('sm:')) {
         this.getElement.value.classList.remove(getFontMobile.value);
@@ -835,13 +824,9 @@ class PageBuilder {
           this.getElement.value.classList.add(userSelectedFontSize);
         }
 
-        this.store.commit(
-          'pageBuilderState/setFontMobile',
-          userSelectedFontSize
-        );
+        this.pageBuilderStateStore.setFontMobile(userSelectedFontSize);
       }
-
-      this.store.commit('pageBuilderState/setElement', this.getElement.value);
+      this.pageBuilderStateStore.setElement(this.getElement.value);
     }
   }
 
@@ -873,7 +858,7 @@ class PageBuilder {
       console.log('deleteAllComponents');
     }
 
-    this.store.commit('pageBuilderState/setComponents', []);
+    this.pageBuilderStateStore.setComponents([]);
   }
 
   deleteComponent() {
@@ -895,13 +880,10 @@ class PageBuilder {
 
     // Remove the component from the array
     this.getComponents.value.splice(indexToDelete, 1);
-    this.store.commit(
-      'pageBuilderState/setComponents',
-      this.getComponents.value
-    );
+    this.pageBuilderStateStore.setComponents(this.getComponents.value);
 
-    this.store.commit('pageBuilderState/setComponent', null);
-    this.store.commit('pageBuilderState/setElement', null);
+    this.pageBuilderStateStore.setComponent(null);
+    this.pageBuilderStateStore.setElement(null);
   }
 
   // move component
@@ -986,8 +968,7 @@ class PageBuilder {
       // Update text content
       this.getElement.value.textContent = textContentVueModel;
 
-      this.store.commit(
-        'pageBuilderState/setTextAreaVueModel',
+      this.pageBuilderStateStore.setTextAreaVueModel(
         this.getElement.value.innerHTML
       );
 
@@ -1043,7 +1024,7 @@ class PageBuilder {
       console.log('previewCurrentDesign');
     }
 
-    this.store.commit('pageBuilderState/setElement', null);
+    this.pageBuilderStateStore.setElement(null);
 
     const addedHtmlComponents = ref([]);
     // preview current design in external browser tab
@@ -1071,8 +1052,7 @@ class PageBuilder {
     addedHtmlComponents.value = JSON.stringify(addedHtmlComponents.value);
 
     // commit
-    this.store.commit(
-      'pageBuilderState/setCurrentLayoutPreview',
+    this.pageBuilderStateStore.setCurrentLayoutPreview(
       addedHtmlComponents.value
     );
 
@@ -1131,7 +1111,8 @@ class PageBuilder {
         components = [];
       }
 
-      this.store.commit('pageBuilderState/setComponents', components);
+      this.pageBuilderStateStore.setComponents(components);
+
       return true;
     }
 
@@ -1152,7 +1133,8 @@ class PageBuilder {
         components = [];
       }
 
-      this.store.commit('pageBuilderState/setComponents', components);
+      this.pageBuilderStateStore.setComponents(components);
+
       return true;
     }
 
@@ -1166,11 +1148,11 @@ class PageBuilder {
 
     if (!this.getElement.value) return;
 
-    if (data.type === 'unsplash') {
+    if (data.type === 'unsplash' && this.getCurrentImage.value) {
       if (this.getCurrentImage.value.file) {
         await this.nextTick;
-        this.store.commit(
-          'pageBuilderState/setBasePrimaryImage',
+
+        this.pageBuilderStateStore.setBasePrimaryImage(
           `${this.getCurrentImage.value.file}`
         );
       }
@@ -1194,14 +1176,12 @@ class PageBuilder {
     if (imgElements.length === 1 && divElements.length === 0) {
       // Return the source of the only img
 
-      this.store.commit(
-        'pageBuilderState/setBasePrimaryImage',
-        imgElements[0].src
-      );
+      this.pageBuilderStateStore.setBasePrimaryImage(imgElements[0].src);
+
       return;
     }
 
-    this.store.commit('pageBuilderState/setBasePrimaryImage', null);
+    this.pageBuilderStateStore.setBasePrimaryImage(null);
   }
 
   #addHyperlinkToElement(hyperlinkEnable, urlInput, openHyperlinkInNewTab) {
@@ -1214,7 +1194,7 @@ class PageBuilder {
     const parentHyperlink = this.getElement.value.closest('a');
     const hyperlink = this.getElement.value.querySelector('a');
 
-    this.store.commit('pageBuilderState/setHyperlinkError', null);
+    this.pageBuilderStateStore.setHyperlinkError(null);
 
     // url validation
     const urlRegex = /^https?:\/\//;
@@ -1226,11 +1206,9 @@ class PageBuilder {
     }
 
     if (isValidURL.value === false) {
-      this.store.commit('pageBuilderState/setHyperlinkMessage', null);
-      this.store.commit(
-        'pageBuilderState/setHyperlinkError',
-        'URL is not valid'
-      );
+      this.pageBuilderStateStore.setHyperlinkMessage(null);
+
+      this.pageBuilderStateStore.setHyperlinkError('URL is not valid');
       return;
     }
 
@@ -1249,11 +1227,12 @@ class PageBuilder {
         }
 
         hyperlink.textContent = this.getElement.value.textContent;
-        this.store.commit(
-          'pageBuilderState/setHyperlinkMessage',
+
+        this.pageBuilderStateStore.setHyperlinkMessage(
           'Succesfully updated element hyperlink'
         );
-        this.store.commit('pageBuilderState/setElementContainsHyperlink', true);
+
+        this.pageBuilderStateStore.setElementContainsHyperlink(true);
 
         return;
       }
@@ -1273,14 +1252,12 @@ class PageBuilder {
           link.textContent = this.getElement.value.textContent;
           this.getElement.value.textContent = '';
           this.getElement.value.appendChild(link);
-          this.store.commit(
-            'pageBuilderState/setHyperlinkMessage',
+
+          this.pageBuilderStateStore.setHyperlinkMessage(
             'Successfully added hyperlink to element'
           );
-          this.store.commit(
-            'pageBuilderState/setElementContainsHyperlink',
-            true
-          );
+
+          this.pageBuilderStateStore.setElementContainsHyperlink(true);
 
           return;
         }
@@ -1294,8 +1271,9 @@ class PageBuilder {
       const textNode = document.createTextNode(originalText);
       this.getElement.value.textContent = '';
       this.getElement.value.appendChild(textNode);
-      this.store.commit('pageBuilderState/setHyberlinkEnable', false);
-      this.store.commit('pageBuilderState/setElementContainsHyperlink', false);
+
+      this.pageBuilderStateStore.setHyberlinkEnable(false);
+      this.pageBuilderStateStore.setElementContainsHyperlink(false);
     }
   }
 
@@ -1308,27 +1286,27 @@ class PageBuilder {
 
     const hyperlink = this.getElement.value.querySelector('a');
     if (hyperlink !== null) {
-      this.store.commit('pageBuilderState/setHyberlinkEnable', true);
-      this.store.commit('pageBuilderState/setElementContainsHyperlink', true);
-      this.store.commit('pageBuilderState/setHyperlinkInput', hyperlink.href);
-      this.store.commit('pageBuilderState/setHyperlinkMessage', null);
-      this.store.commit('pageBuilderState/setHyperlinkError', null);
+      this.pageBuilderStateStore.setHyberlinkEnable(true);
+      this.pageBuilderStateStore.setElementContainsHyperlink(true);
+      this.pageBuilderStateStore.setHyperlinkInput(hyperlink.href);
+      this.pageBuilderStateStore.setHyperlinkMessage(null);
+      this.pageBuilderStateStore.setHyperlinkError(null);
 
       if (hyperlink.target === '_blank') {
-        this.store.commit('pageBuilderState/setOpenHyperlinkInNewTab', true);
+        this.pageBuilderStateStore.setOpenHyperlinkInNewTab(true);
       }
       if (hyperlink.target !== '_blank') {
-        this.store.commit('pageBuilderState/setOpenHyperlinkInNewTab', false);
+        this.pageBuilderStateStore.setOpenHyperlinkInNewTab(false);
       }
 
       return;
     }
 
-    this.store.commit('pageBuilderState/setElementContainsHyperlink', false);
-    this.store.commit('pageBuilderState/setHyperlinkInput', '');
-    this.store.commit('pageBuilderState/setHyperlinkError', null);
-    this.store.commit('pageBuilderState/setHyperlinkMessage', null);
-    this.store.commit('pageBuilderState/setHyberlinkEnable', false);
+    this.pageBuilderStateStore.setElementContainsHyperlink(false);
+    this.pageBuilderStateStore.setHyperlinkInput('');
+    this.pageBuilderStateStore.setHyperlinkError(null);
+    this.pageBuilderStateStore.setHyperlinkMessage(null);
+    this.pageBuilderStateStore.setHyberlinkEnable(false);
   }
 
   handleHyperlink(hyperlinkEnable, urlInput, openHyperlinkInNewTab) {
@@ -1338,7 +1316,7 @@ class PageBuilder {
 
     if (!this.shouldRunMethods()) return;
 
-    this.store.commit('pageBuilderState/setHyperlinkAbility', true);
+    this.pageBuilderStateStore.setHyperlinkAbility(true);
 
     const parentHyperlink = this.getElement.value.closest('a');
     const hyperlink = this.getElement.value.querySelector('a');
@@ -1346,7 +1324,7 @@ class PageBuilder {
     // handle case where parent element already has an a href tag
     // when clicking directly on a hyperlink
     if (parentHyperlink !== null) {
-      this.store.commit('pageBuilderState/setHyperlinkAbility', false);
+      this.pageBuilderStateStore.setHyperlinkAbility(false);
     }
     //
     const elementTag = this.getElement.value.tagName.toUpperCase();
@@ -1360,7 +1338,7 @@ class PageBuilder {
       elementTag !== 'H5' &&
       elementTag !== 'H6'
     ) {
-      this.store.commit('pageBuilderState/setHyperlinkAbility', false);
+      this.pageBuilderStateStore.setHyperlinkAbility(false);
     }
 
     if (hyperlinkEnable === undefined) {
@@ -1378,8 +1356,8 @@ class PageBuilder {
   handlePageBuilderMethods() {
     if (!this.shouldRunMethods()) return;
 
-    this.store.commit('pageBuilderState/setParentElement', null);
-    this.store.commit('pageBuilderState/setRestoredElement', null);
+    this.pageBuilderStateStore.setParentElement(null);
+    this.pageBuilderStateStore.setRestoredElement(null);
 
     // handle custom URL
     this.handleHyperlink();
