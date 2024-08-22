@@ -25,6 +25,7 @@ const inputClass = ref('');
 
 const handleAddClasses = function () {
   pageBuilder.handleAddClasses(inputClass.value);
+  pageBuilder.handlePageBuilderMethods();
 
   inputClass.value = '';
 };
