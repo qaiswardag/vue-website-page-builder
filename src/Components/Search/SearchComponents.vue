@@ -116,7 +116,6 @@ onMounted(async () => {
     minHeight=""
     maxHeight=""
   >
-    <p>den er: {{ getFetchedComponents && getFetchedComponents.isLoading }}</p>
     <div
       class="w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
     >
