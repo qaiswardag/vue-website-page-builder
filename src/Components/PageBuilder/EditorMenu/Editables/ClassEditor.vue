@@ -39,7 +39,12 @@ const handleAddClasses = function () {
           v-for="className in currentClasses"
           :key="className"
           class="myPrimaryTag cursor-pointer hover:bg-myPrimaryErrorColor hover:text-white text-xs py-2 font-medium"
-          @click="pageBuilder.handleRemoveClasses(className)"
+          @click="
+            () => {
+              pageBuilder.handleRemoveClasses(className);
+              pageBuilder.handlePageBuilderMethods();
+            }
+          "
         >
           <div class="flex items-center gap-1">
             <span class="mr-1">
