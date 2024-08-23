@@ -57,6 +57,9 @@ const searchUnsplash = function () {
   }
 
   // set values in store
+
+  localStorage.setItem('unsplash-query', searchQuery.value);
+
   unsplashStore.setSearchTerm(searchQuery.value);
   unsplashStore.setCurrentPageNumber(currentPage.value);
   unsplashStore.setOrientationValue(orientation.value);
@@ -69,8 +72,17 @@ const searchUnsplash = function () {
 
 // on mounted
 onMounted(() => {
-  searchQuery.value = 'Magazine';
-  searchUnsplash();
+  if (
+    localStorage.getItem('unsplash-query') &&
+    localStorage.getItem('unsplash-query').length > 0
+  ) {
+    unsplashStore.setSearchTerm(localStorage.getItem('unsplash-query'));
+    searchQuery.value = localStorage.getItem('unsplash-query');
+    searchUnsplash();
+  } else {
+    searchQuery.value = 'Magazine';
+    searchUnsplash();
+  }
 });
 </script>
 
