@@ -12,13 +12,11 @@ const handleButton = function () {
     class="px-6 py-6 mx-auto flex items-center justify-between bg-gray-50 h-[10vh]"
     aria-label="Global"
   >
-    <a href="/">
-      <img
-        class="h-6"
-        src="/logo/logo.svg"
-        alt="Logo"
-      />
-    </a>
+    <img
+      class="h-6"
+      src="/logo/logo.svg"
+      alt="Logo"
+    />
 
     <div class="flex lg:gap-x-12 myPrimaryGap">
       <p

@@ -7,7 +7,7 @@ import tailwindBorderRadius from '@/utils/builder/tailwind-border-radius';
 import tailwindBorderStyleWidthPlusColor from '@/utils/builder/tailwind-border-style-width-color';
 import { computed, ref, nextTick } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
-import { delay } from '@/helpers/delay';
+import { delay } from '@/composables/delay';
 
 class PageBuilder {
   constructor(pageBuilderStateStore, mediaLibraryStore) {

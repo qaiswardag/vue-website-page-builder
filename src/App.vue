@@ -1,12 +1,12 @@
 <script setup>
 import { ref, computed, nextTick } from 'vue';
 import PageBuilderModal from '@/Components/Modals/PageBuilderModal.vue';
-import HomeSection from '@/Components/App/HomeSection.vue';
-import Footer from '@/Components/App/Footer.vue';
-import Navbar from '@/Components/App/Navbar.vue';
+import HomeSection from '@/Components/Homepage/HomeSection.vue';
+import Footer from '@/Components/Homepage/Footer.vue';
+import Navbar from '@/Components/Homepage/Navbar.vue';
 import PageBuilderView from '@/PageBuilder/PageBuilder.vue';
 import PageBuilder from '@/composables/PageBuilder';
-import { delay } from '@/helpers/delay';
+import { delay } from '@/composables/delay';
 import FullScreenSpinner from '@/Components/Loaders/FullScreenSpinner.vue';
 import { usePageBuilderStateStore } from '@/stores/page-builder-state';
 import { useUserStore } from '@/stores/user';
@@ -36,17 +36,7 @@ const handlePageBuilder = async function () {
 
   if (formType.value === 'create') {
     pageBuilderStateStore.setComponents([]);
-
-    // local storage for page builder
-    if (pageBuilder.areComponentsStoredInLocalStorage()) {
-      // postForm.content =
-      //   Array.isArray(getComponents.value) &&
-      //   getComponents.value
-      //     .map((component) => {
-      //       return component.html_code;
-      //     })
-      //     .join('');
-    }
+    pageBuilder.areComponentsStoredInLocalStorage();
   }
 
   // handle click
@@ -72,32 +62,14 @@ const handlePageBuilder = async function () {
     if (formType.value === 'create') {
       await nextTick();
       pageBuilder.saveComponentsLocalStorage();
-
       await nextTick();
-      // postForm.content =
-      //   Array.isArray(getComponents.value) &&
-      //   getComponents.value
-      //     .map((component) => {
-      //       return component.html_code;
-      //     })
-      //     .join('');
     }
     // save to local storage if update
     if (formType.value === 'update') {
       await nextTick();
       pageBuilder.synchronizeDOMAndComponents();
-
       await nextTick();
-      // postForm.content =
-      //   Array.isArray(getComponents.value) &&
-      //   getComponents.value
-      //     .map((component) => {
-      //       return component.html_code;
-      //     })
-      //     .join('');
     }
-
-    // set open modal
 
     openDesignerModal.value = false;
     await delay();

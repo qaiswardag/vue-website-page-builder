@@ -1,6 +1,6 @@
 <script setup>
 import Modal from '@/Components/Modals/Modal.vue';
-import { delay } from '@/helpers/delay';
+import { delay } from '@/composables/delay';
 
 import {
   Dialog,

@@ -2,7 +2,7 @@
 import Modal from '@/Components/Modals/Modal.vue';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
 import PageBuilder from '@/composables/PageBuilder';
-import { delay } from '@/helpers/delay';
+import { delay } from '@/composables/delay';
 
 import {
   Dialog,
