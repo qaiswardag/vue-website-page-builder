@@ -106,58 +106,6 @@ onMounted(() => {
         Search
       </button>
     </div>
-
-    <div class="flex justify-start items-center gap-2 py-2 mb-1">
-      <button
-        @click="searchByOrientation('landscape')"
-        type="button"
-        class="myPrimaryTag"
-        :class="{
-          'bg-myPrimaryBrandColor text-white': orientation === 'landscape',
-          '': orientation !== 'landscape',
-        }"
-      >
-        Landscape
-      </button>
-      <button
-        @click="searchByOrientation('portrait')"
-        type="button"
-        class="myPrimaryTag"
-        :class="{
-          'bg-myPrimaryBrandColor text-white': orientation === 'portrait',
-          '': orientation !== 'portrait',
-        }"
-      >
-        Portrait
-      </button>
-      <button
-        @click="searchByOrientation('squarish')"
-        type="button"
-        class="myPrimaryTag"
-        :class="{
-          'bg-myPrimaryBrandColor text-white': orientation === 'squarish',
-          '': orientation !== 'squarish',
-        }"
-      >
-        Squarish
-      </button>
-
-      <svg
-        @click="searchByOrientation(null)"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke-width="2"
-        stroke="currentColor"
-        class="w-4 h-4 cursor-pointer"
-      >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M6 18L18 6M6 6l12 12"
-        />
-      </svg>
-    </div>
   </form>
 
   <div
@@ -179,28 +127,84 @@ onMounted(() => {
       !getUnsplashImages.isLoading &&
       !getUnsplashImages.isError
     "
-    class="mt-2 pb-16"
+    class="mt-2"
   >
-    <nav
-      class="flex items-center justify-around border-t border-gray-200 bg-white py-3 mt-4 gap-2"
-      aria-label="Pagination"
+    <div
+      class="flex lg:justify-between justify-end items-center gap-2 py-2 mb-1"
     >
-      <p class="myPrimaryTag">
-        Images {{ getUnsplashImages.fetchedMedia.total }}
-      </p>
-      <p class="myPrimaryTag">
-        Pages {{ getUnsplashImages.fetchedMedia.total_pages }}
-      </p>
-      <div
-        class="flex flex-1 justify-between sm:justify-end items-center gap-2"
-      >
-        <span
-          v-if="currentPage !== 1"
-          class="myPrimaryParagraph italic pr-2 pl-1 cursor-pointer text-xs underline"
-          @click="nextPage((currentPage = 1))"
+      <div class="lg:flex hidden justify-left items-center gap-2">
+        <button
+          @click="searchByOrientation('landscape')"
+          type="button"
+          class="myPrimaryTag"
+          :class="{
+            'bg-myPrimaryBrandColor text-white': orientation === 'landscape',
+            '': orientation !== 'landscape',
+          }"
         >
-          first page
-        </span>
+          Landscape
+        </button>
+        <button
+          @click="searchByOrientation('portrait')"
+          type="button"
+          class="myPrimaryTag"
+          :class="{
+            'bg-myPrimaryBrandColor text-white': orientation === 'portrait',
+            '': orientation !== 'portrait',
+          }"
+        >
+          Portrait
+        </button>
+        <button
+          @click="searchByOrientation('squarish')"
+          type="button"
+          class="myPrimaryTag"
+          :class="{
+            'bg-myPrimaryBrandColor text-white': orientation === 'squarish',
+            '': orientation !== 'squarish',
+          }"
+        >
+          Squarish
+        </button>
+
+        <svg
+          @click="searchByOrientation(null)"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          class="w-4 h-4 cursor-pointer"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </div>
+
+      <nav
+        class="flex items-center gap-2 justify-start"
+        aria-label="Pagination"
+      >
+        <p class="myPrimaryParagraph text-xs italic">
+          Total pages {{ getUnsplashImages.fetchedMedia.total_pages }}
+        </p>
+        <p class="myPrimaryParagraph text-xs italic">
+          Images {{ getUnsplashImages.fetchedMedia.total }}
+        </p>
+        <div
+          class="flex flex-1 justify-between sm:justify-end items-center gap-2"
+        >
+          <span
+            v-if="currentPage !== 1"
+            class="myPrimaryParagraph text-xs italic pr-2 pl-1 cursor-pointer underline"
+            @click="nextPage((currentPage = 1))"
+          >
+            First page
+          </span>
+        </div>
         <button
           v-if="currentPage > 1"
           :disabled="currentPage < 1"
@@ -224,12 +228,13 @@ onMounted(() => {
         >
           {{ `Next ${currentPage > 0 ? currentPage + 1 : currentPage + 1}` }}
         </button>
-      </div>
-    </nav>
+      </nav>
+    </div>
+
     <div
-      class="overflow-y-scroll pr-1 border border-gray-200 rounded-lg md:min-h-[15rem] md:max-h-[15em] min-h-[20rem] max-h-[20rem]"
+      class="overflow-y-scroll pr-1 rounded-lg md:min-h-[25.5rem] md:max-h-[25.5em] min-h-[12rem] max-h-[12rem]"
     >
-      <div class="grid md:grid-cols-6 sm:grid-cols-4 grid-cols-1 gap-2">
+      <div class="grid md:grid-cols-6 sm:grid-cols-4 grid-cols-2 gap-2">
         <div
           v-for="image in getUnsplashImages.fetchedMedia.results"
           :key="image.id"
@@ -271,7 +276,7 @@ onMounted(() => {
       !getUnsplashImages.isError
     "
   >
-    <div class="flex items-center justify-center">
+    <div class="flex items-center justify-center mt-4">
       <div
         class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
       >
