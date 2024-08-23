@@ -82,6 +82,16 @@ const componentHelpers = [
         </span>
         `,
   },
+  {
+    html_code: `<section>\n<div class=\"w-full md:pt-2 md:pb-2 pt-4 pb-4 lg:px-4 px-2\">\n<div class=\"mx-auto max-w-7xl\">\n<div id=\"linktree\"\nclass=\"border-2 border-gray-600 flex items-centre justify-start rounded-md font-medium text-black\">\n<p>\n<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.google.com\">Link to landing page</a>\n</p>\n</div>\n</div>\n</div>\n</section>`,
+    id: null,
+    title: 'Link',
+    icon: `
+        <span class="material-symbols-outlined">
+        horizontal_rule
+        </span>
+        `,
+  },
 ];
 
 export default componentHelpers;
