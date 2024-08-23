@@ -31,11 +31,11 @@ const firstButton = function () {
 };
 
 const search_query = ref('');
-const categorySelected = ref(
-  { name: 'All', id: null },
-  { name: 'HTML Elements', id: null }
-);
+const categorySelected = ref({ name: 'Components', id: null });
 
+const handlecategorySelected = function (category) {
+  categorySelected.value = category;
+};
 const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 
 const getFetchedComponents = computed(() => {
@@ -98,7 +98,6 @@ const fetchComponents = function (page) {
   pageBuilderStateStore.setLoadComponents({
     page: page,
     search_query: search_query.value,
-    category: categorySelected.value,
   });
 };
 
@@ -161,13 +160,30 @@ onMounted(async () => {
             !getFetchedComponents.isError && !getFetchedComponents.isLoading
           "
         >
+          <div class="flex gap-2 flex-wrap">
+            <button
+              @click="handlecategorySelected({ name: 'Components', id: null })"
+              class="myPrimaryTag font-medium"
+            >
+              Components
+            </button>
+            <button
+              @click="
+                handlecategorySelected({ name: 'HTML Elements', id: null })
+              "
+              class="myPrimaryTag font-medium"
+            >
+              HTML Elements
+            </button>
+          </div>
+
           <div
             class="h-full flex md:flex-row flex-col myPrimaryGap mt-2 p-2 overflow-y-scroll"
           >
             <section class="md:w-4/6">
               <template
                 v-if="
-                  categorySelected && categorySelected.name !== 'HTML Elements'
+                  categorySelected && categorySelected.name === 'Components'
                 "
               >
                 <div
@@ -197,18 +213,40 @@ onMounted(async () => {
                   </div>
                 </div>
               </template>
-              <!-- if category selected is HTML Elements -->
-              <template>
+              <template
+                v-if="
+                  categorySelected && categorySelected.name === 'HTML Elements'
+                "
+              >
                 <div
-                  class="min-h-[30rem] max-h-[30rem] w-full border rounded py-4 px-2 overflow-scroll"
+                  class="overflow-scroll min-h-[25rem] max-h-[25rem] px-2 p-4 border border-myPrimaryLightGrayColor rounded-lg"
                 >
-                  <div class="flex gap-4 flex-wrap">
+                  <div class="flex gap-4 flex-wrap w-full">
                     <!-- Unique HTML Component # start -->
-                    ook here
+                    <div
+                      v-for="helperComponent in componentHelpers"
+                      :key="helperComponent.title"
+                    >
+                      <div
+                        class="flex justify-left items-center gap-4 text-xs font-medium"
+                      >
+                        <button
+                          @click="handleAddHelperComponent(helperComponent)"
+                          type="button"
+                          class="mySecondaryButton"
+                        >
+                          <span class="material-symbols-outlined text-sm">
+                            add
+                          </span>
+                          <span>
+                            {{ helperComponent.title }}
+                          </span>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </template>
-              <!-- if category selected is HTML Elements -->
             </section>
             <aside
               class="md:w-2/6 overflow-scroll min-h-[30rem] max-h-[30rem] w-full border rounded-lg py-4 px-2"
