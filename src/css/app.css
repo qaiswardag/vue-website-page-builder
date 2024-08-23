@@ -112,6 +112,27 @@
     @apply font-medium break-words lg:text-xl md:text-lg text-base lg:mb-4 md:mb-2 mb-2 text-myPrimaryDarkGrayColor;
   }
 
+  .video-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+  }
+  
+  .video-background video {
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
   /*
     |--------------------------------------------------------------------------
     | Links

@@ -1,5 +1,6 @@
 <script setup>
 const emit = defineEmits(['handleButton']);
+import FullWidthElement from '@/Components/Layouts/FullWidthElement.vue';
 
 // first button function
 const handleButton = function () {
@@ -18,9 +19,14 @@ const features = [
       'See your changes in real-time as you make them. Elevate your creative vision and effortlessly create pages using an intuitive Vue.js drag-and-drop page builder. Break free from design limitations and turn your visions into reality.',
   },
   {
-    name: 'Technologies and Frameworks',
+    name: 'Features',
     description:
-      'Cutting-Edge Technologies and Frameworks. Developed with Vue 3, Pinia, Composition API, and Tailwind CSS.',
+      'Click & Drop, Reordering, True Visual Editing, Responsive Editing, Font Customization, Undo & Redo, Text Editing, Media Library, Unsplash Integration, YouTube Videos.',
+  },
+  {
+    name: 'Technologies',
+    description:
+      'Developed with JavaScript, Vue 3, Composition API, Pinia, CSS, and Tailwind CSS.',
   },
   {
     name: 'Set Brand and Link Colors one place',
@@ -37,15 +43,6 @@ const features = [
       'A beautiful and user-friendly media library that allows you to effortlessly change and update images.',
   },
   {
-    name: 'Unsplash',
-    description:
-      'Unsplash Integration allows you to change and update images from Unsplash.',
-  },
-  {
-    name: 'YouTube Videos',
-    description: 'YouTube Videosm, integrate video content smoothly.',
-  },
-  {
     name: 'Minimal and Intuitive Design',
     description:
       'Beautiful, elegant and intuitive design. Enhance user engagement with amazing visual experience.',
@@ -60,9 +57,10 @@ const features = [
         <h2 class="mySecondaryHeader">
           Bring your vision to life and create impressive pages using a
           drag-and-drop page builder
+
         </h2>
         <p class="myPrimaryParagraph font-normal">
-          Build responsive pages like listings, jobs or blog posts and manage
+          The web builder for stunning sites. Design and publish modern sites at any scale. Build responsive pages like listings, jobs or blog posts and manage
           content easily using the free drag-and-drop page builder.
           <br />
           <a
@@ -73,13 +71,12 @@ const features = [
             Go to the GitHub repository
           </a>
           or
-          <a
-            class="text-myPrimaryLinkColor font-medium"
-            href="https://www.builder-demo.myissue.dk"
-            target="_blank"
+          <span
+          @click="handleButton"
+            class="text-myPrimaryLinkColor font-medium cursor-pointer"
           >
             play around with the page builder.
-          </a>
+          </span>
         </p>
       </div>
       <div
@@ -470,14 +467,15 @@ const features = [
       </div>
     </div>
 
-    <div
-      class="myPrimaryWidthScreenModule bg-gray-100 lg:block"
+    <FullWidthElement
+      :descriptionArea="true"
+      class="bg-gray-100"
       style="background-image: url('/home/features.jpg')"
     >
-      <div class="myPrimaryContentSection">
-        <h2 class="mySecondaryHeader">
-          Everything you need. Break free from design limitations
-        </h2>
+      <template #title
+        >Everything you need. Break free from design limitations
+      </template>
+      <template #description>
         <p class="myPrimaryParagraph font-normal">
           Build your website pages with hundreds of ready-made components.
           Designed to fit your every need, fully customizable & always
@@ -491,41 +489,35 @@ const features = [
             Go to the GitHub repository
           </a>
           or
-          <a
-            class="text-myPrimaryLinkColor font-medium"
-            href="https://www.builder-demo.myissue.dk"
-            target="_blank"
+          <span
+          @click="handleButton"
+            class="text-myPrimaryLinkColor font-medium cursor-pointer"
           >
             play around with the page builder.
-          </a>
+          </span>
         </p>
-
+      </template>
+      <template #content>
         <div
-          class="grid grid-cols-1 lg:gap-16 gap-24 lg:grid-cols-3 mt-12 pt-12 border-t"
+          class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 mt-8"
         >
-          <dl
-            class="col-span-3 grid grid-cols-1 gap-x-8 gap-y-10 text-base leading-7 sm:grid-cols-2 lg:gap-y-16"
+          <div
+            v-for="feature in features"
+            :key="feature.name"
+            class="bg-red-200 bg-opacity-20 hover:bg-opacity-10 w-full lg:min-h-[20rem] min-h-[12rem] relative col-span-1 flex flex-col text-center rounded-lg shadow-sm outline outline-2 outline-offset-8 outline-yellow-400"
           >
             <div
-              v-for="feature in features"
-              :key="feature.name"
-              class="relative px-4 py-6 rounded-2xl shadow-sm outline outline-2 outline-offset-4 outline-myPrimaryLinkColor hover:outline-myPrimaryLinkColor/50"
-            >
-              <dt
-                class="myPrimaryParagraph font-medium flex items-center gap-2 mb-4"
-              >
-                <span class="material-symbols-outlined"> check </span>
-                <span>
-                  {{ feature.name }}
-                </span>
-              </dt>
-              <dd class="mt-2 myPrimaryParagraph">
+              class="bg-black/0 absolute top-0 left-0 w-full h-full rounded-lg"
+            ></div>
+            <div class="px-2 pt-8 absolute top-0 w-full">
+              <p class="myTertiaryHeader">{{ feature.name }}</p>
+              <p class="myPrimaryParagraph font-medium drop-shadow-sm">
                 {{ feature.description }}
-              </dd>
+              </p>
             </div>
-          </dl>
+          </div>
         </div>
-      </div>
-    </div>
+      </template>
+    </FullWidthElement>
   </div>
 </template>

@@ -1,7 +1,6 @@
 <script setup>
 import Modal from '@/Components/Modals/Modal.vue';
 import { ref, computed, onMounted, onBeforeMount, nextTick } from 'vue';
-import { TailwindPagination } from 'laravel-vue-pagination';
 import componentHelpers from '@/utils/builder/html-elements/componentHelpers';
 import PageBuilder from '@/composables/PageBuilder';
 import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vue';
