@@ -57,11 +57,11 @@ const features = [
         <h2 class="mySecondaryHeader">
           Bring your vision to life and create impressive pages using a
           drag-and-drop page builder
-
         </h2>
         <p class="myPrimaryParagraph font-normal">
-          The web builder for stunning sites. Design and publish modern sites at any scale. Build responsive pages like listings, jobs or blog posts and manage
-          content easily using the free drag-and-drop page builder.
+          The web builder for stunning sites. Design and publish modern sites at
+          any scale. Build responsive pages like listings, jobs or blog posts
+          and manage content easily using the free drag-and-drop page builder.
           <br />
           <a
             class="text-myPrimaryLinkColor font-medium"
@@ -72,7 +72,7 @@ const features = [
           </a>
           or
           <span
-          @click="handleButton"
+            @click="handleButton"
             class="text-myPrimaryLinkColor font-medium cursor-pointer"
           >
             play around with the page builder.
@@ -490,7 +490,7 @@ const features = [
           </a>
           or
           <span
-          @click="handleButton"
+            @click="handleButton"
             class="text-myPrimaryLinkColor font-medium cursor-pointer"
           >
             play around with the page builder.

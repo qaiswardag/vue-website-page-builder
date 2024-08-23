@@ -121,7 +121,7 @@
     overflow: hidden;
     z-index: -1;
   }
-  
+
   .video-background video {
     min-width: 100%;
     min-height: 100%;
