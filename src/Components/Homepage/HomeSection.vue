@@ -59,9 +59,10 @@ const features = [
           drag-and-drop page builder
         </h2>
         <p class="myPrimaryParagraph font-normal">
-          The web builder for stunning sites. Design and publish modern sites at
-          any scale. Build responsive pages like listings, jobs or blog posts
-          and manage content easily using the free drag-and-drop page builder.
+          The web builder for stunning pages. Enable users to design and publish
+          modern pages at any scale. Build responsive pages like listings, jobs
+          or blog posts and manage content easily using the free drag-and-drop
+          page builder.
           <br />
           <a
             class="text-myPrimaryLinkColor font-medium"
