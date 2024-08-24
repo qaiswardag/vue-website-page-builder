@@ -100,15 +100,6 @@ Updating an Existing Blog Post
 For updating an existing blog post, you must first obtain the blog post ID and then save a name that includes this ID to local storage:
 
 ```js
-const pathPageBuilderStorageCreate = `page-builder-create-post`;
-
-onBeforeMount(() => {
-  // Save the Page Builder draft to local storage for a new blog post
-  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
-});
-```
-
-```js
 const pathPageBuilderStorageUpdate = `page-builder-update-post-id-1`;
 
 onBeforeMount(() => {
