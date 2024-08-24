@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, nextTick } from 'vue';
+import { ref, computed, nextTick, onBeforeMount } from 'vue';
 import PageBuilderModal from '@/Components/Modals/PageBuilderModal.vue';
 import HomeSection from '@/Components/Homepage/HomeSection.vue';
 import Footer from '@/Components/Homepage/Footer.vue';
@@ -20,11 +20,14 @@ const openDesignerModal = ref(false);
 const firstDesignerModalButtonFunction = ref(null);
 const secondDesignerModalButtonFunction = ref(null);
 const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
-const formType = ref('create'); // create or update
+const formType = ref('create');
 
 const getIsLoading = computed(() => {
   return userStore.getIsLoading;
 });
+
+const pathPageBuilderStorageCreate = `page-builder-create-post`;
+const pathPageBuilderStorageUpdate = `page-builder-update-post-id-1`;
 
 const handlePageBuilder = async function () {
   // set modal standards
@@ -94,6 +97,16 @@ const handleDraftForUpdate = async function () {
     userStore.setIsLoading(false);
   }
 };
+
+onBeforeMount(() => {
+  // save page builder draft to local storage
+  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
+
+  // save page builder draft to local storage if update
+  pageBuilderStateStore.setLocalStorageItemNameUpdate(
+    pathPageBuilderStorageUpdate
+  );
+});
 </script>
 
 <template>

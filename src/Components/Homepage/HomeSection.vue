@@ -16,7 +16,7 @@ const features = [
   {
     name: 'True Visual Editing',
     description:
-      'See your changes in real-time as you make them. Elevate your creative vision and effortlessly create pages using an intuitive Vue.js drag-and-drop page builder. Break free from design limitations and turn your visions into reality.',
+      'See your changes in real-time as you make them. Elevate your creative vision and create pages using an intuitive drag-and-drop page builder. Break free from design limitations and turn your visions into reality.',
   },
   {
     name: 'Features',
@@ -40,7 +40,7 @@ const features = [
   {
     name: 'Media Library',
     description:
-      'A beautiful and user-friendly media library that allows you to effortlessly change and update images.',
+      'A beautiful and user-friendly media library that allows you to change and update images. Unsplash Integration is included.',
   },
   {
     name: 'Minimal and Intuitive Design',
@@ -469,8 +469,7 @@ const features = [
 
     <FullWidthElement
       :descriptionArea="true"
-      class="bg-gray-100"
-      style="background-image: url('/home/features.jpg')"
+      class="bg-gray-50"
     >
       <template #title
         >Everything you need. Break free from design limitations

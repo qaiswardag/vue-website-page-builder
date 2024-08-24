@@ -80,6 +80,50 @@ Example: VITE_UNSPLASH_KEY="your-unsplash-api-key-here"
 
 [Get your unsplash api key here](https://unsplash.com/developers).
 
+## Saving Page Builder Drafts to Local Storage
+
+Each Page Builder draft is automatically saved to local storage, allowing you to resume your work later. This process differs slightly depending on whether you are creating a new blog post or updating an existing one.
+
+Creating a New Blog Post
+When creating a new blog post, you need to specify a name for the local storage item that will store the draft. This is done as follows:
+
+```js
+const pathPageBuilderStorageCreate = `page-builder-create-post`;
+
+onBeforeMount(() => {
+  // Save the Page Builder draft to local storage for a new blog post
+  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
+});
+```
+
+Updating an Existing Blog Post
+For updating an existing blog post, you must first obtain the blog post ID and then save a name that includes this ID to local storage:
+
+```js
+const pathPageBuilderStorageCreate = `page-builder-create-post`;
+
+onBeforeMount(() => {
+  // Save the Page Builder draft to local storage for a new blog post
+  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
+});
+```
+
+```js
+const pathPageBuilderStorageUpdate = `page-builder-update-post-id-1`;
+
+onBeforeMount(() => {
+  // Save the Page Builder draft to local storage for a new blog post
+  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
+
+  // Save the Page Builder draft to local storage for an update
+  pageBuilderStateStore.setLocalStorageItemNameUpdate(
+    pathPageBuilderStorageUpdate
+  );
+});
+```
+
+In both cases, the pageBuilderStateStore is responsible for handling the local storage name, ensuring that the correct draft is stored and retrieved as needed.
+
 ## Use with Backend
 
 The Page builder's capabilities become infinite when integrated with a backend framework like Laravel or Express.js.
