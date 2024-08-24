@@ -213,6 +213,20 @@ onBeforeMount(() => {
 
 In both cases, the pageBuilderStateStore is responsible for handling the local storage name, ensuring that the correct draft is stored and retrieved as needed.
 
+## HTML Components
+
+If Creating new components, please always add the HTML inside section tags.
+
+```html
+<section>
+  <div>
+    <p>New components</p>
+  </div>
+</section>
+```
+
+Currently stored in a JSON file at components.json, can be easily stored in the database, resulting in better management of HTML components.
+
 ## Unsplash
 
 Please note that if you want to use Unsplash, simply create an .env file in your root folder and enter your Unsplash API key and value.
