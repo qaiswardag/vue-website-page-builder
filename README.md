@@ -183,7 +183,7 @@ onBeforeMount(() => {
   >
     <PageBuilderView></PageBuilderView>
   </PageBuilderModal>
-	</template>
+</template>
 ```
 
 ## Saving Page Builder drafts to local storage
