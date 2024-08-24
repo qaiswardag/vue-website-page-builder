@@ -35,7 +35,8 @@ const features = [
   },
   {
     name: 'Mobile-First Approach',
-    description: 'Developed with Mobile-First approach.',
+    description:
+      'Developed with Mobile-First approach. The Page Builder even works on mobile phones.',
   },
   {
     name: 'Media Library',
