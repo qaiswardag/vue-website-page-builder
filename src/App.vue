@@ -99,10 +99,10 @@ const handleDraftForUpdate = async function () {
 };
 
 onBeforeMount(() => {
-  // save page builder draft to local storage
+  // Define local storage key name before on mount
   pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
 
-  // save page builder draft to local storage if update
+  // Define local storage key name before on mount
   pageBuilderStateStore.setLocalStorageItemNameUpdate(
     pathPageBuilderStorageUpdate
   );

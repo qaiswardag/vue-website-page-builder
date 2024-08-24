@@ -39,7 +39,7 @@ The Page Builder is packed with features:
 
 Empower users to create the perfect content with the Page Builder.
 
-## Technical Details
+## Technical details
 
 - **Tech**: Vue 3, JavaScript, Pinia, Tailwind CSS, HTML.
 - **Features**: Click & Drop Page Builder.
@@ -62,7 +62,7 @@ yarn install
 bun install
 ```
 
-## Required Software Installation
+## Required software installation
 
 Please note that these instructions assume you have Node.js installed.
 
@@ -72,15 +72,121 @@ I have separated all the logic for manipulating the HTML elements into its own P
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
 
-## Unsplash
+## Example use of Page Builder
 
-Please note that if you want to use Unsplash, simply create an .env file in your root folder and enter your Unsplash API key and value.
+```js
+const mediaLibraryStore = useMediaLibraryStore();
+const pageBuilderStateStore = usePageBuilderStateStore();
+const userStore = useUserStore();
+const openDesignerModal = ref(false);
+// use designer model
+const firstDesignerModalButtonFunction = ref(null);
+const secondDesignerModalButtonFunction = ref(null);
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
+const formType = ref('create');
 
-Example: VITE_UNSPLASH_KEY="your-unsplash-api-key-here"
+const getIsLoading = computed(() => {
+  return userStore.getIsLoading;
+});
 
-[Get your unsplash api key here](https://unsplash.com/developers).
+const pathPageBuilderStorageCreate = `page-builder-create-post`;
+const pathPageBuilderStorageUpdate = `page-builder-update-post-id-1`;
 
-## Saving Page Builder Drafts to Local Storage
+const handlePageBuilder = async function () {
+  // set modal standards
+  userStore.setIsLoading(true);
+
+  await delay();
+  await nextTick();
+  openDesignerModal.value = true;
+
+  if (formType.value === 'create') {
+    pageBuilderStateStore.setComponents([]);
+    pageBuilder.areComponentsStoredInLocalStorage();
+  }
+
+  // handle click
+  firstDesignerModalButtonFunction.value = async function () {
+    userStore.setIsLoading(true);
+
+    if (formType.value === 'update') {
+      await nextTick();
+      pageBuilder.saveComponentsLocalStorageUpdate();
+      await delay();
+    }
+
+    // set open modal
+    openDesignerModal.value = false;
+    userStore.setIsLoading(false);
+  };
+
+  // handle click
+  secondDesignerModalButtonFunction.value = async function () {
+    userStore.setIsLoading(true);
+
+    // save to local storage if new resource
+    if (formType.value === 'create') {
+      await nextTick();
+      pageBuilder.saveComponentsLocalStorage();
+      await nextTick();
+    }
+    // save to local storage if update
+    if (formType.value === 'update') {
+      await nextTick();
+      pageBuilder.synchronizeDOMAndComponents();
+      await nextTick();
+    }
+
+    openDesignerModal.value = false;
+    await delay();
+    userStore.setIsLoading(false);
+  };
+
+  userStore.setIsLoading(false);
+
+  // end modal
+};
+// Builder # End
+const handleDraftForUpdate = async function () {
+  userStore.setIsLoading(true);
+
+  if (formType.value === 'update') {
+    await nextTick();
+    pageBuilder.areComponentsStoredInLocalStorageUpdate();
+    await nextTick();
+    pageBuilder.setEventListenersForElements();
+
+    await delay();
+    userStore.setIsLoading(false);
+  }
+};
+
+onBeforeMount(() => {
+	// Define local storage key name before on mount
+  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
+
+  // Define local storage key name before on mount
+  pageBuilderStateStore.setLocalStorageItemNameUpdate(
+    pathPageBuilderStorageUpdate
+  );
+});
+
+
+
+<template>
+<PageBuilderModal
+    :show="openDesignerModal"
+    updateOrCreate="create"
+    @firstDesignerModalButtonFunction="firstDesignerModalButtonFunction"
+    @secondDesignerModalButtonFunction="secondDesignerModalButtonFunction"
+    @handleDraftForUpdate="handleDraftForUpdate"
+  >
+    <PageBuilderView></PageBuilderView>
+  </PageBuilderModal>
+	</template>
+```
+
+## Saving Page Builder drafts to local storage
 
 Each Page Builder draft is automatically saved to local storage, allowing you to resume your work later. This process differs slightly depending on whether you are creating a new blog post or updating an existing one.
 
@@ -91,7 +197,7 @@ When creating a new blog post, you need to specify a name for the local storage 
 const pathPageBuilderStorageCreate = `page-builder-create-post`;
 
 onBeforeMount(() => {
-  // Save the Page Builder draft to local storage for a new blog post
+  // Define local storage key name before on mount
   pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
 });
 ```
@@ -103,10 +209,7 @@ For updating an existing blog post, you must first obtain the blog post ID and t
 const pathPageBuilderStorageUpdate = `page-builder-update-post-id-1`;
 
 onBeforeMount(() => {
-  // Save the Page Builder draft to local storage for a new blog post
-  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
-
-  // Save the Page Builder draft to local storage for an update
+  // Define local storage key name before on mount
   pageBuilderStateStore.setLocalStorageItemNameUpdate(
     pathPageBuilderStorageUpdate
   );
@@ -114,6 +217,14 @@ onBeforeMount(() => {
 ```
 
 In both cases, the pageBuilderStateStore is responsible for handling the local storage name, ensuring that the correct draft is stored and retrieved as needed.
+
+## Unsplash
+
+Please note that if you want to use Unsplash, simply create an .env file in your root folder and enter your Unsplash API key and value.
+
+Example: VITE_UNSPLASH_KEY="your-unsplash-api-key-here"
+
+[Get your unsplash api key here](https://unsplash.com/developers).
 
 ## Use with Backend
 
