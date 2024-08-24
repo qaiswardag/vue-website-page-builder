@@ -74,7 +74,7 @@ I have separated all the logic for manipulating the HTML elements into its own P
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
 
-## Example use of Page Builder
+### Example use of Page Builder
 
 ```vue
 <script setup>
@@ -181,7 +181,7 @@ onBeforeMount(() => {
 </template>
 ```
 
-## Saving Page Builder drafts to local storage
+### Saving Page Builder drafts to local storage
 
 Each Page Builder draft is automatically saved to local storage, allowing you to resume your work later. This process differs slightly depending on whether you are creating a new blog post or updating an existing one.
 
@@ -213,7 +213,7 @@ onBeforeMount(() => {
 
 In both cases, the pageBuilderStateStore is responsible for handling the local storage name, ensuring that the correct draft is stored and retrieved as needed.
 
-## HTML Components
+### HTML Components
 
 If Creating new components, please always add the HTML inside section tags.
 
@@ -227,7 +227,7 @@ If Creating new components, please always add the HTML inside section tags.
 
 Currently stored in a JSON file at components.json, can be easily stored in the database, resulting in better management of HTML components.
 
-## Unsplash
+### Unsplash
 
 Please note that if you want to use Unsplash, simply create an .env file in your root folder and enter your Unsplash API key and value.
 
