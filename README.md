@@ -76,7 +76,8 @@ Customizing the page builder is made simple since all the logic resides in the P
 
 ## Example use of Page Builder
 
-```js
+```vue
+<script setup>
 const mediaLibraryStore = useMediaLibraryStore();
 const pageBuilderStateStore = usePageBuilderStateStore();
 const userStore = useUserStore();
@@ -165,11 +166,10 @@ onBeforeMount(() => {
     pathPageBuilderStorageUpdate
   );
 });
-
-
+</script>
 
 <template>
-<PageBuilderModal
+  <PageBuilderModal
     :show="openDesignerModal"
     updateOrCreate="create"
     @firstDesignerModalButtonFunction="firstDesignerModalButtonFunction"
