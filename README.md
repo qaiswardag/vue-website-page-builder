@@ -96,7 +96,6 @@ const handlePageBuilder = async function () {
   // set modal standards
   userStore.setIsLoading(true);
 
-  await delay();
   await nextTick();
   openDesignerModal.value = true;
 
@@ -112,7 +111,6 @@ const handlePageBuilder = async function () {
     if (formType.value === 'update') {
       await nextTick();
       pageBuilder.saveComponentsLocalStorageUpdate();
-      await delay();
     }
 
     // set open modal
@@ -138,7 +136,6 @@ const handlePageBuilder = async function () {
     }
 
     openDesignerModal.value = false;
-    await delay();
     userStore.setIsLoading(false);
   };
 
@@ -155,8 +152,6 @@ const handleDraftForUpdate = async function () {
     pageBuilder.areComponentsStoredInLocalStorageUpdate();
     await nextTick();
     pageBuilder.setEventListenersForElements();
-
-    await delay();
     userStore.setIsLoading(false);
   }
 };

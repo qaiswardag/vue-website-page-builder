@@ -6,7 +6,6 @@ import Footer from '@/Components/Homepage/Footer.vue';
 import Navbar from '@/Components/Homepage/Navbar.vue';
 import PageBuilderView from '@/PageBuilder/PageBuilder.vue';
 import PageBuilder from '@/composables/PageBuilder';
-import { delay } from '@/composables/delay';
 import FullScreenSpinner from '@/Components/Loaders/FullScreenSpinner.vue';
 import { usePageBuilderStateStore } from '@/stores/page-builder-state';
 import { useUserStore } from '@/stores/user';
@@ -33,7 +32,6 @@ const handlePageBuilder = async function () {
   // set modal standards
   userStore.setIsLoading(true);
 
-  await delay();
   await nextTick();
   openDesignerModal.value = true;
 
@@ -49,7 +47,6 @@ const handlePageBuilder = async function () {
     if (formType.value === 'update') {
       await nextTick();
       pageBuilder.saveComponentsLocalStorageUpdate();
-      await delay();
     }
 
     // set open modal
@@ -75,7 +72,7 @@ const handlePageBuilder = async function () {
     }
 
     openDesignerModal.value = false;
-    await delay();
+
     userStore.setIsLoading(false);
   };
 
@@ -93,7 +90,6 @@ const handleDraftForUpdate = async function () {
     await nextTick();
     pageBuilder.setEventListenersForElements();
 
-    await delay();
     userStore.setIsLoading(false);
   }
 };
