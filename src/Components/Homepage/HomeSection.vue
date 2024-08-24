@@ -26,7 +26,7 @@ const features = [
   {
     name: 'Technologies',
     description:
-      'Developed with JavaScript, Vue 3, Composition API, Pinia, CSS, and Tailwind CSS.',
+      'Developed with JavaScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.',
   },
   {
     name: 'Set Brand and Link Colors one place',

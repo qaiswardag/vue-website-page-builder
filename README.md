@@ -43,7 +43,7 @@ Empower users to create the perfect content with the Page Builder.
 
 ## Technical details
 
-- **Tech**: Vue 3, JavaScript, Pinia, Tailwind CSS, HTML.
+- **Technologies**: Developed with JavaScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.
 - **Features**: Click & Drop Page Builder.
 
 ## Getting started & installation
