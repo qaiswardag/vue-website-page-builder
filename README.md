@@ -93,7 +93,9 @@ const getIsLoading = computed(() => {
 });
 
 const pathPageBuilderStorageCreate = `page-builder-create-post`;
-const pathPageBuilderStorageUpdate = `page-builder-update-post-id-1`;
+
+const resourceId = 1;
+const pathPageBuilderStorageUpdate = `page-builder-update-post-id-${resourceId}`;
 
 const handlePageBuilder = async function () {
   // set modal standards
@@ -183,10 +185,9 @@ onBeforeMount(() => {
 
 ### Saving Page Builder drafts to local storage
 
-Each Page Builder draft is automatically saved to local storage, allowing you to resume your work later. This process differs slightly depending on whether you are creating a new blog post or updating an existing one.
+Each Page Builder draft is automatically saved to local storage, allowing you to resume your work later. This process differs slightly depending on whether you are creating a new resource like a blog post, job ad, or listing, or updating an existing resource.
 
-Creating a New Blog Post
-When creating a new blog post, you need to specify a name for the local storage item that will store the draft. This is done as follows:
+When creating a new resource like a blog post, job ad, or listing, you need to specify a name for the local storage item that will store the draft. This is done as follows:
 
 ```js
 const pathPageBuilderStorageCreate = `page-builder-create-post`;
@@ -197,11 +198,11 @@ onBeforeMount(() => {
 });
 ```
 
-Updating an Existing Blog Post
-For updating an existing blog post, you must first obtain the blog post ID and then save a name that includes this ID to local storage:
+For updating an existing resource like a blog post, job ad, or listing, you must first obtain the blog post ID and then save a name that includes this ID to local storage. This way, the Page Builder can find the exact resource from local storage later on when the user wants to continue editing the resource with the unique ID:
 
 ```js
-const pathPageBuilderStorageUpdate = `page-builder-update-post-id-1`;
+const resourceId = 1;
+const pathPageBuilderStorageUpdate = `page-builder-update-post-id-${resourceId}`;
 
 onBeforeMount(() => {
   // Define local storage key name before on mount
