@@ -31,7 +31,7 @@ const features = [
   {
     name: 'Set Brand and Link Colors one place',
     description:
-      'Set Brand and Link Colors once and apply them across the entire Platform with ease.',
+      'Global Styles for fonts, designs, & colors. Set Brand and Link Colors once and apply them across the entire Platform with ease.',
   },
   {
     name: 'Mobile-First Approach',
@@ -205,7 +205,21 @@ const features = [
                           class="h-8 w-8 rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
                         >
                           <span class="material-symbols-outlined text-[20px]">
+                            edit
+                          </span>
+                        </div>
+                        <div
+                          class="h-8 w-8 rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                        >
+                          <span class="material-symbols-outlined text-[20px]">
                             add
+                          </span>
+                        </div>
+                        <div
+                          class="h-8 w-8 rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white focus-visible:ring-0"
+                        >
+                          <span class="material-symbols-outlined text-[20px]">
+                            delete
                           </span>
                         </div>
                       </div>
@@ -480,7 +494,8 @@ const features = [
         <p class="myPrimaryParagraph font-normal">
           Build your website pages with hundreds of ready-made components.
           Designed to fit your every need, fully customizable & always
-          responsive.
+          responsive. Powerful Page Builder for any growing merchants, brands, &
+          agencies.
           <br />
           <a
             class="text-myPrimaryLinkColor font-medium"

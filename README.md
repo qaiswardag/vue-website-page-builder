@@ -37,9 +37,11 @@ The Page Builder is packed with features:
 - **Text Editing**: Customize your text with ease.
 - **Font Customization**: Choose the perfect fonts to match your style.
 - **Undo & Redo**: Experiment confidently with the ability to revert changes.
+- **Global Styles**: Global Styles for fonts, designs, & colors.
 - **YouTube Videos**: Integrate video content smoothly.
 
-Empower users to create the perfect content with the Page Builder.
+Powerful Page Builder for any growing merchants, brands, &
+agencies. Empower users to create the perfect content with the Page Builder.
 
 ## Technical details
 
