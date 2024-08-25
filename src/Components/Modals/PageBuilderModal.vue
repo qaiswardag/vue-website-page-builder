@@ -196,7 +196,7 @@ onMounted(() => {
               </DynamicModal>
               <div
                 @click="pageBuilderStateStore.setComponent(null)"
-                class="px-4 h-[10vh] flex items-center justify-between border-b border-gray-200 bg-white"
+                class="px-4 px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
                 <div
                   class="flex items-center justify-start divide-x divide-gray-200"
@@ -213,7 +213,7 @@ onMounted(() => {
                     />
                   </button>
                   <button
-                    class="myPrimaryButton lg:text-sm text-[12px] lg:py-3 py-3 min-h-2 ml-4"
+                    class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4"
                     @click="secondButton"
                     type="button"
                   >
@@ -224,7 +224,7 @@ onMounted(() => {
                   </button>
                   <button
                     v-if="updateOrCreate === 'update' && hideDraftButton"
-                    class="mySecondaryButton lg:text-sm text-[12px] lg:py-3 py-3 min-h-2"
+                    class="mySecondaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-2"
                     @click="handleDraftForUpdate"
                     type="button"
                   >

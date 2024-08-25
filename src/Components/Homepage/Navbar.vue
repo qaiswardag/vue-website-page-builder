@@ -9,7 +9,7 @@ const handleButton = function () {
 
 <template>
   <nav
-    class="px-6 py-6 mx-auto flex items-center justify-between bg-gray-50 h-[10vh]"
+    class="px-6 py-6 mx-auto flex items-center justify-between bg-gray-50 px-4 lg:h-[10vh] h-[16vh]"
     aria-label="Global"
   >
     <img

@@ -87,7 +87,7 @@ const handleEscapeKey = function () {
               class="bg-red-100 inline-block align-bottom text-left transform transition-all sm:align-middle w-full overflow-hidden h-[100vh] top-0 left-0 right-0 absolute"
             >
               <div
-                class="px-4 h-[10vh] flex items-center justify-between border-b border-gray-200 bg-white"
+                class="px-4 px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
                 <button
                   type="button"
