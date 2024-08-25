@@ -226,7 +226,7 @@ If Creating new components, please always add the HTML inside section tags.
 </section>
 ```
 
-Currently stored in a JSON file at components.json, can be easily stored in the database, resulting in better management of HTML components.
+HTML components are currently stored in a JSON file named `components.json` in the root directory. HTML components can also be easily stored in the database, resulting in better management. Simply provide the `setLoadComponents` method with the new URL for loading components from the backend.
 
 ### Unsplash
 
