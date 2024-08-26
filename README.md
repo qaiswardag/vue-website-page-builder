@@ -246,7 +246,7 @@ Example: VITE_UNSPLASH_KEY="your-unsplash-api-key-here"
 
 ## Use with Backend
 
-The Page builder's capabilities become infinite when integrated with a backend framework like Laravel or Express.js.
+The Page builder's capabilities become infinite when integrated with a backend.
 
 If you're familiar with Laravel, the Page Builder is already integrated with the open-source Laravel Free Listing Directory, Blog & Job Board Theme, which is available at:
 [demo & repo](https://github.com/qaiswardag/laravel_vue_directory_and_job_board_theme).
