@@ -82,11 +82,6 @@ I have separated all the logic for manipulating the HTML elements into its own P
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
 
-If you have any questions or if you're looking for customization, feel free to connect with me on LinkedIn and send me a message.
-
-- [Email](mailto:qais.wardag@outlook.com)
-- [LinkedIn](https://www.linkedin.com/in/qaiswardag)
-
 ### Example use of Page Builder
 
 ```vue
@@ -257,6 +252,13 @@ If you're familiar with Laravel, the Page Builder is already integrated with the
 [demo & repo](https://github.com/qaiswardag/laravel_vue_directory_and_job_board_theme).
 
 By utilizing a backend Framework, the HTML components, currently stored in a JSON file at `components.json`, can be easily stored in the database, resulting in better management of HTML components.
+
+## Get in touch
+
+If you have any questions or if you're looking for customization, feel free to connect with me on LinkedIn and send me a message.
+
+- [Email](mailto:qais.wardag@outlook.com)
+- [LinkedIn](https://www.linkedin.com/in/qaiswardag)
 
 ## Contributing
 
