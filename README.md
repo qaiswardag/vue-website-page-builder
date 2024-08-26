@@ -83,10 +83,10 @@ Customizing the page builder is made simple since all the logic resides in the P
 const mediaLibraryStore = useMediaLibraryStore();
 const pageBuilderStateStore = usePageBuilderStateStore();
 const userStore = useUserStore();
-const openDesignerModal = ref(false);
-// use designer model
-const firstDesignerModalButtonFunction = ref(null);
-const secondDesignerModalButtonFunction = ref(null);
+const openPageBuilder = ref(false);
+
+const pageBuilderPrimaryHandler = ref(null);
+const pageBuilderSecondaryHandler = ref(null);
 const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 const formType = ref('create');
 
@@ -100,11 +100,11 @@ const resourceId = 1;
 const pathPageBuilderStorageUpdate = `page-builder-update-post-id-${resourceId}`;
 
 const handlePageBuilder = async function () {
-  // set modal standards
+
   userStore.setIsLoading(true);
 
   await nextTick();
-  openDesignerModal.value = true;
+  openPageBuilder.value = true;
 
   if (formType.value === 'create') {
     pageBuilderStateStore.setComponents([]);
@@ -112,7 +112,7 @@ const handlePageBuilder = async function () {
   }
 
   // handle click
-  firstDesignerModalButtonFunction.value = async function () {
+  pageBuilderPrimaryHandler.value = async function () {
     userStore.setIsLoading(true);
 
     if (formType.value === 'update') {
@@ -120,13 +120,13 @@ const handlePageBuilder = async function () {
       pageBuilder.saveComponentsLocalStorageUpdate();
     }
 
-    // set open modal
-    openDesignerModal.value = false;
+
+    openPageBuilder.value = false;
     userStore.setIsLoading(false);
   };
 
   // handle click
-  secondDesignerModalButtonFunction.value = async function () {
+  pageBuilderSecondaryHandler.value = async function () {
     userStore.setIsLoading(true);
 
     // save to local storage if new resource
@@ -142,7 +142,7 @@ const handlePageBuilder = async function () {
       await nextTick();
     }
 
-    openDesignerModal.value = false;
+    openPageBuilder.value = false;
     userStore.setIsLoading(false);
   };
 
@@ -174,10 +174,10 @@ onBeforeMount(() => {
 
 <template>
   <PageBuilderModal
-    :show="openDesignerModal"
+    :show="openPageBuilder"
     updateOrCreate="create"
-    @firstDesignerModalButtonFunction="firstDesignerModalButtonFunction"
-    @secondDesignerModalButtonFunction="secondDesignerModalButtonFunction"
+    @pageBuilderPrimaryHandler="pageBuilderPrimaryHandler"
+    @pageBuilderSecondaryHandler="pageBuilderSecondaryHandler"
     @handleDraftForUpdate="handleDraftForUpdate"
   >
     <PageBuilderView></PageBuilderView>

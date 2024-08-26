@@ -108,7 +108,6 @@ watch(urlEnteret, (newVal) => {
 const handleURL = function () {
   urlEnteret.value = editor.value.getAttributes('link').href;
 
-  // set modal standards
   showModalUrl.value = true;
   typeModal.value = 'success';
   gridColumnModal.value = 2;
@@ -120,7 +119,6 @@ const handleURL = function () {
 
   // handle click
   firstModalButtonFunction.value = function () {
-    // set open modal
     showModalUrl.value = false;
     urlError.value = null;
   };

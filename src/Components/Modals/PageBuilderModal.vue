@@ -52,13 +52,12 @@ const secondModalButtonFunction = ref(null);
 const thirdModalButtonFunction = ref(null);
 
 const emit = defineEmits([
-  'firstDesignerModalButtonFunction',
-  'secondDesignerModalButtonFunction',
+  'pageBuilderPrimaryHandler',
+  'pageBuilderSecondaryHandler',
   'handleDraftForUpdate',
 ]);
 
 const firstButton = function () {
-  // set modal standards
   showModalConfirmClosePageBuilder.value = true;
   typeModal.value = 'danger';
   gridColumnModal.value = 3;
@@ -71,19 +70,17 @@ const firstButton = function () {
 
   // handle click
   firstModalButtonFunction.value = function () {
-    // set open modal
     showModalConfirmClosePageBuilder.value = false;
   };
   // handle click
   secondModalButtonFunction.value = function () {
-    // set open modal
     secondButton();
   };
 
   // handle click
   thirdModalButtonFunction.value = async function () {
     showModalConfirmClosePageBuilder.value = false;
-    emit('firstDesignerModalButtonFunction');
+    emit('pageBuilderPrimaryHandler');
 
     pageBuilder.removeHoveredAndSelected();
     userStore.setIsLoading(true);
@@ -100,7 +97,7 @@ const handleEscapeKey = function () {
 
 // first button function
 const secondButton = function () {
-  emit('secondDesignerModalButtonFunction');
+  emit('pageBuilderSecondaryHandler');
   pageBuilder.removeHoveredAndSelected();
 };
 

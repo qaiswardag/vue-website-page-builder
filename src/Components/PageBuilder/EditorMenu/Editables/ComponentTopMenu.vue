@@ -24,7 +24,6 @@ const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
 
 // remove component
 const deleteComponent = function (e) {
-  // set modal standards
   showModalDeleteComponent.value = true;
   typeModal.value = 'delete';
   gridColumnModal.value = 2;
@@ -36,14 +35,13 @@ const deleteComponent = function (e) {
 
   // handle click
   firstModalButtonFunction.value = function () {
-    // set open modal
     showModalDeleteComponent.value = false;
   };
   //
   // handle click
   thirdModalButtonFunction.value = function () {
     pageBuilder.deleteComponent();
-    // set open modal
+
     showModalDeleteComponent.value = false;
   };
   // end modal

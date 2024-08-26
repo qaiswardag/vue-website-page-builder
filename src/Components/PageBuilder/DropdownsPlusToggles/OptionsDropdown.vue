@@ -37,18 +37,16 @@ const firstDesignerPreviewModalButtonFunction = ref(null);
 
 const handleDesignerPreview = function () {
   emit('previewCurrentDesign');
-  // set modal standards
+
   openDesignerPreviewModal.value = true;
   // handle click
   firstDesignerPreviewModalButtonFunction.value = function () {
-    // set open modal
     openDesignerPreviewModal.value = false;
   };
   // end modal
 };
 
 const deleteAllComponents = function () {
-  // set modal standards
   showModalDeleteAllComponents.value = true;
   typeModal.value = 'delete';
   gridColumnModal.value = 2;
@@ -60,7 +58,6 @@ const deleteAllComponents = function () {
 
   // handle click
   firstModalButtonFunction.value = function () {
-    // set open modal
     showModalDeleteAllComponents.value = false;
   };
   //
