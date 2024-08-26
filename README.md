@@ -76,11 +76,16 @@ yarn install
 bun install
 ```
 
-### Customizing
+### Customization
 
 I have separated all the logic for manipulating the HTML elements into its own PageBuilder class, which can be found at the path: `src/composables/PageBuilder.js`.
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
+
+If you have any questions or if you're looking for customization, feel free to connect with me on LinkedIn and send me a message.
+
+- [Email](mailto:qais.wardag@outlook.com)
+- [LinkedIn](https://www.linkedin.com/in/qaiswardag)
 
 ### Example use of Page Builder
 
