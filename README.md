@@ -52,7 +52,13 @@ agencies. Empower users to create the perfect content with the Page Builder.
 - **Technologies**: This Page Builder is developed using JavaScript, Vue 3, the Composition API, Pinia, CSS, Tailwind CSS, and HTML.
 - **Features**: Click & Drop Page Builder.
 
-## Getting started & installation
+## Documentation
+
+### Required software installation
+
+Please note that these instructions assume you have Node.js installed.
+
+### Getting started & installation
 
 Make sure to install the dependencies:
 
@@ -70,11 +76,7 @@ yarn install
 bun install
 ```
 
-## Required software installation
-
-Please note that these instructions assume you have Node.js installed.
-
-## Documentation
+### Customizing
 
 I have separated all the logic for manipulating the HTML elements into its own PageBuilder class, which can be found at the path: `src/composables/PageBuilder.js`.
 
