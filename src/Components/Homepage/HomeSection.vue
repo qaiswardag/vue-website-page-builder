@@ -63,7 +63,8 @@ const features = [
           The web builder for stunning pages. Enable users to design and publish
           modern pages at any scale. Build responsive pages like listings, jobs
           or blog posts and manage content easily using the free drag-and-drop
-          page builder.
+          page builder. Developed with JavaScript, Vue 3, Composition API,
+          Pinia, CSS, Tailwind CSS and HTML
           <br />
           <a
             class="text-myPrimaryLinkColor font-medium"
@@ -492,10 +493,10 @@ const features = [
       </template>
       <template #description>
         <p class="myPrimaryParagraph font-normal">
-          Build your website pages with hundreds of ready-made components.
-          Designed to fit your every need, fully customizable & always
-          responsive. Powerful Page Builder for any growing merchants, brands, &
-          agencies.
+          A Page Builder designed for growth. Build your website pages with
+          ready-made components that are fully customizable and always
+          responsive, designed to fit every need. A powerful Page Builder for
+          growing merchants, brands, and agencies.
           <br />
           <a
             class="text-myPrimaryLinkColor font-medium"
