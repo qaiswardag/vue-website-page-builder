@@ -72,14 +72,14 @@ const deleteAllComponents = function () {
 
 // handle slideover window
 const handleSettingsSlideOver = function () {
-  pageBuilderStateStore.setComponents(null);
+  pageBuilderStateStore.setComponent(null);
 
   titleSettingsSlideOverRight.value = 'Settings';
   showSettingsSlideOverRight.value = true;
 };
 // handle slideover window
 const settingsSlideOverButton = function () {
-  pageBuilderStateStore.setComponents(null);
+  pageBuilderStateStore.setComponent(null);
 
   showSettingsSlideOverRight.value = false;
 };
