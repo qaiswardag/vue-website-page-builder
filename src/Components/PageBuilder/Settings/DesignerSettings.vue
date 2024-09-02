@@ -3,6 +3,9 @@ import SlideOverRightParent from '@/Components/PageBuilder/Slidebars/SlideOverRi
 import AdvancedDesignerSettings from '@/Components/PageBuilder/Settings/AdvancedDesignerSettings.vue';
 import { ref, computed } from 'vue';
 import fullHTMLContent from '@/utils/builder/html-doc-declaration-with-components';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+
+const pageBuilderStateStore = usePageBuilderStateStore();
 
 const showAdvancedSettingsSlideOverRight = ref(false);
 const titleSettingsSlideOverRight = ref('');
