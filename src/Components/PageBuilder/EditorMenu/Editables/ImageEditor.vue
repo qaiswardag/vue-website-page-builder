@@ -24,16 +24,11 @@ const firstMediaButtonFunction = ref(null);
 const secondMediaButtonFunction = ref(null);
 const thirdMediaButtonFunction = ref(null);
 
-//
-//
-//
 // get current image from store
 const getBasePrimaryImage = computed(() => {
   return pageBuilderStateStore.getBasePrimaryImage;
 });
-//
-//
-// image click
+
 const handleAddImage = function () {
   // open modal to true
   showMediaLibraryModal.value = true;
@@ -64,7 +59,6 @@ const handleAddImage = function () {
 };
 </script>
 <template>
-  <p>it is: {{ getBasePrimaryImage }}</p>
   <div v-if="getBasePrimaryImage !== null">
     <img
       class="object-cover object-center w-full cursor-pointer"
