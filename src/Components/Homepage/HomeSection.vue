@@ -11,12 +11,12 @@ const features = [
   {
     name: 'Live Drag & Drop Builder',
     description:
-      'Drag-and-drop content on a page and watch your pages come to life. Bring your vision to life and create impressive pages using a drag-and-drop page builder',
+      'Click & Drop content on a page and watch your pages come to life. Bring your vision to life and create impressive pages using a click & drop Page Builder',
   },
   {
     name: 'True Visual Editing',
     description:
-      'See your changes in real-time as you make them. Elevate your creative vision and create pages using an intuitive drag-and-drop page builder. Break free from design limitations and turn your visions into reality.',
+      'See your changes in real-time as you make them. Elevate your creative vision and create pages using an intuitive click & drop page builder. Break free from design limitations and turn your visions into reality.',
   },
   {
     name: 'Features',
@@ -56,14 +56,14 @@ const features = [
     <div class="myPrimaryWidthScreenModule bg-red-50 lg:block">
       <div class="myPrimaryContentSection">
         <h2 class="mySecondaryHeader">
-          Bring your vision to life and create impressive pages using a
-          drag-and-drop page builder
+          Bring your vision to life and create impressive pages using a click &
+          drop Page Builder
         </h2>
         <p class="myPrimaryParagraph font-normal">
           The web builder for stunning pages. Enable users to design and publish
           modern pages at any scale. Build responsive pages like listings, jobs
-          or blog posts and manage content easily using the free drag-and-drop
-          page builder. Developed with JavaScript, Vue 3, Composition API,
+          or blog posts and manage content easily using the free click & drop
+          Page Builder. Developed with JavaScript, Vue 3, Composition API,
           Pinia, CSS, Tailwind CSS and HTML
           <br />
           <a
