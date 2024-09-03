@@ -188,7 +188,7 @@ onMounted(async () => {
             @click.self="pageBuilderStateStore.setComponent(null)"
             class="w-4/12 flex justify-end py-2 pr-2"
           >
-            <div class="flex items-center justify-center gap-2">
+            <div class="flex items-center justify-center gap-4">
               <button
                 type="button"
                 @click="
@@ -197,11 +197,18 @@ onMounted(async () => {
                     handleAddComponent();
                   }
                 "
-                class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
               >
-                <span class="myMediumIcon material-symbols-outlined">
-                  add
-                </span>
+                <div class="flex items-center justify-center gap-2">
+                  <span class="lg:block hidden"> Add new Component </span>
+
+                  <span
+                    class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                  >
+                    <span class="myMediumIcon material-symbols-outlined">
+                      add
+                    </span>
+                  </span>
+                </div>
               </button>
               <button
                 type="button"

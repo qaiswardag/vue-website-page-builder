@@ -64,6 +64,7 @@ const handleAddImage = function () {
 };
 </script>
 <template>
+  <p>it is: {{ getBasePrimaryImage }}</p>
   <div v-if="getBasePrimaryImage !== null">
     <img
       class="object-cover object-center w-full cursor-pointer"
