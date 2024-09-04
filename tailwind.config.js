@@ -4,7 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme');
 export default {
   purge: [
     './css/app.css',
-    './src/**/*.{vue,js,ts,jsx,tsx}',
+    './src/**/*.{vue,js,ts,jsx,tsx,json}',
     './public/json/**/*.json',
     './public/**/*.html',
   ],
@@ -40,5 +40,5 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
 };
