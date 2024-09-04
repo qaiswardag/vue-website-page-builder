@@ -331,7 +331,7 @@ const handleModalIframeSrc = function () {
             class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
           >
             <span class="material-symbols-outlined"> add_photo_alternate </span>
-            <span>Update image øø</span>
+            <span>Update image</span>
           </button>
         </div>
       </template>
