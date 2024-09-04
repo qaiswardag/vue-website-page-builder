@@ -22,11 +22,11 @@ defineProps({
   },
 });
 
-const emit = defineEmits(['firstDesignerPreviewModalButtonFunction']);
+const emit = defineEmits(['firstPageBuilderPreviewModalButton']);
 
 // first button function
 const firstButton = async function () {
-  emit('firstDesignerPreviewModalButtonFunction');
+  emit('firstPageBuilderPreviewModalButton');
 
   userStore.setIsLoading(true);
   await delay();

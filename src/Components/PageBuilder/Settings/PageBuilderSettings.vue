@@ -1,6 +1,6 @@
 <script setup>
 import SlideOverRightParent from '@/Components/PageBuilder/Slidebars/SlideOverRightParent.vue';
-import AdvancedDesignerSettings from '@/Components/PageBuilder/Settings/AdvancedDesignerSettings.vue';
+import AdvancedPageBuilderSettings from '@/Components/PageBuilder/Settings/AdvancedPageBuilderSettings.vue';
 import { ref, computed } from 'vue';
 import fullHTMLContent from '@/utils/builder/html-doc-declaration-with-components';
 import { usePageBuilderStateStore } from '@/stores/page-builder-state';
@@ -59,7 +59,7 @@ const handleDownloadHTML = function () {
     :title="titleSettingsSlideOverRight"
     @slideOverButton="settingsAdvancedSlideOverButton"
   >
-    <AdvancedDesignerSettings></AdvancedDesignerSettings>
+    <AdvancedPageBuilderSettings></AdvancedPageBuilderSettings>
   </SlideOverRightParent>
   <!-- Advanced Settings - start -->
   <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">

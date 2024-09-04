@@ -5,7 +5,7 @@ import { ref, computed } from 'vue';
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue';
 import Preview from '@/PageBuilder/Preview.vue';
 import SlideOverRight from '@/Components/PageBuilder/Slidebars/SlideOverRight.vue';
-import DesignerSettings from '@/Components/PageBuilder/Settings/DesignerSettings.vue';
+import PageBuilderSettings from '@/Components/PageBuilder/Settings/PageBuilderSettings.vue';
 import DynamicModal from '@/Components/Modals/DynamicModal.vue';
 import { usePageBuilderStateStore } from '@/stores/page-builder-state';
 import { useMediaLibraryStore } from '@/stores/media-library';
@@ -32,16 +32,16 @@ const thirdModalButtonFunction = ref(null);
 
 const showSettingsSlideOverRight = ref(false);
 const titleSettingsSlideOverRight = ref(null);
-const openDesignerPreviewModal = ref(false);
-const firstDesignerPreviewModalButtonFunction = ref(null);
+const openPageBuilderPreviewModal = ref(false);
+const firstPageBuilderPreviewModalButton = ref(null);
 
-const handleDesignerPreview = function () {
+const handlePageBuilderPreview = function () {
   emit('previewCurrentDesign');
 
-  openDesignerPreviewModal.value = true;
+  openPageBuilderPreviewModal.value = true;
   // handle click
-  firstDesignerPreviewModalButtonFunction.value = function () {
-    openDesignerPreviewModal.value = false;
+  firstPageBuilderPreviewModalButton.value = function () {
+    openPageBuilderPreviewModal.value = false;
   };
   // end modal
 };
@@ -91,7 +91,7 @@ const settingsSlideOverButton = function () {
     :title="titleSettingsSlideOverRight"
     @slideOverButton="settingsSlideOverButton"
   >
-    <DesignerSettings> </DesignerSettings>
+    <PageBuilderSettings> </PageBuilderSettings>
   </SlideOverRight>
   <DynamicModal
     :show="showModalDeleteAllComponents"
@@ -138,7 +138,7 @@ const settingsSlideOverButton = function () {
         <div class="py-1">
           <MenuItem v-slot="{ active }">
             <div
-              @click="handleDesignerPreview"
+              @click="handlePageBuilderPreview"
               class="cursor-pointer"
               :class="[
                 active
@@ -213,10 +213,8 @@ const settingsSlideOverButton = function () {
     </transition>
   </Menu>
   <PageBuilderPreviewModal
-    :show="openDesignerPreviewModal"
-    @firstDesignerPreviewModalButtonFunction="
-      firstDesignerPreviewModalButtonFunction
-    "
+    :show="openPageBuilderPreviewModal"
+    @firstPageBuilderPreviewModalButton="firstPageBuilderPreviewModalButton"
   >
     <Preview></Preview>
   </PageBuilderPreviewModal>

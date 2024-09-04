@@ -21,16 +21,16 @@ const getMenuRight = computed(() => {
 const previewCurrentDesign = function () {
   pageBuilder.previewCurrentDesign();
 };
-const openDesignerPreviewModal = ref(false);
-const firstDesignerPreviewModalButtonFunction = ref(null);
+const openPageBuilderPreviewModal = ref(false);
+const firstPageBuilderPreviewModalButton = ref(null);
 
-const handleDesignerPreview = function () {
+const handlePageBuilderPreview = function () {
   previewCurrentDesign();
 
-  openDesignerPreviewModal.value = true;
+  openPageBuilderPreviewModal.value = true;
   // handle click
-  firstDesignerPreviewModalButtonFunction.value = function () {
-    openDesignerPreviewModal.value = false;
+  firstPageBuilderPreviewModalButton.value = function () {
+    openPageBuilderPreviewModal.value = false;
   };
   // end modal
 };
@@ -121,10 +121,8 @@ onMounted(async () => {
     "
   ></SearchComponents>
   <PageBuilderPreviewModal
-    :show="openDesignerPreviewModal"
-    @firstDesignerPreviewModalButtonFunction="
-      firstDesignerPreviewModalButtonFunction
-    "
+    :show="openPageBuilderPreviewModal"
+    @firstPageBuilderPreviewModalButton="firstPageBuilderPreviewModalButton"
   >
     <Preview></Preview>
   </PageBuilderPreviewModal>
@@ -217,7 +215,7 @@ onMounted(async () => {
                     pageBuilderStateStore.setMenuRight(false);
                     pageBuilderStateStore.setElement(null);
                     pageBuilderStateStore.setComponent(null);
-                    handleDesignerPreview();
+                    handlePageBuilderPreview();
                   }
                 "
                 class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
