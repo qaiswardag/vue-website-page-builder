@@ -10,7 +10,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { delay } from '@/composables/delay';
 
 class PageBuilder {
-  constructor(pageBuilderStateStore, mediaLibraryStore) {
+  constructor(pageBuilderStateStore: any, mediaLibraryStore: any) {
     /**
      * Initialize an instance variable 'elementsWithListeners' as a WeakSet.
      *
