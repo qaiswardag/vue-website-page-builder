@@ -1,7 +1,6 @@
 import { ref } from 'vue';
 import { usePromise } from '@/composables/usePromise';
 import { isObject } from '@/composables/isObject';
-import { delay } from '@/composables/delay';
 
 export const vueFetch = function vueFetch() {
   // Initializing state management references
@@ -15,6 +14,7 @@ export const vueFetch = function vueFetch() {
 
   const additionalTime = ref(null);
   const abortTimeout = ref(null);
+
   const response = ref(null);
 
   // Function to handle data fetching and state updates
@@ -122,7 +122,12 @@ export const vueFetch = function vueFetch() {
       isError.value = true;
       error.value = `Not able to fetch data. Error status: ${err}.`;
 
-      if (response.value && response.value.headers) {
+      const contentType = response.value.headers.get('content-type');
+
+      if (
+        (contentType && contentType.includes('application/json')) ||
+        (contentType && contentType.includes('text/plain'))
+      ) {
         // Get content type of the response
         const contentType = response.value.headers.get('content-type') || '';
 
@@ -204,10 +209,10 @@ export const vueFetch = function vueFetch() {
           isError.value = true;
           error.value = `Not able to fetch data. Error status: ${err.message}`;
         }
-
-        // Rethrow the error for further handling
-        throw err;
       }
+
+      // Rethrow the error for further handling
+      throw err;
     }
   };
 

@@ -58,16 +58,20 @@ export const useUnsplashStore = defineStore('unsplash', {
 
       const unsplashKey = import.meta.env.VITE_UNSPLASH_KEY;
 
-      await handleGetImages(
-        `https://apii.unsplash.com/search/photos?page=${payload.currentPage}&per_page=24&query=${payload.searchTerm || 'a'}${orientationType}`,
-        {
-          headers: {
-            'Accept-Version': 'v1',
-            Authorization: unsplashKey,
+      try {
+        await handleGetImages(
+          `https://apii.unsplash.com/search/photos?page=${payload.currentPage}&per_page=24&query=${payload.searchTerm || 'a'}${orientationType}`,
+          {
+            headers: {
+              'Accept-Version': 'v1',
+              Authorization: unsplashKey,
+            },
           },
-        },
-        { additionalCallTime: 500 }
-      );
+          { additionalCallTime: 500 }
+        );
+      } catch (err) {
+        console.log(`Error: ${err}`);
+      }
 
       // Update state directly instead of committing mutations
       this.setUnsplashImages({

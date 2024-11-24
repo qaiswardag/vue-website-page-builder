@@ -374,11 +374,15 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       data.search_query = data.search_query || '';
       data.page = data.page || '';
 
-      await handlefetchComponents(
-        '/components.json',
-        {},
-        { additionalCallTime: 500 }
-      );
+      try {
+        await handlefetchComponents(
+          '/components.json',
+          {},
+          { additionalCallTime: 500 }
+        );
+      } catch (err) {
+        console.log(`Error: ${err}`);
+      }
 
       this.setFetchedComponents({
         fetchedData: fetchedComponents,
