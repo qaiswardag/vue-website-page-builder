@@ -63,7 +63,7 @@ export const vueFetch = function vueFetch() {
       }
 
       // Parse JSON response when content-type is 'application/json'
-      const contentType = response.headers.get('content-type');
+      const contentType = response.headers.get('content-type') || '';
 
       // Content-Type 'application/json'
       if (contentType !== null && contentType.includes('application/json')) {
@@ -125,7 +125,7 @@ export const vueFetch = function vueFetch() {
       const response = await fetch(url, fetchOptions);
 
       // Get content type of the response
-      const contentType = response.headers.get('content-type');
+      const contentType = response.headers.get('content-type') || '';
 
       // Handle errors when content type is 'application/json'
       if (
