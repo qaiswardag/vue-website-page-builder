@@ -59,7 +59,7 @@ export const useUnsplashStore = defineStore('unsplash', {
       const unsplashKey = import.meta.env.VITE_UNSPLASH_KEY;
 
       await handleGetImages(
-        `https://api.unsplash.com/search/photos?page=${payload.currentPage}&per_page=24&query=${payload.searchTerm || 'a'}${orientationType}`,
+        `https://apii.unsplash.com/search/photos?page=${payload.currentPage}&per_page=24&query=${payload.searchTerm || 'a'}${orientationType}`,
         {
           headers: {
             'Accept-Version': 'v1',
