@@ -126,7 +126,7 @@ onMounted(() => {
         getUnsplashImages &&
         !getUnsplashImages.isLoading &&
         getUnsplashImages.isError &&
-        getUnsplashImages.isSuccess
+        !getUnsplashImages.isSuccess
       "
     >
       <p class="myPrimaryParagraphError">{{ getUnsplashImages.error }}</p>
