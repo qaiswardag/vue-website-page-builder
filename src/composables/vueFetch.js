@@ -122,97 +122,107 @@ export const vueFetch = function vueFetch() {
       isError.value = true;
       error.value = `Not able to fetch data. Error status: ${err}.`;
 
-      const contentType = response.value.headers.get('content-type');
-
-      if (
-        (contentType && contentType.includes('application/json')) ||
-        (contentType && contentType.includes('text/plain'))
-      ) {
+      if (response.value) {
         // Get content type of the response
         const contentType = response.value.headers.get('content-type') || '';
 
-        // Handle errors when content type is 'application/json'
-        if (
-          contentType !== null &&
-          contentType.includes('application/json') &&
-          goDirectToError.value !== true
-        ) {
-          // Parse the response body as JSON
-          const collectingErrorsJson = await response.value.json();
+        if (contentType.includes('application/json')) {
+          // Handle errors when content type is 'application/json'
+          if (goDirectToError.value !== true) {
+            // Parse the response body as JSON
+            const collectingErrorsJson = await response.value.json();
 
-          // Collect backend form validation errors
-          errors.value = collectingErrorsJson;
+            // Collect backend form validation errors
+            errors.value = collectingErrorsJson;
 
-          // Handle different types of error messages
+            // Handle different types of error messages
 
-          // If the error message is a string, handle it accordingly
-          if (typeof collectingErrorsJson === 'string') {
-            // Set error message when error body is a string
-            isError.value = true;
-            error.value = `Not able to fetch data. Error status: ${err.message}. ${collectingErrorsJson}`;
-          }
-          // If the error message is an array, handle it accordingly
-          if (Array.isArray(collectingErrorsJson)) {
-            // Set error message when error body is an array
-            isError.value = true;
-            error.value = `Not able to fetch data. Error status: ${
-              err.message
-            }. ${collectingErrorsJson.join(' ')}`;
-          }
-          // If the error message is an object, handle it accordingly
-          if (isObject(collectingErrorsJson)) {
-            const errorsKeys = Object.keys(collectingErrorsJson);
-            const errorsValues = Object.values(collectingErrorsJson);
-
-            // If there are no errors, handle it accordingly
-            if (errorsKeys.length === 0) {
-              // Set error message when error body is an empty object
+            // If the error message is a string, handle it accordingly
+            if (typeof collectingErrorsJson === 'string') {
+              // Set error message when error body is a string
               isError.value = true;
-              error.value = `Not able to fetch data. Error status: ${response.value.status}.`;
+              error.value = `Not able to fetch data. Error status: ${err.message}. ${collectingErrorsJson}`;
             }
+            // If the error message is an array, handle it accordingly
+            if (Array.isArray(collectingErrorsJson)) {
+              // Set error message when error body is an array
+              isError.value = true;
+              error.value = `Not able to fetch data. Error status: ${
+                err.message
+              }. ${collectingErrorsJson.join(' ')}`;
+            }
+            // If the error message is an object, handle it accordingly
+            if (isObject(collectingErrorsJson)) {
+              const errorsKeys = Object.keys(collectingErrorsJson);
+              const errorsValues = Object.values(collectingErrorsJson);
 
-            // If there are errors, handle them accordingly
-            if (errorsKeys.length > 0) {
-              for (let i = 0; i < errorsKeys.length; i++) {
-                if (
-                  Array.isArray(errorsValues[i]) ||
-                  isObject(errorsValues[i])
-                ) {
-                  // Set error message when encountering a nested object or array
-                  isError.value = true;
-                  error.value = `Not able to fetch data. Error status: ${err.message}`;
-                  break;
-                }
+              // If there are no errors, handle it accordingly
+              if (errorsKeys.length === 0) {
+                // Set error message when error body is an empty object
+                isError.value = true;
+                error.value = `Not able to fetch data. Error status: ${response.value.status}.`;
+              }
 
-                // If the error is neither an array nor an object, handle it accordingly
-                if (
-                  !Array.isArray(errorsValues[i]) &&
-                  !isObject(errorsValues[i])
-                ) {
-                  const errorObjToString =
-                    Object.values(collectingErrorsJson).join(' ');
-                  // Set error message when error body is a flat object
-                  isError.value = true;
-                  error.value = `Not able to fetch data. Error status: ${err.message}. ${errorObjToString}`;
+              // If there are errors, handle them accordingly
+              if (errorsKeys.length > 0) {
+                for (let i = 0; i < errorsKeys.length; i++) {
+                  if (
+                    Array.isArray(errorsValues[i]) ||
+                    isObject(errorsValues[i])
+                  ) {
+                    // Set error message when encountering a nested object or array
+                    isError.value = true;
+                    error.value = `Not able to fetch data. Error status: ${err.message}`;
+                    break;
+                  }
+
+                  // If the error is neither an array nor an object, handle it accordingly
+                  if (
+                    !Array.isArray(errorsValues[i]) &&
+                    !isObject(errorsValues[i])
+                  ) {
+                    const errorObjToString =
+                      Object.values(collectingErrorsJson).join(' ');
+                    // Set error message when error body is a flat object
+                    isError.value = true;
+                    error.value = `Not able to fetch data. Error status: ${err.message}. ${errorObjToString}`;
+                  }
                 }
               }
             }
           }
         }
 
-        // If the response's Content-Type is not application/json, handle it accordingly
+        // If the response's Content-Type text/plain, handle it accordingly
+        if (contentType.includes('text/plain')) {
+          const plainText = await response.value.text();
+          // Remove HTML tags using a regular expression
+          const cleanedText = plainText.replace(/<\/?[^>]+(>|$)/g, '');
+          error.value = `Error: ${cleanedText}`;
+        }
+
+        // If the response's Content-Type text/html, handle it accordingly
+        if (contentType.includes('text/html')) {
+          const htmlContent = await response.value.text();
+
+          // Remove HTML tags using a regular expression
+          const cleanedText = htmlContent.replace(/<\/?[^>]+(>|$)/g, '');
+          error.value = `Error: ${cleanedText}`;
+        }
+
         if (
-          (contentType !== null &&
-            contentType.includes('application/json') === false) ||
-          goDirectToError.value === true
+          (!contentType.includes('application/json') &&
+            !contentType.includes('text/plain') &&
+            !contentType.includes('text/html')) ||
+          goDirectToError.value
         ) {
           isError.value = true;
           error.value = `Not able to fetch data. Error status: ${err.message}`;
         }
-      }
 
-      // Rethrow the error for further handling
-      throw err;
+        // Rethrow the error for further handling
+        throw err;
+      }
     }
   };
 
