@@ -58,7 +58,6 @@ export const vueFetch = function vueFetch() {
 
       // Fetch and handle response
       response.value = await fetch(url, fetchOptions);
-      console.log('response:', response.value);
 
       // Check if the fetch request was successful. If not, throw an error
       if (response.value.status !== 200 && response.value.status !== 201) {
@@ -137,7 +136,6 @@ export const vueFetch = function vueFetch() {
           contentType.includes('application/json') &&
           !streamAlreadyRead.value
         ) {
-          console.log('two..', JSON.stringify(response.value));
           // Handle errors when content type is 'application/json'
           if (goDirectToError.value !== true) {
             // Parse the response body as JSON
