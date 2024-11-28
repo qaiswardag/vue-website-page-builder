@@ -11,12 +11,11 @@ export const vueFetch = function vueFetch() {
   const errors = ref(null);
   const goDirectToError = ref(false);
   const fetchedData = ref(null);
+  const streamAlreadyRead = ref(null);
+  const response = ref(null);
 
   const additionalTime = ref(null);
   const abortTimeout = ref(null);
-
-  const response = ref(null);
-  const streamAlreadyRead = ref(null);
 
   // Function to handle data fetching and state updates
   const handleData = async function (
@@ -24,6 +23,16 @@ export const vueFetch = function vueFetch() {
     fetchOptions = {},
     customFetchOptions = {}
   ) {
+    isSuccess.value = false;
+    isLoading.value = false;
+    isError.value = false;
+    error.value = null;
+    errors.value = null;
+    goDirectToError.value = false;
+    fetchedData.value = null;
+    streamAlreadyRead.value = null;
+    response.value = null;
+
     // Initialize or set timeout and additional time values
     abortTimeout.value = customFetchOptions.abortTimeoutTime;
     additionalTime.value = customFetchOptions.additionalCallTime;
