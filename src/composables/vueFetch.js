@@ -16,6 +16,7 @@ export const vueFetch = function vueFetch() {
   const abortTimeout = ref(null);
 
   const response = ref(null);
+  const streamAlreadyRead = ref(null);
 
   // Function to handle data fetching and state updates
   const handleData = async function (
@@ -57,6 +58,7 @@ export const vueFetch = function vueFetch() {
 
       // Fetch and handle response
       response.value = await fetch(url, fetchOptions);
+      console.log('response:', response.value);
 
       // Check if the fetch request was successful. If not, throw an error
       if (response.value.status !== 200 && response.value.status !== 201) {
@@ -70,6 +72,7 @@ export const vueFetch = function vueFetch() {
 
       // Content-Type 'application/json'
       if (contentType !== null && contentType.includes('application/json')) {
+        streamAlreadyRead.value = true;
         clearTimeout(timer);
         isSuccess.value = true;
         isLoading.value = false;
@@ -78,11 +81,13 @@ export const vueFetch = function vueFetch() {
         fetchedData.value = await response.value.json();
         return fetchedData.value;
       }
+
       // Content-Type 'text/plain' or 'text/html'
       if (
         (contentType !== null && contentType.includes('text/plain')) ||
         contentType.includes('text/html')
       ) {
+        streamAlreadyRead.value = true;
         clearTimeout(timer);
         isSuccess.value = true;
         isLoading.value = false;
@@ -91,6 +96,7 @@ export const vueFetch = function vueFetch() {
         fetchedData.value = await response.value.text();
         return fetchedData.value;
       }
+
       // Handle non-GET requests without 'application/json', 'text/plain' or 'text/html'
       if (
         fetchOptions?.method !== 'GET' &&
@@ -104,6 +110,7 @@ export const vueFetch = function vueFetch() {
         fetchedData.value = 'Your request was processed successfully.';
         return 'Your request was processed successfully.';
       }
+
       // Handle GET requests without 'application/json' content-type
       clearTimeout(timer);
       isSuccess.value = true;
@@ -126,7 +133,11 @@ export const vueFetch = function vueFetch() {
         // Get content type of the response
         const contentType = response.value.headers.get('content-type') || '';
 
-        if (contentType.includes('application/json')) {
+        if (
+          contentType.includes('application/json') &&
+          !streamAlreadyRead.value
+        ) {
+          console.log('two..', JSON.stringify(response.value));
           // Handle errors when content type is 'application/json'
           if (goDirectToError.value !== true) {
             // Parse the response body as JSON
@@ -194,7 +205,7 @@ export const vueFetch = function vueFetch() {
         }
 
         // If the response's Content-Type text/plain, handle it accordingly
-        if (contentType.includes('text/plain')) {
+        if (contentType.includes('text/plain') && !streamAlreadyRead.value) {
           const plainText = await response.value.text();
           // Remove HTML tags using a regular expression
           const cleanedText = plainText.replace(/<\/?[^>]+(>|$)/g, '');
@@ -202,7 +213,7 @@ export const vueFetch = function vueFetch() {
         }
 
         // If the response's Content-Type text/html, handle it accordingly
-        if (contentType.includes('text/html')) {
+        if (contentType.includes('text/html') && !streamAlreadyRead.value) {
           const htmlContent = await response.value.text();
 
           // Remove HTML tags using a regular expression
