@@ -16,11 +16,11 @@ if ! command_exists gh; then
   exit 1
 fi
 
-# Read the version number from the file
-VERSION=$(cat ./new_release/VERSION)
+# Read the version number from package.json
+VERSION=$(jq -r '.version' ./package.json)
 if [ -z "$VERSION" ]; then
-  echo "Error: VERSION file is empty."
-  exit 1
+    echo "Error: version number in package.json is empty."
+    exit 1
 fi
 
 # Check if the release notes file exists and is not empty
