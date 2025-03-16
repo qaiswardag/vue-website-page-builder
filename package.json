@@ -1,6 +1,6 @@
 {
   "name": "vue-website-page-builder",
-  "version": "2.0.1",
+  "version": "v2.1.25",
   "private": false,
   "type": "module",
   "scripts": {
