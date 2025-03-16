@@ -1,3 +1,7 @@
+<script setup>
+const version = __APP_VERSION__;
+</script>
+
 <template>
   <div class="flex justify-between gap-2 bg-red-100 py-10 lg:px-12 px-4">
     <div>
@@ -8,6 +12,9 @@
           class="myPrimaryLink text-myPrimaryDarkGrayColor"
           >Qais Wardag | GitHub
         </a>
+      </p>
+      <p class="myPrimaryParagraph mt-2">
+        <span class="text-myPrimaryDarkGrayColor text-xs">{{ version }}</span>
       </p>
     </div>
     <div>
