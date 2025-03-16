@@ -68,6 +68,6 @@ fi
 # Remove the temporary release notes file
 rm "$TEMP_RELEASE_NOTES"
 
-# Check the current tag of the GO module
-echo "\n\nChecking the current tag of the GO module:"
+# Check the current tag
+echo "\n\nChecking the current tag:"
 git describe --tags
