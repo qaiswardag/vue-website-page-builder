@@ -2,7 +2,7 @@
 
 ## Overview
 
-Go Web Toolkit is a reusable Go module designed to simplify common tasks in web application development. Instead of rewriting the same code for every project.
+Power your vision and build impressive pages. The web builder for stunning pages.
 
 ## Changes
 
