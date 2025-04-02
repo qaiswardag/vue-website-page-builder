@@ -12,6 +12,7 @@ import Borders from '@/Components/PageBuilder/EditorMenu/Editables/Borders.vue';
 import LinkEditor from '@/Components/PageBuilder/EditorMenu/Editables/LinkEditor.vue';
 import TipTap from '@/Components/TipTap/TipTap.vue';
 import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import ElementEditor from '@/Components/PageBuilder/EditorMenu/Editables/ElementEditor.vue';
 
 const pageBuilderStateStore = usePageBuilderStateStore();
 
@@ -100,6 +101,11 @@ const isHeadingElement = computed(() => {
           </article>
         </div>
 
+        <div>
+          <article>
+            <ElementEditor></ElementEditor>
+          </article>
+        </div>
         <article class="min-h-[12em]"></article>
       </div>
     </div>
