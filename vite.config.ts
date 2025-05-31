@@ -8,5 +8,6 @@ import vueDevTools from 'vite-plugin-vue-devtools'
 export default defineConfig({
   plugins: [vue(), vueDevTools()],
   resolve: { alias: { '@': fileURLToPath(new URL('./src', import.meta.url)) } },
+  server: { port: 9999 },
   define: { __APP_VERSION__: JSON.stringify(process.env.npm_package_version) },
 })
