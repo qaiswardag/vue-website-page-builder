@@ -1,0 +1,36 @@
+{
+  "components": {
+    "data": [
+      {
+        "title": "Single Image",
+        "html_code": "<section>\n<div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\"><div class=\"mx-auto max-w-7xl\"><div class=\"myPrimaryGap grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-1\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"></div></div></div></div>\n</section>",
+        "cover_image": "/page-builder/image.png"
+      },
+      {
+        "title": "2 vertical images",
+        "html_code": "<section>\n<div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\"><div class=\"mx-auto max-w-7xl\"><div class=\"myPrimaryGap grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-2\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-[9/16] smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\">  </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-[9/16] smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\">  </div>   </div> </div> </div>\n</section>",
+        "cover_image": "/page-builder/two-vertical-images.png"
+      },
+      {
+        "title": "2 images",
+        "html_code": "<section>\n<div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\"><div class=\"mx-auto max-w-7xl\"><div class=\"myPrimaryGap grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\">  </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\">  </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"></div></div> </div></div>\n</section>",
+        "cover_image": "/page-builder/3-images.png"
+      },
+      {
+        "title": "3 images",
+        "html_code": "<section>\n<div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\"><div class=\"mx-auto max-w-7xl\"><div class=\"myPrimaryGap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\">  </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\"></div></div> </div></div>\n</section>",
+        "cover_image": "/page-builder/2-images.png"
+      },
+      {
+        "title": "6 Images Grid",
+        "html_code": "<section>\n<div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\">\n<div class=\"mx-auto max-w-7xl\">\n<div class=\"grid grid-cols-2 md:grid-cols-3 myPrimaryGap\">\n\n<div>\n<img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"image\">\n</div>\n\n<div>\n<img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"image\">\n</div>\n\n<div>\n<img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"image\">\n</div>\n\n<div>\n<img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"image\">\n</div>\n\n<div>\n<img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"image\">\n</div>\n\n<div>\n<img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"image\">\n</div>\n\n</div>\n</div>\n</div>\n</section>",
+        "cover_image": "/page-builder/6-images.png"
+      },
+      {
+        "title": "Two Images With Right Text Top",
+        "html_code": "<section>\n<div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2\"><div class=\"mx-auto max-w-7xl\">\n<div class=\"myPrimaryGap lg:flex lg:justify-center\"><div class=\"flex-1 py-2\">\n<div class=\"grid myPrimaryGap grid-cols-1 lg:grid-cols-2\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\">  </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-square smooth-transition\" src=\"/page-builder/placeholder.jpg\" alt=\"provider\">  </div>   </div> </div>\n\n<div class=\"flex-1 py-2\"> <div class=\"break-words py-2\"><p><strong>Title</strong></p><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p></div></div> \n</div></div></div>\n</section>",
+        "cover_image": "/page-builder/2-images-text-top.png"
+      }
+    ]
+  }
+}
