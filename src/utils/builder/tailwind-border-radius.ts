@@ -1,4 +1,12 @@
-const tailwindBorderRadius = {
+interface TailwindBorderRadius {
+  roundedGlobal: string[]
+  roundedTopLeft: string[]
+  roundedTopRight: string[]
+  roundedBottomLeft: string[]
+  roundedBottomRight: string[]
+}
+
+const tailwindBorderRadius: TailwindBorderRadius = {
   roundedGlobal: [
     'none',
     'rounded-sm',
@@ -54,6 +62,6 @@ const tailwindBorderRadius = {
     'rounded-br-3xl',
     'rounded-br-full',
   ],
-};
+}
 
-export default tailwindBorderRadius;
+export default tailwindBorderRadius

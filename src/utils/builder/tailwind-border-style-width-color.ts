@@ -1,4 +1,10 @@
-const tailwindBorderStyleWidthPlusColor = {
+interface TailwindBorderStyleWidthColor {
+  borderStyle: string[]
+  borderWidth: string[]
+  borderColor: string[]
+}
+
+const tailwindBorderStyleWidthPlusColor: TailwindBorderStyleWidthColor = {
   borderStyle: [
     'none',
     'border-solid',
@@ -261,6 +267,6 @@ const tailwindBorderStyleWidthPlusColor = {
     'border-rose-800',
     'border-rose-900',
   ],
-};
+}
 
-export default tailwindBorderStyleWidthPlusColor;
+export default tailwindBorderStyleWidthPlusColor

@@ -1,4 +1,11 @@
-const tailwindFontSizes = {
+interface TailwindFontSizes {
+  fontBase: string[]
+  fontDesktop: string[]
+  fontTablet: string[]
+  fontMobile: string[]
+}
+
+const tailwindFontSizes: TailwindFontSizes = {
   // text-xs sm:text-2xl md:text-4xl lg:text-8xl
   fontBase: [
     'base:none',
@@ -64,6 +71,6 @@ const tailwindFontSizes = {
     'sm:text-8xl',
     'sm:text-9xl',
   ],
-};
+}
 
-export default tailwindFontSizes;
+export default tailwindFontSizes

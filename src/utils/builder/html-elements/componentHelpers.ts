@@ -1,7 +1,11 @@
-//
-//
-//
-const componentHelpers = [
+interface ComponentHelper {
+  html_code: string
+  id: string | null
+  title: string
+  icon: string
+}
+
+const componentHelpers: ComponentHelper[] = [
   {
     html_code: `
         <section>
@@ -92,6 +96,6 @@ const componentHelpers = [
         </span>
         `,
   },
-];
+]
 
-export default componentHelpers;
+export default componentHelpers

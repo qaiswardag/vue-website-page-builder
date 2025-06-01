@@ -1,4 +1,9 @@
-const tailwindOpacities = {
+interface TailwindOpacities {
+  opacities: string[]
+  backgroundOpacities: string[]
+}
+
+const tailwindOpacities: TailwindOpacities = {
   opacities: [
     'none',
     'opacity-0',
@@ -35,6 +40,6 @@ const tailwindOpacities = {
     'bg-opacity-95',
     'bg-opacity-100',
   ],
-};
+}
 
-export default tailwindOpacities;
+export default tailwindOpacities

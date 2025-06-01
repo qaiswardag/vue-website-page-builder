@@ -1,4 +1,11 @@
-const tailwindPaddingPlusMargin = {
+interface TailwindPaddingMargin {
+  verticalPadding: string[]
+  horizontalPadding: string[]
+  verticalMargin: string[]
+  horizontalMargin: string[]
+}
+
+const tailwindPaddingAndMargin: TailwindPaddingMargin = {
   verticalPadding: [
     'none',
     'py-0',
@@ -147,6 +154,6 @@ const tailwindPaddingPlusMargin = {
     'mx-80',
     'mx-96',
   ],
-};
+}
 
-export default tailwindPaddingPlusMargin;
+export default tailwindPaddingAndMargin
