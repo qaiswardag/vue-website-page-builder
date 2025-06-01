@@ -15,7 +15,7 @@
       "import": "./dist/vue-website-page-builder.js",
       "require": "./dist/vue-website-page-builder.umd.cjs"
     },
-    "./style.css": "./dist/style.css"
+    "./style.css": "./dist/vue-website-page-builder.css"
   },
   "scripts": {
     "dev": "vite",
