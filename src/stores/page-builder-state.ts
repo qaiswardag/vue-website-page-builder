@@ -1,0 +1,431 @@
+import { defineStore } from 'pinia'
+import { vueFetch } from '@/composables/vueFetch.ts'
+
+interface ComponentObject {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any
+}
+
+interface PageBuilderState {
+  componentArrayAddMethod: string | null
+  localStorageItemName: string | null
+  localStorageItemNameUpdate: string | null
+  showModalTipTap: boolean
+  menuRight: boolean
+  borderStyle: string | null
+  borderWidth: string | null
+  borderColor: string | null
+  borderRadiusGlobal: string | null
+  borderRadiusTopLeft: string | null
+  borderRadiusTopRight: string | null
+  borderRadiusBottomleft: string | null
+  borderRadiusBottomRight: string | null
+  elementContainsHyperlink: boolean | null
+  hyperlinkAbility: boolean | null
+  hyperlinkInput: string | null
+  hyperlinkMessage: string | null
+  hyperlinkError: string | null
+  hyberlinkEnable: boolean
+  openHyperlinkinkInNewTab: boolean | null
+  opacity: string | null
+  backgroundOpacity: string | null
+  textAreaVueModel: string | null
+  nextSibling: HTMLElement | null
+  parentElement: HTMLElement | null
+  restoredElement: string | null
+  currentClasses: string[]
+  fontVerticalPadding: string | null
+  fontHorizontalPadding: string | null
+  fontVerticalMargin: string | null
+  fontHorizontalMargin: string | null
+  fontStyle: string | null
+  fontFamily: string | null
+  fontWeight: string | null
+  fontBase: string | null
+  fontDesktop: string | null
+  fontTablet: string | null
+  fontMobile: string | null
+  backgroundColor: string | null
+  textColor: string | null
+  element: HTMLElement | null
+  component: ComponentObject | null
+  components: ComponentObject[]
+  basePrimaryImage: string | null
+  fetchedComponents: ComponentObject[]
+}
+
+interface SetPushComponentsPayload {
+  componentArrayAddMethod?: string
+  component: ComponentObject
+}
+
+interface LoadComponentsData {
+  search_query?: string
+  page?: string | number
+}
+
+// get components
+const { handleData: handlefetchComponents, fetchedData: fetchedComponents } = vueFetch()
+
+export const usePageBuilderStateStore = defineStore('pageBuilderState', {
+  state: (): PageBuilderState => ({
+    componentArrayAddMethod: null,
+    localStorageItemName: null,
+    localStorageItemNameUpdate: null,
+    showModalTipTap: false,
+    menuRight: true,
+    borderStyle: null,
+    borderWidth: null,
+    borderColor: null,
+    borderRadiusGlobal: null,
+    borderRadiusTopLeft: null,
+    borderRadiusTopRight: null,
+    borderRadiusBottomleft: null,
+    borderRadiusBottomRight: null,
+    elementContainsHyperlink: null,
+    hyperlinkAbility: null,
+    hyperlinkInput: null,
+    hyperlinkMessage: null,
+    hyperlinkError: null,
+    hyberlinkEnable: false,
+    openHyperlinkinkInNewTab: null,
+    opacity: null,
+    backgroundOpacity: null,
+    textAreaVueModel: null,
+    nextSibling: null,
+    parentElement: null,
+    restoredElement: null,
+    currentClasses: [],
+    fontVerticalPadding: null,
+    fontHorizontalPadding: null,
+    fontVerticalMargin: null,
+    fontHorizontalMargin: null,
+    fontStyle: null,
+    fontFamily: null,
+    fontWeight: null,
+    fontBase: null,
+    fontDesktop: null,
+    fontTablet: null,
+    fontMobile: null,
+    backgroundColor: null,
+    textColor: null,
+    element: null,
+    component: null,
+    components: [],
+    basePrimaryImage: null,
+    fetchedComponents: [],
+  }),
+  getters: {
+    getComponentArrayAddMethod(state: PageBuilderState): string | null {
+      return state.componentArrayAddMethod
+    },
+    getLocalStorageItemName(state: PageBuilderState): string | null {
+      return state.localStorageItemName
+    },
+    getLocalStorageItemNameUpdate(state: PageBuilderState): string | null {
+      return state.localStorageItemNameUpdate
+    },
+    getShowModalTipTap(state: PageBuilderState): boolean {
+      return state.showModalTipTap
+    },
+    getMenuRight(state: PageBuilderState): boolean {
+      return state.menuRight
+    },
+    getBorderStyle(state: PageBuilderState): string | null {
+      return state.borderStyle
+    },
+    getBorderWidth(state: PageBuilderState): string | null {
+      return state.borderWidth
+    },
+    getBorderColor(state: PageBuilderState): string | null {
+      return state.borderColor
+    },
+    getBorderRadiusGlobal(state: PageBuilderState): string | null {
+      return state.borderRadiusGlobal
+    },
+    getBorderRadiusTopLeft(state: PageBuilderState): string | null {
+      return state.borderRadiusTopLeft
+    },
+    getBorderRadiusTopRight(state: PageBuilderState): string | null {
+      return state.borderRadiusTopRight
+    },
+    getBorderRadiusBottomleft(state: PageBuilderState): string | null {
+      return state.borderRadiusBottomleft
+    },
+    getBorderRadiusBottomRight(state: PageBuilderState): string | null {
+      return state.borderRadiusBottomRight
+    },
+    getElementContainsHyperlink(state: PageBuilderState): boolean | null {
+      return state.elementContainsHyperlink
+    },
+    getHyperlinkAbility(state: PageBuilderState): boolean | null {
+      return state.hyperlinkAbility
+    },
+    getHyperlinkInput(state: PageBuilderState): string | null {
+      return state.hyperlinkInput
+    },
+    getHyperlinkMessage(state: PageBuilderState): string | null {
+      return state.hyperlinkMessage
+    },
+    getHyperlinkError(state: PageBuilderState): string | null {
+      return state.hyperlinkError
+    },
+    getHyberlinkEnable(state: PageBuilderState): boolean {
+      return state.hyberlinkEnable
+    },
+    getOpenHyperlinkInNewTab(state: PageBuilderState): boolean | null {
+      return state.openHyperlinkinkInNewTab
+    },
+    getOpacity(state: PageBuilderState): string | null {
+      return state.opacity
+    },
+    getBackgroundOpacity(state: PageBuilderState): string | null {
+      return state.backgroundOpacity
+    },
+    getTextAreaVueModel(state: PageBuilderState): string | null {
+      return state.textAreaVueModel
+    },
+    getNextSibling(state: PageBuilderState): HTMLElement | null {
+      return state.nextSibling
+    },
+    getParentElement(state: PageBuilderState): HTMLElement | null {
+      return state.parentElement
+    },
+    getRestoredElement(state: PageBuilderState): string | null {
+      return state.restoredElement
+    },
+    getCurrentClasses(state: PageBuilderState): string[] {
+      return state.currentClasses
+    },
+    getFontStyle(state: PageBuilderState): string | null {
+      return state.fontStyle
+    },
+    getFontVerticalPadding(state: PageBuilderState): string | null {
+      return state.fontVerticalPadding
+    },
+    getFontHorizontalPadding(state: PageBuilderState): string | null {
+      return state.fontHorizontalPadding
+    },
+    getFontVerticalMargin(state: PageBuilderState): string | null {
+      return state.fontVerticalMargin
+    },
+    getFontHorizontalMargin(state: PageBuilderState): string | null {
+      return state.fontHorizontalMargin
+    },
+    getFontFamily(state: PageBuilderState): string | null {
+      return state.fontFamily
+    },
+    getFontWeight(state: PageBuilderState): string | null {
+      return state.fontWeight
+    },
+    getFontBase(state: PageBuilderState): string | null {
+      return state.fontBase
+    },
+    getFontDesktop(state: PageBuilderState): string | null {
+      return state.fontDesktop
+    },
+    getFontTablet(state: PageBuilderState): string | null {
+      return state.fontTablet
+    },
+    getFontMobile(state: PageBuilderState): string | null {
+      return state.fontMobile
+    },
+    getBackgroundColor(state: PageBuilderState): string | null {
+      return state.backgroundColor
+    },
+    getTextColor(state: PageBuilderState): string | null {
+      return state.textColor
+    },
+    getElement(state: PageBuilderState): HTMLElement | null {
+      return state.element
+    },
+    getComponent(state: PageBuilderState): ComponentObject | null {
+      return state.component
+    },
+    getComponents(state: PageBuilderState): ComponentObject[] {
+      return state.components
+    },
+    getBasePrimaryImage(state: PageBuilderState): string | null {
+      return state.basePrimaryImage
+    },
+    getFetchedComponents(state: PageBuilderState): ComponentObject[] {
+      return state.fetchedComponents
+    },
+  },
+  actions: {
+    setComponentArrayAddMethod(payload: string | null): void {
+      this.componentArrayAddMethod = payload
+    },
+    setLocalStorageItemName(payload: string | null): void {
+      this.localStorageItemName = payload
+    },
+    setLocalStorageItemNameUpdate(payload: string | null): void {
+      this.localStorageItemNameUpdate = payload
+    },
+    setShowModalTipTap(payload: boolean): void {
+      this.showModalTipTap = payload
+    },
+    setMenuRight(payload: boolean): void {
+      this.menuRight = payload
+    },
+    setBorderStyle(payload: string | null): void {
+      this.borderStyle = payload
+    },
+    setBorderWidth(payload: string | null): void {
+      this.borderWidth = payload
+    },
+    setBorderColor(payload: string | null): void {
+      this.borderColor = payload
+    },
+    setBorderRadiusGlobal(payload: string | null): void {
+      this.borderRadiusGlobal = payload
+    },
+    setBorderRadiusTopLeft(payload: string | null): void {
+      this.borderRadiusTopLeft = payload
+    },
+    setBorderRadiusTopRight(payload: string | null): void {
+      this.borderRadiusTopRight = payload
+    },
+    setBorderRadiusBottomleft(payload: string | null): void {
+      this.borderRadiusBottomleft = payload
+    },
+    setBorderRadiusBottomRight(payload: string | null): void {
+      this.borderRadiusBottomRight = payload
+    },
+    setElementContainsHyperlink(payload: boolean | null): void {
+      this.elementContainsHyperlink = payload
+    },
+    setHyperlinkAbility(payload: boolean | null): void {
+      this.hyperlinkAbility = payload
+    },
+    setHyperlinkInput(payload: string | null): void {
+      this.hyperlinkInput = payload
+    },
+    setHyperlinkMessage(payload: string | null): void {
+      this.hyperlinkMessage = payload
+    },
+    setHyperlinkError(payload: string | null): void {
+      this.hyperlinkError = payload
+    },
+    setHyberlinkEnable(payload: boolean): void {
+      this.hyberlinkEnable = payload
+    },
+    setOpenHyperlinkInNewTab(payload: boolean | null): void {
+      this.openHyperlinkinkInNewTab = payload
+    },
+    setOpacity(payload: string | null): void {
+      this.opacity = payload
+    },
+    setBackgroundOpacity(payload: string | null): void {
+      this.backgroundOpacity = payload
+    },
+    setTextAreaVueModel(payload: string | null): void {
+      this.textAreaVueModel = payload
+    },
+    setNextSibling(payload: HTMLElement | null): void {
+      this.nextSibling = payload
+    },
+    setParentElement(payload: HTMLElement | null): void {
+      this.parentElement = payload
+    },
+    setRestoredElement(payload: string | null): void {
+      this.restoredElement = payload
+    },
+    setClass(payload: string): void {
+      this.currentClasses = [...this.currentClasses, payload]
+    },
+    removeClass(payload: string): void {
+      this.currentClasses = this.currentClasses.filter((cls) => cls !== payload)
+    },
+    setCurrentClasses(payload: string[] | ArrayLike<string>): void {
+      this.currentClasses = Array.from(payload)
+    },
+    setFontVerticalPadding(payload: string | null): void {
+      this.fontVerticalPadding = payload
+    },
+    setFontHorizontalPadding(payload: string | null): void {
+      this.fontHorizontalPadding = payload
+    },
+    setFontVerticalMargin(payload: string | null): void {
+      this.fontVerticalMargin = payload
+    },
+    setFontHorizontalMargin(payload: string | null): void {
+      this.fontHorizontalMargin = payload
+    },
+    setFontStyle(payload: string | null): void {
+      this.fontStyle = payload
+    },
+    setFontFamily(payload: string | null): void {
+      this.fontFamily = payload
+    },
+    setFontWeight(payload: string | null): void {
+      this.fontWeight = payload
+    },
+    setFontBase(payload: string | null): void {
+      this.fontBase = payload
+    },
+    setFontDesktop(payload: string | null): void {
+      this.fontDesktop = payload
+    },
+    setFontTablet(payload: string | null): void {
+      this.fontTablet = payload
+    },
+    setFontMobile(payload: string | null): void {
+      this.fontMobile = payload
+    },
+    setBackgroundColor(payload: string | null): void {
+      this.backgroundColor = payload
+    },
+    setTextColor(payload: string | null): void {
+      this.textColor = payload
+    },
+    setElement(payload: HTMLElement | null): void {
+      this.element = payload || null
+    },
+    setComponent(payload: ComponentObject | null): void {
+      if (!payload) {
+        this.element = null
+        this.component = null
+        // Note: pageBuilder.removeHoveredAndSelected(null) removed as pageBuilder is not available in store scope
+        return
+      }
+      this.component = payload || null
+    },
+    setComponents(payload: ComponentObject[] | null): void {
+      this.components = payload || []
+    },
+    setPushComponents(payload: SetPushComponentsPayload): void {
+      const method = payload.componentArrayAddMethod || 'push'
+      if (method === 'push') {
+        this.components.push(payload.component)
+      } else if (method === 'unshift') {
+        this.components.unshift(payload.component)
+      }
+    },
+    setBasePrimaryImage(payload: string | null): void {
+      // Note: element manipulation removed as it should be handled by component logic
+      this.basePrimaryImage = payload
+    },
+    setCurrentLayoutPreview(payload: string): void {
+      localStorage.setItem('preview', payload)
+    },
+    setFetchedComponents(payload: ComponentObject[]): void {
+      this.fetchedComponents = payload
+    },
+
+    async setLoadComponents(_data: LoadComponentsData): Promise<void> {
+      this.setFetchedComponents([])
+
+      try {
+        await handlefetchComponents('/components.json', {}, { additionalCallTime: 500 })
+      } catch (err) {
+        console.log(`Error: ${err}`)
+      }
+
+      // Note: Original code had fetchedData structure, but we're setting array directly
+      this.setFetchedComponents(
+        Array.isArray(fetchedComponents.value) ? fetchedComponents.value : [],
+      )
+    },
+  },
+})

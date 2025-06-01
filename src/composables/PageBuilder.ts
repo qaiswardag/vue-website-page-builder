@@ -1396,7 +1396,6 @@ class PageBuilder {
     this.pageBuilderStateStore.setHyperlinkAbility(true)
 
     const parentHyperlink = this.getElement.value?.closest('a')
-    const hyperlink = this.getElement.value?.querySelector('a')
 
     // handle case where parent element already has an a href tag
     // when clicking directly on a hyperlink
