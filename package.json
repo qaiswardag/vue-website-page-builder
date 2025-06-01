@@ -1,11 +1,26 @@
 {
   "name": "vue-website-page-builder",
   "version": "v2.1.25",
-  "private": true,
   "type": "module",
+  "main": "./dist/vue-website-page-builder.umd.cjs",
+  "module": "./dist/vue-website-page-builder.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/vue-website-page-builder.js",
+      "require": "./dist/vue-website-page-builder.umd.cjs"
+    },
+    "./style.css": "./dist/style.css"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
+    "build:lib": "vite build --mode lib",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",

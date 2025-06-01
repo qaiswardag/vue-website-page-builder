@@ -198,26 +198,24 @@ Each Page Builder draft is automatically saved to local storage, allowing you to
 When creating a new resource like a blog post, job ad, or listing, you need to specify a name for the local storage item that will store the draft. This is done as follows:
 
 ```js
-const pathPageBuilderStorageCreate = `page-builder-create-post`;
+const pathPageBuilderStorageCreate = `page-builder-create-post`
 
 onBeforeMount(() => {
   // Define local storage key name before on mount
-  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
-});
+  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate)
+})
 ```
 
 For updating an existing resource like a blog post, job ad, or listing, you must first obtain the blog post ID and then save a name that includes this ID to local storage. This way, the Page Builder can find the exact resource from local storage later on when the user wants to continue editing the resource with the unique ID:
 
 ```js
-const resourceId = 1;
-const pathPageBuilderStorageUpdate = `page-builder-update-post-id-${resourceId}`;
+const resourceId = 1
+const pathPageBuilderStorageUpdate = `page-builder-update-post-id-${resourceId}`
 
 onBeforeMount(() => {
   // Define local storage key name before on mount
-  pageBuilderStateStore.setLocalStorageItemNameUpdate(
-    pathPageBuilderStorageUpdate
-  );
-});
+  pageBuilderStateStore.setLocalStorageItemNameUpdate(pathPageBuilderStorageUpdate)
+})
 ```
 
 In both cases, the pageBuilderStateStore is responsible for handling the local storage name, ensuring that the correct draft is stored and retrieved as needed.
@@ -263,3 +261,134 @@ If you have any questions or if you're looking for customization, feel free to c
 ## Contributing
 
 Thank you for considering contributing to this project!
+
+# Vue Website Page Builder
+
+A powerful, flexible Vue 3 page builder component for creating dynamic websites.
+
+## Features
+
+- 🎨 Drag & drop page builder interface
+- 🧩 Modular component system
+- 📱 Responsive design support
+- 🎯 TypeScript support
+- 🔧 Customizable components
+- 💾 State management with Pinia
+- 🎨 TailwindCSS styling
+
+## Installation
+
+### For Production Use
+
+```bash
+npm install vue-website-page-builder
+```
+
+### For Local Development
+
+If you want to use this package locally in your Laravel project for development:
+
+1. **Clone and build the package:**
+
+   ```bash
+   git clone <repository-url>
+   cd vue-website-page-builder
+   npm install
+   npm run build:lib
+   ```
+
+2. **Set up in your Laravel project:**
+
+   ```bash
+   # In your Laravel project's resources/js/package.json
+   {
+     "dependencies": {
+       "vue-website-page-builder": "file:../../../vue-website-page-builder",
+       "vue": "^3.5.13",
+       "pinia": "^2.1.7"
+     }
+   }
+   ```
+
+3. **Install dependencies:**
+   ```bash
+   cd your-laravel-project/resources/js
+   npm install
+   ```
+
+For detailed local development setup, see [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md).
+
+## Usage
+
+```vue
+<template>
+  <div>
+    <PageBuilder />
+  </div>
+</template>
+
+<script setup>
+import { PageBuilder, usePageBuilderStateStore } from 'vue-website-page-builder'
+import 'vue-website-page-builder/style.css'
+
+const pageBuilderStore = usePageBuilderStateStore()
+</script>
+```
+
+## Available Components
+
+- `PageBuilder` - Main page builder interface
+- `Preview` - Preview component for displaying built pages
+
+## Available Stores
+
+- `usePageBuilderStateStore` - Main state management store
+
+## Development
+
+### Scripts
+
+- `npm run dev` - Start development server
+- `npm run build:lib` - Build library for distribution
+- `npm run build` - Build for production
+- `npm run type-check` - Run TypeScript type checking
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
+
+### Local Development Setup
+
+Use the provided setup script:
+
+```bash
+./setup-local-dev.sh
+```
+
+Or follow the manual steps in [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md).
+
+## Requirements
+
+- Vue 3.5+
+- Node.js 18+
+- TypeScript 5+
+
+## Dependencies
+
+- Vue 3
+- Pinia (state management)
+- TailwindCSS (styling)
+- TipTap (rich text editing)
+- Headless UI (accessible components)
+
+## License
+
+[MIT License](./LICENSE)
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Make your changes
+4. Build and test locally
+5. Submit a pull request
+
+For local development setup, see [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md).
