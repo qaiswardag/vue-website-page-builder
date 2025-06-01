@@ -1,9 +1,15 @@
 import { defineStore } from 'pinia'
-import { vueFetch } from '@/composables/vueFetch.ts'
+import { vueFetch } from '@/composables/vueFetch'
 
 interface ComponentObject {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
+}
+
+interface FetchedComponentsResponse {
+  components: ComponentObject[]
+  // Add other properties that might exist in the response
+  [key: string]: unknown
 }
 
 interface PageBuilderState {
@@ -51,7 +57,7 @@ interface PageBuilderState {
   component: ComponentObject | null
   components: ComponentObject[]
   basePrimaryImage: string | null
-  fetchedComponents: ComponentObject[]
+  fetchedComponents: FetchedComponentsResponse | null
 }
 
 interface SetPushComponentsPayload {
@@ -65,7 +71,13 @@ interface LoadComponentsData {
 }
 
 // get components
-const { handleData: handlefetchComponents, fetchedData: fetchedComponents } = vueFetch()
+const {
+  handleData: handlefetchComponents,
+  fetchedData: fetchedComponents,
+  isLoading,
+  isError,
+  error,
+} = vueFetch()
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
   state: (): PageBuilderState => ({
@@ -113,7 +125,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     component: null,
     components: [],
     basePrimaryImage: null,
-    fetchedComponents: [],
+    fetchedComponents: null,
   }),
   getters: {
     getComponentArrayAddMethod(state: PageBuilderState): string | null {
@@ -248,7 +260,20 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getBasePrimaryImage(state: PageBuilderState): string | null {
       return state.basePrimaryImage
     },
-    getFetchedComponents(state: PageBuilderState): ComponentObject[] {
+    getFetchedComponents(): {
+      isLoading: boolean
+      isError: boolean
+      error: string | null
+      fetchedData: unknown
+    } {
+      return {
+        isLoading: isLoading.value,
+        isError: isError.value,
+        error: error.value,
+        fetchedData: fetchedComponents.value,
+      }
+    },
+    getFetchedComponentsData(state: PageBuilderState): FetchedComponentsResponse | null {
       return state.fetchedComponents
     },
   },
@@ -409,12 +434,12 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     setCurrentLayoutPreview(payload: string): void {
       localStorage.setItem('preview', payload)
     },
-    setFetchedComponents(payload: ComponentObject[]): void {
+    setFetchedComponents(payload: FetchedComponentsResponse | null): void {
       this.fetchedComponents = payload
     },
 
     async setLoadComponents(_data: LoadComponentsData): Promise<void> {
-      this.setFetchedComponents([])
+      this.setFetchedComponents(null)
 
       try {
         await handlefetchComponents('/components.json', {}, { additionalCallTime: 500 })
@@ -422,9 +447,14 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
         console.log(`Error: ${err}`)
       }
 
-      // Note: Original code had fetchedData structure, but we're setting array directly
+      // fetchedComponents.value is an object containing a components property
       this.setFetchedComponents(
-        Array.isArray(fetchedComponents.value) ? fetchedComponents.value : [],
+        fetchedComponents &&
+          fetchedComponents.value &&
+          typeof fetchedComponents.value === 'object' &&
+          'components' in fetchedComponents.value
+          ? (fetchedComponents.value as FetchedComponentsResponse)
+          : null,
       )
     },
   },
