@@ -1,51 +1,51 @@
 <script setup>
-import DynamicModal from '@/Components/Modals/DynamicModal.vue';
-import PageBuilder from '@/composables/PageBuilder';
-import { ref } from 'vue';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+import DynamicModal from '@/Components/Modals/DynamicModal.vue'
+import PageBuilder from '@/composables/PageBuilder.ts'
+import { ref } from 'vue'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const showModalDeleteComponent = ref(false);
+const mediaLibraryStore = useMediaLibraryStore()
+const pageBuilderStateStore = usePageBuilderStateStore()
+const showModalDeleteComponent = ref(false)
 // use dynamic model
-const typeModal = ref('');
-const gridColumnModal = ref(Number(1));
-const titleModal = ref('');
-const descriptionModal = ref('');
-const firstButtonModal = ref('');
-const secondButtonModal = ref(null);
-const thirdButtonModal = ref(null);
+const typeModal = ref('')
+const gridColumnModal = ref(Number(1))
+const titleModal = ref('')
+const descriptionModal = ref('')
+const firstButtonModal = ref('')
+const secondButtonModal = ref(null)
+const thirdButtonModal = ref(null)
 // set dynamic modal handle functions
-const firstModalButtonFunction = ref(null);
-const secondModalButtonFunction = ref(null);
-const thirdModalButtonFunction = ref(null);
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
+const firstModalButtonFunction = ref(null)
+const secondModalButtonFunction = ref(null)
+const thirdModalButtonFunction = ref(null)
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 
 // remove component
 const deleteComponent = function (e) {
-  showModalDeleteComponent.value = true;
-  typeModal.value = 'delete';
-  gridColumnModal.value = 2;
-  titleModal.value = 'Remove Component?';
-  descriptionModal.value = 'Are you sure you want to remove this Component?';
-  firstButtonModal.value = 'Close';
-  secondButtonModal.value = null;
-  thirdButtonModal.value = 'Delete';
+  showModalDeleteComponent.value = true
+  typeModal.value = 'delete'
+  gridColumnModal.value = 2
+  titleModal.value = 'Remove Component?'
+  descriptionModal.value = 'Are you sure you want to remove this Component?'
+  firstButtonModal.value = 'Close'
+  secondButtonModal.value = null
+  thirdButtonModal.value = 'Delete'
 
   // handle click
   firstModalButtonFunction.value = function () {
-    showModalDeleteComponent.value = false;
-  };
+    showModalDeleteComponent.value = false
+  }
   //
   // handle click
   thirdModalButtonFunction.value = function () {
-    pageBuilder.deleteComponent();
+    pageBuilder.deleteComponent()
 
-    showModalDeleteComponent.value = false;
-  };
+    showModalDeleteComponent.value = false
+  }
   // end modal
-};
+}
 </script>
 
 <template>

@@ -1,34 +1,34 @@
 <script setup>
-import { computed, ref, watch } from 'vue';
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue';
-import PageBuilder from '@/composables/PageBuilder';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+import { computed, ref, watch } from 'vue'
+import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
+import PageBuilder from '@/composables/PageBuilder.ts'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
-const currentClasses = ref(null);
+const mediaLibraryStore = useMediaLibraryStore()
+const pageBuilderStateStore = usePageBuilderStateStore()
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const currentClasses = ref(null)
 const getCurrentClasses = computed(() => {
-  return pageBuilderStateStore.getCurrentClasses;
-});
+  return pageBuilderStateStore.getCurrentClasses
+})
 
 watch(
   getCurrentClasses,
   (newValue) => {
-    currentClasses.value = newValue;
+    currentClasses.value = newValue
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 
-const inputClass = ref('');
+const inputClass = ref('')
 
 const handleAddClasses = function () {
-  pageBuilder.handleAddClasses(inputClass.value);
-  pageBuilder.handlePageBuilderMethods();
+  pageBuilder.handleAddClasses(inputClass.value)
+  pageBuilder.handlePageBuilderMethods()
 
-  inputClass.value = '';
-};
+  inputClass.value = ''
+}
 </script>
 
 <template>
@@ -42,8 +42,8 @@ const handleAddClasses = function () {
           class="myPrimaryTag cursor-pointer hover:bg-myPrimaryErrorColor hover:text-white text-xs py-2 font-medium"
           @click="
             () => {
-              pageBuilder.handleRemoveClasses(className);
-              pageBuilder.handlePageBuilderMethods();
+              pageBuilder.handleRemoveClasses(className)
+              pageBuilder.handlePageBuilderMethods()
             }
           "
         >
@@ -57,9 +57,7 @@ const handleAddClasses = function () {
 
       <div class="flex gap-2 item-center flex-col">
         <div class="flex gap-2 item-center">
-          <div
-            class="mt-1 relative flex items-center w-full border myPrimaryInput py-0 p-0"
-          >
+          <div class="mt-1 relative flex items-center w-full border myPrimaryInput py-0 p-0">
             <input
               v-model="inputClass"
               type="text"
@@ -71,9 +69,7 @@ const handleAddClasses = function () {
             <div
               class="border border-gray-200 border-none rounded flex items-center justify-center h-full w-8"
             >
-              <kbd class="myPrimaryParagraph text-gray-400 border-none">
-                ⏎
-              </kbd>
+              <kbd class="myPrimaryParagraph text-gray-400 border-none"> ⏎ </kbd>
             </div>
           </div>
         </div>

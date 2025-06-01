@@ -1,63 +1,63 @@
 <script setup>
-import tailwindPaddingPlusMargin from '@/utils/builder/tailwind-padding-margin';
-import PageBuilder from '@/composables/PageBuilder';
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue';
-import { computed, ref, watch } from 'vue';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+import tailwindPaddingPlusMargin from '@/utils/builder/tailwind-padding-margin'
+import PageBuilder from '@/composables/PageBuilder.ts'
+import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
+import { computed, ref, watch } from 'vue'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
-const fontVerticalPadding = ref(null);
-const fontHorizontalPadding = ref(null);
-const fontVerticalMargin = ref(null);
-const fontHorizontalMargin = ref(null);
+const mediaLibraryStore = useMediaLibraryStore()
+const pageBuilderStateStore = usePageBuilderStateStore()
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const fontVerticalPadding = ref(null)
+const fontHorizontalPadding = ref(null)
+const fontVerticalMargin = ref(null)
+const fontHorizontalMargin = ref(null)
 const getFontVerticalPadding = computed(() => {
-  return pageBuilderStateStore.getFontVerticalPadding;
-});
+  return pageBuilderStateStore.getFontVerticalPadding
+})
 const getFontHorizontalPadding = computed(() => {
-  return pageBuilderStateStore.getFontHorizontalPadding;
-});
+  return pageBuilderStateStore.getFontHorizontalPadding
+})
 const getFontVerticalMargin = computed(() => {
-  return pageBuilderStateStore.getFontVerticalMargin;
-});
+  return pageBuilderStateStore.getFontVerticalMargin
+})
 const getFontHorizontalMargin = computed(() => {
-  return pageBuilderStateStore.getFontHorizontalMargin;
-});
+  return pageBuilderStateStore.getFontHorizontalMargin
+})
 
 watch(
   getFontVerticalPadding,
   (newValue) => {
-    fontVerticalPadding.value = newValue;
-    pageBuilder.handlePageBuilderMethods();
+    fontVerticalPadding.value = newValue
+    pageBuilder.handlePageBuilderMethods()
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 watch(
   getFontHorizontalPadding,
   (newValue) => {
-    fontHorizontalPadding.value = newValue;
-    pageBuilder.handlePageBuilderMethods();
+    fontHorizontalPadding.value = newValue
+    pageBuilder.handlePageBuilderMethods()
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 watch(
   getFontVerticalMargin,
   (newValue) => {
-    fontVerticalMargin.value = newValue;
-    pageBuilder.handlePageBuilderMethods();
+    fontVerticalMargin.value = newValue
+    pageBuilder.handlePageBuilderMethods()
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 watch(
   getFontHorizontalMargin,
   (newValue) => {
-    fontHorizontalMargin.value = newValue;
-    pageBuilder.handlePageBuilderMethods();
+    fontHorizontalMargin.value = newValue
+    pageBuilder.handlePageBuilderMethods()
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 </script>
 <template>
   <EditorAccordion>
@@ -71,12 +71,7 @@ watch(
           class="myPrimarySelect"
           @change="pageBuilder.handleVerticalPadding(fontVerticalPadding)"
         >
-          <option
-            disabled
-            value=""
-          >
-            Select
-          </option>
+          <option disabled value="">Select</option>
           <option
             v-for="verticalPadding in tailwindPaddingPlusMargin.verticalPadding"
             :key="verticalPadding"
@@ -92,12 +87,7 @@ watch(
           class="myPrimarySelect"
           @change="pageBuilder.handleHorizontalPadding(fontHorizontalPadding)"
         >
-          <option
-            disabled
-            value=""
-          >
-            Select
-          </option>
+          <option disabled value="">Select</option>
           <option
             v-for="horizontalPadding in tailwindPaddingPlusMargin.horizontalPadding"
             :key="horizontalPadding"
@@ -114,12 +104,7 @@ watch(
           class="myPrimarySelect"
           @change="pageBuilder.handleVerticalMargin(fontVerticalMargin)"
         >
-          <option
-            disabled
-            value=""
-          >
-            Select
-          </option>
+          <option disabled value="">Select</option>
           <option
             v-for="verticalMargin in tailwindPaddingPlusMargin.verticalMargin"
             :key="verticalMargin"
@@ -135,12 +120,7 @@ watch(
           class="myPrimarySelect"
           @change="pageBuilder.handleHorizontalMargin(fontHorizontalMargin)"
         >
-          <option
-            disabled
-            value=""
-          >
-            Select
-          </option>
+          <option disabled value="">Select</option>
           <option
             v-for="horizontalMargin in tailwindPaddingPlusMargin.horizontalMargin"
             :key="horizontalMargin"

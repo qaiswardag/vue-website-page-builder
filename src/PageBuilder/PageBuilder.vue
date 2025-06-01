@@ -1,75 +1,75 @@
 <script setup>
-import { onMounted, computed, ref, watch, nextTick } from 'vue';
-import PageBuilder from '@/composables/PageBuilder';
-import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue';
-import Preview from '@/PageBuilder/Preview.vue';
-import ComponentTopMenu from '@/Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue';
-import EditGetElement from '@/Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue';
-import SearchComponents from '@/Components/Search/SearchComponents.vue';
-import OptionsDropdown from '@/Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue';
-import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebarEditor.vue';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+import { onMounted, computed, ref, watch, nextTick } from 'vue'
+import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue'
+import Preview from '@/PageBuilder/Preview.vue'
+import ComponentTopMenu from '@/Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue'
+import EditGetElement from '@/Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue'
+import SearchComponents from '@/Components/Search/SearchComponents.vue'
+import OptionsDropdown from '@/Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
+import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const emit = defineEmits(['previewCurrentDesign']);
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
+const mediaLibraryStore = useMediaLibraryStore()
+const pageBuilderStateStore = usePageBuilderStateStore()
+const emit = defineEmits(['previewCurrentDesign'])
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 const getMenuRight = computed(() => {
-  return pageBuilderStateStore.getMenuRight;
-});
+  return pageBuilderStateStore.getMenuRight
+})
 const previewCurrentDesign = function () {
-  pageBuilder.previewCurrentDesign();
-};
-const openPageBuilderPreviewModal = ref(false);
-const firstPageBuilderPreviewModalButton = ref(null);
+  pageBuilder.previewCurrentDesign()
+}
+const openPageBuilderPreviewModal = ref(false)
+const firstPageBuilderPreviewModalButton = ref(null)
 
 const handlePageBuilderPreview = function () {
-  previewCurrentDesign();
+  previewCurrentDesign()
 
-  openPageBuilderPreviewModal.value = true;
+  openPageBuilderPreviewModal.value = true
   // handle click
   firstPageBuilderPreviewModalButton.value = function () {
-    openPageBuilderPreviewModal.value = false;
-  };
+    openPageBuilderPreviewModal.value = false
+  }
   // end modal
-};
+}
 
-const showModalAddComponent = ref(false);
-const titleModalAddComponent = ref('');
-const firstButtonTextSearchComponents = ref('');
-const firstModalButtonSearchComponentsFunction = ref(null);
+const showModalAddComponent = ref(false)
+const titleModalAddComponent = ref('')
+const firstButtonTextSearchComponents = ref('')
+const firstModalButtonSearchComponentsFunction = ref(null)
 
 const handleAddComponent = function () {
-  pageBuilderStateStore.setComponent(null);
+  pageBuilderStateStore.setComponent(null)
 
   //
-  titleModalAddComponent.value = 'Add Components to Page';
-  firstButtonTextSearchComponents.value = 'Close';
-  showModalAddComponent.value = true;
+  titleModalAddComponent.value = 'Add Components to Page'
+  firstButtonTextSearchComponents.value = 'Close'
+  showModalAddComponent.value = true
 
   firstModalButtonSearchComponentsFunction.value = function () {
     // handle show modal for unique content
-    showModalAddComponent.value = false;
-  };
+    showModalAddComponent.value = false
+  }
 
   // end modal
-};
+}
 
 const getComponents = computed(() => {
-  return pageBuilderStateStore.getComponents;
-});
+  return pageBuilderStateStore.getComponents
+})
 const getComponent = computed(() => {
-  return pageBuilderStateStore.getComponent;
-});
+  return pageBuilderStateStore.getComponent
+})
 
 const getElement = computed(() => {
-  return pageBuilderStateStore.getElement;
-});
+  return pageBuilderStateStore.getElement
+})
 
 const getElementAttributes = computed(() => {
   if (!getElement.value || !(getElement.value instanceof HTMLElement)) {
-    return new Object();
+    return new Object()
   }
 
   // Extract the attributes you want to watch
@@ -79,10 +79,10 @@ const getElementAttributes = computed(() => {
     style: getElement.value.getAttribute('style'),
     class: getElement.value.getAttribute('class'),
     dataImage: getElement.value.getAttribute('data-image'),
-  };
+  }
 
-  return attributesToWatch;
-});
+  return attributesToWatch
+})
 
 watch(getElementAttributes, (newAttributes, oldAttributes) => {
   // Check if any of the specified attributes have changed
@@ -94,20 +94,20 @@ watch(getElementAttributes, (newAttributes, oldAttributes) => {
     newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
     // Trigger your method when any of the specified attributes change
-    pageBuilder.handlePageBuilderMethods();
-    pageBuilder.setEventListenersForElements();
+    pageBuilder.handlePageBuilderMethods()
+    pageBuilder.setEventListenersForElements()
   }
-});
+})
 
 const handleSelectComponent = function (componentObject) {
-  pageBuilderStateStore.setComponent(componentObject);
-};
+  pageBuilderStateStore.setComponent(componentObject)
+}
 
-const draggableZone = ref(null);
+const draggableZone = ref(null)
 
 onMounted(async () => {
-  pageBuilder.setEventListenersForElements();
-});
+  pageBuilder.setEventListenersForElements()
+})
 </script>
 
 <template>
@@ -116,9 +116,7 @@ onMounted(async () => {
     :show="showModalAddComponent"
     :firstButtonText="firstButtonTextSearchComponents"
     :title="titleModalAddComponent"
-    @firstModalButtonSearchComponentsFunction="
-      firstModalButtonSearchComponentsFunction
-    "
+    @firstModalButtonSearchComponentsFunction="firstModalButtonSearchComponentsFunction"
   ></SearchComponents>
   <PageBuilderPreviewModal
     :show="openPageBuilderPreviewModal"
@@ -127,9 +125,7 @@ onMounted(async () => {
     <Preview></Preview>
   </PageBuilderPreviewModal>
 
-  <div
-    class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2"
-  >
+  <div class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2">
     <div class="relative h-full flex">
       <div
         @click.self="pageBuilderStateStore.setComponent(null)"
@@ -141,8 +137,8 @@ onMounted(async () => {
               type="button"
               @click="
                 () => {
-                  pageBuilderStateStore.setComponentArrayAddMethod('unshift');
-                  handleAddComponent();
+                  pageBuilderStateStore.setComponentArrayAddMethod('unshift')
+                  handleAddComponent()
                 }
               "
               class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
@@ -156,9 +152,7 @@ onMounted(async () => {
           </div>
         </div>
       </div>
-      <main
-        class="flex flex-col h-full grow rounded-2xl duration-300 shadow-2xl"
-      >
+      <main class="flex flex-col h-full grow rounded-2xl duration-300 shadow-2xl">
         <div
           class="flex items-center justify-between primary-gap rounded-t-2xl bg-myPrimaryLightGrayColor"
         >
@@ -177,9 +171,7 @@ onMounted(async () => {
             @click.self="pageBuilderStateStore.setComponent(null)"
             class="w-4/12 flex justify-center py-2"
           >
-            <OptionsDropdown
-              @previewCurrentDesign="previewCurrentDesign"
-            ></OptionsDropdown>
+            <OptionsDropdown @previewCurrentDesign="previewCurrentDesign"></OptionsDropdown>
           </div>
 
           <div
@@ -191,8 +183,8 @@ onMounted(async () => {
                 type="button"
                 @click="
                   () => {
-                    pageBuilderStateStore.setComponentArrayAddMethod('unshift');
-                    handleAddComponent();
+                    pageBuilderStateStore.setComponentArrayAddMethod('unshift')
+                    handleAddComponent()
                   }
                 "
               >
@@ -202,9 +194,7 @@ onMounted(async () => {
                   <span
                     class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
                   >
-                    <span class="myMediumIcon material-symbols-outlined">
-                      add
-                    </span>
+                    <span class="myMediumIcon material-symbols-outlined"> add </span>
                   </span>
                 </div>
               </button>
@@ -212,10 +202,10 @@ onMounted(async () => {
                 type="button"
                 @click="
                   () => {
-                    pageBuilderStateStore.setMenuRight(false);
-                    pageBuilderStateStore.setElement(null);
-                    pageBuilderStateStore.setComponent(null);
-                    handlePageBuilderPreview();
+                    pageBuilderStateStore.setMenuRight(false)
+                    pageBuilderStateStore.setElement(null)
+                    pageBuilderStateStore.setComponent(null)
+                    handlePageBuilderPreview()
                   }
                 "
                 class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
@@ -245,16 +235,12 @@ onMounted(async () => {
             <div ref="draggableZone">
               <!-- Added Components to DOM # start -->
               <div
-                v-for="component in Array.isArray(getComponents) &&
-                getComponents"
+                v-for="component in Array.isArray(getComponents) && getComponents"
                 :key="component"
                 id="page-builder-editor-editable-area"
                 class="bg-white grow"
               >
-                <div
-                  @mouseup="handleSelectComponent(component)"
-                  class="relative group"
-                >
+                <div @mouseup="handleSelectComponent(component)" class="relative group">
                   <div v-html="component.html_code"></div>
                 </div>
               </div>
@@ -265,27 +251,22 @@ onMounted(async () => {
             <div
               class="rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-12 mx-8"
             >
-              <h3 class="mt-2 text-sm font-medium text-gray-900">
-                Add Components
-              </h3>
+              <h3 class="mt-2 text-sm font-medium text-gray-900">Add Components</h3>
               <p class="mt-1 text-sm text-gray-500">
-                Get started by adding components using the drag & drop Page
-                Builder.
+                Get started by adding components using the drag & drop Page Builder.
               </p>
               <div class="mt-6 flex items-center gap-2 justify-center">
                 <button
                   @click="
                     () => {
-                      pageBuilderStateStore.setComponentArrayAddMethod('push');
-                      handleAddComponent();
+                      pageBuilderStateStore.setComponentArrayAddMethod('push')
+                      handleAddComponent()
                     }
                   "
                   type="button"
                   class="myPrimaryButton flex items-center gap-2 justify-center"
                 >
-                  <span class="myMediumIcon material-symbols-outlined">
-                    add
-                  </span>
+                  <span class="myMediumIcon material-symbols-outlined"> add </span>
                   Add component
                 </button>
               </div>
@@ -301,9 +282,7 @@ onMounted(async () => {
         :class="{ 'w-0': !getMenuRight, 'w-80 ml-4': getMenuRight }"
         class="h-full duration-300 z-20 flex-shrink-0 overflow-hidden shadow-2xl rounded-l-2xl bg-white"
       >
-        <RightSidebarEditor
-          @closeEditor="pageBuilderStateStore.setMenuRight(false)"
-        >
+        <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
         </RightSidebarEditor>
       </aside>
     </div>

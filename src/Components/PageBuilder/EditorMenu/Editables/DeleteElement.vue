@@ -1,16 +1,16 @@
 <script setup>
-import EditorAccordion from '../EditorAccordion.vue';
-import { computed, ref } from 'vue';
-import PageBuilder from '@/composables/PageBuilder';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+import EditorAccordion from '../EditorAccordion.vue'
+import { computed, ref } from 'vue'
+import PageBuilder from '@/composables/PageBuilder.ts'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
+const mediaLibraryStore = useMediaLibraryStore()
+const pageBuilderStateStore = usePageBuilderStateStore()
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 const getRestoredElement = computed(() => {
-  return pageBuilderStateStore.getRestoredElement;
-});
+  return pageBuilderStateStore.getRestoredElement
+})
 </script>
 
 <template>

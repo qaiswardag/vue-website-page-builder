@@ -1,147 +1,147 @@
 <script setup>
-import { computed, ref } from 'vue';
-import DynamicModal from '@/Components/Modals/DynamicModal.vue';
-import TipTapInput from '@/Components/TipTap/TipTapInput.vue';
-import PageBuilder from '@/composables/PageBuilder';
-import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue';
-import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue';
-import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+import { computed, ref } from 'vue'
+import DynamicModal from '@/Components/Modals/DynamicModal.vue'
+import TipTapInput from '@/Components/TipTap/TipTapInput.vue'
+import PageBuilder from '@/composables/PageBuilder.ts'
+import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue'
+import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue'
+import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
+const mediaLibraryStore = useMediaLibraryStore()
+const pageBuilderStateStore = usePageBuilderStateStore()
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 const getElement = computed(() => {
-  return pageBuilderStateStore.getElement;
-});
+  return pageBuilderStateStore.getElement
+})
 const getShowModalTipTap = computed(() => {
-  const result = pageBuilderStateStore.getShowModalTipTap;
+  const result = pageBuilderStateStore.getShowModalTipTap
 
   if (result) {
-    handleModalPreviewTiptap();
+    handleModalPreviewTiptap()
   }
-  return result;
-});
+  return result
+})
 
 const getRestoredElement = computed(() => {
-  return pageBuilderStateStore.getRestoredElement;
-});
+  return pageBuilderStateStore.getRestoredElement
+})
 
 const getComponent = computed(() => {
-  return pageBuilderStateStore.getComponent;
-});
+  return pageBuilderStateStore.getComponent
+})
 
 // hanlde Tip Tap modal
-const typeModal = ref('');
-const gridColumnModal = ref(Number(1));
-const titleModal = ref('');
-const descriptionModal = ref('');
-const firstButtonModal = ref('');
-const secondButtonModal = ref(null);
-const thirdButtonModal = ref(null);
+const typeModal = ref('')
+const gridColumnModal = ref(Number(1))
+const titleModal = ref('')
+const descriptionModal = ref('')
+const firstButtonModal = ref('')
+const secondButtonModal = ref(null)
+const thirdButtonModal = ref(null)
 // set dynamic modal handle functions
-const firstModalButtonFunction = ref(null);
-const secondModalButtonFunction = ref(null);
-const thirdModalButtonFunction = ref(null);
+const firstModalButtonFunction = ref(null)
+const secondModalButtonFunction = ref(null)
+const thirdModalButtonFunction = ref(null)
 
 const handleModalPreviewTiptap = function () {
-  pageBuilderStateStore.setShowModalTipTap(true);
+  pageBuilderStateStore.setShowModalTipTap(true)
 
-  typeModal.value = 'success';
-  gridColumnModal.value = 2;
-  titleModal.value = 'Manage Content';
-  descriptionModal.value = null;
-  firstButtonModal.value = null;
-  secondButtonModal.value = null;
-  thirdButtonModal.value = 'Save';
+  typeModal.value = 'success'
+  gridColumnModal.value = 2
+  titleModal.value = 'Manage Content'
+  descriptionModal.value = null
+  firstButtonModal.value = null
+  secondButtonModal.value = null
+  thirdButtonModal.value = 'Save'
 
   // handle click
 
   firstModalButtonFunction.value = function () {
-    pageBuilderStateStore.setShowModalTipTap(false);
-  };
+    pageBuilderStateStore.setShowModalTipTap(false)
+  }
 
   thirdModalButtonFunction.value = function () {
-    pageBuilderStateStore.setShowModalTipTap(false);
-  };
-};
+    pageBuilderStateStore.setShowModalTipTap(false)
+  }
+}
 
 // handle image
 // get current image from store
 const getBasePrimaryImage = computed(() => {
-  return pageBuilderStateStore.getBasePrimaryImage;
-});
+  return pageBuilderStateStore.getBasePrimaryImage
+})
 
-const isLoading = ref(false);
+const isLoading = ref(false)
 //
 // use media library
-const showMediaLibraryModal = ref(false);
+const showMediaLibraryModal = ref(false)
 // modal content
-const titleMedia = ref('');
-const descriptionMedia = ref('');
-const firstButtonMedia = ref('');
-const secondButtonMedia = ref(null);
-const thirdButtonMedia = ref(null);
+const titleMedia = ref('')
+const descriptionMedia = ref('')
+const firstButtonMedia = ref('')
+const secondButtonMedia = ref(null)
+const thirdButtonMedia = ref(null)
 // set dynamic modal handle functions
-const firstMediaButtonFunction = ref(null);
-const secondMediaButtonFunction = ref(null);
-const thirdMediaButtonFunction = ref(null);
+const firstMediaButtonFunction = ref(null)
+const secondMediaButtonFunction = ref(null)
+const thirdMediaButtonFunction = ref(null)
 
 const handleAddImage = function () {
   // open modal to true
-  showMediaLibraryModal.value = true;
+  showMediaLibraryModal.value = true
 
   // set media library modal standards
-  titleMedia.value = `Media Library`;
-  descriptionMedia.value = null;
-  firstButtonMedia.value = 'Close';
-  secondButtonMedia.value = 'Select image';
+  titleMedia.value = `Media Library`
+  descriptionMedia.value = null
+  firstButtonMedia.value = 'Close'
+  secondButtonMedia.value = 'Select image'
 
   // handle click
   firstMediaButtonFunction.value = function () {
     // close media library modal
-    showMediaLibraryModal.value = false;
-  };
+    showMediaLibraryModal.value = false
+  }
   //
   // handle click
   secondMediaButtonFunction.value = function () {
-    isLoading.value = true;
-    pageBuilder.updateBasePrimaryImage({ type: 'unsplash' });
+    isLoading.value = true
+    pageBuilder.updateBasePrimaryImage({ type: 'unsplash' })
 
     // close media library modal
-    showMediaLibraryModal.value = false;
-    isLoading.value = false;
-  };
-};
+    showMediaLibraryModal.value = false
+    isLoading.value = false
+  }
+}
 
 // Logic for Video Iframe
 
-const urlError = ref(null);
-const iframeSrc = ref('');
-const showModalIframeSrc = ref(false);
+const urlError = ref(null)
+const iframeSrc = ref('')
+const showModalIframeSrc = ref(false)
 
 const validateURL = function () {
   // initial value
-  urlError.value = null;
+  urlError.value = null
 
   // url validation
-  const urlRegex = /^https?:\/\//;
-  const isValidURL = ref(true);
-  isValidURL.value = urlRegex.test(iframeSrc.value);
+  const urlRegex = /^https?:\/\//
+  const isValidURL = ref(true)
+  isValidURL.value = urlRegex.test(iframeSrc.value)
 
   // cancelled
   if (isValidURL.value === false) {
     urlError.value =
-      "The provided URL is invalid. Please ensure that it begins with 'https://' for proper formatting and security.";
-    return true;
+      "The provided URL is invalid. Please ensure that it begins with 'https://' for proper formatting and security."
+    return true
   }
 
-  return false;
-};
+  return false
+}
 
 const handleModalIframeSrc = function () {
-  urlError.value = null;
+  urlError.value = null
 
   const iframeSrcValue =
     getElement.value &&
@@ -149,31 +149,31 @@ const handleModalIframeSrc = function () {
     getElement.value.firstElementChild.hasAttribute('src') &&
     getElement.value.firstElementChild.getAttribute('src').trim() !== ''
       ? getElement.value.firstElementChild.src
-      : '';
+      : ''
 
-  iframeSrc.value = iframeSrcValue;
+  iframeSrc.value = iframeSrcValue
   //
   //
   // open modal to true
-  showModalIframeSrc.value = true;
+  showModalIframeSrc.value = true
 
-  typeModal.value = 'success';
-  gridColumnModal.value = 2;
-  titleModal.value = 'Add video url';
-  descriptionModal.value = null;
-  firstButtonModal.value = 'Close';
-  secondButtonModal.value = 'Save';
-  thirdButtonModal.value = null;
+  typeModal.value = 'success'
+  gridColumnModal.value = 2
+  titleModal.value = 'Add video url'
+  descriptionModal.value = null
+  firstButtonModal.value = 'Close'
+  secondButtonModal.value = 'Save'
+  thirdButtonModal.value = null
 
   // handle click
   firstModalButtonFunction.value = function () {
-    showModalIframeSrc.value = false;
-  };
+    showModalIframeSrc.value = false
+  }
   // handle click
   secondModalButtonFunction.value = function () {
-    const isNotValidated = validateURL();
+    const isNotValidated = validateURL()
     if (isNotValidated) {
-      return;
+      return
     }
 
     if (
@@ -184,21 +184,21 @@ const handleModalIframeSrc = function () {
       // Set the src attribute
 
       // replace watch with embed
-      iframeSrc.value = iframeSrc.value.replace('watch?v=', 'embed/');
+      iframeSrc.value = iframeSrc.value.replace('watch?v=', 'embed/')
 
       // Remove dynamic parameters (&ab_channel, &list, &start_radio)
       iframeSrc.value = iframeSrc.value
         .replace(/&ab_channel=[^&]*/, '')
         .replace(/&list=[^&]*/, '')
         .replace(/&start_radio=[^&]*/, '')
-        .replace(/&t=[^&]*/, ''); // Remove the 't' parameter (time)
+        .replace(/&t=[^&]*/, '') // Remove the 't' parameter (time)
 
-      getElement.value.firstElementChild.src = iframeSrc.value;
+      getElement.value.firstElementChild.src = iframeSrc.value
     }
 
-    showModalIframeSrc.value = false;
-  };
-};
+    showModalIframeSrc.value = false
+  }
+}
 </script>
 <template>
   <DynamicModal
@@ -220,21 +220,9 @@ const handleModalIframeSrc = function () {
       <div class="myInputGroup">
         <div class="myPrimaryFormOrganizationHeaderDescriptionSection">
           <div class="myPrimaryFormOrganizationHeader">
-            <label
-              for="video"
-              class="myPrimaryInputLabel"
-              >Video url:</label
-            >
-            <input
-              v-model="iframeSrc"
-              type="text"
-              class="myPrimaryInput"
-              name="video"
-            />
-            <div
-              v-if="urlError"
-              class="min-h-[2.5rem] flex items-center justify-start"
-            >
+            <label for="video" class="myPrimaryInputLabel">Video url:</label>
+            <input v-model="iframeSrc" type="text" class="myPrimaryInput" name="video" />
+            <div v-if="urlError" class="min-h-[2.5rem] flex items-center justify-start">
               <p class="myPrimaryInputError mt-2 mb-0 py-0 self-start">
                 {{ urlError }}
               </p>
@@ -296,10 +284,7 @@ const handleModalIframeSrc = function () {
       </template>
 
       <template
-        v-if="
-          pageBuilder.selectedElementIsValidText() &&
-          !pageBuilder.ElOrFirstChildIsIframe()
-        "
+        v-if="pageBuilder.selectedElementIsValidText() && !pageBuilder.ElOrFirstChildIsIframe()"
       >
         <div class="px-2 flex items-center justify-start gap-2">
           <button

@@ -1,6 +1,6 @@
-import { defineStore } from 'pinia';
-import { vueFetch } from '@/composables/vueFetch';
-import PageBuilder from '@/composables/PageBuilder';
+import { defineStore } from 'pinia'
+import { vueFetch } from '@/composables/vueFetch'
+import PageBuilder from '@/composables/PageBuilder.ts'
 
 // get components
 const {
@@ -11,9 +11,9 @@ const {
   errors: errorsComponents,
   isLoading: isLoadingComponents,
   isSuccess: isSuccessComponents,
-} = vueFetch();
+} = vueFetch()
 
-const pageBuilder = new PageBuilder(null);
+const pageBuilder = new PageBuilder(null)
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
   state: () => ({
@@ -65,300 +65,298 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
   }),
   getters: {
     getComponentArrayAddMethod(state) {
-      return state.componentArrayAddMethod;
+      return state.componentArrayAddMethod
     },
     getLocalStorageItemName(state) {
-      return state.localStorageItemName;
+      return state.localStorageItemName
     },
     getLocalStorageItemNameUpdate(state) {
-      return state.localStorageItemNameUpdate;
+      return state.localStorageItemNameUpdate
     },
     getShowModalTipTap(state) {
-      return state.showModalTipTap;
+      return state.showModalTipTap
     },
     getMenuRight(state) {
-      return state.menuRight;
+      return state.menuRight
     },
     getBorderStyle(state) {
-      return state.borderStyle;
+      return state.borderStyle
     },
     getBorderWidth(state) {
-      return state.borderWidth;
+      return state.borderWidth
     },
     getBorderColor(state) {
-      return state.borderColor;
+      return state.borderColor
     },
     getBorderRadiusGlobal(state) {
-      return state.borderRadiusGlobal;
+      return state.borderRadiusGlobal
     },
     getBorderRadiusTopLeft(state) {
-      return state.borderRadiusTopLeft;
+      return state.borderRadiusTopLeft
     },
     getBorderRadiusTopRight(state) {
-      return state.borderRadiusTopRight;
+      return state.borderRadiusTopRight
     },
     getBorderRadiusBottomleft(state) {
-      return state.borderRadiusBottomleft;
+      return state.borderRadiusBottomleft
     },
     getBorderRadiusBottomRight(state) {
-      return state.borderRadiusBottomRight;
+      return state.borderRadiusBottomRight
     },
     getElementContainsHyperlink(state) {
-      return state.elementContainsHyperlink;
+      return state.elementContainsHyperlink
     },
     getHyperlinkAbility(state) {
-      return state.hyperlinkAbility;
+      return state.hyperlinkAbility
     },
     getHyperlinkInput(state) {
-      return state.hyperlinkInput;
+      return state.hyperlinkInput
     },
     getHyperlinkMessage(state) {
-      return state.hyperlinkMessage;
+      return state.hyperlinkMessage
     },
     getHyperlinkError(state) {
-      return state.hyperlinkError;
+      return state.hyperlinkError
     },
     getHyberlinkEnable(state) {
-      return state.hyberlinkEnable;
+      return state.hyberlinkEnable
     },
     getOpenHyperlinkInNewTab(state) {
-      return state.openHyperlinkinkInNewTab;
+      return state.openHyperlinkinkInNewTab
     },
     getOpacity(state) {
-      return state.opacity;
+      return state.opacity
     },
     getBackgroundOpacity(state) {
-      return state.backgroundOpacity;
+      return state.backgroundOpacity
     },
     getTextAreaVueModel(state) {
-      return state.textAreaVueModel;
+      return state.textAreaVueModel
     },
     getNextSibling(state) {
-      return state.nextSibling;
+      return state.nextSibling
     },
     getParentElement(state) {
-      return state.parentElement;
+      return state.parentElement
     },
     getRestoredElement(state) {
-      return state.restoredElement;
+      return state.restoredElement
     },
     getCurrentClasses(state) {
-      return state.currentClasses;
+      return state.currentClasses
     },
     getFontStyle(state) {
-      return state.fontStyle;
+      return state.fontStyle
     },
     getFontVerticalPadding(state) {
-      return state.fontVerticalPadding;
+      return state.fontVerticalPadding
     },
     getFontHorizontalPadding(state) {
-      return state.fontHorizontalPadding;
+      return state.fontHorizontalPadding
     },
     getFontVerticalMargin(state) {
-      return state.fontVerticalMargin;
+      return state.fontVerticalMargin
     },
     getFontHorizontalMargin(state) {
-      return state.fontHorizontalMargin;
+      return state.fontHorizontalMargin
     },
     getFontFamily(state) {
-      return state.fontFamily;
+      return state.fontFamily
     },
     getFontWeight(state) {
-      return state.fontWeight;
+      return state.fontWeight
     },
     getFontBase(state) {
-      return state.fontBase;
+      return state.fontBase
     },
     getFontDesktop(state) {
-      return state.fontDesktop;
+      return state.fontDesktop
     },
     getFontTablet(state) {
-      return state.fontTablet;
+      return state.fontTablet
     },
     getFontMobile(state) {
-      return state.fontMobile;
+      return state.fontMobile
     },
     getBackgroundColor(state) {
-      return state.backgroundColor;
+      return state.backgroundColor
     },
     getTextColor(state) {
-      return state.textColor;
+      return state.textColor
     },
     getElement(state) {
-      return state.element;
+      return state.element
     },
     getComponent(state) {
-      return state.component;
+      return state.component
     },
     getComponents(state) {
-      return state.components;
+      return state.components
     },
     getBasePrimaryImage(state) {
-      return state.basePrimaryImage;
+      return state.basePrimaryImage
     },
     getFetchedComponents(state) {
-      return state.fetchedComponents;
+      return state.fetchedComponents
     },
   },
   actions: {
     setComponentArrayAddMethod(payload) {
-      this.componentArrayAddMethod = payload;
+      this.componentArrayAddMethod = payload
     },
     setLocalStorageItemName(payload) {
-      this.localStorageItemName = payload;
+      this.localStorageItemName = payload
     },
     setLocalStorageItemNameUpdate(payload) {
-      this.localStorageItemNameUpdate = payload;
+      this.localStorageItemNameUpdate = payload
     },
     setShowModalTipTap(payload) {
-      this.showModalTipTap = payload;
+      this.showModalTipTap = payload
     },
     setMenuRight(payload) {
-      this.menuRight = payload;
+      this.menuRight = payload
     },
     setBorderStyle(payload) {
-      this.borderStyle = payload;
+      this.borderStyle = payload
     },
     setBorderWidth(payload) {
-      this.borderWidth = payload;
+      this.borderWidth = payload
     },
     setBorderColor(payload) {
-      this.borderColor = payload;
+      this.borderColor = payload
     },
     setBorderRadiusGlobal(payload) {
-      this.borderRadiusGlobal = payload;
+      this.borderRadiusGlobal = payload
     },
     setBorderRadiusTopLeft(payload) {
-      this.borderRadiusTopLeft = payload;
+      this.borderRadiusTopLeft = payload
     },
     setBorderRadiusTopRight(payload) {
-      this.borderRadiusTopRight = payload;
+      this.borderRadiusTopRight = payload
     },
     setBorderRadiusBottomleft(payload) {
-      this.borderRadiusBottomleft = payload;
+      this.borderRadiusBottomleft = payload
     },
     setBorderRadiusBottomRight(payload) {
-      this.borderRadiusBottomRight = payload;
+      this.borderRadiusBottomRight = payload
     },
     setElementContainsHyperlink(payload) {
-      this.elementContainsHyperlink = payload;
+      this.elementContainsHyperlink = payload
     },
     setHyperlinkAbility(payload) {
-      this.hyperlinkAbility = payload;
+      this.hyperlinkAbility = payload
     },
     setHyperlinkInput(payload) {
-      this.hyperlinkInput = payload;
+      this.hyperlinkInput = payload
     },
     setHyperlinkMessage(payload) {
-      this.hyperlinkMessage = payload;
+      this.hyperlinkMessage = payload
     },
     setHyperlinkError(payload) {
-      this.hyperlinkError = payload;
+      this.hyperlinkError = payload
     },
     setHyberlinkEnable(payload) {
-      this.hyberlinkEnable = payload;
+      this.hyberlinkEnable = payload
     },
     setOpenHyperlinkInNewTab(payload) {
-      this.openHyperlinkinkInNewTab = payload;
+      this.openHyperlinkinkInNewTab = payload
     },
     setOpacity(payload) {
-      this.opacity = payload;
+      this.opacity = payload
     },
     setBackgroundOpacity(payload) {
-      this.backgroundOpacity = payload;
+      this.backgroundOpacity = payload
     },
     setTextAreaVueModel(payload) {
-      this.textAreaVueModel = payload;
+      this.textAreaVueModel = payload
     },
     setNextSibling(payload) {
-      this.nextSibling = payload;
+      this.nextSibling = payload
     },
     setParentElement(payload) {
-      this.parentElement = payload;
+      this.parentElement = payload
     },
     setRestoredElement(payload) {
-      this.restoredElement = payload;
+      this.restoredElement = payload
     },
     setClass(payload) {
-      this.currentClasses = [...this.currentClasses, payload];
+      this.currentClasses = [...this.currentClasses, payload]
     },
     removeClass(payload) {
-      this.currentClasses = this.currentClasses.filter(
-        (cls) => cls !== payload
-      );
+      this.currentClasses = this.currentClasses.filter((cls) => cls !== payload)
     },
     setCurrentClasses(payload) {
-      this.currentClasses = Array.from(payload);
+      this.currentClasses = Array.from(payload)
     },
     setFontVerticalPadding(payload) {
-      this.fontVerticalPadding = payload;
+      this.fontVerticalPadding = payload
     },
     setFontHorizontalPadding(payload) {
-      this.fontHorizontalPadding = payload;
+      this.fontHorizontalPadding = payload
     },
     setFontVerticalMargin(payload) {
-      this.fontVerticalMargin = payload;
+      this.fontVerticalMargin = payload
     },
     setFontHorizontalMargin(payload) {
-      this.fontHorizontalMargin = payload;
+      this.fontHorizontalMargin = payload
     },
     setFontStyle(payload) {
-      this.fontStyle = payload;
+      this.fontStyle = payload
     },
     setFontFamily(payload) {
-      this.fontFamily = payload;
+      this.fontFamily = payload
     },
     setFontWeight(payload) {
-      this.fontWeight = payload;
+      this.fontWeight = payload
     },
     setFontBase(payload) {
-      this.fontBase = payload;
+      this.fontBase = payload
     },
     setFontDesktop(payload) {
-      this.fontDesktop = payload;
+      this.fontDesktop = payload
     },
     setFontTablet(payload) {
-      this.fontTablet = payload;
+      this.fontTablet = payload
     },
     setFontMobile(payload) {
-      this.fontMobile = payload;
+      this.fontMobile = payload
     },
     setBackgroundColor(payload) {
-      this.backgroundColor = payload;
+      this.backgroundColor = payload
     },
     setTextColor(payload) {
-      this.textColor = payload;
+      this.textColor = payload
     },
     setElement(payload) {
-      this.element = payload || {};
+      this.element = payload || {}
     },
     setComponent(payload) {
       if (!payload) {
-        this.element = null;
-        this.component = null;
-        pageBuilder.removeHoveredAndSelected(null);
-        return;
+        this.element = null
+        this.component = null
+        pageBuilder.removeHoveredAndSelected(null)
+        return
       }
-      this.component = payload || {};
+      this.component = payload || {}
     },
     setComponents(payload) {
-      this.components = payload || [];
+      this.components = payload || []
     },
     setPushComponents(payload) {
-      const method = payload.componentArrayAddMethod || 'push';
-      this.components[method](payload.component);
+      const method = payload.componentArrayAddMethod || 'push'
+      this.components[method](payload.component)
     },
     setBasePrimaryImage(payload) {
       if (this.element) {
-        this.element.src = payload;
+        this.element.src = payload
       }
-      this.basePrimaryImage = payload;
+      this.basePrimaryImage = payload
     },
     setCurrentLayoutPreview(payload) {
-      localStorage.setItem('preview', payload);
+      localStorage.setItem('preview', payload)
     },
     setFetchedComponents(payload) {
-      this.fetchedComponents = payload;
+      this.fetchedComponents = payload
     },
 
     async setLoadComponents(data) {
@@ -369,19 +367,15 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
         errors: null,
         isLoading: true,
         isSuccess: null,
-      });
+      })
 
-      data.search_query = data.search_query || '';
-      data.page = data.page || '';
+      data.search_query = data.search_query || ''
+      data.page = data.page || ''
 
       try {
-        await handlefetchComponents(
-          '/components.json',
-          {},
-          { additionalCallTime: 500 }
-        );
+        await handlefetchComponents('/components.json', {}, { additionalCallTime: 500 })
       } catch (err) {
-        console.log(`Error: ${err}`);
+        console.log(`Error: ${err}`)
       }
 
       this.setFetchedComponents({
@@ -391,7 +385,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
         errors: errorsComponents,
         isLoading: isLoadingComponents,
         isSuccess: isSuccessComponents,
-      });
+      })
     },
   },
-});
+})

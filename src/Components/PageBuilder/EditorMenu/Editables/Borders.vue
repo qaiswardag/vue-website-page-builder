@@ -1,58 +1,58 @@
 <script setup>
-import tailwindBorderStyleWidthPlusColor from '@/utils/builder/tailwind-border-style-width-color';
-import PageBuilder from '@/composables/PageBuilder';
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue';
-import { computed, ref, watch } from 'vue';
+import tailwindBorderStyleWidthPlusColor from '@/utils/builder/tailwind-border-style-width-color'
+import PageBuilder from '@/composables/PageBuilder.ts'
+import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
+import { computed, ref, watch } from 'vue'
 import {
   Listbox,
   ListboxButton,
   ListboxLabel,
   ListboxOption,
   ListboxOptions,
-} from '@headlessui/vue';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+} from '@headlessui/vue'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
-const borderStyle = ref(null);
-const borderWidth = ref(null);
-const borderColor = ref(null);
+const mediaLibraryStore = useMediaLibraryStore()
+const pageBuilderStateStore = usePageBuilderStateStore()
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const borderStyle = ref(null)
+const borderWidth = ref(null)
+const borderColor = ref(null)
 const getBorderStyle = computed(() => {
-  return pageBuilderStateStore.getBorderStyle;
-});
+  return pageBuilderStateStore.getBorderStyle
+})
 const getBorderWidth = computed(() => {
-  return pageBuilderStateStore.getBorderWidth;
-});
+  return pageBuilderStateStore.getBorderWidth
+})
 const getBorderColor = computed(() => {
-  return pageBuilderStateStore.getBorderColor;
-});
+  return pageBuilderStateStore.getBorderColor
+})
 
 watch(
   getBorderStyle,
   (newValue) => {
-    borderStyle.value = newValue;
-    pageBuilder.handlePageBuilderMethods();
+    borderStyle.value = newValue
+    pageBuilder.handlePageBuilderMethods()
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 watch(
   getBorderWidth,
   (newValue) => {
-    borderWidth.value = newValue;
-    pageBuilder.handlePageBuilderMethods();
+    borderWidth.value = newValue
+    pageBuilder.handlePageBuilderMethods()
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 watch(
   getBorderColor,
   (newValue) => {
-    borderColor.value = newValue;
-    pageBuilder.handlePageBuilderMethods();
+    borderColor.value = newValue
+    pageBuilder.handlePageBuilderMethods()
   },
-  { immediate: true }
-);
+  { immediate: true },
+)
 </script>
 
 <template>
@@ -66,12 +66,7 @@ watch(
           class="myPrimarySelect"
           @change="pageBuilder.handleBorderStyle(borderStyle)"
         >
-          <option
-            disabled
-            value=""
-          >
-            Select
-          </option>
+          <option disabled value="">Select</option>
           <option
             v-for="borderStyle in tailwindBorderStyleWidthPlusColor.borderStyle"
             :key="borderStyle"
@@ -87,12 +82,7 @@ watch(
           class="myPrimarySelect"
           @change="pageBuilder.handleBorderWidth(borderWidth)"
         >
-          <option
-            disabled
-            value=""
-          >
-            Select
-          </option>
+          <option disabled value="">Select</option>
           <option
             v-for="borderWidth in tailwindBorderStyleWidthPlusColor.borderWidth"
             :key="borderWidth"
@@ -103,10 +93,7 @@ watch(
       </div>
 
       <label class="myPrimaryInputLabel"> Border Color </label>
-      <Listbox
-        as="div"
-        v-model="borderColor"
-      >
+      <Listbox as="div" v-model="borderColor">
         <div class="relative mt-2">
           <ListboxButton class="myPrimarySelect">
             <span class="flex items-center gap-2">
@@ -125,9 +112,7 @@ watch(
             <span
               class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2"
             >
-              <span class="material-symbols-outlined">
-                keyboard_arrow_down
-              </span>
+              <span class="material-symbols-outlined"> keyboard_arrow_down </span>
             </span>
           </ListboxButton>
 
@@ -149,18 +134,14 @@ watch(
               >
                 <li
                   :class="[
-                    active
-                      ? 'bg-myPrimaryLinkColor text-white'
-                      : 'text-myPrimaryDarkGrayColor',
+                    active ? 'bg-myPrimaryLinkColor text-white' : 'text-myPrimaryDarkGrayColor',
                     'relative cursor-default select-none py-2 pl-3 pr-9',
                   ]"
                 >
                   <div class="flex items-center">
                     <div v-if="color === 'none'">
                       <div class="myPrimaryColorPreview border-none">
-                        <span class="material-symbols-outlined">
-                          ev_shadow
-                        </span>
+                        <span class="material-symbols-outlined"> ev_shadow </span>
                       </div>
                     </div>
 
@@ -169,16 +150,8 @@ watch(
                       class="aspect-square w-6 h-6 bg-gray-950"
                       :class="`bg-${color.replace('border-', '')}`"
                     ></div>
-                    <span
-                      v-if="color === 'none'"
-                      class="ml-3"
-                      >Transparent</span
-                    >
-                    <span
-                      v-if="color !== 'none'"
-                      class="ml-3"
-                      >{{ color }}</span
-                    >
+                    <span v-if="color === 'none'" class="ml-3">Transparent</span>
+                    <span v-if="color !== 'none'" class="ml-3">{{ color }}</span>
                   </div>
                 </li>
               </ListboxOption>

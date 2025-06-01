@@ -1,22 +1,22 @@
 <script setup>
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import PageBuilder from '@/composables/PageBuilder';
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import PageBuilder from '@/composables/PageBuilder.ts'
 
-const pageBuilderStateStore = usePageBuilderStateStore();
+const pageBuilderStateStore = usePageBuilderStateStore()
 
-import { computed } from 'vue';
+import { computed } from 'vue'
 
-const pageBuilder = new PageBuilder(pageBuilderStateStore);
+const pageBuilder = new PageBuilder(pageBuilderStateStore)
 
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue';
+import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 
 const getElement = computed(() => {
-  return pageBuilderStateStore.getElement;
-});
+  return pageBuilderStateStore.getElement
+})
 
 const getRestoredElement = computed(() => {
-  return pageBuilderStateStore.getRestoredElement;
-});
+  return pageBuilderStateStore.getRestoredElement
+})
 </script>
 
 <template>
