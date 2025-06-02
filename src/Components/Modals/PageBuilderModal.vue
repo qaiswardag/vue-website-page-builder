@@ -27,9 +27,6 @@ defineProps({
     default: false,
     required: true,
   },
-  updateOrCreate: {
-    required: true,
-  },
 })
 
 const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
@@ -182,47 +179,7 @@ onMounted(() => {
                 <header></header>
                 <main></main>
               </DynamicModal>
-              <div
-                @click="pageBuilderStateStore.setComponent(null)"
-                class="px-4 px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
-              >
-                <div class="flex items-center justify-start divide-x divide-gray-200">
-                  <button type="button" @click="firstButton" class="border-r border-gray-200 pr-6">
-                    <img class="h-6" src="/logo/logo.svg" alt="Logo" />
-                  </button>
-                  <button
-                    class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4"
-                    @click="secondButton"
-                    type="button"
-                  >
-                    <span class="material-symbols-outlined text-[18px]"> save </span>
-                    Save & Close
-                  </button>
-                  <button
-                    v-if="updateOrCreate === 'update' && hideDraftButton"
-                    class="mySecondaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-2"
-                    @click="handleDraftForUpdate"
-                    type="button"
-                  >
-                    <span class="material-symbols-outlined text-[18px]">
-                      settings_backup_restore
-                    </span>
-                    Use Draft
-                  </button>
-                </div>
-                <button
-                  type="button"
-                  @click="firstButton"
-                  class="flex items-center justify-center gap-1 cursor-pointer"
-                >
-                  <span class="myPrimaryParagraph font-medium"> Close Builder </span>
-                  <div
-                    class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                  >
-                    <span class="material-symbols-outlined"> close </span>
-                  </div>
-                </button>
-              </div>
+
               <slot></slot>
             </div>
           </TransitionChild>
