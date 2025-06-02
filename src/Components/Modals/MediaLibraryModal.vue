@@ -6,6 +6,7 @@ import {
   TransitionChild,
   TransitionRoot,
 } from '@headlessui/vue'
+import { provide } from 'vue'
 
 const props = defineProps({
   title: {
@@ -53,6 +54,12 @@ const secondButton = function () {
 const thirdButton = function () {
   emit('thirdMediaButtonFunction')
 }
+
+// Provide close function for custom components
+const closeMediaLibraryModal = () => {
+  firstButton() // This triggers the close by emitting to parent
+}
+provide('closeMediaLibraryModal', closeMediaLibraryModal)
 </script>
 
 <template>
