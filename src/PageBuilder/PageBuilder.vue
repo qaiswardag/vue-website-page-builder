@@ -1,5 +1,6 @@
 <script setup>
-import { onMounted, computed, ref, watch } from 'vue'
+import { onMounted, computed, ref, watch, provide } from 'vue'
+import { createPinia } from 'pinia'
 import PageBuilder from '@/composables/PageBuilder.ts'
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue'
 import Preview from '@/PageBuilder/Preview.vue'
@@ -11,9 +12,32 @@ import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebar
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+// Create internal Pinia instance for this component if none exists
+let internalPinia = null
+let mediaLibraryStore = null
+let pageBuilderStateStore = null
+let pageBuilder = null
+
+try {
+  // Try to use existing Pinia first
+  mediaLibraryStore = useMediaLibraryStore()
+  pageBuilderStateStore = usePageBuilderStateStore()
+} catch (error) {
+  // If no Pinia exists, create our own internal instance
+  internalPinia = createPinia()
+  mediaLibraryStore = useMediaLibraryStore(internalPinia)
+  pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
+}
+
+// Initialize PageBuilder with stores
+pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+
+// Provide the stores for child components if using internal Pinia
+if (internalPinia) {
+  provide('pageBuilderStateStore', pageBuilderStateStore)
+  provide('mediaLibraryStore', mediaLibraryStore)
+}
+
 const getMenuRight = computed(() => {
   return pageBuilderStateStore.getMenuRight
 })
@@ -188,7 +212,7 @@ onMounted(async () => {
                   "
                 >
                   <div class="flex items-center justify-center gap-2">
-                    <span class="lg:block hidden"> Add new Component - v.1.0.5 </span>
+                    <span class="lg:block hidden"> Add new Component - v.1.0.6 </span>
 
                     <span
                       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
