@@ -297,9 +297,9 @@ onMounted(async () => {
               </div>
               <!-- Add Component # end -->
             </div>
-            <div class="text-right text-xs text-gray-600 py-2 px-4 bg-white">
-              version: {{ version }}
-            </div>
+          </div>
+          <div class="text-right text-xs text-gray-600 py-2 px-4 bg-white">
+            version: {{ version }}
           </div>
           <!-- Add Component # end -->
         </main>
