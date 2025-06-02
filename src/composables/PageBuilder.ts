@@ -1232,19 +1232,24 @@ class PageBuilder {
     return false
   }
   //
-  async updateBasePrimaryImage(data: { type: string }): Promise<void> {
+  async updateBasePrimaryImage(data?: { type: string }): Promise<void> {
     if (this.showRunningMethodLogs) {
       console.log('updateBasePrimaryImage')
     }
 
     if (!this.getElement.value) return
 
-    if (data.type === 'unsplash' && this.getCurrentImage.value) {
+    // If data is provided, check for specific type (backward compatibility)
+    if (data && data.type === 'unsplash' && this.getCurrentImage.value) {
       if (this.getCurrentImage.value.file) {
         await this.nextTick
-
         this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.file}`)
       }
+    }
+    // If no data provided, apply current image if available (new simplified usage)
+    else if (!data && this.getCurrentImage.value && this.getCurrentImage.value.file) {
+      await this.nextTick
+      this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.file}`)
     }
   }
 
