@@ -1,4 +1,5 @@
 <script setup>
+const version = __APP_VERSION__
 import { onMounted, computed, ref, watch, provide } from 'vue'
 import { createPinia } from 'pinia'
 import PageBuilder from '@/composables/PageBuilder.ts'
@@ -212,7 +213,7 @@ onMounted(async () => {
                   "
                 >
                   <div class="flex items-center justify-center gap-2">
-                    <span class="lg:block hidden"> Add new Component - v.1.0.8 </span>
+                    <span class="lg:block hidden"> Add new Component </span>
 
                     <span
                       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
@@ -308,6 +309,9 @@ onMounted(async () => {
           <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
           </RightSidebarEditor>
         </aside>
+      </div>
+      <div class="text-right text-xs text-gray-500 py-10 px-4 bg-red-100">
+        version: {{ version }}
       </div>
     </div>
   </div>
