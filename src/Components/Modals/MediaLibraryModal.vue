@@ -1,29 +1,32 @@
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue';
+import { computed, onMounted, ref, watch, inject } from 'vue'
 import {
   Dialog,
   DialogOverlay,
   DialogTitle,
   TransitionChild,
   TransitionRoot,
-} from '@headlessui/vue';
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue';
+} from '@headlessui/vue'
+import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 
 // new version
-import DynamicModal from '@/Components/Modals/DynamicModal.vue';
-import SidebarUnsplash from '@/Components/MediaLibrary/SidebarUnsplash.vue';
-import Unsplash from '@/Components/MediaLibrary/Unsplash.vue';
-import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vue';
+import DynamicModal from '@/Components/Modals/DynamicModal.vue'
+import SidebarUnsplash from '@/Components/MediaLibrary/SidebarUnsplash.vue'
+import Unsplash from '@/Components/MediaLibrary/Unsplash.vue'
+import SmallUniversalSpinner from '@/Components/Loaders/SmallUniversalSpinner.vue'
 
-import { useMediaLibraryStore } from '@/stores/media-library';
+import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore();
+const mediaLibraryStore = useMediaLibraryStore()
+
+// Inject custom media component from parent
+const customMediaComponent = inject('customMediaComponent', null)
 
 const getCurrentImage = computed(() => {
-  return mediaLibraryStore.getCurrentImage;
-});
+  return mediaLibraryStore.getCurrentImage
+})
 
-const selected = ref('Unsplash');
+const selected = ref('Unsplash')
 
 const tabs = ref([
   {
@@ -38,7 +41,15 @@ const tabs = ref([
     name: 'Unsplash',
     current: true,
   },
-]);
+])
+
+// Add custom media tab if custom component is provided
+if (customMediaComponent) {
+  tabs.value.push({
+    name: 'Custom Media',
+    current: false,
+  })
+}
 
 const props = defineProps({
   title: {
@@ -60,46 +71,39 @@ const props = defineProps({
   open: {
     required: true,
   },
-});
+})
 
 const emit = defineEmits([
   'firstMediaButtonFunction',
   'secondMediaButtonFunction',
   'thirdMediaButtonFunction',
-]);
+])
 
 // first button function
 const firstButton = function () {
-  emit('firstMediaButtonFunction');
-};
+  emit('firstMediaButtonFunction')
+}
 
 // second button  function
 const secondButton = function () {
-  emit('secondMediaButtonFunction');
-};
+  emit('secondMediaButtonFunction')
+}
 
 // third button function
 const thirdButton = function () {
-  emit('thirdMediaButtonFunction');
-};
+  emit('thirdMediaButtonFunction')
+}
 //
 //
 const changeSelectedMenuTab = function (clicked) {
-  selected.value = clicked;
-};
+  selected.value = clicked
+}
 </script>
 
 <template>
   <teleport to="body">
-    <TransitionRoot
-      :show="open"
-      as="template"
-    >
-      <Dialog
-        as="div"
-        class="fixed z-30 inset-0 overflow-y-auto sm:px-4"
-        @close="firstButton"
-      >
+    <TransitionRoot :show="open" as="template">
+      <Dialog as="div" class="fixed z-30 inset-0 overflow-y-auto sm:px-4" @close="firstButton">
         <div class="flex items-end justify-center text-center sm:block sm:p-0">
           <TransitionChild
             as="template"
@@ -110,15 +114,11 @@ const changeSelectedMenuTab = function (clicked) {
             leave-from="opacity-100"
             leave-to="opacity-0"
           >
-            <DialogOverlay
-              class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
-            />
+            <DialogOverlay class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
           </TransitionChild>
 
           <!-- This element is to trick the browser into centering the modal contents. -->
-          <span
-            aria-hidden="true"
-            class="hidden sm:inline-block sm:align-middle sm:h-screen"
+          <span aria-hidden="true" class="hidden sm:inline-block sm:align-middle sm:h-screen"
             >&#8203;</span
           >
           <TransitionChild
@@ -136,10 +136,7 @@ const changeSelectedMenuTab = function (clicked) {
               <div
                 class="flex gap-2 justify-between items-center border-b border-gray-200 p-4 mb-2"
               >
-                <DialogTitle
-                  as="h3"
-                  class="tertiaryHeader my-0 py-0"
-                >
+                <DialogTitle as="h3" class="tertiaryHeader my-0 py-0">
                   {{ title }}
                 </DialogTitle>
 
@@ -168,11 +165,7 @@ const changeSelectedMenuTab = function (clicked) {
                       <div class="mb-4">
                         <!-- Tabs Mobile -->
                         <div class="sm:hidden">
-                          <label
-                            for="tabs"
-                            class="sr-only"
-                            >Select a tab</label
-                          >
+                          <label for="tabs" class="sr-only">Select a tab</label>
                           <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
 
                           <select
@@ -183,6 +176,7 @@ const changeSelectedMenuTab = function (clicked) {
                             <option>Upload</option>
                             <option>Media library</option>
                             <option>Unsplash</option>
+                            <option v-if="customMediaComponent">Custom Media</option>
                           </select>
                         </div>
                         <div class="hidden sm:block">
@@ -200,9 +194,7 @@ const changeSelectedMenuTab = function (clicked) {
                                 :aria-current="tab.current ? 'page' : undefined"
                                 class="py-2 px-3 my-1 text-xs cursor-pointer font-medium"
                                 :class="[
-                                  tab.name === selected
-                                    ? 'myPrimaryButton'
-                                    : 'mySecondaryButton',
+                                  tab.name === selected ? 'myPrimaryButton' : 'mySecondaryButton',
                                   'whitespace-nowrap',
                                 ]"
                               >
@@ -224,6 +216,12 @@ const changeSelectedMenuTab = function (clicked) {
                                 >
                                   filter_hdr
                                 </span>
+                                <span
+                                  v-if="tab.name === 'Custom Media'"
+                                  class="myMediumIcon material-symbols-outlined"
+                                >
+                                  extension
+                                </span>
                                 <span>
                                   {{ tab.name }}
                                 </span>
@@ -241,9 +239,7 @@ const changeSelectedMenuTab = function (clicked) {
                           >
                             <div class="myInputGroup p-4 mt-4">
                               <div class="col-span-3 mb-4">
-                                <div
-                                  class="relativeflex flex-col items-center justify-center"
-                                >
+                                <div class="relativeflex flex-col items-center justify-center">
                                   <label
                                     class="myPrimaryInputLabel myPrimaryParagraph text-center w-full inset-0 block text-base cursor-pointer"
                                     for="images"
@@ -255,32 +251,19 @@ const changeSelectedMenuTab = function (clicked) {
                                         <div
                                           class="myPrimaryParagraph rounded-full bg-myPrimaryLightGrayColor text-center w-full inset-0 text-base pt-6 pb-6 px-2 flex items-center justify-center p-2"
                                         >
-                                          <div
-                                            class="myPrimaryButton hover:shadow gap-3"
-                                          >
-                                            <span
-                                              class="material-symbols-outlined"
-                                            >
+                                          <div class="myPrimaryButton hover:shadow gap-3">
+                                            <span class="material-symbols-outlined">
                                               cloud_upload </span
                                             ><span> PNG, JPG, up to 2MB </span>
                                           </div>
                                         </div>
                                       </div>
                                     </header></label
-                                  ><input
-                                    id="images"
-                                    type="file"
-                                    multiple=""
-                                    class="sr-only"
-                                  />
+                                  ><input id="images" type="file" multiple="" class="sr-only" />
                                 </div>
                               </div>
-                              <div
-                                class="min-h-[1.5rem] flex items-center justify-start"
-                              >
-                                <p
-                                  class="myPrimaryInputError mt-2 mb-0 py-0 self-start"
-                                ></p>
+                              <div class="min-h-[1.5rem] flex items-center justify-start">
+                                <p class="myPrimaryInputError mt-2 mb-0 py-0 self-start"></p>
                               </div>
                             </div>
                           </div>
@@ -295,9 +278,7 @@ const changeSelectedMenuTab = function (clicked) {
                           >
                             <div class="myInputGroup p-4 mt-4">
                               <div class="col-span-3 mb-4">
-                                <p class="myPrimaryParagraph my-0 py-0">
-                                  Media Library
-                                </p>
+                                <p class="myPrimaryParagraph my-0 py-0">Media Library</p>
                               </div>
                             </div>
                           </div>
@@ -306,23 +287,24 @@ const changeSelectedMenuTab = function (clicked) {
                       </template>
                       <template v-if="selected === 'Unsplash'">
                         <!-- image gallary - start -->
-                        <div
-                          class="w-full border border-gray-200 rounded-lg py-4 px-2"
-                        >
+                        <div class="w-full border border-gray-200 rounded-lg py-4 px-2">
                           <Unsplash></Unsplash>
                         </div>
                         <!-- image gallary - end -->
+                      </template>
+                      <template v-if="selected === 'Custom Media' && customMediaComponent">
+                        <!-- custom media component - start -->
+                        <div class="w-full border border-gray-200 rounded-lg py-4 px-2">
+                          <component :is="customMediaComponent" />
+                        </div>
+                        <!-- custom media component - end -->
                       </template>
                     </div>
 
                     <!-- Main content - end-->
 
                     <!-- Details sidebar - upload start-->
-                    <aside
-                      v-if="selected === 'Upload'"
-                      aria-label="sidebar"
-                      class="md:w-72"
-                    >
+                    <aside v-if="selected === 'Upload'" aria-label="sidebar" class="md:w-72">
                       <div
                         class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
@@ -330,11 +312,7 @@ const changeSelectedMenuTab = function (clicked) {
                       </div>
                     </aside>
                     <!-- Details sidebar - media library start-->
-                    <aside
-                      v-if="selected === 'Media library'"
-                      aria-label="sidebar"
-                      class="md:w-72"
-                    >
+                    <aside v-if="selected === 'Media library'" aria-label="sidebar" class="md:w-72">
                       <div
                         class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
@@ -343,11 +321,7 @@ const changeSelectedMenuTab = function (clicked) {
                     </aside>
                     <!-- Details sidebar - media library end-->
                     <!-- Details sidebar - unsplash start-->
-                    <aside
-                      v-if="selected === 'Unsplash'"
-                      aria-label="sidebar"
-                      class="md:w-72"
-                    >
+                    <aside v-if="selected === 'Unsplash'" aria-label="sidebar" class="md:w-72">
                       <div
                         class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
                       >
@@ -355,6 +329,19 @@ const changeSelectedMenuTab = function (clicked) {
                       </div>
                     </aside>
                     <!-- Details sidebar - unsplash end-->
+                    <!-- Details sidebar - custom media start-->
+                    <aside
+                      v-if="selected === 'Custom Media' && customMediaComponent"
+                      aria-label="sidebar"
+                      class="md:w-72"
+                    >
+                      <div
+                        class="pt-4 px-2 rounded-lg md:w-72 md:min-h-[42.5rem] md:max-h-[42.5rem] min-h-[15rem] max-h-[15rem] overflow-y-scroll bg-white border border-gray-200"
+                      >
+                        <p class="text-gray-600 text-sm">Custom media library component loaded.</p>
+                      </div>
+                    </aside>
+                    <!-- Details sidebar - custom media end-->
 
                     <!-- Details sidebar end-->
                   </div>
@@ -381,24 +368,13 @@ const changeSelectedMenuTab = function (clicked) {
                         </div>
 
                         <div v-if="secondButtonText">
-                          <button
-                            class="myPrimaryButton"
-                            type="button"
-                            @click="secondButton"
-                          >
+                          <button class="myPrimaryButton" type="button" @click="secondButton">
                             {{ secondButtonText }}
                           </button>
                         </div>
 
-                        <div
-                          v-if="thirdButtonText"
-                          class="w-full"
-                        >
-                          <button
-                            class="myPrimaryDeleteButton"
-                            type="button"
-                            @click="thirdButton"
-                          >
+                        <div v-if="thirdButtonText" class="w-full">
+                          <button class="myPrimaryDeleteButton" type="button" @click="thirdButton">
                             {{ thirdButtonText }}
                           </button>
                         </div>

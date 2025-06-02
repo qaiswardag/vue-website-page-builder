@@ -1,12 +1,14 @@
 <script setup>
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { useMediaLibraryStore } from '@/stores/media-library'
 import PageBuilder from '@/composables/PageBuilder.ts'
 
 const pageBuilderStateStore = usePageBuilderStateStore()
+const mediaLibraryStore = useMediaLibraryStore()
 
 import { computed } from 'vue'
 
-const pageBuilder = new PageBuilder(pageBuilderStateStore)
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 

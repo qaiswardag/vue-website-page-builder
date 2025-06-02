@@ -13,6 +13,18 @@ import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebar
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
+// Props for custom components
+const props = defineProps({
+  CustomMediaLibraryComponent: {
+    type: Object,
+    default: null,
+  },
+  CustomSearchComponent: {
+    type: Object,
+    default: null,
+  },
+})
+
 // Create internal Pinia instance for this component if none exists
 let internalPinia = null
 let mediaLibraryStore = null
@@ -38,6 +50,16 @@ if (internalPinia) {
   provide('pageBuilderStateStore', pageBuilderStateStore)
   provide('mediaLibraryStore', mediaLibraryStore)
 }
+
+// Provide custom components for child components
+provide('customMediaComponent', props.CustomMediaLibraryComponent)
+provide('customSearchComponent', props.CustomSearchComponent)
+
+// Provide modal control function for custom components
+const closeAddComponentModal = () => {
+  showModalAddComponent.value = false
+}
+provide('closeAddComponentModal', closeAddComponentModal)
 
 const getMenuRight = computed(() => {
   return pageBuilderStateStore.getMenuRight
@@ -141,6 +163,7 @@ onMounted(async () => {
       :show="showModalAddComponent"
       :firstButtonText="firstButtonTextSearchComponents"
       :title="titleModalAddComponent"
+      :custom-search-component="props.CustomSearchComponent"
       @firstModalButtonSearchComponentsFunction="firstModalButtonSearchComponentsFunction"
     ></SearchComponents>
     <PageBuilderPreviewModal

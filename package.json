@@ -1,6 +1,6 @@
 {
   "name": "@myissue/vue-website-page-builder",
-  "version": "v3.0.18",
+  "version": "v3.0.19",
   "description": "🚧 DEVELOPMENT VERSION - Vue.js page builder component with drag & drop functionality. Not ready for production use.",
   "type": "module",
   "main": "./dist/vue-website-page-builder.umd.cjs",
@@ -70,7 +70,8 @@
     "date-fns": "^2.30.0",
     "pinia": "^2.1.7",
     "uuid": "^9.0.0",
-    "vue": "^3.5.13"
+    "vue": "^3.5.13",
+    "vue-website-page-builder": "file:"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.8.0",

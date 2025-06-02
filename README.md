@@ -25,6 +25,29 @@ import '@myissue/vue-website-page-builder/style.css'
 </template>
 ```
 
+## Custom Components
+
+Want to add your own media library or search functionality? Create custom components that can be injected into the page builder:
+
+📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)** - Learn how to create and integrate your own components
+
+Example integration:
+
+```vue
+<script setup>
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import MediaLibraryComponent from './ComponentsPageBuilder/MediaLibraryComponent.vue'
+import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
+</script>
+
+<template>
+  <PageBuilder
+    :custom-media-component="MediaLibraryComponent"
+    :custom-search-component="SearchComponent"
+  />
+</template>
+```
+
 <p align="center" dir="auto">
 <img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo">
 </p>
