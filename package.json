@@ -1,6 +1,6 @@
 {
   "name": "@myissue/vue-website-page-builder",
-  "version": "v3.0.17",
+  "version": "v3.0.18",
   "description": "🚧 DEVELOPMENT VERSION - Vue.js page builder component with drag & drop functionality. Not ready for production use.",
   "type": "module",
   "main": "./dist/vue-website-page-builder.umd.cjs",
@@ -41,7 +41,7 @@
   "bugs": {
     "url": "https://github.com/qaiswardag/vue-website-page-builder/issues"
   },
-  "homepage": "https://github.com/qaiswardag/vue-website-page-builder#readme",
+  "homepage": "https://www.builder-demo.myissue.dk/",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
