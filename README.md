@@ -2,16 +2,6 @@
 
 ## 🚧 **DEVELOPMENT VERSION - NOT READY FOR PRODUCTION** 🚧
 
-> **⚠️ WARNING**: This package is currently in **alpha development stage**.
->
-> - **DO NOT USE IN PRODUCTION** applications
-> - APIs may change without notice
-> - Features may be incomplete or unstable
-> - Documentation is work in progress
-> - Use only for testing and development purposes
-
----
-
 ## Overview
 
 A Vue.js page builder component with drag & drop functionality for creating dynamic web pages.
@@ -34,45 +24,6 @@ import '@myissue/vue-website-page-builder/style.css'
   <PageBuilder />
 </template>
 ```
-
-## Features
-
-- 🎯 **Zero Configuration** - Just import and use
-- 🔧 **Self-contained** - Manages its own state internally
-- 🎨 **Drag & Drop** - Visual page building experience
-- 📱 **Responsive** - Mobile-friendly interface
-- ⚡ **Vue 3** - Built with modern Vue.js
-
-## Development Status
-
-| Feature            | Status         |
-| ------------------ | -------------- |
-| Basic Page Builder | 🟡 Alpha       |
-| Component Library  | 🟡 Alpha       |
-| State Management   | 🟡 Alpha       |
-| Documentation      | 🔴 In Progress |
-| Testing            | 🔴 Not Started |
-| Stable API         | 🔴 Not Ready   |
-
-## Requirements
-
-- Node.js ≥ 18.0.0
-- Vue.js ≥ 3.0.0
-- Modern browser with ES6+ support
-
-## License
-
-MIT License - see LICENSE file for details
-
-## Author
-
-**qaiswardag**
-
-- GitHub: [@qaiswardag](https://github.com/qaiswardag)
-
----
-
-> 🚧 **Remember**: This is a development version. Wait for v1.0.0 for production use!
 
 <p align="center" dir="auto">
 <img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo">
@@ -130,9 +81,13 @@ agencies. Empower users to create the perfect content with the Page Builder.
 
 ## Documentation
 
-### Required software installation
+### Requirements
 
 Please note that these instructions assume you have Node.js installed.
+
+- Node.js ≥ 18.0.0
+- Vue.js ≥ 3.0.0
+- Modern browser with ES6+ support
 
 ### Getting started & installation
 
@@ -154,26 +109,7 @@ bun install
 
 ### Customization
 
-I have separated all the logic for manipulating the HTML elements into its own PageBuilder class, which can be found at the path: `src/composables/PageBuilder.js`.
-
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
-
-### Example use of Page Builder
-
-```vue
-<script setup>
-import { PageBuilder } from '@myissue/vue-website-page-builder'
-import '@myissue/vue-website-page-builder/style.css'
-</script>
-
-<template>
-  <PageBuilder />
-</template>
-```
-
-## License
-
-[MIT License](./LICENSE)
 
 ## Contributing
 
@@ -182,3 +118,7 @@ import '@myissue/vue-website-page-builder/style.css'
 3. Make your changes
 4. Build and test locally
 5. Submit a pull request
+
+## License
+
+[MIT License](./LICENSE)
