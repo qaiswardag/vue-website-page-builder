@@ -9,6 +9,9 @@ export { useMediaLibraryStore } from './stores/media-library'
 // Export PageBuilder composable/class with auto-injection capability
 export { default as PageBuilderComposable } from './composables/PageBuilder'
 
+// Export modal management composable
+export { usePageBuilderModal } from './composables/usePageBuilderModal'
+
 // Export Pinia for convenience (same version as package uses)
 export { createPinia } from 'pinia'
 

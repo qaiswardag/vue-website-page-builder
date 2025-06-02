@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, inject } from 'vue'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
 import TipTapInput from '@/Components/TipTap/TipTapInput.vue'
 import PageBuilder from '@/composables/PageBuilder.ts'
@@ -8,6 +8,9 @@ import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextC
 import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
+
+// Inject custom media component
+const customMediaComponent = inject('customMediaComponent', null)
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
@@ -201,138 +204,141 @@ const handleModalIframeSrc = function () {
 }
 </script>
 <template>
-  <DynamicModal
-    :show="showModalIframeSrc"
-    maxWidth="2xl"
-    :type="typeModal"
-    :gridColumnAmount="gridColumnModal"
-    :title="titleModal"
-    :description="descriptionModal"
-    :firstButtonText="firstButtonModal"
-    :secondButtonText="secondButtonModal"
-    :thirdButtonText="thirdButtonModal"
-    @firstModalButtonFunction="firstModalButtonFunction"
-    @secondModalButtonFunction="secondModalButtonFunction"
-    @thirdModalButtonFunction="thirdModalButtonFunction"
-  >
-    <header></header>
-    <main>
-      <div class="myInputGroup">
-        <div class="myPrimaryFormOrganizationHeaderDescriptionSection">
-          <div class="myPrimaryFormOrganizationHeader">
-            <label for="video" class="myPrimaryInputLabel">Video url:</label>
-            <input v-model="iframeSrc" type="text" class="myPrimaryInput" name="video" />
-            <div v-if="urlError" class="min-h-[2.5rem] flex items-center justify-start">
-              <p class="myPrimaryInputError mt-2 mb-0 py-0 self-start">
-                {{ urlError }}
-              </p>
+  <div>
+    <DynamicModal
+      :show="showModalIframeSrc"
+      maxWidth="2xl"
+      :type="typeModal"
+      :gridColumnAmount="gridColumnModal"
+      :title="titleModal"
+      :description="descriptionModal"
+      :firstButtonText="firstButtonModal"
+      :secondButtonText="secondButtonModal"
+      :thirdButtonText="thirdButtonModal"
+      @firstModalButtonFunction="firstModalButtonFunction"
+      @secondModalButtonFunction="secondModalButtonFunction"
+      @thirdModalButtonFunction="thirdModalButtonFunction"
+    >
+      <header></header>
+      <main>
+        <div class="myInputGroup">
+          <div class="myPrimaryFormOrganizationHeaderDescriptionSection">
+            <div class="myPrimaryFormOrganizationHeader">
+              <label for="video" class="myPrimaryInputLabel">Video url:</label>
+              <input v-model="iframeSrc" type="text" class="myPrimaryInput" name="video" />
+              <div v-if="urlError" class="min-h-[2.5rem] flex items-center justify-start">
+                <p class="myPrimaryInputError mt-2 mb-0 py-0 self-start">
+                  {{ urlError }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
+      </main>
+    </DynamicModal>
+    <DynamicModal
+      :simpleModal="true"
+      :show="getShowModalTipTap"
+      maxWidth="5xl"
+      :type="typeModal"
+      :gridColumnAmount="gridColumnModal"
+      :title="titleModal"
+      :description="descriptionModal"
+      :firstButtonText="firstButtonModal"
+      :secondButtonText="secondButtonModal"
+      :thirdButtonText="thirdButtonModal"
+      @firstModalButtonFunction="firstModalButtonFunction"
+      @secondModalButtonFunction="secondModalButtonFunction"
+      @thirdModalButtonFunction="thirdModalButtonFunction"
+    >
+      <header></header>
+      <main class="overflow-y-auto">
+        <TipTapInput></TipTapInput>
+      </main>
+    </DynamicModal>
+
+    <MediaLibraryModal
+      :open="showMediaLibraryModal"
+      :title="titleMedia"
+      :description="descriptionMedia"
+      :firstButtonText="firstButtonMedia"
+      :secondButtonText="secondButtonMedia"
+      :thirdButtonText="thirdButtonMedia"
+      :customMediaComponent="customMediaComponent"
+      @firstMediaButtonFunction="firstMediaButtonFunction"
+      @secondMediaButtonFunction="secondMediaButtonFunction"
+      @thirdMediaButtonFunction="thirdMediaButtonFunction"
+    >
+    </MediaLibraryModal>
+
+    <div
+      class="z-20 py-1 px-2 h-20 flex items-center justify-center mt-2 mx-2 border-b border-myPrimaryLightGrayColor"
+    >
+      <div class="flex items-center justify-center divide-x divide-gray-200 py-1">
+        <template v-if="pageBuilder.ElOrFirstChildIsIframe()">
+          <div class="px-2 flex items-center justify-start gap-2">
+            <button
+              @click="handleModalIframeSrc"
+              type="button"
+              class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+            >
+              <span class="material-symbols-outlined"> play_circle </span>
+              <span>Add YouTube</span>
+            </button>
+          </div>
+        </template>
+
+        <template
+          v-if="pageBuilder.selectedElementIsValidText() && !pageBuilder.ElOrFirstChildIsIframe()"
+        >
+          <div class="px-2 flex items-center justify-start gap-2">
+            <button
+              @click="handleModalPreviewTiptap"
+              type="button"
+              class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+            >
+              <span class="material-symbols-outlined"> edit </span>
+              <span>Edit text</span>
+            </button>
+          </div>
+          <div class="px-2">
+            <TextColorEditor></TextColorEditor>
+          </div>
+        </template>
+
+        <template
+          v-if="
+            getElement &&
+            getComponent &&
+            getBasePrimaryImage !== null &&
+            !pageBuilder.ElOrFirstChildIsIframe()
+          "
+        >
+          <div class="px-2 flex items-center justify-start gap-2">
+            <button
+              @click="handleAddImage"
+              type="button"
+              class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+            >
+              <span class="material-symbols-outlined"> add_photo_alternate </span>
+              <span>Update image</span>
+            </button>
+          </div>
+        </template>
+
+        <template
+          v-if="
+            getElement &&
+            Object.keys(getElement).length !== 0 &&
+            !getBasePrimaryImage &&
+            !pageBuilder.ElOrFirstChildIsIframe()
+          "
+        >
+          <div class="px-2">
+            <BackgroundColorEditor></BackgroundColorEditor>
+          </div>
+        </template>
       </div>
-    </main>
-  </DynamicModal>
-  <DynamicModal
-    :simpleModal="true"
-    :show="getShowModalTipTap"
-    maxWidth="5xl"
-    :type="typeModal"
-    :gridColumnAmount="gridColumnModal"
-    :title="titleModal"
-    :description="descriptionModal"
-    :firstButtonText="firstButtonModal"
-    :secondButtonText="secondButtonModal"
-    :thirdButtonText="thirdButtonModal"
-    @firstModalButtonFunction="firstModalButtonFunction"
-    @secondModalButtonFunction="secondModalButtonFunction"
-    @thirdModalButtonFunction="thirdModalButtonFunction"
-  >
-    <header></header>
-    <main class="overflow-y-auto">
-      <TipTapInput></TipTapInput>
-    </main>
-  </DynamicModal>
-
-  <MediaLibraryModal
-    :open="showMediaLibraryModal"
-    :title="titleMedia"
-    :description="descriptionMedia"
-    :firstButtonText="firstButtonMedia"
-    :secondButtonText="secondButtonMedia"
-    :thirdButtonText="thirdButtonMedia"
-    @firstMediaButtonFunction="firstMediaButtonFunction"
-    @secondMediaButtonFunction="secondMediaButtonFunction"
-    @thirdMediaButtonFunction="thirdMediaButtonFunction"
-  >
-  </MediaLibraryModal>
-
-  <div
-    class="z-20 py-1 px-2 h-20 flex items-center justify-center mt-2 mx-2 border-b border-myPrimaryLightGrayColor"
-  >
-    <div class="flex items-center justify-center divide-x divide-gray-200 py-1">
-      <template v-if="pageBuilder.ElOrFirstChildIsIframe()">
-        <div class="px-2 flex items-center justify-start gap-2">
-          <button
-            @click="handleModalIframeSrc"
-            type="button"
-            class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-          >
-            <span class="material-symbols-outlined"> play_circle </span>
-            <span>Add YouTube</span>
-          </button>
-        </div>
-      </template>
-
-      <template
-        v-if="pageBuilder.selectedElementIsValidText() && !pageBuilder.ElOrFirstChildIsIframe()"
-      >
-        <div class="px-2 flex items-center justify-start gap-2">
-          <button
-            @click="handleModalPreviewTiptap"
-            type="button"
-            class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-          >
-            <span class="material-symbols-outlined"> edit </span>
-            <span>Edit text</span>
-          </button>
-        </div>
-        <div class="px-2">
-          <TextColorEditor></TextColorEditor>
-        </div>
-      </template>
-
-      <template
-        v-if="
-          getElement &&
-          getComponent &&
-          getBasePrimaryImage !== null &&
-          !pageBuilder.ElOrFirstChildIsIframe()
-        "
-      >
-        <div class="px-2 flex items-center justify-start gap-2">
-          <button
-            @click="handleAddImage"
-            type="button"
-            class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-          >
-            <span class="material-symbols-outlined"> add_photo_alternate </span>
-            <span>Update image</span>
-          </button>
-        </div>
-      </template>
-
-      <template
-        v-if="
-          getElement &&
-          Object.keys(getElement).length !== 0 &&
-          !getBasePrimaryImage &&
-          !pageBuilder.ElOrFirstChildIsIframe()
-        "
-      >
-        <div class="px-2">
-          <BackgroundColorEditor></BackgroundColorEditor>
-        </div>
-      </template>
     </div>
   </div>
 </template>

@@ -1,10 +1,13 @@
 <script setup>
-import { computed, watch, ref } from 'vue'
+import { computed, watch, ref, inject } from 'vue'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue'
 import PageBuilder from '@/composables/PageBuilder.ts'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
+
+// Inject custom media component
+const customMediaComponent = inject('customMediaComponent', null)
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
@@ -59,24 +62,27 @@ const handleAddImage = function () {
 }
 </script>
 <template>
-  <div v-if="getBasePrimaryImage !== null">
-    <img
-      class="object-cover object-center w-full cursor-pointer"
-      :src="getBasePrimaryImage"
-      @click="handleAddImage"
-      alt="image"
-    />
+  <div>
+    <div v-if="getBasePrimaryImage !== null">
+      <img
+        class="object-cover object-center w-full cursor-pointer"
+        :src="getBasePrimaryImage"
+        @click="handleAddImage"
+        alt="image"
+      />
+    </div>
+    <MediaLibraryModal
+      :open="showMediaLibraryModal"
+      :title="titleMedia"
+      :description="descriptionMedia"
+      :firstButtonText="firstButtonMedia"
+      :secondButtonText="secondButtonMedia"
+      :thirdButtonText="thirdButtonMedia"
+      :customMediaComponent="customMediaComponent"
+      @firstMediaButtonFunction="firstMediaButtonFunction"
+      @secondMediaButtonFunction="secondMediaButtonFunction"
+      @thirdMediaButtonFunction="thirdMediaButtonFunction"
+    >
+    </MediaLibraryModal>
   </div>
-  <MediaLibraryModal
-    :open="showMediaLibraryModal"
-    :title="titleMedia"
-    :description="descriptionMedia"
-    :firstButtonText="firstButtonMedia"
-    :secondButtonText="secondButtonMedia"
-    :thirdButtonText="thirdButtonMedia"
-    @firstMediaButtonFunction="firstMediaButtonFunction"
-    @secondMediaButtonFunction="secondMediaButtonFunction"
-    @thirdMediaButtonFunction="thirdMediaButtonFunction"
-  >
-  </MediaLibraryModal>
 </template>

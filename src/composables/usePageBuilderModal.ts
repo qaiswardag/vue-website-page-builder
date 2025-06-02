@@ -1,0 +1,17 @@
+import { inject } from 'vue'
+
+// Composable for managing PageBuilder modals
+export function usePageBuilderModal() {
+  // Get the close function provided by the PageBuilder component
+  const closeAddComponentModal = inject<(() => void) | null>('closeAddComponentModal', null)
+
+  return {
+    closeAddComponentModal:
+      closeAddComponentModal ||
+      (() => {
+        console.warn(
+          'closeAddComponentModal function not available. Make sure you are using this within a PageBuilder context.',
+        )
+      }),
+  }
+}

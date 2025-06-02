@@ -55,7 +55,7 @@ if (internalPinia) {
 provide('customMediaComponent', props.CustomMediaLibraryComponent)
 provide('customSearchComponent', props.CustomSearchComponent)
 
-// Provide modal control function for custom components
+// Provide modal close function for custom components
 const closeAddComponentModal = () => {
   showModalAddComponent.value = false
 }
@@ -105,6 +105,7 @@ const handleAddComponent = function () {
 const getComponents = computed(() => {
   return pageBuilderStateStore.getComponents
 })
+
 const getComponent = computed(() => {
   return pageBuilderStateStore.getComponent
 })
