@@ -126,6 +126,7 @@ onMounted(async () => {
   </PageBuilderPreviewModal>
 
   <div class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2">
+    hiii
     <div class="relative h-full flex">
       <div
         @click.self="pageBuilderStateStore.setComponent(null)"
@@ -146,7 +147,6 @@ onMounted(async () => {
               <span class="myMediumIcon material-symbols-outlined"> add </span>
             </button>
           </div>
-
           <div @click.self="pageBuilderStateStore.setComponent(null)">
             <ComponentTopMenu v-if="getElement"></ComponentTopMenu>
           </div>
