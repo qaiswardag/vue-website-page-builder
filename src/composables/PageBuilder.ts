@@ -1518,8 +1518,6 @@ class PageBuilder {
 
       this.setEventListenersForElements()
 
-      console.log('Component added successfully:', componentObject)
-
       // Call success callback if provided
       if (onSuccess && typeof onSuccess === 'function') {
         onSuccess()
@@ -1547,8 +1545,6 @@ class PageBuilder {
       })
 
       this.setEventListenersForElements()
-
-      console.log('Helper component added successfully:', helperComponentObject)
 
       // Call success callback if provided
       if (onSuccess && typeof onSuccess === 'function') {
