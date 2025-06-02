@@ -297,6 +297,9 @@ onMounted(async () => {
               </div>
               <!-- Add Component # end -->
             </div>
+            <div class="text-right text-xs text-gray-600 py-2 px-4 bg-white">
+              version: {{ version }}
+            </div>
           </div>
           <!-- Add Component # end -->
         </main>
@@ -309,9 +312,6 @@ onMounted(async () => {
           <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
           </RightSidebarEditor>
         </aside>
-      </div>
-      <div class="text-right text-xs text-gray-500 py-10 px-4 bg-red-100">
-        version: {{ version }}
       </div>
     </div>
   </div>
