@@ -1,6 +1,6 @@
 {
   "name": "vue-website-page-builder",
-  "version": "v2.1.25",
+  "version": "v3.0.1",
   "type": "module",
   "main": "./dist/vue-website-page-builder.umd.cjs",
   "module": "./dist/vue-website-page-builder.js",

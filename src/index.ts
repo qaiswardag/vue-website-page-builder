@@ -9,5 +9,8 @@ export { useMediaLibraryStore } from './stores/media-library'
 // Export PageBuilder composable/class
 export { default as PageBuilderComposable } from './composables/PageBuilder'
 
+// Export Pinia for convenience (same version as package uses)
+export { createPinia } from 'pinia'
+
 // Export CSS (users will need to import this separately)
 import './css/app.css'
