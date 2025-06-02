@@ -1,13 +1,16 @@
 {
-  "name": "vue-website-page-builder",
-  "version": "v3.0.1",
+  "name": "@myissue/vue-website-page-builder",
+  "version": "v3.0.14",
+  "description": "🚧 DEVELOPMENT VERSION - Vue.js page builder component with drag & drop functionality. Not ready for production use.",
   "type": "module",
   "main": "./dist/vue-website-page-builder.umd.cjs",
   "module": "./dist/vue-website-page-builder.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist",
-    "src"
+    "src",
+    "README.md",
+    "LICENSE"
   ],
   "exports": {
     ".": {
@@ -17,6 +20,32 @@
     },
     "./style.css": "./dist/vue-website-page-builder.css"
   },
+  "keywords": [
+    "vue",
+    "vue3",
+    "page-builder",
+    "drag-drop",
+    "website-builder",
+    "components",
+    "development"
+  ],
+  "author": {
+    "name": "qaiswardag",
+    "url": "https://github.com/qaiswardag"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qaiswardag/vue-website-page-builder.git"
+  },
+  "bugs": {
+    "url": "https://github.com/qaiswardag/vue-website-page-builder/issues"
+  },
+  "homepage": "https://github.com/qaiswardag/vue-website-page-builder#readme",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0"
+  },
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
@@ -25,7 +54,8 @@
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
     "lint": "eslint . --fix",
-    "format": "prettier --write src/"
+    "format": "prettier --write src/",
+    "prepublishOnly": "npm run build:lib"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.16",

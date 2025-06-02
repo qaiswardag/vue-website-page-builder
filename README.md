@@ -1,3 +1,79 @@
+# @myissue/vue-website-page-builder
+
+## 🚧 **DEVELOPMENT VERSION - NOT READY FOR PRODUCTION** 🚧
+
+> **⚠️ WARNING**: This package is currently in **alpha development stage**.
+>
+> - **DO NOT USE IN PRODUCTION** applications
+> - APIs may change without notice
+> - Features may be incomplete or unstable
+> - Documentation is work in progress
+> - Use only for testing and development purposes
+
+---
+
+## Overview
+
+A Vue.js page builder component with drag & drop functionality for creating dynamic web pages.
+
+## Installation
+
+```bash
+npm install @myissue/vue-website-page-builder
+```
+
+## Quick Start
+
+```vue
+<script setup>
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+</script>
+
+<template>
+  <PageBuilder />
+</template>
+```
+
+## Features
+
+- 🎯 **Zero Configuration** - Just import and use
+- 🔧 **Self-contained** - Manages its own state internally
+- 🎨 **Drag & Drop** - Visual page building experience
+- 📱 **Responsive** - Mobile-friendly interface
+- ⚡ **Vue 3** - Built with modern Vue.js
+
+## Development Status
+
+| Feature            | Status         |
+| ------------------ | -------------- |
+| Basic Page Builder | 🟡 Alpha       |
+| Component Library  | 🟡 Alpha       |
+| State Management   | 🟡 Alpha       |
+| Documentation      | 🔴 In Progress |
+| Testing            | 🔴 Not Started |
+| Stable API         | 🔴 Not Ready   |
+
+## Requirements
+
+- Node.js ≥ 18.0.0
+- Vue.js ≥ 3.0.0
+- Modern browser with ES6+ support
+
+## License
+
+MIT License - see LICENSE file for details
+
+## Author
+
+**qaiswardag**
+
+- GitHub: [@qaiswardag](https://github.com/qaiswardag)
+
+---
+
+> 🚧 **Remember**: This is a development version. Wait for v1.0.0 for production use!
+
 <p align="center" dir="auto">
 <img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo">
 </p>
@@ -86,298 +162,14 @@ Customizing the page builder is made simple since all the logic resides in the P
 
 ```vue
 <script setup>
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const userStore = useUserStore();
-const openPageBuilder = ref(false);
-
-const pageBuilderPrimaryHandler = ref(null);
-const pageBuilderSecondaryHandler = ref(null);
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
-const formType = ref('create');
-
-const getIsLoading = computed(() => {
-  return userStore.getIsLoading;
-});
-
-const pathPageBuilderStorageCreate = `page-builder-create-post`;
-
-const resourceId = 1;
-const pathPageBuilderStorageUpdate = `page-builder-update-post-id-${resourceId}`;
-
-const handlePageBuilder = async function () {
-
-  userStore.setIsLoading(true);
-
-  await nextTick();
-  openPageBuilder.value = true;
-
-  if (formType.value === 'create') {
-    pageBuilderStateStore.setComponents([]);
-    pageBuilder.areComponentsStoredInLocalStorage();
-  }
-
-  // handle click
-  pageBuilderPrimaryHandler.value = async function () {
-    userStore.setIsLoading(true);
-
-    if (formType.value === 'update') {
-      await nextTick();
-      pageBuilder.saveComponentsLocalStorageUpdate();
-    }
-
-
-    openPageBuilder.value = false;
-    userStore.setIsLoading(false);
-  };
-
-  // handle click
-  pageBuilderSecondaryHandler.value = async function () {
-    userStore.setIsLoading(true);
-
-    // save to local storage if new resource
-    if (formType.value === 'create') {
-      await nextTick();
-      pageBuilder.saveComponentsLocalStorage();
-      await nextTick();
-    }
-    // save to local storage if update
-    if (formType.value === 'update') {
-      await nextTick();
-      pageBuilder.synchronizeDOMAndComponents();
-      await nextTick();
-    }
-
-    openPageBuilder.value = false;
-    userStore.setIsLoading(false);
-  };
-
-  userStore.setIsLoading(false);
-
-  // end modal
-};
-// Builder # End
-const handleDraftForUpdate = async function () {
-  userStore.setIsLoading(true);
-
-  if (formType.value === 'update') {
-    await nextTick();
-    pageBuilder.areComponentsStoredInLocalStorageUpdate();
-    await nextTick();
-    pageBuilder.setEventListenersForElements();****
-    userStore.setIsLoading(false);
-  }
-};
-
-onBeforeMount(() => {
-  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
-
-  pageBuilderStateStore.setLocalStorageItemNameUpdate(
-    pathPageBuilderStorageUpdate
-  );
-});
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
 </script>
 
 <template>
-  <PageBuilderModal
-    :show="openPageBuilder"
-    updateOrCreate="create"
-    @pageBuilderPrimaryHandler="pageBuilderPrimaryHandler"
-    @pageBuilderSecondaryHandler="pageBuilderSecondaryHandler"
-    @handleDraftForUpdate="handleDraftForUpdate"
-  >
-    <PageBuilderView></PageBuilderView>
-  </PageBuilderModal>
+  <PageBuilder />
 </template>
 ```
-
-### Saving Page Builder drafts to local storage
-
-Each Page Builder draft is automatically saved to local storage, allowing you to resume your work later. This process differs slightly depending on whether you are creating a new resource like a blog post, job ad, or listing, or updating an existing resource.
-
-When creating a new resource like a blog post, job ad, or listing, you need to specify a name for the local storage item that will store the draft. This is done as follows:
-
-```js
-const pathPageBuilderStorageCreate = `page-builder-create-post`
-
-onBeforeMount(() => {
-  // Define local storage key name before on mount
-  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate)
-})
-```
-
-For updating an existing resource like a blog post, job ad, or listing, you must first obtain the blog post ID and then save a name that includes this ID to local storage. This way, the Page Builder can find the exact resource from local storage later on when the user wants to continue editing the resource with the unique ID:
-
-```js
-const resourceId = 1
-const pathPageBuilderStorageUpdate = `page-builder-update-post-id-${resourceId}`
-
-onBeforeMount(() => {
-  // Define local storage key name before on mount
-  pageBuilderStateStore.setLocalStorageItemNameUpdate(pathPageBuilderStorageUpdate)
-})
-```
-
-In both cases, the pageBuilderStateStore is responsible for handling the local storage name, ensuring that the correct draft is stored and retrieved as needed.
-
-### HTML Components
-
-If Creating new components, please always add the HTML inside section tags.
-
-```html
-<section>
-  <div>
-    <p>New components</p>
-  </div>
-</section>
-```
-
-HTML components are currently stored in a JSON file named `components.json` in the root directory. HTML components can also be easily stored in the database, resulting in better management. Simply provide the `setLoadComponents` method with the new URL for loading components from the backend.
-
-### Unsplash
-
-Please note that if you want to use Unsplash, simply create an .env file in your root folder and enter your Unsplash API key and value.
-
-Example: VITE_UNSPLASH_KEY="your-unsplash-api-key-here"
-
-[Get your unsplash api key here](https://unsplash.com/developers).
-
-## Use with Backend
-
-The Page builder's capabilities become infinite when integrated with a backend.
-
-If you're familiar with Laravel, the Page Builder is already integrated with the open-source Laravel Free Listing Directory, Blog & Job Board Theme, which is available at:
-[demo & repo](https://github.com/qaiswardag/laravel_vue_directory_and_job_board_theme).
-
-By utilizing a backend Framework, the HTML components, currently stored in a JSON file at `components.json`, can be easily stored in the database, resulting in better management of HTML components.
-
-## Get in touch
-
-If you have any questions or if you're looking for customization, feel free to connect with me on LinkedIn and send me a message.
-
-- [Email](mailto:qais.wardag@outlook.com)
-- [LinkedIn](https://www.linkedin.com/in/qaiswardag)
-
-## Contributing
-
-Thank you for considering contributing to this project!
-
-# Vue Website Page Builder
-
-A powerful, flexible Vue 3 page builder component for creating dynamic websites.
-
-## Features
-
-- 🎨 Drag & drop page builder interface
-- 🧩 Modular component system
-- 📱 Responsive design support
-- 🎯 TypeScript support
-- 🔧 Customizable components
-- 💾 State management with Pinia
-- 🎨 TailwindCSS styling
-
-## Installation
-
-### For Production Use
-
-```bash
-npm install vue-website-page-builder
-```
-
-### For Local Development
-
-If you want to use this package locally in your Laravel project for development:
-
-1. **Clone and build the package:**
-
-   ```bash
-   git clone <repository-url>
-   cd vue-website-page-builder
-   npm install
-   npm run build:lib
-   ```
-
-2. **Set up in your Laravel project:**
-
-   ```bash
-   # In your Laravel project's resources/js/package.json
-   {
-     "dependencies": {
-       "vue-website-page-builder": "file:../../../vue-website-page-builder",
-       "vue": "^3.5.13",
-       "pinia": "^2.1.7"
-     }
-   }
-   ```
-
-3. **Install dependencies:**
-   ```bash
-   cd your-laravel-project/resources/js
-   npm install
-   ```
-
-For detailed local development setup, see [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md).
-
-## Usage
-
-```vue
-<template>
-  <div>
-    <PageBuilder />
-  </div>
-</template>
-
-<script setup>
-import { PageBuilder, usePageBuilderStateStore } from 'vue-website-page-builder'
-import 'vue-website-page-builder/style.css'
-
-const pageBuilderStore = usePageBuilderStateStore()
-</script>
-```
-
-## Available Components
-
-- `PageBuilder` - Main page builder interface
-- `Preview` - Preview component for displaying built pages
-
-## Available Stores
-
-- `usePageBuilderStateStore` - Main state management store
-
-## Development
-
-### Scripts
-
-- `npm run dev` - Start development server
-- `npm run build:lib` - Build library for distribution
-- `npm run build` - Build for production
-- `npm run type-check` - Run TypeScript type checking
-- `npm run lint` - Run ESLint
-- `npm run format` - Format code with Prettier
-
-### Local Development Setup
-
-Use the provided setup script:
-
-```bash
-./setup-local-dev.sh
-```
-
-Or follow the manual steps in [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md).
-
-## Requirements
-
-- Vue 3.5+
-- Node.js 18+
-- TypeScript 5+
-
-## Dependencies
-
-- Vue 3
-- Pinia (state management)
-- TailwindCSS (styling)
-- TipTap (rich text editing)
-- Headless UI (accessible components)
 
 ## License
 
@@ -390,5 +182,3 @@ Or follow the manual steps in [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md).
 3. Make your changes
 4. Build and test locally
 5. Submit a pull request
-
-For local development setup, see [LOCAL_DEVELOPMENT.md](./LOCAL_DEVELOPMENT.md).
