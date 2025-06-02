@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, computed, ref, watch, nextTick } from 'vue'
+import { onMounted, computed, ref, watch } from 'vue'
 import PageBuilder from '@/composables/PageBuilder.ts'
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue'
 import Preview from '@/PageBuilder/Preview.vue'
@@ -13,7 +13,6 @@ import { useMediaLibraryStore } from '@/stores/media-library'
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const emit = defineEmits(['previewCurrentDesign'])
 const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 const getMenuRight = computed(() => {
   return pageBuilderStateStore.getMenuRight
@@ -189,7 +188,7 @@ onMounted(async () => {
                   "
                 >
                   <div class="flex items-center justify-center gap-2">
-                    <span class="lg:block hidden"> Add new Component - v.1.0.3 </span>
+                    <span class="lg:block hidden"> Add new Component - v.1.0.5 </span>
 
                     <span
                       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
