@@ -11,6 +11,14 @@ import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useUserStore } from '@/stores/user'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
+// Accept updateOrCreate prop from parent (Laravel app)
+const props = defineProps({
+  updateOrCreate: {
+    type: String,
+    default: 'create',
+  },
+})
+
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
 const userStore = useUserStore()
@@ -19,7 +27,7 @@ const openPageBuilder = ref(false)
 const pageBuilderPrimaryHandler = ref(null)
 const pageBuilderSecondaryHandler = ref(null)
 const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
-const formType = ref('create')
+const formType = ref(props.updateOrCreate)
 
 const getIsLoading = computed(() => {
   return userStore.getIsLoading
@@ -102,21 +110,23 @@ onBeforeMount(() => {
 </script>
 
 <template>
-  <teleport to="body">
-    <FullScreenSpinner v-if="getIsLoading"></FullScreenSpinner>
-  </teleport>
-  <PageBuilderModal
-    :show="openPageBuilder"
-    updateOrCreate="create"
-    @pageBuilderPrimaryHandler="pageBuilderPrimaryHandler"
-    @pageBuilderSecondaryHandler="pageBuilderSecondaryHandler"
-    @handleDraftForUpdate="handleDraftForUpdate"
-  >
-    <PageBuilderView></PageBuilderView>
-  </PageBuilderModal>
+  <div>
+    <teleport to="body">
+      <FullScreenSpinner v-if="getIsLoading"></FullScreenSpinner>
+    </teleport>
+    <PageBuilderModal
+      :show="openPageBuilder"
+      :updateOrCreate="updateOrCreate"
+      @pageBuilderPrimaryHandler="pageBuilderPrimaryHandler"
+      @pageBuilderSecondaryHandler="pageBuilderSecondaryHandler"
+      @handleDraftForUpdate="handleDraftForUpdate"
+    >
+      <PageBuilderView :updateOrCreate="updateOrCreate"></PageBuilderView>
+    </PageBuilderModal>
 
-  <Navbar @handleButton="handlePageBuilder"></Navbar>
-  <HomeSection @handleButton="handlePageBuilder"></HomeSection>
+    <Navbar @handleButton="handlePageBuilder"></Navbar>
+    <HomeSection @handleButton="handlePageBuilder"></HomeSection>
 
-  <Footer></Footer>
+    <Footer></Footer>
+  </div>
 </template>

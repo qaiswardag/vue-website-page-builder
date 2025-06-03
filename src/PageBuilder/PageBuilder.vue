@@ -24,6 +24,7 @@ const props = defineProps({
     default: null,
   },
   updateOrCreate: {
+    type: String,
     required: true,
   },
 })
@@ -159,6 +160,25 @@ const draggableZone = ref(null)
 onMounted(async () => {
   pageBuilder.setEventListenersForElements()
 })
+
+// Missing variables and functions
+const hideDraftButton = ref(true)
+
+// Define required functions that are referenced in template
+const firstButton = function () {
+  // Close or cancel function - can be customized as needed
+  console.log('First button clicked - close/cancel action')
+}
+
+const secondButton = function () {
+  // Save function - can be customized as needed
+  console.log('Second button clicked - save action')
+}
+
+const handleDraftForUpdate = function () {
+  // Handle draft for update function - can be customized as needed
+  console.log('Handle draft for update')
+}
 </script>
 
 <template>

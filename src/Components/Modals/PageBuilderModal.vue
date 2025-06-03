@@ -27,6 +27,10 @@ defineProps({
     default: false,
     required: true,
   },
+  updateOrCreate: {
+    type: String,
+    default: 'create',
+  },
 })
 
 const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
