@@ -6,8 +6,8 @@ export { default as Preview } from './PageBuilder/Preview.vue'
 export { usePageBuilderStateStore } from './stores/page-builder-state'
 export { useMediaLibraryStore } from './stores/media-library'
 
-// Export PageBuilder composable/class with auto-injection capability
-export { default as PageBuilderComposable } from './composables/PageBuilder'
+// Export PageBuilder class with auto-injection capability
+export { default as PageBuilderClass } from './composables/PageBuilder'
 
 // Export modal management composable
 export { usePageBuilderModal } from './composables/usePageBuilderModal'
