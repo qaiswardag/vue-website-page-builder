@@ -34,6 +34,9 @@ export default defineConfig(({ mode }) => {
         },
         emptyOutDir: true,
       },
+      esbuild: {
+        target: 'esnext',
+      },
     }
   }
 
