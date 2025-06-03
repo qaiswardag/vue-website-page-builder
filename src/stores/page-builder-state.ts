@@ -408,7 +408,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       this.element = payload || null
     },
     setComponent(payload: ComponentObject | null): void {
-      console.log('setComponent called:')
+      console.log('setComponent called:', payload)
       if (!payload) {
         this.element = null
         this.component = null
