@@ -412,11 +412,11 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       if (!payload) {
         this.element = null
         this.component = null
-        // Note: pageBuilder.removeHoveredAndSelected(null) removed as pageBuilder is not available in store scope
         return
       }
       this.component = payload || null
     },
+
     setComponents(payload: ComponentObject[] | null): void {
       this.components = payload || []
     },
