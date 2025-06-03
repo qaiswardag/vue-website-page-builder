@@ -271,6 +271,7 @@ class PageBuilder {
   }
 
   #handleElementClick = (e: Event, element: HTMLElement): void => {
+    console.log('#handleElementClick called')
     e.stopPropagation()
 
     const pagebuilder = document.querySelector('#pagebuilder')
@@ -336,8 +337,9 @@ class PageBuilder {
    * attach event listeners to each element within a 'section'
    */
   setEventListenersForElements = () => {
+    console.log('setEventListenersForElements called')
     if (this.showRunningMethodLogs) {
-      console.log('setEventListenersForElements')
+      console.log('setEventListenersForElements called')
     }
 
     const pagebuilder = document.querySelector('#pagebuilder')
@@ -1505,7 +1507,7 @@ class PageBuilder {
   }
 
   // Helper method for custom components to easily add components
-  addComponent(componentObject: ComponentObject, onSuccess?: () => void): void {
+  addComponent(componentObject: ComponentObject): void {
     if (this.showRunningMethodLogs) {
       console.log('addComponent')
     }
@@ -1522,18 +1524,13 @@ class PageBuilder {
       })
 
       this.setEventListenersForElements()
-
-      // Call success callback if provided
-      if (onSuccess && typeof onSuccess === 'function') {
-        onSuccess()
-      }
     } catch (error) {
       console.error('Error adding component:', error)
     }
   }
 
   // Helper method for adding HTML helper components
-  addHelperComponent(helperComponentObject: ComponentObject, onSuccess?: () => void): void {
+  addHelperComponent(helperComponentObject: ComponentObject): void {
     if (this.showRunningMethodLogs) {
       console.log('addHelperComponent')
     }
@@ -1550,11 +1547,6 @@ class PageBuilder {
       })
 
       this.setEventListenersForElements()
-
-      // Call success callback if provided
-      if (onSuccess && typeof onSuccess === 'function') {
-        onSuccess()
-      }
     } catch (error) {
       console.error('Error adding helper component:', error)
     }
