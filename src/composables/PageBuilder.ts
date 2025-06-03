@@ -84,10 +84,7 @@ class PageBuilder {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private observer?: any // Add missing observer property
 
-  constructor(
-    pageBuilderStateStore?: PageBuilderStateStore,
-    mediaLibraryStore?: MediaLibraryStore,
-  ) {
+  constructor(pageBuilderStateStore: PageBuilderStateStore, mediaLibraryStore: MediaLibraryStore) {
     /**
      * Initialize an instance variable 'elementsWithListeners' as a WeakSet.
      *
@@ -108,24 +105,9 @@ class PageBuilder {
 
     this.timer = null
 
-    // Auto-inject stores if not provided
-    if (!pageBuilderStateStore || !mediaLibraryStore) {
-      const injectedStateStore = inject<PageBuilderStateStore>('pageBuilderStateStore')
-      const injectedMediaStore = inject<MediaLibraryStore>('mediaLibraryStore')
-
-      if (!injectedStateStore || !injectedMediaStore) {
-        throw new Error(
-          'PageBuilder requires stores to be either passed as parameters or injected via provide/inject. ' +
-            'Make sure PageBuilder component provides the stores or pass them manually.',
-        )
-      }
-
-      this.pageBuilderStateStore = injectedStateStore
-      this.mediaLibraryStore = injectedMediaStore
-    } else {
-      this.pageBuilderStateStore = pageBuilderStateStore
-      this.mediaLibraryStore = mediaLibraryStore
-    }
+    // Stores are now required parameters - no fallback to inject
+    this.pageBuilderStateStore = pageBuilderStateStore
+    this.mediaLibraryStore = mediaLibraryStore
 
     this.getTextAreaVueModel = computed(() => this.pageBuilderStateStore.getTextAreaVueModel)
     this.getLocalStorageItemName = computed(
