@@ -48,11 +48,9 @@ try {
 // Initialize PageBuilder with stores
 pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 
-// Provide the stores for child components if using internal Pinia
-if (internalPinia) {
-  provide('pageBuilderStateStore', pageBuilderStateStore)
-  provide('mediaLibraryStore', mediaLibraryStore)
-}
+// Always provide the stores for child components (needed for custom components)
+provide('pageBuilderStateStore', pageBuilderStateStore)
+provide('mediaLibraryStore', mediaLibraryStore)
 
 // Provide custom components for child components
 provide('customMediaComponent', props.CustomMediaLibraryComponent)
