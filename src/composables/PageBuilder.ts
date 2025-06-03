@@ -271,8 +271,8 @@ class PageBuilder {
   }
 
   #handleElementClick = (e: Event, element: HTMLElement): void => {
-    e.stopPropagation()
     e.preventDefault()
+    e.stopPropagation()
 
     const pagebuilder = document.querySelector('#pagebuilder')
 
