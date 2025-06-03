@@ -188,7 +188,7 @@ const handleDraftForUpdate = function () {
       :show="showModalAddComponent"
       :firstButtonText="firstButtonTextSearchComponents"
       :title="titleModalAddComponent"
-      :custom-search-component="props.CustomSearchComponent"
+      :custom-search-component="CustomSearchComponent"
       @firstModalButtonSearchComponentsFunction="firstModalButtonSearchComponentsFunction"
     ></SearchComponents>
     <PageBuilderPreviewModal
