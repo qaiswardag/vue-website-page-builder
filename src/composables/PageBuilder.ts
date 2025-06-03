@@ -1217,7 +1217,6 @@ class PageBuilder {
   }
   //
   async updateBasePrimaryImage(data?: { type: string }): Promise<void> {
-    console.log('køre denne', data)
     if (this.showRunningMethodLogs) {
       console.log('updateBasePrimaryImage')
     }
@@ -1232,7 +1231,7 @@ class PageBuilder {
       }
     }
     // If no data provided, apply current image if available (new simplified usage)
-    else if (!data && this.getCurrentImage.value && this.getCurrentImage.value.file) {
+    else if (this.getCurrentImage.value && this.getCurrentImage.value.file) {
       await this.nextTick
       console.log('eeeer:', this.getCurrentImage.value.file)
       this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.file}`)
