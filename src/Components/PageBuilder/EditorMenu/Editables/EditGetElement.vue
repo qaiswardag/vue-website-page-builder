@@ -10,7 +10,7 @@ import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
 // Inject custom media component
-const customMediaComponent = inject('customMediaComponent', null)
+const customMediaComponent = inject('CustomMediaComponent', null)
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
