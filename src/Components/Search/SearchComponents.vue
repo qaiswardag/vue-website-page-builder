@@ -47,8 +47,8 @@ const firstButton = function () {
 
       <div class="p-4">
         <!-- Only show custom search component if provided -->
-        <div v-if="props.customSearchComponent" class="border border-gray-200 rounded-lg p-4">
-          <component :is="props.customSearchComponent" />
+        <div v-if="customSearchComponent" class="border border-gray-200 rounded-lg p-4">
+          <component :is="customSearchComponent" />
         </div>
         <div v-else class="text-center py-8 text-gray-500">
           <p>No custom search component provided</p>

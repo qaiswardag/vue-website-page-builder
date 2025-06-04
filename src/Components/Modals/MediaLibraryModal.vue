@@ -116,10 +116,8 @@ provide('closeMediaLibraryModal', closeMediaLibraryModal)
 
               <div class="p-4">
                 <!-- Show only custom media component if provided -->
-                <div v-if="props.customMediaComponent" class="w-full">
-                  <div tabindex="0" class="focus:outline-none">
-                    <component :is="props.customMediaComponent" />
-                  </div>
+                <div v-if="customMediaComponent" class="w-full">
+                  <component :is="customMediaComponent" />
                 </div>
                 <div v-else class="text-center py-8 text-gray-500">
                   <p>No custom media component provided</p>
