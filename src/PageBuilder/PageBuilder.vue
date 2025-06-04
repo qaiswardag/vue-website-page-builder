@@ -236,22 +236,63 @@ const handleDraftForUpdate = function () {
     </PageBuilderPreviewModal>
 
     <div class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2">
-      <div class="py-4 p-4 bg-red-100 text-sm test-data">
-        <p class="text-xs py-2 px-2">passed user is: {{ getCurrentUser }}</p>
-        <p class="text-xs py-2 px-2">passed updateOrCreate is: {{ updateOrCreate }}</p>
-        <p class="text-xs py-2 px-2">
-          passed resourceData: {{ resourceData ? JSON.stringify(resourceData) : 'null' }} passed
-        </p>
-        <p class="text-xs py-2 px-2">
-          getCurrentResourceData:
-          {{ getCurrentResourceData ? JSON.stringify(getCurrentResourceData) : 'null' }}
-        </p>
-        <p class="text-xs py-2 px-2">
-          CustomMediaLibraryComponent passed: {{ CustomMediaLibraryComponent ? true : false }}
-        </p>
-        <p class="text-xs py-2 px-2">
-          CustomSearchComponent passed: {{ CustomSearchComponent ? true : false }}
-        </p>
+      <div class="py-4 p-4 bg-red-100 text-sm test-data m-4 rounded-lg">
+        <h3 class="font-semibold mb-3 text-gray-800">PageBuilder Debug Info</h3>
+        <div class="bg-white rounded border overflow-hidden">
+          <table class="min-w-full text-xs">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Property</th>
+                <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Value</th>
+                <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Type</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-200">
+              <tr>
+                <td class="px-3 py-2 font-medium text-gray-600">User</td>
+                <td class="px-3 py-2">
+                  {{ getCurrentUser ? JSON.stringify(getCurrentUser) : 'null' }}
+                </td>
+                <td class="px-3 py-2 text-gray-500">{{ typeof getCurrentUser }}</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2 font-medium text-gray-600">Update or Create</td>
+                <td class="px-3 py-2">{{ updateOrCreate }}</td>
+                <td class="px-3 py-2 text-gray-500">{{ typeof updateOrCreate }}</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2 font-medium text-gray-600">Resource Data (prop)</td>
+                <td class="px-3 py-2">
+                  {{ resourceData ? JSON.stringify(resourceData) : 'null' }}
+                </td>
+                <td class="px-3 py-2 text-gray-500">{{ typeof resourceData }}</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2 font-medium text-gray-600">Resource Data (store)</td>
+                <td class="px-3 py-2">
+                  {{ getCurrentResourceData ? JSON.stringify(getCurrentResourceData) : 'null' }}
+                </td>
+                <td class="px-3 py-2 text-gray-500">{{ typeof getCurrentResourceData }}</td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2 font-medium text-gray-600">Custom Media Component</td>
+                <td class="px-3 py-2">
+                  {{ CustomMediaLibraryComponent ? 'Provided' : 'Not provided' }}
+                </td>
+                <td class="px-3 py-2 text-gray-500">
+                  {{ CustomMediaLibraryComponent ? 'true' : 'false' }}
+                </td>
+              </tr>
+              <tr>
+                <td class="px-3 py-2 font-medium text-gray-600">Custom Search Component</td>
+                <td class="px-3 py-2">{{ CustomSearchComponent ? 'Provided' : 'Not provided' }}</td>
+                <td class="px-3 py-2 text-gray-500">
+                  {{ CustomSearchComponent ? 'true' : 'false' }}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
       <div class="relative h-full flex">
