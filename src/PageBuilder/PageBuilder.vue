@@ -232,7 +232,8 @@ const handleDraftForUpdate = function () {
         <p class="text-xs py-2 px-2">passed user is: {{ getCurrentUser }}</p>
         <p class="text-xs py-2 px-2">passed updateOrCreate is: {{ updateOrCreate }}</p>
         <p class="text-xs py-2 px-2">
-          passed resourceData: {{ resourceData ? JSON.stringify(resourceData) : 'null' }}
+          passed resourceData: {{ resourceData ? JSON.stringify(resourceData) : 'null' }} passed
+          getCurrentResourceData: {{ 1 }}
         </p>
         <p class="text-xs py-2 px-2">
           CustomMediaLibraryComponent passed: {{ CustomMediaLibraryComponent ? true : false }}
