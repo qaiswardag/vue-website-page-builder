@@ -1,6 +1,6 @@
 <script setup>
 import tailwindBorderStyleWidthPlusColor from '@/utils/builder/tailwind-border-style-width-color'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 import { computed, ref, watch } from 'vue'
 import {
@@ -15,7 +15,7 @@ import { useMediaLibraryStore } from '@/stores/media-library'
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const borderStyle = ref(null)
 const borderWidth = ref(null)
 const borderColor = ref(null)
@@ -33,7 +33,7 @@ watch(
   getBorderStyle,
   (newValue) => {
     borderStyle.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -41,7 +41,7 @@ watch(
   getBorderWidth,
   (newValue) => {
     borderWidth.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -49,7 +49,7 @@ watch(
   getBorderColor,
   (newValue) => {
     borderColor.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -64,7 +64,7 @@ watch(
         <select
           v-model="borderStyle"
           class="myPrimarySelect"
-          @change="pageBuilder.handleBorderStyle(borderStyle)"
+          @change="pageBuilderClass.handleBorderStyle(borderStyle)"
         >
           <option disabled value="">Select</option>
           <option
@@ -80,7 +80,7 @@ watch(
         <select
           v-model="borderWidth"
           class="myPrimarySelect"
-          @change="pageBuilder.handleBorderWidth(borderWidth)"
+          @change="pageBuilderClass.handleBorderWidth(borderWidth)"
         >
           <option disabled value="">Select</option>
           <option
@@ -127,7 +127,7 @@ watch(
               <ListboxOption
                 as="template"
                 v-for="color in tailwindBorderStyleWidthPlusColor.borderColor"
-                @click="pageBuilder.handleBorderColor(borderColor)"
+                @click="pageBuilderClass.handleBorderColor(borderColor)"
                 :key="color"
                 :value="color"
                 v-slot="{ active, borderColor }"

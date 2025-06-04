@@ -1,7 +1,7 @@
 <script setup>
 import Modal from '@/Components/Modals/Modal.vue'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { delay } from '@/composables/delay'
 
 import {
@@ -32,7 +32,7 @@ defineProps({
 // Get updateOrCreate from store instead of prop
 const updateOrCreate = computed(() => pageBuilderStateStore.getUpdateOrCreate)
 
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 
 const hideDraftButton = ref(true)
 
@@ -82,7 +82,7 @@ const firstButton = function () {
     showModalConfirmClosePageBuilder.value = false
     emit('pageBuilderPrimaryHandler')
 
-    pageBuilder.removeHoveredAndSelected()
+    pageBuilderClass.removeHoveredAndSelected()
     userStore.setIsLoading(true)
     await delay()
     userStore.setIsLoading(false)
@@ -98,7 +98,7 @@ const handleEscapeKey = function () {
 // first button function
 const secondButton = function () {
   emit('pageBuilderSecondaryHandler')
-  pageBuilder.removeHoveredAndSelected()
+  pageBuilderClass.removeHoveredAndSelected()
 }
 
 //

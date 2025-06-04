@@ -1,13 +1,13 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const currentClasses = ref(null)
 const getCurrentClasses = computed(() => {
   return pageBuilderStateStore.getCurrentClasses
@@ -24,8 +24,8 @@ watch(
 const inputClass = ref('')
 
 const handleAddClasses = function () {
-  pageBuilder.handleAddClasses(inputClass.value)
-  pageBuilder.handlePageBuilderMethods()
+  pageBuilderClass.handleAddClasses(inputClass.value)
+  pageBuilderClass.handlePageBuilderMethods()
 
   inputClass.value = ''
 }
@@ -42,8 +42,8 @@ const handleAddClasses = function () {
           class="myPrimaryTag cursor-pointer hover:bg-myPrimaryErrorColor hover:text-white text-xs py-2 font-medium"
           @click="
             () => {
-              pageBuilder.handleRemoveClasses(className)
-              pageBuilder.handlePageBuilderMethods()
+              pageBuilderClass.handleRemoveClasses(className)
+              pageBuilderClass.handlePageBuilderMethods()
             }
           "
         >

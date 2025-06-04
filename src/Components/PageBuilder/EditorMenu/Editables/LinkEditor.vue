@@ -1,5 +1,5 @@
 <script setup>
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import EditorAccordion from '../EditorAccordion.vue'
 import { computed, nextTick, ref, watch } from 'vue'
 import { Switch } from '@headlessui/vue'
@@ -8,7 +8,7 @@ import { useMediaLibraryStore } from '@/stores/media-library'
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const hyperlinkEnable = ref(false)
 const urlInput = ref(null)
 const openHyperlinkInNewTab = ref(false)
@@ -59,18 +59,26 @@ const handleToggleHyperlinkEnable = async function (data) {
 
   // remove hyperlink
   if (hyperlinkEnable.value === false) {
-    pageBuilder.handleHyperlink(hyperlinkEnable.value, data)
+    pageBuilderClass.handleHyperlink(hyperlinkEnable.value, data)
   }
 }
 // add hyperlink
 const handleHyperlink = function () {
-  pageBuilder.handleHyperlink(hyperlinkEnable.value, urlInput.value, openHyperlinkInNewTab.value)
+  pageBuilderClass.handleHyperlink(
+    hyperlinkEnable.value,
+    urlInput.value,
+    openHyperlinkInNewTab.value,
+  )
 }
 
 const handleToggleOpenHyperlinkInNewTab = async function () {
   await nextTick()
 
-  pageBuilder.handleHyperlink(hyperlinkEnable.value, urlInput.value, openHyperlinkInNewTab.value)
+  pageBuilderClass.handleHyperlink(
+    hyperlinkEnable.value,
+    urlInput.value,
+    openHyperlinkInNewTab.value,
+  )
 }
 </script>
 

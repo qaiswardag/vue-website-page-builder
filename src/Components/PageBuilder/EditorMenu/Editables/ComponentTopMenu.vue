@@ -1,6 +1,6 @@
 <script setup>
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { ref } from 'vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
@@ -20,7 +20,7 @@ const thirdButtonModal = ref(null)
 const firstModalButtonFunction = ref(null)
 const secondModalButtonFunction = ref(null)
 const thirdModalButtonFunction = ref(null)
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 
 // remove component
 const deleteComponent = function (e) {
@@ -40,7 +40,7 @@ const deleteComponent = function (e) {
   //
   // handle click
   thirdModalButtonFunction.value = function () {
-    pageBuilder.deleteComponent()
+    pageBuilderClass.deleteComponent()
 
     showModalDeleteComponent.value = false
   }
@@ -77,14 +77,14 @@ const deleteComponent = function (e) {
 
     <button
       type="button"
-      @click="pageBuilder.moveComponent(-1)"
+      @click="pageBuilderClass.moveComponent(-1)"
       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
     >
       <span class="material-symbols-outlined"> move_up </span>
     </button>
     <button
       type="button"
-      @click="pageBuilder.moveComponent(1)"
+      @click="pageBuilderClass.moveComponent(1)"
       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
     >
       <span class="material-symbols-outlined"> move_down </span>

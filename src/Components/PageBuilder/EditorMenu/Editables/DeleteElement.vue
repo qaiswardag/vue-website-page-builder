@@ -1,13 +1,13 @@
 <script setup>
 import EditorAccordion from '../EditorAccordion.vue'
 import { computed, ref } from 'vue'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const getRestoredElement = computed(() => {
   return pageBuilderStateStore.getRestoredElement
 })
@@ -20,7 +20,7 @@ const getRestoredElement = computed(() => {
       <div class="my-2">
         <button
           v-if="getRestoredElement !== null"
-          @click="pageBuilder.handleRestoreElement"
+          @click="pageBuilderClass.handleRestoreElement"
           type="button"
           class="myPrimaryButton gap-2 items-center w-full"
         >
@@ -29,7 +29,7 @@ const getRestoredElement = computed(() => {
         </button>
         <button
           v-if="getRestoredElement === null"
-          @click="pageBuilder.handleDeleteElement"
+          @click="pageBuilderClass.handleDeleteElement"
           type="button"
           class="myPrimaryDeleteButton gap-2 items-center w-full"
         >

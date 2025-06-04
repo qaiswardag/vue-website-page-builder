@@ -2,7 +2,7 @@
 const version = __APP_VERSION__
 import { onMounted, computed, ref, watch, provide } from 'vue'
 import { createPinia } from 'pinia'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue'
 import Preview from '@/PageBuilder/Preview.vue'
 import ComponentTopMenu from '@/Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue'
@@ -79,7 +79,7 @@ if (props.user) {
 pageBuilderStateStore.setUpdateOrCreate(props.updateOrCreate)
 
 // Initialize PageBuilder with stores
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 
 // Provide stores for child components
 provide('pageBuilderStateStore', pageBuilderStateStore)
@@ -100,7 +100,7 @@ const getMenuRight = computed(() => {
   return pageBuilderStateStore.getMenuRight
 })
 const previewCurrentDesign = function () {
-  pageBuilder.previewCurrentDesign()
+  pageBuilderClass.previewCurrentDesign()
 }
 const openPageBuilderPreviewModal = ref(false)
 const firstPageBuilderPreviewModalButton = ref(null)
@@ -186,8 +186,8 @@ watch(getElementAttributes, (newAttributes, oldAttributes) => {
     newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
     // Trigger your method when any of the specified attributes change
-    pageBuilder.handlePageBuilderMethods()
-    pageBuilder.setEventListenersForElements()
+    pageBuilderClass.handlePageBuilderMethods()
+    pageBuilderClass.setEventListenersForElements()
   }
 })
 
@@ -198,7 +198,7 @@ const handleSelectComponent = function (componentObject) {
 const draggableZone = ref(null)
 
 onMounted(async () => {
-  pageBuilder.setEventListenersForElements()
+  pageBuilderClass.setEventListenersForElements()
 })
 
 // Missing variables and functions

@@ -1,6 +1,6 @@
 <script setup>
 import tailwindColors from '@/utils/builder/tailwaind-colors'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { computed, ref, watch } from 'vue'
 import {
   Listbox,
@@ -14,7 +14,7 @@ import { useMediaLibraryStore } from '@/stores/media-library'
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const backgroundColor = ref(null)
 const getBackgroundColor = computed(() => {
   return pageBuilderStateStore.getBackgroundColor
@@ -24,7 +24,7 @@ watch(
   getBackgroundColor,
   (newValue) => {
     backgroundColor.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -60,7 +60,7 @@ watch(
           <ListboxOption
             as="template"
             v-for="color in tailwindColors.backgroundColorVariables"
-            @click="pageBuilder.handleBackgroundColor(backgroundColor)"
+            @click="pageBuilderClass.handleBackgroundColor(backgroundColor)"
             :key="color"
             :value="color"
             v-slot="{ active, backgroundColor }"

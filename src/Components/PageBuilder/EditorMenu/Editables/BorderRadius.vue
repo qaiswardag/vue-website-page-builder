@@ -1,6 +1,6 @@
 <script setup>
 import tailwindBorderRadius from '@/utils/builder/tailwind-border-radius'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 import { computed, ref, watch } from 'vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
@@ -8,7 +8,7 @@ import { useMediaLibraryStore } from '@/stores/media-library'
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const borderRadiusGlobal = ref(null)
 const borderRadiusTopLeft = ref(null)
 const borderRadiusTopRight = ref(null)
@@ -34,7 +34,7 @@ watch(
   getBorderRadiusGlobal,
   (newValue) => {
     borderRadiusGlobal.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -42,7 +42,7 @@ watch(
   getBorderRadiusTopLeft,
   (newValue) => {
     borderRadiusTopLeft.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -50,7 +50,7 @@ watch(
   getBorderRadiusTopRight,
   (newValue) => {
     borderRadiusTopRight.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -58,7 +58,7 @@ watch(
   getBorderRadiusBottomleft,
   (newValue) => {
     borderRadiusBottomleft.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -66,7 +66,7 @@ watch(
   getBorderRadiusBottomRight,
   (newValue) => {
     borderRadiusBottomRight.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -82,7 +82,7 @@ watch(
         <select
           v-model="borderRadiusGlobal"
           class="myPrimarySelect"
-          @change="pageBuilder.handleBorderRadiusGlobal(borderRadiusGlobal)"
+          @change="pageBuilderClass.handleBorderRadiusGlobal(borderRadiusGlobal)"
         >
           <option disabled value="">Select</option>
           <option
@@ -99,7 +99,7 @@ watch(
         <select
           v-model="borderRadiusTopLeft"
           class="myPrimarySelect"
-          @change="pageBuilder.handleBorderRadiusTopLeft(borderRadiusTopLeft)"
+          @change="pageBuilderClass.handleBorderRadiusTopLeft(borderRadiusTopLeft)"
         >
           <option disabled value="">Select</option>
           <option
@@ -115,7 +115,7 @@ watch(
         <select
           v-model="borderRadiusTopRight"
           class="myPrimarySelect"
-          @change="pageBuilder.handleBorderRadiusTopRight(borderRadiusTopRight)"
+          @change="pageBuilderClass.handleBorderRadiusTopRight(borderRadiusTopRight)"
         >
           <option disabled value="">Select</option>
           <option
@@ -131,7 +131,7 @@ watch(
         <select
           v-model="borderRadiusBottomleft"
           class="myPrimarySelect"
-          @change="pageBuilder.handleBorderRadiusBottomleft(borderRadiusBottomleft)"
+          @change="pageBuilderClass.handleBorderRadiusBottomleft(borderRadiusBottomleft)"
         >
           <option disabled value="">Select</option>
           <option
@@ -147,7 +147,7 @@ watch(
         <select
           v-model="borderRadiusBottomRight"
           class="myPrimarySelect"
-          @change="pageBuilder.handleBorderRadiusBottomRight(borderRadiusBottomRight)"
+          @change="pageBuilderClass.handleBorderRadiusBottomRight(borderRadiusBottomRight)"
         >
           <option disabled value="">Select</option>
           <option

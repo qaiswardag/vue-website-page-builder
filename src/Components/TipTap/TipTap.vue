@@ -1,17 +1,17 @@
 <script setup>
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 </script>
 
 <template>
   <div>
     <div class="blockease-linear duration-200 block ease-linear">
-      <template v-if="pageBuilder.selectedElementIsValidText()">
+      <template v-if="pageBuilderClass.selectedElementIsValidText()">
         <div
           class="border-t border-myPrimaryLightGrayColor flex flex-row justify-between items-center pl-3 pr-3 py-5 duration-200 hover:bg-myPrimaryLightGrayColor"
         >

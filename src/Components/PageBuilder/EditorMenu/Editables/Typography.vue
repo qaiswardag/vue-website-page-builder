@@ -1,5 +1,5 @@
 <script setup>
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 import tailwindFontSizes from '@/utils/builder/tailwind-font-sizes'
 import tailwindFontStyles from '@/utils/builder/tailwind-font-styles'
@@ -7,7 +7,7 @@ import { computed, ref, watch } from 'vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const fontBase = ref(null)
 const fontDesktop = ref(null)
 const fontTablet = ref(null)
@@ -41,7 +41,7 @@ watch(
   getFontBase,
   (newValue) => {
     fontBase.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -49,7 +49,7 @@ watch(
   getFontDesktop,
   (newValue) => {
     fontDesktop.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -57,7 +57,7 @@ watch(
   getFontTablet,
   (newValue) => {
     fontTablet.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -65,7 +65,7 @@ watch(
   getFontMobile,
   (newValue) => {
     fontMobile.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -73,7 +73,7 @@ watch(
   getFontWeight,
   (newValue) => {
     fontWeight.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -81,7 +81,7 @@ watch(
   getFontFamily,
   (newValue) => {
     fontFamily.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -89,7 +89,7 @@ watch(
   getFontStyle,
   (newValue) => {
     fontStyle.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -106,7 +106,7 @@ watch(
         <select
           v-model="fontBase"
           class="myPrimarySelect"
-          @change="pageBuilder.handleFontSize(fontBase)"
+          @change="pageBuilderClass.handleFontSize(fontBase)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontSize in tailwindFontSizes.fontBase" :key="fontSize">
@@ -119,7 +119,7 @@ watch(
         <select
           v-model="fontDesktop"
           class="myPrimarySelect"
-          @change="pageBuilder.handleFontSize(fontDesktop)"
+          @change="pageBuilderClass.handleFontSize(fontDesktop)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontSize in tailwindFontSizes.fontDesktop" :key="fontSize">
@@ -132,7 +132,7 @@ watch(
         <select
           v-model="fontTablet"
           class="myPrimarySelect"
-          @change="pageBuilder.handleFontSize(fontTablet)"
+          @change="pageBuilderClass.handleFontSize(fontTablet)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontSize in tailwindFontSizes.fontTablet" :key="fontSize">
@@ -145,7 +145,7 @@ watch(
         <select
           v-model="fontMobile"
           class="myPrimarySelect"
-          @change="pageBuilder.handleFontSize(fontMobile)"
+          @change="pageBuilderClass.handleFontSize(fontMobile)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontSize in tailwindFontSizes.fontMobile" :key="fontSize">
@@ -160,7 +160,7 @@ watch(
         <select
           v-model="fontWeight"
           class="myPrimarySelect"
-          @change="pageBuilder.handleFontWeight(fontWeight)"
+          @change="pageBuilderClass.handleFontWeight(fontWeight)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontWeight in tailwindFontStyles.fontWeight" :key="fontWeight">
@@ -173,7 +173,7 @@ watch(
         <select
           v-model="fontFamily"
           class="myPrimarySelect"
-          @change="pageBuilder.handleFontFamily(fontFamily)"
+          @change="pageBuilderClass.handleFontFamily(fontFamily)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontFamily in tailwindFontStyles.fontFamily" :key="fontFamily">
@@ -186,7 +186,7 @@ watch(
         <select
           v-model="fontStyle"
           class="myPrimarySelect"
-          @change="pageBuilder.handleFontStyle(fontStyle)"
+          @change="pageBuilderClass.handleFontStyle(fontStyle)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontStyle in tailwindFontStyles.fontStyle" :key="fontStyle">

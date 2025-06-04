@@ -1,14 +1,14 @@
 <script setup>
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 
 const pageBuilderStateStore = usePageBuilderStateStore()
 const mediaLibraryStore = useMediaLibraryStore()
 
 import { computed } from 'vue'
 
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 
@@ -31,7 +31,7 @@ const getRestoredElement = computed(() => {
         <template v-if="getRestoredElement">
           <div class="px-2 flex items-center justify-start gap-2">
             <button
-              @click="pageBuilder.handleRestoreElement"
+              @click="pageBuilderClass.handleRestoreElement"
               type="button"
               class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
             >
@@ -44,7 +44,7 @@ const getRestoredElement = computed(() => {
         <template v-if="getElement && !getRestoredElement">
           <div class="px-2 flex items-center justify-start gap-2">
             <button
-              @click="pageBuilder.handleDeleteElement"
+              @click="pageBuilderClass.handleDeleteElement"
               type="button"
               class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:text-white focus-visible:ring-0 hover:bg-myPrimaryErrorColor"
             >

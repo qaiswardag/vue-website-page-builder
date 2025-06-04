@@ -2,7 +2,7 @@
 import { Editor, useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import Link from '@tiptap/extension-link'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
@@ -25,7 +25,7 @@ const firstModalButtonFunction = ref(null)
 const secondModalButtonFunction = ref(null)
 const thirdModalButtonFunction = ref(null)
 
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement
@@ -69,21 +69,21 @@ const editor = useEditor({
 
 // watch for changes in textContent and update store and textContentVueModel
 watch(textContent, (newValue) => {
-  if (!pageBuilder.selectedElementIsValidText()) return
+  if (!pageBuilderClass.selectedElementIsValidText()) return
 
   if (getElement.value) {
     pageBuilderStateStore.setTextAreaVueModel(newValue)
 
     if (typeof newValue === 'string' && newValue !== textContentVueModel.value) {
-      pageBuilder.handleTextInput(newValue)
+      pageBuilderClass.handleTextInput(newValue)
     }
   }
 })
 
-// pageBuilder.selectedElementIsValidText(newValue);
+// pageBuilderClass.selectedElementIsValidText(newValue);
 
 const TipTapSetContent = function () {
-  if (!pageBuilder.selectedElementIsValidText()) return
+  if (!pageBuilderClass.selectedElementIsValidText()) return
 
   if (editor.value) {
     editor.value.commands.setContent(getElement.value.innerHTML)
@@ -207,7 +207,7 @@ onMounted(() => {
   </DynamicModal>
 
   <div class="blockease-linear duration-200 block ease-linear">
-    <div v-if="pageBuilder.selectedElementIsValidText() && editor">
+    <div v-if="pageBuilderClass.selectedElementIsValidText() && editor">
       <div class="relative rounded-lg">
         <div
           class="flex justify-between myPrimaryGap items-center divide-x divide-gray-200 py-4 px-4 overflow-x-auto border-b border-gray-20"

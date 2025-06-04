@@ -2,7 +2,7 @@
 import { computed, watch, ref, inject } from 'vue'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
@@ -11,7 +11,7 @@ const customMediaComponent = inject('customMediaComponent', null)
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const isLoading = ref(false)
 
 // use media library
@@ -51,7 +51,7 @@ const handleAddImage = function () {
   // handle click
   secondMediaButtonFunction.value = function () {
     isLoading.value = true
-    pageBuilder.updateBasePrimaryImage({ type: 'unsplash' })
+    pageBuilderClass.updateBasePrimaryImage({ type: 'unsplash' })
 
     // close media library modal
     showMediaLibraryModal.value = false

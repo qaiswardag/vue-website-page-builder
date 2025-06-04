@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, watch } from 'vue'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { ref } from 'vue'
 import tailwindOpacities from '@/utils/builder/tailwind-opacities'
 import {
@@ -15,7 +15,7 @@ import { useMediaLibraryStore } from '@/stores/media-library'
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const opacityVueModel = ref(null)
 const getOpacity = computed(() => {
   return pageBuilderStateStore.getOpacity
@@ -25,7 +25,7 @@ watch(
   getOpacity,
   (newValue) => {
     opacityVueModel.value = newValue
-    pageBuilder.handlePageBuilderMethods()
+    pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
@@ -71,7 +71,7 @@ watch(
             <ListboxOption
               as="template"
               v-for="elementOpacity in tailwindOpacities.opacities"
-              @click="pageBuilder.handleOpacity(elementOpacity)"
+              @click="pageBuilderClass.handleOpacity(elementOpacity)"
               :key="elementOpacity"
               :value="elementOpacity"
               v-slot="{ active }"

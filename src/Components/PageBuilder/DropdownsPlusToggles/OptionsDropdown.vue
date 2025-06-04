@@ -1,6 +1,6 @@
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { ref, computed } from 'vue'
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue'
 import Preview from '@/PageBuilder/Preview.vue'
@@ -18,7 +18,7 @@ const getCurrentUser = computed(() => {
 
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const emit = defineEmits(['previewCurrentDesign'])
 
 const showModalDeleteAllComponents = ref(false)
@@ -69,7 +69,7 @@ const deleteAllComponents = function () {
   //
   // handle click
   thirdModalButtonFunction.value = function () {
-    pageBuilder.deleteAllComponents()
+    pageBuilderClass.deleteAllComponents()
     pageBuilderStateStore.setComponents(null)
     showModalDeleteAllComponents.value = false
   }
