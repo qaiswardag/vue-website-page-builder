@@ -5,12 +5,16 @@ export { default as Preview } from './PageBuilder/Preview.vue'
 // Export stores
 export { usePageBuilderStateStore } from './stores/page-builder-state'
 export { useMediaLibraryStore } from './stores/media-library'
+export { useUserStore } from './stores/user'
 
 // Export PageBuilder class with auto-injection capability
 export { default as PageBuilderClass } from './composables/PageBuilder'
 
-// Export modal management composable
+// Export composables
 export { usePageBuilderModal } from './composables/usePageBuilderModal'
+
+// Export types
+export type { PageBuilderUser, ComponentObject, ImageObject } from './types'
 
 // Export Pinia for convenience (same version as package uses)
 export { createPinia } from 'pinia'

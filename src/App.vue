@@ -17,6 +17,10 @@ const props = defineProps({
     type: String,
     default: 'create',
   },
+  user: {
+    type: Object,
+    default: null,
+  },
 })
 
 const mediaLibraryStore = useMediaLibraryStore()
@@ -121,7 +125,7 @@ onBeforeMount(() => {
       @pageBuilderSecondaryHandler="pageBuilderSecondaryHandler"
       @handleDraftForUpdate="handleDraftForUpdate"
     >
-      <PageBuilderView :updateOrCreate="updateOrCreate"></PageBuilderView>
+      <PageBuilderView :updateOrCreate="updateOrCreate" :user="user"></PageBuilderView>
     </PageBuilderModal>
 
     <Navbar @handleButton="handlePageBuilder"></Navbar>

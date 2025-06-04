@@ -12,8 +12,16 @@ import OptionsDropdown from '@/Components/PageBuilder/DropdownsPlusToggles/Optio
 import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
+import { useUserStore } from '@/stores/user'
 
-// Props for custom components
+/**
+ * Props for PageBuilder component
+ * @typedef {Object} Props
+ * @property {Object|null} CustomMediaLibraryComponent - Custom media component
+ * @property {Object|null} CustomSearchComponent - Custom search component
+ * @property {string} updateOrCreate - Mode: create or update
+ * @property {Object|null} user - User object with name property: { name: string }
+ */
 const props = defineProps({
   CustomMediaLibraryComponent: {
     type: Object,
@@ -27,31 +35,48 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  user: {
+    type: Object,
+    default: null,
+    validator: (value) => {
+      // Allow null or object with name property
+      return value === null || (typeof value === 'object' && typeof value.name === 'string')
+    },
+  },
 })
 
 // Create internal Pinia instance for this component if none exists
 let internalPinia = null
 let mediaLibraryStore = null
 let pageBuilderStateStore = null
+let userStore = null
 let pageBuilder = null
 
 try {
   // Try to use existing Pinia first
   mediaLibraryStore = useMediaLibraryStore()
   pageBuilderStateStore = usePageBuilderStateStore()
+  userStore = useUserStore()
 } catch (error) {
   // If no Pinia exists, create our own internal instance
   internalPinia = createPinia()
   mediaLibraryStore = useMediaLibraryStore(internalPinia)
   pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
+  userStore = useUserStore(internalPinia)
+}
+
+// Set current user if provided
+if (props.user) {
+  userStore.setCurrentUser(props.user)
 }
 
 // Initialize PageBuilder with stores
 pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 
-// Always provide the stores for child components (needed for custom components)
+// Provide stores for child components
 provide('pageBuilderStateStore', pageBuilderStateStore)
 provide('mediaLibraryStore', mediaLibraryStore)
+provide('userStore', userStore)
 
 // Provide custom components for child components
 provide('customMediaComponent', props.CustomMediaLibraryComponent)

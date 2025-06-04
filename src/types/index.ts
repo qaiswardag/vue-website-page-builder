@@ -80,6 +80,16 @@ export interface MediaLibraryStore {
   setCurrentPreviewImage: (url: string | null) => void
 }
 
+// User interfaces
+export interface User {
+  name: string
+}
+
+// Specific user interface for page builder usage
+export interface PageBuilderUser {
+  name: string
+}
+
 // User settings interface
 export interface UserSettings {
   theme?: 'light' | 'dark' | 'auto'
