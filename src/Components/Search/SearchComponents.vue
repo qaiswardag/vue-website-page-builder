@@ -13,7 +13,7 @@ const props = defineProps({
     default: false,
     required: true,
   },
-  customSearchComponent: {
+  CustomSearchComponent: {
     type: Object,
     default: null,
   },
@@ -47,8 +47,8 @@ const firstButton = function () {
 
       <div class="p-4">
         <!-- Only show custom search component if provided -->
-        <div v-if="customSearchComponent" class="border border-gray-200 rounded-lg p-4">
-          <component :is="customSearchComponent" />
+        <div v-if="CustomSearchComponent" class="border border-gray-200 rounded-lg p-4">
+          <component :is="CustomSearchComponent" />
         </div>
         <div v-else class="text-center py-8 text-gray-500">
           <p>No custom search component provided</p>

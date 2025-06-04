@@ -41,10 +41,7 @@ import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
 </script>
 
 <template>
-  <PageBuilder
-    :custom-media-component="MediaLibraryComponent"
-    :custom-search-component="SearchComponent"
-  />
+  <PageBuilder :MediaLibraryComponent="MediaLibraryComponent" :SearchComponent="SearchComponent" />
 </template>
 ```
 

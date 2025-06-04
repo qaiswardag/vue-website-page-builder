@@ -80,8 +80,8 @@ provide('mediaLibraryStore', mediaLibraryStore)
 provide('userStore', userStore)
 
 // Provide custom components for child components
-provide('customMediaComponent', props.CustomMediaLibraryComponent)
-provide('customSearchComponent', props.CustomSearchComponent)
+provide('CustomMediaComponent', props.CustomMediaLibraryComponent)
+provide('CustomSearchComponent', props.CustomSearchComponent)
 
 // Provide updateOrCreate for custom components
 provide('updateOrCreate', props.updateOrCreate)
@@ -214,7 +214,7 @@ const handleDraftForUpdate = function () {
       :show="showModalAddComponent"
       :firstButtonText="firstButtonTextSearchComponents"
       :title="titleModalAddComponent"
-      :custom-search-component="CustomSearchComponent"
+      :CustomSearchComponent="CustomSearchComponent"
       @firstModalButtonSearchComponentsFunction="firstModalButtonSearchComponentsFunction"
     ></SearchComponents>
     <PageBuilderPreviewModal
@@ -228,9 +228,11 @@ const handleDraftForUpdate = function () {
       <div class="py-4 p-4 bg-red-100 text-sm">
         <p class="text-xs py-2 px-2">passed updateOrCreate is: {{ updateOrCreate }}</p>
         <p class="text-xs py-2 px-2">
-          CustomMediaLibraryComponent passed: {{ !!CustomMediaLibraryComponent }}
+          CustomMediaLibraryComponent passed: {{ CustomMediaLibraryComponent ? true : false }}
         </p>
-        <p class="text-xs py-2 px-2">CustomSearchComponent passed: {{ !!CustomSearchComponent }}</p>
+        <p class="text-xs py-2 px-2">
+          CustomSearchComponent passed: {{ CustomSearchComponent ? true : false }}
+        </p>
       </div>
       <div class="relative h-full flex">
         <div

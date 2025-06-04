@@ -125,8 +125,8 @@ Once you've created your custom components, inject them into the page builder:
 <template>
   <div>
     <VueWebsitePageBuilder
-      :custom-media-component="MediaLibraryComponent"
-      :custom-search-component="SearchComponent"
+      :MediaLibraryComponent="MediaLibraryComponent"
+      :SearchComponent="SearchComponent"
       v-model="pageData"
     />
   </div>
