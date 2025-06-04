@@ -27,12 +27,10 @@ defineProps({
     default: false,
     required: true,
   },
-  updateOrCreate: {
-    type: String,
-    default: 'create',
-    required: false,
-  },
 })
+
+// Get updateOrCreate from store instead of prop
+const updateOrCreate = computed(() => pageBuilderStateStore.getUpdateOrCreate)
 
 const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 

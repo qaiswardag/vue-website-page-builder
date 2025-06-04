@@ -11,19 +11,6 @@ import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useUserStore } from '@/stores/user'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
-// Accept updateOrCreate prop from parent (Laravel app)
-const props = defineProps({
-  updateOrCreate: {
-    type: String,
-    default: 'create',
-    required: false,
-  },
-  user: {
-    type: Object,
-    default: null,
-  },
-})
-
 const mediaLibraryStore = useMediaLibraryStore()
 const pageBuilderStateStore = usePageBuilderStateStore()
 const userStore = useUserStore()

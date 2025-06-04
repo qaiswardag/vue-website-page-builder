@@ -66,7 +66,7 @@ const mediaLibraryStore = useMediaLibraryStore(internalPinia)
 const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 const userStore = useUserStore(internalPinia)
 
-// Set current user if provided
+// Set current resource data if provided
 if (props.resourceData) {
   pageBuilderStateStore.setCurrentResourceData(props.resourceData)
 }
@@ -74,6 +74,9 @@ if (props.resourceData) {
 if (props.user) {
   userStore.setCurrentUser(props.user)
 }
+
+// Set updateOrCreate in store
+pageBuilderStateStore.setUpdateOrCreate(props.updateOrCreate)
 
 // Initialize PageBuilder with stores
 const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
@@ -86,9 +89,6 @@ provide('userStore', userStore)
 // Provide custom components for child components
 provide('CustomMediaComponent', props.CustomMediaLibraryComponent)
 provide('CustomSearchComponent', props.CustomSearchComponent)
-
-// Provide updateOrCreate for custom components
-provide('updateOrCreate', props.updateOrCreate)
 
 // Provide modal close function for custom components
 const closeAddComponentModal = () => {
@@ -147,6 +147,9 @@ const getCurrentUser = computed(() => {
 
 const getCurrentResourceData = computed(() => {
   return pageBuilderStateStore.getCurrentResourceData
+})
+const getUpdateOrCreate = computed(() => {
+  return pageBuilderStateStore.getUpdateOrCreate
 })
 const getComponent = computed(() => {
   return pageBuilderStateStore.getComponent
@@ -250,20 +253,6 @@ const handleDraftForUpdate = function () {
             </thead>
             <tbody class="divide-y divide-gray-200">
               <tr>
-                <td class="px-3 py-2 font-medium text-gray-600">Update or Create (prop)</td>
-                <td class="px-3 py-2">{{ updateOrCreate }}</td>
-                <td class="px-3 py-2 text-gray-500">{{ typeof updateOrCreate }}</td>
-                <td class="px-3 py-2 text-gray-500">{{ !!updateOrCreate }}</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-gray-600">Resource Data (prop)</td>
-                <td class="px-3 py-2">
-                  {{ resourceData ? JSON.stringify(resourceData) : 'null' }}
-                </td>
-                <td class="px-3 py-2 text-gray-500">{{ typeof resourceData }}</td>
-                <td class="px-3 py-2 text-gray-500">{{ !!resourceData }}</td>
-              </tr>
-              <tr>
                 <td class="px-3 py-2 font-medium text-gray-600">User (store)</td>
                 <td class="px-3 py-2">
                   {{ getCurrentUser ? JSON.stringify(getCurrentUser) : 'null' }}
@@ -271,7 +260,12 @@ const handleDraftForUpdate = function () {
                 <td class="px-3 py-2 text-gray-500">{{ typeof getCurrentUser }}</td>
                 <td class="px-3 py-2 text-gray-500">{{ !!getCurrentUser }}</td>
               </tr>
-
+              <tr>
+                <td class="px-3 py-2 font-medium text-gray-600">Update or Create (store)</td>
+                <td class="px-3 py-2">{{ getUpdateOrCreate }}</td>
+                <td class="px-3 py-2 text-gray-500">{{ typeof getUpdateOrCreate }}</td>
+                <td class="px-3 py-2 text-gray-500">{{ !!getUpdateOrCreate }}</td>
+              </tr>
               <tr>
                 <td class="px-3 py-2 font-medium text-gray-600">Resource Data (store)</td>
                 <td class="px-3 py-2">
