@@ -46,25 +46,10 @@ const props = defineProps({
   },
 })
 
-// Create internal Pinia instance for this component if none exists
-let internalPinia = null
-let mediaLibraryStore = null
-let pageBuilderStateStore = null
-let userStore = null
-let pageBuilder = null
-
-try {
-  // Try to use existing Pinia first
-  mediaLibraryStore = useMediaLibraryStore()
-  pageBuilderStateStore = usePageBuilderStateStore()
-  userStore = useUserStore()
-} catch (error) {
-  // If no Pinia exists, create our own internal instance
-  internalPinia = createPinia()
-  mediaLibraryStore = useMediaLibraryStore(internalPinia)
-  pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
-  userStore = useUserStore(internalPinia)
-}
+// Initialize stores
+const mediaLibraryStore = useMediaLibraryStore()
+const pageBuilderStateStore = usePageBuilderStateStore()
+const userStore = useUserStore()
 
 // Set current user if provided
 if (props.user) {
@@ -72,7 +57,7 @@ if (props.user) {
 }
 
 // Initialize PageBuilder with stores
-pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
 
 // Provide stores for child components
 provide('pageBuilderStateStore', pageBuilderStateStore)
