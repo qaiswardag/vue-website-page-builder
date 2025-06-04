@@ -46,10 +46,11 @@ const props = defineProps({
   },
 })
 
-// Initialize stores
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
-const userStore = useUserStore()
+// Create internal Pinia instance for PageBuilder package
+const internalPinia = createPinia()
+const mediaLibraryStore = useMediaLibraryStore(internalPinia)
+const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
+const userStore = useUserStore(internalPinia)
 
 // Set current user if provided
 if (props.user) {
