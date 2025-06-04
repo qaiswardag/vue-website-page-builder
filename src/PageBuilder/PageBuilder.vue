@@ -245,20 +245,15 @@ const handleDraftForUpdate = function () {
                 <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Property</th>
                 <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Value</th>
                 <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Type</th>
+                <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Present</th>
               </tr>
             </thead>
             <tbody class="divide-y divide-gray-200">
               <tr>
-                <td class="px-3 py-2 font-medium text-gray-600">User</td>
-                <td class="px-3 py-2">
-                  {{ getCurrentUser ? JSON.stringify(getCurrentUser) : 'null' }}
-                </td>
-                <td class="px-3 py-2 text-gray-500">{{ typeof getCurrentUser }}</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-gray-600">Update or Create</td>
+                <td class="px-3 py-2 font-medium text-gray-600">Update or Create (prop)</td>
                 <td class="px-3 py-2">{{ updateOrCreate }}</td>
                 <td class="px-3 py-2 text-gray-500">{{ typeof updateOrCreate }}</td>
+                <td class="px-3 py-2 text-gray-500">{{ !!updateOrCreate }}</td>
               </tr>
               <tr>
                 <td class="px-3 py-2 font-medium text-gray-600">Resource Data (prop)</td>
@@ -266,13 +261,24 @@ const handleDraftForUpdate = function () {
                   {{ resourceData ? JSON.stringify(resourceData) : 'null' }}
                 </td>
                 <td class="px-3 py-2 text-gray-500">{{ typeof resourceData }}</td>
+                <td class="px-3 py-2 text-gray-500">{{ !!resourceData }}</td>
               </tr>
+              <tr>
+                <td class="px-3 py-2 font-medium text-gray-600">User (store)</td>
+                <td class="px-3 py-2">
+                  {{ getCurrentUser ? JSON.stringify(getCurrentUser) : 'null' }}
+                </td>
+                <td class="px-3 py-2 text-gray-500">{{ typeof getCurrentUser }}</td>
+                <td class="px-3 py-2 text-gray-500">{{ !!getCurrentUser }}</td>
+              </tr>
+
               <tr>
                 <td class="px-3 py-2 font-medium text-gray-600">Resource Data (store)</td>
                 <td class="px-3 py-2">
                   {{ getCurrentResourceData ? JSON.stringify(getCurrentResourceData) : 'null' }}
                 </td>
                 <td class="px-3 py-2 text-gray-500">{{ typeof getCurrentResourceData }}</td>
+                <td class="px-3 py-2 text-gray-500">{{ !!getCurrentResourceData }}</td>
               </tr>
               <tr>
                 <td class="px-3 py-2 font-medium text-gray-600">Custom Media Component</td>
@@ -282,6 +288,7 @@ const handleDraftForUpdate = function () {
                 <td class="px-3 py-2 text-gray-500">
                   {{ CustomMediaLibraryComponent ? 'true' : 'false' }}
                 </td>
+                <td class="px-3 py-2 text-gray-500">{{ !!CustomMediaLibraryComponent }}</td>
               </tr>
               <tr>
                 <td class="px-3 py-2 font-medium text-gray-600">Custom Search Component</td>
@@ -289,6 +296,7 @@ const handleDraftForUpdate = function () {
                 <td class="px-3 py-2 text-gray-500">
                   {{ CustomSearchComponent ? 'true' : 'false' }}
                 </td>
+                <td class="px-3 py-2 text-gray-500">{{ !!CustomSearchComponent }}</td>
               </tr>
             </tbody>
           </table>
