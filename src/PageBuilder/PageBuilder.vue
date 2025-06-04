@@ -44,6 +44,20 @@ const props = defineProps({
       return value === null || (typeof value === 'object' && typeof value.name === 'string')
     },
   },
+  resourceData: {
+    type: Object,
+    default: null,
+    required: false,
+    validator: (value) => {
+      // Allow null or object with title (string) and id (number) properties
+      return (
+        value === null ||
+        (typeof value === 'object' &&
+          typeof value.title === 'string' &&
+          typeof value.id === 'number')
+      )
+    },
+  },
 })
 
 // Create internal Pinia instance for PageBuilder package
@@ -123,6 +137,9 @@ const getComponents = computed(() => {
   return pageBuilderStateStore.getComponents
 })
 
+const getCurrentUser = computed(() => {
+  return userStore.getCurrentUser
+})
 const getComponent = computed(() => {
   return pageBuilderStateStore.getComponent
 })
@@ -212,7 +229,11 @@ const handleDraftForUpdate = function () {
 
     <div class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2">
       <div class="py-4 p-4 bg-red-100 text-sm">
+        <p class="text-xs py-2 px-2">passed user is: {{ getCurrentUser }}</p>
         <p class="text-xs py-2 px-2">passed updateOrCreate is: {{ updateOrCreate }}</p>
+        <p class="text-xs py-2 px-2">
+          passed resourceData: {{ resourceData ? JSON.stringify(resourceData) : 'null' }}
+        </p>
         <p class="text-xs py-2 px-2">
           CustomMediaLibraryComponent passed: {{ CustomMediaLibraryComponent ? true : false }}
         </p>
