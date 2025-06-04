@@ -153,7 +153,9 @@ const settingsSlideOverButton = function () {
                   >
                     <span class="material-symbols-outlined text-[16px]"> visibility </span>
                   </div>
-                  <div>Loggedin as: {{ getCurrentUser && getCurrentUser.name }}</div>
+                  <div>
+                    Loggedin as: {{ getCurrentUser ? JSON.stringify(getCurrentUser.name) : 'null' }}
+                  </div>
                 </div>
               </div>
             </MenuItem>

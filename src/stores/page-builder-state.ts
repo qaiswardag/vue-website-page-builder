@@ -53,6 +53,7 @@ interface PageBuilderState {
   components: ComponentObject[]
   basePrimaryImage: string | null
   fetchedComponents: FetchedComponentsResponse | null
+  currentResourceData: { title: string; id: number } | null
 }
 
 // get components
@@ -111,6 +112,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     components: [],
     basePrimaryImage: null,
     fetchedComponents: null,
+    currentResourceData: null,
   }),
   getters: {
     getComponentArrayAddMethod(state: PageBuilderState): string | null {
@@ -260,6 +262,9 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
     getFetchedComponentsData(state: PageBuilderState): FetchedComponentsResponse | null {
       return state.fetchedComponents
+    },
+    getCurrentResourceData(state: PageBuilderState): { title: string; id: number } | null {
+      return state.currentResourceData
     },
   },
   actions: {
@@ -442,6 +447,9 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
           ? (fetchedComponents.value as FetchedComponentsResponse)
           : null,
       )
+    },
+    setCurrentResourceData(payload: { title: string; id: number } | null): void {
+      this.currentResourceData = payload
     },
   },
 })

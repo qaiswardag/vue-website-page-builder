@@ -67,6 +67,10 @@ const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 const userStore = useUserStore(internalPinia)
 
 // Set current user if provided
+if (props.resourceData) {
+  pageBuilderStateStore.setCurrentResourceData(props.resourceData)
+}
+// Set current user if provided
 if (props.user) {
   userStore.setCurrentUser(props.user)
 }
@@ -139,6 +143,10 @@ const getComponents = computed(() => {
 
 const getCurrentUser = computed(() => {
   return userStore.getCurrentUser
+})
+
+const getCurrentResourceData = computed(() => {
+  return pageBuilderStateStore.getCurrentResourceData
 })
 const getComponent = computed(() => {
   return pageBuilderStateStore.getComponent
@@ -228,13 +236,16 @@ const handleDraftForUpdate = function () {
     </PageBuilderPreviewModal>
 
     <div class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2">
-      <div class="py-4 p-4 bg-red-100 text-sm">
+      <div class="py-4 p-4 bg-red-100 text-sm test-data">
         <p class="text-xs py-2 px-2">passed user is: {{ getCurrentUser }}</p>
         <p class="text-xs py-2 px-2">passed updateOrCreate is: {{ updateOrCreate }}</p>
         <p class="text-xs py-2 px-2">
           passed resourceData: {{ resourceData ? JSON.stringify(resourceData) : 'null' }} passed
         </p>
-        <p class="text-xs py-2 px-2">getCurrentResourceData: {{ 1 }}</p>
+        <p class="text-xs py-2 px-2">
+          getCurrentResourceData:
+          {{ getCurrentResourceData ? JSON.stringify(getCurrentResourceData) : 'null' }}
+        </p>
         <p class="text-xs py-2 px-2">
           CustomMediaLibraryComponent passed: {{ CustomMediaLibraryComponent ? true : false }}
         </p>
@@ -242,6 +253,7 @@ const handleDraftForUpdate = function () {
           CustomSearchComponent passed: {{ CustomSearchComponent ? true : false }}
         </p>
       </div>
+
       <div class="relative h-full flex">
         <div
           @click.self="pageBuilderStateStore.setComponent(null)"
