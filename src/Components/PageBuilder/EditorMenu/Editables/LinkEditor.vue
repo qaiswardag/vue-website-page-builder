@@ -1,5 +1,5 @@
 <script setup>
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import EditorAccordion from '../EditorAccordion.vue'
 import { computed, nextTick, ref, watch } from 'vue'
 import { Switch } from '@headlessui/vue'

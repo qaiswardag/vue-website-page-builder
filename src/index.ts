@@ -8,7 +8,7 @@ export { useMediaLibraryStore } from './stores/media-library'
 export { useUserStore } from './stores/user'
 
 // Export PageBuilder class with auto-injection capability
-export { default as PageBuilderClass } from './composables/PageBuilder'
+export { default as PageBuilderClass } from './composables/PageBuilderClass'
 
 // Export composables
 export { usePageBuilderModal } from './composables/usePageBuilderModal'

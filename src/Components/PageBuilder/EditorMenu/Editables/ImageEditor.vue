@@ -2,7 +2,7 @@
 import { computed, watch, ref, inject } from 'vue'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 

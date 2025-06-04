@@ -1,6 +1,6 @@
 <script setup>
 import tailwindColors from '@/utils/builder/tailwaind-colors'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import { computed, ref, watch } from 'vue'
 import {
   Listbox,

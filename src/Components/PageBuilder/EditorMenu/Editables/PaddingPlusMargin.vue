@@ -1,6 +1,6 @@
 <script setup>
 import tailwindPaddingPlusMargin from '@/utils/builder/tailwind-padding-margin'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 import { computed, ref, watch } from 'vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'

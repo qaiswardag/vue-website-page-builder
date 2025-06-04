@@ -1,7 +1,7 @@
 <script setup>
 import Modal from '@/Components/Modals/Modal.vue'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import { delay } from '@/composables/delay'
 
 import {

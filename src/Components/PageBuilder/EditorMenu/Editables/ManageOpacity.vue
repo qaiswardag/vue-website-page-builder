@@ -1,6 +1,6 @@
 <script setup>
 import { computed, onMounted, watch } from 'vue'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import { ref } from 'vue'
 import tailwindOpacities from '@/utils/builder/tailwind-opacities'
 import {

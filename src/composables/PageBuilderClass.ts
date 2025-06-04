@@ -27,7 +27,7 @@ import type { ComputedRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { delay } from '@/composables/delay'
 
-class PageBuilder {
+class PageBuilderClass {
   // Class properties with types
   private elementsWithListeners: WeakSet<Element>
   private nextTick: Promise<void>
@@ -1577,4 +1577,4 @@ class PageBuilder {
   }
 }
 
-export default PageBuilder
+export default PageBuilderClass

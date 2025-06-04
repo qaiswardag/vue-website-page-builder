@@ -1,6 +1,6 @@
 <script setup>
 import tailwindBorderStyleWidthPlusColor from '@/utils/builder/tailwind-border-style-width-color'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 import { computed, ref, watch } from 'vue'
 import {

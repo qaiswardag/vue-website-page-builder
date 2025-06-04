@@ -2,7 +2,7 @@
 import { computed, ref, inject } from 'vue'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
 import TipTapInput from '@/Components/TipTap/TipTapInput.vue'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue'
 import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue'
 import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue'

@@ -1,5 +1,5 @@
 <script setup>
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
 import tailwindFontSizes from '@/utils/builder/tailwind-font-sizes'
 import tailwindFontStyles from '@/utils/builder/tailwind-font-styles'

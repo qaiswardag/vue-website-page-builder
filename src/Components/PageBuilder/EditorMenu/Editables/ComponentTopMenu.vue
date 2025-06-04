@@ -1,6 +1,6 @@
 <script setup>
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import { ref } from 'vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'

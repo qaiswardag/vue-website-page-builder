@@ -2,7 +2,7 @@
 const version = __APP_VERSION__
 import { onMounted, computed, ref, watch, provide } from 'vue'
 import { createPinia } from 'pinia'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue'
 import Preview from '@/PageBuilder/Preview.vue'
 import ComponentTopMenu from '@/Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue'

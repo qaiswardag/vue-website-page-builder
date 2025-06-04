@@ -2,7 +2,7 @@
 import { Editor, useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/composables/PageBuilderClass.ts'
 import Link from '@tiptap/extension-link'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
