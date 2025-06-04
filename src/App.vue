@@ -4,8 +4,8 @@ import PageBuilderModal from '@/Components/Modals/PageBuilderModal.vue'
 import HomeSection from '@/Components/Homepage/HomeSection.vue'
 import Footer from '@/Components/Homepage/Footer.vue'
 import Navbar from '@/Components/Homepage/Navbar.vue'
-import PageBuilderView from '@/PageBuilder/PageBuilder.vue'
-import PageBuilder from '@/composables/PageBuilder.ts'
+import PageBuilder from '@/PageBuilder/PageBuilder.vue'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import FullScreenSpinner from '@/Components/Loaders/FullScreenSpinner.vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useUserStore } from '@/stores/user'
@@ -18,8 +18,20 @@ const openPageBuilder = ref(false)
 
 const pageBuilderPrimaryHandler = ref(null)
 const pageBuilderSecondaryHandler = ref(null)
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
-const formType = ref(props.updateOrCreate)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+
+// Initialize default values for demo app
+const defaultUser = { name: 'Demo User' }
+const defaultResourceData = { title: 'Demo Resource', id: 1 }
+const defaultUpdateOrCreate = 'create'
+
+// Set initial values in stores
+pageBuilderStateStore.setUpdateOrCreate(defaultUpdateOrCreate)
+userStore.setCurrentUser(defaultUser)
+pageBuilderStateStore.setCurrentResourceData(defaultResourceData)
+
+// Get updateOrCreate from store
+const formType = computed(() => pageBuilderStateStore.getUpdateOrCreate)
 
 const getIsLoading = computed(() => {
   return userStore.getIsLoading
@@ -36,7 +48,7 @@ const handlePageBuilder = async function () {
 
   if (formType.value === 'create') {
     pageBuilderStateStore.setComponents([])
-    pageBuilder.areComponentsStoredInLocalStorage()
+    pageBuilderClass.areComponentsStoredInLocalStorage()
   }
 
   // handle click
@@ -45,7 +57,7 @@ const handlePageBuilder = async function () {
 
     if (formType.value === 'update') {
       await nextTick()
-      pageBuilder.saveComponentsLocalStorageUpdate()
+      pageBuilderClass.saveComponentsLocalStorageUpdate()
     }
 
     openPageBuilder.value = false
@@ -59,13 +71,13 @@ const handlePageBuilder = async function () {
     // save to local storage if new resource
     if (formType.value === 'create') {
       await nextTick()
-      pageBuilder.saveComponentsLocalStorage()
+      pageBuilderClass.saveComponentsLocalStorage()
       await nextTick()
     }
     // save to local storage if update
     if (formType.value === 'update') {
       await nextTick()
-      pageBuilder.synchronizeDOMAndComponents()
+      pageBuilderClass.synchronizeDOMAndComponents()
       await nextTick()
     }
 
@@ -84,9 +96,9 @@ const handleDraftForUpdate = async function () {
 
   if (formType.value === 'update') {
     await nextTick()
-    pageBuilder.areComponentsStoredInLocalStorageUpdate()
+    pageBuilderClass.areComponentsStoredInLocalStorageUpdate()
     await nextTick()
-    pageBuilder.setEventListenersForElements()
+    pageBuilderClass.setEventListenersForElements()
 
     userStore.setIsLoading(false)
   }
@@ -108,12 +120,11 @@ onBeforeMount(() => {
     </teleport>
     <PageBuilderModal
       :show="openPageBuilder"
-      :updateOrCreate="updateOrCreate"
       @pageBuilderPrimaryHandler="pageBuilderPrimaryHandler"
       @pageBuilderSecondaryHandler="pageBuilderSecondaryHandler"
       @handleDraftForUpdate="handleDraftForUpdate"
     >
-      <PageBuilderView :updateOrCreate="updateOrCreate" :user="user"></PageBuilderView>
+      <PageBuilder></PageBuilder>
     </PageBuilderModal>
 
     <Navbar @handleButton="handlePageBuilder"></Navbar>
