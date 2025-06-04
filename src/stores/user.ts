@@ -1,13 +1,9 @@
 import { defineStore } from 'pinia'
+import type { UserSettings } from '@/types'
 
 interface UserState {
   isLoading: boolean
-  userSettings: Record<string, unknown> | null
-}
-
-interface UserSettings {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
+  userSettings: UserSettings | null
 }
 
 export const useUserStore = defineStore('user', {

@@ -1,13 +1,9 @@
 import { defineStore } from 'pinia'
+import type { ImageObject } from '@/types'
 
 interface MediaLibraryState {
   currentImage: ImageObject
   currentPreviewImage: string | null
-}
-
-interface ImageObject {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
 }
 
 export const useMediaLibraryStore = defineStore('mediaLibrary', {

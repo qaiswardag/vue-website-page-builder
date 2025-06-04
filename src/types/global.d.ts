@@ -1,49 +1,55 @@
 // Global type declarations for utility modules
+import type {
+  TailwindColors,
+  TailwindOpacities,
+  TailwindFontSizes,
+  TailwindFontStyles,
+  TailwindPaddingAndMargin,
+  TailwindBorderRadius,
+  TailwindBorderStyleWidthColor,
+} from './index'
+
 declare module '@/utils/builder/tailwaind-colors' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tailwindColors: any
+  const tailwindColors: TailwindColors
   export default tailwindColors
 }
 
 declare module '@/utils/builder/tailwind-opacities' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tailwindOpacities: any
+  const tailwindOpacities: TailwindOpacities
   export default tailwindOpacities
 }
 
 declare module '@/utils/builder/tailwind-font-sizes' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tailwindFontSizes: any
+  const tailwindFontSizes: TailwindFontSizes
   export default tailwindFontSizes
 }
 
 declare module '@/utils/builder/tailwind-font-styles' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tailwindFontStyles: any
+  const tailwindFontStyles: TailwindFontStyles
   export default tailwindFontStyles
 }
 
 declare module '@/utils/builder/tailwind-padding-margin' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tailwindPaddingAndMargin: any
+  const tailwindPaddingAndMargin: TailwindPaddingAndMargin
   export default tailwindPaddingAndMargin
 }
 
 declare module '@/utils/builder/tailwind-border-radius' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tailwindBorderRadius: any
+  const tailwindBorderRadius: TailwindBorderRadius
   export default tailwindBorderRadius
 }
 
 declare module '@/utils/builder/tailwind-border-style-width-color' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const tailwindBorderStyleWidthPlusColor: any
+  const tailwindBorderStyleWidthPlusColor: TailwindBorderStyleWidthColor
   export default tailwindBorderStyleWidthPlusColor
 }
 
 declare module '*.vue' {
   import type { DefineComponent } from 'vue'
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const component: DefineComponent<Record<string, unknown>, Record<string, unknown>, any>
+  const component: DefineComponent<
+    Record<string, unknown>,
+    Record<string, unknown>,
+    Record<string, unknown>
+  >
   export default component
 }

@@ -1,0 +1,152 @@
+// Central type definitions for the Vue Page Builder project
+
+// Component and Image interfaces
+export interface ComponentObject {
+  id?: string | number | null
+  name?: string
+  title?: string
+  html_code?: string
+  css_code?: string
+  created_at?: string
+  updated_at?: string
+  [key: string]: unknown
+}
+
+export interface ImageObject {
+  id?: string | number
+  name?: string
+  url?: string
+  alt?: string
+  width?: number
+  height?: number
+  size?: number
+  mime_type?: string
+  path?: string
+  created_at?: string
+  updated_at?: string
+  [key: string]: unknown
+}
+
+// Store interfaces for better type safety
+export interface PageBuilderStateStore {
+  getTextAreaVueModel: string | null
+  getLocalStorageItemName: string | null
+  getLocalStorageItemNameUpdate: string | null
+  getHyberlinkEnable: boolean
+  getComponents: ComponentObject[] | null
+  getComponent: ComponentObject | null
+  getElement: HTMLElement | null
+  getNextSibling: HTMLElement | null
+  getParentElement: HTMLElement | null
+  getRestoredElement: string | null
+  getComponentArrayAddMethod: string | null
+  getFontBase: string | null
+  getFontDesktop: string | null
+  getFontTablet: string | null
+  getFontMobile: string | null
+  setElement: (element: HTMLElement | null) => void
+  setMenuRight: (value: boolean) => void
+  setComponent: (component: ComponentObject | null) => void
+  setComponents: (components: ComponentObject[] | null) => void
+  setComponentArrayAddMethod: (method: string) => void
+  setCurrentClasses: (classes: string[] | ArrayLike<string>) => void
+  setClass: (className: string) => void
+  removeClass: (className: string) => void
+  setParentElement: (element: HTMLElement | Node | null) => void
+  setRestoredElement: (html: string | null) => void
+  setNextSibling: (element: HTMLElement | Node | null) => void
+  setTextAreaVueModel: (html: string | null) => void
+  setFontBase: (size: string | null) => void
+  setFontDesktop: (size: string | null) => void
+  setFontTablet: (size: string | null) => void
+  setFontMobile: (size: string | null) => void
+  setBasePrimaryImage: (url: string | null) => void
+  setCurrentLayoutPreview: (html: string) => void
+  setHyperlinkError: (error: string | null) => void
+  setHyperlinkMessage: (message: string | null) => void
+  setElementContainsHyperlink: (contains: boolean) => void
+  setHyberlinkEnable: (enable: boolean) => void
+  setHyperlinkInput: (input: string) => void
+  setOpenHyperlinkInNewTab: (newTab: boolean) => void
+  setHyperlinkAbility: (ability: boolean) => void
+  setPushComponents: (payload: SetPushComponentsPayload) => void
+  [key: string]: unknown
+}
+
+export interface MediaLibraryStore {
+  getCurrentImage: ImageObject | null
+  setCurrentImage: (image: ImageObject) => void
+  getCurrentPreviewImage: string | null
+  setCurrentPreviewImage: (url: string | null) => void
+}
+
+// User settings interface
+export interface UserSettings {
+  theme?: 'light' | 'dark' | 'auto'
+  language?: string
+  notifications?: boolean
+  autoSave?: boolean
+  [key: string]: unknown
+}
+
+// Tailwind utility interfaces
+export interface TailwindColors {
+  backgroundColorVariables: string[]
+  textColorVariables: string[]
+}
+
+export interface TailwindOpacities {
+  opacities: string[]
+  backgroundOpacities: string[]
+}
+
+export interface TailwindFontSizes {
+  fontBase: string[]
+  fontDesktop: string[]
+  fontTablet: string[]
+  fontMobile: string[]
+}
+
+export interface TailwindFontStyles {
+  fontStyles: string[]
+}
+
+export interface TailwindPaddingAndMargin {
+  paddingAndMargin: string[]
+}
+
+export interface TailwindBorderRadius {
+  borderRadius: string[]
+}
+
+export interface TailwindBorderStyleWidthColor {
+  borderStyles: string[]
+  borderWidths: string[]
+  borderColors: string[]
+}
+
+// Utility types
+export type TimerHandle = ReturnType<typeof setTimeout>
+export type MutationObserver = globalThis.MutationObserver
+
+// Fetch response interfaces
+export interface FetchedComponentsResponse {
+  components: ComponentObject[]
+  pagination?: {
+    current_page: number
+    last_page: number
+    per_page: number
+    total: number
+  }
+  [key: string]: unknown
+}
+
+export interface SetPushComponentsPayload {
+  componentArrayAddMethod?: string
+  component: ComponentObject
+}
+
+export interface LoadComponentsData {
+  search_query?: string
+  page?: string | number
+}

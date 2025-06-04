@@ -1,58 +1,30 @@
 // Type definitions
-interface ComponentObject {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
-}
+import type {
+  ComponentObject,
+  ImageObject,
+  PageBuilderStateStore,
+  MediaLibraryStore,
+  TimerHandle,
+  MutationObserver as MutationObserverType,
+  TailwindColors,
+  TailwindOpacities,
+  TailwindFontSizes,
+  TailwindFontStyles,
+  TailwindPaddingAndMargin,
+  TailwindBorderRadius,
+  TailwindBorderStyleWidthColor,
+} from '@/types'
 
-interface ImageObject {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
-}
-
-interface PageBuilderStateStore {
-  getTextAreaVueModel: string | null
-  getLocalStorageItemName: string | null
-  getLocalStorageItemNameUpdate: string | null
-  getHyberlinkEnable: boolean
-  getComponents: ComponentObject[] | null
-  getComponent: ComponentObject | null
-  getElement: HTMLElement | null
-  getNextSibling: HTMLElement | null
-  getParentElement: HTMLElement | null
-  getRestoredElement: string | null
-  getComponentArrayAddMethod: string | null
-  setElement: (element: HTMLElement | null) => void
-  setMenuRight: (value: boolean) => void
-  setComponent: (component: ComponentObject | null) => void
-  setComponents: (components: ComponentObject[] | null) => void
-  setComponentArrayAddMethod: (method: string) => void
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any // For dynamic mutation methods
-}
-
-interface MediaLibraryStore {
-  getCurrentImage: ImageObject | null
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import tailwindColors from '@/utils/builder/tailwaind-colors'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import tailwindOpacities from '@/utils/builder/tailwind-opacities'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import tailwindFontSizes from '@/utils/builder/tailwind-font-sizes'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import tailwindFontStyles from '@/utils/builder/tailwind-font-styles'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import tailwindPaddingAndMargin from '@/utils/builder/tailwind-padding-margin'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import tailwindBorderRadius from '@/utils/builder/tailwind-border-radius'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import tailwindBorderStyleWidthPlusColor from '@/utils/builder/tailwind-border-style-width-color'
 import { computed, ref, nextTick, inject } from 'vue'
 import type { ComputedRef } from 'vue'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import { v4 as uuidv4 } from 'uuid'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 import { delay } from '@/composables/delay'
 
 class PageBuilder {
@@ -79,10 +51,8 @@ class PageBuilder {
   private additionalTagsNoneListernes: string[]
   private structuringTags: string[]
   private showRunningMethodLogs: boolean
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private delay: any
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private observer?: any // Add missing observer property
+  private delay: ReturnType<typeof delay>
+  private observer?: MutationObserverType
 
   constructor(pageBuilderStateStore: PageBuilderStateStore, mediaLibraryStore: MediaLibraryStore) {
     /**
@@ -197,7 +167,7 @@ class PageBuilder {
     // set to 'none' if undefined
     let elementClass = currentCSS || 'none'
 
-    this.pageBuilderStateStore[mutationName](elementClass)
+    this.pageBuilderStateStore[mutationName as keyof PageBuilderStateStore](elementClass)
 
     if (typeof selectedCSS === 'string' && selectedCSS !== 'none') {
       if (elementClass && this.getElement.value?.classList.contains(elementClass)) {
@@ -211,7 +181,7 @@ class PageBuilder {
       elementClass = selectedCSS
     }
 
-    this.pageBuilderStateStore[mutationName](elementClass)
+    this.pageBuilderStateStore[mutationName as keyof PageBuilderStateStore](elementClass)
     this.pageBuilderStateStore.setElement(this.getElement.value)
 
     return currentCSS
@@ -430,7 +400,7 @@ class PageBuilder {
     const parser = new DOMParser()
 
     // Parse the HTML content of the clonedComponent using the DOMParser
-    const doc = parser.parseFromString(clonedComponent.html_code, 'text/html')
+    const doc = parser.parseFromString(clonedComponent.html_code || '', 'text/html')
 
     // Selects all elements within the HTML document, including elements like:
     const elements = doc.querySelectorAll('*')

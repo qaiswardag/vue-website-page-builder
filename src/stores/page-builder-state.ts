@@ -1,16 +1,11 @@
 import { defineStore } from 'pinia'
 import { vueFetch } from '@/composables/vueFetch'
-
-interface ComponentObject {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  [key: string]: any
-}
-
-interface FetchedComponentsResponse {
-  components: ComponentObject[]
-  // Add other properties that might exist in the response
-  [key: string]: unknown
-}
+import type {
+  ComponentObject,
+  FetchedComponentsResponse,
+  SetPushComponentsPayload,
+  LoadComponentsData,
+} from '@/types'
 
 interface PageBuilderState {
   componentArrayAddMethod: string | null
@@ -58,16 +53,6 @@ interface PageBuilderState {
   components: ComponentObject[]
   basePrimaryImage: string | null
   fetchedComponents: FetchedComponentsResponse | null
-}
-
-interface SetPushComponentsPayload {
-  componentArrayAddMethod?: string
-  component: ComponentObject
-}
-
-interface LoadComponentsData {
-  search_query?: string
-  page?: string | number
 }
 
 // get components
