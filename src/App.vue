@@ -16,6 +16,7 @@ const props = defineProps({
   updateOrCreate: {
     type: String,
     default: 'create',
+    required: false,
   },
   user: {
     type: Object,

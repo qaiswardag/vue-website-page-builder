@@ -30,6 +30,7 @@ defineProps({
   updateOrCreate: {
     type: String,
     default: 'create',
+    required: false,
   },
 })
 

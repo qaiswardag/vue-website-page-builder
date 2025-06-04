@@ -33,7 +33,8 @@ const props = defineProps({
   },
   updateOrCreate: {
     type: String,
-    required: true,
+    default: 'create',
+    required: false,
   },
   user: {
     type: Object,
@@ -224,6 +225,7 @@ const handleDraftForUpdate = function () {
     </PageBuilderPreviewModal>
 
     <div class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2">
+      <p class="py-8 p-4 bg-red-100">passed updateOrCreate is: {{ updateOrCreate }}</p>
       <div class="relative h-full flex">
         <div
           @click.self="pageBuilderStateStore.setComponent(null)"
