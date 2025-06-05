@@ -1200,10 +1200,13 @@ class PageBuilderClass {
         this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.file}`)
       }
     }
+
+    console.log('one nu...:', this.getCurrentImage.value ? 'true' : 'false')
+    console.log('two nu her...:', this.getCurrentImage.value ? 'true' : 'false')
+    console.log('tree nu her...:', this.getCurrentImage.value && this.getCurrentImage.value.file)
     // If no data provided, apply current image if available (new simplified usage)
-    else if (this.getCurrentImage.value && this.getCurrentImage.value.file) {
+    if (this.getCurrentImage.value && this.getCurrentImage.value.file) {
       await this.nextTick
-      console.log('eeeer:', this.getCurrentImage.value.file)
       this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.file}`)
     }
   }
