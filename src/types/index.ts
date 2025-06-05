@@ -4,6 +4,7 @@
 export interface ComponentObject {
   id: string | number | null
   html_code: string
+  title: string
 }
 
 export interface ImageObject {

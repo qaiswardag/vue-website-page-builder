@@ -20,16 +20,6 @@ const pageBuilderPrimaryHandler = ref(null)
 const pageBuilderSecondaryHandler = ref(null)
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 
-// Initialize default values for demo app
-const defaultUser = { name: 'Demo User' }
-const defaultResourceData = { title: 'Demo Resource', id: 1 }
-const defaultUpdateOrCreate = 'create'
-
-// Set initial values in stores
-pageBuilderStateStore.setUpdateOrCreate(defaultUpdateOrCreate)
-userStore.setCurrentUser(defaultUser)
-pageBuilderStateStore.setCurrentResourceData(defaultResourceData)
-
 // Get updateOrCreate from store
 const formType = computed(() => pageBuilderStateStore.getUpdateOrCreate)
 
@@ -37,8 +27,11 @@ const getIsLoading = computed(() => {
   return userStore.getIsLoading
 })
 
-const pathPageBuilderStorageCreate = `page-builder-create-post`
-const pathPageBuilderStorageUpdate = `page-builder-update-post-id-1`
+// // Dynamic localStorage names based on updateOrCreate type
+// const pathPageBuilderStorageCreate = computed(() => `page-builder-${formType.value}-post`)
+// const pathPageBuilderStorageUpdate = computed(
+//   () => `page-builder-${formType.value}-post-id-${defaultResourceData.id}`,
+// )
 
 const handlePageBuilder = async function () {
   userStore.setIsLoading(true)
@@ -105,11 +98,10 @@ const handleDraftForUpdate = async function () {
 }
 
 onBeforeMount(() => {
-  // Define local storage key name before on mount
-  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate)
-
-  // Define local storage key name before on mount
-  pageBuilderStateStore.setLocalStorageItemNameUpdate(pathPageBuilderStorageUpdate)
+  // // Define local storage key name before on mount
+  // pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate.value)
+  // // Define local storage key name before on mount
+  // pageBuilderStateStore.setLocalStorageItemNameUpdate(pathPageBuilderStorageUpdate.value)
 })
 </script>
 
@@ -127,7 +119,7 @@ onBeforeMount(() => {
       <PageBuilder
         updateOrCreate="update"
         :userForPageBuilder="{ name: 'Qais Wardag', id: 1 }"
-        :resourceData="{ title: 'My Blog', id: 1 }"
+        :resourceData="{ title: 'Demo Resource', id: 1 }"
       ></PageBuilder>
     </PageBuilderModal>
 

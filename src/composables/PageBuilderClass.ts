@@ -1463,6 +1463,9 @@ class PageBuilderClass {
     this.currentClasses()
   }
 
+  updateLocalStorageItemNameCreate(): void {}
+  updateLocalStorageItemNameUpdate(): void {}
+
   // Helper method for custom components to easily add components
   addComponent(componentObject: ComponentObject): void {
     if (this.showRunningMethodLogs) {
@@ -1473,6 +1476,7 @@ class PageBuilderClass {
       const clonedComponent = this.cloneCompObjForDOMInsertion({
         html_code: componentObject.html_code,
         id: componentObject.id,
+        title: componentObject.title,
       })
 
       this.pageBuilderStateStore.setPushComponents({
@@ -1530,19 +1534,16 @@ class PageBuilderClass {
         </section>`,
         id: null,
         title: 'Text',
-        icon: `<span class="material-symbols-outlined">text_fields</span>`,
       },
       {
         html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h2>Consequat mauris nunc congue</h2></div></div></div></section>`,
         id: null,
         title: 'Header H2',
-        icon: `<span class="material-symbols-outlined">format_h2</span>`,
       },
       {
         html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h3>Consequat mauris nunc congue</h3></div></div></div></section>`,
         id: null,
         title: 'Header H3',
-        icon: `<span class="material-symbols-outlined">format_h3</span>`,
       },
       {
         html_code: `
@@ -1563,19 +1564,16 @@ class PageBuilderClass {
         </section>`,
         id: null,
         title: 'YouTube Video',
-        icon: `<span class="material-symbols-outlined">play_circle</span>`,
       },
       {
         html_code: `<section><div class="relative py-8"><div class="absolute inset-0 flex items-center" aria-hidden="true"><div class="w-full border-4 border-gray-800 leading-none"></div></div><div class="relative flex justify-start"></div></div></section>`,
         id: null,
         title: 'Break Divider',
-        icon: `<span class="material-symbols-outlined">horizontal_rule</span>`,
       },
       {
         html_code: `<section>\n<div class=\"w-full md:pt-2 md:pb-2 pt-4 pb-4 lg:px-4 px-2\">\n<div class=\"mx-auto max-w-7xl\">\n<div id=\"linktree\"\nclass=\"border-2 border-gray-600 flex items-centre justify-start rounded-md font-medium text-black\">\n<p>\n<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.google.com\">Link to landing page</a>\n</p>\n</div>\n</div>\n</div>\n</section>`,
         id: null,
         title: 'Link',
-        icon: `<span class="material-symbols-outlined">link</span>`,
       },
     ]
   }
