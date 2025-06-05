@@ -146,7 +146,7 @@ const settingsSlideOverButton = function () {
             <template v-if="getCurrentUser && getCurrentUser.name">
               <MenuItem v-slot="{ active }">
                 <div
-                  class="cursor-pointer"
+                  class="cursor-defualt"
                   :class="[
                     active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
                     'block px-4 py-2',
@@ -154,7 +154,7 @@ const settingsSlideOverButton = function () {
                 >
                   <div class="flex items-center justify-left gap-2 text-sm">
                     <div
-                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                      class="h-8 w-8 cursor-defualt rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
                     >
                       <span class="material-symbols-outlined text-[16px]"> person </span>
                     </div>
@@ -168,7 +168,7 @@ const settingsSlideOverButton = function () {
             <template v-if="getCurrentResourceData && getCurrentResourceData.title">
               <MenuItem v-slot="{ active }">
                 <div
-                  class="cursor-pointer"
+                  class="cursor-default"
                   :class="[
                     active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
                     'block px-4 py-2',
@@ -176,7 +176,7 @@ const settingsSlideOverButton = function () {
                 >
                   <div class="flex items-center justify-left gap-2 text-sm">
                     <div
-                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                      class="h-8 w-8 cursor-default rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
                     >
                       <span class="material-symbols-outlined text-[16px]"> post </span>
                     </div>
