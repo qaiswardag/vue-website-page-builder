@@ -426,7 +426,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       })
     },
     setPushComponents(payload: SetPushComponentsPayload): void {
-      const method = payload.componentArrayAddMethod || 'push'
+      const method = payload.componentArrayAddMethod ?? 'push'
       if (method === 'push') {
         this.components.push(payload.component)
       } else if (method === 'unshift') {
@@ -435,11 +435,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
 
     setBasePrimaryImage(payload: string | null): void {
-      // Note: element manipulation removed as it should be handled by component logic
-      console.log('setBasePrimaryImage called', this.element)
-
       if (this.element) {
-        this.element.src = payload || undefined
+        this.element.src = payload ?? undefined
       }
 
       this.basePrimaryImage = payload

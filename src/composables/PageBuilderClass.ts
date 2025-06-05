@@ -1195,20 +1195,20 @@ class PageBuilderClass {
 
     // If data is provided, check for specific type (backward compatibility)
     if (data && data.type === 'unsplash' && this.getCurrentImage.value) {
-      if (this.getCurrentImage.value.file) {
+      if (this.getCurrentImage.value.src) {
         await this.nextTick
-        this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.file}`)
+        this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.src}`)
       }
     }
 
     console.log('one nu...:', this.getCurrentImage.value ? 'true' : 'false')
     console.log('two nu her...:', this.getCurrentImage.value ? 'true' : 'false')
-    console.log('tree nu her...:', this.getCurrentImage.value && this.getCurrentImage.value.file)
+    console.log('tree nu her...:', this.getCurrentImage.value && this.getCurrentImage.value.src)
 
     // If no data provided, apply current image if available (new simplified usage)
-    if (this.getCurrentImage.value && this.getCurrentImage.value.file) {
+    if (this.getCurrentImage.value && this.getCurrentImage.value.src) {
       await this.nextTick
-      this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.file}`)
+      this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.src}`)
     }
   }
 
