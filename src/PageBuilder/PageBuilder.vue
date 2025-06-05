@@ -204,13 +204,8 @@ onMounted(async () => {
   //
   //
   //
-  if (
-    getUpdateOrCreate.value &&
-    typeof getUpdateOrCreate.value === 'string' &&
-    getUpdateOrCreate.value === 'update'
-  ) {
-    pageBuilderClass.loadExistingContent()
-  }
+
+  pageBuilderClass.loadExistingContent()
 })
 </script>
 
