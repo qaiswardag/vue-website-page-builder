@@ -1223,42 +1223,26 @@ class PageBuilderClass {
 
     if (!this.getLocalStorageItemName.value) return false
 
-    const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)
-    if (savedCurrentDesign) {
-      let components = JSON.parse(savedCurrentDesign)
-      if (!components) {
-        components = []
+    if (
+      this.getLocalStorageItemName.value &&
+      localStorage.getItem(this.getLocalStorageItemName.value)
+    ) {
+      const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)
+
+      if (savedCurrentDesign) {
+        let components = JSON.parse(savedCurrentDesign)
+
+        // Ensure components is always an array
+        components = Array.isArray(components) ? components : []
+
+        this.pageBuilderStateStore.setComponents(components)
+        return true
       }
-
-      this.pageBuilderStateStore.setComponents(components)
-
-      return true
     }
 
     return false
   }
   //
-  areComponentsStoredInLocalStorageUpdate() {
-    if (this.showRunningMethodLogs) {
-      console.log('areComponentsStoredInLocalStorageUpdate')
-    }
-
-    if (!this.getLocalStorageItemName.value) return false
-
-    const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)
-    if (savedCurrentDesign) {
-      let components = JSON.parse(savedCurrentDesign)
-      if (!components) {
-        components = []
-      }
-
-      this.pageBuilderStateStore.setComponents(components)
-
-      return true
-    }
-
-    return false
-  }
   //
   async updateBasePrimaryImage(data?: { type: string }): Promise<void> {
     if (this.showRunningMethodLogs) {
@@ -1646,56 +1630,29 @@ class PageBuilderClass {
   }
 
   // Load existing content from HTML when in update mode
-  loadExistingContent(htmlContent?: string): boolean {
-    console.log('loadExistingContent called')
-
+  loadExistingContent(): void {
     if (this.showRunningMethodLogs) {
       console.log('loadExistingContent')
     }
 
-    // If no HTML content provided, try to load from localStorage based on mode
-    if (!htmlContent || typeof htmlContent !== 'string') {
-      console.warn('No HTML content provided, trying localStorage...')
+    if (this.pageBuilderStateStore.getUpdateOrCreate === 'update') {
+      if (this.areComponentsStoredInLocalStorage()) {
+        console.log('this.getComponents.value isssss:', this.getComponents.value)
+        try {
+          // set components
+          const htmlOutput =
+            Array.isArray(this.getComponents.value) &&
+            this.getComponents.value
+              .map((component) => {
+                return component.html_code
+              })
+              .join('')
 
-      if (this.pageBuilderStateStore.getUpdateOrCreate === 'create') {
-        return this.areComponentsStoredInLocalStorage()
+          console.log('Components loaded and processed:', htmlOutput)
+        } catch (error) {
+          console.error('Error loading existing content:', error)
+        }
       }
-
-      if (this.pageBuilderStateStore.getUpdateOrCreate === 'update') {
-        return this.areComponentsStoredInLocalStorageUpdate()
-      }
-
-      return false
-    }
-
-    try {
-      // Parse the HTML content using DOMParser
-      const parser = new DOMParser()
-      const doc = parser.parseFromString(htmlContent, 'text/html')
-
-      // Select all <section> elements with data-componentid attribute
-      const sectionElements = doc.querySelectorAll('section[data-componentid]')
-
-      const extractedSections: ComponentObject[] = []
-
-      // Loop through the selected elements and extract outerHTML
-      sectionElements.forEach((section) => {
-        const htmlElement = section as HTMLElement
-        extractedSections.push({
-          html_code: htmlElement.outerHTML,
-          id: htmlElement.dataset.componentid || null,
-          title: 'Loaded Component', // Default title for loaded components
-        })
-      })
-
-      // Set the extracted components in the store
-      this.pageBuilderStateStore.setComponents(extractedSections)
-
-      console.log(`Loaded ${extractedSections.length} existing components from HTML`)
-      return extractedSections.length > 0
-    } catch (error) {
-      console.error('Error loading existing content:', error)
-      return false
     }
   }
 }
