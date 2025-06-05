@@ -12,8 +12,13 @@ import { useMediaLibraryStore } from '@/stores/media-library'
 import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
+
 const getCurrentUser = computed(() => {
   return userStore.getCurrentUser
+})
+
+const getCurrentResourceData = computed(() => {
+  return pageBuilderStateStore.getCurrentResourceData
 })
 
 const mediaLibraryStore = useMediaLibraryStore()
@@ -138,27 +143,50 @@ const settingsSlideOverButton = function () {
           class="z-50 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
         >
           <div class="py-1">
-            <MenuItem v-slot="{ active }">
-              <div
-                @click="handlePageBuilderPreview"
-                class="cursor-pointer"
-                :class="[
-                  active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                  'block px-4 py-2',
-                ]"
-              >
-                <div class="flex items-center justify-left gap-2 text-sm">
-                  <div
-                    class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                  >
-                    <span class="material-symbols-outlined text-[16px]"> visibility </span>
-                  </div>
-                  <div>
-                    Loggedin as: {{ getCurrentUser ? JSON.stringify(getCurrentUser.name) : 'null' }}
+            <template v-if="getCurrentUser && getCurrentUser.name">
+              <MenuItem v-slot="{ active }">
+                <div
+                  class="cursor-pointer"
+                  :class="[
+                    active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2',
+                  ]"
+                >
+                  <div class="flex items-center justify-left gap-2 text-sm">
+                    <div
+                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                    >
+                      <span class="material-symbols-outlined text-[16px]"> person </span>
+                    </div>
+                    <div>
+                      {{ getCurrentUser.name }}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </MenuItem>
+              </MenuItem>
+            </template>
+            <template v-if="getCurrentResourceData && getCurrentResourceData.title">
+              <MenuItem v-slot="{ active }">
+                <div
+                  class="cursor-pointer"
+                  :class="[
+                    active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2',
+                  ]"
+                >
+                  <div class="flex items-center justify-left gap-2 text-sm">
+                    <div
+                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                    >
+                      <span class="material-symbols-outlined text-[16px]"> post </span>
+                    </div>
+                    <div>
+                      {{ getCurrentResourceData.title }}
+                    </div>
+                  </div>
+                </div>
+              </MenuItem>
+            </template>
             <MenuItem v-slot="{ active }">
               <div
                 @click="handlePageBuilderPreview"
