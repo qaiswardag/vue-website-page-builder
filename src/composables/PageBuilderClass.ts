@@ -1235,7 +1235,15 @@ class PageBuilderClass {
         // Ensure components is always an array
         components = Array.isArray(components) ? components : []
 
+        // Transform HTML strings to component objects if needed
+        if (components.length > 0 && typeof components[0] === 'string') {
+          components = components.map((htmlString: string) => ({
+            html_code: htmlString,
+          }))
+        }
+
         this.pageBuilderStateStore.setComponents(components)
+
         return true
       }
     }
