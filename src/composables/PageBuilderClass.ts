@@ -1504,17 +1504,6 @@ class PageBuilderClass {
     }
   }
 
-  // Initialize localStorage names based on current mode
-  initializeLocalStorageNames(): void {
-    if (this.showRunningMethodLogs) {
-      console.log('initializeLocalStorageNames')
-    }
-    console.log('initializeLocalStorageNames — delete this log again - just for testing')
-
-    this.updateLocalStorageItemNameCreate()
-    this.updateLocalStorageItemNameUpdate()
-  }
-
   // Helper method for custom components to easily add components
   addComponent(componentObject: ComponentObject): void {
     if (this.showRunningMethodLogs) {
