@@ -7,7 +7,6 @@ export { usePageBuilderStateStore } from './stores/page-builder-state'
 export { useMediaLibraryStore } from './stores/media-library'
 export { useUserStore } from './stores/user'
 
-// Export PageBuilder class with auto-injection capability
 export { default as PageBuilderClass } from './composables/PageBuilderClass'
 
 // Export composables
