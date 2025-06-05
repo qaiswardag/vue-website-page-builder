@@ -1164,10 +1164,6 @@ class PageBuilderClass {
       if (typeof resourceData === 'object' && 'title' in resourceData && 'id' in resourceData) {
         const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
         const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
-        console.log(
-          'BOTH TITLE AND ID:',
-          `page-builder-update-resource-${sanitizedTitle}-${sanitizedId}`,
-        )
 
         this.pageBuilderStateStore.setLocalStorageItemName(
           `page-builder-update-resource-${sanitizedTitle}-${sanitizedId}`,
