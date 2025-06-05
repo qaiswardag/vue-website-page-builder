@@ -1155,7 +1155,7 @@ class PageBuilderClass {
         console.log('TITLE BUT NOT ID:', `page-builder-update-resource-${sanitizedTitle}`)
 
         this.pageBuilderStateStore.setLocalStorageItemName(
-          `page-builder-update-resource-${sanitizedTitle}`, // øøø
+          `page-builder-update-resource-${sanitizedTitle}`,
         )
         return
       }
@@ -1649,33 +1649,27 @@ class PageBuilderClass {
     ]
   }
 
-  // Load components from localStorage based on current mode
-  loadComponentsFromLocalStorage(): boolean {
-    if (this.showRunningMethodLogs) {
-      console.log('loadComponentsFromLocalStorage')
-    }
-
-    const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
-
-    if (updateOrCreate === 'create') {
-      return this.areComponentsStoredInLocalStorage()
-    } else if (updateOrCreate === 'update') {
-      return this.areComponentsStoredInLocalStorageUpdate()
-    }
-
-    return false
-  }
-
   // Load existing content from HTML when in update mode
-  loadExistingContent(htmlContent: string): void {
+  loadExistingContent(htmlContent?: string): boolean {
     console.log('loadExistingContent called')
+
     if (this.showRunningMethodLogs) {
       console.log('loadExistingContent')
     }
 
+    // If no HTML content provided, try to load from localStorage based on mode
     if (!htmlContent || typeof htmlContent !== 'string') {
-      console.warn('No valid HTML content provided')
-      return
+      console.warn('No HTML content provided, trying localStorage...')
+
+      if (this.pageBuilderStateStore.getUpdateOrCreate === 'create') {
+        return this.areComponentsStoredInLocalStorage()
+      }
+
+      if (this.pageBuilderStateStore.getUpdateOrCreate === 'update') {
+        return this.areComponentsStoredInLocalStorageUpdate()
+      }
+
+      return false
     }
 
     try {
@@ -1701,9 +1695,11 @@ class PageBuilderClass {
       // Set the extracted components in the store
       this.pageBuilderStateStore.setComponents(extractedSections)
 
-      console.log(`Loaded ${extractedSections.length} existing components`)
+      console.log(`Loaded ${extractedSections.length} existing components from HTML`)
+      return extractedSections.length > 0
     } catch (error) {
       console.error('Error loading existing content:', error)
+      return false
     }
   }
 }
