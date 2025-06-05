@@ -1204,6 +1204,7 @@ class PageBuilderClass {
     console.log('one nu...:', this.getCurrentImage.value ? 'true' : 'false')
     console.log('two nu her...:', this.getCurrentImage.value ? 'true' : 'false')
     console.log('tree nu her...:', this.getCurrentImage.value && this.getCurrentImage.value.file)
+
     // If no data provided, apply current image if available (new simplified usage)
     if (this.getCurrentImage.value && this.getCurrentImage.value.file) {
       await this.nextTick
