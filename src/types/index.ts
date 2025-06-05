@@ -14,7 +14,7 @@ export interface ImageObject {
 // Store interfaces for better type safety
 export interface PageBuilderStateStore {
   getTextAreaVueModel: string | null
-  getLocalStorageItemName: string | null
+  getLocalStorageItemNameCreate: string | null
   getLocalStorageItemNameUpdate: string | null
   getHyberlinkEnable: boolean
   getComponents: ComponentObject[] | null
@@ -28,6 +28,8 @@ export interface PageBuilderStateStore {
   getFontDesktop: string | null
   getFontTablet: string | null
   getFontMobile: string | null
+  getUpdateOrCreate: string
+  getCurrentResourceData: { title: string; id: number } | null
   setElement: (element: HTMLElement | null) => void
   setMenuRight: (value: boolean) => void
   setComponent: (component: ComponentObject | null) => void
@@ -54,6 +56,29 @@ export interface PageBuilderStateStore {
   setOpenHyperlinkInNewTab: (newTab: boolean) => void
   setHyperlinkAbility: (ability: boolean) => void
   setPushComponents: (payload: SetPushComponentsPayload) => void
+  setLocalStorageItemNameCreate: (name: string | null) => void
+  setLocalStorageItemNameUpdate: (name: string | null) => void
+  setUpdateOrCreate: (mode: string) => void
+  setCurrentResourceData: (data: { title: string; id: number } | null) => void
+  setFontWeight: (weight: string) => void
+  setFontFamily: (family: string) => void
+  setFontStyle: (style: string) => void
+  setFontVerticalPadding: (padding: string) => void
+  setFontHorizontalPadding: (padding: string) => void
+  setFontVerticalMargin: (margin: string) => void
+  setFontHorizontalMargin: (margin: string) => void
+  setBorderStyle: (style: string) => void
+  setBorderWidth: (width: string) => void
+  setBorderColor: (color: string) => void
+  setBorderRadiusGlobal: (radius: string) => void
+  setBorderRadiusTopLeft: (radius: string) => void
+  setBorderRadiusTopRight: (radius: string) => void
+  setBorderRadiusBottomleft: (radius: string) => void
+  setBorderRadiusBottomRight: (radius: string) => void
+  setBackgroundColor: (color: string) => void
+  setTextColor: (color: string) => void
+  setBackgroundOpacity: (opacity: string) => void
+  setOpacity: (opacity: string) => void
   [key: string]: unknown
 }
 

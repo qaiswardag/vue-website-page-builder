@@ -10,7 +10,7 @@ import type {
 
 interface PageBuilderState {
   componentArrayAddMethod: string | null
-  localStorageItemName: string | null
+  localStorageItemNameCreate: string | null
   localStorageItemNameUpdate: string | null
   showModalTipTap: boolean
   menuRight: boolean
@@ -70,7 +70,7 @@ const {
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
   state: (): PageBuilderState => ({
     componentArrayAddMethod: null,
-    localStorageItemName: null,
+    localStorageItemNameCreate: null,
     localStorageItemNameUpdate: null,
     showModalTipTap: false,
     menuRight: true,
@@ -121,8 +121,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getComponentArrayAddMethod(state: PageBuilderState): string | null {
       return state.componentArrayAddMethod
     },
-    getLocalStorageItemName(state: PageBuilderState): string | null {
-      return state.localStorageItemName
+    getLocalStorageItemNameCreate(state: PageBuilderState): string | null {
+      return state.localStorageItemNameCreate
     },
     getLocalStorageItemNameUpdate(state: PageBuilderState): string | null {
       return state.localStorageItemNameUpdate
@@ -277,8 +277,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     setComponentArrayAddMethod(payload: string | null): void {
       this.componentArrayAddMethod = payload
     },
-    setLocalStorageItemName(payload: string | null): void {
-      this.localStorageItemName = payload
+    setLocalStorageItemNameCreate(payload: string | null): void {
+      this.localStorageItemNameCreate = payload
     },
     setLocalStorageItemNameUpdate(payload: string | null): void {
       this.localStorageItemNameUpdate = payload

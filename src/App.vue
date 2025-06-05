@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, nextTick, onBeforeMount } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import PageBuilderModal from '@/Components/Modals/PageBuilderModal.vue'
 import HomeSection from '@/Components/Homepage/HomeSection.vue'
 import Footer from '@/Components/Homepage/Footer.vue'
@@ -27,22 +27,11 @@ const getIsLoading = computed(() => {
   return userStore.getIsLoading
 })
 
-// // Dynamic localStorage names based on updateOrCreate type
-// const pathPageBuilderStorageCreate = computed(() => `page-builder-${formType.value}-post`)
-// const pathPageBuilderStorageUpdate = computed(
-//   () => `page-builder-${formType.value}-post-id-${defaultResourceData.id}`,
-// )
-
 const handlePageBuilder = async function () {
   userStore.setIsLoading(true)
 
   await nextTick()
   openPageBuilder.value = true
-
-  if (formType.value === 'create') {
-    pageBuilderStateStore.setComponents([])
-    pageBuilderClass.areComponentsStoredInLocalStorage()
-  }
 
   // handle click
   pageBuilderPrimaryHandler.value = async function () {
@@ -96,13 +85,6 @@ const handleDraftForUpdate = async function () {
     userStore.setIsLoading(false)
   }
 }
-
-onBeforeMount(() => {
-  // // Define local storage key name before on mount
-  // pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate.value)
-  // // Define local storage key name before on mount
-  // pageBuilderStateStore.setLocalStorageItemNameUpdate(pathPageBuilderStorageUpdate.value)
-})
 </script>
 
 <template>

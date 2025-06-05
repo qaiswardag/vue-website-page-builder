@@ -836,7 +836,9 @@ class PageBuilderClass {
         !userSelectedFontSize.includes('md:') &&
         !userSelectedFontSize.includes('lg:')
       ) {
-        this.getElement.value.classList.remove(getFontBase.value)
+        if (getFontBase.value) {
+          this.getElement.value.classList.remove(getFontBase.value)
+        }
         if (!userSelectedFontSize.includes('base:none')) {
           this.getElement.value.classList.add(userSelectedFontSize)
         }
@@ -844,7 +846,9 @@ class PageBuilderClass {
         this.pageBuilderStateStore.setFontBase(userSelectedFontSize)
       }
       if (userSelectedFontSize.includes('lg:')) {
-        this.getElement.value.classList.remove(getFontDesktop.value)
+        if (getFontDesktop.value) {
+          this.getElement.value.classList.remove(getFontDesktop.value)
+        }
         if (!userSelectedFontSize.includes('lg:none')) {
           this.getElement.value.classList.add(userSelectedFontSize)
         }
@@ -852,7 +856,9 @@ class PageBuilderClass {
         this.pageBuilderStateStore.setFontDesktop(userSelectedFontSize)
       }
       if (userSelectedFontSize.includes('md:')) {
-        this.getElement.value.classList.remove(getFontTablet.value)
+        if (getFontTablet.value) {
+          this.getElement.value.classList.remove(getFontTablet.value)
+        }
         if (!userSelectedFontSize.includes('md:none')) {
           this.getElement.value.classList.add(userSelectedFontSize)
         }
@@ -860,7 +866,9 @@ class PageBuilderClass {
         this.pageBuilderStateStore.setFontTablet(userSelectedFontSize)
       }
       if (userSelectedFontSize.includes('sm:')) {
-        this.getElement.value.classList.remove(getFontMobile.value)
+        if (getFontMobile.value) {
+          this.getElement.value.classList.remove(getFontMobile.value)
+        }
         if (!userSelectedFontSize.includes('sm:none')) {
           this.getElement.value.classList.add(userSelectedFontSize)
         }
@@ -1200,11 +1208,6 @@ class PageBuilderClass {
         this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.src}`)
       }
     }
-
-    console.log('one nu...:', this.getCurrentImage.value ? 'true' : 'false')
-    console.log('two nu her...:', this.getCurrentImage.value ? 'true' : 'false')
-    console.log('tree nu her...:', this.getCurrentImage.value && this.getCurrentImage.value.src)
-
     // If no data provided, apply current image if available (new simplified usage)
     if (this.getCurrentImage.value && this.getCurrentImage.value.src) {
       await this.nextTick
@@ -1463,8 +1466,54 @@ class PageBuilderClass {
     this.currentClasses()
   }
 
-  updateLocalStorageItemNameCreate(): void {}
-  updateLocalStorageItemNameUpdate(): void {}
+  updateLocalStorageItemNameCreate(): void {
+    const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
+    const resourceData = this.pageBuilderStateStore.getCurrentResourceData
+    console.log('updateLocalStorageItemNameCreate called:', updateOrCreate)
+
+    if (updateOrCreate === 'create') {
+      const storageName = 'page-builder-create-post'
+      this.pageBuilderStateStore.setLocalStorageItemNameCreate(storageName)
+    } else {
+      // For update mode, include resource ID if available
+      const resourceId =
+        resourceData && typeof resourceData === 'object' && 'id' in resourceData
+          ? resourceData.id
+          : 'draft'
+      const storageName = `page-builder-update-post-${resourceId}`
+      this.pageBuilderStateStore.setLocalStorageItemNameCreate(storageName)
+    }
+  }
+
+  updateLocalStorageItemNameUpdate(): void {
+    const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
+    console.log('updateLocalStorageItemNameUpdate called:', updateOrCreate)
+    const resourceData = this.pageBuilderStateStore.getCurrentResourceData
+
+    if (updateOrCreate === 'update') {
+      const resourceId =
+        resourceData && typeof resourceData === 'object' && 'id' in resourceData
+          ? resourceData.id
+          : 'draft'
+      const storageName = `page-builder-update-post-${resourceId}`
+      this.pageBuilderStateStore.setLocalStorageItemNameUpdate(storageName)
+    } else {
+      // For create mode, use a generic update storage name
+      const storageName = 'page-builder-create-post-update'
+      this.pageBuilderStateStore.setLocalStorageItemNameUpdate(storageName)
+    }
+  }
+
+  // Initialize localStorage names based on current mode
+  initializeLocalStorageNames(): void {
+    if (this.showRunningMethodLogs) {
+      console.log('initializeLocalStorageNames')
+    }
+    console.log('initializeLocalStorageNames — delete this log again - just for testing')
+
+    this.updateLocalStorageItemNameCreate()
+    this.updateLocalStorageItemNameUpdate()
+  }
 
   // Helper method for custom components to easily add components
   addComponent(componentObject: ComponentObject): void {
@@ -1500,6 +1549,7 @@ class PageBuilderClass {
       const clonedComponent = this.cloneCompObjForDOMInsertion({
         html_code: helperComponentObject.html_code,
         id: helperComponentObject.id,
+        title: helperComponentObject.title || 'Helper Component',
       })
 
       this.pageBuilderStateStore.setPushComponents({
