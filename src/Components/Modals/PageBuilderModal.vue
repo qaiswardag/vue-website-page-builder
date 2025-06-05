@@ -1,8 +1,5 @@
 <script setup>
-import Modal from '@/Components/Modals/Modal.vue'
-import DynamicModal from '@/Components/Modals/DynamicModal.vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import { delay } from '@/composables/delay'
 
 import {
   Dialog,
@@ -29,102 +26,21 @@ defineProps({
   },
 })
 
-// Get updateOrCreate from store instead of prop
-const updateOrCreate = computed(() => pageBuilderStateStore.getUpdateOrCreate)
-
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
-
-const hideDraftButton = ref(true)
-
-const showModalConfirmClosePageBuilder = ref(false)
-//
-// use dynamic model
-const typeModal = ref('')
-const gridColumnModal = ref(Number(1))
-const titleModal = ref('')
-const descriptionModal = ref('')
-const firstButtonModal = ref('')
-const secondButtonModal = ref(null)
-const thirdButtonModal = ref(null)
-// set dynamic modal handle functions
-const firstModalButtonFunction = ref(null)
-const secondModalButtonFunction = ref(null)
-const thirdModalButtonFunction = ref(null)
-
-const emit = defineEmits([
-  'pageBuilderPrimaryHandler',
-  'pageBuilderSecondaryHandler',
-  'handleDraftForUpdate',
-])
-
-const firstButton = function () {
-  showModalConfirmClosePageBuilder.value = true
-  typeModal.value = 'danger'
-  gridColumnModal.value = 3
-  titleModal.value = 'Close page builder without save?'
-  descriptionModal.value =
-    'Are you sure you want to close the page builder without saving? Any changes will be lost.'
-  firstButtonModal.value = 'Close'
-  secondButtonModal.value = null
-  thirdButtonModal.value = 'Exit Page Builder'
-
-  // handle click
-  firstModalButtonFunction.value = function () {
-    showModalConfirmClosePageBuilder.value = false
-  }
-  // handle click
-  secondModalButtonFunction.value = function () {
-    secondButton()
-  }
-
-  // handle click
-  thirdModalButtonFunction.value = async function () {
-    showModalConfirmClosePageBuilder.value = false
-    emit('pageBuilderPrimaryHandler')
-
-    pageBuilderClass.removeHoveredAndSelected()
-    userStore.setIsLoading(true)
-    await delay()
-    userStore.setIsLoading(false)
-  }
-  //
-  // end modal
-}
 
 const handleEscapeKey = function () {
   firstButton()
 }
 
-// first button function
-const secondButton = function () {
-  emit('pageBuilderSecondaryHandler')
-  pageBuilderClass.removeHoveredAndSelected()
+const firstButton = function () {
+  console.log('firstButton clicked. What is the logic here...?')
+  // showModalConfirmClosePageBuilder.value = true
 }
 
 //
 //
-const getLocalStorageItemNameUpdate = computed(() => {
-  return pageBuilderStateStore.getLocalStorageItemNameUpdate
-})
+
 //
-const handleDraftForUpdate = function () {
-  hideDraftButton.value = false
-  emit('handleDraftForUpdate')
-}
-
-onMounted(() => {
-  const item = localStorage.getItem(getLocalStorageItemNameUpdate.value)
-  if (item) {
-    const parsedValue = JSON.parse(item)
-
-    if (Array.isArray(parsedValue) && parsedValue.length === 0) {
-      hideDraftButton.value = false
-    }
-  }
-  if (!item) {
-    hideDraftButton.value = false
-  }
-})
 </script>
 
 <template>
@@ -166,23 +82,6 @@ onMounted(() => {
             <div
               class="bg-red-100 inline-block align-bottom text-left transform transition-all sm:align-middle w-full overflow-hidden h-[100vh] top-0 left-0 right-0 absolute"
             >
-              <DynamicModal
-                :show="showModalConfirmClosePageBuilder"
-                :type="typeModal"
-                :gridColumnAmount="gridColumnModal"
-                :title="titleModal"
-                :description="descriptionModal"
-                :firstButtonText="firstButtonModal"
-                :secondButtonText="secondButtonModal"
-                :thirdButtonText="thirdButtonModal"
-                @firstModalButtonFunction="firstModalButtonFunction"
-                @secondModalButtonFunction="secondModalButtonFunction"
-                @thirdModalButtonFunction="thirdModalButtonFunction"
-              >
-                <header></header>
-                <main></main>
-              </DynamicModal>
-
               <!-- Save and Close and Draft logic # start -->
               <!-- Save and Close and Draft logic # end -->
               <slot></slot>

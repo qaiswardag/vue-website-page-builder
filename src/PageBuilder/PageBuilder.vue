@@ -13,6 +13,8 @@ import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebar
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 import { useUserStore } from '@/stores/user'
+import DynamicModal from '@/Components/Modals/DynamicModal.vue'
+import { delay } from '@/composables/delay'
 
 /**
  * Props for PageBuilder component
@@ -59,6 +61,76 @@ const props = defineProps({
     },
   },
 })
+
+const emit = defineEmits([
+  'pageBuilderPrimaryHandler',
+  'pageBuilderSecondaryHandler',
+  'handleDraftForUpdate',
+])
+
+// first button function
+const secondButton = function () {
+  emit('pageBuilderSecondaryHandler')
+  pageBuilderClass.removeHoveredAndSelected()
+}
+
+const getLocalStorageItemNameUpdate = computed(() => {
+  return pageBuilderStateStore.getLocalStorageItemNameUpdate
+})
+
+const showModalConfirmClosePageBuilder = ref(false)
+
+const hideDraftButton = ref(true)
+
+// Get updateOrCreate from store instead of prop
+const updateOrCreate = computed(() => pageBuilderStateStore.getUpdateOrCreate)
+
+// use dynamic model
+const typeModal = ref('')
+const gridColumnModal = ref(Number(1))
+const titleModal = ref('')
+const descriptionModal = ref('')
+const firstButtonModal = ref('')
+const secondButtonModal = ref(null)
+const thirdButtonModal = ref(null)
+// set dynamic modal handle functions
+const firstModalButtonFunction = ref(null)
+const secondModalButtonFunction = ref(null)
+const thirdModalButtonFunction = ref(null)
+
+const firstButton = function () {
+  showModalConfirmClosePageBuilder.value = true
+  typeModal.value = 'danger'
+  gridColumnModal.value = 3
+  titleModal.value = 'Close page builder without save?'
+  descriptionModal.value =
+    'Are you sure you want to close the page builder without saving? Any changes will be lost.'
+  firstButtonModal.value = 'Close'
+  secondButtonModal.value = null
+  thirdButtonModal.value = 'Exit Page Builder'
+
+  // handle click
+  firstModalButtonFunction.value = function () {
+    showModalConfirmClosePageBuilder.value = false
+  }
+  // handle click
+  secondModalButtonFunction.value = function () {
+    secondButton()
+  }
+
+  // handle click
+  thirdModalButtonFunction.value = async function () {
+    showModalConfirmClosePageBuilder.value = false
+    emit('pageBuilderPrimaryHandler')
+
+    pageBuilderClass.removeHoveredAndSelected()
+    userStore.setIsLoading(true)
+    await delay()
+    userStore.setIsLoading(false)
+  }
+  //
+  // end modal
+}
 
 // Create internal Pinia instance for PageBuilder package
 const internalPinia = createPinia()
@@ -206,24 +278,24 @@ onMounted(async () => {
   pageBuilderClass.setEventListenersForElements()
 })
 
-// Missing variables and functions
-const hideDraftButton = ref(true)
-
-// Define required functions that are referenced in template
-const firstButton = function () {
-  // Close or cancel function - can be customized as needed
-  console.log('First button clicked - close/cancel action')
-}
-
-const secondButton = function () {
-  // Save function - can be customized as needed
-  console.log('Second button clicked - save action')
-}
-
 const handleDraftForUpdate = function () {
-  // Handle draft for update function - can be customized as needed
-  console.log('Handle draft for update')
+  hideDraftButton.value = false
+  emit('handleDraftForUpdate')
 }
+
+onMounted(() => {
+  const item = localStorage.getItem(getLocalStorageItemNameUpdate.value)
+  if (item) {
+    const parsedValue = JSON.parse(item)
+
+    if (Array.isArray(parsedValue) && parsedValue.length === 0) {
+      hideDraftButton.value = false
+    }
+  }
+  if (!item) {
+    hideDraftButton.value = false
+  }
+})
 </script>
 
 <template>
@@ -243,7 +315,69 @@ const handleDraftForUpdate = function () {
       <Preview></Preview>
     </PageBuilderPreviewModal>
 
+    <!-- Show Modal for confirm close page builder # start -->
+    <DynamicModal
+      :show="showModalConfirmClosePageBuilder"
+      :type="typeModal"
+      :gridColumnAmount="gridColumnModal"
+      :title="titleModal"
+      :description="descriptionModal"
+      :firstButtonText="firstButtonModal"
+      :secondButtonText="secondButtonModal"
+      :thirdButtonText="thirdButtonModal"
+      @firstModalButtonFunction="firstModalButtonFunction"
+      @secondModalButtonFunction="secondModalButtonFunction"
+      @thirdModalButtonFunction="thirdModalButtonFunction"
+    >
+      <header></header>
+      <main></main>
+    </DynamicModal>
+    <!-- Show Modal for confirm close page builder # end -->
+
     <div class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2">
+      <!-- Save or draft logic # start -->
+      <div class="p-4 m-8 bg-stone-200 rounded-lg">
+        <div
+          @click="pageBuilderStateStore.setComponent(null)"
+          class="px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
+        >
+          <div class="flex items-center justify-start divide-x divide-gray-200">
+            <button type="button" @click="firstButton" class="border-r border-gray-200 pr-6">
+              <img class="h-6" src="/logo/logo.svg" alt="Logo" />
+            </button>
+            <button
+              class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4"
+              @click="secondButton"
+              type="button"
+            >
+              <span class="material-symbols-outlined text-[18px]"> save </span>
+              Save & Close
+            </button>
+            <button
+              v-if="updateOrCreate === 'update' && hideDraftButton"
+              class="mySecondaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-2"
+              @click="handleDraftForUpdate"
+              type="button"
+            >
+              <span class="material-symbols-outlined text-[18px]"> settings_backup_restore </span>
+              Use Draft
+            </button>
+          </div>
+          <button
+            type="button"
+            @click="firstButton"
+            class="flex items-center justify-center gap-1 cursor-pointer"
+          >
+            <span class="myPrimaryParagraph font-medium"> Close Builder </span>
+            <div
+              class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+            >
+              <span class="material-symbols-outlined"> close </span>
+            </div>
+          </button>
+        </div>
+      </div>
+      <!-- Save or draft logic # end -->
       <div class="py-4 p-4 bg-red-100 text-sm test-data m-4 rounded-lg">
         <h3 class="font-semibold mb-3 text-gray-800">PageBuilder Debug Info</h3>
         <div class="bg-white rounded border overflow-hidden">

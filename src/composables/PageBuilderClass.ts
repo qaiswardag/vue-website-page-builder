@@ -1466,40 +1466,33 @@ class PageBuilderClass {
     this.currentClasses()
   }
 
+  // localStorage.setItem(pathLocalStorage, formDataJson);
+
   updateLocalStorageItemNameCreate(): void {
     const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
     const resourceData = this.pageBuilderStateStore.getCurrentResourceData
-    console.log('updateLocalStorageItemNameCreate called:', updateOrCreate)
 
     if (updateOrCreate === 'create') {
+      console.log('create called:', resourceData)
       const storageName = 'page-builder-create-post'
-      this.pageBuilderStateStore.setLocalStorageItemNameCreate(storageName)
-    } else {
-      // For update mode, include resource ID if available
-      const resourceId =
-        resourceData && typeof resourceData === 'object' && 'id' in resourceData
-          ? resourceData.id
-          : 'draft'
-      const storageName = `page-builder-update-post-${resourceId}`
+
       this.pageBuilderStateStore.setLocalStorageItemNameCreate(storageName)
     }
   }
 
   updateLocalStorageItemNameUpdate(): void {
     const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
-    console.log('updateLocalStorageItemNameUpdate called:', updateOrCreate)
     const resourceData = this.pageBuilderStateStore.getCurrentResourceData
 
     if (updateOrCreate === 'update') {
+      console.log('update called:', resourceData)
       const resourceId =
         resourceData && typeof resourceData === 'object' && 'id' in resourceData
           ? resourceData.id
           : 'draft'
+
       const storageName = `page-builder-update-post-${resourceId}`
-      this.pageBuilderStateStore.setLocalStorageItemNameUpdate(storageName)
-    } else {
-      // For create mode, use a generic update storage name
-      const storageName = 'page-builder-create-post-update'
+
       this.pageBuilderStateStore.setLocalStorageItemNameUpdate(storageName)
     }
   }
