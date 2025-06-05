@@ -205,9 +205,9 @@ onMounted(async () => {
   //
   //
   if (
-    getUpdateOrCreate &&
-    typeof getUpdateOrCreate === 'string' &&
-    getUpdateOrCreate === 'update'
+    getUpdateOrCreate.value &&
+    typeof getUpdateOrCreate.value === 'string' &&
+    getUpdateOrCreate.value === 'update'
   ) {
     pageBuilderClass.loadExistingContent()
   }
