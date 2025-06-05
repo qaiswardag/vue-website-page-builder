@@ -26,15 +26,16 @@ defineProps({
   },
 })
 
+const emit = defineEmits(['closeModal'])
+
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 
 const handleEscapeKey = function () {
-  firstButton()
+  closeModal()
 }
 
-const firstButton = function () {
-  console.log('firstButton clicked. What is the logic here...?')
-  // showModalConfirmClosePageBuilder.value = true
+const closeModal = function () {
+  emit('closeModal')
 }
 
 //
@@ -47,7 +48,7 @@ const firstButton = function () {
   <teleport to="body">
     <TransitionRoot :show="show" as="template">
       <Dialog
-        @close="firstButton"
+        @close="closeModal"
         @keydown.escape.prevent="handleEscapeKey"
         as="div"
         class="fixed z-30 inset-0 overflow-y-auto focus:outline-none"

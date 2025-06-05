@@ -36,7 +36,7 @@ class PageBuilderClass {
   private pageBuilderStateStore: PageBuilderStateStore
   private mediaLibraryStore: MediaLibraryStore
   private getTextAreaVueModel: ComputedRef<string | null>
-  private getLocalStorageItemName: ComputedRef<string | null>
+  private getLocalStorageItemNameCreate: ComputedRef<string | null>
   private getLocalStorageItemNameUpdate: ComputedRef<string | null>
   private getCurrentImage: ComputedRef<ImageObject | null>
   private getHyberlinkEnable: ComputedRef<boolean>
@@ -80,8 +80,8 @@ class PageBuilderClass {
     this.mediaLibraryStore = mediaLibraryStore
 
     this.getTextAreaVueModel = computed(() => this.pageBuilderStateStore.getTextAreaVueModel)
-    this.getLocalStorageItemName = computed(
-      () => this.pageBuilderStateStore.getLocalStorageItemName,
+    this.getLocalStorageItemNameCreate = computed(
+      () => this.pageBuilderStateStore.getLocalStorageItemNameCreate,
     )
     this.getLocalStorageItemNameUpdate = computed(
       () => this.pageBuilderStateStore.getLocalStorageItemNameUpdate,
@@ -1118,28 +1118,46 @@ class PageBuilderClass {
     }
 
     await this.nextTick
-    if (this.getLocalStorageItemName.value) {
+    if (this.getLocalStorageItemNameCreate.value) {
       localStorage.setItem(
-        this.getLocalStorageItemName.value,
+        this.getLocalStorageItemNameCreate.value,
         JSON.stringify(this.getComponents.value),
       )
     }
+
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //   console.log('saveComponentsLocalStorageUpdate')
+    // }
+
+    // await this.nextTick
+    // if (this.getLocalStorageItemNameUpdate.value) {
+    //   localStorage.setItem(
+    //     this.getLocalStorageItemNameUpdate.value,
+    //     JSON.stringify(this.getComponents.value),
+    //   )
+    // }
   }
 
-  async saveComponentsLocalStorageUpdate() {
+  async removeItemComponentsLocalStorageCreate() {
+    console.log('removeItemComponentsLocalStorageCreate')
     if (this.showRunningMethodLogs) {
-      console.log('saveComponentsLocalStorageUpdate')
+      console.log('removeItemComponentsLocalStorageCreate')
     }
 
     await this.nextTick
-    if (this.getLocalStorageItemNameUpdate.value) {
-      localStorage.setItem(
-        this.getLocalStorageItemNameUpdate.value,
-        JSON.stringify(this.getComponents.value),
-      )
+    if (this.getLocalStorageItemNameCreate.value) {
+      localStorage.removeItem(this.getLocalStorageItemNameCreate.value)
     }
   }
+
   async removeItemComponentsLocalStorageUpdate() {
+    console.log('removeItemComponentsLocalStorageUpdate')
     if (this.showRunningMethodLogs) {
       console.log('saveComponentsLocalStorageUpdate')
     }
@@ -1155,9 +1173,9 @@ class PageBuilderClass {
       console.log('areComponentsStoredInLocalStorage')
     }
 
-    if (!this.getLocalStorageItemName.value) return false
+    if (!this.getLocalStorageItemNameCreate.value) return false
 
-    const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)
+    const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemNameCreate.value)
     if (savedCurrentDesign) {
       let components = JSON.parse(savedCurrentDesign)
       if (!components) {
@@ -1608,6 +1626,23 @@ class PageBuilderClass {
         title: 'Link',
       },
     ]
+  }
+
+  // Load components from localStorage based on current mode
+  loadComponentsFromLocalStorage(): boolean {
+    if (this.showRunningMethodLogs) {
+      console.log('loadComponentsFromLocalStorage')
+    }
+
+    const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
+
+    if (updateOrCreate === 'create') {
+      return this.areComponentsStoredInLocalStorage()
+    } else if (updateOrCreate === 'update') {
+      return this.areComponentsStoredInLocalStorageUpdate()
+    }
+
+    return false
   }
 }
 

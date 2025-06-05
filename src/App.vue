@@ -16,8 +16,6 @@ const pageBuilderStateStore = usePageBuilderStateStore()
 const userStore = useUserStore()
 const openPageBuilder = ref(false)
 
-const pageBuilderPrimaryHandler = ref(null)
-const pageBuilderSecondaryHandler = ref(null)
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 
 // Get updateOrCreate from store
@@ -33,57 +31,11 @@ const handlePageBuilder = async function () {
   await nextTick()
   openPageBuilder.value = true
 
-  // handle click
-  pageBuilderPrimaryHandler.value = async function () {
-    userStore.setIsLoading(true)
-
-    if (formType.value === 'update') {
-      await nextTick()
-      pageBuilderClass.saveComponentsLocalStorageUpdate()
-    }
-
-    openPageBuilder.value = false
-    userStore.setIsLoading(false)
-  }
-
-  // handle click
-  pageBuilderSecondaryHandler.value = async function () {
-    userStore.setIsLoading(true)
-
-    // save to local storage if new resource
-    if (formType.value === 'create') {
-      await nextTick()
-      pageBuilderClass.saveComponentsLocalStorage()
-      await nextTick()
-    }
-    // save to local storage if update
-    if (formType.value === 'update') {
-      await nextTick()
-      pageBuilderClass.synchronizeDOMAndComponents()
-      await nextTick()
-    }
-
-    openPageBuilder.value = false
-
-    userStore.setIsLoading(false)
-  }
-
   userStore.setIsLoading(false)
-
-  // end modal
 }
-// Builder # End
-const handleDraftForUpdate = async function () {
-  userStore.setIsLoading(true)
 
-  if (formType.value === 'update') {
-    await nextTick()
-    pageBuilderClass.areComponentsStoredInLocalStorageUpdate()
-    await nextTick()
-    pageBuilderClass.setEventListenersForElements()
-
-    userStore.setIsLoading(false)
-  }
+const closePageBuilderModal = function () {
+  openPageBuilder.value = false
 }
 </script>
 
@@ -92,12 +44,7 @@ const handleDraftForUpdate = async function () {
     <teleport to="body">
       <FullScreenSpinner v-if="getIsLoading"></FullScreenSpinner>
     </teleport>
-    <PageBuilderModal
-      :show="openPageBuilder"
-      @pageBuilderPrimaryHandler="pageBuilderPrimaryHandler"
-      @pageBuilderSecondaryHandler="pageBuilderSecondaryHandler"
-      @handleDraftForUpdate="handleDraftForUpdate"
-    >
+    <PageBuilderModal :show="openPageBuilder" @closeModal="closePageBuilderModal">
       <PageBuilder
         updateOrCreate="update"
         :userForPageBuilder="{ name: 'Qais Wardag', id: 1 }"
