@@ -1645,7 +1645,6 @@ class PageBuilderClass {
 
     if (this.pageBuilderStateStore.getUpdateOrCreate === 'update') {
       if (this.areComponentsStoredInLocalStorage()) {
-        console.log('this.getComponents.value isssss:', this.getComponents.value)
         try {
           // set components
           const htmlOutput =
@@ -1655,8 +1654,6 @@ class PageBuilderClass {
                 return component.html_code
               })
               .join('')
-
-          console.log('Components loaded and processed:', htmlOutput)
         } catch (error) {
           console.error('Error loading existing content:', error)
         }
