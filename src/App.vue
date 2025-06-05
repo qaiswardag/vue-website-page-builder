@@ -124,7 +124,11 @@ onBeforeMount(() => {
       @pageBuilderSecondaryHandler="pageBuilderSecondaryHandler"
       @handleDraftForUpdate="handleDraftForUpdate"
     >
-      <PageBuilder></PageBuilder>
+      <PageBuilder
+        updateOrCreate="update"
+        :userForPageBuilder="{ name: 'Qais Wardag', id: 1 }"
+        :resourceData="{ title: 'My Blog', id: 1 }"
+      ></PageBuilder>
     </PageBuilderModal>
 
     <Navbar @handleButton="handlePageBuilder"></Navbar>

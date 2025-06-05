@@ -2,30 +2,12 @@
 
 // Component and Image interfaces
 export interface ComponentObject {
-  id?: string | number | null
-  name?: string
-  title?: string
-  html_code?: string
-  css_code?: string
-  created_at?: string
-  updated_at?: string
-  [key: string]: unknown
+  id: string | number | null
+  html_code: string
 }
 
 export interface ImageObject {
-  id?: string | number
-  name?: string
-  url?: string
   src: string
-  alt?: string
-  width?: number
-  height?: number
-  size?: number
-  mime_type?: string
-  path?: string
-  created_at?: string
-  updated_at?: string
-  [key: string]: unknown
 }
 
 // Store interfaces for better type safety

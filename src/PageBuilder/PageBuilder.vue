@@ -36,7 +36,7 @@ const props = defineProps({
     default: 'create',
     required: false,
   },
-  user: {
+  userForPageBuilder: {
     type: Object,
     default: null,
     validator: (value) => {
@@ -71,8 +71,8 @@ if (props.resourceData) {
   pageBuilderStateStore.setCurrentResourceData(props.resourceData)
 }
 // Set current user if provided
-if (props.user) {
-  userStore.setCurrentUser(props.user)
+if (props.userForPageBuilder) {
+  userStore.setCurrentUser(props.userForPageBuilder)
 }
 
 // Set updateOrCreate in store
@@ -192,6 +192,7 @@ watch(getElementAttributes, (newAttributes, oldAttributes) => {
 })
 
 const handleSelectComponent = function (componentObject) {
+  console.log('handleSelectComponent called', componentObject)
   pageBuilderStateStore.setComponent(componentObject)
 }
 
