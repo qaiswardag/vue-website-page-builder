@@ -48,7 +48,7 @@ interface PageBuilderState {
   fontMobile: string | null
   backgroundColor: string | null
   textColor: string | null
-  element: HTMLElement | null
+  element: (HTMLElement & { src?: string }) | null
   component: ComponentObject | null
   components: ComponentObject[]
   basePrimaryImage: string | null
@@ -400,19 +400,22 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       this.textColor = payload
     },
     setElement(payload: HTMLElement | null): void {
-      this.element = payload || null
+      console.log('setElement called:', payload)
+      this.element = {} as HTMLElement
+      this.element = payload
     },
     setComponent(payload: ComponentObject | null): void {
-      console.log('setComponent called:', payload)
       if (!payload) {
         this.element = null
         this.component = null
         return
       }
-      this.component = payload || null
+      this.component = {} as ComponentObject
+      this.component = payload
     },
 
     setComponents(payload: ComponentObject[] | null): void {
+      this.components = {} as ComponentObject[]
       this.components = payload || []
     },
     setPushComponents(payload: SetPushComponentsPayload): void {
@@ -423,8 +426,15 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
         this.components.unshift(payload.component)
       }
     },
+
     setBasePrimaryImage(payload: string | null): void {
       // Note: element manipulation removed as it should be handled by component logic
+      console.log('setBasePrimaryImage called', this.element)
+
+      if (this.element) {
+        this.element.src = payload || undefined
+      }
+
       this.basePrimaryImage = payload
     },
     setCurrentLayoutPreview(payload: string): void {
