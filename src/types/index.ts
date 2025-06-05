@@ -14,8 +14,7 @@ export interface ImageObject {
 // Store interfaces for better type safety
 export interface PageBuilderStateStore {
   getTextAreaVueModel: string | null
-  getLocalStorageItemNameCreate: string | null
-  getLocalStorageItemNameUpdate: string | null
+  LocalStorageItemName: string | null
   getHyberlinkEnable: boolean
   getComponents: ComponentObject[] | null
   getComponent: ComponentObject | null
@@ -56,8 +55,7 @@ export interface PageBuilderStateStore {
   setOpenHyperlinkInNewTab: (newTab: boolean) => void
   setHyperlinkAbility: (ability: boolean) => void
   setPushComponents: (payload: SetPushComponentsPayload) => void
-  setLocalStorageItemNameCreate: (name: string | null) => void
-  setLocalStorageItemNameUpdate: (name: string | null) => void
+  setLocalStorageItemName: (name: string | null) => void
   setUpdateOrCreate: (mode: string) => void
   setCurrentResourceData: (data: { title: string; id: number } | null) => void
   setFontWeight: (weight: string) => void

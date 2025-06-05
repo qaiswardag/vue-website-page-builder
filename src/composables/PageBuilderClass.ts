@@ -36,8 +36,7 @@ class PageBuilderClass {
   private pageBuilderStateStore: PageBuilderStateStore
   private mediaLibraryStore: MediaLibraryStore
   private getTextAreaVueModel: ComputedRef<string | null>
-  private getLocalStorageItemNameCreate: ComputedRef<string | null>
-  private getLocalStorageItemNameUpdate: ComputedRef<string | null>
+  private getLocalStorageItemName: ComputedRef<string | null>
   private getCurrentImage: ComputedRef<ImageObject | null>
   private getHyberlinkEnable: ComputedRef<boolean>
   private getComponents: ComputedRef<ComponentObject[] | null>
@@ -80,11 +79,8 @@ class PageBuilderClass {
     this.mediaLibraryStore = mediaLibraryStore
 
     this.getTextAreaVueModel = computed(() => this.pageBuilderStateStore.getTextAreaVueModel)
-    this.getLocalStorageItemNameCreate = computed(
-      () => this.pageBuilderStateStore.getLocalStorageItemNameCreate,
-    )
-    this.getLocalStorageItemNameUpdate = computed(
-      () => this.pageBuilderStateStore.getLocalStorageItemNameUpdate,
+    this.getLocalStorageItemName = computed(
+      () => this.pageBuilderStateStore.getLocalStorageItemName,
     )
 
     this.getCurrentImage = computed(() => this.mediaLibraryStore.getCurrentImage)
@@ -557,15 +553,16 @@ class PageBuilderClass {
 
       // Append the restored element to its parent
       // Insert the restored element before its next sibling in its parent
-      if (newElement.firstChild) {
+      if (newElement.firstChild && this.getParentElement.value) {
+        // insertBefore can accept null as second parameter (will append to end)
         this.getParentElement.value.insertBefore(newElement.firstChild, this.getNextSibling.value)
       }
     }
 
     // Clear
-
     this.pageBuilderStateStore.setParentElement(null)
     this.pageBuilderStateStore.setRestoredElement(null)
+    this.pageBuilderStateStore.setNextSibling(null)
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
 
@@ -1109,6 +1106,79 @@ class PageBuilderClass {
     //
   }
 
+  // Helper function to sanitize title for localStorage key
+  private sanitizeForLocalStorage(input: string): string {
+    return input
+      .trim() // Remove leading/trailing spaces
+      .toLowerCase() // Convert to lowercase
+      .replace(/\s+/g, '-') // Replace one or more spaces with single hyphen
+      .replace(/[^a-z0-9-]/g, '') // Remove all non-alphanumeric characters except hyphens
+      .replace(/-+/g, '-') // Replace multiple consecutive hyphens with single hyphen
+      .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
+  }
+
+  updateLocalStorageItemName(): void {
+    const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
+
+    const resourceData = this.pageBuilderStateStore.getCurrentResourceData
+
+    // Logic for update
+    if (updateOrCreate === 'create') {
+      this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-create-resource`)
+      return
+    }
+
+    // Logic for update
+    if (updateOrCreate === 'update') {
+      // if resource data is null
+      if (resourceData === null) {
+        this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-update-resource`)
+        return
+      }
+
+      // If resource is present
+
+      // Runs when resourceData has id but no title
+      if (typeof resourceData === 'object' && 'id' in resourceData && !('title' in resourceData)) {
+        const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
+        console.log('ID BUT NOT TITLE:', `page-builder-update-resource-${sanitizedId}`)
+
+        this.pageBuilderStateStore.setLocalStorageItemName(
+          `page-builder-update-resource-${sanitizedId}`,
+        )
+        return
+      }
+
+      // Runs when resourceData has title but no id
+      if (typeof resourceData === 'object' && 'title' in resourceData && !('id' in resourceData)) {
+        const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
+        console.log('TITLE BUT NOT ID:', `page-builder-update-resource-${sanitizedTitle}`)
+
+        this.pageBuilderStateStore.setLocalStorageItemName(
+          `page-builder-update-resource-${sanitizedTitle}`, // øøø
+        )
+        return
+      }
+
+      // Runs when resourceData has both title and id
+      if (typeof resourceData === 'object' && 'title' in resourceData && 'id' in resourceData) {
+        const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
+        const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
+        console.log(
+          'BOTH TITLE AND ID:',
+          `page-builder-update-resource-${sanitizedTitle}-${sanitizedId}`,
+        )
+
+        this.pageBuilderStateStore.setLocalStorageItemName(
+          `page-builder-update-resource-${sanitizedTitle}-${sanitizedId}`,
+        )
+        return
+      }
+
+      console.log('both are there...')
+    }
+  }
+
   async saveComponentsLocalStorage() {
     await this.nextTick
     this.synchronizeDOMAndComponents()
@@ -1118,30 +1188,12 @@ class PageBuilderClass {
     }
 
     await this.nextTick
-    if (this.getLocalStorageItemNameCreate.value) {
+    if (this.getLocalStorageItemName.value) {
       localStorage.setItem(
-        this.getLocalStorageItemNameCreate.value,
+        this.getLocalStorageItemName.value,
         JSON.stringify(this.getComponents.value),
       )
     }
-
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //   console.log('saveComponentsLocalStorageUpdate')
-    // }
-
-    // await this.nextTick
-    // if (this.getLocalStorageItemNameUpdate.value) {
-    //   localStorage.setItem(
-    //     this.getLocalStorageItemNameUpdate.value,
-    //     JSON.stringify(this.getComponents.value),
-    //   )
-    // }
   }
 
   async removeItemComponentsLocalStorageCreate() {
@@ -1151,8 +1203,9 @@ class PageBuilderClass {
     }
 
     await this.nextTick
-    if (this.getLocalStorageItemNameCreate.value) {
-      localStorage.removeItem(this.getLocalStorageItemNameCreate.value)
+
+    if (this.getLocalStorageItemName.value) {
+      localStorage.removeItem(this.getLocalStorageItemName.value)
     }
   }
 
@@ -1162,9 +1215,8 @@ class PageBuilderClass {
       console.log('saveComponentsLocalStorageUpdate')
     }
 
-    await this.nextTick
-    if (this.getLocalStorageItemNameUpdate.value) {
-      localStorage.removeItem(this.getLocalStorageItemNameUpdate.value)
+    if (this.getLocalStorageItemName.value) {
+      localStorage.removeItem(this.getLocalStorageItemName.value)
     }
   }
 
@@ -1173,9 +1225,9 @@ class PageBuilderClass {
       console.log('areComponentsStoredInLocalStorage')
     }
 
-    if (!this.getLocalStorageItemNameCreate.value) return false
+    if (!this.getLocalStorageItemName.value) return false
 
-    const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemNameCreate.value)
+    const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)
     if (savedCurrentDesign) {
       let components = JSON.parse(savedCurrentDesign)
       if (!components) {
@@ -1195,9 +1247,9 @@ class PageBuilderClass {
       console.log('areComponentsStoredInLocalStorageUpdate')
     }
 
-    if (!this.getLocalStorageItemNameUpdate.value) return false
+    if (!this.getLocalStorageItemName.value) return false
 
-    const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemNameUpdate.value)
+    const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)
     if (savedCurrentDesign) {
       let components = JSON.parse(savedCurrentDesign)
       if (!components) {
@@ -1482,37 +1534,6 @@ class PageBuilderClass {
     this.handleTextColor(undefined)
     // handle classes
     this.currentClasses()
-  }
-
-  // localStorage.setItem(pathLocalStorage, formDataJson);
-
-  updateLocalStorageItemNameCreate(): void {
-    const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
-    const resourceData = this.pageBuilderStateStore.getCurrentResourceData
-
-    if (updateOrCreate === 'create') {
-      console.log('create called:', resourceData)
-      const storageName = 'page-builder-create-post'
-
-      this.pageBuilderStateStore.setLocalStorageItemNameCreate(storageName)
-    }
-  }
-
-  updateLocalStorageItemNameUpdate(): void {
-    const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
-    const resourceData = this.pageBuilderStateStore.getCurrentResourceData
-
-    if (updateOrCreate === 'update') {
-      console.log('update called:', resourceData)
-      const resourceId =
-        resourceData && typeof resourceData === 'object' && 'id' in resourceData
-          ? resourceData.id
-          : 'draft'
-
-      const storageName = `page-builder-update-post-${resourceId}`
-
-      this.pageBuilderStateStore.setLocalStorageItemNameUpdate(storageName)
-    }
   }
 
   // Helper method for custom components to easily add components

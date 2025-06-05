@@ -196,8 +196,7 @@ const handleSelectComponent = function (componentObject) {
 const draggableZone = ref(null)
 
 onMounted(async () => {
-  pageBuilderClass.updateLocalStorageItemNameCreate()
-  pageBuilderClass.updateLocalStorageItemNameUpdate()
+  pageBuilderClass.updateLocalStorageItemName()
 
   // Set up event listeners
   pageBuilderClass.setEventListenersForElements()
