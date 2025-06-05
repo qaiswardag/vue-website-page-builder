@@ -81,8 +81,8 @@ const features = [
       <div>
         <PageBuilder
           updateOrCreate="update"
-          :userForPageBuilder="{ name: 'Mara Almeida', id: 1 }"
-          :resourceData="{ title: 'Demo Resource', id: 1 }"
+          :userForPageBuilder="{ name: 'John Doe' }"
+          :resourceData="{ title: 'Demo Article', id: 1 }"
         ></PageBuilder>
       </div>
       <div @click="handleButton" class="myPrimaryContentSection cursor-pointer">
