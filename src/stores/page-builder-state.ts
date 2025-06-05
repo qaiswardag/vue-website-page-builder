@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import { nextTick } from 'vue'
 import { vueFetch } from '@/composables/vueFetch'
 import type {
   ComponentObject,
@@ -402,7 +403,9 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     setElement(payload: HTMLElement | null): void {
       console.log('setElement called:', payload)
       this.element = {} as HTMLElement
-      this.element = payload
+      nextTick(() => {
+        this.element = payload
+      })
     },
     setComponent(payload: ComponentObject | null): void {
       if (!payload) {
@@ -411,12 +414,16 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
         return
       }
       this.component = {} as ComponentObject
-      this.component = payload
+      nextTick(() => {
+        this.component = payload
+      })
     },
 
     setComponents(payload: ComponentObject[] | null): void {
       this.components = {} as ComponentObject[]
-      this.components = payload || []
+      nextTick(() => {
+        this.components = payload || []
+      })
     },
     setPushComponents(payload: SetPushComponentsPayload): void {
       const method = payload.componentArrayAddMethod || 'push'
