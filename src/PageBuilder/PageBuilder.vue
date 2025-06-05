@@ -197,9 +197,16 @@ const draggableZone = ref(null)
 
 onMounted(async () => {
   pageBuilderClass.updateLocalStorageItemName()
-
   // Set up event listeners
   pageBuilderClass.setEventListenersForElements()
+
+  //
+  //
+  //
+  //
+  if (getUpdateOrCreate && typeof getUpdateOrCreate === string && getUpdateOrCreate === 'update') {
+    pageBuilderClass.loadExistingContent()
+  }
 })
 </script>
 

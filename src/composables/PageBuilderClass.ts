@@ -1665,6 +1665,47 @@ class PageBuilderClass {
 
     return false
   }
+
+  // Load existing content from HTML when in update mode
+  loadExistingContent(htmlContent: string): void {
+    console.log('loadExistingContent called')
+    if (this.showRunningMethodLogs) {
+      console.log('loadExistingContent')
+    }
+
+    if (!htmlContent || typeof htmlContent !== 'string') {
+      console.warn('No valid HTML content provided')
+      return
+    }
+
+    try {
+      // Parse the HTML content using DOMParser
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(htmlContent, 'text/html')
+
+      // Select all <section> elements with data-componentid attribute
+      const sectionElements = doc.querySelectorAll('section[data-componentid]')
+
+      const extractedSections: ComponentObject[] = []
+
+      // Loop through the selected elements and extract outerHTML
+      sectionElements.forEach((section) => {
+        const htmlElement = section as HTMLElement
+        extractedSections.push({
+          html_code: htmlElement.outerHTML,
+          id: htmlElement.dataset.componentid || null,
+          title: 'Loaded Component', // Default title for loaded components
+        })
+      })
+
+      // Set the extracted components in the store
+      this.pageBuilderStateStore.setComponents(extractedSections)
+
+      console.log(`Loaded ${extractedSections.length} existing components`)
+    } catch (error) {
+      console.error('Error loading existing content:', error)
+    }
+  }
 }
 
 export default PageBuilderClass
