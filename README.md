@@ -12,27 +12,6 @@ A Vue.js page builder component with drag & drop functionality for creating dyna
 npm install @myissue/vue-website-page-builder
 ```
 
-## Quick Start
-
-```vue
-<script setup>
-import { PageBuilder } from '@myissue/vue-website-page-builder'
-import '@myissue/vue-website-page-builder/style.css'
-</script>
-
-<template>
-  <PageBuilder />
-</template>
-```
-
-## Custom Components
-
-Want to add your own media library or search functionality? Create custom components that can be injected into the page builder:
-
-📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)** - Learn how to create and integrate your own components
-
-Example integration:
-
 ```vue
 <script setup>
 import { PageBuilder } from '@myissue/vue-website-page-builder'
@@ -127,9 +106,30 @@ yarn install
 bun install
 ```
 
+### Quick Start
+
+```vue
+<script setup>
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+</script>
+
+<template>
+  <PageBuilder />
+</template>
+```
+
 ### Customization
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
+
+### Custom Components
+
+Want to add your own media library or search functionality? Create custom components that can be injected into the page builder:
+
+📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)** - Learn how to create and integrate your own components
+
+Example integration:
 
 ## Contributing
 
