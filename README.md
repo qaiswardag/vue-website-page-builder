@@ -1,10 +1,10 @@
-# @myissue/vue-website-page-builder
-
 <p align="center" dir="auto">
 <img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo">
 </p>
 
 ## **DEVELOPMENT VERSION - NOT READY FOR PRODUCTION**
+
+# Free Click & Drop Page Builder
 
 ## Overview
 
@@ -16,7 +16,7 @@ A Vue 3 page builder component with drag & drop functionality for creating dynam
 npm install @myissue/vue-website-page-builder
 ```
 
-# Free Click & Drop Page Builder
+# Click & Drop Page Builder
 
 [Play around with the page builder](https://www.builder-demo.myissue.dk)
 
