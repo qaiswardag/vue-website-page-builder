@@ -3,8 +3,6 @@ import DynamicModal from '@/Components/Modals/DynamicModal.vue'
 import { computed, inject } from 'vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { ref } from 'vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')

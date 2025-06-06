@@ -4,7 +4,6 @@ import EditorAccordion from '../EditorAccordion.vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import tailwindFontSizes from '@/utils/builder/tailwind-font-sizes'
 import tailwindFontStyles from '@/utils/builder/tailwind-font-styles'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')

@@ -3,8 +3,6 @@ import { ref, computed, inject, watch, nextTick } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { Switch } from '@headlessui/vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')

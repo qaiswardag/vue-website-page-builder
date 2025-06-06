@@ -7,15 +7,11 @@ import Preview from '@/PageBuilder/Preview.vue'
 import SlideOverRight from '@/Components/PageBuilder/Slidebars/SlideOverRight.vue'
 import PageBuilderSettings from '@/Components/PageBuilder/Settings/PageBuilderSettings.vue'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
-import { useUserStore } from '@/stores/user'
 
 // Get stores from parent PageBuilder component
-const internalPinia = inject('internalPinia')
-const userStore = inject('userStore')
 const pageBuilderStateStore = inject('pageBuilderStateStore')
 const mediaLibraryStore = inject('mediaLibraryStore')
+const userStore = inject('userStore')
 
 const getCurrentUser = computed(() => {
   return userStore.getCurrentUser

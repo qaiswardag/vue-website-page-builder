@@ -6,8 +6,6 @@ import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue'
 import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue'
 import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')

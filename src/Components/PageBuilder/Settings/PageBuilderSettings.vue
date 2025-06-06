@@ -3,9 +3,6 @@ import SlideOverRightParent from '@/Components/PageBuilder/Slidebars/SlideOverRi
 import AdvancedPageBuilderSettings from '@/Components/PageBuilder/Settings/AdvancedPageBuilderSettings.vue'
 import { ref, computed, onMounted, inject } from 'vue'
 import fullHTMLContent from '@/utils/builder/html-doc-declaration-with-components'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { Switch } from '@headlessui/vue'
-import Modal from '@/Components/Modals/Modal.vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
