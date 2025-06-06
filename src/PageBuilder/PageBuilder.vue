@@ -192,6 +192,8 @@ watch(getElementAttributes, (newAttributes, oldAttributes) => {
 })
 
 const handleSelectComponent = function (componentObject) {
+  console.log('handleSelectComponent i VUE CAAAAAAAAAAAALLED', componentObject)
+  return
   console.log('handleSelectComponent called', componentObject)
   pageBuilderStateStore.setComponent(componentObject)
 }
