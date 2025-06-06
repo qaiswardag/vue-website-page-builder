@@ -40,7 +40,7 @@ const convertToComponentObject = function (comp: any): ComponentObject {
   <div class="p-4">
     <!-- Helper Components Section -->
     <div class="mb-8">
-      <h3 class="text-lg font-semibold mb-4">Helper Components</h3>
+      <h3 class="myQuaternaryHeader mb-4">Helper Components</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         <div
           v-for="helper in componentHelpers"
@@ -61,7 +61,7 @@ const convertToComponentObject = function (comp: any): ComponentObject {
 
     <!-- Regular Components Section -->
     <div>
-      <h3 class="text-lg font-semibold mb-4">Layout Components</h3>
+      <h3 class="myQuaternaryHeader mb-4">Layout Components</h3>
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         <div
           v-for="comp in components[0].components.data"
