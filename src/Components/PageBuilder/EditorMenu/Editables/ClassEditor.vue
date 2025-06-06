@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, inject } from 'vue'
+import { ref, computed, inject, watch } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 

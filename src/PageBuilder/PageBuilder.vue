@@ -219,7 +219,7 @@ onMounted(async () => {
       :show="showModalAddComponent"
       :firstButtonText="firstButtonTextSearchComponents"
       :title="titleModalAddComponent"
-      :CustomSearchComponent="CustomSearchComponent"
+      :CustomSearchComponent="props.CustomSearchComponent"
       @firstModalButtonSearchComponentsFunction="firstModalButtonSearchComponentsFunction"
     ></SearchComponents>
     <PageBuilderPreviewModal
@@ -307,20 +307,22 @@ onMounted(async () => {
               <tr>
                 <td class="px-3 py-2 font-medium text-gray-600">Custom Media Component</td>
                 <td class="px-3 py-2">
-                  {{ CustomMediaLibraryComponent ? 'Provided' : 'Not provided' }}
+                  {{ props.CustomMediaLibraryComponent ? 'Provided' : 'Not provided' }}
                 </td>
                 <td class="px-3 py-2 text-gray-500">
-                  {{ CustomMediaLibraryComponent ? 'true' : 'false' }}
+                  {{ props.CustomMediaLibraryComponent ? 'true' : 'false' }}
                 </td>
-                <td class="px-3 py-2 text-gray-500">{{ !!CustomMediaLibraryComponent }}</td>
+                <td class="px-3 py-2 text-gray-500">{{ !!props.CustomMediaLibraryComponent }}</td>
               </tr>
               <tr>
                 <td class="px-3 py-2 font-medium text-gray-600">Custom Search Component</td>
-                <td class="px-3 py-2">{{ CustomSearchComponent ? 'Provided' : 'Not provided' }}</td>
-                <td class="px-3 py-2 text-gray-500">
-                  {{ CustomSearchComponent ? 'true' : 'false' }}
+                <td class="px-3 py-2">
+                  {{ props.CustomSearchComponent ? 'Provided' : 'Not provided' }}
                 </td>
-                <td class="px-3 py-2 text-gray-500">{{ !!CustomSearchComponent }}</td>
+                <td class="px-3 py-2 text-gray-500">
+                  {{ props.CustomSearchComponent ? 'true' : 'false' }}
+                </td>
+                <td class="px-3 py-2 text-gray-500">{{ !!props.CustomSearchComponent }}</td>
               </tr>
             </tbody>
           </table>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, inject } from 'vue'
+import { ref, computed, inject, watch, nextTick } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { Switch } from '@headlessui/vue'
@@ -92,7 +92,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
       <div v-if="getHyperlinkAbility === false" class="rounded-md bg-red-50 p-2">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <ExclamationCircleIcon class="w-4 h-4 text-myPrimaryErrorColor"></ExclamationCircleIcon>
+            <span class="myMediumIcon material-symbols-outlined"> warning </span>
           </div>
           <div class="ml-2">
             <p class="text-sm font-medium text-green-800">
@@ -197,9 +197,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
         <div v-if="getElementContainsHyperlink === false" class="rounded-md bg-red-50 p-2">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <ExclamationCircleIcon
-                class="w-4 h-4 text-myPrimaryErrorColor"
-              ></ExclamationCircleIcon>
+              <span class="myMediumIcon material-symbols-outlined"> warning </span>
             </div>
             <div class="ml-2">
               <p class="text-sm font-medium text-green-800">No hyperlink added</p>

@@ -9,6 +9,7 @@ import { useMediaLibraryStore } from '@/stores/media-library'
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
 const mediaLibraryStore = inject('mediaLibraryStore')
+const customMediaComponent = inject('CustomMediaComponent')
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const isLoading = ref(false)
