@@ -266,7 +266,7 @@ class PageBuilderClass {
    * The function is used to
    * attach event listeners to each element within a 'section'
    */
-  setEventListenersForElements = () => {
+  setEventListenersForElements = async () => {
     console.log('setEventListenersForElements called')
 
     if (this.showRunningMethodLogs) {
@@ -277,8 +277,11 @@ class PageBuilderClass {
 
     if (!pagebuilder) return
 
+    // Wait for any pending DOM updates
+    await nextTick()
+    await new Promise((resolve) => requestAnimationFrame(resolve))
+
     pagebuilder.querySelectorAll('section *').forEach(async (element) => {
-      console.log('SECTTION....:', element)
       // exclude headerTags && additional Tags for not listening
       if (
         !this.headerTags.includes(element.tagName) &&

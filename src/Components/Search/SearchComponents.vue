@@ -1,5 +1,6 @@
 <script setup>
 import Modal from '@/Components/Modals/Modal.vue'
+import NoneCustomSearchComponent from '@/Components/PageBuilder/NoneCustomSearchComponent.vue'
 
 const props = defineProps({
   firstButtonText: {
@@ -50,9 +51,7 @@ const firstButton = function () {
         <div v-if="CustomSearchComponent" class="border border-gray-200 rounded-lg p-4">
           <component :is="CustomSearchComponent" />
         </div>
-        <div v-else class="text-center py-8 text-gray-500">
-          <p>No custom search component provided</p>
-        </div>
+        <div v-else><NoneCustomSearchComponent /></div>
       </div>
     </div>
     <div class="bg-slate-50 px-2 py-4 flex sm:justify-end justify-center">

@@ -7,6 +7,7 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import { provide } from 'vue'
+import NoneCustomMediaLibraryComponent from '@/Components/PageBuilder/NoneCustomMediaLibraryComponent.vue'
 
 const props = defineProps({
   title: {
@@ -119,8 +120,8 @@ provide('closeMediaLibraryModal', closeMediaLibraryModal)
                 <div v-if="customMediaComponent" class="w-full">
                   <component :is="customMediaComponent" />
                 </div>
-                <div v-else class="text-center py-8 text-gray-500">
-                  <p>No custom media component provided</p>
+                <div v-else>
+                  <NoneCustomMediaLibraryComponent />
                 </div>
               </div>
 

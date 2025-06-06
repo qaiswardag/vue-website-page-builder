@@ -2,7 +2,6 @@
 const emit = defineEmits(['handleButton'])
 import FullWidthElement from '@/Components/Layouts/FullWidthElement.vue'
 import PageBuilder from '@/PageBuilder/PageBuilder.vue'
-import CustomSearchComponent from '/Users/qaiswardag/Desktop/Google/projects/builder-project/laravel_vue_directory_and_job_board_theme/ComponentsPageBuilder/CustomSearchComponent.vue'
 
 // first button function
 const handleButton = function () {
@@ -81,7 +80,6 @@ const features = [
       </div>
       <div>
         <PageBuilder
-          :CustomSearchComponent="CustomSearchComponent"
           updateOrCreate="update"
           :userForPageBuilder="{ name: 'John Doe' }"
           :resourceData="{ title: 'Demo Article', id: 1 }"
