@@ -192,9 +192,6 @@ watch(getElementAttributes, (newAttributes, oldAttributes) => {
 })
 
 const handleSelectComponent = function (componentObject) {
-  console.log('handleSelectComponent i VUE CAAAAAAAAAAAALLED', componentObject)
-  return
-  console.log('handleSelectComponent called', componentObject)
   pageBuilderStateStore.setComponent(componentObject)
 }
 
@@ -430,11 +427,7 @@ onMounted(async () => {
           </div>
 
           <EditGetElement></EditGetElement>
-          <div
-            @click="pageBuilderStateStore.setComponent(null)"
-            id="contains-pagebuilder"
-            class="pl-4 pr-4 pb-4 overflow-y-auto h-screen pt-1"
-          >
+          <div id="contains-pagebuilder" class="pl-4 pr-4 pb-4 overflow-y-auto h-screen pt-1">
             <div id="pagebuilder">
               <div ref="draggableZone">
                 <!-- Added Components to DOM # start -->
