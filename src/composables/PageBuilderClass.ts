@@ -268,8 +268,9 @@ class PageBuilderClass {
    */
   setEventListenersForElements = () => {
     console.log('setEventListenersForElements called')
+
     if (this.showRunningMethodLogs) {
-      console.log('setEventListenersForElements called')
+      console.log('setEventListenersForElements')
     }
 
     const pagebuilder = document.querySelector('#pagebuilder')
