@@ -393,7 +393,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       this.textColor = payload
     },
     setElement(payload: HTMLElement | null): void {
-      console.log('setElement called:', payload)
       this.element = {} as HTMLElement
       nextTick(() => {
         this.element = payload

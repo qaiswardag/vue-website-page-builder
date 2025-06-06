@@ -219,7 +219,6 @@ class PageBuilderClass {
   }
 
   #handleElementClick = (e: Event, element: HTMLElement): void => {
-    console.log('handleElementClick called')
     e.preventDefault()
     e.stopPropagation()
 
