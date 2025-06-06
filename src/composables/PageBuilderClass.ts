@@ -278,6 +278,7 @@ class PageBuilderClass {
     if (!pagebuilder) return
 
     pagebuilder.querySelectorAll('section *').forEach(async (element) => {
+      console.log('SECTTION....:', element)
       // exclude headerTags && additional Tags for not listening
       if (
         !this.headerTags.includes(element.tagName) &&
@@ -288,7 +289,6 @@ class PageBuilderClass {
           // Type assertion to HTMLElement since we know these are DOM elements
           const htmlElement = element as HTMLElement
           // Attach event listeners directly to individual elements
-          console.log('OOOOOOK KOMME HER....:', htmlElement)
           htmlElement.addEventListener('click', (e) => this.#handleElementClick(e, htmlElement))
           htmlElement.addEventListener('mouseover', (e) => this.#handleMouseOver(e, htmlElement))
           htmlElement.addEventListener('mouseleave', (e) => this.#handleMouseLeave(e))
