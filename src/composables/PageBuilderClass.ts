@@ -1312,6 +1312,13 @@ class PageBuilderClass {
     if (!this.shouldRunMethods()) return
     if (!this.getElement.value) return
 
+    // Check if element is a proper DOM element and has closest method
+    if (
+      !(this.getElement.value instanceof HTMLElement) ||
+      typeof this.getElement.value.closest !== 'function'
+    )
+      return
+
     const parentHyperlink = this.getElement.value.closest('a')
     const hyperlink = this.getElement.value.querySelector('a')
 
@@ -1440,7 +1447,16 @@ class PageBuilderClass {
 
     this.pageBuilderStateStore.setHyperlinkAbility(true)
 
-    const parentHyperlink = this.getElement.value?.closest('a')
+    if (!this.getElement.value) return
+
+    // Check if element is a proper DOM element and has closest method
+    if (
+      !(this.getElement.value instanceof HTMLElement) ||
+      typeof this.getElement.value.closest !== 'function'
+    )
+      return
+
+    const parentHyperlink = this.getElement.value.closest('a')
 
     // handle case where parent element already has an a href tag
     // when clicking directly on a hyperlink
