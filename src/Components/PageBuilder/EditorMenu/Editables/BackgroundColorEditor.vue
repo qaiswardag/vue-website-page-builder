@@ -1,19 +1,12 @@
 <script setup>
-import tailwindColors from '@/utils/builder/tailwaind-colors'
+import { ref, computed, inject, watch } from 'vue'
+import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import { computed, ref, watch } from 'vue'
-import {
-  Listbox,
-  ListboxButton,
-  ListboxLabel,
-  ListboxOption,
-  ListboxOptions,
-} from '@headlessui/vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
+import tailwindColors from '@/utils/builder/tailwaind-colors'
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
+const mediaLibraryStore = inject('mediaLibraryStore')
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const backgroundColor = ref(null)
 const getBackgroundColor = computed(() => {

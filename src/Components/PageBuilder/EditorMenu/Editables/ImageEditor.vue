@@ -6,11 +6,10 @@ import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
-// Inject custom media component
-const customMediaComponent = inject('CustomMediaComponent', null)
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
+const mediaLibraryStore = inject('mediaLibraryStore')
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const isLoading = ref(false)
 

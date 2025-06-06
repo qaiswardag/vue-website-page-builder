@@ -1,13 +1,15 @@
 <script setup>
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
+import { ref, computed, inject } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
-import { computed, nextTick, ref, watch } from 'vue'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { Switch } from '@headlessui/vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
+const mediaLibraryStore = inject('mediaLibraryStore')
+
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const hyperlinkEnable = ref(false)
 const urlInput = ref(null)

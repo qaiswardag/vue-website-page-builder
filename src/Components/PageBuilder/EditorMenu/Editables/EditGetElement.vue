@@ -1,20 +1,20 @@
 <script setup>
-import { computed, ref, inject } from 'vue'
+import { ref, computed, inject } from 'vue'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
 import TipTapInput from '@/Components/TipTap/TipTapInput.vue'
-import PageBuilder from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue'
 import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue'
 import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 
-// Inject custom media component
-const customMediaComponent = inject('CustomMediaComponent', null)
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
+const mediaLibraryStore = inject('mediaLibraryStore')
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement
 })
@@ -110,7 +110,7 @@ const handleAddImage = function () {
   // handle click
   secondMediaButtonFunction.value = function () {
     isLoading.value = true
-    pageBuilder.updateBasePrimaryImage({ type: 'unsplash' })
+    pageBuilderClass.updateBasePrimaryImage({ type: 'unsplash' })
 
     // close media library modal
     showMediaLibraryModal.value = false
@@ -275,7 +275,7 @@ const handleModalIframeSrc = function () {
       class="z-20 py-1 px-2 h-20 flex items-center justify-center mt-2 mx-2 border-b border-myPrimaryLightGrayColor"
     >
       <div class="flex items-center justify-center divide-x divide-gray-200 py-1">
-        <template v-if="pageBuilder.ElOrFirstChildIsIframe()">
+        <template v-if="pageBuilderClass.ElOrFirstChildIsIframe()">
           <div class="px-2 flex items-center justify-start gap-2">
             <button
               @click="handleModalIframeSrc"
@@ -289,7 +289,10 @@ const handleModalIframeSrc = function () {
         </template>
 
         <template
-          v-if="pageBuilder.selectedElementIsValidText() && !pageBuilder.ElOrFirstChildIsIframe()"
+          v-if="
+            pageBuilderClass.selectedElementIsValidText() &&
+            !pageBuilderClass.ElOrFirstChildIsIframe()
+          "
         >
           <div class="px-2 flex items-center justify-start gap-2">
             <button
@@ -311,7 +314,7 @@ const handleModalIframeSrc = function () {
             getElement &&
             getComponent &&
             getBasePrimaryImage !== null &&
-            !pageBuilder.ElOrFirstChildIsIframe()
+            !pageBuilderClass.ElOrFirstChildIsIframe()
           "
         >
           <div class="px-2 flex items-center justify-start gap-2">
@@ -331,7 +334,7 @@ const handleModalIframeSrc = function () {
             getElement &&
             Object.keys(getElement).length !== 0 &&
             !getBasePrimaryImage &&
-            !pageBuilder.ElOrFirstChildIsIframe()
+            !pageBuilderClass.ElOrFirstChildIsIframe()
           "
         >
           <div class="px-2">

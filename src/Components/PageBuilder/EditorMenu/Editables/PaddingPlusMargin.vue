@@ -1,13 +1,13 @@
 <script setup>
-import tailwindPaddingPlusMargin from '@/utils/builder/tailwind-padding-margin'
+import { ref, computed, inject, watch } from 'vue'
+import EditorAccordion from '../EditorAccordion.vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
-import { computed, ref, watch } from 'vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
+import tailwindPaddingPlusMargin from '@/utils/builder/tailwind-padding-margin'
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
+const mediaLibraryStore = inject('mediaLibraryStore')
+
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const fontVerticalPadding = ref(null)
 const fontHorizontalPadding = ref(null)

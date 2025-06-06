@@ -1,7 +1,7 @@
 <script setup>
-import { computed, onMounted, watch } from 'vue'
+import { ref, computed, inject, watch } from 'vue'
+import EditorAccordion from '../EditorAccordion.vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import { ref } from 'vue'
 import tailwindOpacities from '@/utils/builder/tailwind-opacities'
 import {
   Listbox,
@@ -10,11 +10,10 @@ import {
   ListboxOption,
   ListboxOptions,
 } from '@headlessui/vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
+const mediaLibraryStore = inject('mediaLibraryStore')
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const opacityVueModel = ref(null)
 const getBackgroundOpacity = computed(() => {

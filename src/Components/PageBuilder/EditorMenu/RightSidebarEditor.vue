@@ -1,49 +1,47 @@
 <script setup>
-import { computed, ref, watch } from 'vue';
-import ClassEditor from '@/Components/PageBuilder/EditorMenu/Editables/ClassEditor.vue';
-import ImageEditor from '@/Components/PageBuilder/EditorMenu/Editables/ImageEditor.vue';
-import OpacityEditor from '@/Components/PageBuilder/EditorMenu/Editables/OpacityEditor.vue';
-import Typography from '@/Components/PageBuilder/EditorMenu/Editables/Typography.vue';
-import PaddingPlusMargin from '@/Components/PageBuilder/EditorMenu/Editables/PaddingPlusMargin.vue';
-import DeleteElement from '@/Components/PageBuilder/EditorMenu/Editables/DeleteElement.vue';
-import BorderRadius from '@/Components/PageBuilder/EditorMenu/Editables/BorderRadius.vue';
-import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue';
-import Borders from '@/Components/PageBuilder/EditorMenu/Editables/Borders.vue';
-import LinkEditor from '@/Components/PageBuilder/EditorMenu/Editables/LinkEditor.vue';
-import TipTap from '@/Components/TipTap/TipTap.vue';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import ElementEditor from '@/Components/PageBuilder/EditorMenu/Editables/ElementEditor.vue';
+import { computed, inject } from 'vue'
+import ClassEditor from '@/Components/PageBuilder/EditorMenu/Editables/ClassEditor.vue'
+import ImageEditor from '@/Components/PageBuilder/EditorMenu/Editables/ImageEditor.vue'
+import OpacityEditor from '@/Components/PageBuilder/EditorMenu/Editables/OpacityEditor.vue'
+import Typography from '@/Components/PageBuilder/EditorMenu/Editables/Typography.vue'
+import PaddingPlusMargin from '@/Components/PageBuilder/EditorMenu/Editables/PaddingPlusMargin.vue'
+import DeleteElement from '@/Components/PageBuilder/EditorMenu/Editables/DeleteElement.vue'
+import BorderRadius from '@/Components/PageBuilder/EditorMenu/Editables/BorderRadius.vue'
+import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue'
+import Borders from '@/Components/PageBuilder/EditorMenu/Editables/Borders.vue'
+import LinkEditor from '@/Components/PageBuilder/EditorMenu/Editables/LinkEditor.vue'
+import TipTap from '@/Components/TipTap/TipTap.vue'
+import EditGetElement from '@/Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue'
+import ElementEditor from '@/Components/PageBuilder/EditorMenu/Editables/ElementEditor.vue'
 
-const pageBuilderStateStore = usePageBuilderStateStore();
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
 
 // emit
-const emit = defineEmits(['closeEditor']);
+const emit = defineEmits(['closeEditor'])
 
 // get current element tag
 const getElement = computed(() => {
-  return pageBuilderStateStore.getElement;
-});
+  return pageBuilderStateStore.getElement
+})
 
 // Get tagName of element
 const elementTag = computed(() => {
-  return getElement.value?.tagName;
-});
+  return getElement.value?.tagName
+})
 
 const isHeadingElement = computed(() => {
   return (
-    (getElement.value instanceof HTMLElement &&
-      getElement.value.innerText.trim() !== ' ') ||
+    (getElement.value instanceof HTMLElement && getElement.value.innerText.trim() !== ' ') ||
     getElement.value instanceof HTMLImageElement
-  );
-});
+  )
+})
 </script>
 
 <template>
   <div class="h-full w-80 bg-white">
     <div class="h-screen flex flex-col">
-      <div
-        class="flex flex-row justify-between pt-2.5 pr-4 pl-4 items-center mb-3"
-      >
+      <div class="flex flex-row justify-between pt-2.5 pr-4 pl-4 items-center mb-3">
         <button
           type="button"
           @click="$emit('closeEditor')"

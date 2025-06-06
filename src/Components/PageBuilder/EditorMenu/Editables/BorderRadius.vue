@@ -1,13 +1,13 @@
 <script setup>
-import tailwindBorderRadius from '@/utils/builder/tailwind-border-radius'
+import { ref, computed, inject, watch } from 'vue'
+import EditorAccordion from '../EditorAccordion.vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
-import { computed, ref, watch } from 'vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
+import tailwindBorderRadius from '@/utils/builder/tailwind-border-radius'
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
+const mediaLibraryStore = inject('mediaLibraryStore')
+
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const borderRadiusGlobal = ref(null)
 const borderRadiusTopLeft = ref(null)

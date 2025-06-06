@@ -1,8 +1,8 @@
 <script setup>
-import { computed } from 'vue'
-import { useMediaLibraryStore } from '@/stores/media-library'
+import { ref, computed, onMounted, inject } from 'vue'
 
-const mediaLibraryStore = useMediaLibraryStore()
+// Get stores from parent PageBuilder component
+const mediaLibraryStore = inject('mediaLibraryStore')
 
 const getCurrentImage = computed(() => {
   return mediaLibraryStore.getCurrentImage

@@ -11,13 +11,11 @@ import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 import { useUserStore } from '@/stores/user'
 
-// Get the internal Pinia instance from parent PageBuilder component
+// Get stores from parent PageBuilder component
 const internalPinia = inject('internalPinia')
-
-// Use the same internal Pinia instance that PageBuilder.vue uses
-const userStore = useUserStore(internalPinia)
-const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
-const mediaLibraryStore = useMediaLibraryStore(internalPinia)
+const userStore = inject('userStore')
+const pageBuilderStateStore = inject('pageBuilderStateStore')
+const mediaLibraryStore = inject('mediaLibraryStore')
 
 const getCurrentUser = computed(() => {
   return userStore.getCurrentUser

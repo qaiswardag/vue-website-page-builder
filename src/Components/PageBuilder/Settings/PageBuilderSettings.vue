@@ -1,56 +1,59 @@
 <script setup>
-import SlideOverRightParent from '@/Components/PageBuilder/Slidebars/SlideOverRightParent.vue';
-import AdvancedPageBuilderSettings from '@/Components/PageBuilder/Settings/AdvancedPageBuilderSettings.vue';
-import { ref, computed } from 'vue';
-import fullHTMLContent from '@/utils/builder/html-doc-declaration-with-components';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
+import SlideOverRightParent from '@/Components/PageBuilder/Slidebars/SlideOverRightParent.vue'
+import AdvancedPageBuilderSettings from '@/Components/PageBuilder/Settings/AdvancedPageBuilderSettings.vue'
+import { ref, computed, onMounted, inject } from 'vue'
+import fullHTMLContent from '@/utils/builder/html-doc-declaration-with-components'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { Switch } from '@headlessui/vue'
+import Modal from '@/Components/Modals/Modal.vue'
 
-const pageBuilderStateStore = usePageBuilderStateStore();
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
 
-const showAdvancedSettingsSlideOverRight = ref(false);
-const titleSettingsSlideOverRight = ref('');
-const downloadedComponents = ref(null);
+const showAdvancedSettingsSlideOverRight = ref(false)
+const titleSettingsSlideOverRight = ref('')
+const downloadedComponents = ref(null)
 
 // handle slideover window
 const handleAdvancedSettingsSlideOver = function () {
-  titleSettingsSlideOverRight.value = 'Advanced Settings';
-  showAdvancedSettingsSlideOverRight.value = true;
-};
+  titleSettingsSlideOverRight.value = 'Advanced Settings'
+  showAdvancedSettingsSlideOverRight.value = true
+}
 
 // handle slideover window
 const settingsAdvancedSlideOverButton = function () {
-  showAdvancedSettingsSlideOverRight.value = false;
-};
+  showAdvancedSettingsSlideOverRight.value = false
+}
 
 const getComponents = computed(() => {
-  return pageBuilderStateStore.getComponents;
-});
+  return pageBuilderStateStore.getComponents
+})
 
 // generate HTML
 const generateHTML = function (filename, HTML) {
-  const element = document.createElement('a');
+  const element = document.createElement('a')
   element.setAttribute(
     'href',
-    'data:text/html;charset=utf-8,' + encodeURIComponent(fullHTMLContent(HTML))
-  );
-  element.setAttribute('download', filename);
+    'data:text/html;charset=utf-8,' + encodeURIComponent(fullHTMLContent(HTML)),
+  )
+  element.setAttribute('download', filename)
 
-  element.style.display = 'none';
-  document.body.appendChild(element);
+  element.style.display = 'none'
+  document.body.appendChild(element)
 
-  element.click();
+  element.click()
 
-  document.body.removeChild(element);
-};
+  document.body.removeChild(element)
+}
 
 // handle download HTML
 const handleDownloadHTML = function () {
   downloadedComponents.value = getComponents.value.map((component) => {
-    return component.html_code;
-  });
+    return component.html_code
+  })
 
-  generateHTML('downloaded_html.html', downloadedComponents.value.join(''));
-};
+  generateHTML('downloaded_html.html', downloadedComponents.value.join(''))
+}
 </script>
 
 <template>
@@ -66,8 +69,8 @@ const handleDownloadHTML = function () {
     <div class="flex items-left flex-col gap-1">
       <h3 class="myQuaternaryHeader">Advanced Settings</h3>
       <p class="myPrimaryParagraph text-xs">
-        Manage advanced settings here. Like an overview of Selected Element,
-        Component, and Components in real-time.
+        Manage advanced settings here. Like an overview of Selected Element, Component, and
+        Components in real-time.
       </p>
     </div>
     <div class="mt-4">
@@ -88,11 +91,7 @@ const handleDownloadHTML = function () {
       <p class="myPrimaryParagraph text-xs">Download current page layout.</p>
     </div>
     <div class="mt-4">
-      <button
-        @click="handleDownloadHTML"
-        type="button"
-        class="myPrimaryButton text-xs"
-      >
+      <button @click="handleDownloadHTML" type="button" class="myPrimaryButton text-xs">
         Download HTML file
       </button>
     </div>

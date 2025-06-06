@@ -1,15 +1,15 @@
 <script setup>
 import { Editor, useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
-import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
+import { computed, onBeforeMount, onMounted, ref, watch, inject } from 'vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import Link from '@tiptap/extension-link'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
+// Get stores from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
+const mediaLibraryStore = inject('mediaLibraryStore')
+
 const showModalUrl = ref(false)
 
 // use dynamic model
