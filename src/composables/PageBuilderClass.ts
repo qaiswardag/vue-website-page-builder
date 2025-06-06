@@ -1533,32 +1533,6 @@ class PageBuilderClass {
     }
   }
 
-  // Helper method for adding HTML helper components
-  async addHelperComponent(helperComponentObject: ComponentObject): Promise<void> {
-    if (this.showRunningMethodLogs) {
-      console.log('addHelperComponent')
-    }
-
-    try {
-      const clonedComponent = this.cloneCompObjForDOMInsertion({
-        html_code: helperComponentObject.html_code,
-        id: helperComponentObject.id,
-        title: helperComponentObject.title || 'Helper Component',
-      })
-
-      this.pageBuilderStateStore.setPushComponents({
-        component: clonedComponent,
-        componentArrayAddMethod: this.getComponentArrayAddMethod.value || 'push',
-      })
-
-      // Wait for the DOM to update before setting event listeners
-      await nextTick()
-      this.setEventListenersForElements()
-    } catch (error) {
-      console.error('Error adding helper component:', error)
-    }
-  }
-
   // Get default helper components
   getDefaultHelperComponents(): ComponentObject[] {
     return [
