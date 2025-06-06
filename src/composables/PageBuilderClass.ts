@@ -125,7 +125,7 @@ class PageBuilderClass {
       'FOOTER',
     ]
 
-    this.showRunningMethodLogs = true
+    this.showRunningMethodLogs = false
 
     this.delay = delay()
   }
@@ -274,7 +274,6 @@ class PageBuilderClass {
     }
 
     const pagebuilder = document.querySelector('#pagebuilder')
-    console.log('SKAAAAAAAL KOMME HER....:', pagebuilder)
 
     if (!pagebuilder) return
 
@@ -289,6 +288,7 @@ class PageBuilderClass {
           // Type assertion to HTMLElement since we know these are DOM elements
           const htmlElement = element as HTMLElement
           // Attach event listeners directly to individual elements
+          console.log('OOOOOOK KOMME HER....:', htmlElement)
           htmlElement.addEventListener('click', (e) => this.#handleElementClick(e, htmlElement))
           htmlElement.addEventListener('mouseover', (e) => this.#handleMouseOver(e, htmlElement))
           htmlElement.addEventListener('mouseleave', (e) => this.#handleMouseLeave(e))
