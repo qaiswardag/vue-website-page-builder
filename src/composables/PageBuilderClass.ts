@@ -273,6 +273,7 @@ class PageBuilderClass {
     }
 
     const pagebuilder = document.querySelector('#pagebuilder')
+    console.log('SKAAAAAAAL KOMME HER....:', pagebuilder)
 
     if (!pagebuilder) return
 
