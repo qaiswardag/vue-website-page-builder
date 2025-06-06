@@ -125,25 +125,9 @@ class PageBuilderClass {
       'FOOTER',
     ]
 
-    this.showRunningMethodLogs = false
+    this.showRunningMethodLogs = true
 
     this.delay = delay()
-  }
-
-  shouldRunMethods(): boolean {
-    if (!this.getComponents.value) {
-      return false
-    }
-
-    if (!this.getComponent.value) {
-      return false
-    }
-
-    if (!this.getElement.value) {
-      return false
-    }
-
-    return true
   }
 
   #applyElementClassChanges(
@@ -154,7 +138,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('#applyElementClassChanges')
     }
-    if (!this.shouldRunMethods()) return
 
     const currentCSS = CSSArray.find((CSS) => {
       return this.getElement.value?.classList.contains(CSS)
@@ -450,8 +433,6 @@ class PageBuilderClass {
       console.log('handleAddClasses')
     }
 
-    if (!this.shouldRunMethods()) return
-
     // convert classList to array
     const classListArray = Array.from(this.getElement.value?.classList || [])
 
@@ -463,8 +444,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleAddClasses')
     }
-
-    if (!this.shouldRunMethods()) return
 
     if (
       typeof userSelectedClass === 'string' &&
@@ -488,8 +467,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleRemoveClasses')
     }
-
-    if (!this.shouldRunMethods()) return
 
     // remove selected class from element
     if (this.getElement.value?.classList.contains(userSelectedClass)) {
@@ -776,7 +753,6 @@ class PageBuilderClass {
       console.log('handleFontSize')
     }
 
-    if (!this.shouldRunMethods()) return
     if (!userSelectedFontSize) return
     if (!this.getElement.value) return
 
@@ -910,7 +886,6 @@ class PageBuilderClass {
       console.log('deleteComponent')
     }
 
-    if (!this.shouldRunMethods()) return
     if (!this.getComponents.value || !this.getComponent.value) return
 
     // Find the index of the component to delete
@@ -938,7 +913,6 @@ class PageBuilderClass {
       console.log('moveComponent')
     }
 
-    if (!this.shouldRunMethods()) return
     if (!this.getComponents.value || !this.getComponent.value) return
 
     if (this.getComponents.value.length <= 1) return
@@ -973,7 +947,6 @@ class PageBuilderClass {
       console.log('ensureTextAreaHasContent')
     }
 
-    if (!this.shouldRunMethods()) return
     if (!this.getElement.value) return
 
     // text content
@@ -1002,8 +975,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleTextInput')
     }
-
-    if (!this.shouldRunMethods()) return
 
     // // text content
     if (typeof this.getElement.value?.innerHTML !== 'string') {
@@ -1309,7 +1280,6 @@ class PageBuilderClass {
       console.log('#addHyperlinkToElement')
     }
 
-    if (!this.shouldRunMethods()) return
     if (!this.getElement.value) return
 
     // Check if element is a proper DOM element and has closest method
@@ -1406,7 +1376,6 @@ class PageBuilderClass {
       console.log('#checkForHyperlink')
     }
 
-    if (!this.shouldRunMethods()) return
     if (!this.getElement.value) return
 
     const hyperlink = this.getElement.value.querySelector('a')
@@ -1442,8 +1411,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleHyperlink')
     }
-
-    if (!this.shouldRunMethods()) return
 
     this.pageBuilderStateStore.setHyperlinkAbility(true)
 
@@ -1487,8 +1454,6 @@ class PageBuilderClass {
   }
 
   handlePageBuilderMethods(): void {
-    if (!this.shouldRunMethods()) return
-
     this.pageBuilderStateStore.setParentElement(null)
     this.pageBuilderStateStore.setRestoredElement(null)
 
