@@ -16,7 +16,7 @@ A Vue 3 page builder component with drag & drop functionality for creating dynam
 npm install @myissue/vue-website-page-builder
 ```
 
-# Click & Drop Page Builder
+## Click & Drop Page Builder
 
 [Play around with the page builder](https://www.builder-demo.myissue.dk)
 
