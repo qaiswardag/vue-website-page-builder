@@ -1,7 +1,6 @@
 <script setup>
 import { ref, computed, onMounted, inject } from 'vue'
 import { useUnsplashStore } from '@/stores/unsplash'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 
 // Get stores from parent PageBuilder component
 const mediaLibraryStore = inject('mediaLibraryStore')
