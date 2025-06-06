@@ -1,32 +1,20 @@
 # @myissue/vue-website-page-builder
 
-## 🚧 **DEVELOPMENT VERSION - NOT READY FOR PRODUCTION** 🚧
+<p align="center" dir="auto">
+<img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo">
+</p>
+
+## **DEVELOPMENT VERSION - NOT READY FOR PRODUCTION**
 
 ## Overview
 
-A Vue.js page builder component with drag & drop functionality for creating dynamic web pages.
+A Vue 3 page builder component with drag & drop functionality for creating dynamic web pages.
 
 ## Installation
 
 ```bash
 npm install @myissue/vue-website-page-builder
 ```
-
-```vue
-<script setup>
-import { PageBuilder } from '@myissue/vue-website-page-builder'
-import MediaLibraryComponent from './ComponentsPageBuilder/MediaLibraryComponent.vue'
-import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
-</script>
-
-<template>
-  <PageBuilder :MediaLibraryComponent="MediaLibraryComponent" :SearchComponent="SearchComponent" />
-</template>
-```
-
-<p align="center" dir="auto">
-<img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo">
-</p>
 
 # Free Click & Drop Page Builder
 
@@ -130,6 +118,18 @@ Want to add your own media library or search functionality? Create custom compon
 📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)** - Learn how to create and integrate your own components
 
 Example integration:
+
+```vue
+<script setup>
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import MediaLibraryComponent from './ComponentsPageBuilder/MediaLibraryComponent.vue'
+import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
+</script>
+
+<template>
+  <PageBuilder :MediaLibraryComponent="MediaLibraryComponent" :SearchComponent="SearchComponent" />
+</template>
+```
 
 ## Contributing
 
