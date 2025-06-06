@@ -1508,7 +1508,7 @@ class PageBuilderClass {
   }
 
   // Helper method for custom components to easily add components
-  addComponent(componentObject: ComponentObject): void {
+  async addComponent(componentObject: ComponentObject): Promise<void> {
     if (this.showRunningMethodLogs) {
       console.log('addComponent')
     }
@@ -1525,6 +1525,8 @@ class PageBuilderClass {
         componentArrayAddMethod: this.getComponentArrayAddMethod.value || 'push',
       })
 
+      // Wait for the DOM to update before setting event listeners
+      await nextTick()
       this.setEventListenersForElements()
     } catch (error) {
       console.error('Error adding component:', error)
@@ -1532,7 +1534,7 @@ class PageBuilderClass {
   }
 
   // Helper method for adding HTML helper components
-  addHelperComponent(helperComponentObject: ComponentObject): void {
+  async addHelperComponent(helperComponentObject: ComponentObject): Promise<void> {
     if (this.showRunningMethodLogs) {
       console.log('addHelperComponent')
     }
@@ -1549,6 +1551,8 @@ class PageBuilderClass {
         componentArrayAddMethod: this.getComponentArrayAddMethod.value || 'push',
       })
 
+      // Wait for the DOM to update before setting event listeners
+      await nextTick()
       this.setEventListenersForElements()
     } catch (error) {
       console.error('Error adding helper component:', error)
