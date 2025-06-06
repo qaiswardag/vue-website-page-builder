@@ -1,7 +1,7 @@
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import { ref, computed } from 'vue'
+import { ref, computed, inject } from 'vue'
 import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue'
 import Preview from '@/PageBuilder/Preview.vue'
 import SlideOverRight from '@/Components/PageBuilder/Slidebars/SlideOverRight.vue'
@@ -11,7 +11,13 @@ import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 import { useMediaLibraryStore } from '@/stores/media-library'
 import { useUserStore } from '@/stores/user'
 
-const userStore = useUserStore()
+// Get the internal Pinia instance from parent PageBuilder component
+const internalPinia = inject('internalPinia')
+
+// Use the same internal Pinia instance that PageBuilder.vue uses
+const userStore = useUserStore(internalPinia)
+const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
+const mediaLibraryStore = useMediaLibraryStore(internalPinia)
 
 const getCurrentUser = computed(() => {
   return userStore.getCurrentUser
@@ -21,8 +27,6 @@ const getCurrentResourceData = computed(() => {
   return pageBuilderStateStore.getCurrentResourceData
 })
 
-const mediaLibraryStore = useMediaLibraryStore()
-const pageBuilderStateStore = usePageBuilderStateStore()
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
 const emit = defineEmits(['previewCurrentDesign'])
 

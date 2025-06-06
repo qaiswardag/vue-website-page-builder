@@ -86,6 +86,9 @@ provide('pageBuilderStateStore', pageBuilderStateStore)
 provide('mediaLibraryStore', mediaLibraryStore)
 provide('userStore', userStore)
 
+// Provide the internal Pinia instance for components that need to create stores
+provide('internalPinia', internalPinia)
+
 // Provide custom components for child components
 provide('CustomMediaComponent', props.CustomMediaLibraryComponent)
 provide('CustomSearchComponent', props.CustomSearchComponent)
