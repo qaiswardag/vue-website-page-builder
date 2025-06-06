@@ -241,10 +241,10 @@ class PageBuilderClass {
   }
 
   #handleMouseOver = (e: Event, element: HTMLElement): void => {
+    console.log('handleMouseOver called')
     if (this.showRunningMethodLogs) {
       console.log('#handleMouseOver')
     }
-    // console.log("YOU MOUSE OVER ME!");
 
     e.preventDefault()
     e.stopPropagation()
@@ -484,6 +484,7 @@ class PageBuilderClass {
       this.pageBuilderStateStore.setClass(userSelectedClass)
     }
   }
+
   handleRemoveClasses(userSelectedClass: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleRemoveClasses')
