@@ -1,9 +1,9 @@
 <script setup>
-import Modal from '@/Components/Modals/Modal.vue';
-import {} from '@headlessui/vue';
+import Modal from '@/Components/Modals/Modal.vue'
+import {} from '@headlessui/vue'
 
 defineProps({
-  show: {
+  showDynamicModal: {
     type: Boolean,
     default: false,
     required: true,
@@ -52,35 +52,31 @@ defineProps({
   thirdButtonText: {
     type: String,
   },
-});
+})
 
 const emit = defineEmits([
   'firstModalButtonFunction',
   'secondModalButtonFunction',
   'thirdModalButtonFunction',
-]);
+])
 
 // first button function
 const firstButton = function () {
-  emit('firstModalButtonFunction');
-};
+  emit('firstModalButtonFunction')
+}
 // second button  function
 const secondButton = function () {
-  emit('secondModalButtonFunction');
-};
+  emit('secondModalButtonFunction')
+}
 
 // third button function
 const thirdButton = function () {
-  emit('thirdModalButtonFunction');
-};
+  emit('thirdModalButtonFunction')
+}
 </script>
 
 <template>
-  <Modal
-    :show="show"
-    @close="firstButton"
-    :maxWidth="maxWidth"
-  >
+  <Modal :show="showDynamicModal" @close="firstButton" :maxWidth="maxWidth">
     <slot name="content" />
 
     <div
@@ -103,9 +99,7 @@ const thirdButton = function () {
                 v-if="type === 'warning'"
                 class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white"
               >
-                <span class="material-symbols-outlined">
-                  notification_important
-                </span>
+                <span class="material-symbols-outlined"> notification_important </span>
               </div>
 
               <div
@@ -122,10 +116,7 @@ const thirdButton = function () {
                 <span class="material-symbols-outlined"> warning </span>
               </div>
 
-              <h3
-                as="h3"
-                class="myQuaternaryHeader my-0 py-0"
-              >
+              <h3 as="h3" class="myQuaternaryHeader my-0 py-0">
                 {{ title }}
               </h3>
             </div>
@@ -142,10 +133,7 @@ const thirdButton = function () {
 
       <div :class="{ 'p-4': simpleModal !== true }">
         <template v-if="simpleModal !== true">
-          <div
-            v-html="description"
-            class="myPrimaryParagraph mb-6"
-          ></div>
+          <div v-html="description" class="myPrimaryParagraph mb-6"></div>
         </template>
 
         <slot name="header"></slot>
@@ -188,10 +176,7 @@ const thirdButton = function () {
               >
                 <div>
                   <Transition name="bounce">
-                    <div
-                      role="status"
-                      class="flex items-center"
-                    >
+                    <div role="status" class="flex items-center">
                       <svg
                         aria-hidden="true"
                         class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"
@@ -240,10 +225,7 @@ const thirdButton = function () {
                 >
                   <div>
                     <Transition name="bounce">
-                      <div
-                        role="status"
-                        class="flex items-center"
-                      >
+                      <div role="status" class="flex items-center">
                         <svg
                           aria-hidden="true"
                           class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"
@@ -290,10 +272,7 @@ const thirdButton = function () {
                 >
                   <div>
                     <Transition name="bounce">
-                      <div
-                        role="status"
-                        class="flex items-center"
-                      >
+                      <div role="status" class="flex items-center">
                         <svg
                           aria-hidden="true"
                           class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"
@@ -341,10 +320,7 @@ const thirdButton = function () {
                 >
                   <div>
                     <Transition name="bounce">
-                      <div
-                        role="status"
-                        class="flex items-center"
-                      >
+                      <div role="status" class="flex items-center">
                         <svg
                           aria-hidden="true"
                           class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"
@@ -392,10 +368,7 @@ const thirdButton = function () {
                 >
                   <div>
                     <Transition name="bounce">
-                      <div
-                        role="status"
-                        class="flex items-center"
-                      >
+                      <div role="status" class="flex items-center">
                         <svg
                           aria-hidden="true"
                           class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"

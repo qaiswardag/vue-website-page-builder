@@ -205,7 +205,7 @@ const handleModalIframeSrc = function () {
 <template>
   <div>
     <DynamicModal
-      :show="showModalIframeSrc"
+      :showDynamicModal="showModalIframeSrc"
       maxWidth="2xl"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
@@ -237,7 +237,7 @@ const handleModalIframeSrc = function () {
     </DynamicModal>
     <DynamicModal
       :simpleModal="true"
-      :show="getShowModalTipTap"
+      :showDynamicModal="getShowModalTipTap"
       maxWidth="5xl"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"

@@ -104,7 +104,7 @@ const settingsSlideOverButton = function () {
       <PageBuilderSettings> </PageBuilderSettings>
     </SlideOverRight>
     <DynamicModal
-      :show="showModalDeleteAllComponents"
+      :showDynamicModal="showModalDeleteAllComponents"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
       :title="titleModal"

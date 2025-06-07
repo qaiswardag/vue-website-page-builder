@@ -51,7 +51,7 @@ const deleteComponent = function (e) {
 
 <template>
   <DynamicModal
-    :show="showModalDeleteComponent"
+    :showDynamicModal="showModalDeleteComponent"
     :type="typeModal"
     :gridColumnAmount="gridColumnModal"
     :title="titleModal"

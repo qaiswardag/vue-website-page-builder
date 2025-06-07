@@ -181,7 +181,7 @@ onMounted(() => {
 <template>
   <div>
     <DynamicModal
-      :show="showModalUrl"
+      :showDynamicModal="showModalUrl"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
       :title="titleModal"
