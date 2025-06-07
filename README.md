@@ -131,6 +131,33 @@ import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
 </template>
 ```
 
+### Company Logo
+
+You can display your company logo in the page builder interface by passing a logo URL to the `PageBuilderLogo` prop. When provided, the logo will appear in the top toolbar of the page builder.
+
+Basic Usage:
+
+```vue
+<script setup>
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+</script>
+
+<template>
+  <PageBuilder PageBuilderLogo="/logo/square-logo.svg" />
+</template>
+```
+
+configuration Options
+
+| Prop              | Type     | Default | Description                         |
+| ----------------- | -------- | ------- | ----------------------------------- |
+| `PageBuilderLogo` | `String` | `null`  | URL path to your company logo image |
+
+#### Examples
+
+The logo will be displayed with a subtle border separator and proper spacing in the page builder toolbar.
+
 ## Contributing
 
 1. Fork the repository
