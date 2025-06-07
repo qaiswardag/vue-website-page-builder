@@ -9,6 +9,7 @@ import type {
 } from '@/types'
 
 interface PageBuilderState {
+  pageBuilderLogo: string | null
   componentArrayAddMethod: string | null
   localStorageItemName: string | null
   showModalTipTap: boolean
@@ -68,6 +69,7 @@ const {
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
   state: (): PageBuilderState => ({
+    pageBuilderLogo: null,
     componentArrayAddMethod: null,
     localStorageItemName: null,
     showModalTipTap: false,
@@ -116,6 +118,9 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     updateOrCreate: '',
   }),
   getters: {
+    getPageBuilderLogo(state: PageBuilderState): string | null {
+      return state.pageBuilderLogo
+    },
     getComponentArrayAddMethod(state: PageBuilderState): string | null {
       return state.componentArrayAddMethod
     },
@@ -269,6 +274,9 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
   },
   actions: {
+    setPageBuilderLogo(payload: string | null): void {
+      this.pageBuilderLogo = payload
+    },
     setComponentArrayAddMethod(payload: string | null): void {
       this.componentArrayAddMethod = payload
     },

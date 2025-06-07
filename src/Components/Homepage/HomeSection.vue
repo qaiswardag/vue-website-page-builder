@@ -80,6 +80,7 @@ const features = [
       </div>
       <div>
         <PageBuilder
+          PageBuilderLogo="/logo/logo.svg"
           updateOrCreate="update"
           :userForPageBuilder="{ name: 'John Doe' }"
           :resourceData="{ title: 'Demo Article', id: 1 }"

@@ -23,6 +23,10 @@ import { useUserStore } from '@/stores/user'
  * @property {Object|null} user - User object with name property: { name: string }
  */
 const props = defineProps({
+  PageBuilderLogo: {
+    type: String,
+    default: null,
+  },
   CustomMediaLibraryComponent: {
     type: Object,
     default: null,
@@ -65,6 +69,15 @@ const internalPinia = createPinia()
 const mediaLibraryStore = useMediaLibraryStore(internalPinia)
 const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 const userStore = useUserStore(internalPinia)
+
+// Set logo
+if (props.PageBuilderLogo) {
+  pageBuilderStateStore.setPageBuilderLogo(props.PageBuilderLogo)
+}
+
+const getPageBuilderLogo = computed(() => {
+  return pageBuilderStateStore.getPageBuilderLogo
+})
 
 // Set current resource data if provided
 if (props.resourceData) {
@@ -236,9 +249,11 @@ onMounted(async () => {
           class="px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
         >
           <div class="flex items-center justify-start divide-x divide-gray-200">
-            <button type="button" @click="firstButton" class="border-r border-gray-200 pr-6">
-              <img class="h-6" src="/logo/logo.svg" alt="Logo" />
-            </button>
+            <template v-if="getPageBuilderLogo">
+              <div class="border-r border-gray-200 pr-6">
+                <img class="h-6" :src="getPageBuilderLogo" alt="Logo" />
+              </div>
+            </template>
             <button
               class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4"
               @click="pageBuilderClass.saveComponentsLocalStorage"
