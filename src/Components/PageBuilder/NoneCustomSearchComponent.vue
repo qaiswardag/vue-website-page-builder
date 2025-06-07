@@ -3,9 +3,10 @@ import componentHelpers from '../../utils/html-elements/componentHelpers'
 import components from '../../utils/html-elements/component'
 import PageBuilderClass from '../../composables/PageBuilderClass'
 import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
+import { generateComponentPreview } from '../../utils/componentPreviews'
 import type { ComponentObject, PageBuilderStateStore, MediaLibraryStore } from '../../types'
 
-import { inject } from 'vue'
+import { inject, ref } from 'vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject<PageBuilderStateStore>('pageBuilderStateStore')
@@ -15,6 +16,9 @@ const mediaLibraryStore = inject<MediaLibraryStore>('mediaLibraryStore')
 const { closeAddComponentModal } = usePageBuilderModal()
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore!, mediaLibraryStore!)
+
+// Track image loading states
+const imageLoadingStates = ref<Record<string, boolean>>({})
 
 // Super simple component addition with professional modal closing!
 const handleDropComponent = function (componentObject: ComponentObject) {
@@ -29,6 +33,28 @@ const convertToComponentObject = function (comp: any): ComponentObject {
     html_code: comp.html_code,
     title: comp.title,
   }
+}
+
+// Handle image load errors
+const handleImageError = (event: Event, title: string) => {
+  const img = event.target as HTMLImageElement
+  const container = img.parentElement
+  if (container) {
+    // Generate and set SVG preview
+    const svgPreview = generateComponentPreview(title)
+    container.innerHTML = `<div class="w-full h-full flex items-center justify-center">${svgPreview}</div>`
+  }
+}
+
+// Check if we should show SVG preview instead of image
+const shouldShowSvgPreview = (comp: any) => {
+  // Always show SVG preview for better reliability
+  return true
+}
+
+// Get SVG preview for component
+const getSvgPreview = (title: string) => {
+  return generateComponentPreview(title)
 }
 </script>
 
@@ -72,13 +98,11 @@ const convertToComponentObject = function (comp: any): ComponentObject {
           <div
             class="overflow-hidden whitespace-pre-line flex-1 h-auto border-b border-gray-200 lg:py-10 py-8 px-2"
           >
-            <img
-              v-if="comp.cover_image"
-              :src="comp.cover_image"
-              :alt="comp.title"
-              class="max-h-72 cursor-pointer object-contain bg-white mx-auto"
-            />
-            <div v-else class="text-gray-500">{{ comp.title }}</div>
+            <!-- Use SVG preview instead of external images -->
+            <div
+              class="max-h-72 cursor-pointer bg-white mx-auto flex items-center justify-center"
+              v-html="getSvgPreview(comp.title)"
+            ></div>
           </div>
           <div class="p-3">
             <h4 class="myPrimaryParagraph text-sm font-normal">{{ comp.title }}</h4>
