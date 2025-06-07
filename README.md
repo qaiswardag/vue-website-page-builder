@@ -16,6 +16,20 @@ A Vue 3 page builder component with drag & drop functionality for creating dynam
 npm install @myissue/vue-website-page-builder
 ```
 
+### Important: CSS Import Required
+
+The page builder requires its CSS file to be imported for proper styling and automatic icon loading:
+
+```js
+import '@myissue/vue-website-page-builder/style.css'
+```
+
+This import automatically includes:
+
+- ✅ Page builder styles
+- ✅ Google Material Icons (no additional setup needed)
+- ✅ Responsive design utilities
+
 ## Click & Drop Page Builder
 
 [Play around with the page builder](https://www.builder-demo.myissue.dk)
@@ -107,6 +121,8 @@ import '@myissue/vue-website-page-builder/style.css'
 </template>
 ```
 
+> **📝 Note**: Google Material Icons are automatically loaded when you import the CSS file. No additional setup required for icons!
+
 ### Customization
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
@@ -157,6 +173,32 @@ configuration Options
 #### Examples
 
 The logo will be displayed with a subtle border separator and proper spacing in the page builder toolbar.
+
+## Troubleshooting
+
+### Icons Not Displaying
+
+If Material Icons are not displaying correctly, verify that:
+
+1. **CSS Import**: Ensure you're importing the CSS file:
+
+   ```js
+   import '@myissue/vue-website-page-builder/style.css'
+   ```
+
+2. **Network Access**: The package loads icons from Google Fonts CDN. Ensure your application can access:
+
+   ```
+   https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined
+   ```
+
+3. **Content Security Policy**: If using CSP, allow Google Fonts:
+   ```html
+   <meta
+     http-equiv="Content-Security-Policy"
+     content="font-src 'self' https://fonts.googleapis.com;"
+   />
+   ```
 
 ## Contributing
 

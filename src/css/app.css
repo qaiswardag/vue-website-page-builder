@@ -1,3 +1,6 @@
+/* Google Material Icons - Auto-loaded for vue-website-page-builder */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -563,8 +566,9 @@ h3 {
 /* CSS for Vue datepicker # start */
 :root {
   /*General*/
-  --dp-font-family: 'Jost', blinkmacsystemfont, 'Segoe UI', roboto, oxygen,
-    ubuntu, cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+  --dp-font-family:
+    'Jost', blinkmacsystemfont, 'Segoe UI', roboto, oxygen, ubuntu, cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif !important;
   --dp-border-radius: 40px; /*Configurable border-radius*/
   --dp-cell-border-radius: 4px; /*Specific border radius for the calendar cell*/
   --dp-common-transition: all 0.1s ease-in; /*Generic transition applied on buttons and calendar cells*/
