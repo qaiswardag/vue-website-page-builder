@@ -27,6 +27,7 @@ import '@myissue/vue-website-page-builder/style.css'
 This import automatically includes:
 
 - ✅ Page builder styles
+- ✅ Google Fonts (Jost, Cormorant - no additional setup needed)
 - ✅ Google Material Icons (no additional setup needed)
 - ✅ Responsive design utilities
 
@@ -121,7 +122,7 @@ import '@myissue/vue-website-page-builder/style.css'
 </template>
 ```
 
-> **📝 Note**: Google Material Icons are automatically loaded when you import the CSS file. No additional setup required for icons!
+> **📝 Note**: Google Fonts (Jost, Cormorant) and Material Icons are automatically loaded when you import the CSS file. No additional setup required for fonts or icons!
 
 ### Customization
 
@@ -176,9 +177,9 @@ The logo will be displayed with a subtle border separator and proper spacing in 
 
 ## Troubleshooting
 
-### Icons Not Displaying
+### Fonts or Icons Not Displaying
 
-If Material Icons are not displaying correctly, verify that:
+If fonts (Jost, Cormorant) or Material Icons are not displaying correctly, verify that:
 
 1. **CSS Import**: Ensure you're importing the CSS file:
 
@@ -186,9 +187,11 @@ If Material Icons are not displaying correctly, verify that:
    import '@myissue/vue-website-page-builder/style.css'
    ```
 
-2. **Network Access**: The package loads icons from Google Fonts CDN. Ensure your application can access:
+2. **Network Access**: The package loads fonts and icons from Google Fonts CDN. Ensure your application can access:
 
    ```
+   https://fonts.googleapis.com/css2?family=Jost:*
+   https://fonts.googleapis.com/css2?family=Cormorant:*
    https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined
    ```
 
