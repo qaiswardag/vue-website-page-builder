@@ -506,13 +506,11 @@ h3 {
 /* CSS for content inside page builder # start */
 #page-builder-editor-editable-area a {
   pointer-events: none;
-  /* display: block;
-    width: 100%; */
 }
 
 #page-builder-editor-editable-area #youtube-video::before {
   content: 'Select video element';
-  font-family: 'Jost';
+  font-family: 'Jost', sans-serif;
   display: inline-block;
   margin-right: 8px;
   vertical-align: middle;
@@ -576,6 +574,9 @@ h3 {
   --dp-common-transition: all 0.1s ease-in; /*Generic transition applied on buttons and calendar cells*/
 }
 
+#builder-container {
+  font-family: 'Jost', sans-serif;
+}
 .dp__action_row {
   display: flex !important;
   align-items: center !important;

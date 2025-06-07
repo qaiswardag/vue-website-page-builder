@@ -241,7 +241,10 @@ onMounted(async () => {
       <Preview></Preview>
     </PageBuilderPreviewModal>
 
-    <div class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2">
+    <div
+      id="builder-container"
+      class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2"
+    >
       <!-- Save laylout # start -->
       <div class="p-4 m-8 bg-stone-200 rounded-lg">
         <div
