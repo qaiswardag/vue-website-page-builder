@@ -1,7 +1,7 @@
 <script setup>
 import SlideOverRightParent from '@/Components/PageBuilder/Slidebars/SlideOverRightParent.vue'
 import AdvancedPageBuilderSettings from '@/Components/PageBuilder/Settings/AdvancedPageBuilderSettings.vue'
-import { ref, computed, onMounted, inject } from 'vue'
+import { ref, computed, inject } from 'vue'
 import fullHTMLContent from '@/utils/builder/html-doc-declaration-with-components'
 
 // Get stores from parent PageBuilder component
@@ -54,43 +54,45 @@ const handleDownloadHTML = function () {
 </script>
 
 <template>
-  <SlideOverRightParent
-    :open="showAdvancedSettingsSlideOverRight"
-    :title="titleSettingsSlideOverRight"
-    @slideOverButton="settingsAdvancedSlideOverButton"
-  >
-    <AdvancedPageBuilderSettings></AdvancedPageBuilderSettings>
-  </SlideOverRightParent>
-  <!-- Advanced Settings - start -->
-  <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
-    <div class="flex items-left flex-col gap-1">
-      <h3 class="myQuaternaryHeader">Advanced Settings</h3>
-      <p class="myPrimaryParagraph text-xs">
-        Manage advanced settings here. Like an overview of Selected Element, Component, and
-        Components in real-time.
-      </p>
+  <div>
+    <SlideOverRightParent
+      :open="showAdvancedSettingsSlideOverRight"
+      :title="titleSettingsSlideOverRight"
+      @slideOverButton="settingsAdvancedSlideOverButton"
+    >
+      <AdvancedPageBuilderSettings></AdvancedPageBuilderSettings>
+    </SlideOverRightParent>
+    <!-- Advanced Settings - start -->
+    <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
+      <div class="flex items-left flex-col gap-1">
+        <h3 class="myQuaternaryHeader">Advanced Settings</h3>
+        <p class="myPrimaryParagraph text-xs">
+          Manage advanced settings here. Like an overview of Selected Element, Component, and
+          Components in real-time.
+        </p>
+      </div>
+      <div class="mt-4">
+        <button
+          @click="handleAdvancedSettingsSlideOver"
+          type="button"
+          class="myPrimaryButton text-xs"
+        >
+          Advanced Settings
+        </button>
+      </div>
     </div>
-    <div class="mt-4">
-      <button
-        @click="handleAdvancedSettingsSlideOver"
-        type="button"
-        class="myPrimaryButton text-xs"
-      >
-        Advanced Settings
-      </button>
-    </div>
-  </div>
-  <!-- Advanced Settings - end -->
-  <!-- Download Layout HTML - start -->
-  <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
-    <div class="flex items-left flex-col gap-1">
-      <h3 class="myQuaternaryHeader">Download Page as HTML</h3>
-      <p class="myPrimaryParagraph text-xs">Download current page layout.</p>
-    </div>
-    <div class="mt-4">
-      <button @click="handleDownloadHTML" type="button" class="myPrimaryButton text-xs">
-        Download HTML file
-      </button>
+    <!-- Advanced Settings - end -->
+    <!-- Download Layout HTML - start -->
+    <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
+      <div class="flex items-left flex-col gap-1">
+        <h3 class="myQuaternaryHeader">Download Page as HTML</h3>
+        <p class="myPrimaryParagraph text-xs">Download current page layout.</p>
+      </div>
+      <div class="mt-4">
+        <button @click="handleDownloadHTML" type="button" class="myPrimaryButton text-xs">
+          Download HTML file
+        </button>
+      </div>
     </div>
   </div>
   <!-- Download Layout HTML - end -->
