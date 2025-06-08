@@ -128,7 +128,7 @@ class PageBuilderClass {
   }
 
   #applyElementClassChanges(
-    selectedCSS: string,
+    selectedCSS: string | undefined,
     CSSArray: string[],
     mutationName: string,
   ): string | undefined {
@@ -139,11 +139,9 @@ class PageBuilderClass {
     }
 
     const currentHTMLElement = this.getElement.value
-
-    if (!currentHTMLElement || !selectedCSS) return
+    if (!currentHTMLElement) return
 
     // currentCSS array example: ["none","py-0", "py-2", ...] or ['none', 'rounded-sm', 'rounded', 'rounded-md', ...]
-
     const currentCSS = CSSArray.find((CSS) => {
       return currentHTMLElement.classList.contains(CSS)
     })
@@ -151,10 +149,12 @@ class PageBuilderClass {
     // set to 'none' if undefined
     let elementClass = currentCSS || 'none'
 
-    // this.pageBuilderStateStore
-
-    if (typeof mutationName === 'string' && mutationName.length > 2) {
-      ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
+    // If selectedCSS is undefined, just set the current state and return
+    if (selectedCSS === undefined) {
+      if (typeof mutationName === 'string' && mutationName.length > 2) {
+        ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
+      }
+      return currentCSS
     }
 
     // selectedCSS examples: bg-zinc-200, px-10, rounded-full etc.
@@ -170,6 +170,7 @@ class PageBuilderClass {
       elementClass = selectedCSS
     }
 
+    // Only call store mutations after all DOM manipulation is complete
     if (typeof mutationName === 'string' && mutationName.length > 2) {
       ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
       this.pageBuilderStateStore.setElement(currentHTMLElement)
@@ -522,13 +523,13 @@ class PageBuilderClass {
     // Store the parent of the deleted element
     // if parent element tag is section remove the hole component
     if (element.parentElement?.tagName !== 'SECTION') {
-      this.pageBuilderStateStore.setParentElement(element.parentNode)
+      this.pageBuilderStateStore.setParentElement(element.parentNode as HTMLElement)
 
       // Store the outerHTML of the deleted element
       this.pageBuilderStateStore.setRestoredElement(element.outerHTML)
 
       // Store the next sibling of the deleted element
-      this.pageBuilderStateStore.setNextSibling(element.nextSibling)
+      this.pageBuilderStateStore.setNextSibling(element.nextSibling as HTMLElement | null)
     }
 
     // if parent element tag is section remove the hole component
@@ -594,7 +595,7 @@ class PageBuilderClass {
       'setFontFamily',
     )
   }
-  handleFontStyle(userSelectedFontStyle: string): void {
+  handleFontStyle(userSelectedFontStyle?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleFontStyle')
     }
@@ -605,7 +606,7 @@ class PageBuilderClass {
       'setFontStyle',
     )
   }
-  handleVerticalPadding(userSelectedVerticalPadding: string): void {
+  handleVerticalPadding(userSelectedVerticalPadding?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleVerticalPadding')
     }
@@ -616,7 +617,7 @@ class PageBuilderClass {
       'setFontVerticalPadding',
     )
   }
-  handleHorizontalPadding(userSelectedHorizontalPadding: string): void {
+  handleHorizontalPadding(userSelectedHorizontalPadding?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleHorizontalPadding')
     }
@@ -628,7 +629,7 @@ class PageBuilderClass {
     )
   }
 
-  handleVerticalMargin(userSelectedVerticalMargin: string): void {
+  handleVerticalMargin(userSelectedVerticalMargin?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleVerticalMargin')
     }
@@ -639,7 +640,7 @@ class PageBuilderClass {
       'setFontVerticalMargin',
     )
   }
-  handleHorizontalMargin(userSelectedHorizontalMargin: string): void {
+  handleHorizontalMargin(userSelectedHorizontalMargin?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleHorizontalMargin')
     }
@@ -652,7 +653,7 @@ class PageBuilderClass {
   }
 
   // border color, style & width / start
-  handleBorderStyle(borderStyle: string): void {
+  handleBorderStyle(borderStyle?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderStyle')
     }
@@ -663,7 +664,7 @@ class PageBuilderClass {
       'setBorderStyle',
     )
   }
-  handleBorderWidth(borderWidth: string): void {
+  handleBorderWidth(borderWidth?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderWidth')
     }
@@ -674,7 +675,7 @@ class PageBuilderClass {
       'setBorderWidth',
     )
   }
-  handleBorderColor(borderColor: string): void {
+  handleBorderColor(borderColor?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderColor')
     }
@@ -687,7 +688,7 @@ class PageBuilderClass {
   }
   // border color, style & width / end
 
-  handleBackgroundColor(color: string): void {
+  handleBackgroundColor(color?: string): void {
     this.#applyElementClassChanges(
       color,
       tailwindColors.backgroundColorVariables,
@@ -695,12 +696,12 @@ class PageBuilderClass {
     )
   }
 
-  handleTextColor(color: string): void {
+  handleTextColor(color?: string): void {
     this.#applyElementClassChanges(color, tailwindColors.textColorVariables, 'setTextColor')
   }
 
   // border radius / start
-  handleBorderRadiusGlobal(borderRadiusGlobal: string): void {
+  handleBorderRadiusGlobal(borderRadiusGlobal?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusGlobal')
     }
@@ -711,7 +712,7 @@ class PageBuilderClass {
       'setBorderRadiusGlobal',
     )
   }
-  handleBorderRadiusTopLeft(borderRadiusTopLeft: string): void {
+  handleBorderRadiusTopLeft(borderRadiusTopLeft?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusTopLeft')
     }
@@ -722,7 +723,7 @@ class PageBuilderClass {
       'setBorderRadiusTopLeft',
     )
   }
-  handleBorderRadiusTopRight(borderRadiusTopRight: string): void {
+  handleBorderRadiusTopRight(borderRadiusTopRight?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusTopRight')
     }
@@ -733,7 +734,7 @@ class PageBuilderClass {
       'setBorderRadiusTopRight',
     )
   }
-  handleBorderRadiusBottomleft(borderRadiusBottomleft: string): void {
+  handleBorderRadiusBottomleft(borderRadiusBottomleft?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusBottomleft')
     }
@@ -744,7 +745,7 @@ class PageBuilderClass {
       'setBorderRadiusBottomleft',
     )
   }
-  handleBorderRadiusBottomRight(borderRadiusBottomRight: string): void {
+  handleBorderRadiusBottomRight(borderRadiusBottomRight?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusBottomRight')
     }
@@ -757,7 +758,7 @@ class PageBuilderClass {
   }
   // border radius / end
 
-  handleFontSize(userSelectedFontSize: string): void {
+  handleFontSize(userSelectedFontSize?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleFontSize')
     }
@@ -861,7 +862,7 @@ class PageBuilderClass {
     }
   }
 
-  handleBackgroundOpacity(opacity: string): void {
+  handleBackgroundOpacity(opacity?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBackgroundOpacity')
     }
@@ -872,7 +873,7 @@ class PageBuilderClass {
       'setBackgroundOpacity',
     )
   }
-  handleOpacity(opacity: string): void {
+  handleOpacity(opacity?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleOpacity')
     }
