@@ -414,29 +414,38 @@ onMounted(async () => {
                     </span>
                   </div>
                 </button>
-                <button
-                  type="button"
-                  @click="
-                    () => {
-                      pageBuilderStateStore.setMenuRight(false)
-                      pageBuilderStateStore.setElement(null)
-                      pageBuilderStateStore.setComponent(null)
-                      handlePageBuilderPreview()
-                    }
-                  "
-                  class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                >
-                  <span class="material-symbols-outlined"> visibility </span>
-                </button>
+                <div class="flex items-center justify-center gap-4">
+                  <button
+                    type="button"
+                    @click="
+                      () => {
+                        pageBuilderStateStore.setMenuRight(false)
+                        pageBuilderStateStore.setElement(null)
+                        pageBuilderStateStore.setComponent(null)
+                        handlePageBuilderPreview()
+                      }
+                    "
+                  >
+                    <div class="flex items-center justify-center gap-2">
+                      <span class="lg:block hidden"> Preview </span>
 
-                <button
-                  type="button"
-                  v-if="getMenuRight === false"
-                  @click="pageBuilderStateStore.setMenuRight(true)"
-                  class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                >
-                  <span class="material-symbols-outlined"> palette </span>
-                </button>
+                      <span
+                        class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                      >
+                        <span class="myMediumIcon material-symbols-outlined"> visibility </span>
+                      </span>
+                    </div>
+                  </button>
+
+                  <button
+                    type="button"
+                    v-if="getMenuRight === false"
+                    @click="pageBuilderStateStore.setMenuRight(true)"
+                    class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                  >
+                    <span class="material-symbols-outlined"> palette </span>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
