@@ -6,9 +6,8 @@ import { Switch } from '@headlessui/vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const hyperlinkEnable = ref(false)
 const urlInput = ref(null)
 const openHyperlinkInNewTab = ref(false)

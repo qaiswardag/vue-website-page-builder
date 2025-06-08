@@ -8,9 +8,8 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const borderStyle = ref(null)
 const borderWidth = ref(null)
 const borderColor = ref(null)

@@ -6,9 +6,29 @@ import type {
   FetchedComponentsResponse,
   SetPushComponentsPayload,
   LoadComponentsData,
+  ImageObject,
+  UserSettings,
+  User,
 } from '@/types'
 
+// Media Library interfaces
+interface UnsplashImagesData {
+  fetchedMedia: unknown
+  isError: boolean | null
+  error: unknown
+  errors: unknown
+  isLoading: boolean | null
+  isSuccess: boolean | null
+}
+
+interface LoadUnsplashImagesPayload {
+  orientation?: string
+  currentPage: number
+  searchTerm?: string
+}
+
 interface PageBuilderState {
+  // Core Page Builder State
   pageBuilderLogo: string | null
   componentArrayAddMethod: string | null
   localStorageItemName: string | null
@@ -56,6 +76,21 @@ interface PageBuilderState {
   fetchedComponents: FetchedComponentsResponse | null
   currentResourceData: { title: string; id: number } | null
   updateOrCreate: string
+
+  // Media Library State
+  currentImage: ImageObject
+  currentPreviewImage: string | null
+
+  // User State
+  isLoading: boolean
+  userSettings: UserSettings | null
+  currentUser: User | null
+
+  // Unsplash State
+  unsplashImages: UnsplashImagesData | null
+  searchTerm: string
+  currentPageNumber: number
+  orientationValue: string | null
 }
 
 // get components
@@ -67,8 +102,20 @@ const {
   error,
 } = vueFetch()
 
+// get unsplash images
+const {
+  handleData: handleGetImages,
+  fetchedData: fetchedMedia,
+  isError: isErrorImages,
+  error: errorImages,
+  errors: errorsImages,
+  isLoading: isLoadingImages,
+  isSuccess: isSuccessImages,
+} = vueFetch()
+
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
   state: (): PageBuilderState => ({
+    // Core Page Builder State
     pageBuilderLogo: null,
     componentArrayAddMethod: null,
     localStorageItemName: null,
@@ -116,8 +163,24 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     fetchedComponents: null,
     currentResourceData: null,
     updateOrCreate: '',
+
+    // Media Library State
+    currentImage: { src: '' },
+    currentPreviewImage: null,
+
+    // User State
+    isLoading: false,
+    userSettings: null,
+    currentUser: null,
+
+    // Unsplash State
+    unsplashImages: null,
+    searchTerm: '',
+    currentPageNumber: 1,
+    orientationValue: null,
   }),
   getters: {
+    // Core Page Builder Getters
     getPageBuilderLogo(state: PageBuilderState): string | null {
       return state.pageBuilderLogo
     },
@@ -272,8 +335,30 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getUpdateOrCreate(state: PageBuilderState): string {
       return state.updateOrCreate
     },
+
+    // Media Library Getters
+    getCurrentImage(state: PageBuilderState): ImageObject {
+      return state.currentImage
+    },
+    getCurrentPreviewImage(state: PageBuilderState): string | null {
+      return state.currentPreviewImage
+    },
+
+    // User Getters
+    getIsLoading: (state: PageBuilderState): boolean => state.isLoading,
+    getUserSettings: (state: PageBuilderState): UserSettings | null => state.userSettings,
+    getCurrentUser: (state: PageBuilderState): User | null => state.currentUser,
+
+    // Unsplash Getters
+    getUnsplashImages: (state: PageBuilderState): UnsplashImagesData | null => {
+      return state.unsplashImages
+    },
+    getSearchTerm: (state: PageBuilderState): string => state.searchTerm,
+    getCurrentPageNumber: (state: PageBuilderState): number => state.currentPageNumber,
+    getOrientationValue: (state: PageBuilderState): string | null => state.orientationValue,
   },
   actions: {
+    // Core Page Builder Actions
     setPageBuilderLogo(payload: string | null): void {
       this.pageBuilderLogo = payload
     },
@@ -472,6 +557,80 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
     setUpdateOrCreate(payload: string): void {
       this.updateOrCreate = payload
+    },
+
+    // Media Library Actions
+    setCurrentImage(payload: ImageObject): void {
+      this.currentImage = payload
+    },
+    setCurrentPreviewImage(payload: string | null): void {
+      this.currentPreviewImage = payload
+    },
+
+    // User Actions
+    setIsLoading(payload: boolean): void {
+      this.isLoading = payload
+    },
+    setUserSettings(payload: UserSettings | null): void {
+      this.userSettings = payload
+    },
+    setCurrentUser(payload: User | null): void {
+      this.currentUser = payload
+    },
+
+    // Unsplash Actions
+    setUnsplashImages(payload: UnsplashImagesData | null): void {
+      this.unsplashImages = payload
+    },
+    setSearchTerm(payload: string): void {
+      this.searchTerm = payload
+    },
+    setCurrentPageNumber(payload: number): void {
+      this.currentPageNumber = payload
+    },
+    setOrientationValue(payload: string | null): void {
+      this.orientationValue = payload
+    },
+
+    // Load Unsplash images
+    async setLoadUnsplashImages(payload: LoadUnsplashImagesPayload): Promise<void> {
+      this.setUnsplashImages({
+        fetchedMedia: null,
+        isError: null,
+        error: null,
+        errors: null,
+        isLoading: true,
+        isSuccess: null,
+      })
+
+      const orientationType = payload.orientation ? `&orientation=${payload.orientation}` : ''
+
+      const unsplashKey = import.meta.env.VITE_UNSPLASH_KEY as string
+
+      try {
+        await handleGetImages(
+          `https://api.unsplash.com/search/photos?page=${payload.currentPage}&per_page=24&query=${payload.searchTerm || 'a'}${orientationType}`,
+          {
+            headers: {
+              'Accept-Version': 'v1',
+              Authorization: unsplashKey,
+            },
+          },
+          { additionalCallTime: 500 },
+        )
+      } catch (err) {
+        console.log(`Error: ${err}`)
+      }
+
+      // Update state directly instead of committing mutations
+      this.setUnsplashImages({
+        fetchedMedia: fetchedMedia.value,
+        isError: isErrorImages.value,
+        error: errorImages.value,
+        errors: errorsImages.value,
+        isLoading: isLoadingImages.value,
+        isSuccess: isSuccessImages.value,
+      })
     },
   },
 })

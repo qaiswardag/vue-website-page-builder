@@ -77,14 +77,11 @@ export interface PageBuilderStateStore {
   setTextColor: (color: string) => void
   setBackgroundOpacity: (opacity: string) => void
   setOpacity: (opacity: string) => void
-  [key: string]: unknown
-}
-
-export interface MediaLibraryStore {
   getCurrentImage: ImageObject | null
   setCurrentImage: (image: ImageObject) => void
   getCurrentPreviewImage: string | null
   setCurrentPreviewImage: (url: string | null) => void
+  [key: string]: unknown
 }
 
 // User interfaces
@@ -99,10 +96,10 @@ export interface PageBuilderUser {
 
 // User settings interface
 export interface UserSettings {
-  theme?: 'light' | 'dark' | 'auto'
-  language?: string
+  theme: 'light' | 'dark' | 'auto'
+  language: string
   notifications?: boolean
-  autoSave?: boolean
+  autoSave: boolean
   [key: string]: unknown
 }
 

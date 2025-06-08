@@ -6,7 +6,6 @@ import { ref } from 'vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
 
 const showModalDeleteComponent = ref(false)
 // use dynamic model
@@ -21,7 +20,7 @@ const thirdButtonModal = ref(null)
 const firstModalButtonFunction = ref(null)
 const secondModalButtonFunction = ref(null)
 const thirdModalButtonFunction = ref(null)
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // remove component
 const deleteComponent = function (e) {

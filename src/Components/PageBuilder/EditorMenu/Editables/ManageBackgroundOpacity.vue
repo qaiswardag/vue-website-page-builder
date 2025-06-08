@@ -13,8 +13,7 @@ import {
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const opacityVueModel = ref(null)
 const getBackgroundOpacity = computed(() => {
   return pageBuilderStateStore.getBackgroundOpacity

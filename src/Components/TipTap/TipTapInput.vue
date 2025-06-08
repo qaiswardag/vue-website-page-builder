@@ -8,7 +8,6 @@ import DynamicModal from '@/Components/Modals/DynamicModal.vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
 
 const showModalUrl = ref(false)
 
@@ -25,7 +24,7 @@ const firstModalButtonFunction = ref(null)
 const secondModalButtonFunction = ref(null)
 const thirdModalButtonFunction = ref(null)
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement

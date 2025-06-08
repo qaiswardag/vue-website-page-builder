@@ -6,8 +6,7 @@ import tailwindColors from '@/utils/builder/tailwaind-colors'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const textColor = ref(null)
 const getTextColor = computed(() => {
   return pageBuilderStateStore.getTextColor

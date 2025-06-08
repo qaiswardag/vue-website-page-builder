@@ -6,9 +6,8 @@ import tailwindBorderRadius from '@/utils/builder/tailwind-border-radius'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const borderRadiusGlobal = ref(null)
 const borderRadiusTopLeft = ref(null)
 const borderRadiusTopRight = ref(null)

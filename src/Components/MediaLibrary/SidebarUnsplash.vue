@@ -1,11 +1,11 @@
 <script setup>
 import { ref, computed, onMounted, inject } from 'vue'
 
-// Get stores from parent PageBuilder component
-const mediaLibraryStore = inject('mediaLibraryStore')
+// Get consolidated store from parent PageBuilder component
+const pageBuilderStateStore = inject('pageBuilderStateStore')
 
 const getCurrentImage = computed(() => {
-  return mediaLibraryStore.getCurrentImage
+  return pageBuilderStateStore.getCurrentImage
 })
 </script>
 

@@ -8,20 +8,18 @@ import SlideOverRight from '@/Components/PageBuilder/Slidebars/SlideOverRight.vu
 import PageBuilderSettings from '@/Components/PageBuilder/Settings/PageBuilderSettings.vue'
 import DynamicModal from '@/Components/Modals/DynamicModal.vue'
 
-// Get stores from parent PageBuilder component
+// Get consolidated store from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
-const userStore = inject('userStore')
 
 const getCurrentUser = computed(() => {
-  return userStore.getCurrentUser
+  return pageBuilderStateStore.getCurrentUser
 })
 
 const getCurrentResourceData = computed(() => {
   return pageBuilderStateStore.getCurrentResourceData
 })
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const emit = defineEmits(['previewCurrentDesign'])
 
 const showModalDeleteAllComponents = ref(false)

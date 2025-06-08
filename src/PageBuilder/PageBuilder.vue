@@ -11,8 +11,6 @@ import SearchComponents from '@/Components/Search/SearchComponents.vue'
 import OptionsDropdown from '@/Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
 import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { useMediaLibraryStore } from '@/stores/media-library'
-import { useUserStore } from '@/stores/user'
 
 /**
  * Props for PageBuilder component
@@ -66,9 +64,7 @@ const props = defineProps({
 
 // Create internal Pinia instance for PageBuilder package
 const internalPinia = createPinia()
-const mediaLibraryStore = useMediaLibraryStore(internalPinia)
 const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
-const userStore = useUserStore(internalPinia)
 
 // Set logo
 if (props.PageBuilderLogo) {
@@ -79,27 +75,23 @@ const getPageBuilderLogo = computed(() => {
   return pageBuilderStateStore.getPageBuilderLogo
 })
 
-console.log('loooogo is in pagebuilderer:', getPageBuilderLogo.value)
-
 // Set current resource data if provided
 if (props.resourceData) {
   pageBuilderStateStore.setCurrentResourceData(props.resourceData)
 }
 // Set current user if provided
 if (props.userForPageBuilder) {
-  userStore.setCurrentUser(props.userForPageBuilder)
+  pageBuilderStateStore.setCurrentUser(props.userForPageBuilder)
 }
 
 // Set updateOrCreate in store
 pageBuilderStateStore.setUpdateOrCreate(props.updateOrCreate)
 
-// Initialize PageBuilder with stores
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+// Initialize PageBuilder with store
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Provide stores for child components
+// Provide store for child components (all pointing to the same consolidated store)
 provide('pageBuilderStateStore', pageBuilderStateStore)
-provide('mediaLibraryStore', mediaLibraryStore)
-provide('userStore', userStore)
 
 // Provide the internal Pinia instance for components that need to create stores
 provide('internalPinia', internalPinia)
@@ -160,7 +152,7 @@ const getComponents = computed(() => {
 })
 
 const getCurrentUser = computed(() => {
-  return userStore.getCurrentUser
+  return pageBuilderStateStore.getCurrentUser
 })
 
 const getCurrentResourceData = computed(() => {

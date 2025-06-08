@@ -3,7 +3,6 @@ import { ref, computed, onMounted, inject } from 'vue'
 import { useUnsplashStore } from '@/stores/unsplash'
 
 // Get stores from parent PageBuilder component
-const mediaLibraryStore = inject('mediaLibraryStore')
 const unsplashStore = useUnsplashStore()
 const searchQuery = ref('')
 const currentPage = ref(1)
@@ -18,8 +17,8 @@ const getUnsplashImages = computed(() => {
 })
 
 const handleImageClick = function (file) {
-  mediaLibraryStore.setCurrentImage({ src: file })
-  mediaLibraryStore.setCurrentPreviewImage(null)
+  pageBuilderStateStore.setCurrentImage({ src: file })
+  pageBuilderStateStore.setCurrentPreviewImage(null)
 }
 
 // search by orientation

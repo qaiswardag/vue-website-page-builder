@@ -2,8 +2,6 @@
 import type {
   ComponentObject,
   ImageObject,
-  PageBuilderStateStore,
-  MediaLibraryStore,
   TimerHandle,
   MutationObserver as MutationObserverType,
   TailwindColors,
@@ -14,6 +12,7 @@ import type {
   TailwindBorderRadius,
   TailwindBorderStyleWidthColor,
 } from '@/types'
+import type { usePageBuilderStateStore } from '@/stores/page-builder-state'
 
 import tailwindColors from '@/utils/builder/tailwaind-colors'
 import tailwindOpacities from '@/utils/builder/tailwind-opacities'
@@ -33,11 +32,10 @@ class PageBuilderClass {
   private nextTick: Promise<void>
   private containsPagebuilder: Element | null
   private timer: number | null
-  private pageBuilderStateStore: PageBuilderStateStore
-  private mediaLibraryStore: MediaLibraryStore
+  private pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>
   private getTextAreaVueModel: ComputedRef<string | null>
   private getLocalStorageItemName: ComputedRef<string | null>
-  private getCurrentImage: ComputedRef<ImageObject | null>
+  private getCurrentImage: ComputedRef<ImageObject>
   private getHyberlinkEnable: ComputedRef<boolean>
   private getComponents: ComputedRef<ComponentObject[] | null>
   private getComponent: ComputedRef<ComponentObject | null>
@@ -53,7 +51,7 @@ class PageBuilderClass {
   private delay: ReturnType<typeof delay>
   private observer?: MutationObserverType
 
-  constructor(pageBuilderStateStore: PageBuilderStateStore, mediaLibraryStore: MediaLibraryStore) {
+  constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     /**
      * Initialize an instance variable 'elementsWithListeners' as a WeakSet.
      *
@@ -74,16 +72,15 @@ class PageBuilderClass {
 
     this.timer = null
 
-    // Stores are now required parameters - no fallback to inject
+    // Store is now required parameter - no fallback to inject
     this.pageBuilderStateStore = pageBuilderStateStore
-    this.mediaLibraryStore = mediaLibraryStore
 
     this.getTextAreaVueModel = computed(() => this.pageBuilderStateStore.getTextAreaVueModel)
     this.getLocalStorageItemName = computed(
       () => this.pageBuilderStateStore.getLocalStorageItemName,
     )
 
-    this.getCurrentImage = computed(() => this.mediaLibraryStore.getCurrentImage)
+    this.getCurrentImage = computed(() => this.pageBuilderStateStore.getCurrentImage)
     this.getHyberlinkEnable = computed(() => this.pageBuilderStateStore.getHyberlinkEnable)
     this.getComponents = computed(() => this.pageBuilderStateStore.getComponents)
 
@@ -144,9 +141,8 @@ class PageBuilderClass {
     })
 
     // set to 'none' if undefined
-    let elementClass = currentCSS || 'none'
-
-    this.pageBuilderStateStore[mutationName as keyof PageBuilderStateStore](elementClass)
+    let elementClass =
+      currentCSS || 'none'(this.pageBuilderStateStore as any)[mutationName](elementClass)
 
     if (typeof selectedCSS === 'string' && selectedCSS !== 'none') {
       if (elementClass && this.getElement.value?.classList.contains(elementClass)) {

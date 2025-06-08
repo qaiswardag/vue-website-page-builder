@@ -4,18 +4,17 @@ import components from '../../utils/html-elements/component'
 import PageBuilderClass from '../../composables/PageBuilderClass'
 import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
 import { generateComponentPreview } from '../../utils/componentPreviews'
-import type { ComponentObject, PageBuilderStateStore, MediaLibraryStore } from '../../types'
+import type { ComponentObject, PageBuilderStateStore } from '../../types'
 
 import { inject, ref } from 'vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject<PageBuilderStateStore>('pageBuilderStateStore')
-const mediaLibraryStore = inject<MediaLibraryStore>('mediaLibraryStore')
 
 // Get modal close function
 const { closeAddComponentModal } = usePageBuilderModal()
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore!, mediaLibraryStore!)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore!)
 
 // Track image loading states
 const imageLoadingStates = ref<Record<string, boolean>>({})

@@ -5,9 +5,8 @@ import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement

@@ -12,8 +12,7 @@ import {
 } from '@headlessui/vue'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 
-// Get stores from parent PageBuilder component
-const userStore = inject('userStore')
+// Get store from parent PageBuilder component
 const internalPinia = inject('internalPinia')
 
 defineProps({
@@ -30,9 +29,9 @@ const emit = defineEmits(['firstPageBuilderPreviewModalButton'])
 const firstButton = async function () {
   emit('firstPageBuilderPreviewModalButton')
 
-  userStore.setIsLoading(true)
+  pageBuilderStateStore.setIsLoading(true)
   await delay()
-  userStore.setIsLoading(false)
+  pageBuilderStateStore.setIsLoading(false)
 }
 
 const handleEscapeKey = function () {
@@ -44,8 +43,6 @@ const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 const getPageBuilderLogo = computed(() => {
   return pageBuilderStateStore.getPageBuilderLogo
 })
-
-console.log('loooogo er:', getPageBuilderLogo.value)
 </script>
 
 <template>

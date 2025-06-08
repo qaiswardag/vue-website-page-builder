@@ -5,9 +5,8 @@ import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
-const mediaLibraryStore = inject('mediaLibraryStore')
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore, mediaLibraryStore)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const currentClasses = ref(null)
 const getCurrentClasses = computed(() => {
   return pageBuilderStateStore.getCurrentClasses
