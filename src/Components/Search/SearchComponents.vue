@@ -30,7 +30,7 @@ const firstButton = function () {
 <template>
   <Modal maxWidth="5xl" :show="show" @close="firstButton" minHeight="" maxHeight="">
     <div
-      class="w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
+      class="font-sans w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
     >
       <div class="flex items-center border-b border-gray-200 p-4 mb-2">
         <div class="flex-1">

@@ -80,7 +80,7 @@ const thirdButton = function () {
     <slot name="content" />
 
     <div
-      class="w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
+      class="font-sans w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
     >
       <template v-if="simpleModal !== true">
         <div class="flex items-center border-b border-gray-200 p-4 mb-2">

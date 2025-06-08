@@ -566,17 +566,14 @@ h3 {
 /* CSS for Vue datepicker # start */
 :root {
   /*General*/
-  --dp-font-family:
-    'Jost', blinkmacsystemfont, 'Segoe UI', roboto, oxygen, ubuntu, cantarell, 'Open Sans',
-    'Helvetica Neue', sans-serif !important;
   --dp-border-radius: 40px; /*Configurable border-radius*/
   --dp-cell-border-radius: 4px; /*Specific border radius for the calendar cell*/
   --dp-common-transition: all 0.1s ease-in; /*Generic transition applied on buttons and calendar cells*/
 }
 
 #builder-container {
-  font-family: 'Jost', sans-serif;
 }
+
 .dp__action_row {
   display: flex !important;
   align-items: center !important;

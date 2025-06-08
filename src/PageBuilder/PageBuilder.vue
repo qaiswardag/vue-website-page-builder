@@ -225,7 +225,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div id="builder-container">
+  <div id="builder-container" class="font-sans">
     <SearchComponents
       v-if="showModalAddComponent"
       :show="showModalAddComponent"
