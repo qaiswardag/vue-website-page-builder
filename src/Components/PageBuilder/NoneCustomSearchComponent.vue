@@ -6,7 +6,8 @@ import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
 import { generateComponentPreview } from '../../utils/componentPreviews'
 import type { ComponentObject } from '../../types'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
-import { ref, inject } from 'vue'
+
+import { inject } from 'vue'
 
 // Get store from parent PageBuilder component
 const internalPinia = inject('internalPinia')
