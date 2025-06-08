@@ -5,7 +5,7 @@ import PageBuilderClass from '../../composables/PageBuilderClass'
 import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
 import { generateComponentPreview } from '../../utils/componentPreviews'
 import type { ComponentObject } from '../../types'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { usePageBuilderStateStore } from '../../stores/page-builder-state'
 
 import { inject } from 'vue'
 
