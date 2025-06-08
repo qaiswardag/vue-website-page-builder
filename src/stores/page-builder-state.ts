@@ -486,26 +486,28 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       this.textColor = payload
     },
     setElement(payload: HTMLElement | null): void {
-      this.element = {} as HTMLElement
+      // Force reactivity by setting to null first, then the actual value
+      this.element = null
       nextTick(() => {
         this.element = payload
       })
     },
     setComponent(payload: ComponentObject | null): void {
-      console.log('setComponent called:', payload)
       if (!payload) {
         this.element = null
         this.component = null
         return
       }
-      this.component = {} as ComponentObject
+      // Force reactivity by setting to null first, then the actual value
+      this.component = null
       nextTick(() => {
         this.component = payload
       })
     },
 
     setComponents(payload: ComponentObject[] | null): void {
-      this.components = {} as ComponentObject[]
+      // Force reactivity by setting to empty array first, then the actual value
+      this.components = []
       nextTick(() => {
         this.components = payload || []
       })
