@@ -354,7 +354,7 @@ onMounted(async () => {
                 "
                 class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
               >
-                <span class="myMediumIcon material-symbols-outlined"> add </span>
+                <span class="myMediumIcon material-symbols-outlined"> interests </span>
               </button>
             </div>
             <div @click.self="pageBuilderStateStore.setComponent(null)">
@@ -399,12 +399,13 @@ onMounted(async () => {
                   "
                 >
                   <div class="flex items-center justify-center gap-2">
-                    <span class="lg:block hidden"> Add new Component </span>
-
+                    <span class="lg:block hidden">
+                      <div>Add new Elements</div>
+                    </span>
                     <span
                       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
                     >
-                      <span class="myMediumIcon material-symbols-outlined"> add </span>
+                      <span class="myMediumIcon material-symbols-outlined"> interests </span>
                     </span>
                   </div>
                 </button>
@@ -471,25 +472,27 @@ onMounted(async () => {
 
               <!-- Add Component # start -->
               <div
-                class="rounded-lg border-2 border-dashed border-gray-300 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-12 mx-8"
+                @click="
+                  () => {
+                    pageBuilderStateStore.setComponentArrayAddMethod('push')
+                    handleAddComponent()
+                  }
+                "
+                class="hover:bg-gray-100 rounded-lg border border-gray-200 p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-12 mx-8 cursor-pointer"
               >
-                <h3 class="mt-2 text-sm font-medium text-gray-900">Add Components</h3>
-                <p class="mt-1 text-sm text-gray-500">
-                  Get started by adding components using the drag & drop Page Builder.
-                </p>
+                <div class="flex items-center justify-center gap-2 font-medium cursor-pointer">
+                  <span class="lg:block hidden">
+                    <div>Add new Elements</div>
+                  </span>
+                </div>
+
                 <div class="mt-6 flex items-center gap-2 justify-center">
                   <button
-                    @click="
-                      () => {
-                        pageBuilderStateStore.setComponentArrayAddMethod('push')
-                        handleAddComponent()
-                      }
-                    "
                     type="button"
                     class="myPrimaryButton flex items-center gap-2 justify-center"
                   >
-                    <span class="myMediumIcon material-symbols-outlined"> add </span>
-                    Add component
+                    <span class="myMediumIcon material-symbols-outlined"> interests </span>
+                    Add new Elements
                   </button>
                 </div>
               </div>
