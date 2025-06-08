@@ -20,7 +20,7 @@ const getRestoredElement = computed(() => {
 
 <template>
   <EditorAccordion>
-    <template #title>Element Editor</template>
+    <template #title>Selected HTML Element</template>
     <template #content>
       <div class="flex flex-row flex-wrap gap-2 mt-2"></div>
       <div>
