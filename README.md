@@ -4,6 +4,9 @@
 
 ## **DEVELOPMENT VERSION - NOT READY FOR PRODUCTION**
 
+🚀 **Launch Date: July 1, 2025**  
+_We're working hard to bring you a production-ready page builder. Stay tuned for updates!_
+
 # Free Click & Drop Page Builder
 
 ## Overview
