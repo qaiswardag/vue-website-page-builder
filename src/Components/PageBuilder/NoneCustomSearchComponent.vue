@@ -12,11 +12,12 @@ import { inject } from 'vue'
 // Get store from parent PageBuilder component
 const internalPinia = inject('internalPinia')
 
-const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 // Get modal close function
 const { closeAddComponentModal } = usePageBuilderModal()
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore!)
+const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
+
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Super simple component addition with professional modal closing!
 const handleDropComponent = function (componentObject: ComponentObject) {

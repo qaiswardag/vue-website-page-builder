@@ -23,6 +23,7 @@ defineProps({
   },
 })
 
+const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 const emit = defineEmits(['firstPageBuilderPreviewModalButton'])
 
 // first button function
@@ -37,8 +38,6 @@ const firstButton = async function () {
 const handleEscapeKey = function () {
   firstButton()
 }
-
-const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 
 const getPageBuilderLogo = computed(() => {
   return pageBuilderStateStore.getPageBuilderLogo
