@@ -31,12 +31,12 @@ const component: Components[] = [
         },
         {
           title: '2 Square Images',
-          html_code: `<section>\n<div class="w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2"><div class="mx-auto max-w-7xl"><div class="myPrimaryGap grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3"> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider">  </div> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider">  </div> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider"></div></div> </div></div>\n</section>`,
+          html_code: `<section>\n<div class="w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2"><div class="mx-auto max-w-7xl"><div class="myPrimaryGap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2"> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider">  </div> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider"></div></div> </div></div>\n</section>`,
           cover_image: null,
         },
         {
           title: '3 Square Images',
-          html_code: `<section>\n<div class="w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2"><div class="mx-auto max-w-7xl"><div class="myPrimaryGap grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2"> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider">  </div> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider"></div></div> </div></div>\n</section>`,
+          html_code: `<section>\n<div class="w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2"><div class="mx-auto max-w-7xl"><div class="myPrimaryGap grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3"> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider">  </div> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider">  </div> <div class="flex-1 py-2"> <img class="object-cover w-full object-top aspect-square smooth-transition" src="${placeholderImage}" alt="provider"></div></div> </div></div>\n</section>`,
           cover_image: null,
         },
         {
