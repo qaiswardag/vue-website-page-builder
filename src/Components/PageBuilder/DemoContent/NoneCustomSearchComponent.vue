@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import componentHelpers from '../../utils/html-elements/componentHelpers'
-import components from '../../utils/html-elements/component'
-import PageBuilderClass from '../../composables/PageBuilderClass'
-import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
-import { generateComponentPreview } from '../../utils/componentPreviews'
-import type { ComponentObject } from '../../types'
-import { usePageBuilderStateStore } from '../../stores/page-builder-state'
+import componentHelpers from '../../../utils/html-elements/componentHelpers'
+import components from '../../../utils/html-elements/component'
+import PageBuilderClass from '../../../composables/PageBuilderClass'
+import { usePageBuilderModal } from '../../../composables/usePageBuilderModal'
+import { generateComponentPreview } from '../../../utils/componentPreviews'
+import type { ComponentObject } from '../../../types'
+import { usePageBuilderStateStore } from '../../../stores/page-builder-state'
 import type { Pinia } from 'pinia'
 
 import { inject } from 'vue'
@@ -75,7 +75,7 @@ const getSvgPreview = (title: string) => {
           @click="handleDropComponent(helper)"
         >
           <div class="max-h-72 cursor-pointer object-contain bg-white mx-auto">
-            <div class="mr-2" v-html="helper.icon"></div>
+            <!-- <div class="mr-2" v-html="helper.icon"></div> -->
             <h4 class="myPrimaryParagraph text-sm font-normal">{{ helper.title }}</h4>
           </div>
           <div class="myPrimaryParagraph text-xs font-normal pt-2">
