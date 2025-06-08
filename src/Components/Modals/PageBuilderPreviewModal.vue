@@ -48,7 +48,9 @@ const handleEscapeKey = function () {
         class="fixed z-30 inset-0 overflow-y-auto focus:outline-none"
         tabindex="0"
       >
-        <div class="flex items-end justify-center pb-20 text-center sm:block sm:p-0 bg-white">
+        <div
+          class="font-sans flex items-end justify-center pb-20 text-center sm:block sm:p-0 bg-white"
+        >
           <TransitionChild
             as="template"
             enter="ease-out duration-100"
@@ -78,11 +80,13 @@ const handleEscapeKey = function () {
               class="bg-red-100 inline-block align-bottom text-left transform transition-all sm:align-middle w-full overflow-hidden h-[100vh] top-0 left-0 right-0 absolute"
             >
               <div
-                class="px-4 px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
+                class="px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
-                <button type="button" @click="firstButton">
-                  <img class="h-6" src="/logo/logo.svg" alt="Logo" />
-                </button>
+                <template v-if="getPageBuilderLogo">
+                  <div class="border-r border-gray-200 pr-6">
+                    <img class="h-6" :src="getPageBuilderLogo" alt="Logo" />
+                  </div>
+                </template>
                 <div
                   @click="firstButton"
                   class="flex items-center justify-center gap-1 cursor-pointer"

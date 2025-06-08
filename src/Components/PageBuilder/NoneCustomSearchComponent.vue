@@ -63,7 +63,7 @@ const getSvgPreview = (title: string) => {
 </style>
 
 <template>
-  <div class="font-sans p-4">
+  <div class="p-4">
     <!-- Helper Components Section -->
     <div class="mb-8">
       <h3 class="myQuaternaryHeader mb-4">Helper Components</h3>
