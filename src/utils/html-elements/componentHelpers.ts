@@ -92,7 +92,7 @@ const componentHelpers: ComponentHelper[] = [
     title: 'Link',
     icon: `
         <span class="material-symbols-outlined">
-        horizontal_rule
+        link
         </span>
         `,
   },

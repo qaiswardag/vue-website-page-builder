@@ -1,8 +1,8 @@
 <script setup>
-import { ref, computed, onMounted, inject } from 'vue'
+import { computed } from 'vue'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 
-// Get consolidated store from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 
 const getCurrentImage = computed(() => {
   return pageBuilderStateStore.getCurrentImage

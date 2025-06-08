@@ -400,7 +400,7 @@ onMounted(async () => {
                 >
                   <div class="flex items-center justify-center gap-2">
                     <span class="lg:block hidden">
-                      <div>Add new Elements</div>
+                      <div>Add new Components</div>
                     </span>
                     <span
                       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
@@ -482,7 +482,7 @@ onMounted(async () => {
               >
                 <div class="flex items-center justify-center gap-2 font-medium cursor-pointer">
                   <span class="lg:block hidden">
-                    <div>Add new Elements</div>
+                    <div>Add new Components</div>
                   </span>
                 </div>
 
@@ -492,7 +492,7 @@ onMounted(async () => {
                     class="myPrimaryButton flex items-center gap-2 justify-center"
                   >
                     <span class="myMediumIcon material-symbols-outlined"> interests </span>
-                    Add new Elements
+                    Add new Components
                   </button>
                 </div>
               </div>
