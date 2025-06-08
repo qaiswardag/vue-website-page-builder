@@ -99,7 +99,6 @@ const updateCurrentTab = function (tab) {
           </div>
           <div class="px-4 pb-8 pt-4 text-white text-xs break-all">
             <div v-if="current === 'element'">
-              <p>eeeer: {{ getElement }}</p>
               <div v-if="!getComponent">
                 <p class="pb-2">
                   {{ getComponent === null ? 'NULL' : typeof getComponent }}
@@ -107,7 +106,7 @@ const updateCurrentTab = function (tab) {
               </div>
               <div v-if="getElement">
                 <div class="flex flex-col gap-4 border-b border-white mb-4 pb-4">
-                  <p>Selected element outerHTML:</p>
+                  <p>Selected HTML:</p>
                   <p class="whitespace-pre-line leading-5">
                     {{ getElement?.outerHTML }}
                   </p>
@@ -129,16 +128,6 @@ const updateCurrentTab = function (tab) {
                   <p class="whitespace-pre-line leading-5">
                     {{
                       getElement?.classList ? getElement?.classList : typeof getElement?.classList
-                    }}
-                  </p>
-                </div>
-                <div class="flex flex-col gap-2 mt-4">
-                  <p>Selected element style:</p>
-                  <p class="whitespace-pre-line leading-5">
-                    {{
-                      getElement?.style
-                        ? JSON.stringify(getElement?.style)
-                        : typeof getElement?.style
                     }}
                   </p>
                 </div>
