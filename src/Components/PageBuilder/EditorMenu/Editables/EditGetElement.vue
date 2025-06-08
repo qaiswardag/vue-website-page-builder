@@ -16,6 +16,7 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement
 })
+
 const getShowModalTipTap = computed(() => {
   const result = pageBuilderStateStore.getShowModalTipTap
 
@@ -330,7 +331,7 @@ const handleModalIframeSrc = function () {
         <template
           v-if="
             getElement &&
-            Object.keys(getElement).length !== 0 &&
+            getElement.nodeType === 1 &&
             !getBasePrimaryImage &&
             !pageBuilderClass.ElOrFirstChildIsIframe()
           "
