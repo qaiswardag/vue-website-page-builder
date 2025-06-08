@@ -430,7 +430,6 @@ class PageBuilderClass {
     }
 
     const selectedElement = pagebuilder.querySelector('[selected]')
-    console.log('selectedElement eeeer', selectedElement)
 
     if (selectedElement) {
       selectedElement.removeAttribute('selected')
