@@ -52,21 +52,34 @@ export const generateComponentPreview = (title: string): string => {
     '2 Vertical Images': {
       title: '2 Vertical Images',
       svg: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 137.88 122.11">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.88 122.11">
           <defs>
             <style>
-              .bg { fill: #384152; }
-              .fg { fill: #718096; }
+              .cls-1 {
+                fill: #384152;
+              }
+
+              .cls-2 {
+                fill: #718096;
+              }
             </style>
           </defs>
-          <rect class="bg" width="63.93" height="122.11"/>
-          <rect class="bg" x="73.95" width="63.93" height="122.11"/>
-          <polygon class="fg" points="8.68 71.04 25.31 51.08 41.94 71.04"/>
-          <polygon class="fg" points="38.62 71.04 46.93 61.06 55.24 71.04"/>
-          <circle class="fg" cx="46.93" cy="53.84" r="2.77"/>
-          <polygon class="fg" points="82.64 71.04 99.27 51.08 115.89 71.04"/>
-          <polygon class="fg" points="112.57 71.04 120.88 61.06 129.2 71.04"/>
-          <circle class="fg" cx="120.88" cy="53.84" r="2.77"/>
+          <g>
+            <rect class="cls-1" width="63.93" height="122.11"/>
+            <g>
+              <polygon class="cls-2" points="8.68 71.04 25.31 51.08 41.94 71.04 8.68 71.04"/>
+              <polygon class="cls-2" points="38.62 71.04 46.93 61.06 55.24 71.04 38.62 71.04"/>
+              <circle class="cls-2" cx="46.93" cy="53.84" r="2.77"/>
+            </g>
+          </g>
+          <g>
+            <rect class="cls-1" x="69.95" width="63.93" height="122.11"/>
+            <g>
+              <polygon class="cls-2" points="78.64 71.04 95.27 51.08 111.89 71.04 78.64 71.04"/>
+              <polygon class="cls-2" points="108.57 71.04 116.88 61.06 125.2 71.04 108.57 71.04"/>
+              <circle class="cls-2" cx="116.88" cy="53.84" r="2.77"/>
+            </g>
+          </g>
         </svg>
       `,
     },
@@ -74,21 +87,34 @@ export const generateComponentPreview = (title: string): string => {
     '2 Square Images': {
       title: '2 Square Images',
       svg: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 159.09 73.9">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.18 57.68">
           <defs>
             <style>
-              .bg { fill: #384152; }
-              .fg { fill: #718096; }
+              .cls-1 {
+                fill: #384152;
+              }
+
+              .cls-2 {
+                fill: #718096;
+              }
             </style>
           </defs>
-          <rect class="bg" width="73.9" height="73.9"/>
-          <rect class="bg" x="85.19" width="73.9" height="73.9"/>
-          <polygon class="fg" points="11.24 47.97 29.6 25.94 47.97 47.97"/>
-          <polygon class="fg" points="44.29 47.97 53.48 36.96 62.66 47.97"/>
-          <circle class="fg" cx="53.48" cy="28.98" r="3.06"/>
-          <polygon class="fg" points="96.43 47.97 114.8 25.94 133.16 47.97"/>
-          <polygon class="fg" points="129.49 47.97 138.67 36.96 147.85 47.97"/>
-          <circle class="fg" cx="138.67" cy="28.98" r="3.06"/>
+          <g>
+            <rect class="cls-1" width="57.68" height="57.68"/>
+            <g>
+              <polygon class="cls-2" points="8.77 37.45 23.11 20.25 37.44 37.45 8.77 37.45"/>
+              <polygon class="cls-2" points="34.58 37.45 41.74 28.85 48.91 37.45 34.58 37.45"/>
+              <circle class="cls-2" cx="41.74" cy="22.62" r="2.39"/>
+            </g>
+          </g>
+          <g>
+            <rect class="cls-1" x="62.5" width="57.68" height="57.68"/>
+            <g>
+              <polygon class="cls-2" points="71.27 37.45 85.61 20.25 99.94 37.45 71.27 37.45"/>
+              <polygon class="cls-2" points="97.07 37.45 104.24 28.85 111.41 37.45 97.07 37.45"/>
+              <circle class="cls-2" cx="104.24" cy="22.62" r="2.39"/>
+            </g>
+          </g>
         </svg>
       `,
     },
@@ -290,27 +316,44 @@ export const generateComponentPreview = (title: string): string => {
     '2 Square Images With Text': {
       title: '2 Square Images With Text',
       svg: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 124.18 75.79">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.18 75.79">
           <defs>
             <style>
-              .bg { fill: #384152; }
-              .fg { fill: #718096; }
+              .cls-1 {
+                fill: #384152;
+              }
+
+              .cls-2 {
+                fill: #718096;
+              }
             </style>
           </defs>
-          <rect class="bg" width="57.68" height="57.68"/>
-          <rect class="bg" x="66.5" width="57.68" height="57.68"/>
-          <polygon class="fg" points="8.77 37.45 23.11 20.25 37.44 37.45"/>
-          <polygon class="fg" points="34.58 37.45 41.74 28.85 48.91 37.45"/>
-          <circle class="fg" cx="41.74" cy="22.62" r="2.39"/>
-          <polygon class="fg" points="75.27 37.45 89.61 20.25 103.94 37.45"/>
-          <polygon class="fg" points="101.07 37.45 108.24 28.85 115.41 37.45"/>
-          <circle class="fg" cx="108.24" cy="22.62" r="2.39"/>
-          <rect class="bg" y="64.1" width="57.68" height="3.13"/>
-          <rect class="bg" y="68.38" width="57.68" height="3.13"/>
-          <rect class="bg" y="72.65" width="57.68" height="3.13"/>
-          <rect class="bg" x="66.5" y="64.1" width="57.68" height="3.13"/>
-          <rect class="bg" x="66.5" y="68.38" width="57.68" height="3.13"/>
-          <rect class="bg" x="66.5" y="72.65" width="57.68" height="3.13"/>
+          <g>
+            <g>
+              <rect class="cls-1" width="57.68" height="57.68"/>
+              <g>
+                <polygon class="cls-2" points="8.77 37.45 23.11 20.25 37.44 37.45 8.77 37.45"/>
+                <polygon class="cls-2" points="34.58 37.45 41.74 28.85 48.91 37.45 34.58 37.45"/>
+                <circle class="cls-2" cx="41.74" cy="22.62" r="2.39"/>
+              </g>
+            </g>
+            <g>
+              <rect class="cls-1" x="64.5" width="57.68" height="57.68"/>
+              <g>
+                <polygon class="cls-2" points="73.27 37.45 87.61 20.25 101.94 37.45 73.27 37.45"/>
+                <polygon class="cls-2" points="99.07 37.45 106.24 28.85 113.41 37.45 99.07 37.45"/>
+                <circle class="cls-2" cx="106.24" cy="22.62" r="2.39"/>
+              </g>
+            </g>
+          </g>
+          <g>
+            <rect class="cls-1" y="64.1" width="57.68" height="3.13"/>
+            <rect class="cls-1" y="68.38" width="57.68" height="3.13"/>
+            <rect class="cls-1" y="72.65" width="57.68" height="3.13"/>
+            <rect class="cls-1" x="64.5" y="64.1" width="57.68" height="3.13"/>
+            <rect class="cls-1" x="64.5" y="68.38" width="57.68" height="3.13"/>
+            <rect class="cls-1" x="64.5" y="72.65" width="57.68" height="3.13"/>
+          </g>
         </svg>
       `,
     },
