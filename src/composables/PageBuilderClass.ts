@@ -413,17 +413,25 @@ class PageBuilderClass {
     return clonedComponent
   }
 
-  removeHoveredAndSelected() {
+  async removeHoveredAndSelected() {
     if (this.showRunningMethodLogs) {
       console.log('removeHoveredAndSelected')
     }
 
-    const hoveredElement = document.querySelector('[hovered]')
+    await new Promise((resolve) => requestAnimationFrame(resolve))
+
+    const pagebuilder = document.querySelector('#pagebuilder')
+
+    if (!pagebuilder) return
+
+    const hoveredElement = pagebuilder.querySelector('[hovered]')
     if (hoveredElement) {
       hoveredElement.removeAttribute('hovered')
     }
 
-    const selectedElement = document.querySelector('[selected]')
+    const selectedElement = pagebuilder.querySelector('[selected]')
+    console.log('selectedElement eeeer', selectedElement)
+
     if (selectedElement) {
       selectedElement.removeAttribute('selected')
     }

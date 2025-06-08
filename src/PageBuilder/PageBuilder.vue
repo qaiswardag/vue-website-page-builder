@@ -215,6 +215,7 @@ onMounted(async () => {
   //
 
   pageBuilderClass.loadExistingContent()
+  pageBuilderClass.removeHoveredAndSelected()
 })
 </script>
 
