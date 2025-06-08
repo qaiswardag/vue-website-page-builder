@@ -140,13 +140,13 @@ class PageBuilderClass {
 
     const currentHTMLElement = this.getElement.value
 
-    if (!currentHTMLElement) return
+    if (!currentHTMLElement || !selectedCSS) return
+
+    // currentCSS array example: ["none","py-0", "py-2", ...] or ['none', 'rounded-sm', 'rounded', 'rounded-md', ...]
 
     const currentCSS = CSSArray.find((CSS) => {
       return currentHTMLElement.classList.contains(CSS)
     })
-
-    console.log('currentCSS', currentCSS)
 
     // set to 'none' if undefined
     let elementClass = currentCSS || 'none'
@@ -157,6 +157,7 @@ class PageBuilderClass {
       ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
     }
 
+    // selectedCSS examples: bg-zinc-200, px-10, rounded-full etc.
     if (typeof selectedCSS === 'string' && selectedCSS !== 'none') {
       if (elementClass && currentHTMLElement.classList.contains(elementClass)) {
         currentHTMLElement.classList.remove(elementClass)
@@ -593,7 +594,7 @@ class PageBuilderClass {
       'setFontFamily',
     )
   }
-  handleFontStyle(userSelectedFontStyle?: string): void {
+  handleFontStyle(userSelectedFontStyle: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleFontStyle')
     }
@@ -604,7 +605,7 @@ class PageBuilderClass {
       'setFontStyle',
     )
   }
-  handleVerticalPadding(userSelectedVerticalPadding?: string): void {
+  handleVerticalPadding(userSelectedVerticalPadding: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleVerticalPadding')
     }
@@ -615,7 +616,7 @@ class PageBuilderClass {
       'setFontVerticalPadding',
     )
   }
-  handleHorizontalPadding(userSelectedHorizontalPadding?: string): void {
+  handleHorizontalPadding(userSelectedHorizontalPadding: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleHorizontalPadding')
     }
@@ -627,7 +628,7 @@ class PageBuilderClass {
     )
   }
 
-  handleVerticalMargin(userSelectedVerticalMargin?: string): void {
+  handleVerticalMargin(userSelectedVerticalMargin: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleVerticalMargin')
     }
@@ -638,7 +639,7 @@ class PageBuilderClass {
       'setFontVerticalMargin',
     )
   }
-  handleHorizontalMargin(userSelectedHorizontalMargin?: string): void {
+  handleHorizontalMargin(userSelectedHorizontalMargin: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleHorizontalMargin')
     }
@@ -651,7 +652,7 @@ class PageBuilderClass {
   }
 
   // border color, style & width / start
-  handleBorderStyle(borderStyle?: string): void {
+  handleBorderStyle(borderStyle: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderStyle')
     }
@@ -662,7 +663,7 @@ class PageBuilderClass {
       'setBorderStyle',
     )
   }
-  handleBorderWidth(borderWidth?: string): void {
+  handleBorderWidth(borderWidth: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderWidth')
     }
@@ -673,7 +674,7 @@ class PageBuilderClass {
       'setBorderWidth',
     )
   }
-  handleBorderColor(borderColor?: string): void {
+  handleBorderColor(borderColor: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderColor')
     }
@@ -686,7 +687,7 @@ class PageBuilderClass {
   }
   // border color, style & width / end
 
-  handleBackgroundColor(color?: string): void {
+  handleBackgroundColor(color: string): void {
     this.#applyElementClassChanges(
       color,
       tailwindColors.backgroundColorVariables,
@@ -694,12 +695,12 @@ class PageBuilderClass {
     )
   }
 
-  handleTextColor(color?: string): void {
+  handleTextColor(color: string): void {
     this.#applyElementClassChanges(color, tailwindColors.textColorVariables, 'setTextColor')
   }
 
   // border radius / start
-  handleBorderRadiusGlobal(borderRadiusGlobal?: string): void {
+  handleBorderRadiusGlobal(borderRadiusGlobal: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusGlobal')
     }
@@ -710,7 +711,7 @@ class PageBuilderClass {
       'setBorderRadiusGlobal',
     )
   }
-  handleBorderRadiusTopLeft(borderRadiusTopLeft?: string): void {
+  handleBorderRadiusTopLeft(borderRadiusTopLeft: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusTopLeft')
     }
@@ -721,7 +722,7 @@ class PageBuilderClass {
       'setBorderRadiusTopLeft',
     )
   }
-  handleBorderRadiusTopRight(borderRadiusTopRight?: string): void {
+  handleBorderRadiusTopRight(borderRadiusTopRight: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusTopRight')
     }
@@ -732,7 +733,7 @@ class PageBuilderClass {
       'setBorderRadiusTopRight',
     )
   }
-  handleBorderRadiusBottomleft(borderRadiusBottomleft?: string): void {
+  handleBorderRadiusBottomleft(borderRadiusBottomleft: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusBottomleft')
     }
@@ -743,7 +744,7 @@ class PageBuilderClass {
       'setBorderRadiusBottomleft',
     )
   }
-  handleBorderRadiusBottomRight(borderRadiusBottomRight?: string): void {
+  handleBorderRadiusBottomRight(borderRadiusBottomRight: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusBottomRight')
     }
@@ -756,7 +757,7 @@ class PageBuilderClass {
   }
   // border radius / end
 
-  handleFontSize(userSelectedFontSize?: string): void {
+  handleFontSize(userSelectedFontSize: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleFontSize')
     }
@@ -860,7 +861,7 @@ class PageBuilderClass {
     }
   }
 
-  handleBackgroundOpacity(opacity?: string): void {
+  handleBackgroundOpacity(opacity: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleBackgroundOpacity')
     }
@@ -871,7 +872,7 @@ class PageBuilderClass {
       'setBackgroundOpacity',
     )
   }
-  handleOpacity(opacity?: string): void {
+  handleOpacity(opacity: string): void {
     if (this.showRunningMethodLogs) {
       console.log('handleOpacity')
     }
