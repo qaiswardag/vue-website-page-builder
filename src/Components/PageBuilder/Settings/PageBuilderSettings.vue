@@ -3,6 +3,7 @@ import SlideOverRightParent from '@/Components/PageBuilder/Slidebars/SlideOverRi
 import AdvancedPageBuilderSettings from '@/Components/PageBuilder/Settings/AdvancedPageBuilderSettings.vue'
 import { ref, computed, inject } from 'vue'
 import fullHTMLContent from '@/utils/builder/html-doc-declaration-with-components'
+const version = __APP_VERSION__
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
@@ -70,6 +71,7 @@ const handleDownloadHTML = function () {
           Manage advanced settings here. Like an overview of Selected Element, Component, and
           Components in real-time.
         </p>
+        <p class="myPrimaryParagraph text-xs pt-4">Page Builder Version: {{ version }}</p>
       </div>
       <div class="mt-4">
         <button

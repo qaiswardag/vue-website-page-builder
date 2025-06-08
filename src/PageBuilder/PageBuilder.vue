@@ -1,5 +1,4 @@
 <script setup>
-const version = __APP_VERSION__
 import { onMounted, computed, ref, watch, provide } from 'vue'
 import { createPinia } from 'pinia'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
@@ -220,7 +219,10 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div id="builder-container" class="font-sans">
+  <div
+    id="builder-container"
+    class="font-sans max-w-full m-8 border-2 border-myPrimaryLinkColor inset-x-0 z-10 bg-white overflow-x-scroll lg:pt-2 pt-2 rounded-lg"
+  >
     <SearchComponents
       v-if="showModalAddComponent"
       :show="showModalAddComponent"
@@ -236,7 +238,7 @@ onMounted(async () => {
       <Preview></Preview>
     </PageBuilderPreviewModal>
 
-    <div class="w-full inset-x-0 h-[90vh] z-10 bg-white overflow-x-scroll lg:pt-2 pt-2">
+    <div>
       <!-- Save laylout # start -->
       <div class="p-4 m-8 bg-stone-200 rounded-lg">
         <div
@@ -499,9 +501,6 @@ onMounted(async () => {
               </div>
               <!-- Add Component # end -->
             </div>
-          </div>
-          <div class="text-right text-xs text-gray-600 py-2 px-4 bg-white">
-            version: {{ version }}
           </div>
           <!-- Add Component # end -->
         </main>
