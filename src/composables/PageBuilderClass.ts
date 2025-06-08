@@ -1051,10 +1051,14 @@ class PageBuilderClass {
 
     this.pageBuilderStateStore.setElement(null)
 
+    const pagebuilder = document.querySelector('#pagebuilder')
+
+    if (!pagebuilder) return
+
     const addedHtmlComponents = ref<string[]>([])
     // preview current design in external browser tab
-    // iterate over each top-level section component
-    document.querySelectorAll('section:not(section section)').forEach((section) => {
+    // iterate over each top-level section component within pagebuilder only
+    pagebuilder.querySelectorAll('section:not(section section)').forEach((section) => {
       // remove hovered and selected
 
       // remove hovered
