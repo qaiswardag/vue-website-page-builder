@@ -1,7 +1,6 @@
 <script setup>
 import { computed, inject } from 'vue'
 import { delay } from '@/composables/delay'
-import { createPinia } from 'pinia'
 import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 
 import {
@@ -15,6 +14,7 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 
 // Get stores from parent PageBuilder component
 const userStore = inject('userStore')
+const internalPinia = inject('internalPinia')
 
 defineProps({
   show: {
@@ -38,8 +38,6 @@ const firstButton = async function () {
 const handleEscapeKey = function () {
   firstButton()
 }
-
-const internalPinia = createPinia()
 
 const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 
