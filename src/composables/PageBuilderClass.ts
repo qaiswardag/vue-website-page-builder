@@ -132,32 +132,47 @@ class PageBuilderClass {
     CSSArray: string[],
     mutationName: string,
   ): string | undefined {
+    //
+    //
     if (this.showRunningMethodLogs) {
       console.log('#applyElementClassChanges')
     }
 
+    const currentHTMLElement = this.getElement.value
+
+    if (!currentHTMLElement) return
+
     const currentCSS = CSSArray.find((CSS) => {
-      return this.getElement.value?.classList.contains(CSS)
+      return currentHTMLElement.classList.contains(CSS)
     })
 
+    console.log('currentCSS', currentCSS)
+
     // set to 'none' if undefined
-    let elementClass =
-      currentCSS || 'none'(this.pageBuilderStateStore as any)[mutationName](elementClass)
+    let elementClass = currentCSS || 'none'
+
+    // this.pageBuilderStateStore
+
+    if (typeof mutationName === 'string' && mutationName.length > 2) {
+      ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
+    }
 
     if (typeof selectedCSS === 'string' && selectedCSS !== 'none') {
-      if (elementClass && this.getElement.value?.classList.contains(elementClass)) {
-        this.getElement.value?.classList.remove(elementClass)
+      if (elementClass && currentHTMLElement.classList.contains(elementClass)) {
+        currentHTMLElement.classList.remove(elementClass)
       }
 
-      this.getElement.value?.classList.add(selectedCSS)
+      currentHTMLElement.classList.add(selectedCSS)
       elementClass = selectedCSS
     } else if (typeof selectedCSS === 'string' && selectedCSS === 'none' && elementClass) {
-      this.getElement.value?.classList.remove(elementClass)
+      currentHTMLElement.classList.remove(elementClass)
       elementClass = selectedCSS
     }
 
-    this.pageBuilderStateStore[mutationName as keyof PageBuilderStateStore](elementClass)
-    this.pageBuilderStateStore.setElement(this.getElement.value)
+    if (typeof mutationName === 'string' && mutationName.length > 2) {
+      ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
+      this.pageBuilderStateStore.setElement(currentHTMLElement)
+    }
 
     return currentCSS
   }
@@ -436,10 +451,12 @@ class PageBuilderClass {
     }
   }
 
-  currentClasses() {
+  async currentClasses() {
     if (this.showRunningMethodLogs) {
       console.log('handleAddClasses')
     }
+
+    await new Promise((resolve) => requestAnimationFrame(resolve))
 
     // convert classList to array
     const classListArray = Array.from(this.getElement.value?.classList || [])
@@ -558,7 +575,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleFontWeight')
     }
-    if (!userSelectedFontWeight) return
 
     this.#applyElementClassChanges(
       userSelectedFontWeight,
@@ -570,7 +586,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleFontFamily')
     }
-    if (!userSelectedFontFamily) return
 
     this.#applyElementClassChanges(
       userSelectedFontFamily,
@@ -582,7 +597,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleFontStyle')
     }
-    if (!userSelectedFontStyle) return
 
     this.#applyElementClassChanges(
       userSelectedFontStyle,
@@ -594,7 +608,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleVerticalPadding')
     }
-    if (!userSelectedVerticalPadding) return
 
     this.#applyElementClassChanges(
       userSelectedVerticalPadding,
@@ -606,7 +619,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleHorizontalPadding')
     }
-    if (!userSelectedHorizontalPadding) return
 
     this.#applyElementClassChanges(
       userSelectedHorizontalPadding,
@@ -619,7 +631,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleVerticalMargin')
     }
-    if (!userSelectedVerticalMargin) return
 
     this.#applyElementClassChanges(
       userSelectedVerticalMargin,
@@ -631,7 +642,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleHorizontalMargin')
     }
-    if (!userSelectedHorizontalMargin) return
 
     this.#applyElementClassChanges(
       userSelectedHorizontalMargin,
@@ -645,7 +655,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderStyle')
     }
-    if (!borderStyle) return
 
     this.#applyElementClassChanges(
       borderStyle,
@@ -657,7 +666,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderWidth')
     }
-    if (!borderWidth) return
 
     this.#applyElementClassChanges(
       borderWidth,
@@ -669,7 +677,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderColor')
     }
-    if (!borderColor) return
 
     this.#applyElementClassChanges(
       borderColor,
@@ -680,7 +687,6 @@ class PageBuilderClass {
   // border color, style & width / end
 
   handleBackgroundColor(color?: string): void {
-    if (!color) return
     this.#applyElementClassChanges(
       color,
       tailwindColors.backgroundColorVariables,
@@ -689,7 +695,6 @@ class PageBuilderClass {
   }
 
   handleTextColor(color?: string): void {
-    if (!color) return
     this.#applyElementClassChanges(color, tailwindColors.textColorVariables, 'setTextColor')
   }
 
@@ -698,7 +703,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusGlobal')
     }
-    if (!borderRadiusGlobal) return
 
     this.#applyElementClassChanges(
       borderRadiusGlobal,
@@ -710,7 +714,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusTopLeft')
     }
-    if (!borderRadiusTopLeft) return
 
     this.#applyElementClassChanges(
       borderRadiusTopLeft,
@@ -722,7 +725,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusTopRight')
     }
-    if (!borderRadiusTopRight) return
 
     this.#applyElementClassChanges(
       borderRadiusTopRight,
@@ -734,7 +736,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusBottomleft')
     }
-    if (!borderRadiusBottomleft) return
 
     this.#applyElementClassChanges(
       borderRadiusBottomleft,
@@ -746,7 +747,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleBorderRadiusBottomRight')
     }
-    if (!borderRadiusBottomRight) return
 
     this.#applyElementClassChanges(
       borderRadiusBottomRight,
@@ -864,7 +864,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleBackgroundOpacity')
     }
-    if (!opacity) return
 
     this.#applyElementClassChanges(
       opacity,
@@ -876,7 +875,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('handleOpacity')
     }
-    if (!opacity) return
 
     this.#applyElementClassChanges(opacity, tailwindOpacities.opacities, 'setOpacity')
   }
@@ -1461,7 +1459,9 @@ class PageBuilderClass {
     this.#addHyperlinkToElement(hyperlinkEnable, urlInput || null, openHyperlinkInNewTab || false)
   }
 
-  handlePageBuilderMethods(): void {
+  async handlePageBuilderMethods(): Promise<void> {
+    await new Promise((resolve) => requestAnimationFrame(resolve))
+
     this.pageBuilderStateStore.setParentElement(null)
     this.pageBuilderStateStore.setRestoredElement(null)
 
@@ -1510,7 +1510,7 @@ class PageBuilderClass {
     // handle text color
     this.handleTextColor(undefined)
     // handle classes
-    this.currentClasses()
+    await this.currentClasses()
   }
 
   // Helper method for custom components to easily add components
