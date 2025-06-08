@@ -280,8 +280,6 @@ class PageBuilderClass {
    * attach event listeners to each element within a 'section'
    */
   setEventListenersForElements = async () => {
-    console.log('setEventListenersForElements called')
-
     if (this.showRunningMethodLogs) {
       console.log('setEventListenersForElements')
     }
