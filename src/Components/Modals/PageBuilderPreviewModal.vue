@@ -1,6 +1,8 @@
 <script setup>
 import { computed, inject } from 'vue'
 import { delay } from '@/composables/delay'
+import { createPinia } from 'pinia'
+import { usePageBuilderStateStore } from '@/stores/page-builder-state'
 
 import {
   Dialog,
@@ -36,6 +38,16 @@ const firstButton = async function () {
 const handleEscapeKey = function () {
   firstButton()
 }
+
+const internalPinia = createPinia()
+
+const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
+
+const getPageBuilderLogo = computed(() => {
+  return pageBuilderStateStore.getPageBuilderLogo
+})
+
+console.log('loooogo er:', getPageBuilderLogo.value)
 </script>
 
 <template>
@@ -82,11 +94,18 @@ const handleEscapeKey = function () {
               <div
                 class="px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
-                <template v-if="getPageBuilderLogo">
-                  <div class="border-r border-gray-200 pr-6">
+                <div v-if="getPageBuilderLogo">
+                  <div class="border-gray-200 pr-6">
                     <img class="h-6" :src="getPageBuilderLogo" alt="Logo" />
                   </div>
-                </template>
+                  <span class="myPrimaryParagraph font-medium">Preview mode </span>
+                </div>
+                <div v-else>
+                  <div class="border-r border-gray-200 pr-6">
+                    <span class="myPrimaryParagraph font-medium">Preview mode </span>
+                  </div>
+                </div>
+
                 <div
                   @click="firstButton"
                   class="flex items-center justify-center gap-1 cursor-pointer"

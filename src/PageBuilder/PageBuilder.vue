@@ -79,6 +79,8 @@ const getPageBuilderLogo = computed(() => {
   return pageBuilderStateStore.getPageBuilderLogo
 })
 
+console.log('loooogo is in pagebuilderer:', getPageBuilderLogo.value)
+
 // Set current resource data if provided
 if (props.resourceData) {
   pageBuilderStateStore.setCurrentResourceData(props.resourceData)
