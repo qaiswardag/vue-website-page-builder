@@ -438,12 +438,12 @@ onMounted(async () => {
                     @click="pageBuilderStateStore.setMenuRight(true)"
                   >
                     <div class="flex items-center justify-center gap-2">
-                      <span class="lg:block hidden"> Design </span>
+                      <span class="lg:block hidden"> Styling </span>
 
                       <span
                         class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
                       >
-                        <span class="myMediumIcon material-symbols-outlined"> palette </span>
+                        <span class="myMediumIcon material-symbols-outlined"> tune </span>
                       </span>
                     </div>
                   </button>
