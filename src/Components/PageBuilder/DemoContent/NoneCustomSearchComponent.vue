@@ -75,8 +75,8 @@ const getSvgPreview = (title: string) => {
           @click="handleDropComponent(helper)"
         >
           <div class="max-h-72 cursor-pointer object-contain bg-white mx-auto">
-            <!-- <div class="mr-2" v-html="helper.icon"></div> -->
-            <h4 class="myPrimaryParagraph text-sm font-normal">{{ helper.title }}</h4>
+            <div v-if="false" class="mr-2" v-html="helper.icon"></div>
+            <h4 class="myPrimaryParagraph text-base font-medium">{{ helper.title }}</h4>
           </div>
           <div class="myPrimaryParagraph text-xs font-normal pt-2">
             Click to add {{ helper.title.toLowerCase() }} component
