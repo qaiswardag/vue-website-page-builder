@@ -1481,7 +1481,18 @@ class PageBuilderClass {
     }
   }
 
-  // Public method to parse and set components from JSON or HTML
+  /**
+   * Parse and set components from JSON or HTML data
+   *
+   * Supports:
+   * - JSON: Array of ComponentObject with html_code, id, title
+   * - HTML: String containing <section data-componentid="..."> elements
+   *
+   * Auto-detects format and parses accordingly
+   *
+   * @param data - JSON string (e.g., '[{"html_code":"...","id":"123","title":"..."}]')
+   *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
+   */
   setComponentsFromData(data: string): void {
     if (this.showRunningMethodLogs) {
       console.log('setComponentsFromData')
@@ -1503,7 +1514,7 @@ class PageBuilderClass {
 
   // Private method to parse JSON components
   #parseJSONComponents(jsonData: string): void {
-    console.log('using HTML method...')
+    console.log('using JSON method...')
     try {
       const parsedData = JSON.parse(jsonData)
       let savedCurrentDesign: ComponentObject[] = []
@@ -1524,7 +1535,7 @@ class PageBuilderClass {
 
   // Private method to parse HTML components
   #parseHTMLComponents(htmlData: string): void {
-    console.log('using JSON method...')
+    console.log('using HTML method...')
     try {
       // Parse the HTML content using DOMParser
       const parser = new DOMParser()
