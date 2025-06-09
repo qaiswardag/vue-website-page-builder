@@ -1,8 +1,8 @@
 <script setup>
-import SlideOverRightParent from '@/Components/PageBuilder/Slidebars/SlideOverRightParent.vue'
-import AdvancedPageBuilderSettings from '@/Components/PageBuilder/Settings/AdvancedPageBuilderSettings.vue'
+import SlideOverRightParent from '../Slidebars/SlideOverRightParent.vue'
+import AdvancedPageBuilderSettings from './AdvancedPageBuilderSettings.vue'
 import { ref, computed, inject } from 'vue'
-import fullHTMLContent from '@/utils/builder/html-doc-declaration-with-components'
+import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
 const version = __APP_VERSION__
 
 // Get stores from parent PageBuilder component

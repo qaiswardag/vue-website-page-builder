@@ -1,6 +1,6 @@
 <script setup>
-import ModalBuilder from '@/Components/Modals/ModalBuilder.vue'
-import NoneCustomSearchComponent from '@/Components/PageBuilder/DemoContent/NoneCustomSearchComponent.vue'
+import ModalBuilder from '../Modals/ModalBuilder.vue'
+import NoneCustomSearchComponent from '../PageBuilder/DemoContent/NoneCustomSearchComponent.vue'
 
 defineProps({
   firstButtonText: {

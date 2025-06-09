@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, inject, watch } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import tailwindBorderRadius from '@/utils/builder/tailwind-border-radius'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import tailwindBorderRadius from '../../../../utils/builder/tailwind-border-radius'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')

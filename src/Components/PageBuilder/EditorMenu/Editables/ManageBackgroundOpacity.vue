@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, inject, watch } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import tailwindOpacities from '@/utils/builder/tailwind-opacities'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import tailwindOpacities from '../../../../utils/builder/tailwind-opacities'
 import {
   Listbox,
   ListboxButton,

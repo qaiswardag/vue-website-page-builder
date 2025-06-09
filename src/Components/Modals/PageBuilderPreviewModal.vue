@@ -1,7 +1,7 @@
 <script setup>
 import { computed, inject } from 'vue'
-import { delay } from '@/composables/delay'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import { delay } from '../../composables/delay'
+import { usePageBuilderStateStore } from '../../stores/page-builder-state'
 
 import {
   Dialog,

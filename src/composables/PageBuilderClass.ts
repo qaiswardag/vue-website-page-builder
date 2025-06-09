@@ -11,20 +11,20 @@ import type {
   TailwindPaddingAndMargin,
   TailwindBorderRadius,
   TailwindBorderStyleWidthColor,
-} from '@/types'
-import type { usePageBuilderStateStore } from '@/stores/page-builder-state'
+} from '../types'
+import type { usePageBuilderStateStore } from '../stores/page-builder-state'
 
-import tailwindColors from '@/utils/builder/tailwaind-colors'
-import tailwindOpacities from '@/utils/builder/tailwind-opacities'
-import tailwindFontSizes from '@/utils/builder/tailwind-font-sizes'
-import tailwindFontStyles from '@/utils/builder/tailwind-font-styles'
-import tailwindPaddingAndMargin from '@/utils/builder/tailwind-padding-margin'
-import tailwindBorderRadius from '@/utils/builder/tailwind-border-radius'
-import tailwindBorderStyleWidthPlusColor from '@/utils/builder/tailwind-border-style-width-color'
+import tailwindColors from '../utils/builder/tailwaind-colors'
+import tailwindOpacities from '../utils/builder/tailwind-opacities'
+import tailwindFontSizes from '../utils/builder/tailwind-font-sizes'
+import tailwindFontStyles from '../utils/builder/tailwind-font-styles'
+import tailwindPaddingAndMargin from '../utils/builder/tailwind-padding-margin'
+import tailwindBorderRadius from '../utils/builder/tailwind-border-radius'
+import tailwindBorderStyleWidthPlusColor from '../utils/builder/tailwind-border-style-width-color'
 import { computed, ref, nextTick, inject } from 'vue'
 import type { ComputedRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
-import { delay } from '@/composables/delay'
+import { delay } from './delay'
 
 class PageBuilderClass {
   // Class properties with types

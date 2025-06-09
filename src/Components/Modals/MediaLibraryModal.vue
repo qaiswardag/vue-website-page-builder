@@ -7,7 +7,7 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import { provide } from 'vue'
-import NoneCustomMediaLibraryComponent from '@/Components/PageBuilder/DemoContent/NoneCustomMediaLibraryComponent.vue'
+import NoneCustomMediaLibraryComponent from '../PageBuilder/DemoContent/NoneCustomMediaLibraryComponent.vue'
 
 const props = defineProps({
   title: {

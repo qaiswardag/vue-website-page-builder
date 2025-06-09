@@ -1,9 +1,9 @@
 <script setup>
 import { ref, computed, inject, watch } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import tailwindBorderStyleWidthPlusColor from '@/utils/builder/tailwind-border-style-width-color'
-import tailwindColors from '@/utils/builder/tailwaind-colors'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import tailwindBorderStyleWidthPlusColor from '../../../../utils/builder/tailwind-border-style-width-color'
+import tailwindColors from '../../../../utils/builder/tailwaind-colors'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 
 // Get stores from parent PageBuilder component

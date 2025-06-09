@@ -1,5 +1,5 @@
 <script setup>
-import ModalBuilder from '@/Components/Modals/ModalBuilder.vue'
+import ModalBuilder from './ModalBuilder.vue'
 import {} from '@headlessui/vue'
 
 defineProps({

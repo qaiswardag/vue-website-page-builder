@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { nextTick } from 'vue'
-import { vueFetch } from '@/composables/vueFetch'
 import type {
   ComponentObject,
   FetchedComponentsResponse,
@@ -9,23 +8,7 @@ import type {
   ImageObject,
   UserSettings,
   User,
-} from '@/types'
-
-// Media Library interfaces
-interface UnsplashImagesData {
-  fetchedMedia: unknown
-  isError: boolean | null
-  error: unknown
-  errors: unknown
-  isLoading: boolean | null
-  isSuccess: boolean | null
-}
-
-interface LoadUnsplashImagesPayload {
-  orientation?: string
-  currentPage: number
-  searchTerm?: string
-}
+} from '../types'
 
 interface PageBuilderState {
   // Core Page Builder State
@@ -85,33 +68,7 @@ interface PageBuilderState {
   isLoading: boolean
   userSettings: UserSettings | null
   currentUser: User | null
-
-  // Unsplash State
-  unsplashImages: UnsplashImagesData | null
-  searchTerm: string
-  currentPageNumber: number
-  orientationValue: string | null
 }
-
-// get components
-const {
-  handleData: handlefetchComponents,
-  fetchedData: fetchedComponents,
-  isLoading,
-  isError,
-  error,
-} = vueFetch()
-
-// get unsplash images
-const {
-  handleData: handleGetImages,
-  fetchedData: fetchedMedia,
-  isError: isErrorImages,
-  error: errorImages,
-  errors: errorsImages,
-  isLoading: isLoadingImages,
-  isSuccess: isSuccessImages,
-} = vueFetch()
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
   state: (): PageBuilderState => ({
@@ -172,12 +129,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     isLoading: false,
     userSettings: null,
     currentUser: null,
-
-    // Unsplash State
-    unsplashImages: null,
-    searchTerm: '',
-    currentPageNumber: 1,
-    orientationValue: null,
   }),
   getters: {
     // Core Page Builder Getters
@@ -348,14 +299,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getIsLoading: (state: PageBuilderState): boolean => state.isLoading,
     getUserSettings: (state: PageBuilderState): UserSettings | null => state.userSettings,
     getCurrentUser: (state: PageBuilderState): User | null => state.currentUser,
-
-    // Unsplash Getters
-    getUnsplashImages: (state: PageBuilderState): UnsplashImagesData | null => {
-      return state.unsplashImages
-    },
-    getSearchTerm: (state: PageBuilderState): string => state.searchTerm,
-    getCurrentPageNumber: (state: PageBuilderState): number => state.currentPageNumber,
-    getOrientationValue: (state: PageBuilderState): string | null => state.orientationValue,
   },
   actions: {
     // Core Page Builder Actions
@@ -578,61 +521,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
     setCurrentUser(payload: User | null): void {
       this.currentUser = payload
-    },
-
-    // Unsplash Actions
-    setUnsplashImages(payload: UnsplashImagesData | null): void {
-      this.unsplashImages = payload
-    },
-    setSearchTerm(payload: string): void {
-      this.searchTerm = payload
-    },
-    setCurrentPageNumber(payload: number): void {
-      this.currentPageNumber = payload
-    },
-    setOrientationValue(payload: string | null): void {
-      this.orientationValue = payload
-    },
-
-    // Load Unsplash images
-    async setLoadUnsplashImages(payload: LoadUnsplashImagesPayload): Promise<void> {
-      this.setUnsplashImages({
-        fetchedMedia: null,
-        isError: null,
-        error: null,
-        errors: null,
-        isLoading: true,
-        isSuccess: null,
-      })
-
-      const orientationType = payload.orientation ? `&orientation=${payload.orientation}` : ''
-
-      const unsplashKey = import.meta.env.VITE_UNSPLASH_KEY as string
-
-      try {
-        await handleGetImages(
-          `https://api.unsplash.com/search/photos?page=${payload.currentPage}&per_page=24&query=${payload.searchTerm || 'a'}${orientationType}`,
-          {
-            headers: {
-              'Accept-Version': 'v1',
-              Authorization: unsplashKey,
-            },
-          },
-          { additionalCallTime: 500 },
-        )
-      } catch (err) {
-        console.log(`Error: ${err}`)
-      }
-
-      // Update state directly instead of committing mutations
-      this.setUnsplashImages({
-        fetchedMedia: fetchedMedia.value,
-        isError: isErrorImages.value,
-        error: errorImages.value,
-        errors: errorsImages.value,
-        isLoading: isLoadingImages.value,
-        isSuccess: isSuccessImages.value,
-      })
     },
   },
 })

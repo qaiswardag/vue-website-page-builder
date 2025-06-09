@@ -1,8 +1,8 @@
 <script setup>
 import { ref, computed, inject, watch } from 'vue'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import tailwindColors from '@/utils/builder/tailwaind-colors'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import tailwindColors from '../../../../utils/builder/tailwaind-colors'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')

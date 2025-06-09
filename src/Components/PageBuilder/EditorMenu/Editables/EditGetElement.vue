@@ -1,11 +1,11 @@
 <script setup>
 import { ref, computed, inject } from 'vue'
-import DynamicModalBuilder from '@/Components/Modals/DynamicModalBuilder.vue'
-import TipTapInput from '@/Components/TipTap/TipTapInput.vue'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue'
-import TextColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/TextColorEditor.vue'
-import BackgroundColorEditor from '@/Components/PageBuilder/EditorMenu/Editables/BackgroundColorEditor.vue'
+import DynamicModalBuilder from '../../../Modals/DynamicModalBuilder.vue'
+import TipTapInput from '../../../TipTap/TipTapInput.vue'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import MediaLibraryModal from '../../../Modals/MediaLibraryModal.vue'
+import TextColorEditor from './TextColorEditor.vue'
+import BackgroundColorEditor from './BackgroundColorEditor.vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')

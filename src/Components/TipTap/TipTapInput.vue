@@ -2,9 +2,9 @@
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { computed, onBeforeMount, onMounted, ref, watch, inject } from 'vue'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '../../composables/PageBuilderClass.ts'
 import Link from '@tiptap/extension-link'
-import DynamicModalBuilder from '@/Components/Modals/DynamicModalBuilder.vue'
+import DynamicModalBuilder from '../Modals/DynamicModalBuilder.vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')

@@ -1,15 +1,15 @@
 <script setup>
 import { onMounted, computed, ref, watch, provide } from 'vue'
 import { createPinia } from 'pinia'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal.vue'
-import Preview from '@/PageBuilder/Preview.vue'
-import ComponentTopMenu from '@/Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue'
-import EditGetElement from '@/Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue'
-import SearchComponents from '@/Components/Search/SearchComponents.vue'
-import OptionsDropdown from '@/Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
-import RightSidebarEditor from '@/Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
-import { usePageBuilderStateStore } from '@/stores/page-builder-state'
+import PageBuilderClass from '../composables/PageBuilderClass.ts'
+import PageBuilderPreviewModal from '../Components/Modals/PageBuilderPreviewModal.vue'
+import Preview from './Preview.vue'
+import ComponentTopMenu from '../Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue'
+import EditGetElement from '../Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue'
+import SearchComponents from '../Components/Search/SearchComponents.vue'
+import OptionsDropdown from '../Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
+import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
+import { usePageBuilderStateStore } from '../stores/page-builder-state'
 
 /**
  * Props for PageBuilder component

@@ -1,7 +1,7 @@
 <script setup>
-import DynamicModalBuilder from '@/Components/Modals/DynamicModalBuilder.vue'
+import DynamicModalBuilder from '../../../Modals/DynamicModalBuilder.vue'
 import { computed, inject } from 'vue'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import { ref } from 'vue'
 
 // Get stores from parent PageBuilder component

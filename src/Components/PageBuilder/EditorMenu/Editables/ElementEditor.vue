@@ -1,7 +1,7 @@
 <script setup>
 import { computed, inject } from 'vue'
-import PageBuilderClass from '@/composables/PageBuilderClass.ts'
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import EditorAccordion from '../EditorAccordion.vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')

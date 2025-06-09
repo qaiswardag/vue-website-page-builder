@@ -1,7 +1,6 @@
 <script setup>
-const emit = defineEmits(['handleButton'])
-import FullWidthElement from '@/Components/Layouts/FullWidthElement.vue'
-import PageBuilder from '@/PageBuilder/PageBuilder.vue'
+import FullWidthElement from '../../Components/Layouts/FullWidthElement.vue'
+import PageBuilder from '../../PageBuilder/PageBuilder.vue'
 
 // first button function
 const handleButton = function () {
