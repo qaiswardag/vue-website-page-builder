@@ -35,23 +35,6 @@ const convertToComponentObject = function (comp: any): ComponentObject {
   }
 }
 
-// Handle image load errors
-const handleImageError = (event: Event, title: string) => {
-  const img = event.target as HTMLImageElement
-  const container = img.parentElement
-  if (container) {
-    // Generate and set SVG preview
-    const svgPreview = generateComponentPreview(title)
-    container.innerHTML = `<div class="w-full h-full flex items-center justify-center">${svgPreview}</div>`
-  }
-}
-
-// Check if we should show SVG preview instead of image
-const shouldShowSvgPreview = (comp: any) => {
-  // Always show SVG preview for better reliability
-  return true
-}
-
 // Get SVG preview for component
 const getSvgPreview = (title: string) => {
   return generateComponentPreview(title)
