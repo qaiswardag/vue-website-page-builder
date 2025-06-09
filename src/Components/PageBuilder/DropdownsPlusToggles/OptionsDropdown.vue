@@ -1,15 +1,16 @@
 <script setup>
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import PageBuilderClass from '../../../composables/PageBuilderClass'
-import { ref, computed, inject } from 'vue'
+import { ref, computed } from 'vue'
 import PageBuilderPreviewModal from '../../Modals/PageBuilderPreviewModal.vue'
 import Preview from '../../../PageBuilder/Preview.vue'
 import SlideOverRight from '../Slidebars/SlideOverRight.vue'
 import PageBuilderSettings from '../Settings/PageBuilderSettings.vue'
 import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
+import { sharedPageBuilderStore } from '../../../stores/shared-store'
 
-// Get consolidated store from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const getConfigPageBuilder = computed(() => {
   return pageBuilderStateStore.getConfigPageBuilder

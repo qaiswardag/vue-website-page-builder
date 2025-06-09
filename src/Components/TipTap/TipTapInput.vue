@@ -1,13 +1,14 @@
 <script setup>
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
-import { computed, onBeforeMount, onMounted, ref, watch, inject } from 'vue'
+import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
 import PageBuilderClass from '../../composables/PageBuilderClass.ts'
 import Link from '@tiptap/extension-link'
 import DynamicModalBuilder from '../Modals/DynamicModalBuilder.vue'
+import { sharedPageBuilderStore } from '../../stores/shared-store'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const showModalUrl = ref(false)
 

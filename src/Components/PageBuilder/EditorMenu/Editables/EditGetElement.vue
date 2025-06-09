@@ -1,14 +1,15 @@
 <script setup>
-import { ref, computed, inject } from 'vue'
+import { ref, computed } from 'vue'
 import DynamicModalBuilder from '../../../Modals/DynamicModalBuilder.vue'
 import TipTapInput from '../../../TipTap/TipTapInput.vue'
 import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import MediaLibraryModal from '../../../Modals/MediaLibraryModal.vue'
 import TextColorEditor from './TextColorEditor.vue'
 import BackgroundColorEditor from './BackgroundColorEditor.vue'
+import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 const customMediaComponent = inject('CustomMediaComponent')
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)

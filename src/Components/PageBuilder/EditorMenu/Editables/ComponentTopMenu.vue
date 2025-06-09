@@ -1,11 +1,11 @@
 <script setup>
 import DynamicModalBuilder from '../../../Modals/DynamicModalBuilder.vue'
-import { computed, inject } from 'vue'
+import { computed, ref } from 'vue'
 import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
-import { ref } from 'vue'
+import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const showModalDeleteComponent = ref(false)
 // use dynamic model
