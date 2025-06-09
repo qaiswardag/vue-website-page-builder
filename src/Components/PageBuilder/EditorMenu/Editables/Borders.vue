@@ -25,25 +25,25 @@ const getBorderColor = computed(() => {
 
 watch(
   getBorderStyle,
-  (newValue) => {
+  async (newValue) => {
     borderStyle.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getBorderWidth,
-  (newValue) => {
+  async (newValue) => {
     borderWidth.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getBorderColor,
-  (newValue) => {
+  async (newValue) => {
     borderColor.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )

@@ -14,9 +14,9 @@ const getTextColor = computed(() => {
 
 watch(
   getTextColor,
-  (newValue) => {
+  async (newValue) => {
     textColor.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )

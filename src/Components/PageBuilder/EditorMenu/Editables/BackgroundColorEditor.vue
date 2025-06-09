@@ -14,9 +14,9 @@ const getBackgroundColor = computed(() => {
 
 watch(
   getBackgroundColor,
-  (newValue) => {
+  async (newValue) => {
     backgroundColor.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )

@@ -22,9 +22,9 @@ watch(
 
 const inputClass = ref('')
 
-const handleAddClasses = function () {
+const handleAddClasses = async function () {
   pageBuilderClass.handleAddClasses(inputClass.value)
-  pageBuilderClass.handlePageBuilderMethods()
+  await pageBuilderClass.handlePageBuilderMethods()
 
   inputClass.value = ''
 }
@@ -40,9 +40,9 @@ const handleAddClasses = function () {
           :key="className"
           class="myPrimaryTag cursor-pointer hover:bg-myPrimaryErrorColor hover:text-white text-xs py-2 font-medium"
           @click="
-            () => {
+            async () => {
               pageBuilderClass.handleRemoveClasses(className)
-              pageBuilderClass.handlePageBuilderMethods()
+              await pageBuilderClass.handlePageBuilderMethods()
             }
           "
         >

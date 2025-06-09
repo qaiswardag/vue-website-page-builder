@@ -156,7 +156,7 @@ const getElementAttributes = computed(() => {
   return attributesToWatch
 })
 
-watch(getElementAttributes, (newAttributes, oldAttributes) => {
+watch(getElementAttributes, async (newAttributes, oldAttributes) => {
   // Check if any of the specified attributes have changed
   if (
     newAttributes?.src !== oldAttributes?.src ||
@@ -166,8 +166,8 @@ watch(getElementAttributes, (newAttributes, oldAttributes) => {
     newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
     // Trigger your method when any of the specified attributes change
-    pageBuilderClass.handlePageBuilderMethods()
-    pageBuilderClass.setEventListenersForElements()
+    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.setEventListenersForElements()
   }
 })
 
@@ -180,7 +180,7 @@ const draggableZone = ref(null)
 onMounted(async () => {
   pageBuilderClass.updateLocalStorageItemName()
   // Set up event listeners
-  pageBuilderClass.setEventListenersForElements()
+  await pageBuilderClass.setEventListenersForElements()
 
   if (getConfigPageBuilder.value.updateOrCreate.formType === 'create') {
     pageBuilderClass.loadExistingContent()

@@ -27,33 +27,33 @@ const getFontHorizontalMargin = computed(() => {
 
 watch(
   getFontVerticalPadding,
-  (newValue) => {
+  async (newValue) => {
     fontVerticalPadding.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getFontHorizontalPadding,
-  (newValue) => {
+  async (newValue) => {
     fontHorizontalPadding.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getFontVerticalMargin,
-  (newValue) => {
+  async (newValue) => {
     fontVerticalMargin.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getFontHorizontalMargin,
-  (newValue) => {
+  async (newValue) => {
     fontHorizontalMargin.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )

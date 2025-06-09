@@ -541,7 +541,7 @@ class PageBuilderClass {
     this.pageBuilderStateStore.setElement(null)
   }
 
-  handleRestoreElement() {
+  async handleRestoreElement() {
     if (this.showRunningMethodLogs) {
       console.log('handleRestoreElement')
     }
@@ -568,7 +568,7 @@ class PageBuilderClass {
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
 
-    this.setEventListenersForElements()
+    await this.setEventListenersForElements()
   }
 
   handleFontWeight(userSelectedFontWeight?: string): void {
@@ -1475,7 +1475,7 @@ class PageBuilderClass {
 
       // Wait for the DOM to update before setting event listeners
       await nextTick()
-      this.setEventListenersForElements()
+      await this.setEventListenersForElements()
     } catch (error) {
       console.error('Error adding component:', error)
     }

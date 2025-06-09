@@ -40,57 +40,57 @@ const getFontStyle = computed(() => {
 
 watch(
   getFontBase,
-  (newValue) => {
+  async (newValue) => {
     fontBase.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getFontDesktop,
-  (newValue) => {
+  async (newValue) => {
     fontDesktop.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getFontTablet,
-  (newValue) => {
+  async (newValue) => {
     fontTablet.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getFontMobile,
-  (newValue) => {
+  async (newValue) => {
     fontMobile.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getFontWeight,
-  (newValue) => {
+  async (newValue) => {
     fontWeight.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getFontFamily,
-  (newValue) => {
+  async (newValue) => {
     fontFamily.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getFontStyle,
-  (newValue) => {
+  async (newValue) => {
     fontStyle.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )

@@ -31,41 +31,41 @@ const getBorderRadiusBottomRight = computed(() => {
 
 watch(
   getBorderRadiusGlobal,
-  (newValue) => {
+  async (newValue) => {
     borderRadiusGlobal.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getBorderRadiusTopLeft,
-  (newValue) => {
+  async (newValue) => {
     borderRadiusTopLeft.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getBorderRadiusTopRight,
-  (newValue) => {
+  async (newValue) => {
     borderRadiusTopRight.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getBorderRadiusBottomleft,
-  (newValue) => {
+  async (newValue) => {
     borderRadiusBottomleft.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
 watch(
   getBorderRadiusBottomRight,
-  (newValue) => {
+  async (newValue) => {
     borderRadiusBottomRight.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )

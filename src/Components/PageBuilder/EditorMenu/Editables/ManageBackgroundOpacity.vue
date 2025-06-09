@@ -21,9 +21,9 @@ const getBackgroundOpacity = computed(() => {
 
 watch(
   getBackgroundOpacity,
-  (newValue) => {
+  async (newValue) => {
     opacityVueModel.value = newValue
-    pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.handlePageBuilderMethods()
   },
   { immediate: true },
 )
