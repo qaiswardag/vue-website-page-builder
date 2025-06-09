@@ -131,7 +131,8 @@ const handleAddComponent = function () {
 }
 
 const getComponents = computed(() => {
-  return pageBuilderStateStore.getComponents
+  const components = pageBuilderStateStore.getComponents
+  return components
 })
 
 const getElement = computed(() => {
@@ -181,12 +182,10 @@ onMounted(async () => {
   // Set up event listeners
   pageBuilderClass.setEventListenersForElements()
 
-  //
-  //
-  //
-  //
+  if (getConfigPageBuilder.value.updateOrCreate.formType === 'create') {
+    pageBuilderClass.loadExistingContent()
+  }
 
-  pageBuilderClass.loadExistingContent()
   pageBuilderClass.removeHoveredAndSelected()
 })
 </script>
@@ -380,8 +379,8 @@ onMounted(async () => {
               <div ref="draggableZone">
                 <!-- Added Components to DOM # start -->
                 <div
-                  v-for="component in Array.isArray(getComponents) && getComponents"
-                  :key="component"
+                  v-for="component in getComponents"
+                  :key="component.id"
                   id="page-builder-editor-editable-area"
                   class="bg-white grow"
                 >

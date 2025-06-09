@@ -1497,7 +1497,6 @@ class PageBuilderClass {
     if (this.showRunningMethodLogs) {
       console.log('setComponentsFromData')
     }
-
     // Auto-detect if input is JSON or HTML
     const trimmedData = data.trim()
 
@@ -1508,6 +1507,7 @@ class PageBuilderClass {
       // Looks like HTML - parse as HTML
       this.#parseHTMLComponents(trimmedData)
     } else {
+      console.log('using JSON method..............')
       this.#parseJSONComponents(trimmedData)
     }
   }
@@ -1535,7 +1535,6 @@ class PageBuilderClass {
 
   // Private method to parse HTML components
   #parseHTMLComponents(htmlData: string): void {
-    console.log('using HTML method...')
     try {
       // Parse the HTML content using DOMParser
       const parser = new DOMParser()
@@ -1556,7 +1555,11 @@ class PageBuilderClass {
         })
       })
 
+      console.log('extractedSections', extractedSections)
       this.pageBuilderStateStore.setComponents(extractedSections)
+
+      // Debug: Verify components were set correctly
+      console.log('Components after setting in store:', this.pageBuilderStateStore.getComponents)
     } catch (error) {
       console.error('Error parsing HTML components:', error)
       // Set empty array on error to ensure consistent state
@@ -1565,10 +1568,13 @@ class PageBuilderClass {
   }
 
   // Load existing content from HTML when in update mode
-  loadExistingContent(JSONComponents?: string): void {
+  loadExistingContent(data?: string): void {
+    console.log('loadExistingContent ran')
     if (this.showRunningMethodLogs) {
       console.log('loadExistingContent')
     }
+
+    console.log('getConfigPageBuilder iiis:', this.pageBuilderStateStore.getConfigPageBuilder)
 
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
@@ -1580,11 +1586,14 @@ class PageBuilderClass {
       }
     }
 
+    console.log(
+      'twoos',
+      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update',
+    )
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
-      console.log('should come here, since update...... passed JSONComponents are:', JSONComponents)
-      // Update mode: Use passed JSONComponents
-      if (JSONComponents) {
-        this.setComponentsFromData(JSONComponents)
+      // Update mode: Use passed data
+      if (data) {
+        this.setComponentsFromData(data)
       }
     }
   }
