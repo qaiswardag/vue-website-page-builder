@@ -1,10 +1,10 @@
 <script setup>
-import { Editor, useEditor, EditorContent } from '@tiptap/vue-3'
+import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { computed, onBeforeMount, onMounted, ref, watch, inject } from 'vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import Link from '@tiptap/extension-link'
-import DynamicModal from '@/Components/Modals/DynamicModal.vue'
+import DynamicModalBuilder from '@/Components/Modals/DynamicModalBuilder.vue'
 
 // Get stores from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
@@ -20,9 +20,9 @@ const firstButtonModal = ref('')
 const secondButtonModal = ref(null)
 const thirdButtonModal = ref(null)
 // set dynamic modal handle functions
-const firstModalButtonFunction = ref(null)
-const secondModalButtonFunction = ref(null)
-const thirdModalButtonFunction = ref(null)
+const firstModalButtonFunctionDynamicModalBuilder = ref(null)
+const secondModalButtonFunctionDynamicModalBuilder = ref(null)
+const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
@@ -79,8 +79,6 @@ watch(textContent, (newValue) => {
   }
 })
 
-// pageBuilderClass.selectedElementIsValidText(newValue);
-
 const TipTapSetContent = function () {
   if (!pageBuilderClass.selectedElementIsValidText()) return
 
@@ -114,19 +112,19 @@ const handleURL = function () {
   thirdButtonModal.value = 'Save'
 
   // handle click
-  firstModalButtonFunction.value = function () {
+  firstModalButtonFunctionDynamicModalBuilder.value = function () {
     showModalUrl.value = false
     urlError.value = null
   }
 
   // handle click
-  secondModalButtonFunction.value = function () {
+  secondModalButtonFunctionDynamicModalBuilder.value = function () {
     editor.value.chain().focus().extendMarkRange('link').unsetLink().run()
     showModalUrl.value = false
   }
 
   // handle click
-  thirdModalButtonFunction.value = function () {
+  thirdModalButtonFunctionDynamicModalBuilder.value = function () {
     const isNotValidated = validateURL()
     if (isNotValidated) {
       return
@@ -179,8 +177,8 @@ onMounted(() => {
 </script>
 <template>
   <div>
-    <DynamicModal
-      :showDynamicModal="showModalUrl"
+    <DynamicModalBuilder
+      :showDynamicModalBuilder="showModalUrl"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
       :title="titleModal"
@@ -188,9 +186,9 @@ onMounted(() => {
       :firstButtonText="firstButtonModal"
       :secondButtonText="secondButtonModal"
       :thirdButtonText="thirdButtonModal"
-      @firstModalButtonFunction="firstModalButtonFunction"
-      @secondModalButtonFunction="secondModalButtonFunction"
-      @thirdModalButtonFunction="thirdModalButtonFunction"
+      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicModalBuilder"
+      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicModalBuilder"
+      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicModalBuilder"
     >
       <header></header>
       <main>
@@ -204,7 +202,7 @@ onMounted(() => {
           </div>
         </div>
       </main>
-    </DynamicModal>
+    </DynamicModalBuilder>
 
     <div class="blockease-linear duration-200 block ease-linear">
       <div v-if="pageBuilderClass.selectedElementIsValidText() && editor">

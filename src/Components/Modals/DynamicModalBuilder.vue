@@ -1,9 +1,9 @@
 <script setup>
-import Modal from '@/Components/Modals/Modal.vue'
+import ModalBuilder from '@/Components/Modals/ModalBuilder.vue'
 import {} from '@headlessui/vue'
 
 defineProps({
-  showDynamicModal: {
+  showDynamicModalBuilder: {
     type: Boolean,
     default: false,
     required: true,
@@ -55,28 +55,35 @@ defineProps({
 })
 
 const emit = defineEmits([
-  'firstModalButtonFunction',
-  'secondModalButtonFunction',
-  'thirdModalButtonFunction',
+  'firstModalButtonFunctionDynamicModalBuilder',
+  'secondModalButtonFunctionDynamicModalBuilder',
+  'thirdModalButtonFunctionDynamicModalBuilder',
 ])
 
 // first button function
-const firstButton = function () {
-  emit('firstModalButtonFunction')
+const firstButtonBuilder = function () {
+  console.log('firstButtonBuilder VUE.js raaan')
+  emit('firstModalButtonFunctionDynamicModalBuilder')
 }
 // second button  function
-const secondButton = function () {
-  emit('secondModalButtonFunction')
+const secondButtonBuilder = function () {
+  console.log('secondButtonBuilder VUE.js raaan')
+  emit('secondModalButtonFunctionDynamicModalBuilder')
 }
 
 // third button function
-const thirdButton = function () {
-  emit('thirdModalButtonFunction')
+const thirdButtonBuilder = function () {
+  console.log('thirdButtonBuilder VUE.js raaan')
+  emit('thirdModalButtonFunctionDynamicModalBuilder')
 }
 </script>
 
 <template>
-  <Modal :show="showDynamicModal" @close="firstButton" :maxWidth="maxWidth">
+  <ModalBuilder
+    :showModalBuilder="showDynamicModalBuilder"
+    @closeMainModalBuilder="firstButtonBuilder"
+    :maxWidth="maxWidth"
+  >
     <slot name="content" />
 
     <div
@@ -124,7 +131,7 @@ const thirdButton = function () {
 
           <div
             class="h-10 w-10 flex-end cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
-            @click="firstButton"
+            @click="firstButtonBuilder"
           >
             <span class="material-symbols-outlined"> close </span>
           </div>
@@ -158,13 +165,13 @@ const thirdButton = function () {
             ref="firstButtonRef"
             class="mySecondaryButton"
             type="button"
-            @click="firstButton"
+            @click="firstButtonBuilder"
           >
             {{ firstButtonText }}
           </button>
 
           <div v-if="secondButtonText">
-            <div v-if="disabled && disabledWhichButton === 'secondButton'">
+            <div v-if="disabled && disabledWhichButton === 'secondButtonBuilder'">
               <button
                 class="flex items-center gap-2 myPrimaryButton bg-yellow-300 hover:bg-yellow-400 text-myPrimaryDarkGrayColor hover:text-myPrimaryDarkGrayColor focus:ring-yellow-400 w-full"
                 :class="{
@@ -172,7 +179,7 @@ const thirdButton = function () {
                 }"
                 :disabled="disabled"
                 type="button"
-                @click="secondButton"
+                @click="secondButtonBuilder"
               >
                 <div>
                   <Transition name="bounce">
@@ -201,11 +208,11 @@ const thirdButton = function () {
               </button>
             </div>
 
-            <div v-if="!disabled || disabledWhichButton !== 'secondButton'">
+            <div v-if="!disabled || disabledWhichButton !== 'secondButtonBuilder'">
               <button
                 class="myPrimaryButton bg-yellow-300 hover:bg-yellow-400 text-myPrimaryDarkGrayColor hover:text-myPrimaryDarkGrayColor focus:ring-yellow-400 w-full"
                 type="button"
-                @click="secondButton"
+                @click="secondButtonBuilder"
               >
                 {{ secondButtonText }}
               </button>
@@ -214,7 +221,7 @@ const thirdButton = function () {
 
           <div v-if="thirdButtonText">
             <div v-if="type === 'default'">
-              <div v-if="disabled && disabledWhichButton === 'thirdButton'">
+              <div v-if="disabled && disabledWhichButton === 'thirdButtonBuilder'">
                 <button
                   class="flex items-center gap-2 myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
                   :class="{
@@ -250,18 +257,18 @@ const thirdButton = function () {
                 </button>
               </div>
 
-              <div v-if="!disabled || disabledWhichButton !== 'thirdButton'">
+              <div v-if="!disabled || disabledWhichButton !== 'thirdButtonBuilder'">
                 <button
                   class="myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
                   type="button"
-                  @click="thirdButton"
+                  @click="thirdButtonBuilder"
                 >
                   {{ thirdButtonText }}
                 </button>
               </div>
             </div>
             <div v-if="type === 'success'">
-              <div v-if="disabled && disabledWhichButton === 'thirdButton'">
+              <div v-if="disabled && disabledWhichButton === 'thirdButtonBuilder'">
                 <button
                   class="flex items-center gap-2 myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
                   :class="{
@@ -297,11 +304,11 @@ const thirdButton = function () {
                 </button>
               </div>
 
-              <div v-if="!disabled || disabledWhichButton !== 'thirdButton'">
+              <div v-if="!disabled || disabledWhichButton !== 'thirdButtonBuilder'">
                 <button
                   class="myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
                   type="button"
-                  @click="thirdButton"
+                  @click="thirdButtonBuilder"
                 >
                   {{ thirdButtonText }}
                 </button>
@@ -309,7 +316,7 @@ const thirdButton = function () {
             </div>
 
             <div v-if="type === 'warning'">
-              <div v-if="disabled && disabledWhichButton === 'thirdButton'">
+              <div v-if="disabled && disabledWhichButton === 'thirdButtonBuilder'">
                 <button
                   class="flex items-center gap-2 myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
                   :class="{
@@ -345,11 +352,11 @@ const thirdButton = function () {
                 </button>
               </div>
 
-              <div v-if="!disabled || disabledWhichButton !== 'thirdButton'">
+              <div v-if="!disabled || disabledWhichButton !== 'thirdButtonBuilder'">
                 <button
                   class="flex items-center gap-2 myPrimaryButton bg-myPrimaryErrorColor hover:bg-red-600 text-white focus:ring-myPrimaryErrorColor w-full"
                   type="button"
-                  @click="thirdButton"
+                  @click="thirdButtonBuilder"
                 >
                   {{ thirdButtonText }}
                 </button>
@@ -357,7 +364,7 @@ const thirdButton = function () {
             </div>
 
             <div v-if="type === 'danger' || type === 'delete'">
-              <div v-if="disabled && disabledWhichButton === 'thirdButton'">
+              <div v-if="disabled && disabledWhichButton === 'thirdButtonBuilder'">
                 <button
                   class="flex items-center gap-2 myPrimaryButton bg-myPrimaryErrorColor hover:bg-red-600 text-white focus:ring-myPrimaryErrorColor w-full"
                   :class="{
@@ -393,11 +400,11 @@ const thirdButton = function () {
                 </button>
               </div>
 
-              <div v-if="!disabled || disabledWhichButton !== 'thirdButton'">
+              <div v-if="!disabled || disabledWhichButton !== 'thirdButtonBuilder'">
                 <button
                   class="flex items-center gap-2 myPrimaryButton bg-myPrimaryErrorColor hover:bg-red-600 text-white focus:ring-myPrimaryErrorColor w-full"
                   type="button"
-                  @click="thirdButton"
+                  @click="thirdButtonBuilder"
                 >
                   {{ thirdButtonText }}
                 </button>
@@ -407,7 +414,7 @@ const thirdButton = function () {
         </div>
       </div>
     </template>
-  </Modal>
+  </ModalBuilder>
 </template>
 
 <style scope>

@@ -1,15 +1,9 @@
-<script setup>
-import { computed, onMounted, onUnmounted, watch } from 'vue'
-import {
-  Dialog,
-  DialogOverlay,
-  DialogTitle,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue'
+<script setup lang="ts">
+import { computed } from 'vue'
+import { Dialog, DialogOverlay, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 const props = defineProps({
-  show: {
+  showModalBuilder: {
     type: Boolean,
     default: false,
   },
@@ -25,10 +19,10 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['close'])
+const emit = defineEmits(['closeMainModalBuilder'])
 
-const close = () => {
-  emit('close')
+const handleClose = () => {
+  emit('closeMainModalBuilder')
 }
 
 const maxWidthClass = computed(() => {
@@ -47,8 +41,8 @@ const maxWidthClass = computed(() => {
 
 <template>
   <teleport to="body">
-    <TransitionRoot :show="show" as="template">
-      <Dialog as="div" class="font-sans fixed z-30 inset-0 overflow-y-auto" @close="close">
+    <TransitionRoot :show="showModalBuilder" as="template">
+      <Dialog as="div" class="font-sans fixed z-30 inset-0 overflow-y-auto" @close="handleClose">
         <div class="flex items-end justify-center text-center sm:block sm:p-0">
           <TransitionChild
             as="template"

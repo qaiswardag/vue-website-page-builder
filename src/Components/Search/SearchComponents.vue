@@ -1,8 +1,8 @@
 <script setup>
-import Modal from '@/Components/Modals/Modal.vue'
+import ModalBuilder from '@/Components/Modals/ModalBuilder.vue'
 import NoneCustomSearchComponent from '@/Components/PageBuilder/DemoContent/NoneCustomSearchComponent.vue'
 
-const props = defineProps({
+defineProps({
   firstButtonText: {
     required: true,
   },
@@ -22,13 +22,19 @@ const props = defineProps({
 const emit = defineEmits(['firstModalButtonSearchComponentsFunction'])
 
 // first button function
-const firstButton = function () {
+const firstButtonBuilder = function () {
   emit('firstModalButtonSearchComponentsFunction')
 }
 </script>
 
 <template>
-  <Modal maxWidth="5xl" :show="show" @close="firstButton" minHeight="" maxHeight="">
+  <ModalBuilder
+    maxWidth="5xl"
+    :showModalBuilder="show"
+    @closeMainModalBuilder="firstButtonBuilder"
+    minHeight=""
+    maxHeight=""
+  >
     <div
       class="font-sans w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
     >
@@ -40,7 +46,7 @@ const firstButton = function () {
         </div>
         <div
           class="h-10 w-10 flex-start cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
-          @click="firstButton"
+          @click="firstButtonBuilder"
         >
           <span class="material-symbols-outlined"> close </span>
         </div>
@@ -61,11 +67,11 @@ const firstButton = function () {
           ref="firstButtonRef"
           class="mySecondaryButton"
           type="button"
-          @click="firstButton"
+          @click="firstButtonBuilder"
         >
           {{ firstButtonText }}
         </button>
       </div>
     </div>
-  </Modal>
+  </ModalBuilder>
 </template>

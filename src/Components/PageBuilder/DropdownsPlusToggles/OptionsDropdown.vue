@@ -6,7 +6,7 @@ import PageBuilderPreviewModal from '@/Components/Modals/PageBuilderPreviewModal
 import Preview from '@/PageBuilder/Preview.vue'
 import SlideOverRight from '@/Components/PageBuilder/Slidebars/SlideOverRight.vue'
 import PageBuilderSettings from '@/Components/PageBuilder/Settings/PageBuilderSettings.vue'
-import DynamicModal from '@/Components/Modals/DynamicModal.vue'
+import DynamicModalBuilder from '@/Components/Modals/DynamicModalBuilder.vue'
 
 // Get consolidated store from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
@@ -33,9 +33,9 @@ const firstButtonModal = ref('')
 const secondButtonModal = ref(null)
 const thirdButtonModal = ref(null)
 // set dynamic modal handle functions
-const firstModalButtonFunction = ref(null)
-const secondModalButtonFunction = ref(null)
-const thirdModalButtonFunction = ref(null)
+const firstModalButtonFunctionDynamicModalBuilder = ref(null)
+const secondModalButtonFunctionDynamicModalBuilder = ref(null)
+const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 
 const showSettingsSlideOverRight = ref(false)
 const titleSettingsSlideOverRight = ref(null)
@@ -64,12 +64,12 @@ const deleteAllComponents = function () {
   thirdButtonModal.value = 'Delete'
 
   // handle click
-  firstModalButtonFunction.value = function () {
+  firstModalButtonFunctionDynamicModalBuilder.value = function () {
     showModalDeleteAllComponents.value = false
   }
   //
   // handle click
-  thirdModalButtonFunction.value = function () {
+  thirdModalButtonFunctionDynamicModalBuilder.value = function () {
     pageBuilderClass.deleteAllComponents()
     pageBuilderStateStore.setComponents(null)
     showModalDeleteAllComponents.value = false
@@ -101,8 +101,8 @@ const settingsSlideOverButton = function () {
     >
       <PageBuilderSettings> </PageBuilderSettings>
     </SlideOverRight>
-    <DynamicModal
-      :showDynamicModal="showModalDeleteAllComponents"
+    <DynamicModalBuilder
+      :showDynamicModalBuilder="showModalDeleteAllComponents"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
       :title="titleModal"
@@ -110,13 +110,13 @@ const settingsSlideOverButton = function () {
       :firstButtonText="firstButtonModal"
       :secondButtonText="secondButtonModal"
       :thirdButtonText="thirdButtonModal"
-      @firstModalButtonFunction="firstModalButtonFunction"
-      @secondModalButtonFunction="secondModalButtonFunction"
-      @thirdModalButtonFunction="thirdModalButtonFunction"
+      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicModalBuilder"
+      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicModalBuilder"
+      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicModalBuilder"
     >
       <header></header>
       <main></main>
-    </DynamicModal>
+    </DynamicModalBuilder>
     <Menu as="div" class="myPrimaryParagraph relative lg:inline-block hidden text-left">
       <div>
         <MenuButton

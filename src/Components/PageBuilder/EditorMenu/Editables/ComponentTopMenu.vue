@@ -1,5 +1,5 @@
 <script setup>
-import DynamicModal from '@/Components/Modals/DynamicModal.vue'
+import DynamicModalBuilder from '@/Components/Modals/DynamicModalBuilder.vue'
 import { computed, inject } from 'vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import { ref } from 'vue'
@@ -17,9 +17,9 @@ const firstButtonModal = ref('')
 const secondButtonModal = ref(null)
 const thirdButtonModal = ref(null)
 // set dynamic modal handle functions
-const firstModalButtonFunction = ref(null)
-const secondModalButtonFunction = ref(null)
-const thirdModalButtonFunction = ref(null)
+const firstModalButtonFunctionDynamicModalBuilder = ref(null)
+const secondModalButtonFunctionDynamicModalBuilder = ref(null)
+const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // remove component
@@ -34,12 +34,12 @@ const deleteComponent = function (e) {
   thirdButtonModal.value = 'Delete'
 
   // handle click
-  firstModalButtonFunction.value = function () {
+  firstModalButtonFunctionDynamicModalBuilder.value = function () {
     showModalDeleteComponent.value = false
   }
   //
   // handle click
-  thirdModalButtonFunction.value = function () {
+  thirdModalButtonFunctionDynamicModalBuilder.value = function () {
     pageBuilderClass.deleteComponent()
 
     showModalDeleteComponent.value = false
@@ -49,8 +49,8 @@ const deleteComponent = function (e) {
 </script>
 
 <template>
-  <DynamicModal
-    :showDynamicModal="showModalDeleteComponent"
+  <DynamicModalBuilder
+    :showDynamicModalBuilder="showModalDeleteComponent"
     :type="typeModal"
     :gridColumnAmount="gridColumnModal"
     :title="titleModal"
@@ -58,13 +58,13 @@ const deleteComponent = function (e) {
     :firstButtonText="firstButtonModal"
     :secondButtonText="secondButtonModal"
     :thirdButtonText="thirdButtonModal"
-    @firstModalButtonFunction="firstModalButtonFunction"
-    @secondModalButtonFunction="secondModalButtonFunction"
-    @thirdModalButtonFunction="thirdModalButtonFunction"
+    @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicModalBuilder"
+    @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicModalBuilder"
+    @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicModalBuilder"
   >
     <header></header>
     <main></main>
-  </DynamicModal>
+  </DynamicModalBuilder>
   <div class="flex flex-col items-center justify-center myPrimaryGap">
     <div class="flex gap-2 items-center justify-center">
       <div

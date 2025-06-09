@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, inject } from 'vue'
-import DynamicModal from '@/Components/Modals/DynamicModal.vue'
+import DynamicModalBuilder from '@/Components/Modals/DynamicModalBuilder.vue'
 import TipTapInput from '@/Components/TipTap/TipTapInput.vue'
 import PageBuilderClass from '@/composables/PageBuilderClass.ts'
 import MediaLibraryModal from '@/Components/Modals/MediaLibraryModal.vue'
@@ -43,9 +43,9 @@ const firstButtonModal = ref('')
 const secondButtonModal = ref(null)
 const thirdButtonModal = ref(null)
 // set dynamic modal handle functions
-const firstModalButtonFunction = ref(null)
-const secondModalButtonFunction = ref(null)
-const thirdModalButtonFunction = ref(null)
+const firstModalButtonFunctionDynamicModalBuilder = ref(null)
+const secondModalButtonFunctionDynamicModalBuilder = ref(null)
+const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 
 const handleModalPreviewTiptap = function () {
   pageBuilderStateStore.setShowModalTipTap(true)
@@ -60,11 +60,11 @@ const handleModalPreviewTiptap = function () {
 
   // handle click
 
-  firstModalButtonFunction.value = function () {
+  firstModalButtonFunctionDynamicModalBuilder.value = function () {
     pageBuilderStateStore.setShowModalTipTap(false)
   }
 
-  thirdModalButtonFunction.value = function () {
+  thirdModalButtonFunctionDynamicModalBuilder.value = function () {
     pageBuilderStateStore.setShowModalTipTap(false)
   }
 }
@@ -168,11 +168,11 @@ const handleModalIframeSrc = function () {
   thirdButtonModal.value = null
 
   // handle click
-  firstModalButtonFunction.value = function () {
+  firstModalButtonFunctionDynamicModalBuilder.value = function () {
     showModalIframeSrc.value = false
   }
   // handle click
-  secondModalButtonFunction.value = function () {
+  secondModalButtonFunctionDynamicModalBuilder.value = function () {
     const isNotValidated = validateURL()
     if (isNotValidated) {
       return
@@ -204,8 +204,8 @@ const handleModalIframeSrc = function () {
 </script>
 <template>
   <div>
-    <DynamicModal
-      :showDynamicModal="showModalIframeSrc"
+    <DynamicModalBuilder
+      :showDynamicModalBuilder="showModalIframeSrc"
       maxWidth="2xl"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
@@ -214,9 +214,9 @@ const handleModalIframeSrc = function () {
       :firstButtonText="firstButtonModal"
       :secondButtonText="secondButtonModal"
       :thirdButtonText="thirdButtonModal"
-      @firstModalButtonFunction="firstModalButtonFunction"
-      @secondModalButtonFunction="secondModalButtonFunction"
-      @thirdModalButtonFunction="thirdModalButtonFunction"
+      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicModalBuilder"
+      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicModalBuilder"
+      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicModalBuilder"
     >
       <header></header>
       <main>
@@ -234,10 +234,10 @@ const handleModalIframeSrc = function () {
           </div>
         </div>
       </main>
-    </DynamicModal>
-    <DynamicModal
+    </DynamicModalBuilder>
+    <DynamicModalBuilder
       :simpleModal="true"
-      :showDynamicModal="getShowModalTipTap"
+      :showDynamicModalBuilder="getShowModalTipTap"
       maxWidth="5xl"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
@@ -246,15 +246,15 @@ const handleModalIframeSrc = function () {
       :firstButtonText="firstButtonModal"
       :secondButtonText="secondButtonModal"
       :thirdButtonText="thirdButtonModal"
-      @firstModalButtonFunction="firstModalButtonFunction"
-      @secondModalButtonFunction="secondModalButtonFunction"
-      @thirdModalButtonFunction="thirdModalButtonFunction"
+      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicModalBuilder"
+      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicModalBuilder"
+      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicModalBuilder"
     >
       <header></header>
       <main class="overflow-y-auto">
         <TipTapInput></TipTapInput>
       </main>
-    </DynamicModal>
+    </DynamicModalBuilder>
 
     <MediaLibraryModal
       :open="showMediaLibraryModal"
