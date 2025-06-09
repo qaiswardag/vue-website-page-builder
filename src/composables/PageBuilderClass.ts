@@ -1574,10 +1574,7 @@ class PageBuilderClass {
       console.log('loadExistingContent')
     }
 
-    console.log(
-      'getConfigPageBuilder noooooooow:',
-      this.pageBuilderStateStore.getLocalStorageItemName,
-    )
+    console.log('getConfigPageBuilder noooooooow:', this.pageBuilderStateStore.getConfigPageBuilder)
     // console.log('getConfigPageBuilder iiis:', this.pageBuilderStateStore.getConfigPageBuilder)
 
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
