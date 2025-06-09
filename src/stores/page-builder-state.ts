@@ -2,9 +2,7 @@ import { defineStore } from 'pinia'
 import { nextTick } from 'vue'
 import type {
   ComponentObject,
-  FetchedComponentsResponse,
   SetPushComponentsPayload,
-  LoadComponentsData,
   ImageObject,
   UserSettings,
   User,
@@ -56,7 +54,6 @@ interface PageBuilderState {
   component: ComponentObject | null
   components: ComponentObject[]
   basePrimaryImage: string | null
-  fetchedComponents: FetchedComponentsResponse | null
   currentResourceData: { title: string; id: number } | null
   updateOrCreate: string
 
@@ -117,7 +114,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     component: null,
     components: [],
     basePrimaryImage: null,
-    fetchedComponents: null,
     currentResourceData: null,
     updateOrCreate: '',
 
@@ -264,22 +260,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getBasePrimaryImage(state: PageBuilderState): string | null {
       return state.basePrimaryImage
     },
-    getFetchedComponents(): {
-      isLoading: boolean
-      isError: boolean
-      error: string | null
-      fetchedData: unknown
-    } {
-      return {
-        isLoading: isLoading.value,
-        isError: isError.value,
-        error: error.value,
-        fetchedData: fetchedComponents.value,
-      }
-    },
-    getFetchedComponentsData(state: PageBuilderState): FetchedComponentsResponse | null {
-      return state.fetchedComponents
-    },
+
+    // øøø
     getCurrentResourceData(state: PageBuilderState): { title: string; id: number } | null {
       return state.currentResourceData
     },
@@ -473,29 +455,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
     setCurrentLayoutPreview(payload: string): void {
       localStorage.setItem('preview', payload)
-    },
-    setFetchedComponents(payload: FetchedComponentsResponse | null): void {
-      this.fetchedComponents = payload
-    },
-
-    async setLoadComponents(_data: LoadComponentsData): Promise<void> {
-      this.setFetchedComponents(null)
-
-      try {
-        await handlefetchComponents('/components.json', {}, { additionalCallTime: 500 })
-      } catch (err) {
-        console.log(`Error: ${err}`)
-      }
-
-      // fetchedComponents.value is an object containing a components property
-      this.setFetchedComponents(
-        fetchedComponents &&
-          fetchedComponents.value &&
-          typeof fetchedComponents.value === 'object' &&
-          'components' in fetchedComponents.value
-          ? (fetchedComponents.value as FetchedComponentsResponse)
-          : null,
-      )
     },
     setCurrentResourceData(payload: { title: string; id: number } | null): void {
       this.currentResourceData = payload
