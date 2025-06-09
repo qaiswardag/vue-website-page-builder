@@ -82,19 +82,19 @@ const features = [
           :configPageBuilder="{
             updateOrCreate: {
               formType: 'create',
-              createNewResourceFormName: 'post',
+              createNewResourceFormName: 'article',
             },
             pageBuilderLogo: {
               src: '/logo/logo.svg',
             },
-            userForPageBuilder: { name: 'John Doe' },
+            userForPageBuilder: { name: 'Mie Mortensen' },
             resourceData: {
-              title: 'Demo Article',
+              title: 'Demo Fashion Article',
               id: 1,
             },
             userSettings: {
-              theme: 'light',
-              language: 'en',
+              theme: 'blue',
+              language: 'it',
               autoSave: true,
             },
           }"

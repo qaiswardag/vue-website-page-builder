@@ -12,8 +12,8 @@ import {
 } from '@headlessui/vue'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 
-// Get store from parent PageBuilder component
-const internalPinia = inject('internalPinia')
+// Use shared store instance
+import { sharedPageBuilderStore } from '../../stores/shared-store'
 
 defineProps({
   show: {
@@ -23,7 +23,7 @@ defineProps({
   },
 })
 
-const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
+const pageBuilderStateStore = sharedPageBuilderStore
 const emit = defineEmits(['firstPageBuilderPreviewModalButton'])
 
 // first button function

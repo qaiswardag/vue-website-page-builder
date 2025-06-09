@@ -1,6 +1,5 @@
 <script setup>
 import { onMounted, computed, ref, watch, provide } from 'vue'
-import { createPinia } from 'pinia'
 import PageBuilderClass from '../composables/PageBuilderClass.ts'
 import PageBuilderPreviewModal from '../Components/Modals/PageBuilderPreviewModal.vue'
 import Preview from './Preview.vue'
@@ -9,7 +8,7 @@ import EditGetElement from '../Components/PageBuilder/EditorMenu/Editables/EditG
 import SearchComponents from '../Components/Search/SearchComponents.vue'
 import OptionsDropdown from '../Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
 import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
-import { usePageBuilderStateStore } from '../stores/page-builder-state'
+import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
 
 /**
  * Props for PageBuilder component
@@ -34,9 +33,9 @@ const props = defineProps({
   },
 })
 
-// Create internal Pinia instance for PageBuilder package
-const internalPinia = createPinia()
-const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
+// Use shared Pinia instance for PageBuilder package (THIS IS THE KEY CHANGE!)
+const internalPinia = sharedPageBuilderPinia
+const pageBuilderStateStore = sharedPageBuilderStore
 
 // Set configPageBuilder in store (this will be the single source of truth)
 if (props.configPageBuilder) {

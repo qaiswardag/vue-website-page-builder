@@ -1555,11 +1555,7 @@ class PageBuilderClass {
         })
       })
 
-      console.log('extractedSections', extractedSections)
       this.pageBuilderStateStore.setComponents(extractedSections)
-
-      // Debug: Verify components were set correctly
-      console.log('Components after setting in store:', this.pageBuilderStateStore.getComponents)
     } catch (error) {
       console.error('Error parsing HTML components:', error)
       // Set empty array on error to ensure consistent state
@@ -1569,13 +1565,9 @@ class PageBuilderClass {
 
   // Load existing content from HTML when in update mode
   loadExistingContent(data?: string): void {
-    console.log('loadExistingContent ran')
     if (this.showRunningMethodLogs) {
       console.log('loadExistingContent')
     }
-
-    console.log('getConfigPageBuilder noooooooow:', this.pageBuilderStateStore.getConfigPageBuilder)
-    // console.log('getConfigPageBuilder iiis:', this.pageBuilderStateStore.getConfigPageBuilder)
 
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
@@ -1588,6 +1580,7 @@ class PageBuilderClass {
     }
 
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
+      console.log('data:', data)
       // Update mode: Use passed data
       if (data) {
         this.setComponentsFromData(data)

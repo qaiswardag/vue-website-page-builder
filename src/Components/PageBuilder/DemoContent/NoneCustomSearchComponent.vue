@@ -5,18 +5,12 @@ import PageBuilderClass from '../../../composables/PageBuilderClass'
 import { usePageBuilderModal } from '../../../composables/usePageBuilderModal'
 import { generateComponentPreview } from '../../../utils/componentPreviews'
 import type { ComponentObject } from '../../../types'
-import { usePageBuilderStateStore } from '../../../stores/page-builder-state'
-import type { Pinia } from 'pinia'
-
-import { inject } from 'vue'
-
-// Get store from parent PageBuilder component
-const internalPinia = inject('internalPinia') as Pinia
+import { sharedPageBuilderStore } from '../../../stores/shared-store'
 
 // Get modal close function
 const { closeAddComponentModal } = usePageBuilderModal()
 
-const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 

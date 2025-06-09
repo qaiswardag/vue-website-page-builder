@@ -5,16 +5,19 @@ export { default as Preview } from './PageBuilder/Preview.vue'
 // Export stores (consolidated into single store)
 export { usePageBuilderStateStore } from './stores/page-builder-state'
 
-export { default as PageBuilderClass } from './composables/PageBuilderClass'
+export { default as PageBuilderClass } from './composables/PageBuilderClass.ts'
 
 // Export composables
 export { usePageBuilderModal } from './composables/usePageBuilderModal'
 
 // Export types
-export type { PageBuilderUser, ComponentObject, ImageObject } from './types'
+export type { PageBuilderUser, ComponentObject, ImageObject, PageBuilderConfig } from './types'
 
 // Export Pinia for convenience (same version as package uses)
 export { createPinia } from 'pinia'
 
 // Export CSS (users will need to import this separately)
 import './css/app.css'
+
+// Export shared store instances for external access
+export { sharedPageBuilderPinia, sharedPageBuilderStore } from './stores/shared-store'
