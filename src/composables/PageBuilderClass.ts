@@ -1481,15 +1481,31 @@ class PageBuilderClass {
     }
   }
 
-  // Public method to parse and set JSON components
-  setComponentsFromJSON(jsonComponents: string): void {
+  // Public method to parse and set components from JSON or HTML
+  setComponentsFromData(data: string): void {
     if (this.showRunningMethodLogs) {
-      console.log('setComponentsFromJSON')
+      console.log('setComponentsFromData')
     }
 
+    // Auto-detect if input is JSON or HTML
+    const trimmedData = data.trim()
+
+    if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
+      // Looks like JSON - parse as JSON
+      this.#parseJSONComponents(trimmedData)
+    } else if (trimmedData.startsWith('<')) {
+      // Looks like HTML - parse as HTML
+      this.#parseHTMLComponents(trimmedData)
+    } else {
+      this.#parseJSONComponents(trimmedData)
+    }
+  }
+
+  // Private method to parse JSON components
+  #parseJSONComponents(jsonData: string): void {
+    console.log('using HTML method...')
     try {
-      // Parse the JSON string
-      const parsedData = JSON.parse(jsonComponents)
+      const parsedData = JSON.parse(jsonData)
       let savedCurrentDesign: ComponentObject[] = []
 
       // Load ComponentObjects from parsed data
@@ -1501,6 +1517,37 @@ class PageBuilderClass {
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
     } catch (error) {
       console.error('Error parsing JSON components:', error)
+      // Set empty array on error to ensure consistent state
+      this.pageBuilderStateStore.setComponents([])
+    }
+  }
+
+  // Private method to parse HTML components
+  #parseHTMLComponents(htmlData: string): void {
+    console.log('using JSON method...')
+    try {
+      // Parse the HTML content using DOMParser
+      const parser = new DOMParser()
+      const doc = parser.parseFromString(htmlData, 'text/html')
+
+      // Select all <section> elements with data-componentid attribute
+      const sectionElements = doc.querySelectorAll('section[data-componentid]')
+
+      const extractedSections: ComponentObject[] = []
+      // Loop through the selected elements and extract outerHTML
+      sectionElements.forEach((section) => {
+        const htmlElement = section as HTMLElement
+        extractedSections.push({
+          html_code: htmlElement.outerHTML,
+          id: htmlElement.dataset.componentid || null,
+          title:
+            htmlElement.dataset.title || htmlElement.dataset.componentid || 'Untitled Component',
+        })
+      })
+
+      this.pageBuilderStateStore.setComponents(extractedSections)
+    } catch (error) {
+      console.error('Error parsing HTML components:', error)
       // Set empty array on error to ensure consistent state
       this.pageBuilderStateStore.setComponents([])
     }
@@ -1518,7 +1565,7 @@ class PageBuilderClass {
       // Create mode: Load from localStorage (drafts)
       const storedData = this.areComponentsStoredInLocalStorage()
       if (storedData) {
-        this.setComponentsFromJSON(storedData)
+        this.setComponentsFromData(storedData)
       }
     }
 
@@ -1526,7 +1573,7 @@ class PageBuilderClass {
       console.log('should come here, since update...... passed JSONComponents are:', JSONComponents)
       // Update mode: Use passed JSONComponents
       if (JSONComponents) {
-        this.setComponentsFromJSON(JSONComponents)
+        this.setComponentsFromData(JSONComponents)
       }
     }
   }
