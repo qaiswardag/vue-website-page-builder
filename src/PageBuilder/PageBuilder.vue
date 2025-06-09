@@ -42,7 +42,7 @@ if (props.configPageBuilder) {
   // Ensure updateOrCreate defaults with proper deep merge
   const defaultUpdateOrCreate = {
     formType: 'create',
-    createNewResourceFormName: 'article',
+    createNewResourceFormName: 'post',
   }
 
   const defaultUserSettings = {

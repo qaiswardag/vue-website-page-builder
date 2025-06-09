@@ -1501,20 +1501,21 @@ class PageBuilderClass {
     const trimmedData = data.trim()
 
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
+      console.log('Using JSON method..............1')
       // Looks like JSON - parse as JSON
       this.#parseJSONComponents(trimmedData)
     } else if (trimmedData.startsWith('<')) {
+      console.log('Using HTML method..............2')
       // Looks like HTML - parse as HTML
       this.#parseHTMLComponents(trimmedData)
     } else {
-      console.log('using JSON method..............')
+      console.log('Using JSON method..............3')
       this.#parseJSONComponents(trimmedData)
     }
   }
 
   // Private method to parse JSON components
   #parseJSONComponents(jsonData: string): void {
-    console.log('using JSON method...')
     try {
       const parsedData = JSON.parse(jsonData)
       let savedCurrentDesign: ComponentObject[] = []
@@ -1580,8 +1581,6 @@ class PageBuilderClass {
     }
 
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
-      console.log('data:', data)
-      // Update mode: Use passed data
       if (data) {
         this.setComponentsFromData(data)
       }
