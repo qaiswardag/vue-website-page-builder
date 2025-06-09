@@ -1574,7 +1574,11 @@ class PageBuilderClass {
       console.log('loadExistingContent')
     }
 
-    console.log('getConfigPageBuilder iiis:', this.pageBuilderStateStore.getConfigPageBuilder)
+    console.log(
+      'getConfigPageBuilder noooooooow:',
+      this.pageBuilderStateStore.getLocalStorageItemName,
+    )
+    // console.log('getConfigPageBuilder iiis:', this.pageBuilderStateStore.getConfigPageBuilder)
 
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
@@ -1586,10 +1590,6 @@ class PageBuilderClass {
       }
     }
 
-    console.log(
-      'twoos',
-      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update',
-    )
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
       // Update mode: Use passed data
       if (data) {
