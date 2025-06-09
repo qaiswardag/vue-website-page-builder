@@ -280,66 +280,6 @@ onMounted(async () => {
       </div>
       <!-- Save laylout # end -->
 
-      <div class="py-4 p-4 bg-red-100 text-sm test-data m-4 rounded-lg">
-        <h3 class="font-semibold mb-3 text-gray-800">PageBuilder Debug Info</h3>
-        <div class="bg-white rounded border overflow-hidden">
-          <table class="min-w-full text-xs">
-            <thead class="bg-gray-50">
-              <tr>
-                <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Property</th>
-                <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Value</th>
-                <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Type</th>
-                <th class="px-3 py-2 text-left font-medium text-gray-700 border-b">Present</th>
-              </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-200">
-              <tr>
-                <td class="px-3 py-2 font-medium text-gray-600">User (store)</td>
-                <td class="px-3 py-2">
-                  {{ getCurrentUser ? JSON.stringify(getCurrentUser) : 'null' }}
-                </td>
-                <td class="px-3 py-2 text-gray-500">{{ typeof getCurrentUser }}</td>
-                <td class="px-3 py-2 text-gray-500">{{ !!getCurrentUser }}</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-gray-600">Update or Create (store)</td>
-                <td class="px-3 py-2">{{ getUpdateOrCreate }}</td>
-                <td class="px-3 py-2 text-gray-500">{{ typeof getUpdateOrCreate }}</td>
-                <td class="px-3 py-2 text-gray-500">{{ !!getUpdateOrCreate }}</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-gray-600">Resource Data (store)</td>
-                <td class="px-3 py-2">
-                  {{ getCurrentResourceData ? JSON.stringify(getCurrentResourceData) : 'null' }}
-                </td>
-                <td class="px-3 py-2 text-gray-500">{{ typeof getCurrentResourceData }}</td>
-                <td class="px-3 py-2 text-gray-500">{{ !!getCurrentResourceData }}</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-gray-600">Custom Media Component</td>
-                <td class="px-3 py-2">
-                  {{ props.CustomMediaLibraryComponent ? 'Provided' : 'Not provided' }}
-                </td>
-                <td class="px-3 py-2 text-gray-500">
-                  {{ props.CustomMediaLibraryComponent ? 'true' : 'false' }}
-                </td>
-                <td class="px-3 py-2 text-gray-500">{{ !!props.CustomMediaLibraryComponent }}</td>
-              </tr>
-              <tr>
-                <td class="px-3 py-2 font-medium text-gray-600">Custom Search Component</td>
-                <td class="px-3 py-2">
-                  {{ props.CustomSearchComponent ? 'Provided' : 'Not provided' }}
-                </td>
-                <td class="px-3 py-2 text-gray-500">
-                  {{ props.CustomSearchComponent ? 'true' : 'false' }}
-                </td>
-                <td class="px-3 py-2 text-gray-500">{{ !!props.CustomSearchComponent }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-
       <div class="relative h-full flex">
         <div
           @click.self="pageBuilderStateStore.setComponent(null)"

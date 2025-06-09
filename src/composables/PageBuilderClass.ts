@@ -1549,17 +1549,26 @@ class PageBuilderClass {
       console.log('loadExistingContent')
     }
 
-    if (this.pageBuilderStateStore.getUpdateOrCreate === 'update') {
-      if (this.areComponentsStoredInLocalStorage()) {
+    if (Array.isArray(this.getComponents.value) && this.areComponentsStoredInLocalStorage()) {
+      if (this.pageBuilderStateStore.getUpdateOrCreate === 'create') {
         try {
-          // set components
-          const htmlOutput =
-            Array.isArray(this.getComponents.value) &&
-            this.getComponents.value
-              .map((component) => {
-                return component.html_code
-              })
-              .join('')
+          const htmlOutput = this.getComponents.value
+            .map((component) => {
+              return component.html_code
+            })
+            .join('')
+        } catch (error) {
+          console.error('Error loading existing content:', error)
+        }
+      }
+
+      if (this.pageBuilderStateStore.getUpdateOrCreate === 'update') {
+        try {
+          const htmlOutput = this.getComponents.value
+            .map((component) => {
+              return component.html_code
+            })
+            .join('')
         } catch (error) {
           console.error('Error loading existing content:', error)
         }
