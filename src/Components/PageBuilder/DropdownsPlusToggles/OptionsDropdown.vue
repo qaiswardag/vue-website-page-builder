@@ -174,37 +174,6 @@ const settingsSlideOverButton = function () {
                   getConfigPageBuilder.resourceData.title
                 "
               >
-                <MenuItem v-slot="{ active }">
-                  <div
-                    class="cursor-default"
-                    :class="[
-                      active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                      'block px-4 py-2',
-                    ]"
-                  >
-                    <div class="flex items-center justify-left gap-2 text-sm">
-                      <div
-                        class="h-8 w-8 cursor-default rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                      >
-                        <span class="material-symbols-outlined text-[16px]"> bookmark </span>
-                      </div>
-                      <div>
-                        <div class="text-[10px] text-gray-500">
-                          {{
-                            getConfigPageBuilder.updateOrCreate === 'create'
-                              ? 'Crating new Resource'
-                              : 'Updating existing Resource'
-                          }}
-                        </div>
-                        {{
-                          getConfigPageBuilder &&
-                          getConfigPageBuilder.resourceData &&
-                          getConfigPageBuilder.resourceData.title
-                        }}
-                      </div>
-                    </div>
-                  </div>
-                </MenuItem>
               </template>
               <MenuItem v-slot="{ active }">
                 <div
