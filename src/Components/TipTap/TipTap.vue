@@ -1,9 +1,9 @@
 <script setup>
-import { inject } from 'vue'
 import PageBuilderClass from '../../composables/PageBuilderClass.ts'
+import { sharedPageBuilderStore } from '../../stores/shared-store'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 </script>

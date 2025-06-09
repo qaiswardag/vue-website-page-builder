@@ -21,7 +21,7 @@ import tailwindFontStyles from '../utils/builder/tailwind-font-styles'
 import tailwindPaddingAndMargin from '../utils/builder/tailwind-padding-margin'
 import tailwindBorderRadius from '../utils/builder/tailwind-border-radius'
 import tailwindBorderStyleWidthPlusColor from '../utils/builder/tailwind-border-style-width-color'
-import { computed, ref, nextTick, inject } from 'vue'
+import { computed, ref, nextTick } from 'vue'
 import type { ComputedRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { delay } from './delay'
@@ -72,7 +72,6 @@ class PageBuilderClass {
 
     this.timer = null
 
-    // Store is now required parameter - no fallback to inject
     this.pageBuilderStateStore = pageBuilderStateStore
 
     this.getTextAreaVueModel = computed(() => this.pageBuilderStateStore.getTextAreaVueModel)

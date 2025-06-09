@@ -1,12 +1,13 @@
 <script setup>
-import { ref, computed, inject, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
 import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import tailwindFontSizes from '../../../../utils/builder/tailwind-font-sizes'
 import tailwindFontStyles from '../../../../utils/builder/tailwind-font-styles'
+import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const fontBase = ref(null)

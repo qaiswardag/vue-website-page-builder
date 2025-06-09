@@ -1,11 +1,12 @@
 <script setup>
-import { ref, computed, inject, watch } from 'vue'
+import { ref, computed, watch } from 'vue'
+import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import EditorAccordion from '../EditorAccordion.vue'
 import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import tailwindPaddingPlusMargin from '../../../../utils/builder/tailwind-padding-margin'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const fontVerticalPadding = ref(null)

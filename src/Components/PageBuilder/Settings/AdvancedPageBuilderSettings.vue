@@ -1,8 +1,9 @@
 <script setup>
-import { ref, computed, inject } from 'vue'
+import { ref, computed } from 'vue'
+import { sharedPageBuilderStore } from '../../../stores/shared-store'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement

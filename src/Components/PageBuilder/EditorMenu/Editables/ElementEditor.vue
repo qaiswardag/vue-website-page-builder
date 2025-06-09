@@ -1,10 +1,11 @@
 <script setup>
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
+import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import EditorAccordion from '../EditorAccordion.vue'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 

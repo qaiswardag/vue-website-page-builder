@@ -1,5 +1,6 @@
 <script setup>
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
+import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import ClassEditor from './Editables/ClassEditor.vue'
 import ImageEditor from './Editables/ImageEditor.vue'
 import OpacityEditor from './Editables/OpacityEditor.vue'
@@ -14,8 +15,8 @@ import TipTap from '../../TipTap/TipTap.vue'
 import EditGetElement from './Editables/EditGetElement.vue'
 import ElementEditor from './Editables/ElementEditor.vue'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 // emit
 const emit = defineEmits(['closeEditor'])

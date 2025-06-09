@@ -1,16 +1,6 @@
 <script setup>
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
 import { delay } from '../../composables/delay'
-import { usePageBuilderStateStore } from '../../stores/page-builder-state'
-
-import {
-  Dialog,
-  DialogOverlay,
-  DialogTitle,
-  TransitionChild,
-  TransitionRoot,
-} from '@headlessui/vue'
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 
 // Use shared store instance
 import { sharedPageBuilderStore } from '../../stores/shared-store'

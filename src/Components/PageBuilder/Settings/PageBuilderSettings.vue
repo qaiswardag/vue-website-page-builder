@@ -1,12 +1,13 @@
 <script setup>
 import SlideOverRightParent from '../Slidebars/SlideOverRightParent.vue'
 import AdvancedPageBuilderSettings from './AdvancedPageBuilderSettings.vue'
-import { ref, computed, inject } from 'vue'
+import { ref, computed } from 'vue'
+import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
 const version = __APP_VERSION__
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
 const showAdvancedSettingsSlideOverRight = ref(false)
 const titleSettingsSlideOverRight = ref('')

@@ -1,11 +1,11 @@
 <script setup>
-import { computed, watch, ref, inject } from 'vue'
-import EditorAccordion from '../EditorAccordion.vue'
+import { computed, ref, inject } from 'vue'
 import MediaLibraryModal from '../../../Modals/MediaLibraryModal.vue'
 import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 
-// Get stores from parent PageBuilder component
-const pageBuilderStateStore = inject('pageBuilderStateStore')
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 const customMediaComponent = inject('CustomMediaComponent')
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
