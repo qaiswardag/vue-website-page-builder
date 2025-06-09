@@ -93,7 +93,10 @@ export interface PageBuilderUser {
 
 // Page Builder Configuration interface
 export interface PageBuilderConfig {
-  updateOrCreate?: 'create' | 'update'
+  updateOrCreate?: {
+    formType: string
+    createNewResourceFormName?: string
+  }
   pageBuilderLogo?: string
   resourceData?: { title: string; id: number } | null
   userForPageBuilder?: { name: string } | null

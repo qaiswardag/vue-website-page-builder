@@ -344,10 +344,27 @@ const handleDownloadHTML = function () {
                         "
                       >
                         {{
-                          getConfigPageBuilder.updateOrCreate === 'create'
+                          getConfigPageBuilder.updateOrCreate.formType === 'create'
                             ? 'Creating new Resource'
                             : 'Updating existing Resource'
                         }}
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Form Name
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                        :class="
+                          getConfigPageBuilder.updateOrCreate === 'create'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-blue-100 text-blue-800'
+                        "
+                      >
+                        {{ getConfigPageBuilder.updateOrCreate.createNewResourceFormName }}
                       </span>
                     </td>
                   </tr>

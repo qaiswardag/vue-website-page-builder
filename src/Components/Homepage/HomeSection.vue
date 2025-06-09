@@ -80,7 +80,10 @@ const features = [
       <div>
         <PageBuilder
           :configPageBuilder="{
-            updateOrCreate: 'create',
+            updateOrCreate: {
+              formType: 'create',
+              createNewResourceFormName: 'post',
+            },
             pageBuilderLogo: {
               src: '/logo/logo.svg',
             },

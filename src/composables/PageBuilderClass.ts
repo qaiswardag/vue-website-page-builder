@@ -1100,11 +1100,22 @@ class PageBuilderClass {
 
   updateLocalStorageItemName(): void {
     const updateOrCreate =
-      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate || 'create'
+      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType || 'create'
 
     const resourceData = this.pageBuilderStateStore.getConfigPageBuilder?.resourceData
 
-    // Logic for update
+    const resourceFormName =
+      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.createNewResourceFormName
+
+    // Logic for create
+    if (updateOrCreate === 'create' && resourceFormName && resourceFormName.length > 0) {
+      this.pageBuilderStateStore.setLocalStorageItemName(
+        `page-builder-create-resource-${this.sanitizeForLocalStorage(resourceFormName)}`,
+      )
+      return
+    }
+
+    // Logic for create
     if (updateOrCreate === 'create') {
       this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-create-resource`)
       return
@@ -1481,7 +1492,7 @@ class PageBuilderClass {
     const storedData = this.areComponentsStoredInLocalStorage()
 
     if (storedData) {
-      if (this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate === 'create') {
+      if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
         try {
           // Parse the JSON string from localStorage
           const parsedData = JSON.parse(storedData)
@@ -1499,7 +1510,7 @@ class PageBuilderClass {
         }
       }
 
-      if (this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate === 'update') {
+      if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
         try {
           // Parse the JSON string from localStorage
           const parsedData = JSON.parse(storedData)

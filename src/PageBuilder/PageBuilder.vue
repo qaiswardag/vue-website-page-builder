@@ -43,7 +43,11 @@ if (props.configPageBuilder) {
   // Ensure updateOrCreate defaults to 'create' if not provided
   const configWithDefaults = {
     ...props.configPageBuilder,
-    updateOrCreate: props.configPageBuilder.updateOrCreate || 'create',
+    updateOrCreate: props.configPageBuilder.updateOrCreate || {
+      formType: 'create',
+      createNewResourceFormName: 'post',
+    },
+
     userSettings: props.configPageBuilder.userSettings || {
       theme: 'light',
       language: 'en',
