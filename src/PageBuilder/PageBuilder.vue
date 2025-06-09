@@ -47,8 +47,8 @@ if (props.configPageBuilder) {
   }
 
   const defaultUserSettings = {
-    theme: 'pink',
-    language: 'sw',
+    theme: 'light',
+    language: 'en',
     autoSave: true,
   }
 
