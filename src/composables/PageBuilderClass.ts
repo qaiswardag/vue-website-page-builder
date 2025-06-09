@@ -1123,8 +1123,6 @@ class PageBuilderClass {
       // Runs when resourceData has id but no title
       if (typeof resourceData === 'object' && 'id' in resourceData && !('title' in resourceData)) {
         const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
-        console.log('ID BUT NOT TITLE:', `page-builder-update-resource-${sanitizedId}`)
-
         this.pageBuilderStateStore.setLocalStorageItemName(
           `page-builder-update-resource-${sanitizedId}`,
         )
@@ -1134,8 +1132,6 @@ class PageBuilderClass {
       // Runs when resourceData has title but no id
       if (typeof resourceData === 'object' && 'title' in resourceData && !('id' in resourceData)) {
         const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
-        console.log('TITLE BUT NOT ID:', `page-builder-update-resource-${sanitizedTitle}`)
-
         this.pageBuilderStateStore.setLocalStorageItemName(
           `page-builder-update-resource-${sanitizedTitle}`,
         )
@@ -1152,8 +1148,6 @@ class PageBuilderClass {
         )
         return
       }
-
-      console.log('both are there...')
     }
   }
 

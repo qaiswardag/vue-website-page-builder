@@ -98,8 +98,55 @@ const handleDownloadHTML = function () {
             including UI theme, language, saved components, and logo configuration.
           </p>
         </div>
+
+        <!-- Resource Data Table - start -->
+        <div class="mt-4" v-if="getConfigPageBuilder?.resourceData">
+          <h4 class="myQuaternaryHeader text-sm mb-2">Resource Data</h4>
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Property
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Value
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr v-if="getConfigPageBuilder?.resourceData?.title">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Title
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {{ getConfigPageBuilder.resourceData.title }}
+                    </td>
+                  </tr>
+                  <tr v-if="getConfigPageBuilder?.resourceData?.id">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      ID
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {{ getConfigPageBuilder.resourceData.id }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Resource Data Table - end -->
+
         <!-- User Settings Table - start -->
-        <div class="mt-4">
+        <div class="mt-8">
           <h4 class="myQuaternaryHeader text-sm mb-2">User Settings</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
