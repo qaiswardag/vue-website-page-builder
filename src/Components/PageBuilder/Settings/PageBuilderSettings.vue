@@ -12,6 +12,10 @@ const showAdvancedSettingsSlideOverRight = ref(false)
 const titleSettingsSlideOverRight = ref('')
 const downloadedComponents = ref(null)
 
+const getConfigPageBuilder = computed(() => {
+  return pageBuilderStateStore.getConfigPageBuilder
+})
+
 // handle slideover window
 const handleAdvancedSettingsSlideOver = function () {
   titleSettingsSlideOverRight.value = 'Advanced Settings'
@@ -64,23 +68,310 @@ const handleDownloadHTML = function () {
       <AdvancedPageBuilderSettings></AdvancedPageBuilderSettings>
     </SlideOverRightParent>
     <!-- Advanced Settings - start -->
-    <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
-      <div class="flex items-left flex-col gap-1">
-        <h3 class="myQuaternaryHeader">Advanced Settings</h3>
+    <div
+      class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor flex gap-4 flex-col divide-y divide-gray-300"
+    >
+      <div class="flex items-left flex-col gap-2">
+        <h3 class="myQuaternaryHeader">Selections Overview</h3>
         <p class="myPrimaryParagraph text-xs">
           Manage advanced settings here. Like an overview of Selected Element, Component, and
           Components in real-time.
         </p>
-        <p class="myPrimaryParagraph text-xs pt-4">Page Builder Version: {{ version }}</p>
+
+        <div class="my-4">
+          <button
+            @click="handleAdvancedSettingsSlideOver"
+            type="button"
+            class="myPrimaryButton text-xs"
+          >
+            Open Overview
+          </button>
+        </div>
       </div>
-      <div class="mt-4">
-        <button
-          @click="handleAdvancedSettingsSlideOver"
-          type="button"
-          class="myPrimaryButton text-xs"
-        >
-          Advanced Settings
-        </button>
+
+      <!-- Advanced Settings - start -->
+      <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
+        <div class="flex items-left flex-col gap-1">
+          <h3 class="myQuaternaryHeader">Configuration Overview</h3>
+          <p class="myPrimaryParagraph text-xs">
+            A summary of current user preferences, application settings, and system metadata
+            including UI theme, language, saved components, and logo configuration.
+          </p>
+        </div>
+        <!-- User Settings Table - start -->
+        <div class="mt-4">
+          <h4 class="myQuaternaryHeader text-sm mb-2">User Settings</h4>
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Setting
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Value
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr v-if="getConfigPageBuilder?.userSettings?.theme">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Theme
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {{ getConfigPageBuilder.userSettings.theme }}
+                    </td>
+                  </tr>
+                  <tr v-if="getConfigPageBuilder?.userSettings?.language">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Language
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {{ getConfigPageBuilder.userSettings.language }}
+                    </td>
+                  </tr>
+                  <tr v-if="getConfigPageBuilder?.userSettings?.autoSave !== undefined">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Auto Save
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                        :class="
+                          getConfigPageBuilder.userSettings.autoSave
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-red-100 text-red-800'
+                        "
+                      >
+                        {{ getConfigPageBuilder.userSettings.autoSave ? 'Enabled' : 'Disabled' }}
+                      </span>
+                    </td>
+                  </tr>
+                  <tr v-if="getConfigPageBuilder?.userSettings?.notifications !== undefined">
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Notifications
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                        :class="
+                          getConfigPageBuilder.userSettings.notifications
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-red-100 text-red-800'
+                        "
+                      >
+                        {{
+                          getConfigPageBuilder.userSettings.notifications ? 'Enabled' : 'Disabled'
+                        }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- User Settings Table - end -->
+
+        <!-- Version Information Table - start -->
+        <div class="mt-8">
+          <h4 class="myQuaternaryHeader text-sm mb-2">Version Information</h4>
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Component
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Version
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Page Builder
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                      >
+                        {{ version }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Version Information Table - end -->
+
+        <!-- User Information Table - start -->
+        <div class="mt-8" v-if="getConfigPageBuilder?.userForPageBuilder">
+          <h4 class="myQuaternaryHeader text-sm mb-2">User Information</h4>
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Property
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Value
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      User Name
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      {{ getConfigPageBuilder.userForPageBuilder.name }}
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- User Information Table - end -->
+
+        <!-- Operation Mode Table - start -->
+        <div class="mt-8" v-if="getConfigPageBuilder?.updateOrCreate">
+          <h4 class="myQuaternaryHeader text-sm mb-2">Operation Mode</h4>
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Mode
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Description
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Current Operation
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                        :class="
+                          getConfigPageBuilder.updateOrCreate === 'create'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-blue-100 text-blue-800'
+                        "
+                      >
+                        {{
+                          getConfigPageBuilder.updateOrCreate === 'create'
+                            ? 'Creating new Resource'
+                            : 'Updating existing Resource'
+                        }}
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Operation Mode Table - end -->
+
+        <!-- Page Builder Logo Table - start -->
+        <div class="mt-8" v-if="getConfigPageBuilder?.pageBuilderLogo">
+          <h4 class="myQuaternaryHeader text-sm mb-2">Logo Configuration</h4>
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Property
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Value
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Logo
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <div class="flex items-center space-x-3">
+                        <div class="border-r border-gray-200 pr-6">
+                          <img
+                            class="h-3"
+                            :src="getConfigPageBuilder.pageBuilderLogo.src"
+                            alt="Logo"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Logo URL
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <div class="flex items-center space-x-3">
+                        <div class="border-r border-gray-200 pr-6">
+                          <div class="flex items-center space-x-3">
+                            <span class="whitespace-nowrap">{{
+                              getConfigPageBuilder.pageBuilderLogo.src
+                            }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Page Builder Logo Table - end -->
       </div>
     </div>
     <!-- Advanced Settings - end -->

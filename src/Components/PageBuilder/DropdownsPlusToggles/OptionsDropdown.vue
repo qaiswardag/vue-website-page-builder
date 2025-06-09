@@ -11,12 +11,8 @@ import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
 // Get consolidated store from parent PageBuilder component
 const pageBuilderStateStore = inject('pageBuilderStateStore')
 
-const getCurrentUser = computed(() => {
-  return pageBuilderStateStore.getCurrentUser
-})
-
-const getCurrentResourceData = computed(() => {
-  return pageBuilderStateStore.getCurrentResourceData
+const getConfigPageBuilder = computed(() => {
+  return pageBuilderStateStore.getConfigPageBuilder
 })
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
@@ -139,7 +135,13 @@ const settingsSlideOverButton = function () {
           class="z-50 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
         >
           <div class="py-1">
-            <template v-if="getCurrentUser && getCurrentUser.name">
+            <template
+              v-if="
+                getConfigPageBuilder &&
+                getConfigPageBuilder.userForPageBuilder &&
+                getConfigPageBuilder.userForPageBuilder.name
+              "
+            >
               <MenuItem v-slot="{ active }">
                 <div
                   class="cursor-defualt"
@@ -155,16 +157,59 @@ const settingsSlideOverButton = function () {
                       <span class="material-symbols-outlined text-[16px]"> person </span>
                     </div>
                     <div>
-                      {{ getCurrentUser.name }}
+                      {{ getConfigPageBuilder.userForPageBuilder.name }}
                     </div>
                   </div>
                 </div>
               </MenuItem>
             </template>
-            <template v-if="getCurrentResourceData && getCurrentResourceData.title">
+
+            <p>
+              <template
+                v-if="
+                  getConfigPageBuilder &&
+                  typeof getConfigPageBuilder.updateOrCreate === 'string' &&
+                  getConfigPageBuilder.updateOrCreate.length > 0 &&
+                  getConfigPageBuilder.resourceData &&
+                  getConfigPageBuilder.resourceData.title
+                "
+              >
+                <MenuItem v-slot="{ active }">
+                  <div
+                    class="cursor-default"
+                    :class="[
+                      active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
+                      'block px-4 py-2',
+                    ]"
+                  >
+                    <div class="flex items-center justify-left gap-2 text-sm">
+                      <div
+                        class="h-8 w-8 cursor-default rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                      >
+                        <span class="material-symbols-outlined text-[16px]"> bookmark </span>
+                      </div>
+                      <div>
+                        <div class="text-[10px] text-gray-500">
+                          {{
+                            getConfigPageBuilder.updateOrCreate === 'create'
+                              ? 'Crating new Resource'
+                              : 'Updating existing Resource'
+                          }}
+                        </div>
+                        {{
+                          getConfigPageBuilder &&
+                          getConfigPageBuilder.resourceData &&
+                          getConfigPageBuilder.resourceData.title
+                        }}
+                      </div>
+                    </div>
+                  </div>
+                </MenuItem>
+              </template>
               <MenuItem v-slot="{ active }">
                 <div
-                  class="cursor-default"
+                  @click="handlePageBuilderPreview"
+                  class="cursor-pointer"
                   :class="[
                     active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
                     'block px-4 py-2',
@@ -172,75 +217,56 @@ const settingsSlideOverButton = function () {
                 >
                   <div class="flex items-center justify-left gap-2 text-sm">
                     <div
-                      class="h-8 w-8 cursor-default rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
                     >
-                      <span class="material-symbols-outlined text-[16px]"> post </span>
+                      <span class="material-symbols-outlined text-[16px]"> visibility </span>
                     </div>
-                    <div>
-                      {{ getCurrentResourceData.title }}
-                    </div>
+                    Preview
                   </div>
                 </div>
               </MenuItem>
-            </template>
-            <MenuItem v-slot="{ active }">
-              <div
-                @click="handlePageBuilderPreview"
-                class="cursor-pointer"
-                :class="[
-                  active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                  'block px-4 py-2',
-                ]"
-              >
-                <div class="flex items-center justify-left gap-2 text-sm">
-                  <div
-                    class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                  >
-                    <span class="material-symbols-outlined text-[16px]"> visibility </span>
-                  </div>
-                  Preview
-                </div>
-              </div>
-            </MenuItem>
 
-            <MenuItem v-slot="{ active }">
-              <div
-                @click="handleSettingsSlideOver"
-                class="cursor-pointer"
-                :class="[
-                  active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                  'block px-4 py-2',
-                ]"
-              >
-                <div class="flex items-center justify-left gap-2 text-sm">
-                  <div
-                    class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                  >
-                    <span class="material-symbols-outlined text-[16px]"> settings </span>
+              <MenuItem v-slot="{ active }">
+                <div
+                  @click="handleSettingsSlideOver"
+                  class="cursor-pointer"
+                  :class="[
+                    active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2',
+                  ]"
+                >
+                  <div class="flex items-center justify-left gap-2 text-sm">
+                    <div
+                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                    >
+                      <span class="material-symbols-outlined text-[16px]"> settings </span>
+                    </div>
+                    Settings
                   </div>
-                  Settings
                 </div>
-              </div>
-            </MenuItem>
-            <MenuItem v-slot="{ active }">
-              <div
-                @click="deleteAllComponents"
-                class="cursor-pointer"
-                :class="[
-                  active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                  'block px-4 py-2',
-                ]"
-              >
-                <div class="flex items-center justify-left gap-2 text-sm">
-                  <div
-                    class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white text-myPrimaryErrorColor"
-                  >
-                    <span class="myMediumIcon material-symbols-outlined text-[16px]"> delete </span>
+              </MenuItem>
+              <MenuItem v-slot="{ active }">
+                <div
+                  @click="deleteAllComponents"
+                  class="cursor-pointer"
+                  :class="[
+                    active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2',
+                  ]"
+                >
+                  <div class="flex items-center justify-left gap-2 text-sm">
+                    <div
+                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white text-myPrimaryErrorColor"
+                    >
+                      <span class="myMediumIcon material-symbols-outlined text-[16px]">
+                        delete
+                      </span>
+                    </div>
+                    <span class="group-hover:text-white"> Clear page </span>
                   </div>
-                  <span class="group-hover:text-white"> Clear page </span>
                 </div>
-              </div>
-            </MenuItem>
+              </MenuItem>
+            </p>
           </div>
         </MenuItems>
       </transition>

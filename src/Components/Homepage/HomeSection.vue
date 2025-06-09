@@ -79,9 +79,22 @@ const features = [
       </div>
       <div>
         <PageBuilder
-          PageBuilderLogo="/logo/logo.svg"
-          :userForPageBuilder="{ name: 'John Doe' }"
-          :resourceData="{ title: 'Demo Article', id: 1 }"
+          :configPageBuilder="{
+            updateOrCreate: 'create',
+            pageBuilderLogo: {
+              src: '/logo/logo.svg',
+            },
+            userForPageBuilder: { name: 'John Doe' },
+            resourceData: {
+              title: 'Demo Article',
+              id: 1,
+            },
+            userSettings: {
+              theme: 'light',
+              language: 'en',
+              autoSave: true,
+            },
+          }"
         ></PageBuilder>
       </div>
       <div @click="handleButton" class="myPrimaryContentSection cursor-pointer">

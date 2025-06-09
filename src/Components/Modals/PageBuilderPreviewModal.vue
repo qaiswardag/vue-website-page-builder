@@ -39,8 +39,8 @@ const handleEscapeKey = function () {
   firstButton()
 }
 
-const getPageBuilderLogo = computed(() => {
-  return pageBuilderStateStore.getPageBuilderLogo
+const getConfigPageBuilder = computed(() => {
+  return pageBuilderStateStore.getConfigPageBuilder
 })
 </script>
 
@@ -88,9 +88,16 @@ const getPageBuilderLogo = computed(() => {
               <div
                 class="px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
               >
-                <div v-if="getPageBuilderLogo" class="flex items-center divide-x divide-gray-200">
+                <div
+                  v-if="
+                    getConfigPageBuilder &&
+                    getConfigPageBuilder.pageBuilderLogo &&
+                    getConfigPageBuilder.pageBuilderLogo.src
+                  "
+                  class="flex items-center divide-x divide-gray-200"
+                >
                   <div class="pr-4">
-                    <img class="h-6" :src="getPageBuilderLogo" alt="Logo" />
+                    <img class="h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
                   </div>
                   <span class="myPrimaryParagraph font-medium pl-4">Preview mode </span>
                 </div>

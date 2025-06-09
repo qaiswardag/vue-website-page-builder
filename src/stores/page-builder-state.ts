@@ -4,13 +4,11 @@ import type {
   ComponentObject,
   SetPushComponentsPayload,
   ImageObject,
-  UserSettings,
-  User,
+  PageBuilderConfig,
 } from '../types'
 
 interface PageBuilderState {
   // Core Page Builder State
-  pageBuilderLogo: string | null
   componentArrayAddMethod: string | null
   localStorageItemName: string | null
   showModalTipTap: boolean
@@ -54,8 +52,7 @@ interface PageBuilderState {
   component: ComponentObject | null
   components: ComponentObject[]
   basePrimaryImage: string | null
-  currentResourceData: { title: string; id: number } | null
-  updateOrCreate: string
+  configPageBuilder: PageBuilderConfig | null
 
   // Media Library State
   currentImage: ImageObject
@@ -63,14 +60,11 @@ interface PageBuilderState {
 
   // User State
   isLoading: boolean
-  userSettings: UserSettings | null
-  currentUser: User | null
 }
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
   state: (): PageBuilderState => ({
     // Core Page Builder State
-    pageBuilderLogo: null,
     componentArrayAddMethod: null,
     localStorageItemName: null,
     showModalTipTap: false,
@@ -114,8 +108,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     component: null,
     components: [],
     basePrimaryImage: null,
-    currentResourceData: null,
-    updateOrCreate: '',
+    configPageBuilder: null,
 
     // Media Library State
     currentImage: { src: '' },
@@ -123,14 +116,9 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
 
     // User State
     isLoading: false,
-    userSettings: null,
-    currentUser: null,
   }),
   getters: {
     // Core Page Builder Getters
-    getPageBuilderLogo(state: PageBuilderState): string | null {
-      return state.pageBuilderLogo
-    },
     getComponentArrayAddMethod(state: PageBuilderState): string | null {
       return state.componentArrayAddMethod
     },
@@ -261,12 +249,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       return state.basePrimaryImage
     },
 
-    // øøø
-    getCurrentResourceData(state: PageBuilderState): { title: string; id: number } | null {
-      return state.currentResourceData
-    },
-    getUpdateOrCreate(state: PageBuilderState): string {
-      return state.updateOrCreate
+    getConfigPageBuilder(state: PageBuilderState): PageBuilderConfig | null {
+      return state.configPageBuilder
     },
 
     // Media Library Getters
@@ -279,14 +263,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
 
     // User Getters
     getIsLoading: (state: PageBuilderState): boolean => state.isLoading,
-    getUserSettings: (state: PageBuilderState): UserSettings | null => state.userSettings,
-    getCurrentUser: (state: PageBuilderState): User | null => state.currentUser,
   },
   actions: {
-    // Core Page Builder Actions
-    setPageBuilderLogo(payload: string | null): void {
-      this.pageBuilderLogo = payload
-    },
     setComponentArrayAddMethod(payload: string | null): void {
       this.componentArrayAddMethod = payload
     },
@@ -456,11 +434,9 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     setCurrentLayoutPreview(payload: string): void {
       localStorage.setItem('preview', payload)
     },
-    setCurrentResourceData(payload: { title: string; id: number } | null): void {
-      this.currentResourceData = payload
-    },
-    setUpdateOrCreate(payload: string): void {
-      this.updateOrCreate = payload
+
+    setConfigPageBuilder(payload: PageBuilderConfig | null): void {
+      this.configPageBuilder = payload
     },
 
     // Media Library Actions
@@ -474,12 +450,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     // User Actions
     setIsLoading(payload: boolean): void {
       this.isLoading = payload
-    },
-    setUserSettings(payload: UserSettings | null): void {
-      this.userSettings = payload
-    },
-    setCurrentUser(payload: User | null): void {
-      this.currentUser = payload
     },
   },
 })

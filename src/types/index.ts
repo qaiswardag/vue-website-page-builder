@@ -27,8 +27,6 @@ export interface PageBuilderStateStore {
   getFontDesktop: string | null
   getFontTablet: string | null
   getFontMobile: string | null
-  getUpdateOrCreate: string
-  getCurrentResourceData: { title: string; id: number } | null
   setElement: (element: HTMLElement | null) => void
   setMenuRight: (value: boolean) => void
   setComponent: (component: ComponentObject | null) => void
@@ -57,7 +55,6 @@ export interface PageBuilderStateStore {
   setPushComponents: (payload: SetPushComponentsPayload) => void
   setLocalStorageItemName: (name: string | null) => void
   setUpdateOrCreate: (mode: string) => void
-  setCurrentResourceData: (data: { title: string; id: number } | null) => void
   setFontWeight: (weight: string) => void
   setFontFamily: (family: string) => void
   setFontStyle: (style: string) => void
@@ -94,15 +91,21 @@ export interface PageBuilderUser {
   name: string
 }
 
-// User settings interface
-export interface UserSettings {
-  theme: 'light' | 'dark' | 'auto'
-  language: string
-  notifications?: boolean
-  autoSave: boolean
+// Page Builder Configuration interface
+export interface PageBuilderConfig {
+  updateOrCreate?: 'create' | 'update'
+  pageBuilderLogo?: string
+  resourceData?: { title: string; id: number } | null
+  userForPageBuilder?: { name: string } | null
   [key: string]: unknown
+  userSettings: {
+    theme: 'light' | 'dark' | 'auto'
+    language: string
+    notifications?: boolean
+    autoSave: boolean
+    [key: string]: unknown
+  }
 }
-
 // Tailwind utility interfaces
 export interface TailwindColors {
   backgroundColorVariables: string[]

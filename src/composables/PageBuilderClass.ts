@@ -1099,9 +1099,10 @@ class PageBuilderClass {
   }
 
   updateLocalStorageItemName(): void {
-    const updateOrCreate = this.pageBuilderStateStore.getUpdateOrCreate
+    const updateOrCreate =
+      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate || 'create'
 
-    const resourceData = this.pageBuilderStateStore.getCurrentResourceData
+    const resourceData = this.pageBuilderStateStore.getConfigPageBuilder?.resourceData
 
     // Logic for update
     if (updateOrCreate === 'create') {
@@ -1211,21 +1212,7 @@ class PageBuilderClass {
       const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)
 
       if (savedCurrentDesign) {
-        let components = JSON.parse(savedCurrentDesign)
-
-        // Ensure components is always an array
-        components = Array.isArray(components) ? components : []
-
-        // Transform HTML strings to component objects if needed
-        if (components.length > 0 && typeof components[0] === 'string') {
-          components = components.map((htmlString: string) => ({
-            html_code: htmlString,
-          }))
-        }
-
-        this.pageBuilderStateStore.setComponents(components)
-
-        return true
+        return savedCurrentDesign
       }
     }
 
@@ -1463,6 +1450,81 @@ class PageBuilderClass {
     this.#addHyperlinkToElement(hyperlinkEnable, urlInput || null, openHyperlinkInNewTab || false)
   }
 
+  // Helper method for custom components to easily add components
+  async addComponent(componentObject: ComponentObject): Promise<void> {
+    if (this.showRunningMethodLogs) {
+      console.log('addComponent')
+    }
+
+    try {
+      const clonedComponent = this.cloneCompObjForDOMInsertion({
+        html_code: componentObject.html_code,
+        id: componentObject.id,
+        title: componentObject.title,
+      })
+
+      this.pageBuilderStateStore.setPushComponents({
+        component: clonedComponent,
+        componentArrayAddMethod: this.getComponentArrayAddMethod.value || 'push',
+      })
+
+      // Wait for the DOM to update before setting event listeners
+      await nextTick()
+      this.setEventListenersForElements()
+    } catch (error) {
+      console.error('Error adding component:', error)
+    }
+  }
+
+  // Load existing content from HTML when in update mode
+  loadExistingContent(): void {
+    if (this.showRunningMethodLogs) {
+      console.log('loadExistingContent')
+    }
+
+    if (!this.pageBuilderStateStore.getConfigPageBuilder) return
+
+    const storedData = this.areComponentsStoredInLocalStorage()
+
+    if (storedData) {
+      if (this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate === 'create') {
+        try {
+          // Parse the JSON string from localStorage
+          const parsedData = JSON.parse(storedData)
+          let savedCurrentDesign: ComponentObject[] = []
+
+          // Load ComponentObjects from localStorage
+          if (Array.isArray(parsedData) && parsedData.length > 0) {
+            // Data is always ComponentObjects with html_code, id, and title
+            savedCurrentDesign = parsedData
+          }
+
+          this.pageBuilderStateStore.setComponents(savedCurrentDesign)
+        } catch (error) {
+          console.error('Error loading existing content:', error)
+        }
+      }
+
+      if (this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate === 'update') {
+        try {
+          // Parse the JSON string from localStorage
+          const parsedData = JSON.parse(storedData)
+          let savedCurrentDesign: ComponentObject[] = []
+
+          // Load ComponentObjects from localStorage
+          if (Array.isArray(parsedData) && parsedData.length > 0) {
+            // Data is always ComponentObjects with html_code, id, and title
+            savedCurrentDesign = parsedData
+          }
+
+          this.pageBuilderStateStore.setComponents(savedCurrentDesign)
+        } catch (error) {
+          console.error('Error loading existing content:', error)
+        }
+      }
+    }
+  }
+
   async handlePageBuilderMethods(): Promise<void> {
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
@@ -1515,65 +1577,6 @@ class PageBuilderClass {
     this.handleTextColor(undefined)
     // handle classes
     await this.currentClasses()
-  }
-
-  // Helper method for custom components to easily add components
-  async addComponent(componentObject: ComponentObject): Promise<void> {
-    if (this.showRunningMethodLogs) {
-      console.log('addComponent')
-    }
-
-    try {
-      const clonedComponent = this.cloneCompObjForDOMInsertion({
-        html_code: componentObject.html_code,
-        id: componentObject.id,
-        title: componentObject.title,
-      })
-
-      this.pageBuilderStateStore.setPushComponents({
-        component: clonedComponent,
-        componentArrayAddMethod: this.getComponentArrayAddMethod.value || 'push',
-      })
-
-      // Wait for the DOM to update before setting event listeners
-      await nextTick()
-      this.setEventListenersForElements()
-    } catch (error) {
-      console.error('Error adding component:', error)
-    }
-  }
-
-  // Load existing content from HTML when in update mode
-  loadExistingContent(): void {
-    if (this.showRunningMethodLogs) {
-      console.log('loadExistingContent')
-    }
-
-    if (Array.isArray(this.getComponents.value) && this.areComponentsStoredInLocalStorage()) {
-      if (this.pageBuilderStateStore.getUpdateOrCreate === 'create') {
-        try {
-          const htmlOutput = this.getComponents.value
-            .map((component) => {
-              return component.html_code
-            })
-            .join('')
-        } catch (error) {
-          console.error('Error loading existing content:', error)
-        }
-      }
-
-      if (this.pageBuilderStateStore.getUpdateOrCreate === 'update') {
-        try {
-          const htmlOutput = this.getComponents.value
-            .map((component) => {
-              return component.html_code
-            })
-            .join('')
-        } catch (error) {
-          console.error('Error loading existing content:', error)
-        }
-      }
-    }
   }
 }
 

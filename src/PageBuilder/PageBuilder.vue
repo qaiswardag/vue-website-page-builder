@@ -16,14 +16,9 @@ import { usePageBuilderStateStore } from '../stores/page-builder-state'
  * @typedef {Object} Props
  * @property {Object|null} CustomMediaLibraryComponent - Custom media component
  * @property {Object|null} CustomSearchComponent - Custom search component
- * @property {string} updateOrCreate - Mode: create or update
- * @property {Object|null} user - User object with name property: { name: string }
+ * @property {Object} configPageBuilder - Configuration object containing:
  */
 const props = defineProps({
-  PageBuilderLogo: {
-    type: String,
-    default: null,
-  },
   CustomMediaLibraryComponent: {
     type: Object,
     default: null,
@@ -32,32 +27,10 @@ const props = defineProps({
     type: Object,
     default: null,
   },
-  updateOrCreate: {
-    type: String,
-    default: 'create',
-    required: false,
-  },
-  userForPageBuilder: {
+  configPageBuilder: {
     type: Object,
-    default: null,
-    validator: (value) => {
-      // Allow null or object with name property
-      return value === null || (typeof value === 'object' && typeof value.name === 'string')
-    },
-  },
-  resourceData: {
-    type: Object,
-    default: null,
+    default: () => ({ updateOrCreate: 'create' }),
     required: false,
-    validator: (value) => {
-      // Allow null or object with title (string) and id (number) properties
-      return (
-        value === null ||
-        (typeof value === 'object' &&
-          typeof value.title === 'string' &&
-          typeof value.id === 'number')
-      )
-    },
   },
 })
 
@@ -65,26 +38,20 @@ const props = defineProps({
 const internalPinia = createPinia()
 const pageBuilderStateStore = usePageBuilderStateStore(internalPinia)
 
-// Set logo
-if (props.PageBuilderLogo) {
-  pageBuilderStateStore.setPageBuilderLogo(props.PageBuilderLogo)
+// Set configPageBuilder in store (this will be the single source of truth)
+if (props.configPageBuilder) {
+  // Ensure updateOrCreate defaults to 'create' if not provided
+  const configWithDefaults = {
+    ...props.configPageBuilder,
+    updateOrCreate: props.configPageBuilder.updateOrCreate || 'create',
+    userSettings: props.configPageBuilder.userSettings || {
+      theme: 'light',
+      language: 'en',
+      autoSave: true,
+    },
+  }
+  pageBuilderStateStore.setConfigPageBuilder(configWithDefaults)
 }
-
-const getPageBuilderLogo = computed(() => {
-  return pageBuilderStateStore.getPageBuilderLogo
-})
-
-// Set current resource data if provided
-if (props.resourceData) {
-  pageBuilderStateStore.setCurrentResourceData(props.resourceData)
-}
-// Set current user if provided
-if (props.userForPageBuilder) {
-  pageBuilderStateStore.setCurrentUser(props.userForPageBuilder)
-}
-
-// Set updateOrCreate in store
-pageBuilderStateStore.setUpdateOrCreate(props.updateOrCreate)
 
 // Initialize PageBuilder with store
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
@@ -104,6 +71,10 @@ const closeAddComponentModal = () => {
   showModalAddComponent.value = false
 }
 provide('closeAddComponentModal', closeAddComponentModal)
+
+const getConfigPageBuilder = computed(() => {
+  return pageBuilderStateStore.getConfigPageBuilder
+})
 
 const getMenuRight = computed(() => {
   return pageBuilderStateStore.getMenuRight
@@ -148,17 +119,6 @@ const handleAddComponent = function () {
 
 const getComponents = computed(() => {
   return pageBuilderStateStore.getComponents
-})
-
-const getCurrentUser = computed(() => {
-  return pageBuilderStateStore.getCurrentUser
-})
-
-const getCurrentResourceData = computed(() => {
-  return pageBuilderStateStore.getCurrentResourceData
-})
-const getUpdateOrCreate = computed(() => {
-  return pageBuilderStateStore.getUpdateOrCreate
 })
 
 const getElement = computed(() => {
@@ -246,9 +206,15 @@ onMounted(async () => {
           class="px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
         >
           <div class="flex items-center justify-start divide-x divide-gray-200">
-            <template v-if="getPageBuilderLogo">
+            <template
+              v-if="
+                getConfigPageBuilder &&
+                getConfigPageBuilder.pageBuilderLogo &&
+                getConfigPageBuilder.pageBuilderLogo.src
+              "
+            >
               <div class="border-r border-gray-200 pr-6">
-                <img class="h-6" :src="getPageBuilderLogo" alt="Logo" />
+                <img class="h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
               </div>
             </template>
             <button
