@@ -1481,51 +1481,52 @@ class PageBuilderClass {
     }
   }
 
+  // Public method to parse and set JSON components
+  setComponentsFromJSON(jsonComponents: string): void {
+    if (this.showRunningMethodLogs) {
+      console.log('setComponentsFromJSON')
+    }
+
+    try {
+      // Parse the JSON string
+      const parsedData = JSON.parse(jsonComponents)
+      let savedCurrentDesign: ComponentObject[] = []
+
+      // Load ComponentObjects from parsed data
+      if (Array.isArray(parsedData) && parsedData.length > 0) {
+        // Data is always ComponentObjects with html_code, id, and title
+        savedCurrentDesign = parsedData
+      }
+
+      this.pageBuilderStateStore.setComponents(savedCurrentDesign)
+    } catch (error) {
+      console.error('Error parsing JSON components:', error)
+      // Set empty array on error to ensure consistent state
+      this.pageBuilderStateStore.setComponents([])
+    }
+  }
+
   // Load existing content from HTML when in update mode
-  loadExistingContent(): void {
+  loadExistingContent(JSONComponents?: string): void {
     if (this.showRunningMethodLogs) {
       console.log('loadExistingContent')
     }
 
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
-    const storedData = this.areComponentsStoredInLocalStorage()
-
-    if (storedData) {
-      if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
-        try {
-          // Parse the JSON string from localStorage
-          const parsedData = JSON.parse(storedData)
-          let savedCurrentDesign: ComponentObject[] = []
-
-          // Load ComponentObjects from localStorage
-          if (Array.isArray(parsedData) && parsedData.length > 0) {
-            // Data is always ComponentObjects with html_code, id, and title
-            savedCurrentDesign = parsedData
-          }
-
-          this.pageBuilderStateStore.setComponents(savedCurrentDesign)
-        } catch (error) {
-          console.error('Error loading existing content:', error)
-        }
+    if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
+      // Create mode: Load from localStorage (drafts)
+      const storedData = this.areComponentsStoredInLocalStorage()
+      if (storedData) {
+        this.setComponentsFromJSON(storedData)
       }
+    }
 
-      if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
-        try {
-          // Parse the JSON string from localStorage
-          const parsedData = JSON.parse(storedData)
-          let savedCurrentDesign: ComponentObject[] = []
-
-          // Load ComponentObjects from localStorage
-          if (Array.isArray(parsedData) && parsedData.length > 0) {
-            // Data is always ComponentObjects with html_code, id, and title
-            savedCurrentDesign = parsedData
-          }
-
-          this.pageBuilderStateStore.setComponents(savedCurrentDesign)
-        } catch (error) {
-          console.error('Error loading existing content:', error)
-        }
+    if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
+      console.log('should come here, since update...... passed JSONComponents are:', JSONComponents)
+      // Update mode: Use passed JSONComponents
+      if (JSONComponents) {
+        this.setComponentsFromJSON(JSONComponents)
       }
     }
   }
