@@ -23,9 +23,9 @@ npm install @myissue/vue-website-page-builder
 
 ## Click & Drop Page Builder
 
-[Play around with the page builder](https://www.builder-demo.myissue.dk)
+[Play around with the Page Builder](https://www.builder-demo.myissue.dk)
 
-Born out of desire to create a minimalist page builder with an elegant and intuitive design.
+Lightweight & Minimalist Page Builder with an elegant and intuitive design, focused on simplicity and speed.
 
 Build responsive pages like listings, jobs or blog posts and manage content easily using the free Click & Drop Page Builder.
 
@@ -33,10 +33,10 @@ To star the repository, simply click on the **Star** button located at the top-r
 
 ## Demo
 
-Introducing the **The LightweightFree Vue Click & Drop Page Builder**
+Introducing the **The Lightweight Free Vue Click & Drop Page Builder**
 create and enhance digital experiences with Vue on any backend.
 
-[Play around with the page builder](https://www.builder-demo.myissue.dk)
+[Play around with the Page Builder](https://www.builder-demo.myissue.dk)
 
 ## About
 
@@ -101,7 +101,7 @@ bun install
 
 ### Important: CSS Import Required
 
-The page builder requires its CSS file to be imported for proper styling and automatic icon loading:
+The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading:
 
 ```js
 import '@myissue/vue-website-page-builder/style.css'
@@ -109,16 +109,18 @@ import '@myissue/vue-website-page-builder/style.css'
 
 This import automatically includes:
 
-- ✅ Page builder styles
+- ✅ Page Builder styles
 - ✅ Google Fonts (Jost, Cormorant - no additional setup needed)
 - ✅ Google Material Icons (no additional setup needed)
 - ✅ Responsive design utilities
+
+---
 
 ### Quick Start
 
 Get up and running quickly and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages.
 
-- The page builder requires its CSS file to be imported for proper styling and automatic icon loading:
+- The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading:
 
 ```vue
 <script setup>
@@ -140,7 +142,7 @@ Get up and running quickly by importing the PageBuilder component, setting up yo
   - `pageBuilderLogo` to display your company logo in the builder toolbar
   - `resourceData` to prefill the builder with initial data
   - `userSettings` to set user preferences such as theme, language, or autoSave
-  - `createNewResourceFormName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the page builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
+  - `createNewResourceFormName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
 
 ```vue
 <script setup>
@@ -175,7 +177,7 @@ const configPageBuilder = {
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing page builder with essential configuration
+// Initializing Page Builder with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 </script>
 
@@ -186,9 +188,9 @@ pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 
 ### Company Logo & Logged-in User
 
-You can display your company logo in the page builder interface and set the currently logged-in user by passing both a logo URL and user information in your config object:
+You can display your company logo in the Page Builder interface and set the currently logged-in user by passing both a logo URL and user information in your config object:
 
-- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear at the top of the page builder with proper spacing in the toolbar.
+- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
 - **Logged-in User:** Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., for audit trails, personalization, or permissions).
 
 **Basic Usage:**
