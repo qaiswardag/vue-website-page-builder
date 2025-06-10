@@ -127,6 +127,43 @@ import '@myissue/vue-website-page-builder/style.css'
 
 > **📝 Note**: Google Fonts (Jost, Cormorant) and Material Icons are automatically loaded when you import the CSS file. No additional setup required for fonts or icons!
 
+### Updating Existing Resources
+
+To load existing content that was created with this PageBuilder:
+
+- Use `sharedPageBuilderStore` to ensure the external PageBuilderClass and internal PageBuilder component share the same state
+- Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state - in this case we need the `loadExistingContent()` method to load existing content into the page builder
+- The PageBuilderClass uses the shared store to maintain state consistency between external operations and the internal PageBuilder component, ensuring that when you load content externally it appears correctly in the PageBuilder interface
+- Set formType to "update" to tell the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions
+
+1. **Set formType to "update"** in template:
+
+```javascript
+<PageBuilder
+    updateOrCreate: {
+      formType: 'update',
+    }
+/>
+```
+
+2. **Load existing content on mount**:
+
+```javascript
+import { onMounted } from 'vue'
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
+
+const pageBuilderStateStore = sharedPageBuilderStore
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+onMounted(() => {
+  pageBuilderClass.loadExistingContent(existingResourceFromBackend)
+})
+```
+
 ### Customization
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
