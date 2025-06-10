@@ -114,10 +114,57 @@ bun install
 
 ### Quick Start
 
+Get up and running quickly and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages.
+
 ```vue
 <script setup>
 import { PageBuilder } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
+</script>
+
+<template>
+  <PageBuilder />
+</template>
+```
+
+### Optional: Provide Config to PageBuilder
+
+Get up and running quickly by importing the PageBuilder component, setting up your configuration, and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages with your own config and logo.
+
+- Use `sharedPageBuilderStore` to ensure the external PageBuilderClass and internal PageBuilder component share the same state
+- (Optional) Provide a `configPageBuilder` object to customize the builder, such as:
+  - `pageBuilderLogo` to display your company logo in the builder toolbar
+  - `resourceData` to prefill the builder with initial data
+  - `userSettings` to set user preferences such as theme, language, or autoSave
+
+```vue
+<script setup>
+import { onMounted } from 'vue'
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+const configPageBuilder = {
+  pageBuilderLogo: {
+    src: '/logo/logo.svg',
+  },
+  userForPageBuilder: { name: 'John Doe' },
+  resourceData: {
+    title: 'Demo Article',
+    id: 1,
+  },
+  userSettings: {
+    theme: 'light',
+    language: 'en',
+    autoSave: true,
+  },
+}
+
+const pageBuilderStateStore = sharedPageBuilderStore
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+onMounted(() => {
+  pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+})
 </script>
 
 <template>
@@ -134,16 +181,12 @@ To load existing content that was created with this PageBuilder:
 - Use `sharedPageBuilderStore` to ensure the external PageBuilderClass and internal PageBuilder component share the same state
 - Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state - in this case we need the `loadExistingContent()` method to load existing content into the page builder
 - The PageBuilderClass uses the shared store to maintain state consistency between external operations and the internal PageBuilder component, ensuring that when you load content externally it appears correctly in the PageBuilder interface
-- Set formType to "update" to tell the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions
+- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)` inside `onMounted`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
 
 1. **Set formType to "update"** in template:
 
 ```javascript
-<PageBuilder
-    updateOrCreate: {
-      formType: 'update',
-    }
-/>
+<PageBuilder />
 ```
 
 2. **Load existing content on mount**:
@@ -159,19 +202,6 @@ import {
 const configPageBuilder = {
   updateOrCreate: {
     formType: 'update',
-  },
-  pageBuilderLogo: {
-    src: '/logo.svg',
-  },
-  userForPageBuilder: { name: 'John Doe' },
-  resourceData: {
-    title: 'Demo Article',
-    id: 1,
-  },
-  userSettings: {
-    theme: 'light',
-    language: 'en',
-    autoSave: true,
   },
 }
 
@@ -210,7 +240,9 @@ import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
 
 ### Company Logo
 
-You can display your company logo in the page builder interface by passing a logo URL to the `PageBuilderLogo` prop. When provided, the logo will appear in the top toolbar of the page builder.
+You can display your company logo in the page builder interface by passing a logo URL:
+
+- You can display your company logo in the page builder interface by setting the logo URL in your config object and passing it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)` inside `onMounted`. When provided, the logo will appear in the top toolbar of the page builder.
 
 Basic Usage:
 
@@ -218,10 +250,28 @@ Basic Usage:
 <script setup>
 import { PageBuilder } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
+
+const configPageBuilder = {
+  pageBuilderLogo: {
+    src: '/logo/logo.svg',
+  },
+  userForPageBuilder: { name: 'John Doe' },
+  resourceData: {
+    title: 'Demo Article',
+    id: 1,
+  },
+}
+
+const pageBuilderStateStore = sharedPageBuilderStore
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+onMounted(() => {
+  pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+})
 </script>
 
 <template>
-  <PageBuilder PageBuilderLogo="/logo/square-logo.svg" />
+  <PageBuilder />
 </template>
 ```
 
