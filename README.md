@@ -57,7 +57,7 @@ The Page Builder is packed with features:
 - **Media Library**: Access and manage your media files effortlessly.
 - **Unsplash**: Unsplash Integration.
 - **Responsive Editing**: Ensure your site looks great on all devices.
-- **Text Editing**: Customize your text with ease.
+- **Text Editing:** Edit text content live and in real-time.
 - **Font Customization**: Choose the perfect fonts to match your style.
 - **Undo & Redo**: Experiment confidently with the ability to revert changes.
 - **Global Styles**: Global Styles for fonts, designs, & colors.
