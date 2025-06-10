@@ -1569,19 +1569,23 @@ class PageBuilderClass {
       console.log('loadExistingContent')
     }
 
-    // console.log('loadExistingContent...... data er her:', data)
+    console.log('loadExistingContent...... data er her:', data)
+    console.log('whaaat:', this.pageBuilderStateStore.getConfigPageBuilder)
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
-      // Create mode: Load from localStorage (drafts)
+      console.log('hvad med nuuuuuuu')
       const storedData = this.areComponentsStoredInLocalStorage()
       if (storedData) {
         this.setComponentsFromData(storedData)
       }
     }
 
+    console.log('oook:', this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType)
+
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
       if (data) {
+        console.log('kommer den her...')
         this.setComponentsFromData(data)
       }
     }

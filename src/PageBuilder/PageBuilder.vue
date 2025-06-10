@@ -181,6 +181,7 @@ onMounted(async () => {
   // Set up event listeners
   await pageBuilderClass.setEventListenersForElements()
 
+  console.log('laaaa:', getConfigPageBuilder.value)
   if (getConfigPageBuilder.value.updateOrCreate.formType === 'create') {
     pageBuilderClass.loadExistingContent()
   }
