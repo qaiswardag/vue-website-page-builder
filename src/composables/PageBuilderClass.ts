@@ -1160,13 +1160,12 @@ class PageBuilderClass {
         if (resourceData && resourceData != null && !resourceData.title) {
           // Check if id is missing, null, undefined, or an empty string (after trimming)
           if (!resourceData.id || typeof resourceData.id === 'string') {
-            console.log(1111)
             this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-update-resource`)
             return
           }
         }
 
-        // Runs when resourceData has title but no id
+        // Runs when resourceData has title but no ID
         if (resourceData && resourceData != null) {
           if (
             resourceData.title &&
@@ -1174,51 +1173,101 @@ class PageBuilderClass {
             resourceData.title.length > 0
           ) {
             if (!resourceData.id || typeof resourceData.id === 'string') {
-              console.log(2222)
-              const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
               this.pageBuilderStateStore.setLocalStorageItemName(
-                `page-builder-update-resource-${sanitizedTitle}-${this.sanitizeForLocalStorage(resourceFormName)}`,
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(resourceFormName)}-${this.sanitizeForLocalStorage(resourceData.title)}`,
               )
               return
             }
           }
         }
 
-        // Runs when resourceData has id but no title
-        if (
-          resourceData &&
-          resourceData != null &&
-          !resourceData.id &&
-          !resourceData.title &&
-          typeof resourceData.title === 'string' &&
-          resourceData.title.length < 1 &&
-          typeof resourceData.id === 'number'
-        ) {
-          console.log(3333)
-          const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
-          this.pageBuilderStateStore.setLocalStorageItemName(
-            `page-builder-update-resource-${sanitizedId}-${this.sanitizeForLocalStorage(resourceFormName)}`,
-          )
-          return
+        // Runs when resourceData has ID but no title
+        if (resourceData && resourceData != null) {
+          if (!resourceData.title && typeof resourceData.title !== 'string') {
+            if (resourceData.id || typeof resourceData.id === 'number') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(resourceFormName)}-${this.sanitizeForLocalStorage(String(resourceData.id))}`,
+              )
+              return
+            }
+          }
         }
 
-        // Runs when resourceData has both title and id
-        if (
-          resourceData &&
-          resourceData != null &&
-          'title' in resourceData &&
-          'id' in resourceData
-        ) {
-          console.log(4444)
-          const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
-          const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
-
-          this.pageBuilderStateStore.setLocalStorageItemName(
-            `page-builder-update-resource-${sanitizedTitle}-${this.sanitizeForLocalStorage(resourceFormName)}-${sanitizedId}`,
-          )
-          return
+        // Runs when resourceData has both title and ID
+        if (resourceData && resourceData != null) {
+          if (
+            resourceData.title &&
+            typeof resourceData.title === 'string' &&
+            resourceData.title.length > 0
+          ) {
+            if (resourceData.id || typeof resourceData.id === 'number') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(resourceFormName)}-${this.sanitizeForLocalStorage(resourceData.title)}-${this.sanitizeForLocalStorage(String(resourceData.id))}`,
+              )
+              return
+            }
+          }
         }
-        // Logic for update without without resourceFormName
+      }
+
+      // Logic for update without without resourceFormName
+      if (
+        !resourceFormName ||
+        (typeof resourceFormName === 'string' && resourceFormName.length === 0)
+      ) {
+        //
+        //
+        if (resourceData && resourceData != null && !resourceData.title) {
+          // Check if id is missing, null, undefined, or an empty string (after trimming)
+          if (!resourceData.id || typeof resourceData.id === 'string') {
+            this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-update-resource`)
+            return
+          }
+        }
+
+        // Runs when resourceData has title but no ID
+        if (resourceData && resourceData != null) {
+          if (
+            resourceData.title &&
+            typeof resourceData.title === 'string' &&
+            resourceData.title.length > 0
+          ) {
+            if (!resourceData.id || typeof resourceData.id === 'string') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(resourceData.title)}`,
+              )
+              return
+            }
+          }
+        }
+
+        // Runs when resourceData has ID but no title
+        if (resourceData && resourceData != null) {
+          if (!resourceData.title && typeof resourceData.title !== 'string') {
+            if (resourceData.id || typeof resourceData.id === 'number') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(String(resourceData.id))}`,
+              )
+              return
+            }
+          }
+        }
+
+        // Runs when resourceData has both title and ID
+        if (resourceData && resourceData != null) {
+          if (
+            resourceData.title &&
+            typeof resourceData.title === 'string' &&
+            resourceData.title.length > 0
+          ) {
+            if (resourceData.id || typeof resourceData.id === 'number') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(resourceData.title)}-${this.sanitizeForLocalStorage(String(resourceData.id))}`,
+              )
+              return
+            }
+          }
+        }
       }
     }
   }
