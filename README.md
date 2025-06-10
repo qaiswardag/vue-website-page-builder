@@ -15,24 +15,11 @@ A Vue 3 page builder component with drag & drop functionality for creating dynam
 
 ## Installation
 
+The web builder for stunning pages. Enable users to design and publish modern pages at any scale.
+
 ```bash
 npm install @myissue/vue-website-page-builder
 ```
-
-### Important: CSS Import Required
-
-The page builder requires its CSS file to be imported for proper styling and automatic icon loading:
-
-```js
-import '@myissue/vue-website-page-builder/style.css'
-```
-
-This import automatically includes:
-
-- ✅ Page builder styles
-- ✅ Google Fonts (Jost, Cormorant - no additional setup needed)
-- ✅ Google Material Icons (no additional setup needed)
-- ✅ Responsive design utilities
 
 ## Click & Drop Page Builder
 
@@ -40,7 +27,7 @@ This import automatically includes:
 
 Born out of desire to create a minimalist page builder with an elegant and intuitive design.
 
-The web builder for stunning pages. Enable users to design and publish modern pages at any scale. Build responsive pages like listings, jobs or blog posts and manage content easily using the free Click & Drop Page Builder.
+Build responsive pages like listings, jobs or blog posts and manage content easily using the free Click & Drop Page Builder.
 
 To star the repository, simply click on the **Star** button located at the top-right corner of the GitHub page. Thank you in advance for your support! 🙌
 
@@ -112,9 +99,26 @@ yarn install
 bun install
 ```
 
+### Important: CSS Import Required
+
+The page builder requires its CSS file to be imported for proper styling and automatic icon loading:
+
+```js
+import '@myissue/vue-website-page-builder/style.css'
+```
+
+This import automatically includes:
+
+- ✅ Page builder styles
+- ✅ Google Fonts (Jost, Cormorant - no additional setup needed)
+- ✅ Google Material Icons (no additional setup needed)
+- ✅ Responsive design utilities
+
 ### Quick Start
 
 Get up and running quickly and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages.
+
+- The page builder requires its CSS file to be imported for proper styling and automatic icon loading:
 
 ```vue
 <script setup>
