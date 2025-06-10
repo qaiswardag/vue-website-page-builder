@@ -24,7 +24,7 @@ dist-ssr
 *.sln
 *.sw?
 
-PUBLISHING.md
+LOCAL_DEVELOPMENT.md
 
 /public/css/app.css
 /public/js/app.js
