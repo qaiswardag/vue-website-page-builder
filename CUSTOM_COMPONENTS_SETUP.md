@@ -17,6 +17,8 @@ your-project/
 
 ## Component Templates
 
+---
+
 ### 1. Custom Media Library Component
 
 Once you've created your custom components, inject them into the page builder:
@@ -46,6 +48,8 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
   </div>
 </template>
 ```
+
+---
 
 ### 2. Custom Components
 

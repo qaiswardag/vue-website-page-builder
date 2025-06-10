@@ -71,7 +71,11 @@ agencies. Empower users to create the perfect content with the Page Builder.
 - **Technologies**: This Page Builder is developed using TypeScript, Vue 3, the Composition API, Pinia, CSS, Tailwind CSS, and HTML.
 - **Features**: Click & Drop Page Builder.
 
+---
+
 ## Documentation
+
+---
 
 ### Requirements
 
@@ -80,6 +84,8 @@ Please note that these instructions assume you have Node.js installed.
 - Node.js ≥ 18.0.0
 - Vue.js ≥ 3.0.0
 - Modern browser with ES6+ support
+
+---
 
 ### Getting started & installation
 
@@ -98,6 +104,8 @@ yarn install
 # bun
 bun install
 ```
+
+---
 
 ### Important: CSS Import Required
 
@@ -132,6 +140,8 @@ import '@myissue/vue-website-page-builder/style.css'
   <PageBuilder />
 </template>
 ```
+
+---
 
 ### Optional: Provide Config to PageBuilder
 
@@ -234,6 +244,8 @@ Configuration Options
 | ----------------- | -------- | ------- | ----------------------------------- |
 | `PageBuilderLogo` | `String` | `null`  | URL path to your company logo image |
 
+---
+
 ### Updating Existing Resources
 
 To load existing content that was created with this PageBuilder:
@@ -317,11 +329,17 @@ const existingResourceFromBackend = JSON.stringify([
 
 Alternatively, you can provide a raw HTML string containing your `<section>` components:
 
+---
+
 ### Customization
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
 
     - Google Fonts (Jost, Cormorant) and Material Icons are automatically loaded when you import the CSS file. No additional setup required for fonts or icons!
+
+---
+
+---
 
 ### Custom Components
 
@@ -344,6 +362,8 @@ import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
 ```
 
 ## Troubleshooting
+
+---
 
 ### Fonts or Icons Not Displaying
 
