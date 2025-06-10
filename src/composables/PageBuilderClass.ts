@@ -1136,59 +1136,6 @@ class PageBuilderClass {
       this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.createNewResourceFormName
 
     // Logic for create
-    if (updateOrCreate === 'create' && resourceFormName && resourceFormName.length > 0) {
-      this.pageBuilderStateStore.setLocalStorageItemName(
-        `page-builder-create-resource-${this.sanitizeForLocalStorage(resourceFormName)}`,
-      )
-      return
-    }
-
-    // Logic for create
-    if (updateOrCreate === 'create') {
-      this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-create-resource`)
-      return
-    }
-
-    // Logic for update
-    if (
-      (updateOrCreate === 'update' && typeof resourceFormName !== 'string') ||
-      (typeof resourceFormName === 'string' && resourceFormName?.length < 1)
-    ) {
-      // if resource data is null
-      if (resourceData === null) {
-        this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-update-resource`)
-        return
-      }
-
-      // Runs when resourceData has id but no title
-      if (typeof resourceData === 'object' && 'id' in resourceData && !('title' in resourceData)) {
-        const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
-        this.pageBuilderStateStore.setLocalStorageItemName(
-          `page-builder-update-resource-${sanitizedId}`,
-        )
-        return
-      }
-
-      // Runs when resourceData has title but no id
-      if (typeof resourceData === 'object' && 'title' in resourceData && !('id' in resourceData)) {
-        const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
-        this.pageBuilderStateStore.setLocalStorageItemName(
-          `page-builder-update-resource-${sanitizedTitle}`,
-        )
-        return
-      }
-
-      // Runs when resourceData has both title and id
-      if (typeof resourceData === 'object' && 'title' in resourceData && 'id' in resourceData) {
-        const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
-        const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
-
-        this.pageBuilderStateStore.setLocalStorageItemName(
-          `page-builder-update-resource-${sanitizedTitle}-${sanitizedId}`,
-        )
-        return
-      }
-    }
     // Logic for update and with resource form name
     if (
       updateOrCreate === 'update' &&
@@ -1206,7 +1153,7 @@ class PageBuilderClass {
 
       // Runs when resourceData has id but no title
       if (typeof resourceData === 'object' && 'id' in resourceData && !('title' in resourceData)) {
-        console.log(2)
+        console.log(2222)
         const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
         this.pageBuilderStateStore.setLocalStorageItemName(
           `page-builder-update-resource-${sanitizedId}-${this.sanitizeForLocalStorage(resourceFormName)}`,
@@ -1216,7 +1163,7 @@ class PageBuilderClass {
 
       // Runs when resourceData has title but no id
       if (typeof resourceData === 'object' && 'title' in resourceData && !('id' in resourceData)) {
-        console.log(3)
+        console.log(3333)
         const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
         this.pageBuilderStateStore.setLocalStorageItemName(
           `page-builder-update-resource-${sanitizedTitle}-${this.sanitizeForLocalStorage(resourceFormName)}`,
@@ -1226,12 +1173,67 @@ class PageBuilderClass {
 
       // Runs when resourceData has both title and id
       if (typeof resourceData === 'object' && 'title' in resourceData && 'id' in resourceData) {
-        console.log(4)
+        console.log(4444)
         const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
         const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
 
         this.pageBuilderStateStore.setLocalStorageItemName(
           `page-builder-update-resource-${sanitizedTitle}-${this.sanitizeForLocalStorage(resourceFormName)}-${sanitizedId}`,
+        )
+        return
+      }
+    } else {
+      if (updateOrCreate === 'create' && resourceFormName && resourceFormName.length > 0) {
+        console.log(5555)
+        this.pageBuilderStateStore.setLocalStorageItemName(
+          `page-builder-create-resource-${this.sanitizeForLocalStorage(resourceFormName)}`,
+        )
+        return
+      }
+
+      // Logic for create
+      if (updateOrCreate === 'create') {
+        console.log(6666)
+        this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-create-resource`)
+        return
+      }
+
+      // Logic for update
+
+      // if resource data is null
+      if (resourceData === null) {
+        console.log(7777)
+        this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-update-resource`)
+        return
+      }
+
+      // Runs when resourceData has id but no title
+      if (typeof resourceData === 'object' && 'id' in resourceData && !('title' in resourceData)) {
+        console.log(8888)
+        const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
+        this.pageBuilderStateStore.setLocalStorageItemName(
+          `page-builder-update-resource-${sanitizedId}`,
+        )
+        return
+      }
+
+      // Runs when resourceData has title but no id
+      if (typeof resourceData === 'object' && 'title' in resourceData && !('id' in resourceData)) {
+        console.log(9999)
+        const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
+        this.pageBuilderStateStore.setLocalStorageItemName(
+          `page-builder-update-resource-${sanitizedTitle}`,
+        )
+        return
+      }
+
+      // Runs when resourceData has both title and id
+      if (typeof resourceData === 'object' && 'title' in resourceData && 'id' in resourceData) {
+        const sanitizedId = this.sanitizeForLocalStorage(String(resourceData['id']))
+        const sanitizedTitle = this.sanitizeForLocalStorage(String(resourceData['title']))
+
+        this.pageBuilderStateStore.setLocalStorageItemName(
+          `page-builder-update-resource-${sanitizedTitle}-${sanitizedId}`,
         )
         return
       }
