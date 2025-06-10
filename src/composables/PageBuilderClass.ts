@@ -1500,12 +1500,15 @@ class PageBuilderClass {
     const trimmedData = data.trim()
 
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
+      console.log('Using JSON method..............1:', trimmedData)
       // Looks like JSON - parse as JSON
       this.#parseJSONComponents(trimmedData)
     } else if (trimmedData.startsWith('<')) {
+      console.log('Using HTML method..............2:', trimmedData)
       // Looks like HTML - parse as HTML
       this.#parseHTMLComponents(trimmedData)
     } else {
+      console.log('Using JSON method..............3:', trimmedData)
       this.#parseJSONComponents(trimmedData)
     }
   }
@@ -1566,6 +1569,7 @@ class PageBuilderClass {
       console.log('loadExistingContent')
     }
 
+    console.log('data er her:', data)
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
