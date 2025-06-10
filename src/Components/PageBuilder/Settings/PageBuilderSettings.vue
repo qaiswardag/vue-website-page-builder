@@ -344,10 +344,20 @@ const handleDownloadHTML = function () {
                             : 'bg-blue-100 text-blue-800'
                         "
                       >
-                        <span v-if="getConfigPageBuilder.updateOrCreate.formType === 'create'">
+                        <span
+                          v-if="
+                            getConfigPageBuilder &&
+                            getConfigPageBuilder.updateOrCreate.formType === 'create'
+                          "
+                        >
                           {{ getConfigPageBuilder.updateOrCreate.formType }}
                         </span>
-                        <span v-if="getConfigPageBuilder.updateOrCreate.formType === 'update'">
+                        <span
+                          v-if="
+                            getConfigPageBuilder &&
+                            getConfigPageBuilder.updateOrCreate.formType === 'update'
+                          "
+                        >
                           {{ getConfigPageBuilder.updateOrCreate.formType }}
                         </span>
                       </span>

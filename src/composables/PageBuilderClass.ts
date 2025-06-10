@@ -11,6 +11,7 @@ import type {
   TailwindPaddingAndMargin,
   TailwindBorderRadius,
   TailwindBorderStyleWidthColor,
+  PageBuilderConfig,
 } from '../types'
 import type { usePageBuilderStateStore } from '../stores/page-builder-state'
 
@@ -124,6 +125,34 @@ class PageBuilderClass {
     this.showRunningMethodLogs = false
 
     this.delay = delay()
+  }
+
+  // Load existing content from HTML when in update mode
+  setConfigPageBuilder(data: PageBuilderConfig): void {
+    const defaultUpdateOrCreate = {
+      formType: 'create',
+      createNewResourceFormName: 'post',
+    }
+
+    const defaultUserSettings = {
+      theme: 'light',
+      language: 'en',
+      autoSave: true,
+    }
+
+    const configWithDefaults = {
+      ...data,
+      updateOrCreate: {
+        ...defaultUpdateOrCreate,
+        ...data.updateOrCreate,
+      },
+      userSettings: {
+        ...defaultUserSettings,
+        ...data.userSettings,
+      },
+    }
+
+    this.pageBuilderStateStore.setConfigPageBuilder(configWithDefaults)
   }
 
   #applyElementClassChanges(
@@ -1569,8 +1598,6 @@ class PageBuilderClass {
       console.log('loadExistingContent')
     }
 
-    console.log('loadExistingContent...... data er her:', data)
-    console.log('whaaat:', this.pageBuilderStateStore.getConfigPageBuilder)
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
@@ -1581,11 +1608,8 @@ class PageBuilderClass {
       }
     }
 
-    console.log('oook:', this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType)
-
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
       if (data) {
-        console.log('kommer den her...')
         this.setComponentsFromData(data)
       }
     }

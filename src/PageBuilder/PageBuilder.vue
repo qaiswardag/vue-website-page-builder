@@ -26,44 +26,11 @@ const props = defineProps({
     type: Object,
     default: null,
   },
-  configPageBuilder: {
-    type: Object,
-    default: () => ({ updateOrCreate: 'create' }),
-    required: false,
-  },
 })
 
 // Use shared Pinia instance for PageBuilder package (THIS IS THE KEY CHANGE!)
 const internalPinia = sharedPageBuilderPinia
 const pageBuilderStateStore = sharedPageBuilderStore
-
-// Set configPageBuilder in store (this will be the single source of truth)
-if (props.configPageBuilder) {
-  // Ensure updateOrCreate defaults with proper deep merge
-  const defaultUpdateOrCreate = {
-    formType: 'create',
-    createNewResourceFormName: 'post',
-  }
-
-  const defaultUserSettings = {
-    theme: 'light',
-    language: 'en',
-    autoSave: true,
-  }
-
-  const configWithDefaults = {
-    ...props.configPageBuilder,
-    updateOrCreate: {
-      ...defaultUpdateOrCreate,
-      ...props.configPageBuilder.updateOrCreate,
-    },
-    userSettings: {
-      ...defaultUserSettings,
-      ...props.configPageBuilder.userSettings,
-    },
-  }
-  pageBuilderStateStore.setConfigPageBuilder(configWithDefaults)
-}
 
 // Initialize PageBuilder with store
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
@@ -178,11 +145,13 @@ const draggableZone = ref(null)
 
 onMounted(async () => {
   pageBuilderClass.updateLocalStorageItemName()
-  // Set up event listeners
   await pageBuilderClass.setEventListenersForElements()
 
-  console.log('laaaa:', getConfigPageBuilder.value)
-  if (getConfigPageBuilder.value.updateOrCreate.formType === 'create') {
+  if (
+    getConfigPageBuilder.value &&
+    getConfigPageBuilder.value.updateOrCreate &&
+    getConfigPageBuilder.value.updateOrCreate.formType === 'create'
+  ) {
     pageBuilderClass.loadExistingContent()
   }
 
