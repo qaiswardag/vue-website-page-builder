@@ -163,6 +163,7 @@ const configPageBuilder = {
   },
 }
 
+// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
@@ -207,7 +208,7 @@ const configPageBuilder = {
   },
 }
 
-const pageBuilderStateStore = sharedPageBuilderStore
+// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing page builder with essential configuration
@@ -264,6 +265,7 @@ const configPageBuilder = {
   },
 }
 
+// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
