@@ -228,7 +228,7 @@ pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 </template>
 ```
 
-configuration Options
+Configuration Options
 
 | Prop              | Type     | Default | Description                         |
 | ----------------- | -------- | ------- | ----------------------------------- |
