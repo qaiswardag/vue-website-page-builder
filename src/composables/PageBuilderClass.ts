@@ -1680,7 +1680,6 @@ class PageBuilderClass {
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
-      console.log('hvad med nuuuuuuu')
       const storedData = this.areComponentsStoredInLocalStorage()
       if (storedData) {
         this.setComponentsFromData(storedData)
