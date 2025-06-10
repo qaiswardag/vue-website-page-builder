@@ -1,27 +1,26 @@
 <script setup>
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import PageBuilder from '@/composables/PageBuilder';
+import { computed } from 'vue'
+import { sharedPageBuilderStore } from '../../../../stores/shared-store'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import EditorAccordion from '../EditorAccordion.vue'
 
-const pageBuilderStateStore = usePageBuilderStateStore();
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
 
-import { computed } from 'vue';
-
-const pageBuilder = new PageBuilder(pageBuilderStateStore);
-
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue';
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 const getElement = computed(() => {
-  return pageBuilderStateStore.getElement;
-});
+  return pageBuilderStateStore.getElement
+})
 
 const getRestoredElement = computed(() => {
-  return pageBuilderStateStore.getRestoredElement;
-});
+  return pageBuilderStateStore.getRestoredElement
+})
 </script>
 
 <template>
   <EditorAccordion>
-    <template #title>Element Editor</template>
+    <template #title>Selected HTML Element</template>
     <template #content>
       <div class="flex flex-row flex-wrap gap-2 mt-2"></div>
       <div>
@@ -29,7 +28,7 @@ const getRestoredElement = computed(() => {
         <template v-if="getRestoredElement">
           <div class="px-2 flex items-center justify-start gap-2">
             <button
-              @click="pageBuilder.handleRestoreElement"
+              @click="pageBuilderClass.handleRestoreElement"
               type="button"
               class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
             >
@@ -42,7 +41,7 @@ const getRestoredElement = computed(() => {
         <template v-if="getElement && !getRestoredElement">
           <div class="px-2 flex items-center justify-start gap-2">
             <button
-              @click="pageBuilder.handleDeleteElement"
+              @click="pageBuilderClass.handleDeleteElement"
               type="button"
               class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:text-white focus-visible:ring-0 hover:bg-myPrimaryErrorColor"
             >

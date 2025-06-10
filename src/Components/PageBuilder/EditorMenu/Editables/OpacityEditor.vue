@@ -1,7 +1,7 @@
 <script setup>
-import EditorAccordion from '@/Components/PageBuilder/EditorMenu/EditorAccordion.vue';
-import ManageBackgroundOpacity from '@/Components/PageBuilder/EditorMenu/Editables/ManageBackgroundOpacity.vue';
-import ManageOpacity from '@/Components/PageBuilder/EditorMenu/Editables/ManageOpacity.vue';
+import EditorAccordion from '../EditorAccordion.vue'
+import ManageBackgroundOpacity from './ManageBackgroundOpacity.vue'
+import ManageOpacity from './ManageOpacity.vue'
 </script>
 
 <template>

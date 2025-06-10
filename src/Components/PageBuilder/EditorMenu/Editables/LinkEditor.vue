@@ -1,85 +1,85 @@
 <script setup>
-import PageBuilder from '@/composables/PageBuilder';
-import EditorAccordion from '../EditorAccordion.vue';
-import { computed, nextTick, ref, watch } from 'vue';
-import { Switch } from '@headlessui/vue';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+import { ref, computed, watch, nextTick } from 'vue'
+import { sharedPageBuilderStore } from '../../../../stores/shared-store'
+import EditorAccordion from '../EditorAccordion.vue'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import { Switch } from '@headlessui/vue'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
-const hyperlinkEnable = ref(false);
-const urlInput = ref(null);
-const openHyperlinkInNewTab = ref(false);
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
+
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+const hyperlinkEnable = ref(false)
+const urlInput = ref(null)
+const openHyperlinkInNewTab = ref(false)
 const getElementContainsHyperlink = computed(() => {
-  return pageBuilderStateStore.getElementContainsHyperlink;
-});
+  return pageBuilderStateStore.getElementContainsHyperlink
+})
 const getHyperlinkAbility = computed(() => {
-  return pageBuilderStateStore.getHyperlinkAbility;
-});
+  return pageBuilderStateStore.getHyperlinkAbility
+})
 const getHyperlinkMessage = computed(() => {
-  return pageBuilderStateStore.getHyperlinkMessage;
-});
+  return pageBuilderStateStore.getHyperlinkMessage
+})
 const getHyperlinkError = computed(() => {
-  return pageBuilderStateStore.getHyperlinkError;
-});
+  return pageBuilderStateStore.getHyperlinkError
+})
 const getHyperlinkInput = computed(() => {
-  return pageBuilderStateStore.getHyperlinkInput;
-});
+  return pageBuilderStateStore.getHyperlinkInput
+})
 const getHyberlinkEnable = computed(() => {
-  return pageBuilderStateStore.getHyberlinkEnable;
-});
+  return pageBuilderStateStore.getHyberlinkEnable
+})
 
 const getOpenHyperlinkInNewTab = computed(() => {
-  return pageBuilderStateStore.getOpenHyperlinkInNewTab;
-});
+  return pageBuilderStateStore.getOpenHyperlinkInNewTab
+})
 const getElement = computed(() => {
-  return pageBuilderStateStore.getElement;
-});
+  return pageBuilderStateStore.getElement
+})
 
 watch(getHyperlinkInput, (newValue) => {
-  urlInput.value = newValue;
-});
+  urlInput.value = newValue
+})
 watch(getHyberlinkEnable, (newValue) => {
-  hyperlinkEnable.value = newValue;
-});
+  hyperlinkEnable.value = newValue
+})
 watch(getOpenHyperlinkInNewTab, (newValue) => {
-  openHyperlinkInNewTab.value = newValue;
-});
+  openHyperlinkInNewTab.value = newValue
+})
 
 // remove hyperlink
 watch(hyperlinkEnable, (hyperlinkEnableNewValue) => {
-  hyperlinkEnable.value = hyperlinkEnableNewValue;
-  pageBuilderStateStore.setHyberlinkEnable(hyperlinkEnable.value);
-});
+  hyperlinkEnable.value = hyperlinkEnableNewValue
+  pageBuilderStateStore.setHyberlinkEnable(hyperlinkEnable.value)
+})
 
 const handleToggleHyperlinkEnable = async function (data) {
-  await nextTick();
+  await nextTick()
 
   // remove hyperlink
   if (hyperlinkEnable.value === false) {
-    pageBuilder.handleHyperlink(hyperlinkEnable.value, data);
+    pageBuilderClass.handleHyperlink(hyperlinkEnable.value, data)
   }
-};
+}
 // add hyperlink
 const handleHyperlink = function () {
-  pageBuilder.handleHyperlink(
+  pageBuilderClass.handleHyperlink(
     hyperlinkEnable.value,
     urlInput.value,
-    openHyperlinkInNewTab.value
-  );
-};
+    openHyperlinkInNewTab.value,
+  )
+}
 
 const handleToggleOpenHyperlinkInNewTab = async function () {
-  await nextTick();
+  await nextTick()
 
-  pageBuilder.handleHyperlink(
+  pageBuilderClass.handleHyperlink(
     hyperlinkEnable.value,
     urlInput.value,
-    openHyperlinkInNewTab.value
-  );
-};
+    openHyperlinkInNewTab.value,
+  )
+}
 </script>
 
 <template>
@@ -87,15 +87,10 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
     <template #title>Link</template>
     <template #content>
       <!-- Hyperlink ability / start -->
-      <div
-        v-if="getHyperlinkAbility === false"
-        class="rounded-md bg-red-50 p-2"
-      >
+      <div v-if="getHyperlinkAbility === false" class="rounded-md bg-red-50 p-2">
         <div class="flex items-center">
           <div class="flex-shrink-0">
-            <ExclamationCircleIcon
-              class="w-4 h-4 text-myPrimaryErrorColor"
-            ></ExclamationCircleIcon>
+            <span class="myMediumIcon material-symbols-outlined"> warning </span>
           </div>
           <div class="ml-2">
             <p class="text-sm font-medium text-green-800">
@@ -142,11 +137,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
                   ]"
                   aria-hidden="true"
                 >
-                  <svg
-                    class="h-3 w-3 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 12 12"
-                  >
+                  <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
                     <path
                       d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
                       stroke="currentColor"
@@ -181,15 +172,10 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
           </div>
         </div>
         <!-- attached url - start -->
-        <div
-          v-if="getElementContainsHyperlink === true"
-          class="rounded-md bg-green-50 p-2"
-        >
+        <div v-if="getElementContainsHyperlink === true" class="rounded-md bg-green-50 p-2">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <span class="myMediumIcon material-symbols-outlined">
-                check
-              </span>
+              <span class="myMediumIcon material-symbols-outlined"> check </span>
             </div>
             <div class="ml-2">
               <p class="text-sm font-medium text-green-800">Hyperlink added</p>
@@ -206,20 +192,13 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
         </div>
         <!-- attached url - end -->
         <!-- no attached url - start -->
-        <div
-          v-if="getElementContainsHyperlink === false"
-          class="rounded-md bg-red-50 p-2"
-        >
+        <div v-if="getElementContainsHyperlink === false" class="rounded-md bg-red-50 p-2">
           <div class="flex items-center">
             <div class="flex-shrink-0">
-              <ExclamationCircleIcon
-                class="w-4 h-4 text-myPrimaryErrorColor"
-              ></ExclamationCircleIcon>
+              <span class="myMediumIcon material-symbols-outlined"> warning </span>
             </div>
             <div class="ml-2">
-              <p class="text-sm font-medium text-green-800">
-                No hyperlink added
-              </p>
+              <p class="text-sm font-medium text-green-800">No hyperlink added</p>
             </div>
             <div class="ml-auto pl-3">
               <div class="-mx-1.5 -my-1.5">
@@ -232,13 +211,8 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
           </div>
         </div>
         <!-- no attached url - end -->
-        <div
-          v-if="hyperlinkEnable === true"
-          class="my-3 py-3"
-        >
-          <div
-            class="relative flex items-center w-full border myPrimaryInput py-0 p-0"
-          >
+        <div v-if="hyperlinkEnable === true" class="my-3 py-3">
+          <div class="relative flex items-center w-full border myPrimaryInput py-0 p-0">
             <input
               v-model="urlInput"
               type="text"
@@ -250,9 +224,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
             <div
               class="border border-gray-200 border-none rounded flex items-center justify-center h-full w-8"
             >
-              <kbd class="myPrimaryParagraph text-gray-400 border-none">
-                ⏎
-              </kbd>
+              <kbd class="myPrimaryParagraph text-gray-400 border-none"> ⏎ </kbd>
             </div>
           </div>
 
@@ -262,10 +234,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
           >
             {{ getHyperlinkMessage }}
           </p>
-          <p
-            v-if="getHyperlinkError !== null"
-            class="myPrimaryParagraphError mt-1"
-          >
+          <p v-if="getHyperlinkError !== null" class="myPrimaryParagraphError mt-1">
             {{ getHyperlinkError }}
           </p>
 
@@ -277,9 +246,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
                 v-model="openHyperlinkInNewTab"
                 @click="handleToggleOpenHyperlinkInNewTab"
                 :class="[
-                  openHyperlinkInNewTab
-                    ? 'bg-myPrimaryLinkColor'
-                    : 'bg-gray-200',
+                  openHyperlinkInNewTab ? 'bg-myPrimaryLinkColor' : 'bg-gray-200',
                   'relative inline-flex h-6 w-11 flex-shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-myPrimaryLinkColor focus:ring-offset-2',
                 ]"
               >
@@ -299,11 +266,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
                     ]"
                     aria-hidden="true"
                   >
-                    <svg
-                      class="h-3 w-3 text-gray-400"
-                      fill="none"
-                      viewBox="0 0 12 12"
-                    >
+                    <svg class="h-3 w-3 text-gray-400" fill="none" viewBox="0 0 12 12">
                       <path
                         d="M4 8l2-2m0 0l2-2M6 6L4 4m2 2l2 2"
                         stroke="currentColor"

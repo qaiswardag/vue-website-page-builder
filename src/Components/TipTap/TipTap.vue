@@ -1,17 +1,17 @@
 <script setup>
-import PageBuilder from '@/composables/PageBuilder';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+import PageBuilderClass from '../../composables/PageBuilderClass.ts'
+import { sharedPageBuilderStore } from '../../stores/shared-store'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
+
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 </script>
 
 <template>
   <div>
     <div class="blockease-linear duration-200 block ease-linear">
-      <template v-if="pageBuilder.selectedElementIsValidText()">
+      <template v-if="pageBuilderClass.selectedElementIsValidText()">
         <div
           class="border-t border-myPrimaryLightGrayColor flex flex-row justify-between items-center pl-3 pr-3 py-5 duration-200 hover:bg-myPrimaryLightGrayColor"
         >

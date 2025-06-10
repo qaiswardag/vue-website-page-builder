@@ -68,6 +68,24 @@ fi
 # Remove the temporary release notes file
 rm "$TEMP_RELEASE_NOTES"
 
+# Build the library for production
+echo "\n\nBuilding the library..."
+npm run build:lib
+if [ $? -ne 0 ]; then
+  echo "Error: Failed to build the library."
+  exit 1
+fi
+
+# Publish to npm
+echo "\n\nPublishing to npm..."
+npm publish
+if [ $? -eq 0 ]; then
+  echo "Package version $VERSION published to npm successfully."
+else
+  echo "Error: Failed to publish to npm."
+  exit 1
+fi
+
 # Check the current tag
 echo "\n\nChecking the current tag:"
 git describe --tags

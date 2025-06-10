@@ -1,3 +1,8 @@
+/* Google Fonts - Auto-loaded for vue-website-page-builder */
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;1,100;1,200;1,300;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -501,13 +506,11 @@ h3 {
 /* CSS for content inside page builder # start */
 #page-builder-editor-editable-area a {
   pointer-events: none;
-  /* display: block;
-    width: 100%; */
 }
 
 #page-builder-editor-editable-area #youtube-video::before {
   content: 'Select video element';
-  font-family: 'Jost';
+  font-family: 'Jost', sans-serif;
   display: inline-block;
   margin-right: 8px;
   vertical-align: middle;
@@ -563,11 +566,12 @@ h3 {
 /* CSS for Vue datepicker # start */
 :root {
   /*General*/
-  --dp-font-family: 'Jost', blinkmacsystemfont, 'Segoe UI', roboto, oxygen,
-    ubuntu, cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
   --dp-border-radius: 40px; /*Configurable border-radius*/
   --dp-cell-border-radius: 4px; /*Specific border radius for the calendar cell*/
   --dp-common-transition: all 0.1s ease-in; /*Generic transition applied on buttons and calendar cells*/
+}
+
+#builder-container {
 }
 
 .dp__action_row {

@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme');
+const defaultTheme = require('tailwindcss/defaultTheme')
 
 export default {
   content: [
@@ -30,15 +30,9 @@ export default {
         myPrimarySuccesColor: '#16a34a',
       },
       fontFamily: {
-        sans: [
-          'Jost',
-          'Raleway',
-          "'Cormorant'",
-          'sans-serif',
-          ...defaultTheme.fontFamily.sans,
-        ],
+        sans: ['Jost', 'Raleway', "'Cormorant'", 'sans-serif', ...defaultTheme.fontFamily.sans],
       },
     },
   },
   plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
-};
+}

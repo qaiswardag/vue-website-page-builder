@@ -1,56 +1,56 @@
 <script setup>
-import DynamicModal from '@/Components/Modals/DynamicModal.vue';
-import PageBuilder from '@/composables/PageBuilder';
-import { ref } from 'vue';
-import { usePageBuilderStateStore } from '@/stores/page-builder-state';
-import { useMediaLibraryStore } from '@/stores/media-library';
+import DynamicModalBuilder from '../../../Modals/DynamicModalBuilder.vue'
+import { computed, ref } from 'vue'
+import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const showModalDeleteComponent = ref(false);
+// Use shared store instance
+const pageBuilderStateStore = sharedPageBuilderStore
+
+const showModalDeleteComponent = ref(false)
 // use dynamic model
-const typeModal = ref('');
-const gridColumnModal = ref(Number(1));
-const titleModal = ref('');
-const descriptionModal = ref('');
-const firstButtonModal = ref('');
-const secondButtonModal = ref(null);
-const thirdButtonModal = ref(null);
+const typeModal = ref('')
+const gridColumnModal = ref(Number(1))
+const titleModal = ref('')
+const descriptionModal = ref('')
+const firstButtonModal = ref('')
+const secondButtonModal = ref(null)
+const thirdButtonModal = ref(null)
 // set dynamic modal handle functions
-const firstModalButtonFunction = ref(null);
-const secondModalButtonFunction = ref(null);
-const thirdModalButtonFunction = ref(null);
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
+const firstModalButtonFunctionDynamicModalBuilder = ref(null)
+const secondModalButtonFunctionDynamicModalBuilder = ref(null)
+const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // remove component
 const deleteComponent = function (e) {
-  showModalDeleteComponent.value = true;
-  typeModal.value = 'delete';
-  gridColumnModal.value = 2;
-  titleModal.value = 'Remove Component?';
-  descriptionModal.value = 'Are you sure you want to remove this Component?';
-  firstButtonModal.value = 'Close';
-  secondButtonModal.value = null;
-  thirdButtonModal.value = 'Delete';
+  showModalDeleteComponent.value = true
+  typeModal.value = 'delete'
+  gridColumnModal.value = 2
+  titleModal.value = 'Remove Component?'
+  descriptionModal.value = 'Are you sure you want to remove this Component?'
+  firstButtonModal.value = 'Close'
+  secondButtonModal.value = null
+  thirdButtonModal.value = 'Delete'
 
   // handle click
-  firstModalButtonFunction.value = function () {
-    showModalDeleteComponent.value = false;
-  };
+  firstModalButtonFunctionDynamicModalBuilder.value = function () {
+    showModalDeleteComponent.value = false
+  }
   //
   // handle click
-  thirdModalButtonFunction.value = function () {
-    pageBuilder.deleteComponent();
+  thirdModalButtonFunctionDynamicModalBuilder.value = function () {
+    pageBuilderClass.deleteComponent()
 
-    showModalDeleteComponent.value = false;
-  };
+    showModalDeleteComponent.value = false
+  }
   // end modal
-};
+}
 </script>
 
 <template>
-  <DynamicModal
-    :show="showModalDeleteComponent"
+  <DynamicModalBuilder
+    :showDynamicModalBuilder="showModalDeleteComponent"
     :type="typeModal"
     :gridColumnAmount="gridColumnModal"
     :title="titleModal"
@@ -58,13 +58,13 @@ const deleteComponent = function (e) {
     :firstButtonText="firstButtonModal"
     :secondButtonText="secondButtonModal"
     :thirdButtonText="thirdButtonModal"
-    @firstModalButtonFunction="firstModalButtonFunction"
-    @secondModalButtonFunction="secondModalButtonFunction"
-    @thirdModalButtonFunction="thirdModalButtonFunction"
+    @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicModalBuilder"
+    @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicModalBuilder"
+    @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicModalBuilder"
   >
     <header></header>
     <main></main>
-  </DynamicModal>
+  </DynamicModalBuilder>
   <div class="flex flex-col items-center justify-center myPrimaryGap">
     <div class="flex gap-2 items-center justify-center">
       <div
@@ -77,14 +77,14 @@ const deleteComponent = function (e) {
 
     <button
       type="button"
-      @click="pageBuilder.moveComponent(-1)"
+      @click="pageBuilderClass.moveComponent(-1)"
       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
     >
       <span class="material-symbols-outlined"> move_up </span>
     </button>
     <button
       type="button"
-      @click="pageBuilder.moveComponent(1)"
+      @click="pageBuilderClass.moveComponent(1)"
       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
     >
       <span class="material-symbols-outlined"> move_down </span>

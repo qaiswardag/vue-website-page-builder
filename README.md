@@ -2,22 +2,59 @@
 <img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo">
 </p>
 
+## **DEVELOPMENT VERSION - NOT READY FOR PRODUCTION**
+
+🚀 **Official Launch Date: June 15, 2025**  
+We're working hard to bring you a production-ready page builder. Stay tuned for updates!
+
+You are welcome to test the builder and report any bugs or feedback before the official launch date.  
+Your input will help us deliver a more stable and feature-rich release!
+
 # Free Click & Drop Page Builder
 
-[Play around with the page builder](https://www.builder-demo.myissue.dk)
+## Overview
 
-This app was born out of my desire to create a minimalist page builder with an elegant and intuitive design.
+A Vue 3 page builder component with drag & drop functionality for creating dynamic web pages.
 
-The web builder for stunning pages. Enable users to design and publish modern pages at any scale. Build responsive pages like listings, jobs or blog posts and manage content easily using the free Click & Drop Page Builder.
+## Installation
+
+The web builder for stunning pages. Enable users to design and publish modern pages at any scale.
+
+```bash
+npm install @myissue/vue-website-page-builder
+```
+
+## Click & Drop Page Builder
+
+[Play around with the Page Builder](https://www.builder-demo.myissue.dk)
+
+Lightweight & Minimalist Page Builder with an elegant and intuitive design, focused on simplicity and speed.
+
+Build responsive pages like listings, jobs or blog posts and manage content easily using the free Click & Drop Page Builder.
 
 To star the repository, simply click on the **Star** button located at the top-right corner of the GitHub page. Thank you in advance for your support! 🙌
 
 ## Demo
 
-Introducing the **Free Vue Click & Drop Page Builder**
+Introducing the **The Lightweight Free Vue Click & Drop Page Builder**
 create and enhance digital experiences with Vue on any backend.
 
-[Play around with the page builder](https://www.builder-demo.myissue.dk)
+[Play around with the Page Builder](https://www.builder-demo.myissue.dk)
+
+---
+
+<table>
+  <tr>
+    <td>
+      <img src="./assets/builder1.jpg" alt="Image 1" height="400"/>
+    </td>
+    <td>
+      <img src="./assets/builder2.jpg" alt="Image 2" height="400"/>
+    </td>
+  </tr>
+</table>
+
+---
 
 ## About
 
@@ -38,7 +75,7 @@ The Page Builder is packed with features:
 - **Media Library**: Access and manage your media files effortlessly.
 - **Unsplash**: Unsplash Integration.
 - **Responsive Editing**: Ensure your site looks great on all devices.
-- **Text Editing**: Customize your text with ease.
+- **Text Editing:** Edit text content live and in real-time.
 - **Font Customization**: Choose the perfect fonts to match your style.
 - **Undo & Redo**: Experiment confidently with the ability to revert changes.
 - **Global Styles**: Global Styles for fonts, designs, & colors.
@@ -49,14 +86,24 @@ agencies. Empower users to create the perfect content with the Page Builder.
 
 ## Technical details
 
-- **Technologies**: This Page Builder is developed using JavaScript, Vue 3, the Composition API, Pinia, CSS, Tailwind CSS, and HTML.
+- **Technologies**: This Page Builder is developed using TypeScript, Vue 3, the Composition API, Pinia, CSS, Tailwind CSS, and HTML.
 - **Features**: Click & Drop Page Builder.
+
+---
 
 ## Documentation
 
-### Required software installation
+---
+
+### Requirements
 
 Please note that these instructions assume you have Node.js installed.
+
+- Node.js ≥ 18.0.0
+- Vue.js ≥ 3.0.0
+- Modern browser with ES6+ support
+
+---
 
 ### Getting started & installation
 
@@ -76,190 +123,300 @@ yarn install
 bun install
 ```
 
-### Customization
+---
 
-I have separated all the logic for manipulating the HTML elements into its own PageBuilder class, which can be found at the path: `src/composables/PageBuilder.js`.
+### Important: CSS Import Required
 
-Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
+The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading:
 
-### Example use of Page Builder
+```js
+import '@myissue/vue-website-page-builder/style.css'
+```
+
+This import automatically includes:
+
+- ✅ Page Builder styles
+- ✅ Google Fonts (Jost, Cormorant - no additional setup needed)
+- ✅ Google Material Icons (no additional setup needed)
+- ✅ Responsive design utilities
+
+---
+
+### Quick Start
+
+Get up and running quickly and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages.
+
+- The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading:
 
 ```vue
 <script setup>
-const mediaLibraryStore = useMediaLibraryStore();
-const pageBuilderStateStore = usePageBuilderStateStore();
-const userStore = useUserStore();
-const openPageBuilder = ref(false);
-
-const pageBuilderPrimaryHandler = ref(null);
-const pageBuilderSecondaryHandler = ref(null);
-const pageBuilder = new PageBuilder(pageBuilderStateStore, mediaLibraryStore);
-const formType = ref('create');
-
-const getIsLoading = computed(() => {
-  return userStore.getIsLoading;
-});
-
-const pathPageBuilderStorageCreate = `page-builder-create-post`;
-
-const resourceId = 1;
-const pathPageBuilderStorageUpdate = `page-builder-update-post-id-${resourceId}`;
-
-const handlePageBuilder = async function () {
-
-  userStore.setIsLoading(true);
-
-  await nextTick();
-  openPageBuilder.value = true;
-
-  if (formType.value === 'create') {
-    pageBuilderStateStore.setComponents([]);
-    pageBuilder.areComponentsStoredInLocalStorage();
-  }
-
-  // handle click
-  pageBuilderPrimaryHandler.value = async function () {
-    userStore.setIsLoading(true);
-
-    if (formType.value === 'update') {
-      await nextTick();
-      pageBuilder.saveComponentsLocalStorageUpdate();
-    }
-
-
-    openPageBuilder.value = false;
-    userStore.setIsLoading(false);
-  };
-
-  // handle click
-  pageBuilderSecondaryHandler.value = async function () {
-    userStore.setIsLoading(true);
-
-    // save to local storage if new resource
-    if (formType.value === 'create') {
-      await nextTick();
-      pageBuilder.saveComponentsLocalStorage();
-      await nextTick();
-    }
-    // save to local storage if update
-    if (formType.value === 'update') {
-      await nextTick();
-      pageBuilder.synchronizeDOMAndComponents();
-      await nextTick();
-    }
-
-    openPageBuilder.value = false;
-    userStore.setIsLoading(false);
-  };
-
-  userStore.setIsLoading(false);
-
-  // end modal
-};
-// Builder # End
-const handleDraftForUpdate = async function () {
-  userStore.setIsLoading(true);
-
-  if (formType.value === 'update') {
-    await nextTick();
-    pageBuilder.areComponentsStoredInLocalStorageUpdate();
-    await nextTick();
-    pageBuilder.setEventListenersForElements();****
-    userStore.setIsLoading(false);
-  }
-};
-
-onBeforeMount(() => {
-  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
-
-  pageBuilderStateStore.setLocalStorageItemNameUpdate(
-    pathPageBuilderStorageUpdate
-  );
-});
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
 </script>
 
 <template>
-  <PageBuilderModal
-    :show="openPageBuilder"
-    updateOrCreate="create"
-    @pageBuilderPrimaryHandler="pageBuilderPrimaryHandler"
-    @pageBuilderSecondaryHandler="pageBuilderSecondaryHandler"
-    @handleDraftForUpdate="handleDraftForUpdate"
-  >
-    <PageBuilderView></PageBuilderView>
-  </PageBuilderModal>
+  <PageBuilder />
 </template>
 ```
 
-### Saving Page Builder drafts to local storage
+---
 
-Each Page Builder draft is automatically saved to local storage, allowing you to resume your work later. This process differs slightly depending on whether you are creating a new resource like a blog post, job ad, or listing, or updating an existing resource.
+### Optional: Provide Config to PageBuilder
 
-When creating a new resource like a blog post, job ad, or listing, you need to specify a name for the local storage item that will store the draft. This is done as follows:
+Get up and running quickly by importing the PageBuilder component, setting up your configuration, and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages with your own config and logo.
 
-```js
-const pathPageBuilderStorageCreate = `page-builder-create-post`;
+- Use `sharedPageBuilderStore` to ensure the external PageBuilderClass and internal PageBuilder component share the same state
+- (Optional) Provide a `configPageBuilder` object to customize the builder, such as:
+  - `pageBuilderLogo` to display your company logo in the builder toolbar
+  - `resourceData` to prefill the builder with initial data
+  - `userSettings` to set user preferences such as theme, language, or autoSave
+  - `createNewResourceFormName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
 
-onBeforeMount(() => {
-  // Define local storage key name before on mount
-  pageBuilderStateStore.setLocalStorageItemName(pathPageBuilderStorageCreate);
-});
+```vue
+<script setup>
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+const configPageBuilder = {
+  updateOrCreate: {
+    // Set the resource type for better local storage and multi-resource support
+    createNewResourceFormName: 'article',
+  },
+  pageBuilderLogo: {
+    src: '/logo/logo.svg',
+  },
+  userForPageBuilder: { name: 'John Doe' },
+  resourceData: {
+    title: 'Demo Article',
+    id: 1,
+  },
+  userSettings: {
+    theme: 'light',
+    language: 'en',
+    autoSave: true,
+  },
+}
+
+// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
+const pageBuilderStateStore = sharedPageBuilderStore
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+// Initializing Page Builder with essential configuration
+pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+</script>
+
+<template>
+  <PageBuilder />
+</template>
 ```
 
-For updating an existing resource like a blog post, job ad, or listing, you must first obtain the blog post ID and then save a name that includes this ID to local storage. This way, the Page Builder can find the exact resource from local storage later on when the user wants to continue editing the resource with the unique ID:
+### Company Logo & Logged-in User
 
-```js
-const resourceId = 1;
-const pathPageBuilderStorageUpdate = `page-builder-update-post-id-${resourceId}`;
+You can display your company logo in the Page Builder interface and set the currently logged-in user by passing both a logo URL and user information in your config object:
 
-onBeforeMount(() => {
-  // Define local storage key name before on mount
-  pageBuilderStateStore.setLocalStorageItemNameUpdate(
-    pathPageBuilderStorageUpdate
-  );
-});
+- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
+- **Logged-in User:** Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., for audit trails, personalization, or permissions).
+
+**Basic Usage:**
+
+- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
+
+Basic Usage:
+
+```vue
+<script setup>
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+const configPageBuilder = {
+  pageBuilderLogo: {
+    src: '/logo/logo.svg',
+  },
+  userForPageBuilder: { name: 'John Doe' },
+}
+
+// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
+const pageBuilderStateStore = sharedPageBuilderStore
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+// Initializing page builder with essential configuration
+pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+</script>
+
+<template>
+  <PageBuilder />
+</template>
 ```
 
-In both cases, the pageBuilderStateStore is responsible for handling the local storage name, ensuring that the correct draft is stored and retrieved as needed.
+Configuration Options
 
-### HTML Components
+| Prop              | Type     | Default | Description                         |
+| ----------------- | -------- | ------- | ----------------------------------- |
+| `PageBuilderLogo` | `String` | `null`  | URL path to your company logo image |
 
-If Creating new components, please always add the HTML inside section tags.
+---
 
-```html
-<section>
-  <div>
-    <p>New components</p>
-  </div>
-</section>
+### Updating Existing Resources
+
+To load existing content that was created with this PageBuilder:
+
+- Use `sharedPageBuilderStore` to ensure the external PageBuilderClass and internal PageBuilder component share the same state
+- Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state - in this case we need the `loadExistingContent()` method to load existing content into the page builder
+- The PageBuilderClass uses the shared store to maintain state consistency between external operations and the internal PageBuilder component, ensuring that when you load content externally it appears correctly in the PageBuilder interface
+- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
+
+1. **Set formType to "update"** in template:
+
+```javascript
+<PageBuilder />
 ```
 
-HTML components are currently stored in a JSON file named `components.json` in the root directory. HTML components can also be easily stored in the database, resulting in better management. Simply provide the `setLoadComponents` method with the new URL for loading components from the backend.
+1. **Load existing content on mount**:
 
-### Unsplash
+```javascript
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
 
-Please note that if you want to use Unsplash, simply create an .env file in your root folder and enter your Unsplash API key and value.
+const configPageBuilder = {
+  updateOrCreate: {
+    formType: 'update',
+  },
+}
 
-Example: VITE_UNSPLASH_KEY="your-unsplash-api-key-here"
+// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-[Get your unsplash api key here](https://unsplash.com/developers).
+// Initializing page builder with essential configuration
+pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+// Populating page builder with existing resource content
+pageBuilderClass.loadExistingContent(existingResourceFromBackend)
+```
 
-## Use with Backend
+#### How should `existingResourceFromBackend` look?
 
-The Page builder's capabilities become infinite when integrated with a backend.
+When loading an existing resource, each component object will have an `id` assigned by the page builder.  
+The example below shows the structure as it would appear when loaded from local storage after components have been added in the builder.
 
-If you're familiar with Laravel, the Page Builder is already integrated with the open-source Laravel Free Listing Directory, Blog & Job Board Theme, which is available at:
-[demo & repo](https://github.com/qaiswardag/laravel_vue_directory_and_job_board_theme).
+- Example JSON string (from localStorage or backend)
+- For existing resources, id will always be present and set by the page builder.
 
-By utilizing a backend Framework, the HTML components, currently stored in a JSON file at `components.json`, can be easily stored in the database, resulting in better management of HTML components.
+```typescript
+// TypeScript interface for reference
+export interface ComponentObject {
+  id: string | number | null
+  html_code: string
+  title?: string
+}
 
-## Get in touch
+// Example JSON string (from localStorage or backend)
+const existingResourceFromBackend = JSON.stringify([
+  {
+    html_code: `<section>
+                  <div>
+                    <h1>Article Title</h1>
+                      <p>Content</p>
+                  </div>
+                </section>`,
+    id: null,
+    title: 'Component Title',
+  },
+  {
+    html_code: `<section>
+                  <div>
+                    <h1>Article Title</h1>
+                      <p>Content</p>
+                  </div>
+                </section>`,
+    id: null,
+    title: 'Component Title',
+  },
+])
+```
 
-If you have any questions or if you're looking for customization, feel free to connect with me on LinkedIn and send me a message.
+Alternatively, you can provide a raw HTML string containing your `<section>` components:
 
-- [Email](mailto:qais.wardag@outlook.com)
-- [LinkedIn](https://www.linkedin.com/in/qaiswardag)
+---
+
+### Customization
+
+Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
+
+    - Google Fonts (Jost, Cormorant) and Material Icons are automatically loaded when you import the CSS file. No additional setup required for fonts or icons!
+
+---
+
+---
+
+### Custom Components
+
+Want to add your own media library or Create custom components that can be injected into the page builder:
+
+📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)** - Learn how to create and integrate your own components
+
+Example integration:
+
+```vue
+<script setup>
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import MediaLibraryComponent from './ComponentsPageBuilder/MediaLibraryComponent.vue'
+import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
+</script>
+
+<template>
+  <PageBuilder :MediaLibraryComponent="MediaLibraryComponent" :SearchComponent="SearchComponent" />
+</template>
+```
+
+## Troubleshooting
+
+---
+
+### Fonts or Icons Not Displaying
+
+If fonts (Jost, Cormorant) or Material Icons are not displaying correctly, verify that:
+
+1. **CSS Import**: Ensure you're importing the CSS file:
+
+   ```js
+   import '@myissue/vue-website-page-builder/style.css'
+   ```
+
+2. **Network Access**: The package loads fonts and icons from Google Fonts CDN. Ensure your application can access:
+
+   ```
+   https://fonts.googleapis.com/css2?family=Jost:*
+   https://fonts.googleapis.com/css2?family=Cormorant:*
+   https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined
+   ```
+
+3. **Content Security Policy**: If using CSP, allow Google Fonts:
+   ```html
+   <meta
+     http-equiv="Content-Security-Policy"
+     content="font-src 'self' https://fonts.googleapis.com;"
+   />
+   ```
 
 ## Contributing
 
-Thank you for considering contributing to this project!
+1. Fork the repository
+2. Create your feature branch
+3. Make your changes
+4. Build and test locally
+5. Submit a pull request
+
+## License
+
+[MIT License](./LICENSE)
