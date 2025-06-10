@@ -41,8 +41,8 @@ create and enhance digital experiences with Vue on any backend.
 
 [Play around with the Page Builder](https://www.builder-demo.myissue.dk)
 
----
-
+<hr>
+<hr>
 <table>
   <tr>
     <td>
@@ -53,8 +53,8 @@ create and enhance digital experiences with Vue on any backend.
     </td>
   </tr>
 </table>
-
----
+<hr>
+<hr>
 
 ## About
 
@@ -273,15 +273,10 @@ To load existing content that was created with this PageBuilder:
 - The PageBuilderClass uses the shared store to maintain state consistency between external operations and the internal PageBuilder component, ensuring that when you load content externally it appears correctly in the PageBuilder interface
 - Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
 
-1. **Set formType to "update"** in template:
+  **Set formType to "update"** in template:
 
 ```javascript
-<PageBuilder />
-```
-
-1. **Load existing content on mount**:
-
-```javascript
+<script setup>
 import {
   PageBuilder,
   PageBuilderClass,
@@ -302,6 +297,11 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 // Populating page builder with existing resource content
 pageBuilderClass.loadExistingContent(existingResourceFromBackend)
+</script>
+
+<template>
+  <PageBuilder />
+</template>
 ```
 
 #### How should `existingResourceFromBackend` look?
@@ -312,14 +312,18 @@ The example below shows the structure as it would appear when loaded from local 
 - Example JSON string (from localStorage or backend)
 - For existing resources, id will always be present and set by the page builder.
 
-```typescript
-// TypeScript interface for reference
+TypeScript interface for reference
+
+```javascript
 export interface ComponentObject {
   id: string | number | null
   html_code: string
   title?: string
 }
+```
 
+```javascript
+<script setup>
 // Example JSON string (from localStorage or backend)
 const existingResourceFromBackend = JSON.stringify([
   {
@@ -343,6 +347,11 @@ const existingResourceFromBackend = JSON.stringify([
     title: 'Component Title',
   },
 ])
+</script>
+
+<template>
+  <PageBuilder />
+</template>
 ```
 
 Alternatively, you can provide a raw HTML string containing your `<section>` components:
@@ -367,7 +376,7 @@ Want to add your own media library or Create custom components that can be injec
 
 Example integration:
 
-```vue
+```javascript
 <script setup>
 import { PageBuilder } from '@myissue/vue-website-page-builder'
 import MediaLibraryComponent from './ComponentsPageBuilder/MediaLibraryComponent.vue'
@@ -399,6 +408,7 @@ If fonts (Jost, Cormorant) or Material Icons are not displaying correctly, verif
    https://fonts.googleapis.com/css2?family=Jost:*
    https://fonts.googleapis.com/css2?family=Cormorant:*
    https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined
+
    ```
 
 3. **Content Security Policy**: If using CSP, allow Google Fonts:
@@ -416,6 +426,25 @@ If fonts (Jost, Cormorant) or Material Icons are not displaying correctly, verif
 3. Make your changes
 4. Build and test locally
 5. Submit a pull request
+
+## Security Vulnerabilities
+
+If you discover a security vulnerability, please send us a message.
+
+## Get in touch for customization or any questions
+
+If you have any questions or if you're looking for customization, feel free to connect with our developer.
+
+- [Email](mailto:qais.wardag@outlook.com)
+- [LinkedIn](https://www.linkedin.com/in/qaiswardag)
+
+## Feedback
+
+Suggestions, or any issues you encounter while using this app. Feel free to reach out.
+
+## Support the Project
+
+We would greatly appreciate it if you could star the GitHub repository. Starring the project helps to boost its visibility.
 
 ## License
 
