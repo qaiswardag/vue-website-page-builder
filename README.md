@@ -156,10 +156,30 @@ import {
   sharedPageBuilderStore,
 } from '@myissue/vue-website-page-builder'
 
+const configPageBuilder = {
+  updateOrCreate: {
+    formType: 'update',
+  },
+  pageBuilderLogo: {
+    src: '/logo.svg',
+  },
+  userForPageBuilder: { name: 'John Doe' },
+  resourceData: {
+    title: 'Demo Article',
+    id: 1,
+  },
+  userSettings: {
+    theme: 'light',
+    language: 'en',
+    autoSave: true,
+  },
+}
+
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 onMounted(() => {
+  pageBuilderClass.setConfigPageBuilder(configPageBuilder)
   pageBuilderClass.loadExistingContent(existingResourceFromBackend)
 })
 ```
