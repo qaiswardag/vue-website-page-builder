@@ -41,6 +41,21 @@ create and enhance digital experiences with Vue on any backend.
 
 [Play around with the Page Builder](https://www.builder-demo.myissue.dk)
 
+---
+
+<table>
+  <tr>
+    <td>
+      <img src="public/home/builder1.jpg" alt="Image 1" height="400"/>
+    </td>
+    <td>
+      <img src="public/home/builder2.jpg" alt="Image 2" height="400"/>
+    </td>
+  </tr>
+</table>
+
+---
+
 ## About
 
 A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.
