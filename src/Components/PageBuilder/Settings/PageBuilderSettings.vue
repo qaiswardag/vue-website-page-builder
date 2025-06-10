@@ -227,7 +227,7 @@ const handleDownloadHTML = function () {
         <!-- User Information Table - end -->
 
         <!-- User Settings Table - start -->
-        <div class="mt-8">
+        <div class="mt-8" v-if="getConfigPageBuilder?.userSettings">
           <h4 class="myQuaternaryHeader text-sm mb-2">User Settings</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
