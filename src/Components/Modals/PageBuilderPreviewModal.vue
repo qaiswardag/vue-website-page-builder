@@ -1,6 +1,7 @@
 <script setup>
 import { computed } from 'vue'
 import { delay } from '../../composables/delay'
+import { Dialog, DialogOverlay, TransitionChild, TransitionRoot } from '@headlessui/vue'
 
 // Use shared store instance
 import { sharedPageBuilderStore } from '../../stores/shared-store'

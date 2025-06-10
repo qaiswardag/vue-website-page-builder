@@ -1500,15 +1500,12 @@ class PageBuilderClass {
     const trimmedData = data.trim()
 
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
-      console.log('Using JSON method..............1')
       // Looks like JSON - parse as JSON
       this.#parseJSONComponents(trimmedData)
     } else if (trimmedData.startsWith('<')) {
-      console.log('Using HTML method..............2')
       // Looks like HTML - parse as HTML
       this.#parseHTMLComponents(trimmedData)
     } else {
-      console.log('Using JSON method..............3')
       this.#parseJSONComponents(trimmedData)
     }
   }
