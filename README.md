@@ -140,7 +140,11 @@ Get up and running quickly by importing the PageBuilder component, setting up yo
 
 ```vue
 <script setup>
-import { PageBuilder } from '@myissue/vue-website-page-builder'
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
 
 const configPageBuilder = {
@@ -176,82 +180,26 @@ pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 </template>
 ```
 
-> **📝 Note**: Google Fonts (Jost, Cormorant) and Material Icons are automatically loaded when you import the CSS file. No additional setup required for fonts or icons!
+### Company Logo & Logged-in User
 
-### Updating Existing Resources
+You can display your company logo in the page builder interface and set the currently logged-in user by passing both a logo URL and user information in your config object:
 
-To load existing content that was created with this PageBuilder:
+- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear at the top of the page builder with proper spacing in the toolbar.
+- **Logged-in User:** Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., for audit trails, personalization, or permissions).
 
-- Use `sharedPageBuilderStore` to ensure the external PageBuilderClass and internal PageBuilder component share the same state
-- Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state - in this case we need the `loadExistingContent()` method to load existing content into the page builder
-- The PageBuilderClass uses the shared store to maintain state consistency between external operations and the internal PageBuilder component, ensuring that when you load content externally it appears correctly in the PageBuilder interface
-- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
+**Basic Usage:**
 
-1. **Set formType to "update"** in template:
-
-```javascript
-<PageBuilder />
-```
-
-2. **Load existing content on mount**:
-
-```javascript
-import {
-  PageBuilder,
-  PageBuilderClass,
-  sharedPageBuilderStore,
-} from '@myissue/vue-website-page-builder'
-
-const configPageBuilder = {
-  updateOrCreate: {
-    formType: 'update',
-  },
-}
-
-// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
-
-// Initializing page builder with essential configuration
-pageBuilderClass.setConfigPageBuilder(configPageBuilder)
-// Populating page builder with existing resource content
-pageBuilderClass.loadExistingContent(existingResourceFromBackend)
-```
-
-### Customization
-
-Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
-
-### Custom Components
-
-Want to add your own media library or search functionality? Create custom components that can be injected into the page builder:
-
-📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)** - Learn how to create and integrate your own components
-
-Example integration:
-
-```vue
-<script setup>
-import { PageBuilder } from '@myissue/vue-website-page-builder'
-import MediaLibraryComponent from './ComponentsPageBuilder/MediaLibraryComponent.vue'
-import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
-</script>
-
-<template>
-  <PageBuilder :MediaLibraryComponent="MediaLibraryComponent" :SearchComponent="SearchComponent" />
-</template>
-```
-
-### Company Logo
-
-You can display your company logo in the page builder interface by passing a logo URL:
-
-- You can display your company logo in the page builder interface by setting the logo URL in your config object and passing it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
+- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
 
 Basic Usage:
 
 ```vue
 <script setup>
-import { PageBuilder } from '@myissue/vue-website-page-builder'
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
 
 const configPageBuilder = {
@@ -259,10 +207,6 @@ const configPageBuilder = {
     src: '/logo/logo.svg',
   },
   userForPageBuilder: { name: 'John Doe' },
-  resourceData: {
-    title: 'Demo Article',
-    id: 1,
-  },
 }
 
 // Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
@@ -284,9 +228,114 @@ configuration Options
 | ----------------- | -------- | ------- | ----------------------------------- |
 | `PageBuilderLogo` | `String` | `null`  | URL path to your company logo image |
 
-#### Examples
+### Updating Existing Resources
 
-The logo will be displayed with a subtle border separator and proper spacing in the page builder toolbar.
+To load existing content that was created with this PageBuilder:
+
+- Use `sharedPageBuilderStore` to ensure the external PageBuilderClass and internal PageBuilder component share the same state
+- Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state - in this case we need the `loadExistingContent()` method to load existing content into the page builder
+- The PageBuilderClass uses the shared store to maintain state consistency between external operations and the internal PageBuilder component, ensuring that when you load content externally it appears correctly in the PageBuilder interface
+- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
+
+1. **Set formType to "update"** in template:
+
+```javascript
+<PageBuilder />
+```
+
+1. **Load existing content on mount**:
+
+```javascript
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+const configPageBuilder = {
+  updateOrCreate: {
+    formType: 'update',
+  },
+}
+
+// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+// Initializing page builder with essential configuration
+pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+// Populating page builder with existing resource content
+pageBuilderClass.loadExistingContent(existingResourceFromBackend)
+```
+
+#### How should `existingResourceFromBackend` look?
+
+When loading an existing resource, each component object will have an `id` assigned by the page builder.  
+The example below shows the structure as it would appear when loaded from local storage after components have been added in the builder.
+
+- Example JSON string (from localStorage or backend)
+- For existing resources, id will always be present and set by the page builder.
+
+```typescript
+// TypeScript interface for reference
+export interface ComponentObject {
+  id: string | number | null
+  html_code: string
+  title?: string
+}
+
+// Example JSON string (from localStorage or backend)
+const existingResourceFromBackend = JSON.stringify([
+  {
+    html_code: `<section>
+                  <div>
+                    <h1>Article Title</h1>
+                      <p>Content</p>
+                  </div>
+                </section>`,
+    id: null,
+    title: 'Component Title',
+  },
+  {
+    html_code: `<section>
+                  <div>
+                    <h1>Article Title</h1>
+                      <p>Content</p>
+                  </div>
+                </section>`,
+    id: null,
+    title: 'Component Title',
+  },
+])
+```
+
+Alternatively, you can provide a raw HTML string containing your `<section>` components:
+
+### Customization
+
+Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
+
+    - Google Fonts (Jost, Cormorant) and Material Icons are automatically loaded when you import the CSS file. No additional setup required for fonts or icons!
+
+### Custom Components
+
+Want to add your own media library or Create custom components that can be injected into the page builder:
+
+📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)** - Learn how to create and integrate your own components
+
+Example integration:
+
+```vue
+<script setup>
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+import MediaLibraryComponent from './ComponentsPageBuilder/MediaLibraryComponent.vue'
+import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
+</script>
+
+<template>
+  <PageBuilder :MediaLibraryComponent="MediaLibraryComponent" :SearchComponent="SearchComponent" />
+</template>
+```
 
 ## Troubleshooting
 
