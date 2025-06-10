@@ -46,10 +46,10 @@ create and enhance digital experiences with Vue on any backend.
 <table>
   <tr>
     <td>
-      <img src="public/home/builder1.jpg" alt="Image 1" height="400"/>
+      <img src="./public/home/builder1.jpg" alt="Image 1" height="400"/>
     </td>
     <td>
-      <img src="public/home/builder2.jpg" alt="Image 2" height="400"/>
+      <img src="./public/home/builder2.jpg" alt="Image 2" height="400"/>
     </td>
   </tr>
 </table>
