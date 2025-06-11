@@ -165,24 +165,43 @@ onMounted(async () => {
   pageBuilderClass.updateLocalStorageItemName()
   await pageBuilderClass.setEventListenersForElements()
 
-  if (
-    getConfigPageBuilder.value &&
-    getConfigPageBuilder.value.updateOrCreate &&
-    getConfigPageBuilder.value.updateOrCreate.formType === 'create'
-  ) {
+  const config = getConfigPageBuilder.value
+  if (config && config.updateOrCreate && config.updateOrCreate.formType === 'create') {
     pageBuilderClass.loadExistingContent()
   }
 
   pageBuilderClass.removeHoveredAndSelected()
 
-  // Set config if it's an empty object
+  // Set config for page builder if not set by user
   if (
-    getConfigPageBuilder.value === null ||
-    getConfigPageBuilder.value === undefined ||
-    (getConfigPageBuilder.value &&
-      Object.keys(getConfigPageBuilder.value).length === 0 &&
-      getConfigPageBuilder.value.constructor === Object)
+    config === null ||
+    config === undefined ||
+    (config && Object.keys(config).length === 0 && config.constructor === Object)
   ) {
+    console.log('1')
+    pageBuilderClass.setConfigPageBuilder(defaultConfigValues)
+    return
+  }
+
+  console.log(
+    'user:',
+    config &&
+      config &&
+      Object.keys(config).length !== 0 &&
+      config.constructor === Object &&
+      config.userForPageBuilder &&
+      typeof config.userForPageBuilder.name === 'string',
+  )
+  // Set config for page builder if only user for page builder is present
+  if (
+    config &&
+    Object.keys(config).length !== 0 &&
+    config.constructor === Object &&
+    config.userForPageBuilder &&
+    typeof config.userForPageBuilder.name === 'string' &&
+    config.userForPageBuilder.name.length > 0
+  ) {
+    console.log('2')
     pageBuilderClass.setConfigPageBuilder(defaultConfigValues)
   }
 })
@@ -206,11 +225,11 @@ onMounted(async () => {
         <div class="pr-4">
           <img class="h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
         </div>
-        <span class="myPrimaryParagraph font-medium pl-4">Edit mode </span>
+        <span class="myPrimaryParagraph font-medium pl-4">Editing Page </span>
       </div>
       <div v-else>
         <div class="pr-6">
-          <span class="myPrimaryParagraph font-medium">Edit mode </span>
+          <span class="myPrimaryParagraph font-medium">Editing Page </span>
         </div>
       </div>
     </div>
@@ -348,7 +367,7 @@ onMounted(async () => {
                       <span
                         class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
                       >
-                        <span class="myMediumIcon material-symbols-outlined"> apps </span>
+                        <span class="myMediumIcon material-symbols-outlined"> more_vert </span>
                       </span>
                     </div>
                   </button>

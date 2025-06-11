@@ -72,29 +72,7 @@ const features = [
 //   },
 // }
 
-const configPageBuilder = {
-  pageBuilderLogo: {
-    src: '/logo/logo.svg',
-  },
-  userForPageBuilder: { name: 'John Doe' },
-}
-
-// const configPageBuilder = {
-//   updateOrCreate: {
-//     formType: 'update',
-//     createNewResourceFormName: 'article',
-//   },
-//   userForPageBuilder: { name: 'John Doe' },
-//   resourceData: {
-//     title: 'Demo Article',
-//     id: 1,
-//   },
-//   userSettings: {
-//     theme: 'pink',
-//     language: 'sw',
-//     autoSave: true,
-//   },
-// }
+const configPageBuilder = null
 
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
