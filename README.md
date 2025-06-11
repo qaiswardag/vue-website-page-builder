@@ -60,7 +60,7 @@ create and enhance digital experiences with Vue on any backend.
 
 A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.
 
-<img style="max-width: 100%;" src="./public/home/builder3.png" alt="Logo">
+<img style="max-width: 100%;" src="./public/home/builder3.jpg" alt="Logo">
 
 ## Features
 
