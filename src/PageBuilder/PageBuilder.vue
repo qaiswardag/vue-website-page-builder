@@ -176,7 +176,7 @@ const handleConfig = function (config) {
   if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
     //
     // Returns true if all config fields are missing or empty
-    if (isChildrenEmpty) {
+    if (isChildrenEmpty(config)) {
       return
     }
     // only user is present
