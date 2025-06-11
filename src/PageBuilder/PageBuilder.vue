@@ -179,21 +179,31 @@ const handleConfig = function (config) {
         !config.updateOrCreate ||
         (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string')
       ) {
-        console.log('2:')
-        let editorConfig = {
-          updateOrCreate: {
-            formType: 'create',
-            createNewResourceFormName: 'event',
-          },
-          userSettings: {
-            theme: 'saffron',
-            language: 'it',
-            autoSave: false,
-          },
-        }
+        if (
+          !config.pageBuilderLogo ||
+          (config.pageBuilderLogo &&
+            config.pageBuilderLogo.src &&
+            typeof config.pageBuilderLogo.src === 'string' &&
+            config.pageBuilderLogo.src.length === 0)
+        ) {
+          if (!config.userSettings) {
+            console.log('2:')
+            let editorConfig = {
+              updateOrCreate: {
+                formType: 'create',
+                createNewResourceFormName: 'event',
+              },
+              userSettings: {
+                theme: 'saffron',
+                language: 'it',
+                autoSave: false,
+              },
+            }
 
-        pageBuilderClass.setConfigPageBuilder(editorConfig)
-        return
+            pageBuilderClass.setConfigPageBuilder(editorConfig)
+            return
+          }
+        }
       }
     }
 
@@ -209,17 +219,27 @@ const handleConfig = function (config) {
         (typeof config.userForPageBuilder.name === 'string' &&
           config.userForPageBuilder.name.length < 1)
       ) {
-        console.log('3:')
-        const editorConfig = {
-          userSettings: {
-            theme: 'saffron',
-            language: 'it',
-            autoSave: false,
-          },
-        }
+        if (
+          !config.pageBuilderLogo ||
+          (config.pageBuilderLogo &&
+            config.pageBuilderLogo.src &&
+            typeof config.pageBuilderLogo.src === 'string' &&
+            config.pageBuilderLogo.src.length === 0)
+        ) {
+          if (!config.userSettings) {
+            console.log('3:')
+            const editorConfig = {
+              userSettings: {
+                theme: 'saffron',
+                language: 'it',
+                autoSave: false,
+              },
+            }
 
-        pageBuilderClass.setConfigPageBuilder(editorConfig)
-        return
+            pageBuilderClass.setConfigPageBuilder(editorConfig)
+            return
+          }
+        }
       }
     }
   }
