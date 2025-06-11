@@ -202,6 +202,27 @@ onMounted(async () => {
     config.userForPageBuilder.name.length > 0
   ) {
     console.log('2')
+
+    const editorConfig = {
+      updateOrCreate: {
+        formType: 'create',
+        createNewResourceFormName: 'post',
+      },
+      pageBuilderLogo: {
+        src: '/logo/logo.svg',
+      },
+      userForPageBuilder: { name: 'John Doe' },
+      resourceData: {
+        title: 'Demo Article',
+        id: 1,
+      },
+      userSettings: {
+        theme: 'light',
+        language: 'en',
+        autoSave: true,
+      },
+    }
+
     pageBuilderClass.setConfigPageBuilder(defaultConfigValues)
   }
 })
