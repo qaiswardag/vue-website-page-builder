@@ -44,7 +44,9 @@ export const isUserValid = function (config: PageBuilderConfig) {
             }
 
             pageBuilderClass.setConfigPageBuilder(editorConfig)
-            return
+            return true
+          } else {
+            return false
           }
         }
       }
@@ -86,7 +88,9 @@ export const isValidUpdateOrCreate = function (config: PageBuilderConfig) {
             }
 
             pageBuilderClass.setConfigPageBuilder(editorConfig)
-            return
+            return true
+          } else {
+            return false
           }
         }
       }

@@ -74,11 +74,11 @@ const features = [
 
 const configPageBuilder = {
   updateOrCreate: {
-    // formType: 'create',
-    // createNewResourceFormName: 'product',
+    formType: 'create',
+    createNewResourceFormName: 'product øøø',
   },
   userForPageBuilder: {
-    name: 'John Doe',
+    // name: 'John Doe',
   },
   pageBuilderLogo: {
     // src: '/logo/logo.svg',

@@ -181,6 +181,8 @@ const handleConfig = function (config) {
       return
     }
   }
+
+  // In the end make check if form type for update or create is set:
 }
 
 onMounted(async () => {
