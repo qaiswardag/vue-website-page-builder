@@ -10,8 +10,8 @@ Create a `ComponentsPageBuilder` folder in your project two customizable compone
 your-project/
 ├── src/
 │   └── ComponentsPageBuilder/
-│       ├── MediaLibraryComponent.vue
-│       ├── SearchComponent.vue
+│       ├── YourMediaLibraryComponent.vue
+│       ├── YourSearchComponent.vue
 │       └── README.md (optional)
 ```
 

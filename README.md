@@ -366,12 +366,12 @@ Example integration:
 ```javascript
 <script setup>
 import { PageBuilder } from '@myissue/vue-website-page-builder'
-import MediaLibraryComponent from './ComponentsPageBuilder/MediaLibraryComponent.vue'
-import SearchComponent from './ComponentsPageBuilder/SearchComponent.vue'
+import YourMediaLibraryComponent from './ComponentsPageBuilder/YourMediaLibraryComponent.vue'
+import YourSearchComponent from './ComponentsPageBuilder/YourSearchComponent.vue'
 </script>
 
 <template>
-  <PageBuilder :MediaLibraryComponent="MediaLibraryComponent" :SearchComponent="SearchComponent" />
+  <PageBuilder :CustomMediaLibraryComponent="YourMediaLibraryComponent" :CustomSearchComponent="YourSearchComponent" />
 </template>
 ```
 
