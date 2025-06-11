@@ -450,7 +450,7 @@ const handleDownloadHTML = function () {
         <!-- Operation Mode Table - end -->
 
         <div class="mt-8" v-if="getConfigPageBuilder?.updateOrCreate">
-          <h4 class="myQuaternaryHeader text-sm mb-2">Delete</h4>
+          <h4 class="myQuaternaryHeader text-sm mb-2">Delete Saved Layout</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
               <table class="min-w-full divide-y divide-gray-300">
@@ -466,7 +466,7 @@ const handleDownloadHTML = function () {
                       scope="col"
                       class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Delete
+                      Description
                     </th>
                   </tr>
                 </thead>
@@ -474,14 +474,46 @@ const handleDownloadHTML = function () {
                 <tbody class="bg-white divide-y divide-gray-200">
                   <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      Delete Draft
+                      Form Type
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                        :class="
+                          getConfigPageBuilder.updateOrCreate === 'create'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-blue-100 text-blue-800'
+                        "
+                      >
+                        <span
+                          v-if="
+                            getConfigPageBuilder &&
+                            getConfigPageBuilder.updateOrCreate.formType === 'create'
+                          "
+                        >
+                          {{ getConfigPageBuilder.updateOrCreate.formType }}
+                        </span>
+                        <span
+                          v-if="
+                            getConfigPageBuilder &&
+                            getConfigPageBuilder.updateOrCreate.formType === 'update'
+                          "
+                        >
+                          {{ getConfigPageBuilder.updateOrCreate.formType }}
+                        </span>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Delete
                     </td>
                     <td
-                      v-if="getConfigPageBuilder.updateOrCreate === 'create'"
+                      v-if="getConfigPageBuilder?.updateOrCreate.formType === 'create'"
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     >
                       <button
-                        class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4 bg-red-500"
+                        class="myPrimaryDeleteButton w-full"
                         @click="pageBuilderClass.removeItemComponentsLocalStorageCreate"
                         type="button"
                       >
@@ -490,11 +522,11 @@ const handleDownloadHTML = function () {
                       </button>
                     </td>
                     <td
-                      v-if="getConfigPageBuilder.updateOrCreate === 'update'"
+                      v-if="getConfigPageBuilder?.updateOrCreate.formType === 'update'"
                       class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
                     >
                       <button
-                        class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4 bg-red-800"
+                        class="myPrimaryDeleteButton w-full"
                         @click="pageBuilderClass.removeItemComponentsLocalStorageUpdate"
                         type="button"
                       >
