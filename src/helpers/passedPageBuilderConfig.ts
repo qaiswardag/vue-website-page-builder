@@ -8,6 +8,26 @@ const pageBuilderStateStore = sharedPageBuilderStore
 // Initialize PageBuilder with store
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
+export const isChildrenEmpty = function (config: PageBuilderConfig) {
+  if (
+    (!config.updateOrCreate || isEmptyObject(config.updateOrCreate)) &&
+    (!config.pageBuilderLogo || isEmptyObject(config.pageBuilderLogo)) &&
+    (!config.resourceData || isEmptyObject(config.resourceData)) &&
+    (!config.userForPageBuilder || isEmptyObject(config.userForPageBuilder)) &&
+    (!config.userSettings || isEmptyObject(config.userSettings))
+  ) {
+    console.log(0)
+    const editorConfig = {
+      updateOrCreate: config.updateOrCreate,
+      userSettings: {
+        theme: 'light' as 'light',
+        language: 'it',
+        autoSave: false,
+      },
+    }
+    pageBuilderClass.setConfigPageBuilder(editorConfig)
+  }
+}
 export const isUserValid = function (config: PageBuilderConfig) {
   if (
     config.userForPageBuilder &&
@@ -86,7 +106,6 @@ export const isValidUpdateOrCreate = function (config: PageBuilderConfig) {
                 autoSave: false,
               },
             }
-
             pageBuilderClass.setConfigPageBuilder(editorConfig)
             return true
           } else {

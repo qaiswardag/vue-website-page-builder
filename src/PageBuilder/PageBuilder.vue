@@ -9,7 +9,11 @@ import SearchComponents from '../Components/Search/SearchComponents.vue'
 import OptionsDropdown from '../Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
 import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
 import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
-import { isUserValid, isValidUpdateOrCreate } from '../helpers/passedPageBuilderConfig'
+import {
+  isChildrenEmpty,
+  isUserValid,
+  isValidUpdateOrCreate,
+} from '../helpers/passedPageBuilderConfig'
 /**
  * Props for PageBuilder component
  * @typedef {Object} Props
@@ -171,6 +175,10 @@ const handleConfig = function (config) {
 
   if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
     //
+    // Returns true if all config fields are missing or empty
+    if (isChildrenEmpty) {
+      return
+    }
     // only user is present
     if (isUserValid(config)) {
       return
