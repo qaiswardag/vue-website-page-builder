@@ -152,11 +152,6 @@ const settingsSlideOverButton = function () {
                   ]"
                 >
                   <div class="flex items-center justify-left gap-2 text-sm">
-                    <div
-                      class="h-8 w-8 cursor-defualt rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                    >
-                      <span class="material-symbols-outlined text-[16px]"> person </span>
-                    </div>
                     <div>
                       {{ getConfigPageBuilder.userForPageBuilder.name }}
                     </div>
@@ -185,14 +180,7 @@ const settingsSlideOverButton = function () {
                     'block px-4 py-2',
                   ]"
                 >
-                  <div class="flex items-center justify-left gap-2 text-sm">
-                    <div
-                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                    >
-                      <span class="material-symbols-outlined text-[16px]"> visibility </span>
-                    </div>
-                    Preview
-                  </div>
+                  <div class="flex items-center justify-left gap-2 text-sm">Preview</div>
                 </div>
               </MenuItem>
 
@@ -205,14 +193,7 @@ const settingsSlideOverButton = function () {
                     'block px-4 py-2',
                   ]"
                 >
-                  <div class="flex items-center justify-left gap-2 text-sm">
-                    <div
-                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                    >
-                      <span class="material-symbols-outlined text-[16px]"> settings </span>
-                    </div>
-                    Settings
-                  </div>
+                  <div class="flex items-center justify-left gap-2 text-sm">Settings</div>
                 </div>
               </MenuItem>
               <MenuItem v-slot="{ active }">
@@ -225,14 +206,7 @@ const settingsSlideOverButton = function () {
                   ]"
                 >
                   <div class="flex items-center justify-left gap-2 text-sm">
-                    <div
-                      class="h-8 w-8 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white text-myPrimaryErrorColor"
-                    >
-                      <span class="myMediumIcon material-symbols-outlined text-[16px]">
-                        delete
-                      </span>
-                    </div>
-                    <span class="group-hover:text-white"> Clear page </span>
+                    <span class="group-hover:text-white"> Delete Layout </span>
                   </div>
                 </div>
               </MenuItem>
