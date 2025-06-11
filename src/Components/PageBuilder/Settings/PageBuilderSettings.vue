@@ -4,10 +4,14 @@ import AdvancedPageBuilderSettings from './AdvancedPageBuilderSettings.vue'
 import { ref, computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
+import PageBuilderClass from '../../../composables/PageBuilderClass.ts'
 const version = __APP_VERSION__
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
+
+// Initialize PageBuilder with store
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 const showAdvancedSettingsSlideOverRight = ref(false)
 const titleSettingsSlideOverRight = ref('')

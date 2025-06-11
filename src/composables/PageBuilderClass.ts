@@ -129,30 +129,7 @@ class PageBuilderClass {
 
   // Load existing content from HTML when in update mode
   setConfigPageBuilder(data: PageBuilderConfig): void {
-    const defaultUpdateOrCreate = {
-      formType: 'create',
-      createNewResourceFormName: 'post',
-    }
-
-    const defaultUserSettings = {
-      theme: 'light',
-      language: 'en',
-      autoSave: true,
-    }
-
-    const configWithDefaults = {
-      ...data,
-      updateOrCreate: {
-        ...defaultUpdateOrCreate,
-        ...data.updateOrCreate,
-      },
-      userSettings: {
-        ...defaultUserSettings,
-        ...data.userSettings,
-      },
-    }
-
-    this.pageBuilderStateStore.setConfigPageBuilder(configWithDefaults)
+    this.pageBuilderStateStore.setConfigPageBuilder(data)
   }
 
   #applyElementClassChanges(

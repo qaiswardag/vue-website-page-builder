@@ -143,6 +143,24 @@ const handleSelectComponent = function (componentObject) {
 
 const draggableZone = ref(null)
 
+const defaultUpdateOrCreate = {
+  formType: 'create',
+  createNewResourceFormName: 'post',
+}
+
+const defaultConfigValues = {
+  updateOrCreate: {
+    formType: 'create',
+    createNewResourceFormName: 'post',
+  },
+
+  userSettings: {
+    theme: 'pink',
+    language: 'en',
+    autoSave: true,
+  },
+}
+
 onMounted(async () => {
   console.info('Initiate Page Builder Component')
   pageBuilderClass.updateLocalStorageItemName()
@@ -157,7 +175,15 @@ onMounted(async () => {
   }
 
   pageBuilderClass.removeHoveredAndSelected()
-  pageBuilderClass.setConfigPageBuilder({})
+
+  // Set config if it's an empty object
+  if (
+    getConfigPageBuilder.value &&
+    Object.keys(getConfigPageBuilder.value).length === 0 &&
+    getConfigPageBuilder.value.constructor === Object
+  ) {
+    pageBuilderClass.setConfigPageBuilder(defaultConfigValues)
+  }
 })
 </script>
 
