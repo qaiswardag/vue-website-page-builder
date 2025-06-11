@@ -148,7 +148,7 @@ const settingsSlideOverButton = function () {
                   class="cursor-defualt"
                   :class="[
                     active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2',
+                    'block px-4 py-2 break-all',
                   ]"
                 >
                   <div class="flex items-center justify-left gap-2 text-sm">
