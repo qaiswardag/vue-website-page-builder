@@ -308,6 +308,68 @@ const handleDownloadHTML = function () {
         </div>
         <!-- User Settings Table - end -->
 
+        <!-- Page Builder Logo Table - start -->
+        <div class="mt-8" v-if="getConfigPageBuilder?.pageBuilderLogo">
+          <h4 class="myQuaternaryHeader text-sm mb-2">Logo Configuration</h4>
+          <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
+            <div class="overflow-x-auto">
+              <table class="min-w-full divide-y divide-gray-300">
+                <thead class="bg-gray-50">
+                  <tr>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Property
+                    </th>
+                    <th
+                      scope="col"
+                      class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    >
+                      Value
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="bg-white divide-y divide-gray-200">
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Logo
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <div class="flex items-center space-x-3">
+                        <div class="border-r border-gray-200 pr-6">
+                          <img
+                            class="h-3"
+                            :src="getConfigPageBuilder.pageBuilderLogo.src"
+                            alt="Logo"
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      Logo URL
+                    </td>
+                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <div class="flex items-center space-x-3">
+                        <div class="border-r border-gray-200 pr-6">
+                          <div class="flex items-center space-x-3">
+                            <span class="whitespace-nowrap">{{
+                              getConfigPageBuilder.pageBuilderLogo.src
+                            }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+        <!-- Page Builder Logo Table - end -->
+
         <!-- Operation Mode Table - start -->
         <div class="mt-8" v-if="getConfigPageBuilder?.updateOrCreate">
           <h4 class="myQuaternaryHeader text-sm mb-2">Operation Mode</h4>
@@ -387,9 +449,8 @@ const handleDownloadHTML = function () {
         </div>
         <!-- Operation Mode Table - end -->
 
-        <!-- Page Builder Logo Table - start -->
-        <div class="mt-8" v-if="getConfigPageBuilder?.pageBuilderLogo">
-          <h4 class="myQuaternaryHeader text-sm mb-2">Logo Configuration</h4>
+        <div class="mt-8" v-if="getConfigPageBuilder?.updateOrCreate">
+          <h4 class="myQuaternaryHeader text-sm mb-2">Delete</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
               <table class="min-w-full divide-y divide-gray-300">
@@ -399,47 +460,47 @@ const handleDownloadHTML = function () {
                       scope="col"
                       class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Property
+                      Option
                     </th>
                     <th
                       scope="col"
                       class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
                     >
-                      Value
+                      Delete
                     </th>
                   </tr>
                 </thead>
+
                 <tbody class="bg-white divide-y divide-gray-200">
                   <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      Logo
+                      Delete Draft
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <div class="flex items-center space-x-3">
-                        <div class="border-r border-gray-200 pr-6">
-                          <img
-                            class="h-3"
-                            :src="getConfigPageBuilder.pageBuilderLogo.src"
-                            alt="Logo"
-                          />
-                        </div>
-                      </div>
+                    <td
+                      v-if="getConfigPageBuilder.updateOrCreate === 'create'"
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                    >
+                      <button
+                        class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4 bg-red-500"
+                        @click="pageBuilderClass.removeItemComponentsLocalStorageCreate"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"> delete </span>
+                        Delete
+                      </button>
                     </td>
-                  </tr>
-                  <tr>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      Logo URL
-                    </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      <div class="flex items-center space-x-3">
-                        <div class="border-r border-gray-200 pr-6">
-                          <div class="flex items-center space-x-3">
-                            <span class="whitespace-nowrap">{{
-                              getConfigPageBuilder.pageBuilderLogo.src
-                            }}</span>
-                          </div>
-                        </div>
-                      </div>
+                    <td
+                      v-if="getConfigPageBuilder.updateOrCreate === 'update'"
+                      class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                    >
+                      <button
+                        class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4 bg-red-800"
+                        @click="pageBuilderClass.removeItemComponentsLocalStorageUpdate"
+                        type="button"
+                      >
+                        <span class="material-symbols-outlined text-[18px]"> delete </span>
+                        Delete
+                      </button>
                     </td>
                   </tr>
                 </tbody>
@@ -447,7 +508,7 @@ const handleDownloadHTML = function () {
             </div>
           </div>
         </div>
-        <!-- Page Builder Logo Table - end -->
+        <!-- Delete Draft - end -->
       </div>
     </div>
     <!-- Advanced Settings - end -->

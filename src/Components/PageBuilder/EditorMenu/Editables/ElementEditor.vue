@@ -30,7 +30,7 @@ const getRestoredElement = computed(() => {
             <button
               @click="pageBuilderClass.handleRestoreElement"
               type="button"
-              class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+              class="myPrimaryButton w-full"
             >
               <span class="material-symbols-outlined"> undo </span>
               <span>Undo</span>
@@ -43,7 +43,7 @@ const getRestoredElement = computed(() => {
             <button
               @click="pageBuilderClass.handleDeleteElement"
               type="button"
-              class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:text-white focus-visible:ring-0 hover:bg-myPrimaryErrorColor"
+              class="myPrimaryDeleteButton w-full"
             >
               <span class="material-symbols-outlined"> delete </span>
               <span class="hover:text-white">Delete element</span>

@@ -144,6 +144,7 @@ const handleSelectComponent = function (componentObject) {
 const draggableZone = ref(null)
 
 onMounted(async () => {
+  console.info('Initiate Page Builder Component')
   pageBuilderClass.updateLocalStorageItemName()
   await pageBuilderClass.setEventListenersForElements()
 
@@ -156,6 +157,7 @@ onMounted(async () => {
   }
 
   pageBuilderClass.removeHoveredAndSelected()
+  pageBuilderClass.setConfigPageBuilder({})
 })
 </script>
 
@@ -180,53 +182,6 @@ onMounted(async () => {
     </PageBuilderPreviewModal>
 
     <div>
-      <!-- Save laylout # start -->
-      <div class="p-4 m-8 bg-stone-200 rounded-lg">
-        <div
-          @click="pageBuilderStateStore.setComponent(null)"
-          class="px-4 lg:h-[10vh] h-[16vh] flex items-center justify-between border-b border-gray-200 bg-white"
-        >
-          <div class="flex items-center justify-start divide-x divide-gray-200">
-            <template
-              v-if="
-                getConfigPageBuilder &&
-                getConfigPageBuilder.pageBuilderLogo &&
-                getConfigPageBuilder.pageBuilderLogo.src
-              "
-            >
-              <div class="border-r border-gray-200 pr-6">
-                <img class="h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
-              </div>
-            </template>
-            <button
-              class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4"
-              @click="pageBuilderClass.saveComponentsLocalStorage"
-              type="button"
-            >
-              <span class="material-symbols-outlined text-[18px]"> save </span>
-              Save layout - saveComponents LocalStorage
-            </button>
-            <button
-              class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4 bg-red-500"
-              @click="pageBuilderClass.removeItemComponentsLocalStorageCreate"
-              type="button"
-            >
-              <span class="material-symbols-outlined text-[18px]"> delete </span>
-              Remove Create Local Storage Item
-            </button>
-            <button
-              class="myPrimaryButton lg:text-sm text-[10px] lg:py-2 py-2 min-h-2 ml-4 bg-red-800"
-              @click="pageBuilderClass.removeItemComponentsLocalStorageUpdate"
-              type="button"
-            >
-              <span class="material-symbols-outlined text-[18px]"> delete </span>
-              Remove Update Local Storage Item
-            </button>
-          </div>
-        </div>
-      </div>
-      <!-- Save laylout # end -->
-
       <div class="relative h-full flex">
         <div
           @click.self="pageBuilderStateStore.setComponent(null)"
