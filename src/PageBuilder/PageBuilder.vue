@@ -162,8 +162,6 @@ const defaultConfigValues = {
 }
 
 onMounted(async () => {
-  console.info('Initiate Page Builder Component')
-
   pageBuilderClass.updateLocalStorageItemName()
   await pageBuilderClass.setEventListenersForElements()
 
