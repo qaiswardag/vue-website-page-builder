@@ -52,20 +52,35 @@ const features = [
   },
 ]
 
+// const configPageBuilder = {
+//   pageBuilderLogo: {
+//     src: '/logo/logo.svg',
+//   },
+//   userForPageBuilder: { name: 'John Doe' },
+//   resourceData: {
+//     title: 'Demo Article',
+//     id: 1,
+//   },
+//   userSettings: {
+//     theme: 'light',
+//     language: 'en',
+//     autoSave: true,
+//   },
+// }
 const configPageBuilder = {
-  pageBuilderLogo: {
-    src: '/logo/logo.svg',
-  },
+  // pageBuilderLogo: {
+  //   src: '/logo/logo.svg',
+  // },
   userForPageBuilder: { name: 'John Doe' },
-  resourceData: {
-    title: 'Demo Article',
-    id: 1,
-  },
-  userSettings: {
-    theme: 'light',
-    language: 'en',
-    autoSave: true,
-  },
+  // resourceData: {
+  //   title: 'Demo Article',
+  //   id: 1,
+  // },
+  // userSettings: {
+  //   theme: 'light',
+  //   language: 'en',
+  //   autoSave: true,
+  // },
 }
 
 const pageBuilderStateStore = sharedPageBuilderStore
