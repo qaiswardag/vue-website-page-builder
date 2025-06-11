@@ -1,0 +1,95 @@
+import type { PageBuilderConfig } from '../types'
+import { sharedPageBuilderStore } from '../stores/shared-store'
+import PageBuilderClass from '../composables/PageBuilderClass.ts'
+import { isEmptyObject } from './isEmptyObject.ts'
+
+const pageBuilderStateStore = sharedPageBuilderStore
+
+// Initialize PageBuilder with store
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+export const isUserValid = function (config: PageBuilderConfig) {
+  if (
+    config.userForPageBuilder &&
+    typeof config.userForPageBuilder.name === 'string' &&
+    config.userForPageBuilder.name.length > 0
+  ) {
+    if (!config.userSettings || (config.userSettings && isEmptyObject(config.userSettings))) {
+      if (
+        !config.updateOrCreate ||
+        (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string') ||
+        (config.updateOrCreate && isEmptyObject(config.updateOrCreate))
+      ) {
+        if (
+          !config.pageBuilderLogo ||
+          (config.pageBuilderLogo &&
+            config.pageBuilderLogo.src &&
+            typeof config.pageBuilderLogo.src === 'string' &&
+            config.pageBuilderLogo.src.length === 0) ||
+          (config.pageBuilderLogo && isEmptyObject(config.pageBuilderLogo))
+        ) {
+          if (!config.resourceData || (config.resourceData && isEmptyObject(config.resourceData))) {
+            console.log('2:')
+            const editorConfig = {
+              userForPageBuilder: config.userForPageBuilder,
+              updateOrCreate: {
+                formType: 'create',
+                createNewResourceFormName: 'walking',
+              },
+              userSettings: {
+                theme: 'light' as 'light',
+                language: 'it',
+                autoSave: false,
+              },
+            }
+
+            pageBuilderClass.setConfigPageBuilder(editorConfig)
+            return
+          }
+        }
+      }
+    }
+  }
+}
+
+export const isValidUpdateOrCreate = function (config: PageBuilderConfig) {
+  if (
+    config.updateOrCreate &&
+    typeof config.updateOrCreate.formType === 'string' &&
+    (config.updateOrCreate.formType === 'create' || config.updateOrCreate.formType === 'update')
+  ) {
+    if (
+      !config.userForPageBuilder ||
+      (config.userForPageBuilder && typeof config.userForPageBuilder.name !== 'string') ||
+      (typeof config.userForPageBuilder.name === 'string' &&
+        config.userForPageBuilder.name.length < 1) ||
+      (config.userForPageBuilder && isEmptyObject(config.userForPageBuilder))
+    ) {
+      if (
+        !config.pageBuilderLogo ||
+        (config.pageBuilderLogo &&
+          config.pageBuilderLogo.src &&
+          typeof config.pageBuilderLogo.src === 'string' &&
+          config.pageBuilderLogo.src.length === 0) ||
+        (config.pageBuilderLogo && isEmptyObject(config.pageBuilderLogo))
+      ) {
+        if (!config.userSettings || (config.userSettings && isEmptyObject(config.userSettings))) {
+          if (!config.resourceData || (config.resourceData && isEmptyObject(config.resourceData))) {
+            console.log('3:')
+            const editorConfig = {
+              updateOrCreate: config.updateOrCreate,
+              userSettings: {
+                theme: 'light' as 'light',
+                language: 'it',
+                autoSave: false,
+              },
+            }
+
+            pageBuilderClass.setConfigPageBuilder(editorConfig)
+            return
+          }
+        }
+      }
+    }
+  }
+}

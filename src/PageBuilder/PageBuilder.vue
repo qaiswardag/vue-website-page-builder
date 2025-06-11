@@ -9,7 +9,7 @@ import SearchComponents from '../Components/Search/SearchComponents.vue'
 import OptionsDropdown from '../Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
 import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
 import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
-
+import { isUserValid, isValidUpdateOrCreate } from '../helpers/passedPageBuilderConfig'
 /**
  * Props for PageBuilder component
  * @typedef {Object} Props
@@ -28,8 +28,9 @@ const props = defineProps({
   },
 })
 
-// Use shared Pinia instance for PageBuilder package (THIS IS THE KEY CHANGE!)
+// Use shared Pinia instance for PageBuilder package
 const internalPinia = sharedPageBuilderPinia
+
 const pageBuilderStateStore = sharedPageBuilderStore
 
 // Initialize PageBuilder with store
@@ -169,117 +170,15 @@ const handleConfig = function (config) {
   }
 
   if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
-    // Set config for page builder if only user is present
-    if (
-      config.userForPageBuilder &&
-      typeof config.userForPageBuilder.name === 'string' &&
-      config.userForPageBuilder.name.length > 0
-    ) {
-      if (
-        !config.userSettings ||
-        (config.userSettings &&
-          Object.keys(config.userSettings).length === 0 &&
-          config.userSettings.constructor === Object)
-      ) {
-        if (
-          !config.updateOrCreate ||
-          (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string') ||
-          (config.updateOrCreate &&
-            Object.keys(config.updateOrCreate).length === 0 &&
-            config.updateOrCreate.constructor === Object)
-        ) {
-          if (
-            !config.pageBuilderLogo ||
-            (config.pageBuilderLogo &&
-              config.pageBuilderLogo.src &&
-              typeof config.pageBuilderLogo.src === 'string' &&
-              config.pageBuilderLogo.src.length === 0) ||
-            (config.pageBuilderLogo &&
-              Object.keys(config.pageBuilderLogo).length === 0 &&
-              config.pageBuilderLogo.constructor === Object)
-          ) {
-            if (
-              !config.resourceData ||
-              (config.resourceData &&
-                Object.keys(config.resourceData).length === 0 &&
-                config.resourceData.constructor === Object)
-            ) {
-              console.log('2:')
-              let editorConfig = {
-                userForPageBuilder: config.userForPageBuilder,
-                updateOrCreate: {
-                  formType: 'create',
-                  createNewResourceFormName: 'event',
-                },
-                userSettings: {
-                  theme: 'saffron',
-                  language: 'it',
-                  autoSave: false,
-                },
-              }
-
-              pageBuilderClass.setConfigPageBuilder(editorConfig)
-              return
-            }
-          }
-        }
-      }
+    //
+    // only user is present
+    if (isUserValid(config)) {
+      return
     }
 
-    // Set config for page builder if only updateOrCreate is set
-    if (
-      config.updateOrCreate &&
-      typeof config.updateOrCreate.formType === 'string' &&
-      (config.updateOrCreate.formType === 'create' || config.updateOrCreate.formType === 'update')
-    ) {
-      if (
-        !config.userForPageBuilder ||
-        (config.userForPageBuilder && typeof config.userForPageBuilder.name !== 'string') ||
-        (typeof config.userForPageBuilder.name === 'string' &&
-          config.userForPageBuilder.name.length < 1) ||
-        (config.userForPageBuilder &&
-          Object.keys(config.userForPageBuilder).length === 0 &&
-          config.userForPageBuilder.constructor === Object)
-      ) {
-        console.log('hiii. user')
-        if (
-          !config.pageBuilderLogo ||
-          (config.pageBuilderLogo &&
-            config.pageBuilderLogo.src &&
-            typeof config.pageBuilderLogo.src === 'string' &&
-            config.pageBuilderLogo.src.length === 0) ||
-          (config.pageBuilderLogo &&
-            Object.keys(config.pageBuilderLogo).length === 0 &&
-            config.pageBuilderLogo.constructor === Object)
-        ) {
-          if (
-            !config.userSettings ||
-            (config.userSettings &&
-              Object.keys(config.userSettings).length === 0 &&
-              config.userSettings.constructor === Object)
-          ) {
-            if (
-              !config.resourceData ||
-              (config.resourceData &&
-                Object.keys(config.resourceData).length === 0 &&
-                config.resourceData.constructor === Object)
-            ) {
-              console.log('3:')
-              const editorConfig = {
-                updateOrCreate: config.updateOrCreate,
-                userSettings: {
-                  theme: 'saffron',
-                  language: 'it',
-                  autoSave: false,
-                },
-              }
-
-              pageBuilderClass.setConfigPageBuilder(editorConfig)
-              return
-            }
-          }
-        }
-      }
+    // only updateOrCreate is set
+    if (isValidUpdateOrCreate(config)) {
+      return
     }
   }
 }

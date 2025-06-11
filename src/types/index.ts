@@ -97,14 +97,13 @@ export interface PageBuilderConfig {
     formType: string
     createNewResourceFormName?: string
   }
-  pageBuilderLogo?: string
+  pageBuilderLogo?: { src: string } | null
   resourceData?: { title: string; id: number } | null
   userForPageBuilder?: { name: string } | null
   [key: string]: unknown
   userSettings: {
     theme: 'light' | 'dark' | 'auto'
     language: string
-    notifications?: boolean
     autoSave: boolean
     [key: string]: unknown
   }
