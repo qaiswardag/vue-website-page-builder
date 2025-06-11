@@ -155,7 +155,7 @@ const defaultConfigValues = {
   },
 
   userSettings: {
-    theme: 'pink',
+    theme: 'light',
     language: 'en',
     autoSave: true,
   },
@@ -163,6 +163,7 @@ const defaultConfigValues = {
 
 onMounted(async () => {
   console.info('Initiate Page Builder Component')
+
   pageBuilderClass.updateLocalStorageItemName()
   await pageBuilderClass.setEventListenersForElements()
 
@@ -178,9 +179,11 @@ onMounted(async () => {
 
   // Set config if it's an empty object
   if (
-    getConfigPageBuilder.value &&
-    Object.keys(getConfigPageBuilder.value).length === 0 &&
-    getConfigPageBuilder.value.constructor === Object
+    getConfigPageBuilder.value === null ||
+    getConfigPageBuilder.value === undefined ||
+    (getConfigPageBuilder.value &&
+      Object.keys(getConfigPageBuilder.value).length === 0 &&
+      getConfigPageBuilder.value.constructor === Object)
   ) {
     pageBuilderClass.setConfigPageBuilder(defaultConfigValues)
   }
@@ -237,14 +240,26 @@ onMounted(async () => {
           <div
             class="flex items-center justify-between primary-gap rounded-t-2xl bg-myPrimaryLightGrayColor"
           >
-            <div
-              @click.self="pageBuilderStateStore.setComponent(null)"
-              class="w-4/12 flex justify-start items-center py-2 pl-2 h-full"
-            >
-              <div class="flex gap-2">
-                <span class="w-2 h-2 rounded-full bg-red-400"></span>
-                <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
-                <span class="w-2 h-2 rounded-full bg-green-400"></span>
+            <div class="flex myPrimaryGap items-center">
+              <div
+                @click.self="pageBuilderStateStore.setComponent(null)"
+                class="w-4/12 flex justify-start items-center py-2 pl-2 h-full"
+              >
+                <div class="flex gap-2">
+                  <span class="w-2 h-2 rounded-full bg-red-400"></span>
+                  <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+                  <span class="w-2 h-2 rounded-full bg-green-400"></span>
+                </div>
+              </div>
+              <div class="w-4/12 flex justify-start items-center py-2 pl-2 h-full">
+                <button
+                  class="myPrimaryButton"
+                  @click="pageBuilderClass.saveComponentsLocalStorage"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined text-[18px]"> save </span>
+                  Save layout
+                </button>
               </div>
             </div>
 
