@@ -1,6 +1,8 @@
 <script setup>
 import FullWidthElement from '../../Components/Layouts/FullWidthElement.vue'
 import PageBuilder from '../../PageBuilder/PageBuilder.vue'
+import PageBuilderClass from '../../composables/PageBuilderClass.ts'
+import { sharedPageBuilderStore } from '../../stores/shared-store'
 
 // first button function
 const handleButton = function () {
@@ -49,6 +51,26 @@ const features = [
       'Beautiful, elegant and intuitive design. Enhance user engagement with amazing visual experience.',
   },
 ]
+
+const configPageBuilder = {
+  pageBuilderLogo: {
+    src: '/logo/logo.svg',
+  },
+  userForPageBuilder: { name: 'John Doe' },
+  resourceData: {
+    title: 'Demo Article',
+    id: 1,
+  },
+  userSettings: {
+    theme: 'light',
+    language: 'en',
+    autoSave: true,
+  },
+}
+
+const pageBuilderStateStore = sharedPageBuilderStore
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 </script>
 
 <template>

@@ -193,6 +193,28 @@ onMounted(async () => {
     id="builder-container"
     class="font-sans max-w-full m-8 border-2 border-myPrimaryLinkColor inset-x-0 z-10 bg-white overflow-x-scroll pt-2 rounded-lg p-2"
   >
+    <div class="bg-red-200 px-4 py-4 mx-4 my-4 rounded-2xl">
+      <!-- Logo # start -->
+      <div
+        v-if="
+          getConfigPageBuilder &&
+          getConfigPageBuilder.pageBuilderLogo &&
+          getConfigPageBuilder.pageBuilderLogo.src
+        "
+        class="flex items-center divide-x divide-gray-200"
+      >
+        <div class="pr-4">
+          <img class="h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
+        </div>
+        <span class="myPrimaryParagraph font-medium pl-4">Edit mode </span>
+      </div>
+      <div v-else>
+        <div class="pr-6">
+          <span class="myPrimaryParagraph font-medium">Edit mode </span>
+        </div>
+      </div>
+    </div>
+    <!-- Logo # end -->
     <SearchComponents
       v-if="showModalAddComponent"
       :show="showModalAddComponent"
