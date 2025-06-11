@@ -1,5 +1,5 @@
 <p align="center" dir="auto">
-<img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo">
+<img width="200" style="max-width: 100%;" src="./public/logo/logo.svg" alt="Logo" />
 </p>
 
 ## **DEVELOPMENT VERSION - NOT READY FOR PRODUCTION**
@@ -41,26 +41,11 @@ create and enhance digital experiences with Vue on any backend.
 
 [Play around with the Page Builder](https://www.builder-demo.myissue.dk)
 
-<hr>
-<hr>
-<table>
-  <tr>
-    <td>
-      <img src="./public/home/builder1.jpg" alt="Image 1" height="400"/>
-    </td>
-    <td>
-      <img src="./public/home/builder2.jpg" alt="Image 2" height="400"/>
-    </td>
-  </tr>
-</table>
-<hr>
-<hr>
-
 ## About
 
-A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.
+<img style="max-width: 100%;" src="./public/home/builder3.jpg" alt="Logo" />
 
-<img style="max-width: 100%;" src="./public/home/builder3.jpg" alt="Logo">
+A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.
 
 ## Features
 
