@@ -331,9 +331,9 @@ onMounted(async () => {
         </div>
         <main class="flex flex-col h-full grow rounded-2xl duration-300 shadow-2xl">
           <div
-            class="flex items-center justify-between primary-gap rounded-t-2xl py-2 bg-myPrimaryLightGrayColor"
+            class="flex items-center justify-between primary-gap rounded-t-2xl bg-myPrimaryLightGrayColor"
           >
-            <div class="flex myPrimaryGap items-center mr-8 overflow-x-scroll w-96 pt-4">
+            <div class="flex myPrimaryGap items-center mr-8 overflow-x-scroll w-96 pt-4 pb-2">
               <div
                 @click.self="pageBuilderStateStore.setComponent(null)"
                 class="w-4/12 flex justify-start items-center py-2 pl-2 h-full"
@@ -351,7 +351,7 @@ onMounted(async () => {
                 type="button"
               >
                 <span class="material-symbols-outlined text-[18px]"> save </span>
-                Save layout
+                Save
               </button>
             </div>
 
