@@ -326,7 +326,7 @@ onMounted(async () => {
                       <span
                         class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
                       >
-                        <span class="myMediumIcon material-symbols-outlined"> tune </span>
+                        <span class="myMediumIcon material-symbols-outlined"> apps </span>
                       </span>
                     </div>
                   </button>
