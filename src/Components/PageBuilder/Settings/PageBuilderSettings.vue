@@ -87,7 +87,7 @@ const handleDownloadHTML = function () {
           <button
             @click="handleAdvancedSettingsSlideOver"
             type="button"
-            class="myPrimaryButton text-xs"
+            class="myPrimaryButton text"
           >
             Open Overview
           </button>
@@ -555,7 +555,7 @@ const handleDownloadHTML = function () {
         <p class="myPrimaryParagraph text-xs">Download current page layout.</p>
       </div>
       <div class="mt-4">
-        <button @click="handleDownloadHTML" type="button" class="myPrimaryButton text-xs">
+        <button @click="handleDownloadHTML" type="button" class="myPrimaryButton">
           Download HTML file
         </button>
       </div>
