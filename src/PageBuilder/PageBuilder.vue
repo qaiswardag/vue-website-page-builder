@@ -191,7 +191,7 @@ onMounted(async () => {
 <template>
   <div
     id="builder-container"
-    class="font-sans max-w-full m-8 border-2 border-myPrimaryLinkColor inset-x-0 z-10 bg-white overflow-x-scroll lg:pt-2 pt-2 rounded-lg"
+    class="font-sans max-w-full m-8 border-2 border-myPrimaryLinkColor inset-x-0 z-10 bg-white overflow-x-scroll pt-2 rounded-lg p-2"
   >
     <SearchComponents
       v-if="showModalAddComponent"
@@ -236,9 +236,9 @@ onMounted(async () => {
         </div>
         <main class="flex flex-col h-full grow rounded-2xl duration-300 shadow-2xl">
           <div
-            class="flex items-center justify-between primary-gap rounded-t-2xl bg-myPrimaryLightGrayColor"
+            class="flex items-center justify-between primary-gap rounded-t-2xl py-2 bg-myPrimaryLightGrayColor"
           >
-            <div class="flex myPrimaryGap items-center">
+            <div class="flex myPrimaryGap items-center mr-8 overflow-x-scroll w-96 pt-4">
               <div
                 @click.self="pageBuilderStateStore.setComponent(null)"
                 class="w-4/12 flex justify-start items-center py-2 pl-2 h-full"
@@ -249,16 +249,15 @@ onMounted(async () => {
                   <span class="w-2 h-2 rounded-full bg-green-400"></span>
                 </div>
               </div>
-              <div class="w-4/12 flex justify-start items-center py-2 pl-2 h-full">
-                <button
-                  class="myPrimaryButton"
-                  @click="pageBuilderClass.saveComponentsLocalStorage"
-                  type="button"
-                >
-                  <span class="material-symbols-outlined text-[18px]"> save </span>
-                  Save layout
-                </button>
-              </div>
+
+              <button
+                class="myPrimaryButton"
+                @click="pageBuilderClass.saveComponentsLocalStorage"
+                type="button"
+              >
+                <span class="material-symbols-outlined text-[18px]"> save </span>
+                Save layout
+              </button>
             </div>
 
             <div
@@ -284,7 +283,7 @@ onMounted(async () => {
                 >
                   <div class="flex items-center justify-center gap-2">
                     <span class="lg:block hidden">
-                      <div>Add new Components</div>
+                      <div class="whitespace-nowrap">Add new Components</div>
                     </span>
                     <span
                       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
@@ -306,7 +305,7 @@ onMounted(async () => {
                     "
                   >
                     <div class="flex items-center justify-center gap-2">
-                      <span class="lg:block hidden"> Preview </span>
+                      <div class="whitespace-nowrap lg:block hidden">Preview</div>
 
                       <span
                         class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"

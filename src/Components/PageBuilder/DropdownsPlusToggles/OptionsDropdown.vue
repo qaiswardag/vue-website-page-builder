@@ -114,7 +114,7 @@ const settingsSlideOverButton = function () {
       <header></header>
       <main></main>
     </DynamicModalBuilder>
-    <Menu as="div" class="myPrimaryParagraph relative lg:inline-block hidden text-left">
+    <Menu as="div" class="myPrimaryParagraph relative lg:inline-block hidden text-left mr-4">
       <div>
         <MenuButton
           class="inline-flex items-center gap-2 justify-center w-full rounded-md border border-gray-300 shadow-sm pl-4 pr-6 py-2 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-emerald-600"
