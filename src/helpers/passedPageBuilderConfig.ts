@@ -18,12 +18,14 @@ export const isChildrenEmpty = function (config: PageBuilderConfig) {
   ) {
     console.log(0)
     const editorConfig = {
-      updateOrCreate: config.updateOrCreate,
-      userSettings: {
-        theme: 'light' as 'light',
-        language: 'it',
-        autoSave: false,
+      updateOrCreate: {
+        formType: 'create',
+        createNewResourceFormName: 'post',
       },
+      userSettings: null,
+      pageBuilderLogo: null,
+      resourceData: null,
+      userForPageBuilder: null,
     }
     pageBuilderClass.setConfigPageBuilder(editorConfig)
   }
@@ -54,7 +56,7 @@ export const isUserValid = function (config: PageBuilderConfig) {
               userForPageBuilder: config.userForPageBuilder,
               updateOrCreate: {
                 formType: 'create',
-                createNewResourceFormName: 'walking',
+                createNewResourceFormName: 'post',
               },
               userSettings: {
                 theme: 'light' as 'light',

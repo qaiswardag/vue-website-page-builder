@@ -101,12 +101,12 @@ export interface PageBuilderConfig {
   resourceData?: { title: string; id: number } | null
   userForPageBuilder?: { name: string } | null
   [key: string]: unknown
-  userSettings: {
+  userSettings?: {
     theme: 'light' | 'dark' | 'auto'
     language: string
     autoSave: boolean
     [key: string]: unknown
-  }
+  } | null
 }
 // Tailwind utility interfaces
 export interface TailwindColors {
