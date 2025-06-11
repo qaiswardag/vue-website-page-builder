@@ -143,11 +143,6 @@ const handleSelectComponent = function (componentObject) {
 
 const draggableZone = ref(null)
 
-const defaultUpdateOrCreate = {
-  formType: 'create',
-  createNewResourceFormName: 'post',
-}
-
 const defaultConfigValues = {
   updateOrCreate: {
     formType: 'create',
@@ -161,17 +156,7 @@ const defaultConfigValues = {
   },
 }
 
-onMounted(async () => {
-  pageBuilderClass.updateLocalStorageItemName()
-  await pageBuilderClass.setEventListenersForElements()
-
-  const config = getConfigPageBuilder.value
-  if (config && config.updateOrCreate && config.updateOrCreate.formType === 'create') {
-    pageBuilderClass.loadExistingContent()
-  }
-
-  pageBuilderClass.removeHoveredAndSelected()
-
+const handleConfig = function (config) {
   // Set config for page builder if not set by user
   if (
     config === null ||
@@ -183,48 +168,76 @@ onMounted(async () => {
     return
   }
 
-  console.log(
-    'user:',
-    config &&
-      config &&
-      Object.keys(config).length !== 0 &&
-      config.constructor === Object &&
+  if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
+    // Set config for page builder if only user is present
+    if (
       config.userForPageBuilder &&
-      typeof config.userForPageBuilder.name === 'string',
-  )
-  // Set config for page builder if only user for page builder is present
-  if (
-    config &&
-    Object.keys(config).length !== 0 &&
-    config.constructor === Object &&
-    config.userForPageBuilder &&
-    typeof config.userForPageBuilder.name === 'string' &&
-    config.userForPageBuilder.name.length > 0
-  ) {
-    console.log('2')
+      typeof config.userForPageBuilder.name === 'string' &&
+      config.userForPageBuilder.name.length > 0
+    ) {
+      if (
+        !config.updateOrCreate ||
+        (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string')
+      ) {
+        console.log('2:')
+        let editorConfig = {
+          updateOrCreate: {
+            formType: 'create',
+            createNewResourceFormName: 'event',
+          },
+          userSettings: {
+            theme: 'saffron',
+            language: 'it',
+            autoSave: false,
+          },
+        }
 
-    const editorConfig = {
-      updateOrCreate: {
-        formType: 'create',
-        createNewResourceFormName: 'post',
-      },
-      pageBuilderLogo: {
-        src: '/logo/logo.svg',
-      },
-      userForPageBuilder: { name: 'John Doe' },
-      resourceData: {
-        title: 'Demo Article',
-        id: 1,
-      },
-      userSettings: {
-        theme: 'light',
-        language: 'en',
-        autoSave: true,
-      },
+        pageBuilderClass.setConfigPageBuilder(editorConfig)
+        return
+      }
     }
 
-    pageBuilderClass.setConfigPageBuilder(defaultConfigValues)
+    // Set config for page builder if only updateOrCreate is set
+    if (
+      config.updateOrCreate &&
+      typeof config.updateOrCreate.formType === 'string' &&
+      (config.updateOrCreate.formType === 'create' || config.updateOrCreate.formType === 'update')
+    ) {
+      if (
+        !config.userForPageBuilder ||
+        (config.userForPageBuilder && typeof config.userForPageBuilder.name !== 'string') ||
+        (typeof config.userForPageBuilder.name === 'string' &&
+          config.userForPageBuilder.name.length < 1)
+      ) {
+        console.log('3:')
+        const editorConfig = {
+          userSettings: {
+            theme: 'saffron',
+            language: 'it',
+            autoSave: false,
+          },
+        }
+
+        pageBuilderClass.setConfigPageBuilder(editorConfig)
+        return
+      }
+    }
   }
+}
+
+onMounted(async () => {
+  pageBuilderClass.updateLocalStorageItemName()
+  await pageBuilderClass.setEventListenersForElements()
+
+  const config = getConfigPageBuilder.value
+
+  if (config && config.updateOrCreate && config.updateOrCreate.formType === 'create') {
+    pageBuilderClass.loadExistingContent()
+  }
+
+  pageBuilderClass.removeHoveredAndSelected()
+
+  handleConfig(config)
 })
 </script>
 

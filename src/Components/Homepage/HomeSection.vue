@@ -52,7 +52,7 @@ const features = [
   },
 ]
 
-// const configPageBuilder = {
+// const configPageBuilderTemplate = {
 //   updateOrCreate: {
 //     formType: 'create',
 //     createNewResourceFormName: 'post',
@@ -72,7 +72,13 @@ const features = [
 //   },
 // }
 
-const configPageBuilder = null
+const configPageBuilder = {
+  // userForPageBuilder: { name: 'Mie Mortensen' },
+  updateOrCreate: {
+    formType: 'update',
+    // createNewResourceFormName: 'product',
+  },
+}
 
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
