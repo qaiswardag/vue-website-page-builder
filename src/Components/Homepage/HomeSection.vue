@@ -53,6 +53,10 @@ const features = [
 ]
 
 // const configPageBuilder = {
+//   updateOrCreate: {
+//     formType: 'create',
+//     createNewResourceFormName: 'post',
+//   },
 //   pageBuilderLogo: {
 //     src: '/logo/logo.svg',
 //   },
@@ -67,21 +71,30 @@ const features = [
 //     autoSave: true,
 //   },
 // }
+
 const configPageBuilder = {
-  // pageBuilderLogo: {
-  //   src: '/logo/logo.svg',
-  // },
+  pageBuilderLogo: {
+    src: '/logo/logo.svg',
+  },
   userForPageBuilder: { name: 'John Doe' },
-  // resourceData: {
-  //   title: 'Demo Article',
-  //   id: 1,
-  // },
-  // userSettings: {
-  //   theme: 'light',
-  //   language: 'en',
-  //   autoSave: true,
-  // },
 }
+
+// const configPageBuilder = {
+//   updateOrCreate: {
+//     formType: 'update',
+//     createNewResourceFormName: 'article',
+//   },
+//   userForPageBuilder: { name: 'John Doe' },
+//   resourceData: {
+//     title: 'Demo Article',
+//     id: 1,
+//   },
+//   userSettings: {
+//     theme: 'pink',
+//     language: 'sw',
+//     autoSave: true,
+//   },
+// }
 
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)

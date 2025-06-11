@@ -6,7 +6,7 @@ import Footer from './Components/Homepage/Footer.vue'
 
 <template>
   <div>
-    <Navbar @handleButton="handlePageBuilder"></Navbar>
+    <Navbar></Navbar>
     <HomeSection></HomeSection>
     <Footer></Footer>
   </div>
