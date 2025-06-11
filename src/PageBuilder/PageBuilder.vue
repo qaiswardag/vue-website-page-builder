@@ -176,32 +176,51 @@ const handleConfig = function (config) {
       config.userForPageBuilder.name.length > 0
     ) {
       if (
-        !config.updateOrCreate ||
-        (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string')
+        !config.userSettings ||
+        (config.userSettings &&
+          Object.keys(config.userSettings).length === 0 &&
+          config.userSettings.constructor === Object)
       ) {
         if (
-          !config.pageBuilderLogo ||
-          (config.pageBuilderLogo &&
-            config.pageBuilderLogo.src &&
-            typeof config.pageBuilderLogo.src === 'string' &&
-            config.pageBuilderLogo.src.length === 0)
+          !config.updateOrCreate ||
+          (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string') ||
+          (config.updateOrCreate &&
+            Object.keys(config.updateOrCreate).length === 0 &&
+            config.updateOrCreate.constructor === Object)
         ) {
-          if (!config.userSettings) {
-            console.log('2:')
-            let editorConfig = {
-              updateOrCreate: {
-                formType: 'create',
-                createNewResourceFormName: 'event',
-              },
-              userSettings: {
-                theme: 'saffron',
-                language: 'it',
-                autoSave: false,
-              },
-            }
+          if (
+            !config.pageBuilderLogo ||
+            (config.pageBuilderLogo &&
+              config.pageBuilderLogo.src &&
+              typeof config.pageBuilderLogo.src === 'string' &&
+              config.pageBuilderLogo.src.length === 0) ||
+            (config.pageBuilderLogo &&
+              Object.keys(config.pageBuilderLogo).length === 0 &&
+              config.pageBuilderLogo.constructor === Object)
+          ) {
+            if (
+              !config.resourceData ||
+              (config.resourceData &&
+                Object.keys(config.resourceData).length === 0 &&
+                config.resourceData.constructor === Object)
+            ) {
+              console.log('2:')
+              let editorConfig = {
+                userForPageBuilder: config.userForPageBuilder,
+                updateOrCreate: {
+                  formType: 'create',
+                  createNewResourceFormName: 'event',
+                },
+                userSettings: {
+                  theme: 'saffron',
+                  language: 'it',
+                  autoSave: false,
+                },
+              }
 
-            pageBuilderClass.setConfigPageBuilder(editorConfig)
-            return
+              pageBuilderClass.setConfigPageBuilder(editorConfig)
+              return
+            }
           }
         }
       }
@@ -217,27 +236,47 @@ const handleConfig = function (config) {
         !config.userForPageBuilder ||
         (config.userForPageBuilder && typeof config.userForPageBuilder.name !== 'string') ||
         (typeof config.userForPageBuilder.name === 'string' &&
-          config.userForPageBuilder.name.length < 1)
+          config.userForPageBuilder.name.length < 1) ||
+        (config.userForPageBuilder &&
+          Object.keys(config.userForPageBuilder).length === 0 &&
+          config.userForPageBuilder.constructor === Object)
       ) {
+        console.log('hiii. user')
         if (
           !config.pageBuilderLogo ||
           (config.pageBuilderLogo &&
             config.pageBuilderLogo.src &&
             typeof config.pageBuilderLogo.src === 'string' &&
-            config.pageBuilderLogo.src.length === 0)
+            config.pageBuilderLogo.src.length === 0) ||
+          (config.pageBuilderLogo &&
+            Object.keys(config.pageBuilderLogo).length === 0 &&
+            config.pageBuilderLogo.constructor === Object)
         ) {
-          if (!config.userSettings) {
-            console.log('3:')
-            const editorConfig = {
-              userSettings: {
-                theme: 'saffron',
-                language: 'it',
-                autoSave: false,
-              },
-            }
+          if (
+            !config.userSettings ||
+            (config.userSettings &&
+              Object.keys(config.userSettings).length === 0 &&
+              config.userSettings.constructor === Object)
+          ) {
+            if (
+              !config.resourceData ||
+              (config.resourceData &&
+                Object.keys(config.resourceData).length === 0 &&
+                config.resourceData.constructor === Object)
+            ) {
+              console.log('3:')
+              const editorConfig = {
+                updateOrCreate: config.updateOrCreate,
+                userSettings: {
+                  theme: 'saffron',
+                  language: 'it',
+                  autoSave: false,
+                },
+              }
 
-            pageBuilderClass.setConfigPageBuilder(editorConfig)
-            return
+              pageBuilderClass.setConfigPageBuilder(editorConfig)
+              return
+            }
           }
         }
       }

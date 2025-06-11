@@ -74,13 +74,24 @@ const features = [
 
 const configPageBuilder = {
   updateOrCreate: {
-    formType: 'update',
+    formType: 'create',
     createNewResourceFormName: 'product',
   },
-  // userForPageBuilder: { name: 'Mie Mortensen' },
-  // pageBuilderLogo: {
-  //   src: '',
-  // },
+  userForPageBuilder: {
+    // name: 'John Doe',
+  },
+  pageBuilderLogo: {
+    // src: '/logo/logo.svg',
+  },
+  resourceData: {
+    // title: 'Demo Article',
+    // id: 1,
+  },
+  userSettings: {
+    // theme: 'light',
+    // language: 'en',
+    // autoSave: true,
+  },
 }
 
 const pageBuilderStateStore = sharedPageBuilderStore
