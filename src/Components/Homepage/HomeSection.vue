@@ -76,16 +76,16 @@ const configPageBuilder = {
   userForPageBuilder: {
     name: 'John Doe',
   },
-  updateOrCreate: {
-    formType: 'create',
-    createNewResourceFormName: 'product',
-  },
+  // updateOrCreate: {
+  //   formType: 'create',
+  //   createNewResourceFormName: 'product',
+  // },
   pageBuilderLogo: {
     src: '/logo/logo.svg',
   },
   resourceData: {
-    title: 'Demo Article',
-    id: 1,
+    // title: 'Demo Article',
+    // id: 1,
   },
   userSettings: {
     // theme: 'light',

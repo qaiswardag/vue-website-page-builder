@@ -16,7 +16,6 @@ export const isChildrenEmpty = function (config: PageBuilderConfig) {
     (!config.userForPageBuilder || isEmptyObject(config.userForPageBuilder)) &&
     (!config.userSettings || isEmptyObject(config.userSettings))
   ) {
-    console.log(0)
     const editorConfig = {
       updateOrCreate: {
         formType: 'create' as 'create',
@@ -58,7 +57,6 @@ export const onlyUserIsValid = function (config: PageBuilderConfig) {
           (config.pageBuilderLogo && isEmptyObject(config.pageBuilderLogo))
         ) {
           if (!config.resourceData || (config.resourceData && isEmptyObject(config.resourceData))) {
-            console.log('2:')
             const editorConfig = {
               userForPageBuilder: config.userForPageBuilder,
               updateOrCreate: {
@@ -106,7 +104,6 @@ export const onlyUpdateOrCreateIsValid = function (config: PageBuilderConfig) {
       ) {
         if (!config.userSettings || (config.userSettings && isEmptyObject(config.userSettings))) {
           if (!config.resourceData || (config.resourceData && isEmptyObject(config.resourceData))) {
-            console.log('3:', config.updateOrCreate)
             const editorConfig = {
               updateOrCreate: config.updateOrCreate,
               userSettings: {
@@ -149,7 +146,6 @@ export const onlyPageBuilderLogoIsValid = function (config: PageBuilderConfig) {
       ) {
         if (!config.userSettings || (config.userSettings && isEmptyObject(config.userSettings))) {
           if (!config.resourceData || (config.resourceData && isEmptyObject(config.resourceData))) {
-            console.log('4:', config.updateOrCreate)
             const editorConfig = {
               updateOrCreate: {
                 formType: 'create' as 'create',
@@ -186,7 +182,6 @@ export const onlyResourceDataIsValid = function (config: PageBuilderConfig) {
       (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string') ||
       (config.updateOrCreate && isEmptyObject(config.updateOrCreate))
     ) {
-      console.log('ooog')
       if (
         !config.userForPageBuilder ||
         (config.userForPageBuilder && typeof config.userForPageBuilder.name !== 'string') ||
@@ -203,7 +198,6 @@ export const onlyResourceDataIsValid = function (config: PageBuilderConfig) {
           (config.pageBuilderLogo && isEmptyObject(config.pageBuilderLogo))
         ) {
           if (!config.userSettings || (config.userSettings && isEmptyObject(config.userSettings))) {
-            console.log('5:')
             const editorConfig = {
               updateOrCreate: {
                 formType: 'create' as 'create',
@@ -260,7 +254,6 @@ export const onlyUserSettingsIsValid = function (config: PageBuilderConfig) {
               config.pageBuilderLogo.src.length === 0) ||
             (config.pageBuilderLogo && isEmptyObject(config.pageBuilderLogo))
           ) {
-            console.log('5:')
             const editorConfig = {
               updateOrCreate: {
                 formType: 'create' as 'create',
@@ -283,5 +276,26 @@ export const onlyUserSettingsIsValid = function (config: PageBuilderConfig) {
         }
       }
     }
+  }
+}
+
+export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
+  if (
+    !config.updateOrCreate ||
+    (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string') ||
+    (config.updateOrCreate && isEmptyObject(config.updateOrCreate))
+  ) {
+    const updatedConfig = {
+      ...config,
+      updateOrCreate: {
+        formType: 'create' as 'create',
+        createNewResourceFormName: 'post',
+      },
+    }
+
+    pageBuilderClass.setConfigPageBuilder(updatedConfig)
+    return true
+  } else {
+    return false
   }
 }

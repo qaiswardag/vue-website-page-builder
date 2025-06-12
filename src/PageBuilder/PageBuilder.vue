@@ -16,6 +16,7 @@ import {
   onlyPageBuilderLogoIsValid,
   onlyResourceDataIsValid,
   onlyUserSettingsIsValid,
+  updateOrCreateIsFalsy,
 } from '../helpers/passedPageBuilderConfig'
 /**
  * Props for PageBuilder component
@@ -178,6 +179,7 @@ const handleConfig = function (config) {
 
   if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
     //
+    // Check alone
     // Returns true if all config fields are missing or empty
     if (isChildrenEmpty(config)) {
       return
@@ -198,9 +200,20 @@ const handleConfig = function (config) {
     if (onlyResourceDataIsValid(config)) {
       return
     }
+
     if (onlyUserSettingsIsValid(config)) {
       return
     }
+
+    if (onlyUserSettingsIsValid(config)) {
+      return
+    }
+
+    if (updateOrCreateIsFalsy(config)) {
+      return
+    }
+
+    // Check against eachoter in all combinations
   }
 
   // In the end make check if form type for update or create is set:
@@ -316,7 +329,7 @@ onMounted(async () => {
           >
             <div
               @click="pageBuilderClass.clearHtmlSelection()"
-              class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 bg-green-200 h-36 w-full"
+              class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 pl-2 bg-green-200 h-36 w-full"
             >
               <button
                 class="myPrimaryButton"
