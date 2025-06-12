@@ -193,19 +193,26 @@ const handleConfig = function (config) {
   // In the end make check if form type for update or create is set:
 }
 
+watch(
+  () => getConfigPageBuilder.value,
+  (config) => {
+    pageBuilderClass.updateLocalStorageItemName()
+
+    if (config && config.updateOrCreate && config.updateOrCreate.formType === 'create') {
+      pageBuilderClass.loadExistingContent()
+    }
+  },
+  { immediate: true },
+)
+
 onMounted(async () => {
-  pageBuilderClass.updateLocalStorageItemName()
   await pageBuilderClass.setEventListenersForElements()
-
   const config = getConfigPageBuilder.value
+  handleConfig(config)
 
-  if (config && config.updateOrCreate && config.updateOrCreate.formType === 'create') {
-    pageBuilderClass.loadExistingContent()
-  }
+  pageBuilderClass.updateLocalStorageItemName()
 
   pageBuilderClass.removeHoveredAndSelected()
-
-  handleConfig(config)
 })
 </script>
 
@@ -287,7 +294,7 @@ onMounted(async () => {
               @click="pageBuilderClass.clearHtmlSelection()"
               class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 bg-green-200 h-36 w-full"
             >
-              <div class="w-4/12 flex justify-start items-center py-2 pl-2 h-full">
+              <div class="flex justify-start items-center py-2 pl-2 mr-2 h-full">
                 <div class="flex gap-2">
                   <span class="w-2 h-2 rounded-full bg-red-400"></span>
                   <span class="w-2 h-2 rounded-full bg-yellow-400"></span>

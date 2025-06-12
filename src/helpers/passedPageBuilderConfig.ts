@@ -60,7 +60,7 @@ export const isUserValid = function (config: PageBuilderConfig) {
               },
               userSettings: {
                 theme: 'light' as 'light',
-                language: 'it',
+                language: 'en',
                 autoSave: false,
               },
             }
@@ -99,12 +99,12 @@ export const isValidUpdateOrCreate = function (config: PageBuilderConfig) {
       ) {
         if (!config.userSettings || (config.userSettings && isEmptyObject(config.userSettings))) {
           if (!config.resourceData || (config.resourceData && isEmptyObject(config.resourceData))) {
-            console.log('3:')
+            console.log('3:', config.updateOrCreate)
             const editorConfig = {
               updateOrCreate: config.updateOrCreate,
               userSettings: {
                 theme: 'light' as 'light',
-                language: 'it',
+                language: 'en',
                 autoSave: false,
               },
             }

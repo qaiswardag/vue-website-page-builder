@@ -74,8 +74,8 @@ const features = [
 
 const configPageBuilder = {
   updateOrCreate: {
-    // formType: 'create',
-    // createNewResourceFormName: 'product',
+    formType: 'create',
+    createNewResourceFormName: 'product',
   },
   userForPageBuilder: {
     // name: 'John Doe',
