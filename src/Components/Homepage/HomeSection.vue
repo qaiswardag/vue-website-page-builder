@@ -77,20 +77,20 @@ const configPageBuilder = {
     name: 'John Doe',
   },
   updateOrCreate: {
-    // formType: 'update',
-    // createNewResourceFormName: 'product',
+    formType: 'update',
+    // createNewResourceFormName: 0,
   },
   pageBuilderLogo: {
     src: '/logo/logo.svg',
   },
   resourceData: {
-    // title: 'Demo Article',
-    // id: 1,
+    title: 'Demo Article',
+    id: 1,
   },
   userSettings: {
-    // theme: 'light',
-    // language: 'en',
-    // autoSave: true,
+    theme: 'light',
+    language: 'en',
+    autoSave: true,
   },
 }
 

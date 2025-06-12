@@ -289,13 +289,68 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
       ...config,
       updateOrCreate: {
         formType: 'create' as 'create',
+        createNewResourceFormName: 'pøøøøøøøøost',
+      },
+    }
+
+    pageBuilderClass.setConfigPageBuilder(updatedConfig)
+    return true
+  }
+
+  if (
+    config.updateOrCreate &&
+    typeof config.updateOrCreate.formType === 'string' &&
+    config.updateOrCreate.formType !== 'create' &&
+    config.updateOrCreate.formType !== 'update' &&
+    typeof config.createNewResourceFormName !== 'string'
+  ) {
+    const updatedConfig = {
+      ...config,
+      updateOrCreate: {
+        formType: 'create' as 'create',
         createNewResourceFormName: 'post',
       },
     }
 
     pageBuilderClass.setConfigPageBuilder(updatedConfig)
     return true
-  } else {
-    return false
+  }
+  if (
+    (config.updateOrCreate &&
+      typeof config.updateOrCreate.formType === 'string' &&
+      (config.updateOrCreate.formType === 'create' ||
+        config.updateOrCreate.formType === 'update') &&
+      typeof config.updateOrCreate.createNewResourceFormName !== 'string') ||
+    (typeof config.updateOrCreate.createNewResourceFormName === 'string' &&
+      config.updateOrCreate.createNewResourceFormName.length === 0)
+  ) {
+    const updatedConfig = {
+      ...config,
+      updateOrCreate: {
+        formType: 'create' as 'create',
+        createNewResourceFormName: 'post',
+      },
+    }
+
+    pageBuilderClass.setConfigPageBuilder(updatedConfig)
+    return true
+  }
+  if (
+    config.updateOrCreate &&
+    typeof config.updateOrCreate.formType === 'string' &&
+    (config.updateOrCreate.formType === 'create' || config.updateOrCreate.formType === 'update') &&
+    typeof config.updateOrCreate.createNewResourceFormName === 'string' &&
+    config.updateOrCreate.createNewResourceFormName.length > 0
+  ) {
+    const updatedConfig = {
+      ...config,
+      updateOrCreate: {
+        formType: 'create' as 'create',
+        createNewResourceFormName: config.updateOrCreate.createNewResourceFormName,
+      },
+    }
+
+    pageBuilderClass.setConfigPageBuilder(updatedConfig)
+    return true
   }
 }
