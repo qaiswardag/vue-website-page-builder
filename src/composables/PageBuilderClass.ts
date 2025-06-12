@@ -1145,7 +1145,6 @@ class PageBuilderClass {
         //
         //
         if (resourceData && resourceData != null && !resourceData.title) {
-          console.log(1111)
           // Check if id is missing, null, undefined, or an empty string (after trimming)
           if (!resourceData.id || typeof resourceData.id === 'string') {
             this.pageBuilderStateStore.setLocalStorageItemName(
@@ -1157,7 +1156,6 @@ class PageBuilderClass {
 
         // Runs when resourceData has title but no ID
         if (resourceData && resourceData != null) {
-          console.log(2222)
           if (
             resourceData.title &&
             typeof resourceData.title === 'string' &&
@@ -1174,7 +1172,6 @@ class PageBuilderClass {
 
         // Runs when resourceData has ID but no title
         if (resourceData && resourceData != null) {
-          console.log(3333)
           if (!resourceData.title && typeof resourceData.title !== 'string') {
             if (resourceData.id || typeof resourceData.id === 'number') {
               this.pageBuilderStateStore.setLocalStorageItemName(
@@ -1187,7 +1184,6 @@ class PageBuilderClass {
 
         // Runs when resourceData has both title and ID
         if (resourceData && resourceData != null) {
-          console.log(4444)
           if (
             resourceData.title &&
             typeof resourceData.title === 'string' &&
