@@ -54,13 +54,13 @@ const componentHelpers: ComponentHelper[] = [
     html_code: `
     <section>
     <div class="py-4">
-    <div class="mx-auto max-w-7xl lg:px-4 px-2">
-    <div  id="youtube-video" class="w-full aspect-video bg-slate-100 border border-slate-200 rounded-xl lg:p-8 md:p-6 p-4">
+    <div class="w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2 bg-gray-100">
+    <div  id="youtube-video" class="w-full aspect-video p-4">
 
     <iframe
     frameborder="0" 
     allowfullscreen
-    class="w-full aspect-video bg-gray-600 border border-slate-800 rounded-xl"
+    class="w-full aspect-video"
     src="" 
     allow="accelerometer; autoplay; clipboard-write;" allowfullscreen>
     </iframe>

@@ -509,14 +509,37 @@ h3 {
 }
 
 #page-builder-editor-editable-area #youtube-video::before {
-  content: 'Select video element';
-  font-family: 'Jost', sans-serif;
-  display: inline-block;
+  content: 'Select Video Element';
+  font-family: 'Jost';
+  background: #16a34a !important;
+  color: white;
+  text-decoration: none;
   margin-right: 8px;
   vertical-align: middle;
+  min-height: 3rem;
+  padding: 0.75rem 0.75rem;
+  white-space: nowrap;
+  word-break: keep-all;
+  font-weight: 500;
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  margin-bottom: 20px;
+  font-size: 0.8rem !important;
 }
+
+@media (min-width: 640px) {
+  #page-builder-editor-editable-area #youtube-video::before {
+    font-size: 0.9rem !important;
+    width: auto;
+  }
+}
+
 #page-builder-editor-editable-area #youtube-video:hover::before {
-  text-decoration: underline;
+  text-decoration: none;
   cursor: pointer;
 }
 
