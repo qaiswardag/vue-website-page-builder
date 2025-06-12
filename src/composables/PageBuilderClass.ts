@@ -336,36 +336,40 @@ class PageBuilderClass {
       this.pageBuilderStateStore.setComponents([])
     }
 
-    const hoveredElement = document.querySelector('[hovered]')
-    if (hoveredElement) {
-      hoveredElement.removeAttribute('hovered')
-    }
+    const pagebuilder = document.querySelector('#pagebuilder')
 
-    this.getComponents.value?.forEach((component) => {
-      const section = document.querySelector(`section[data-componentid="${component.id}"]`)
-
-      if (section) {
-        component.html_code = section.outerHTML
+    if (pagebuilder) {
+      const hoveredElement = pagebuilder.querySelector('[hovered]')
+      if (hoveredElement) {
+        hoveredElement.removeAttribute('hovered')
       }
-    })
 
-    // Initialize the MutationObserver
-    this.observer = new MutationObserver((mutationsList, observer) => {
-      // Once we have seen a mutation, stop observing and resolve the promise
-      observer.disconnect()
-    })
+      this.getComponents.value?.forEach((component) => {
+        const section = pagebuilder.querySelector(`section[data-componentid="${component.id}"]`)
 
-    // Start observing the document with the configured parameters
-    this.observer.observe(document, {
-      attributes: true,
-      childList: true,
-      subtree: true,
-    })
+        if (section) {
+          component.html_code = section.outerHTML
+        }
+      })
 
-    // Use the MutationObserver to wait for the next DOM change
-    await new Promise<void>((resolve) => {
-      resolve()
-    })
+      // Initialize the MutationObserver
+      this.observer = new MutationObserver((mutationsList, observer) => {
+        // Once we have seen a mutation, stop observing and resolve the promise
+        observer.disconnect()
+      })
+
+      // Start observing the pagebuilder with the configured parameters
+      this.observer.observe(pagebuilder, {
+        attributes: true,
+        childList: true,
+        subtree: true,
+      })
+
+      // Use the MutationObserver to wait for the next DOM change
+      await new Promise<void>((resolve) => {
+        resolve()
+      })
+    }
   }
 
   cloneCompObjForDOMInsertion(componentObject: ComponentObject): ComponentObject {
