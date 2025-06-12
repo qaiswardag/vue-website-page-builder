@@ -214,7 +214,7 @@ onMounted(async () => {
     id="builder-container"
     class="font-sans max-w-full m-8 border-2 border-myPrimaryLinkColor inset-x-0 z-10 bg-white overflow-x-scroll pt-2 rounded-lg p-2"
   >
-    <div class="bg-red-200 px-4 py-4 mx-4 my-4 rounded-2xl">
+    <div id="pagebuilder-top-area" class="bg-red-200 px-4 py-4 mx-4 my-4 rounded-2xl">
       <!-- Logo # start -->
       <div
         v-if="
@@ -255,6 +255,7 @@ onMounted(async () => {
       <div class="relative h-full flex">
         <div
           @click.self="pageBuilderStateStore.setComponent(null)"
+          id="pagebuilder-left-area"
           class="min-w-[3.5rem] pt-6 pb-2 my-2 mx-2 bg-myPrimaryLightGrayColor rounded-full shadow"
         >
           <div class="mx-2 flex flex-col myPrimaryGap">
@@ -279,6 +280,7 @@ onMounted(async () => {
         </div>
         <main class="flex flex-col h-full grow rounded-2xl duration-300 shadow-2xl">
           <div
+            id="pagebuilder-toolbar-area"
             class="flex items-center justify-between primary-gap rounded-t-2xl bg-myPrimaryLightGrayColor"
           >
             <div class="flex myPrimaryGap items-center mr-8 overflow-x-scroll w-96 pt-4 pb-2">
@@ -404,6 +406,7 @@ onMounted(async () => {
                     handleAddComponent()
                   }
                 "
+                id="pagebuilder-bottom-components-area"
                 class="hover:bg-gray-100 rounded-full border-2 border-myPrimaryLinkColor pt-10 pb-14 text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-12 mx-8 cursor-pointer"
               >
                 <div class="flex items-center justify-center gap-2 font-medium cursor-pointer">
@@ -430,6 +433,7 @@ onMounted(async () => {
 
         <aside
           aria-label="Menu"
+          id="pagebuilder-right-area"
           :class="{ 'w-0': !getMenuRight, 'w-80 ml-4': getMenuRight }"
           class="h-full duration-300 z-20 flex-shrink-0 overflow-hidden shadow-2xl rounded-l-2xl bg-white"
         >
