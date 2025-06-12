@@ -182,34 +182,42 @@ const handleConfig = function (config) {
     // Check alone
     // Returns true if all config fields are missing or empty
     if (isChildrenEmpty(config)) {
+      console.log('1:')
       return
     }
 
     if (onlyUserIsValid(config)) {
+      console.log('2:')
       return
     }
 
     if (onlyUpdateOrCreateIsValid(config)) {
+      console.log('3:')
       return
     }
 
     if (onlyPageBuilderLogoIsValid(config)) {
+      console.log('4:')
       return
     }
 
     if (onlyResourceDataIsValid(config)) {
+      console.log('5:')
       return
     }
 
     if (onlyUserSettingsIsValid(config)) {
+      console.log('6:')
       return
     }
 
     if (onlyUserSettingsIsValid(config)) {
+      console.log('7:')
       return
     }
 
     if (updateOrCreateIsFalsy(config)) {
+      console.log('8:')
       return
     }
 

@@ -251,9 +251,60 @@ Configuration Options
 
 ---
 
-### Updating Existing Resources
+### Local Storage
 
-To load existing content that was created with this PageBuilder:
+The Page Builder automatically manages all changes using the browser's local storage. Every change you make—such as adding, editing, or deleting components—is saved in local storage. This ensures that your progress is not lost, even if you accidentally close the browser or navigate away.
+
+- **Auto-Save:** The builder periodically auto-saves your changes to local storage, so you don't have to worry about losing your work.
+- **Manual Save:** When the user clicks the Save button, the current state is also saved to local storage.
+
+#### Resource-Specific Storage Keys
+
+Each save is stored in local storage using a unique key. The key is determined by whether you are creating a new resource or updating an existing one:
+
+- **New Resource:** The key will be prefixed with `page-builder-create-resource`.
+- **Updating Resource:** The key will be prefixed with `page-builder-update-resource`.
+
+You can further customize and uniquely identify the storage key by providing a `createNewResourceFormName` in your `configPageBuilder`:
+
+```js
+<script setup>
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+
+const configPageBuilder = {
+  updateOrCreate: {
+    // Set the resource type for better local storage and multi-resource support
+    createNewResourceFormName: 'article',
+  },
+  // ...other config options
+}
+
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+// Initializing page builder with essential configuration
+pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+// Populating page builder with existing resource content
+pageBuilderClass.loadExistingContent(existingResourceFromBackend)
+
+
+<template>
+  <PageBuilder />
+</template>
+```
+
+This allows you to manage drafts for multiple resource types (e.g., articles, jobs, stores) independently in local storage.
+
+> **Tip:** The local storage key will automatically include the resource type if `createNewResourceFormName` is provided, ensuring that drafts for different resource types do not overwrite each other.
+
+### Getting Existing Resources From Backend
+
+To load existing content that was created with this PageBuilder from any backend:
 
 - Use `sharedPageBuilderStore` to ensure the external PageBuilderClass and internal PageBuilder component share the same state
 - Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state - in this case we need the `loadExistingContent()` method to load existing content into the page builder
@@ -274,6 +325,7 @@ import '@myissue/vue-website-page-builder/style.css'
 const configPageBuilder = {
   updateOrCreate: {
     formType: 'update',
+    createNewResourceFormName: 'article',
   },
 }
 
