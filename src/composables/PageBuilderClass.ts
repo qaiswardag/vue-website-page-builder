@@ -129,13 +129,9 @@ class PageBuilderClass {
 
   // Load existing content from HTML when in update mode
   clearHtmlSelection(): void {
-    console.log('getElement is:', this.getElement.value)
-    console.log('getComponent is:', this.getComponents.value)
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
-
-    console.log('now. getElement is:', this.getElement.value)
-    console.log('now. getComponent is:', this.getComponents.value)
+    this.removeHoveredAndSelected()
   }
   // Load existing content from HTML when in update mode
   setConfigPageBuilder(data: PageBuilderConfig): void {
