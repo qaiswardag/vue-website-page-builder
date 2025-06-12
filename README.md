@@ -302,18 +302,16 @@ This allows you to manage drafts for multiple resource types (e.g., articles, jo
 
 > **Tip:** The local storage key will automatically include the resource type if `createNewResourceFormName` is provided, ensuring that drafts for different resource types do not overwrite each other.
 
-### Getting Existing Resources From Backend
+### Restoring Unfinished Drafts for New Resources
 
-To load existing content that was created with this PageBuilder from any backend:
+If a user started creating a new resource but hasn't finished (e.g., they want to continue the next day), you can restore their draft from local storage:
 
-- Use `sharedPageBuilderStore` to ensure the external PageBuilderClass and internal PageBuilder component share the same state
-- Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state - in this case we need the `loadExistingContent()` method to load existing content into the page builder
-- The PageBuilderClass uses the shared store to maintain state consistency between external operations and the internal PageBuilder component, ensuring that when you load content externally it appears correctly in the PageBuilder interface
-- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
+- Set `formType` to `"create"` in your config object.
+- The PageBuilder will automatically look for any saved draft in local storage (based on the resource type) and load it if available.
 
-  **Set formType to "update"** in template:
+**Example: Set `formType` to "create" for continuing a new resource draft**
 
-```javascript
+```js
 <script setup>
 import {
   PageBuilder,
@@ -322,6 +320,51 @@ import {
 } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
 
+const pageBuilderStateStore = sharedPageBuilderStore
+
+const configPageBuilder = {
+  updateOrCreate: {
+    formType: 'create',
+    createNewResourceFormName: 'article',
+  },
+}
+
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+// Initializing page builder with essential configuration
+pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+// No need to call loadExistingContent; the builder will auto-restore from local storage if available
+</script>
+
+<template>
+  <PageBuilder />
+</template>
+```
+
+> **Tip:** Use `formType: 'create'` for new resources and `formType: 'update'` for editing existing resources. This ensures the correct local storage key is used and the right content is loaded.
+
+### Loading Published Content from the Backend into the Page Builder
+
+To load existing content that was created with this PageBuilder from any backend:
+
+- Use `sharedPageBuilderStore` to ensure the external `PageBuilderClass` and internal `PageBuilder` component share the same state.
+- Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state. Use the `loadExistingContent()` method to load existing content into the page builder.
+- The `PageBuilderClass` uses the shared store to maintain state consistency between external operations and the internal `PageBuilder` component, ensuring that when you load content externally it appears correctly in the PageBuilder interface.
+- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
+
+**Example: Set `formType` to "update" for editing an existing resource**
+
+```js
+<script setup>
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+const pageBuilderStateStore = sharedPageBuilderStore
+
 const configPageBuilder = {
   updateOrCreate: {
     formType: 'update',
@@ -329,12 +372,11 @@ const configPageBuilder = {
   },
 }
 
-// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing page builder with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
-// Populating page builder with existing resource content
+// Populating page builder with existing resource content from backend
 pageBuilderClass.loadExistingContent(existingResourceFromBackend)
 </script>
 
@@ -342,6 +384,8 @@ pageBuilderClass.loadExistingContent(existingResourceFromBackend)
   <PageBuilder />
 </template>
 ```
+
+---
 
 #### How should `existingResourceFromBackend` look?
 
