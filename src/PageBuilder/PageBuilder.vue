@@ -11,8 +11,9 @@ import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSideba
 import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
 import {
   isChildrenEmpty,
-  isUserValid,
-  isValidUpdateOrCreate,
+  onlyUserIsValid,
+  onlyUpdateOrCreateIsValid,
+  onlyPageBuilderLogoIsValid,
 } from '../helpers/passedPageBuilderConfig'
 /**
  * Props for PageBuilder component
@@ -180,12 +181,16 @@ const handleConfig = function (config) {
       return
     }
     // only user is present
-    if (isUserValid(config)) {
+    if (onlyUserIsValid(config)) {
       return
     }
 
     // only updateOrCreate is set
-    if (isValidUpdateOrCreate(config)) {
+    if (onlyUpdateOrCreateIsValid(config)) {
+      return
+    }
+    // only updateOrCreate is set
+    if (onlyPageBuilderLogoIsValid(config)) {
       return
     }
   }

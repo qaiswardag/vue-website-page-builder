@@ -5,6 +5,7 @@ import { ref, computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
 import PageBuilderClass from '../../../composables/PageBuilderClass.ts'
+import { isEmptyObject } from '../../../helpers/isEmptyObject.ts'
 const version = __APP_VERSION__
 
 // Use shared store instance
@@ -313,7 +314,13 @@ const handleDownloadHTML = function () {
         <!-- User Settings Table - end -->
 
         <!-- Page Builder Logo Table - start -->
-        <div class="mt-8" v-if="getConfigPageBuilder?.pageBuilderLogo">
+        <div
+          class="mt-8"
+          v-if="
+            getConfigPageBuilder.pageBuilderLogo &&
+            !isEmptyObject(getConfigPageBuilder.pageBuilderLogo)
+          "
+        >
           <h4 class="myQuaternaryHeader text-sm mb-2">Logo Configuration</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
@@ -374,9 +381,9 @@ const handleDownloadHTML = function () {
         </div>
         <!-- Page Builder Logo Table - end -->
 
-        <!-- Operation Mode Table - start -->
+        <!-- Form Type Table - start -->
         <div class="mt-8" v-if="getConfigPageBuilder?.updateOrCreate">
-          <h4 class="myQuaternaryHeader text-sm mb-2">Operation Mode</h4>
+          <h4 class="myQuaternaryHeader text-sm mb-2">Form Type</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
               <table class="min-w-full divide-y divide-gray-300">
@@ -399,7 +406,7 @@ const handleDownloadHTML = function () {
                 <tbody class="bg-white divide-y divide-gray-200">
                   <tr>
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                      Current Operation
+                      Form Type
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                       <span
@@ -451,7 +458,7 @@ const handleDownloadHTML = function () {
             </div>
           </div>
         </div>
-        <!-- Operation Mode Table - end -->
+        <!-- Form Type Table - end -->
 
         <div class="mt-8" v-if="getConfigPageBuilder?.updateOrCreate">
           <h4 class="myQuaternaryHeader text-sm mb-2">Delete Saved Layout</h4>

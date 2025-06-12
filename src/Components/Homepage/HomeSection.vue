@@ -73,24 +73,24 @@ const features = [
 // }
 
 const configPageBuilder = {
-  updateOrCreate: {
-    formType: 'create',
-    createNewResourceFormName: 'product',
-  },
   userForPageBuilder: {
     // name: 'John Doe',
   },
+  updateOrCreate: {
+    // formType: 'create',
+    // createNewResourceFormName: 'product',
+  },
   pageBuilderLogo: {
-    // src: '/logo/logo.svg',
+    src: '/logo/logo.svg',
   },
   resourceData: {
     // title: 'Demo Article',
     // id: 1,
   },
   userSettings: {
-    // theme: 'light',
-    // language: 'en',
-    // autoSave: true,
+    theme: 'light',
+    language: 'en',
+    autoSave: true,
   },
 }
 
