@@ -86,7 +86,7 @@ const firstButtonTextSearchComponents = ref('')
 const firstModalButtonSearchComponentsFunction = ref(null)
 
 const handleAddComponent = function () {
-  pageBuilderStateStore.setComponent(null)
+  pageBuilderClass.clearHtmlSelection()
 
   //
   titleModalAddComponent.value = 'Add Components to Page'
@@ -254,7 +254,7 @@ onMounted(async () => {
     <div>
       <div class="relative h-full flex">
         <div
-          @click.self="pageBuilderStateStore.setComponent(null)"
+          @click.self="pageBuilderClass.clearHtmlSelection()"
           id="pagebuilder-left-area"
           class="min-w-[3.5rem] pt-6 pb-2 my-2 mx-2 bg-myPrimaryLightGrayColor rounded-full shadow"
         >
@@ -273,7 +273,7 @@ onMounted(async () => {
                 <span class="myMediumIcon material-symbols-outlined"> interests </span>
               </button>
             </div>
-            <div @click.self="pageBuilderStateStore.setComponent(null)">
+            <div @click.self="pageBuilderClass.clearHtmlSelection()">
               <ComponentTopMenu v-if="getElement"></ComponentTopMenu>
             </div>
           </div>
@@ -281,13 +281,13 @@ onMounted(async () => {
         <main class="flex flex-col h-full grow rounded-2xl duration-300 shadow-2xl">
           <div
             id="pagebuilder-toolbar-area"
-            class="flex items-center justify-between primary-gap rounded-t-2xl bg-myPrimaryLightGrayColor"
+            class="flex items-center justify-between rounded-t-2xl bg-myPrimaryLightGrayColor"
           >
-            <div class="flex myPrimaryGap items-center mr-8 overflow-x-scroll w-96 pt-4 pb-2">
-              <div
-                @click.self="pageBuilderStateStore.setComponent(null)"
-                class="w-4/12 flex justify-start items-center py-2 pl-2 h-full"
-              >
+            <div
+              @click="pageBuilderClass.clearHtmlSelection()"
+              class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 bg-green-200 h-36 w-full"
+            >
+              <div class="w-4/12 flex justify-start items-center py-2 pl-2 h-full">
                 <div class="flex gap-2">
                   <span class="w-2 h-2 rounded-full bg-red-400"></span>
                   <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
@@ -306,17 +306,20 @@ onMounted(async () => {
             </div>
 
             <div
-              @click.self="pageBuilderStateStore.setComponent(null)"
-              class="w-4/12 flex justify-center py-2"
+              @click.self="pageBuilderClass.clearHtmlSelection()"
+              class="flex justify-center items-center py-2 bg-red-300 h-36 w-full"
             >
               <OptionsDropdown @previewCurrentDesign="previewCurrentDesign"></OptionsDropdown>
             </div>
 
             <div
-              @click.self="pageBuilderStateStore.setComponent(null)"
-              class="w-4/12 flex justify-end py-2 pr-2"
+              @click.self="pageBuilderClass.clearHtmlSelection()"
+              class="flex justify-end py-2 pr-2 bg-amber-400 h-36 w-full"
             >
-              <div class="flex items-center justify-center gap-4">
+              <div
+                @click.self="pageBuilderClass.clearHtmlSelection()"
+                class="flex items-center justify-center gap-4"
+              >
                 <button
                   type="button"
                   @click="
@@ -344,7 +347,7 @@ onMounted(async () => {
                       () => {
                         pageBuilderStateStore.setMenuRight(false)
                         pageBuilderStateStore.setElement(null)
-                        pageBuilderStateStore.setComponent(null)
+                        pageBuilderClass.clearHtmlSelection()
                         handlePageBuilderPreview()
                       }
                     "
@@ -359,23 +362,33 @@ onMounted(async () => {
                       </span>
                     </div>
                   </button>
-
-                  <button
-                    type="button"
-                    v-if="getMenuRight === false"
-                    @click="pageBuilderStateStore.setMenuRight(true)"
-                  >
-                    <div class="flex items-center justify-center gap-2">
-                      <span class="lg:block hidden"> Styling </span>
-
-                      <span
-                        class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-                      >
-                        <span class="myMediumIcon material-symbols-outlined"> more_vert </span>
-                      </span>
-                    </div>
-                  </button>
                 </div>
+              </div>
+            </div>
+
+            <div
+              @click.self="pageBuilderClass.clearHtmlSelection()"
+              class="flex justify-end py-2 pr-2 bg-sky-500 h-36 w-full"
+            >
+              <div
+                @click.self="pageBuilderClass.clearHtmlSelection()"
+                class="flex items-center justify-center gap-4"
+              >
+                <button
+                  type="button"
+                  v-if="getMenuRight === false"
+                  @click="pageBuilderStateStore.setMenuRight(true)"
+                >
+                  <div class="flex items-center justify-center gap-2">
+                    <span class="lg:block hidden"> Styling </span>
+
+                    <span
+                      class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                    >
+                      <span class="myMediumIcon material-symbols-outlined"> more_vert </span>
+                    </span>
+                  </div>
+                </button>
               </div>
             </div>
           </div>

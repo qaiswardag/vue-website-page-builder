@@ -68,7 +68,7 @@ const deleteAllComponents = function () {
   // handle click
   thirdModalButtonFunctionDynamicModalBuilder.value = function () {
     pageBuilderClass.deleteAllComponents()
-    pageBuilderStateStore.setComponents(null)
+    pageBuilderClass.clearHtmlSelection()
     showModalDeleteAllComponents.value = false
   }
   // end modal
