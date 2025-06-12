@@ -54,7 +54,7 @@ const componentHelpers: ComponentHelper[] = [
     html_code: `
     <section>
     <div class="py-4">
-    <div class="w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2 bg-gray-100">
+    <div class="mx-auto max-w-7xl w-full pt-6 pb-6 bg-gray-100">
     <div  id="youtube-video" class="w-full aspect-video p-4">
 
     <iframe
