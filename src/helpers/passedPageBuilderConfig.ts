@@ -19,7 +19,7 @@ export const isChildrenEmpty = function (config: PageBuilderConfig) {
     console.log(0)
     const editorConfig = {
       updateOrCreate: {
-        formType: 'create',
+        formType: 'create' as 'create',
         createNewResourceFormName: 'post',
       },
       userSettings: {
@@ -32,6 +32,9 @@ export const isChildrenEmpty = function (config: PageBuilderConfig) {
       userForPageBuilder: null,
     }
     pageBuilderClass.setConfigPageBuilder(editorConfig)
+    return true
+  } else {
+    return false
   }
 }
 export const onlyUserIsValid = function (config: PageBuilderConfig) {
@@ -59,7 +62,7 @@ export const onlyUserIsValid = function (config: PageBuilderConfig) {
             const editorConfig = {
               userForPageBuilder: config.userForPageBuilder,
               updateOrCreate: {
-                formType: 'create',
+                formType: 'create' as 'create',
                 createNewResourceFormName: 'post',
               },
               userSettings: {
@@ -122,6 +125,7 @@ export const onlyUpdateOrCreateIsValid = function (config: PageBuilderConfig) {
     }
   }
 }
+
 export const onlyPageBuilderLogoIsValid = function (config: PageBuilderConfig) {
   if (
     config.updateOrCreate &&
@@ -148,8 +152,61 @@ export const onlyPageBuilderLogoIsValid = function (config: PageBuilderConfig) {
             console.log('4:', config.updateOrCreate)
             const editorConfig = {
               updateOrCreate: {
-                formType: 'create',
-                createNewResourceFormName: 'postøøø',
+                formType: 'create' as 'create',
+                createNewResourceFormName: 'post',
+              },
+              userSettings: {
+                theme: 'light' as 'light',
+                language: 'en',
+                autoSave: false,
+              },
+              pageBuilderLogo: config.pageBuilderLogo,
+              resourceData: null,
+              userForPageBuilder: null,
+            }
+            pageBuilderClass.setConfigPageBuilder(editorConfig)
+            return true
+          } else {
+            return false
+          }
+        }
+      }
+    }
+  }
+}
+
+export const onlyResourceDataIsValid = function (config: PageBuilderConfig) {
+  if (
+    config.resourceData &&
+    typeof config.resourceData.title === 'string' &&
+    config.resourceData.title.length > 0
+  ) {
+    if (
+      config.updateOrCreate &&
+      typeof config.updateOrCreate.formType === 'string' &&
+      (config.updateOrCreate.formType === 'create' || config.updateOrCreate.formType === 'update')
+    ) {
+      if (
+        !config.userForPageBuilder ||
+        (config.userForPageBuilder && typeof config.userForPageBuilder.name !== 'string') ||
+        (typeof config.userForPageBuilder.name === 'string' &&
+          config.userForPageBuilder.name.length < 1) ||
+        (config.userForPageBuilder && isEmptyObject(config.userForPageBuilder))
+      ) {
+        if (
+          !config.pageBuilderLogo ||
+          (config.pageBuilderLogo &&
+            config.pageBuilderLogo.src &&
+            typeof config.pageBuilderLogo.src === 'string' &&
+            config.pageBuilderLogo.src.length === 0) ||
+          (config.pageBuilderLogo && isEmptyObject(config.pageBuilderLogo))
+        ) {
+          if (!config.userSettings || (config.userSettings && isEmptyObject(config.userSettings))) {
+            console.log('5:', config.updateOrCreate)
+            const editorConfig = {
+              updateOrCreate: {
+                formType: 'create' as 'create',
+                createNewResourceFormName: 'post',
               },
               userSettings: {
                 theme: 'light' as 'light',
