@@ -76,11 +76,7 @@ agencies. Empower users to create the perfect content with the Page Builder.
 - **Technologies**: This Page Builder is developed using TypeScript, Vue 3, the Composition API, Pinia, CSS, Tailwind CSS, and HTML.
 - **Features**: Click & Drop Page Builder.
 
----
-
 ## Documentation
-
----
 
 ### Requirements
 
@@ -89,8 +85,6 @@ Please note that these instructions assume you have Node.js installed.
 - Node.js ≥ 18.0.0
 - Vue.js ≥ 3.0.0
 - Modern browser with ES6+ support
-
----
 
 ### Getting started & installation
 
@@ -110,8 +104,6 @@ yarn install
 bun install
 ```
 
----
-
 ### Important: CSS Import Required
 
 The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading:
@@ -126,8 +118,6 @@ This import automatically includes:
 - ✅ Google Fonts (Jost, Cormorant - no additional setup needed)
 - ✅ Google Material Icons (no additional setup needed)
 - ✅ Responsive design utilities
-
----
 
 ### Quick Start
 
@@ -145,8 +135,6 @@ import '@myissue/vue-website-page-builder/style.css'
   <PageBuilder />
 </template>
 ```
-
----
 
 ### Optional: Provide Config to PageBuilder
 
@@ -248,8 +236,6 @@ Configuration Options
 | Prop              | Type     | Default | Description                         |
 | ----------------- | -------- | ------- | ----------------------------------- |
 | `PageBuilderLogo` | `String` | `null`  | URL path to your company logo image |
-
----
 
 ### Local Storage
 
@@ -387,8 +373,6 @@ pageBuilderClass.loadExistingContent(existingResourceFromBackend)
 </template>
 ```
 
----
-
 #### How should `existingResourceFromBackend` look?
 
 When loading an existing resource, each component object will have an `id` assigned by the page builder.  
@@ -409,17 +393,9 @@ export interface ComponentObject {
 
 Alternatively, you can provide a raw HTML string containing your `<section>` components:
 
----
-
 ### Customization
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
-
-    - Google Fonts (Jost, Cormorant) and Material Icons are automatically loaded when you import the CSS file. No additional setup required for fonts or icons!
-
----
-
----
 
 ### Custom Components
 
@@ -442,8 +418,6 @@ import YourSearchComponent from './ComponentsPageBuilder/YourSearchComponent.vue
 ```
 
 ## Troubleshooting
-
----
 
 ### Fonts or Icons Not Displaying
 
