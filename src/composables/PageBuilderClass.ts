@@ -1123,8 +1123,6 @@ class PageBuilderClass {
     const resourceFormName =
       this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.createNewResourceFormName
 
-    console.log('oki:', resourceFormName)
-
     // Logic for create resource
     if (updateOrCreate === 'create') {
       if (resourceFormName && resourceFormName.length > 0) {
