@@ -413,7 +413,7 @@ onMounted(async () => {
 
             <div
               @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex justify-end py-2 pr-h-24 w-full"
+              class="flex justify-end py-2 pr-2 w-full"
             >
               <div
                 @click.self="pageBuilderClass.clearHtmlSelection()"
