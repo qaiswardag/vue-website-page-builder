@@ -192,7 +192,7 @@ const configPageBuilder = {
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing Page Builder with essential configuration
+// Initializing with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 </script>
 
@@ -234,7 +234,7 @@ const configPageBuilder = {
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing page builder with essential configuration
+// Initializing with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 </script>
 
@@ -287,10 +287,12 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing page builder with essential configuration
+// Initializing with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 // Populating page builder with existing resource content
 pageBuilderClass.loadExistingContent(existingResourceFromBackend)
+</script>
+
 
 
 <template>
@@ -331,7 +333,7 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing page builder with essential configuration
+// Initializing with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 // No need to call loadExistingContent; the builder will auto-restore from local storage if available
 </script>
@@ -374,7 +376,7 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing page builder with essential configuration
+// Initializing with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 // Populating page builder with existing resource content from backend
 pageBuilderClass.loadExistingContent(existingResourceFromBackend)
@@ -403,38 +405,6 @@ export interface ComponentObject {
   html_code: string
   title?: string
 }
-```
-
-```javascript
-<script setup>
-// Example JSON string (from localStorage or backend)
-const existingResourceFromBackend = JSON.stringify([
-  {
-    html_code: `<section>
-                  <div>
-                    <h1>Article Title</h1>
-                      <p>Content</p>
-                  </div>
-                </section>`,
-    id: null,
-    title: 'Component Title',
-  },
-  {
-    html_code: `<section>
-                  <div>
-                    <h1>Article Title</h1>
-                      <p>Content</p>
-                  </div>
-                </section>`,
-    id: null,
-    title: 'Component Title',
-  },
-])
-</script>
-
-<template>
-  <PageBuilder />
-</template>
 ```
 
 Alternatively, you can provide a raw HTML string containing your `<section>` components:
