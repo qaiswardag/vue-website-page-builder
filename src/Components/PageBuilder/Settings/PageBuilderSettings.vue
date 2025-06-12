@@ -148,7 +148,12 @@ const handleDownloadHTML = function () {
         <!-- Version Information Table - end -->
 
         <!-- Resource Data Table - start -->
-        <div class="mt-4" v-if="getConfigPageBuilder?.resourceData">
+        <div
+          class="mt-4"
+          v-if="
+            getConfigPageBuilder?.resourceData && !isEmptyObject(getConfigPageBuilder.resourceData)
+          "
+        >
           <h4 class="myQuaternaryHeader text-sm mb-2">Resource Data</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
@@ -194,7 +199,13 @@ const handleDownloadHTML = function () {
         <!-- Resource Data Table - end -->
 
         <!-- User Information Table - start -->
-        <div class="mt-8" v-if="getConfigPageBuilder?.userForPageBuilder">
+        <div
+          class="mt-8"
+          v-if="
+            getConfigPageBuilder?.userForPageBuilder &&
+            !isEmptyObject(getConfigPageBuilder.userForPageBuilder)
+          "
+        >
           <h4 class="myQuaternaryHeader text-sm mb-2">User Information</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
@@ -232,7 +243,12 @@ const handleDownloadHTML = function () {
         <!-- User Information Table - end -->
 
         <!-- User Settings Table - start -->
-        <div class="mt-8" v-if="getConfigPageBuilder?.userSettings">
+        <div
+          class="mt-8"
+          v-if="
+            getConfigPageBuilder?.userSettings && !isEmptyObject(getConfigPageBuilder.userSettings)
+          "
+        >
           <h4 class="myQuaternaryHeader text-sm mb-2">User Settings</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
@@ -382,7 +398,13 @@ const handleDownloadHTML = function () {
         <!-- Page Builder Logo Table - end -->
 
         <!-- Form Type Table - start -->
-        <div class="mt-8" v-if="getConfigPageBuilder?.updateOrCreate">
+        <div
+          class="mt-8"
+          v-if="
+            getConfigPageBuilder?.updateOrCreate &&
+            !isEmptyObject(getConfigPageBuilder.updateOrCreate)
+          "
+        >
           <h4 class="myQuaternaryHeader text-sm mb-2">Form Type</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">
@@ -460,7 +482,13 @@ const handleDownloadHTML = function () {
         </div>
         <!-- Form Type Table - end -->
 
-        <div class="mt-8" v-if="getConfigPageBuilder?.updateOrCreate">
+        <div
+          class="mt-8"
+          v-if="
+            getConfigPageBuilder?.updateOrCreate &&
+            !isEmptyObject(getConfigPageBuilder.updateOrCreate)
+          "
+        >
           <h4 class="myQuaternaryHeader text-sm mb-2">Delete Saved Layout</h4>
           <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
             <div class="overflow-x-auto">

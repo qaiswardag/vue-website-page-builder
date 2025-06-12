@@ -81,7 +81,7 @@ const configPageBuilder = {
     // createNewResourceFormName: 'product',
   },
   pageBuilderLogo: {
-    src: '/logo/logo.svg',
+    // src: '/logo/logo.svg',
   },
   resourceData: {
     // title: 'Demo Article',
