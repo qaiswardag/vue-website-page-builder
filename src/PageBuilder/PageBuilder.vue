@@ -14,6 +14,8 @@ import {
   onlyUserIsValid,
   onlyUpdateOrCreateIsValid,
   onlyPageBuilderLogoIsValid,
+  onlyResourceDataIsValid,
+  onlyUserSettingsIsValid,
 } from '../helpers/passedPageBuilderConfig'
 /**
  * Props for PageBuilder component
@@ -180,17 +182,23 @@ const handleConfig = function (config) {
     if (isChildrenEmpty(config)) {
       return
     }
-    // only user is present
+
     if (onlyUserIsValid(config)) {
       return
     }
 
-    // only updateOrCreate is set
     if (onlyUpdateOrCreateIsValid(config)) {
       return
     }
-    // only updateOrCreate is set
+
     if (onlyPageBuilderLogoIsValid(config)) {
+      return
+    }
+
+    if (onlyResourceDataIsValid(config)) {
+      return
+    }
+    if (onlyUserSettingsIsValid(config)) {
       return
     }
   }

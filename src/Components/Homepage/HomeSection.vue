@@ -84,8 +84,8 @@ const configPageBuilder = {
     // src: '/logo/logo.svg',
   },
   resourceData: {
-    // title: 'Demo Article',
-    // id: 1,
+    title: 'Demo Article',
+    id: 1,
   },
   userSettings: {
     // theme: 'light',
