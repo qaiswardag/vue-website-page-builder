@@ -69,6 +69,20 @@ const deleteAllComponents = function () {
   thirdModalButtonFunctionDynamicModalBuilder.value = function () {
     pageBuilderClass.deleteAllComponents()
     pageBuilderClass.clearHtmlSelection()
+    if (
+      getConfigPageBuilder.value.updateOrCreate &&
+      typeof getConfigPageBuilder.value.updateOrCreate.formType === 'string'
+    ) {
+      if (getConfigPageBuilder.value.updateOrCreate.formType === 'create') {
+        pageBuilderClass.removeItemComponentsLocalStorageCreate()
+      }
+      if (getConfigPageBuilder.value.updateOrCreate.formType === 'update') {
+        pageBuilderClass.removeItemComponentsLocalStorageUpdate()
+      }
+    }
+
+    // if(getConfigPageBuilder.updateOrCreate && getConfigPageBuilder.updateOrCreate){}
+
     showModalDeleteAllComponents.value = false
   }
   // end modal
@@ -161,16 +175,6 @@ const settingsSlideOverButton = function () {
             </template>
 
             <p>
-              <template
-                v-if="
-                  getConfigPageBuilder &&
-                  typeof getConfigPageBuilder.updateOrCreate === 'string' &&
-                  getConfigPageBuilder.updateOrCreate.length > 0 &&
-                  getConfigPageBuilder.resourceData &&
-                  getConfigPageBuilder.resourceData.title
-                "
-              >
-              </template>
               <MenuItem v-slot="{ active }">
                 <div
                   @click="handlePageBuilderPreview"
