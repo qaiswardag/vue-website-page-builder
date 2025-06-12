@@ -234,7 +234,18 @@ onMounted(async () => {
     id="builder-container"
     class="font-sans max-w-full m-8 border-2 border-myPrimaryLinkColor inset-x-0 z-10 bg-white overflow-x-scroll pt-2 rounded-lg p-2"
   >
-    <div id="pagebuilder-top-area" class="px-4 py-4 mx-4 my-4 rounded-xl">
+    <div
+      @click="pageBuilderClass.clearHtmlSelection()"
+      id="pagebuilder-top-area"
+      class="px-4 pb-4 mx-4 my-4 rounded-xl"
+    >
+      <div class="flex justify-start items-center py-2 pl-2 mr-2 mb-6 h-full">
+        <div class="flex gap-2">
+          <span class="w-2 h-2 rounded-full bg-red-400"></span>
+          <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
+          <span class="w-2 h-2 rounded-full bg-green-400"></span>
+        </div>
+      </div>
       <!-- Logo # start -->
       <div
         v-if="
@@ -307,14 +318,6 @@ onMounted(async () => {
               @click="pageBuilderClass.clearHtmlSelection()"
               class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 bg-green-200 h-36 w-full"
             >
-              <div class="flex justify-start items-center py-2 pl-2 mr-2 h-full">
-                <div class="flex gap-2">
-                  <span class="w-2 h-2 rounded-full bg-red-400"></span>
-                  <span class="w-2 h-2 rounded-full bg-yellow-400"></span>
-                  <span class="w-2 h-2 rounded-full bg-green-400"></span>
-                </div>
-              </div>
-
               <button
                 class="myPrimaryButton"
                 @click="pageBuilderClass.saveComponentsLocalStorage"
