@@ -330,7 +330,7 @@ onMounted(async () => {
           >
             <div
               @click="pageBuilderClass.clearHtmlSelection()"
-              class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 pl-2 bg-green-200 h-36 w-full"
+              class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 pl-2 h-24 w-full"
             >
               <button
                 class="myPrimaryButton"
@@ -344,14 +344,14 @@ onMounted(async () => {
 
             <div
               @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex justify-center items-center py-2 bg-red-300 h-36 w-full"
+              class="flex justify-center items-center py-h-24 w-full"
             >
               <OptionsDropdown @previewCurrentDesign="previewCurrentDesign"></OptionsDropdown>
             </div>
 
             <div
               @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex justify-end py-2 pr-2 bg-amber-400 h-36 w-full"
+              class="flex justify-end py-2 pr-2 h-24 w-full"
             >
               <div
                 @click.self="pageBuilderClass.clearHtmlSelection()"
@@ -405,7 +405,7 @@ onMounted(async () => {
 
             <div
               @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex justify-end py-2 pr-2 bg-sky-500 h-36 w-full"
+              class="flex justify-end py-2 pr-h-24 w-full"
             >
               <div
                 @click.self="pageBuilderClass.clearHtmlSelection()"
