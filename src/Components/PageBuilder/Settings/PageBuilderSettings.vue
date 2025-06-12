@@ -521,7 +521,6 @@ const handleDownloadHTML = function () {
                         @click="pageBuilderClass.removeItemComponentsLocalStorageCreate"
                         type="button"
                       >
-                        <span class="material-symbols-outlined text-[18px]"> delete </span>
                         Delete
                       </button>
                     </td>
@@ -534,7 +533,6 @@ const handleDownloadHTML = function () {
                         @click="pageBuilderClass.removeItemComponentsLocalStorageUpdate"
                         type="button"
                       >
-                        <span class="material-symbols-outlined text-[18px]"> delete </span>
                         Delete
                       </button>
                     </td>
