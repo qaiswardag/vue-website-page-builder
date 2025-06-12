@@ -232,13 +232,14 @@ watch(
 )
 
 onMounted(async () => {
-  await pageBuilderClass.setEventListenersForElements()
   const config = getConfigPageBuilder.value
   handleConfig(config)
 
   pageBuilderClass.updateLocalStorageItemName()
 
   pageBuilderClass.removeHoveredAndSelected()
+
+  await pageBuilderClass.setEventListenersForElements()
 })
 </script>
 

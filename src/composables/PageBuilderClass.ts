@@ -152,7 +152,6 @@ class PageBuilderClass {
     const currentHTMLElement = this.getElement.value
     if (!currentHTMLElement) return
 
-    // currentCSS array example: ["none","py-0", "py-2", ...] or ['none', 'rounded-sm', 'rounded', 'rounded-md', ...]
     const currentCSS = CSSArray.find((CSS) => {
       return currentHTMLElement.classList.contains(CSS)
     })
@@ -1114,13 +1113,17 @@ class PageBuilderClass {
   }
 
   updateLocalStorageItemName(): void {
-    const updateOrCreate =
-      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType || 'create'
+    // const updateOrCreate =
+    //   this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType || 'create'
+
+    const updateOrCreate = this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType
 
     const resourceData = this.pageBuilderStateStore.getConfigPageBuilder?.resourceData
 
     const resourceFormName =
       this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.createNewResourceFormName
+
+    console.log('oki:', resourceFormName)
 
     // Logic for create resource
     if (updateOrCreate === 'create') {
