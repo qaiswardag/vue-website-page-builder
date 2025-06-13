@@ -20,11 +20,6 @@ const getComponents = computed(() => {
   return pageBuilderStateStore.getComponents
 })
 
-// first button function
-const handleButton = function () {
-  console.log('user want to play with the page builder')
-}
-
 const features = [
   {
     name: 'Live Drag & Drop Builder',
@@ -121,12 +116,8 @@ onMounted(async () => {
             href="https://github.com/qaiswardag/vue-website-page-builder"
             target="_blank"
           >
-            Go to the GitHub repository
+            Go to the GitHub repository.
           </a>
-          or
-          <span @click="handleButton" class="text-myPrimaryLinkColor font-medium cursor-pointer">
-            play around with the page builder.
-          </span>
         </p>
       </div>
       <div>
@@ -148,12 +139,8 @@ onMounted(async () => {
             href="https://github.com/qaiswardag/vue-website-page-builder"
             target="_blank"
           >
-            Go to the GitHub repository
+            Go to the GitHub repository.
           </a>
-          or
-          <span @click="handleButton" class="text-myPrimaryLinkColor font-medium cursor-pointer">
-            play around with the page builder.
-          </span>
         </p>
       </template>
       <template #content>

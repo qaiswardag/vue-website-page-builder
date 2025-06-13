@@ -1628,8 +1628,6 @@ class PageBuilderClass {
         savedCurrentDesign = parsedData
       }
 
-      console.log('okokoko:', savedCurrentDesign)
-
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
     } catch (error) {
       console.error('Error parsing JSON components:', error)
