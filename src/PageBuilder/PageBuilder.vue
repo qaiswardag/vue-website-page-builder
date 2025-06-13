@@ -245,7 +245,7 @@ onMounted(async () => {
 
   await pageBuilderClass.setEventListenersForElements()
 
-  console.log('config fo rpage builder to work with:', config)
+  console.log('config for page builder to work with:', config)
 })
 </script>
 
