@@ -400,23 +400,23 @@ onMounted(async () => {
 
               <!-- Add Component # start -->
               <div
-                @click="
-                  () => {
-                    pageBuilderStateStore.setComponentArrayAddMethod('push')
-                    handleAddComponent()
-                  }
-                "
                 id="pagebuilder-bottom-components-area"
-                class="hover:bg-gray-100 rounded-full border-2 border-myPrimaryLinkColor pt-10 pb-14 text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-12 mx-8 cursor-pointer"
+                class="border-t border-gray-200 pt-10 pb-14 text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-12 mx-8"
               >
-                <div class="flex items-center justify-center gap-2 font-medium cursor-pointer">
+                <div class="flex items-center justify-center gap-2 font-medium">
                   <span class="lg:block hidden">
-                    <div>Add new Components</div>
+                    <div>Add new components to the bottom of the page</div>
                   </span>
                 </div>
 
                 <div class="mt-6 flex items-center gap-2 justify-center">
                   <button
+                    @click="
+                      () => {
+                        pageBuilderStateStore.setComponentArrayAddMethod('push')
+                        handleAddComponent()
+                      }
+                    "
                     type="button"
                     class="myPrimaryButton flex items-center gap-2 justify-center"
                   >
