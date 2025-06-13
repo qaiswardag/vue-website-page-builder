@@ -95,7 +95,7 @@ export interface PageBuilderUser {
 export interface PageBuilderConfig {
   updateOrCreate?: {
     formType: 'create' | 'update'
-    createNewResourceFormName?: string
+    formName?: string
   }
   pageBuilderLogo?: { src: string } | null
   resourceData?: { title: string; id: number } | null

@@ -55,7 +55,7 @@ const features = [
 // const configPageBuilderTemplate = {
 //   updateOrCreate: {
 //     formType: 'create',
-//     createNewResourceFormName: 'post',
+//     formName: 'post',
 //   },
 //   pageBuilderLogo: {
 //     src: '/logo/logo.svg',
@@ -78,7 +78,7 @@ const configPageBuilder = {
   },
   updateOrCreate: {
     formType: 'update',
-    // createNewResourceFormName: 0,
+    // formName: 0,
   },
   pageBuilderLogo: {
     src: '/logo/logo.svg',

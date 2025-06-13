@@ -155,7 +155,7 @@ const draggableZone = ref(null)
 const defaultConfigValues = {
   updateOrCreate: {
     formType: 'create',
-    createNewResourceFormName: 'post',
+    formName: 'post',
   },
 
   userSettings: {

@@ -460,8 +460,8 @@ const handleDownloadHTML = function () {
                   </tr>
                   <tr
                     v-if="
-                      getConfigPageBuilder.updateOrCreate.createNewResourceFormName &&
-                      getConfigPageBuilder.updateOrCreate.createNewResourceFormName.length > 0
+                      getConfigPageBuilder.updateOrCreate.formName &&
+                      getConfigPageBuilder.updateOrCreate.formName.length > 0
                     "
                   >
                     <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
@@ -471,7 +471,7 @@ const handleDownloadHTML = function () {
                       <span
                         class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                       >
-                        {{ getConfigPageBuilder.updateOrCreate.createNewResourceFormName }}
+                        {{ getConfigPageBuilder.updateOrCreate.formName }}
                       </span>
                     </td>
                   </tr>

@@ -145,7 +145,7 @@ Get up and running quickly by importing the PageBuilder component, setting up yo
   - `pageBuilderLogo` to display your company logo in the builder toolbar
   - `resourceData` to prefill the builder with initial data
   - `userSettings` to set user preferences such as theme, language, or autoSave
-  - `createNewResourceFormName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
+  - `formName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
 
 ```vue
 <script setup>
@@ -159,7 +159,7 @@ import '@myissue/vue-website-page-builder/style.css'
 const configPageBuilder = {
   updateOrCreate: {
     // Set the resource type for better local storage and multi-resource support
-    createNewResourceFormName: 'article',
+    formName: 'article',
   },
   pageBuilderLogo: {
     src: '/logo/logo.svg',
@@ -251,7 +251,7 @@ Each save is stored in local storage using a unique key. The key is determined b
 - **New Resource:** The key will be prefixed with `page-builder-create-resource`.
 - **Updating Resource:** The key will be prefixed with `page-builder-update-resource`.
 
-You can further customize and uniquely identify the storage key by providing a `createNewResourceFormName` in your `configPageBuilder`:
+You can further customize and uniquely identify the storage key by providing a `formName` in your `configPageBuilder`:
 
 ```js
 <script setup>
@@ -266,7 +266,7 @@ import '@myissue/vue-website-page-builder/style.css'
 const configPageBuilder = {
   updateOrCreate: {
     // Set the resource type for better local storage and multi-resource support
-    createNewResourceFormName: 'article',
+    formName: 'article',
   },
   // ...other config options
 }
@@ -288,7 +288,7 @@ pageBuilderClass.loadExistingContent(existingResourceFromBackend)
 
 This allows you to manage drafts for multiple resource types (e.g., articles, jobs, stores) independently in local storage.
 
-> **Tip:** The local storage key will automatically include the resource type if `createNewResourceFormName` is provided, ensuring that drafts for different resource types do not overwrite each other.
+> **Tip:** The local storage key will automatically include the resource type if `formName` is provided, ensuring that drafts for different resource types do not overwrite each other.
 
 ### Restoring Unfinished Drafts for New Resources
 
@@ -313,7 +313,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 const configPageBuilder = {
   updateOrCreate: {
     formType: 'create',
-    createNewResourceFormName: 'article',
+    formName: 'article',
   },
 }
 
@@ -356,7 +356,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 const configPageBuilder = {
   updateOrCreate: {
     formType: 'update',
-    createNewResourceFormName: 'article',
+    formName: 'article',
   },
 }
 

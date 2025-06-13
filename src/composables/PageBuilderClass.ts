@@ -1121,7 +1121,7 @@ class PageBuilderClass {
     const resourceData = this.pageBuilderStateStore.getConfigPageBuilder?.resourceData
 
     const resourceFormName =
-      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.createNewResourceFormName
+      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formName
 
     // Logic for create resource
     if (updateOrCreate === 'create') {

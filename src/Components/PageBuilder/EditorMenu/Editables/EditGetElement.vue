@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, inject } from 'vue'
+import { ref, computed, onMounted, nextTick, watch, inject } from 'vue'
 import DynamicModalBuilder from '../../../Modals/DynamicModalBuilder.vue'
 import TipTapInput from '../../../TipTap/TipTapInput.vue'
 import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
@@ -202,6 +202,27 @@ const handleModalIframeSrc = function () {
     showModalIframeSrc.value = false
   }
 }
+
+const pagebuilder = ref(null)
+const videoElement = ref(null)
+
+watch(
+  pagebuilder,
+  async (newValue) => {
+    if (newValue) {
+      console.log('new value:', newValue)
+      videoElement.value = pagebuilder.value?.querySelector('#youtube-video')
+      console.log('video er:', videoElement.value)
+    }
+  },
+  { immediate: true },
+)
+
+onMounted(async () => {
+  pagebuilder.value = document.querySelector('#pagebuilder')
+  console.log('pagebuilder:', pagebuilder.value)
+  await nextTick()
+})
 </script>
 <template>
   <div>

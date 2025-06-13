@@ -19,7 +19,7 @@ export const isChildrenEmpty = function (config: PageBuilderConfig) {
     const editorConfig = {
       updateOrCreate: {
         formType: 'create' as 'create',
-        createNewResourceFormName: 'post',
+        formName: 'post',
       },
       userSettings: {
         theme: 'light' as 'light',
@@ -61,7 +61,7 @@ export const onlyUserIsValid = function (config: PageBuilderConfig) {
               userForPageBuilder: config.userForPageBuilder,
               updateOrCreate: {
                 formType: 'create' as 'create',
-                createNewResourceFormName: 'post',
+                formName: 'post',
               },
               userSettings: {
                 theme: 'light' as 'light',
@@ -149,7 +149,7 @@ export const onlyPageBuilderLogoIsValid = function (config: PageBuilderConfig) {
             const editorConfig = {
               updateOrCreate: {
                 formType: 'create' as 'create',
-                createNewResourceFormName: 'post',
+                formName: 'post',
               },
               userSettings: {
                 theme: 'light' as 'light',
@@ -201,7 +201,7 @@ export const onlyResourceDataIsValid = function (config: PageBuilderConfig) {
             const editorConfig = {
               updateOrCreate: {
                 formType: 'create' as 'create',
-                createNewResourceFormName: 'post',
+                formName: 'post',
               },
               userSettings: {
                 theme: 'light' as 'light',
@@ -257,7 +257,7 @@ export const onlyUserSettingsIsValid = function (config: PageBuilderConfig) {
             const editorConfig = {
               updateOrCreate: {
                 formType: 'create' as 'create',
-                createNewResourceFormName: 'post',
+                formName: 'post',
               },
               userSettings: {
                 theme: 'light' as 'light',
@@ -289,7 +289,7 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
       ...config,
       updateOrCreate: {
         formType: 'create' as 'create',
-        createNewResourceFormName: 'pøøøøøøøøost',
+        formName: 'pøøøøøøøøost',
       },
     }
 
@@ -302,13 +302,13 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
     typeof config.updateOrCreate.formType === 'string' &&
     config.updateOrCreate.formType !== 'create' &&
     config.updateOrCreate.formType !== 'update' &&
-    typeof config.createNewResourceFormName !== 'string'
+    typeof config.formName !== 'string'
   ) {
     const updatedConfig = {
       ...config,
       updateOrCreate: {
         formType: 'create' as 'create',
-        createNewResourceFormName: 'post',
+        formName: 'post',
       },
     }
 
@@ -320,15 +320,15 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
       typeof config.updateOrCreate.formType === 'string' &&
       (config.updateOrCreate.formType === 'create' ||
         config.updateOrCreate.formType === 'update') &&
-      typeof config.updateOrCreate.createNewResourceFormName !== 'string') ||
-    (typeof config.updateOrCreate.createNewResourceFormName === 'string' &&
-      config.updateOrCreate.createNewResourceFormName.length === 0)
+      typeof config.updateOrCreate.formName !== 'string') ||
+    (typeof config.updateOrCreate.formName === 'string' &&
+      config.updateOrCreate.formName.length === 0)
   ) {
     const updatedConfig = {
       ...config,
       updateOrCreate: {
         formType: 'create' as 'create',
-        createNewResourceFormName: 'post',
+        formName: 'post',
       },
     }
 
@@ -339,14 +339,14 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
     config.updateOrCreate &&
     typeof config.updateOrCreate.formType === 'string' &&
     (config.updateOrCreate.formType === 'create' || config.updateOrCreate.formType === 'update') &&
-    typeof config.updateOrCreate.createNewResourceFormName === 'string' &&
-    config.updateOrCreate.createNewResourceFormName.length > 0
+    typeof config.updateOrCreate.formName === 'string' &&
+    config.updateOrCreate.formName.length > 0
   ) {
     const updatedConfig = {
       ...config,
       updateOrCreate: {
         formType: 'create' as 'create',
-        createNewResourceFormName: config.updateOrCreate.createNewResourceFormName,
+        formName: config.updateOrCreate.formName,
       },
     }
 
