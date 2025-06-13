@@ -9,15 +9,7 @@ import SearchComponents from '../Components/Search/SearchComponents.vue'
 import OptionsDropdown from '../Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
 import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
 import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
-import {
-  isChildrenEmpty,
-  onlyUserIsValid,
-  onlyUpdateOrCreateIsValid,
-  onlyPageBuilderLogoIsValid,
-  onlyResourceDataIsValid,
-  onlyUserSettingsIsValid,
-  updateOrCreateIsFalsy,
-} from '../helpers/passedPageBuilderConfig'
+import { updateOrCreateIsFalsy } from '../helpers/passedPageBuilderConfig'
 /**
  * Props for PageBuilder component
  * @typedef {Object} Props
@@ -178,44 +170,6 @@ const handleConfig = function (config) {
   }
 
   if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
-    //
-    // Check alone
-    // Returns true if all config fields are missing or empty
-    if (isChildrenEmpty(config)) {
-      console.log('1111:')
-      return
-    }
-
-    if (onlyUserIsValid(config)) {
-      console.log('2222:')
-      return
-    }
-
-    if (onlyUpdateOrCreateIsValid(config)) {
-      console.log('3333:')
-      return
-    }
-
-    if (onlyPageBuilderLogoIsValid(config)) {
-      console.log('4444:')
-      return
-    }
-
-    if (onlyResourceDataIsValid(config)) {
-      console.log('5555:')
-      return
-    }
-
-    if (onlyUserSettingsIsValid(config)) {
-      console.log('6666:')
-      return
-    }
-
-    if (onlyUserSettingsIsValid(config)) {
-      console.log('7777:')
-      return
-    }
-
     if (updateOrCreateIsFalsy(config)) {
       console.log('8888:')
       return
