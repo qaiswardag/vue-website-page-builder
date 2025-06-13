@@ -25,7 +25,7 @@ By default, the Page Builder does not include a built-in media library.
 
 This is intentional — without a custom media library, layout components that rely on images (like Image Blocks, Hero Sections, etc.) are disabled by default. Only helper components such as containers, headings, text, and buttons are available in this state.
 
-To enable image-related components in the builder, you must inject your own media library by passing it to the PageBuilder via the :CustomMediaLibraryComponent prop:
+To enable image-related components in the builder, you must inject your own media library by passing it to the PageBuilder via the :s prop:
 
 //TODO: How to: Close the Modal, inject selected Image into the page builder
 
@@ -89,10 +89,37 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 </template>
 ```
 
+#### How should Components array look?
+
+TypeScript interface for reference
+
+The HTML of each component must be wrapped inside a `<section></section>`. The Page Builder relies on this `<section>` wrapper to correctly reneachder the component and attach event listeners.
+
+```javascript
+interface Components {
+  html_code: string
+  id: string | null
+  title: string
+}
+
+const components: Components[] = [
+  {
+    html_code: `<div class="relative py-4"> <div class="mx-auto max-w-7xl lg:px-4 px-2"> <div class="break-words"> <h2>This is a component</h2> </div> </div> </div> </section>`,
+    id: null,
+    title: 'Header Example One',
+  },
+  {
+    html_code: `<div class="relative py-4"> <div class="mx-auto max-w-7xl lg:px-4 px-2"> <div class="break-words"> <h2>This is another component</h2> </div> </div> </div> </section>`,
+    id: null,
+    title: 'Header Example Two',
+  },
+]
+```
+
 ## Benefits of This Approach
 
-✅ **Full Control**: You decide where and when to create components  
-✅ **Flexible**: Adapt to any project structure  
-✅ **Secure**: No postinstall scripts to worry about  
-✅ **Simple**: Clean package with clear documentation  
+✅ **Full Control**: You decide where and when to create components
+✅ **Flexible**: Adapt to any project structure
+✅ **Secure**: No postinstall scripts to worry about
+✅ **Simple**: Clean package with clear documentation
 ✅ **Optional**: Only create components you actually need

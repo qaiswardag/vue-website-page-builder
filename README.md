@@ -4,7 +4,7 @@
 
 ## **DEVELOPMENT VERSION - NOT READY FOR PRODUCTION**
 
-🚀 **Official Launch Date: June 15, 2025**  
+🚀 **Official Launch Date: June 16, 2025**  
 We're working hard to bring you a production-ready page builder. Stay tuned for updates!
 
 You are welcome to test the builder and report any bugs or feedback before the official launch date.  
@@ -375,23 +375,10 @@ pageBuilderClass.loadExistingContent(existingResourceFromBackend)
 
 #### How should `existingResourceFromBackend` look?
 
-When loading an existing resource, each component object will have an `id` assigned by the page builder.  
 The example below shows the structure as it would appear when loaded from local storage after components have been added in the builder.
 
 - Example JSON string (from localStorage or backend)
 - For existing resources, id will always be present and set by the page builder.
-
-TypeScript interface for reference
-
-```javascript
-export interface ComponentObject {
-  id: string | number | null
-  html_code: string
-  title?: string
-}
-```
-
-Alternatively, you can provide a raw HTML string containing your `<section>` components:
 
 ### Customization
 
