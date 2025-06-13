@@ -90,7 +90,7 @@ const handleDownloadHTML = function () {
             type="button"
             class="myPrimaryButton text"
           >
-            Open Overview
+            Advanced Settings
           </button>
         </div>
       </div>
