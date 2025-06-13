@@ -1,6 +1,6 @@
 <script setup>
 import ModalBuilder from '../Modals/ModalBuilder.vue'
-import NoneCustomBuilderComponents from '../PageBuilder/DemoContent/NoneCustomBuilderComponents.vue'
+import DefaultBuilderComponents from '../PageBuilder/DefaultComponents/DefaultBuilderComponents.vue'
 
 defineProps({
   firstButtonText: {
@@ -57,7 +57,7 @@ const firstButtonBuilder = function () {
         <div v-if="CustomBuilderComponents" class="border border-gray-200 rounded-lg p-4">
           <component :is="CustomBuilderComponents" />
         </div>
-        <div v-else><NoneCustomBuilderComponents /></div>
+        <div v-else><DefaultBuilderComponents /></div>
       </div>
     </div>
     <div class="bg-slate-50 px-2 py-4 flex sm:justify-end justify-center">

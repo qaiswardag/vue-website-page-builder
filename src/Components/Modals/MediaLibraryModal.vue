@@ -7,7 +7,7 @@ import {
   TransitionRoot,
 } from '@headlessui/vue'
 import { provide } from 'vue'
-import NoneCustomMediaLibraryComponent from '../PageBuilder/DemoContent/NoneCustomMediaLibraryComponent.vue'
+import DefaultMediaLibraryComponent from '../PageBuilder/DefaultComponents/DefaultMediaLibraryComponent.vue'
 
 const props = defineProps({
   title: {
@@ -121,7 +121,7 @@ provide('closeMediaLibraryModal', closeMediaLibraryModal)
                   <component :is="customMediaComponent" />
                 </div>
                 <div v-else>
-                  <NoneCustomMediaLibraryComponent />
+                  <DefaultMediaLibraryComponent />
                 </div>
               </div>
 

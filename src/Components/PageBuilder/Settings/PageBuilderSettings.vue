@@ -593,6 +593,32 @@ const handleDownloadHTML = function () {
         </button>
       </div>
     </div>
+    <!-- Download Layout HTML - end -->
+
+    <!-- Congig - start -->
+    <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
+      <div class="flex items-left flex-col gap-1">
+        <h3 class="myQuaternaryHeader">Page Builder Configuration Overview</h3>
+        <p class="myPrimaryParagraph text-xs">
+          omplete configuration object currently used by the Page Builder. It includes information
+          about the user, form behavior, branding settings, and other context-specific data needed
+          for rendering and managing the builder environment.
+        </p>
+      </div>
+
+      <div class="mt-4 whitespace-pre-wrap text-white overflow-hidden bg-gray-900 max-w-2xl">
+        <div class="flex bg-gray-800/40 ring-1 ring-white/5">
+          <div class="-mb-px flex text-xs font-medium text-myPrimaryMediumGrayColor">
+            <div class="px-4 py-4 text-white">Configuration</div>
+          </div>
+        </div>
+        <div class="px-4 pb-8 pt-4 text-white text-xs break-all">
+          <p class="myPrimaryParagraph text-xs text-white">
+            config: {{ JSON.stringify(getConfigPageBuilder, null, 4) }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Config - end -->
   </div>
-  <!-- Download Layout HTML - end -->
 </template>

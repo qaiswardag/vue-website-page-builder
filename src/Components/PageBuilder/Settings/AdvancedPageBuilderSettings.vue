@@ -188,5 +188,12 @@ const updateCurrentTab = function (tab) {
       </div>
       <!-- Code Block Component - end-->
     </div>
+
+    <div class="my-8">
+      <div class="flex items-left flex-col myPrimaryGap border-myPrimaryMediumGrayColor">
+        <h4 class="myQuaternaryHeader">Config</h4>
+        <p class="myPrimaryParagraph text-xs">Overview of config</p>
+      </div>
+    </div>
   </div>
 </template>

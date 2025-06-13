@@ -5,7 +5,7 @@ import PageBuilderPreviewModal from '../Components/Modals/PageBuilderPreviewModa
 import Preview from './Preview.vue'
 import ComponentTopMenu from '../Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue'
 import EditGetElement from '../Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue'
-import SearchComponents from '../Components/Search/SearchComponents.vue'
+import BuilderComponents from '../Components/Modals/BuilderComponents.vue'
 import OptionsDropdown from '../Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
 import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
 import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
@@ -239,14 +239,14 @@ onMounted(async () => {
       </div>
     </div>
     <!-- Logo # end -->
-    <SearchComponents
+    <BuilderComponents
       v-if="showModalAddComponent"
       :show="showModalAddComponent"
       :firstButtonText="firstButtonTextSearchComponents"
       :title="titleModalAddComponent"
       :CustomBuilderComponents="props.CustomBuilderComponents"
       @firstModalButtonSearchComponentsFunction="firstModalButtonSearchComponentsFunction"
-    ></SearchComponents>
+    ></BuilderComponents>
     <PageBuilderPreviewModal
       :show="openPageBuilderPreviewModal"
       @firstPageBuilderPreviewModalButton="firstPageBuilderPreviewModalButton"

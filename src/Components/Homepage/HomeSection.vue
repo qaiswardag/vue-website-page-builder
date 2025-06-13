@@ -4,6 +4,9 @@ import PageBuilder from '../../PageBuilder/PageBuilder.vue'
 import PageBuilderClass from '../../composables/PageBuilderClass.ts'
 import { sharedPageBuilderStore } from '../../stores/shared-store'
 
+import DemoMediaLibraryComponent from '../../Components/PageBuilder/DemoComponent/DemoMediaLibraryComponent.vue'
+import DemoBuilderComponents from '../../Components/PageBuilder/DemoComponent/DemoBuilderComponents.vue'
+
 // first button function
 const handleButton = function () {
   console.log('user want to play with the page builder')
@@ -53,25 +56,25 @@ const features = [
 ]
 
 const configPageBuilder = {
-  // userForPageBuilder: {
-  //   name: 'John Doe',
-  // },
+  userForPageBuilder: {
+    name: 'John Doe',
+  },
   updateOrCreate: {
-    formType: 'update',
+    formType: 'create',
     formName: 'news',
   },
   pageBuilderLogo: {
     src: '/logo/logo.svg',
   },
-  // resourceData: {
-  //   title: 'Demo Article',
-  //   id: 1,
-  // },
-  // userSettings: {
-  //   // theme: 'light',
-  //   // language: 'en',
-  //   // autoSave: true,
-  // },
+  resourceData: {
+    title: 'Demo Article',
+    id: 1,
+  },
+  userSettings: {
+    // theme: 'light',
+    // language: 'en',
+    // autoSave: true,
+  },
   settings: {
     brandColor: '#DB93B0',
   },
