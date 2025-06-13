@@ -94,7 +94,7 @@ provide('closeMediaLibraryModal', closeMediaLibraryModal)
             leave-to="opacity-0 scale-95"
           >
             <div
-              class="font-sans relative max-h-[65rem] my-2 inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-7xl sm:w-full w-[96%]"
+              class="font-sans relative min-h-[55rem] max-h-[55rem] my-2 inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-7xl sm:w-full"
             >
               <div
                 class="flex gap-2 justify-between items-center border-b border-gray-200 p-4 mb-2"
@@ -123,29 +123,6 @@ provide('closeMediaLibraryModal', closeMediaLibraryModal)
                 <div v-else>
                   <DefaultMediaLibraryComponent />
                 </div>
-              </div>
-
-              <!-- Actions footer to ensure focusable elements -->
-              <div
-                v-if="firstButtonText || secondButtonText"
-                class="bg-slate-50 px-4 py-3 flex justify-end gap-2"
-              >
-                <button
-                  v-if="firstButtonText"
-                  @click="firstButton"
-                  class="mySecondaryButton focus:ring-2 focus:ring-blue-500"
-                  type="button"
-                >
-                  {{ firstButtonText }}
-                </button>
-                <button
-                  v-if="secondButtonText"
-                  @click="secondButton"
-                  class="myPrimaryButton focus:ring-2 focus:ring-blue-500"
-                  type="button"
-                >
-                  {{ secondButtonText }}
-                </button>
               </div>
             </div>
           </TransitionChild>

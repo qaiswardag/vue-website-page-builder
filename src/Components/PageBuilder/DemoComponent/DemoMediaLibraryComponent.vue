@@ -1,5 +1,8 @@
+<script setup>
+import Unsplash from './DemoUnsplash.vue'
+</script>
 <template>
   <div>
-    <p class="myPrimaryParagraph">Unsplash here</p>
+    <Unsplash />
   </div>
 </template>
