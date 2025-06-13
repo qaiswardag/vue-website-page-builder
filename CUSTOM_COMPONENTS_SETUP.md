@@ -21,7 +21,11 @@ your-project/
 
 ### 1. Custom Media Library Component
 
-Once you've created your custom components, inject them into the page builder:
+By default, the Page Builder does not include a built-in media library.
+
+This is intentional — without a custom media library, layout components that rely on images (like Image Blocks, Hero Sections, etc.) are disabled by default. Only helper components such as containers, headings, text, and buttons are available in this state.
+
+To enable image-related components in the builder, you must inject your own media library by passing it to the PageBuilder via the :CustomMediaLibraryComponent prop:
 
 //TODO: How to: Close the Modal, inject selected Image into the page builder
 
@@ -53,7 +57,11 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 ### 2. Custom Components
 
-Once you've created your custom components, inject them into the page builder:
+The Page Builder includes a growing collection of built-in components available out of the box, including layout components and helper components. These default components are continuously improved and expanded over time.
+
+If you'd like to use your own components—whether custom-designed or tailored to specific needs—you can inject them directly into the builder.
+
+Here’s how to do it:
 
 //TODO: How to: Close the Modal, Inject Selected Components into the page builder
 
