@@ -52,45 +52,29 @@ const features = [
   },
 ]
 
-// const configPageBuilderTemplate = {
-//   updateOrCreate: {
-//     formType: 'create',
-//     formName: 'post',
-//   },
-//   pageBuilderLogo: {
-//     src: '/logo/logo.svg',
-//   },
-//   userForPageBuilder: { name: 'John Doe' },
-//   resourceData: {
-//     title: 'Demo Article',
-//     id: 1,
-//   },
-//   userSettings: {
-//     theme: 'light',
-//     language: 'en',
-//     autoSave: true,
-//   },
-// }
-
 const configPageBuilder = {
   userForPageBuilder: {
     name: 'John Doe',
   },
   updateOrCreate: {
     formType: 'update',
-    // formName: 0,
+    formName: 'news',
   },
   pageBuilderLogo: {
     src: '/logo/logo.svg',
+    other: 'red',
   },
   resourceData: {
     title: 'Demo Article',
     id: 1,
   },
   userSettings: {
-    theme: 'light',
-    language: 'en',
-    autoSave: true,
+    // theme: 'light',
+    // language: 'en',
+    // autoSave: true,
+  },
+  settings: {
+    brandcolor: '#DB93B0',
   },
 }
 

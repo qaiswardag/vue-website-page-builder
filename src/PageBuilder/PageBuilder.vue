@@ -182,49 +182,45 @@ const handleConfig = function (config) {
     // Check alone
     // Returns true if all config fields are missing or empty
     if (isChildrenEmpty(config)) {
-      console.log('1:')
+      console.log('1111:')
       return
     }
 
     if (onlyUserIsValid(config)) {
-      console.log('2:')
+      console.log('2222:')
       return
     }
 
     if (onlyUpdateOrCreateIsValid(config)) {
-      console.log('3:')
+      console.log('3333:')
       return
     }
 
     if (onlyPageBuilderLogoIsValid(config)) {
-      console.log('4:')
+      console.log('4444:')
       return
     }
 
     if (onlyResourceDataIsValid(config)) {
-      console.log('5:')
+      console.log('5555:')
       return
     }
 
     if (onlyUserSettingsIsValid(config)) {
-      console.log('6:')
+      console.log('6666:')
       return
     }
 
     if (onlyUserSettingsIsValid(config)) {
-      console.log('7:')
+      console.log('7777:')
       return
     }
 
     if (updateOrCreateIsFalsy(config)) {
-      console.log('8:')
+      console.log('8888:')
       return
     }
-
-    // Check against eachoter in all combinations
   }
-
-  // In the end make check if form type for update or create is set:
 }
 
 watch(
@@ -248,6 +244,8 @@ onMounted(async () => {
   pageBuilderClass.removeHoveredAndSelected()
 
   await pageBuilderClass.setEventListenersForElements()
+
+  console.log('config fo rpage builder to work with:', config)
 })
 </script>
 

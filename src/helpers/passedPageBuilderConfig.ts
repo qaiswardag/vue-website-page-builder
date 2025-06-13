@@ -289,7 +289,12 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
       ...config,
       updateOrCreate: {
         formType: 'create' as 'create',
-        formName: 'pøøøøøøøøost',
+        formName: 'post',
+      },
+      userSettings: {
+        theme: 'light' as 'light',
+        language: 'en',
+        autoSave: false,
       },
     }
 
@@ -309,6 +314,11 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
       updateOrCreate: {
         formType: 'create' as 'create',
         formName: 'post',
+      },
+      userSettings: {
+        theme: 'light' as 'light',
+        language: 'en',
+        autoSave: false,
       },
     }
 
@@ -330,6 +340,11 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
         formType: 'create' as 'create',
         formName: 'post',
       },
+      userSettings: {
+        theme: 'light' as 'light',
+        language: 'en',
+        autoSave: false,
+      },
     }
 
     pageBuilderClass.setConfigPageBuilder(updatedConfig)
@@ -347,6 +362,11 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
       updateOrCreate: {
         formType: 'create' as 'create',
         formName: config.updateOrCreate.formName,
+      },
+      userSettings: {
+        theme: 'light' as 'light',
+        language: 'en',
+        autoSave: false,
       },
     }
 
