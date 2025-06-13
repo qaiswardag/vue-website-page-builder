@@ -19,6 +19,16 @@ const current = ref('element')
 const updateCurrentTab = function (tab) {
   current.value = tab
 }
+
+function prettifyHtml(html) {
+  if (!html) return ''
+  return html
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+}
 </script>
 
 <template>
@@ -105,54 +115,155 @@ const updateCurrentTab = function (tab) {
                   {{ getComponent === null ? 'NULL' : typeof getComponent }}
                 </p>
               </div>
-              <div v-if="getElement">
-                <div class="flex flex-col gap-4 border-b border-white mb-4 pb-4">
-                  <p>Selected HTML:</p>
-                  <p class="whitespace-pre-line leading-5">
-                    {{ getElement?.outerHTML }}
-                  </p>
+              <div
+                v-if="getElement"
+                class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
+              >
+                <div class="bg-gray-50 pt-4 pb-1 border-b border-gray-200">
+                  <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                          >
+                            Selected HTML:
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                          <td class="px-6 py-4 text-sm text-gray-500">
+                            {{ getElement?.outerHTML }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                          >
+                            Element src:
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                          <td class="px-6 py-4 text-sm text-gray-500 whitespace-pre-line">
+                            {{ getElement?.src ? getElement?.src : typeof getElement?.src }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
-                <div class="flex flex-col gap-2 mt-4 border-b border-white mb-4 pb-4">
-                  <p>Selected element src:</p>
-                  <p class="whitespace-pre-line leading-5">
-                    {{ getElement?.src ? getElement?.src : typeof getElement?.src }}
-                  </p>
-                </div>
-                <div class="flex flex-col gap-2 mt-4 border-b border-white mb-4 pb-4">
-                  <p>Selected element href:</p>
-                  <p class="whitespace-pre-line leading-5">
-                    {{ getElement?.href ? getElement?.href : typeof getElement?.href }}
-                  </p>
-                </div>
-                <div class="flex flex-col gap-2 mt-4 border-b border-white mb-4 pb-4">
-                  <p>Selected element class:</p>
-                  <p class="whitespace-pre-line leading-5">
-                    {{
-                      getElement?.classList ? getElement?.classList : typeof getElement?.classList
-                    }}
-                  </p>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Element classes
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                      <tr>
+                        <td class="px-6 py-4 text-sm text-gray-500">
+                          {{
+                            getElement?.classList
+                              ? getElement?.classList
+                              : typeof getElement?.classList
+                          }}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
+
             <div v-if="current === 'component'">
               <div v-if="!getComponent">
                 <p class="pb-2">
                   {{ getComponent === null ? 'NULL' : typeof getComponent }}
                 </p>
               </div>
-              <div v-if="getComponent">
-                <p class="pb-2">
-                  Component ID:
-                  {{ getComponent?.id }}
-                </p>
-                <p class="whitespace-pre-line leading-5 mt-4">
-                  Component Title:<br />
-                  {{ getComponent?.title }}
-                </p>
-                <p class="whitespace-pre-line leading-5 mt-4">
-                  Component HTML:
-                  {{ getComponent?.html_code }}
-                </p>
+              <div
+                v-if="getComponent"
+                class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
+              >
+                <div class="bg-gray-50 pt-4 pb-1 border-b border-gray-200">
+                  <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                          >
+                            ID
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                          <td class="px-6 py-4 text-sm text-gray-500">
+                            {{ getComponent?.id }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                          >
+                            Title
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                          <td class="px-6 py-4 text-sm text-gray-500 whitespace-pre-line">
+                            {{ getComponent?.title }}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-300">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          HTML Code
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                      <tr>
+                        <td class="px-6 py-4 text-sm text-gray-500">
+                          <pre
+                            class="py-4 text-sm text-gray-500 whitespace-pre-lines font-sans flex items-start justify-left"
+                          >
+                              <code class="font-sans" v-html="prettifyHtml(getComponent?.html_code)"></code>
+                            </pre>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
             </div>
             <div v-if="current === 'components'">
@@ -161,25 +272,80 @@ const updateCurrentTab = function (tab) {
                   {{ getComponents === null ? 'NULL' : typeof getComponents }}
                 </p>
               </div>
+
               <div v-if="getComponents">
                 <div
-                  class="border-b border-white mb-4 pb-4 last:border-none"
                   v-for="component in getComponents"
                   :key="component.id"
+                  class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mb-6"
                 >
-                  <p class="pb-2">
-                    Component ID:
-                    {{ component.id }}
-                  </p>
-
-                  <p class="whitespace-pre-line leading-5 mt-4">
-                    Component Title:
-                    {{ component?.title }}
-                  </p>
-                  <p class="whitespace-pre-line leading-5 mt-4">
-                    Component HTML:<br />
-                    {{ component.html_code }}
-                  </p>
+                  <!-- ID and Title above the table, styled to look connected -->
+                  <div class="bg-gray-50 pt-4 pb-1 border-b border-gray-200">
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full divide-y divide-gray-300">
+                        <thead class="bg-gray-50">
+                          <tr>
+                            <th
+                              class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                            >
+                              ID
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                          <tr>
+                            <td class="px-6 py-4 text-sm text-gray-500">
+                              {{ component.id }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div class="overflow-x-auto">
+                      <table class="min-w-full divide-y divide-gray-300">
+                        <thead class="bg-gray-50">
+                          <tr>
+                            <th
+                              class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                            >
+                              Title
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                          <tr>
+                            <td class="px-6 py-4 text-sm text-gray-500 whitespace-pre-line">
+                              {{ component.title }}
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-300">
+                      <thead class="bg-gray-50">
+                        <tr>
+                          <th
+                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                          >
+                            HTML Code
+                          </th>
+                        </tr>
+                      </thead>
+                      <tbody class="bg-white divide-y divide-gray-200">
+                        <tr>
+                          <td class="px-6 py-4 text-sm text-gray-500">
+                            <pre
+                              class="py-4 text-sm text-gray-500 whitespace-pre-lines font-sans flex items-start justify-left"
+                            >
+                              <code class="font-sans" v-html="prettifyHtml(component.html_code)"></code>
+                            </pre>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
