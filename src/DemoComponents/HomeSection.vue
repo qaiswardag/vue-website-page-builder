@@ -1,11 +1,24 @@
 <script setup>
-import FullWidthElement from '../../Components/Layouts/FullWidthElement.vue'
-import PageBuilder from '../../PageBuilder/PageBuilder.vue'
-import PageBuilderClass from '../../composables/PageBuilderClass.ts'
-import { sharedPageBuilderStore } from '../../stores/shared-store'
+import FullWidthElement from '../Components/Layouts/FullWidthElement.vue'
+import PageBuilder from '../PageBuilder/PageBuilder.vue'
+import PageBuilderClass from '../composables/PageBuilderClass.ts'
 
-import DemoMediaLibraryComponent from '../../Components/PageBuilder/DemoComponent/DemoMediaLibraryComponent.vue'
-import DemoBuilderComponents from '../../Components/PageBuilder/DemoComponent/DemoBuilderComponents.vue'
+import DemoMediaLibraryComponent from './DemoMediaLibraryComponent.vue'
+import DemoBuilderComponents from './DemoBuilderComponents.vue'
+import { computed, onMounted } from 'vue'
+import { sharedPageBuilderStore } from '../stores/shared-store'
+import html from './html.json'
+
+const pageBuilderStateStore = sharedPageBuilderStore
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+const getLocalStorageItemName = computed(() => {
+  return pageBuilderStateStore.getLocalStorageItemName
+})
+
+const getComponents = computed(() => {
+  return pageBuilderStateStore.getComponents
+})
 
 // first button function
 const handleButton = function () {
@@ -80,9 +93,14 @@ const configPageBuilder = {
   },
 }
 
-const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+
+onMounted(async () => {
+  if (localStorage.getItem(getLocalStorageItemName.value)) {
+  } else {
+    pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
+  }
+})
 </script>
 
 <template>
@@ -112,10 +130,8 @@ pageBuilderClass.setConfigPageBuilder(configPageBuilder)
         </p>
       </div>
       <div>
-        <PageBuilder
-          :CustomMediaLibraryComponent="DemoMediaLibraryComponent"
-          :CustomBuilderComponents="DemoBuilderComponents"
-        ></PageBuilder>
+        <!--   :CustomBuilderComponents="DemoBuilderComponents" -->
+        <PageBuilder :CustomMediaLibraryComponent="DemoMediaLibraryComponent"></PageBuilder>
       </div>
     </div>
 

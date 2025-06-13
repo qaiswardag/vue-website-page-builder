@@ -1628,6 +1628,8 @@ class PageBuilderClass {
         savedCurrentDesign = parsedData
       }
 
+      console.log('okokoko:', savedCurrentDesign)
+
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
     } catch (error) {
       console.error('Error parsing JSON components:', error)
@@ -1653,8 +1655,7 @@ class PageBuilderClass {
         extractedSections.push({
           html_code: htmlElement.outerHTML,
           id: htmlElement.dataset.componentid || null,
-          title:
-            htmlElement.dataset.title || htmlElement.dataset.componentid || 'Untitled Component',
+          title: htmlElement.title || htmlElement.dataset.componentid || 'Untitled Component',
         })
       })
 
@@ -1667,15 +1668,20 @@ class PageBuilderClass {
   }
 
   // Load existing content from HTML when in update mode
-  loadExistingContent(data?: string): void {
+  loadExistingContent(data?: string, injectCustomHTMLSections?: boolean): void {
     if (this.showRunningMethodLogs) {
       console.log('loadExistingContent')
     }
 
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
+    if (injectCustomHTMLSections && data !== undefined) {
+      this.setComponentsFromData(data)
+    }
+
+    const storedData = this.areComponentsStoredInLocalStorage()
+
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
-      const storedData = this.areComponentsStoredInLocalStorage()
       if (storedData) {
         this.setComponentsFromData(storedData)
       }

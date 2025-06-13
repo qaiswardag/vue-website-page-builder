@@ -1,9 +1,9 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 const unsplashKey = import.meta.env.VITE_UNSPLASH_KEY
-import { usePageBuilderModal } from '../../../composables/usePageBuilderModal'
-import PageBuilderClass from '../../../composables/PageBuilderClass.ts'
-import { sharedPageBuilderStore } from '../../../stores/shared-store'
+import { usePageBuilderModal } from '../composables/usePageBuilderModal'
+import PageBuilderClass from '../composables/PageBuilderClass.ts'
+import { sharedPageBuilderStore } from '../stores/shared-store'
 
 const { closeMediaLibraryModal } = usePageBuilderModal()
 
@@ -87,8 +87,6 @@ const nextPage = async function () {
 }
 
 const applySelectedImage = async function (imageURL) {
-  console.log('file:', imageURL)
-
   // Ensure the current image is set in the store with proper structure
   pageBuilderClass.pageBuilderStateStore.setCurrentImage({
     src: `${imageURL}`,
@@ -263,11 +261,11 @@ onMounted(async () => {
                 v-for="image in getUnsplashImages.results"
                 :key="image.id"
                 @click="handleImageClick({ url: image.urls.regular, user: image.user.name })"
-                class="border border-myPrimaryLightGrayColor rounded-lg px-2 p-2 cursor-pointer bg-gray-50"
+                class="border border-gray-200 my-2 px-2 p-2 cursor-pointer"
               >
                 <img
                   :alt="image.user.name"
-                  class="group block w-full overflow-hidden rounded-lg cursor-pointer"
+                  class="group block w-full overflow-hidden cursor-pointer"
                   :src="image.urls.thumb"
                 />
                 <p class="myPrimaryParagraph text-xs font-normal mt-2">By: {{ image.user.name }}</p>

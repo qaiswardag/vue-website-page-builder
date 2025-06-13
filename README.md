@@ -59,7 +59,7 @@ The Page Builder is packed with features:
 - **Click & Drop**: Easily rearrange elements on your page.
 - **Reordering**: Change the order of your content without hassle.
 - **True Visual Editing**: See your changes in real-time as you make them.
-- **Media Library**: Access and manage your media files effortlessly.
+- **Media Library**: Access and manage your media files.
 - **Unsplash**: Unsplash Integration.
 - **Responsive Editing**: Ensure your site looks great on all devices.
 - **Text Editing:** Edit text content live and in real-time.

@@ -174,7 +174,7 @@ const updateCurrentTab = function (tab) {
 
                   <p class="whitespace-pre-line leading-5 mt-4">
                     Component Title:
-                    {{ getComponent?.title }}
+                    {{ component?.title }}
                   </p>
                   <p class="whitespace-pre-line leading-5 mt-4">
                     Component HTML:<br />
