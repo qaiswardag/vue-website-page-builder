@@ -39,7 +39,7 @@ const features = [
   {
     name: 'Technologies',
     description:
-      'Developed with JavaScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.',
+      'Developed with TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.',
   },
   {
     name: 'Set Brand and Link Colors one place',
@@ -108,7 +108,7 @@ onMounted(async () => {
         <p class="myPrimaryParagraph font-normal">
           The web builder for stunning pages. Enable users to design and publish modern pages at any
           scale. Build responsive pages like listings, jobs or blog posts and manage content easily
-          using the free click & drop Page Builder. Developed with JavaScript, Vue 3, Composition
+          using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition
           API, Pinia, CSS, Tailwind CSS and HTML
           <br />
           <a
