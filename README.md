@@ -145,6 +145,7 @@ Get up and running quickly by importing the PageBuilder component, setting up yo
   - `pageBuilderLogo` to display your company logo in the builder toolbar
   - `resourceData` to prefill the builder with initial data
   - `userSettings` to set user preferences such as theme, language, or autoSave
+  - `brandColor` set brand’s primary color, which will be used for key UI elements in the builder in the `settings` config
   - `formName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
 
 ```vue
