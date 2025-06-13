@@ -598,7 +598,7 @@ const handleDownloadHTML = function () {
     <!-- Congig - start -->
     <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
       <div class="flex items-left flex-col gap-1">
-        <h3 class="myQuaternaryHeader">Page Builder Configuration Overview</h3>
+        <h3 class="myQuaternaryHeader">Complete Configuration Overview</h3>
         <p class="myPrimaryParagraph text-xs">
           omplete configuration object currently used by the Page Builder. It includes information
           about the user, form behavior, branding settings, and other context-specific data needed
