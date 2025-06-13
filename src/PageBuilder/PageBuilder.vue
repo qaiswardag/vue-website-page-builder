@@ -149,12 +149,6 @@ const defaultConfigValues = {
     formType: 'create',
     formName: 'post',
   },
-
-  userSettings: {
-    theme: 'light',
-    language: 'en',
-    autoSave: true,
-  },
 }
 
 const handleConfig = function (config) {
@@ -164,14 +158,12 @@ const handleConfig = function (config) {
     config === undefined ||
     (config && Object.keys(config).length === 0 && config.constructor === Object)
   ) {
-    console.log('0000')
     pageBuilderClass.setConfigPageBuilder(defaultConfigValues)
     return
   }
 
   if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
     if (updateOrCreateIsFalsy(config)) {
-      console.log('8888:')
       return
     }
   }
