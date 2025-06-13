@@ -54,7 +54,7 @@ const firstButtonBuilder = function () {
 
       <div class="p-4">
         <!-- Only show custom search component if provided -->
-        <div v-if="CustomBuilderComponents" class="border border-gray-200 rounded-lg p-4">
+        <div v-if="CustomBuilderComponents">
           <component :is="CustomBuilderComponents" />
         </div>
         <div v-else><DefaultBuilderComponents /></div>

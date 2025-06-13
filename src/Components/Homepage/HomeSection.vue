@@ -112,7 +112,10 @@ pageBuilderClass.setConfigPageBuilder(configPageBuilder)
         </p>
       </div>
       <div>
-        <PageBuilder></PageBuilder>
+        <PageBuilder
+          :CustomMediaLibraryComponent="DemoMediaLibraryComponent"
+          :CustomBuilderComponents="DemoBuilderComponents"
+        ></PageBuilder>
       </div>
     </div>
 
