@@ -58,7 +58,7 @@ const configPageBuilder = {
   // },
   updateOrCreate: {
     formType: 'update',
-    formName: 'news',
+    // formName: 'news',
   },
   // pageBuilderLogo: {
   //   src: '/logo/logo.svg',
