@@ -195,5 +195,7 @@ const updateCurrentTab = function (tab) {
         <p class="myPrimaryParagraph text-xs">Overview of config</p>
       </div>
     </div>
+
+    ø: {{ get }}
   </div>
 </template>
