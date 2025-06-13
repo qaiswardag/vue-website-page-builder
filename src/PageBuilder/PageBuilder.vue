@@ -400,6 +400,7 @@ onMounted(async () => {
 
               <!-- Add Component # start -->
               <div
+                @click="pageBuilderClass.clearHtmlSelection()"
                 id="pagebuilder-bottom-components-area"
                 class="border-t border-gray-200 pt-10 pb-14 text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-12 mx-8"
               >
