@@ -409,11 +409,11 @@ Example integration:
 <script setup>
 import { PageBuilder } from '@myissue/vue-website-page-builder'
 import YourMediaLibraryComponent from './ComponentsPageBuilder/YourMediaLibraryComponent.vue'
-import YourSearchComponent from './ComponentsPageBuilder/YourSearchComponent.vue'
+import YourCustomBuilderComponents from './ComponentsPageBuilder/YourCustomBuilderComponents.vue'
 </script>
 
 <template>
-  <PageBuilder :CustomMediaLibraryComponent="YourMediaLibraryComponent" :CustomSearchComponent="YourSearchComponent" />
+  <PageBuilder :CustomMediaLibraryComponent="YourMediaLibraryComponent" :CustomBuilderComponents="YourCustomBuilderComponents" />
 </template>
 ```
 

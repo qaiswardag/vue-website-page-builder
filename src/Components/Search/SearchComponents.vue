@@ -1,6 +1,6 @@
 <script setup>
 import ModalBuilder from '../Modals/ModalBuilder.vue'
-import NoneCustomSearchComponent from '../PageBuilder/DemoContent/NoneCustomSearchComponent.vue'
+import NoneCustomBuilderComponents from '../PageBuilder/DemoContent/NoneCustomBuilderComponents.vue'
 
 defineProps({
   firstButtonText: {
@@ -14,7 +14,7 @@ defineProps({
     default: false,
     required: true,
   },
-  CustomSearchComponent: {
+  CustomBuilderComponents: {
     type: Object,
     default: null,
   },
@@ -54,10 +54,10 @@ const firstButtonBuilder = function () {
 
       <div class="p-4">
         <!-- Only show custom search component if provided -->
-        <div v-if="CustomSearchComponent" class="border border-gray-200 rounded-lg p-4">
-          <component :is="CustomSearchComponent" />
+        <div v-if="CustomBuilderComponents" class="border border-gray-200 rounded-lg p-4">
+          <component :is="CustomBuilderComponents" />
         </div>
-        <div v-else><NoneCustomSearchComponent /></div>
+        <div v-else><NoneCustomBuilderComponents /></div>
       </div>
     </div>
     <div class="bg-slate-50 px-2 py-4 flex sm:justify-end justify-center">

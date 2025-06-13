@@ -11,7 +11,7 @@ your-project/
 ├── src/
 │   └── ComponentsPageBuilder/
 │       ├── YourMediaLibraryComponent.vue
-│       ├── YourSearchComponent.vue
+│       ├── YourCustomBuilderComponents.vue
 │       └── README.md (optional)
 ```
 
@@ -23,7 +23,7 @@ your-project/
 
 Once you've created your custom components, inject them into the page builder:
 
-//TODO: Write how to: Close the Modal, Inject Selected Image or Component into the page builder
+//TODO: How to: Close the Modal, inject selected Image into the page builder
 
 ```vue
 <script setup>
@@ -55,7 +55,7 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 Once you've created your custom components, inject them into the page builder:
 
-//TODO: Write how to: Close the Modal, Inject Selected Image or Component into the page builder
+//TODO: How to: Close the Modal, Inject Selected Components into the page builder
 
 ```vue
 <script setup>
@@ -65,7 +65,7 @@ import {
   sharedPageBuilderStore,
 } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
-import YourSearchComponent from './ComponentsPageBuilder/YourSearchComponent.vue'
+import YourCustomBuilderComponents from './ComponentsPageBuilder/YourCustomBuilderComponents.vue'
 
 // Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component and how components object should look like
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -76,7 +76,7 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 <template>
   <div>
-    <PageBuilder :CustomSearchComponent="YourSearchComponent" />
+    <PageBuilder :CustomBuilderComponents="YourCustomBuilderComponents" />
   </div>
 </template>
 ```

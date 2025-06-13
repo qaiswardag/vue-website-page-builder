@@ -22,7 +22,7 @@ import {
  * Props for PageBuilder component
  * @typedef {Object} Props
  * @property {Object|null} CustomMediaLibraryComponent - Custom media component
- * @property {Object|null} CustomSearchComponent - Custom search component
+ * @property {Object|null} CustomBuilderComponents - Custom search component
  * @property {Object} configPageBuilder - Configuration object containing:
  */
 const props = defineProps({
@@ -30,7 +30,7 @@ const props = defineProps({
     type: Object,
     default: null,
   },
-  CustomSearchComponent: {
+  CustomBuilderComponents: {
     type: Object,
     default: null,
   },
@@ -52,7 +52,7 @@ provide('internalPinia', internalPinia)
 
 // Provide custom components for child components
 provide('CustomMediaComponent', props.CustomMediaLibraryComponent)
-provide('CustomSearchComponent', props.CustomSearchComponent)
+provide('CustomBuilderComponents', props.CustomBuilderComponents)
 
 // Provide modal close function for custom components
 const closeAddComponentModal = () => {
@@ -294,7 +294,7 @@ onMounted(async () => {
       :show="showModalAddComponent"
       :firstButtonText="firstButtonTextSearchComponents"
       :title="titleModalAddComponent"
-      :CustomSearchComponent="props.CustomSearchComponent"
+      :CustomBuilderComponents="props.CustomBuilderComponents"
       @firstModalButtonSearchComponentsFunction="firstModalButtonSearchComponentsFunction"
     ></SearchComponents>
     <PageBuilderPreviewModal
