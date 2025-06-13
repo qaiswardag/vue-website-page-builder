@@ -79,9 +79,9 @@ const configPageBuilder = {
     id: 1,
   },
   userSettings: {
-    // theme: 'light',
-    // language: 'en',
-    // autoSave: true,
+    theme: 'light',
+    language: 'en',
+    autoSave: true,
   },
   settings: {
     brandColor: '#DB93B0',
