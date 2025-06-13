@@ -58,12 +58,11 @@ const configPageBuilder = {
   // },
   updateOrCreate: {
     formType: 'update',
-    // formName: 'news',
+    formName: 'news',
   },
-  // pageBuilderLogo: {
-  //   src: '/logo/logo.svg',
-  //   other: 'red',
-  // },
+  pageBuilderLogo: {
+    src: '/logo/logo.svg',
+  },
   // resourceData: {
   //   title: 'Demo Article',
   //   id: 1,

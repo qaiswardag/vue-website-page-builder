@@ -174,6 +174,9 @@ const configPageBuilder = {
     language: 'en',
     autoSave: true,
   },
+  settings: {
+    brandColor: '#DB93B0',
+  },
 }
 
 // Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component

@@ -15,12 +15,9 @@ const handleButton = function () {
     <img class="h-6" src="/logo/logo.svg" alt="Logo" />
 
     <div class="flex lg:gap-x-12 myPrimaryGap">
-      <p
-        @click="handleButton"
-        class="text-lg font-medium text-myPrimaryDarkGrayColor flex gap-2 items-center cursor-pointer"
-      >
-        Start Builder
-      </p>
+      <div class="text-lg font-medium text-myPrimaryDarkGrayColor flex gap-2 items-center">
+        Page Builder
+      </div>
     </div>
   </nav>
 </template>
