@@ -1116,6 +1116,11 @@ class PageBuilderClass {
     // const updateOrCreate =
     //   this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType || 'create'
 
+    console.log(
+      'config for page builder to work with:',
+      this.pageBuilderStateStore.getConfigPageBuilder,
+    )
+
     const updateOrCreate = this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType
 
     const resourceData = this.pageBuilderStateStore.getConfigPageBuilder?.resourceData

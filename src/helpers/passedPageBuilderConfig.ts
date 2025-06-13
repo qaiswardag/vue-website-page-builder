@@ -14,7 +14,8 @@ export const isChildrenEmpty = function (config: PageBuilderConfig) {
     (!config.pageBuilderLogo || isEmptyObject(config.pageBuilderLogo)) &&
     (!config.resourceData || isEmptyObject(config.resourceData)) &&
     (!config.userForPageBuilder || isEmptyObject(config.userForPageBuilder)) &&
-    (!config.userSettings || isEmptyObject(config.userSettings))
+    (!config.userSettings || isEmptyObject(config.userSettings)) &&
+    (!config.settings || isEmptyObject(config.settings))
   ) {
     const editorConfig = {
       updateOrCreate: {
@@ -125,9 +126,9 @@ export const onlyUpdateOrCreateIsValid = function (config: PageBuilderConfig) {
 
 export const onlyPageBuilderLogoIsValid = function (config: PageBuilderConfig) {
   if (
-    config.updateOrCreate &&
-    typeof config.updateOrCreate.formType === 'string' &&
-    (config.updateOrCreate.formType === 'create' || config.updateOrCreate.formType === 'update')
+    !config.updateOrCreate ||
+    (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string') ||
+    (config.updateOrCreate && isEmptyObject(config.updateOrCreate))
   ) {
     if (
       !config.userForPageBuilder ||
@@ -280,11 +281,13 @@ export const onlyUserSettingsIsValid = function (config: PageBuilderConfig) {
 }
 
 export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
+  // Case A: updateOrCreate is missing, not an object, has an invalid formType, or is an empty object
   if (
     !config.updateOrCreate ||
     (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string') ||
     (config.updateOrCreate && isEmptyObject(config.updateOrCreate))
   ) {
+    console.log('aaaa')
     const updatedConfig = {
       ...config,
       updateOrCreate: {
@@ -302,6 +305,7 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
     return true
   }
 
+  // Case B: formType exists but is not 'create' or 'update', and formName is missing or invalid
   if (
     config.updateOrCreate &&
     typeof config.updateOrCreate.formType === 'string' &&
@@ -309,6 +313,7 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
     config.updateOrCreate.formType !== 'update' &&
     typeof config.formName !== 'string'
   ) {
+    console.log('bbbb')
     const updatedConfig = {
       ...config,
       updateOrCreate: {
@@ -325,6 +330,8 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
     pageBuilderClass.setConfigPageBuilder(updatedConfig)
     return true
   }
+
+  // Case C: formType is valid ('create' or 'update'), but formName is missing or an empty string
   if (
     (config.updateOrCreate &&
       typeof config.updateOrCreate.formType === 'string' &&
@@ -334,34 +341,12 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
     (typeof config.updateOrCreate.formName === 'string' &&
       config.updateOrCreate.formName.length === 0)
   ) {
+    console.log('cccc')
     const updatedConfig = {
       ...config,
       updateOrCreate: {
         formType: 'create' as 'create',
         formName: 'post',
-      },
-      userSettings: {
-        theme: 'light' as 'light',
-        language: 'en',
-        autoSave: false,
-      },
-    }
-
-    pageBuilderClass.setConfigPageBuilder(updatedConfig)
-    return true
-  }
-  if (
-    config.updateOrCreate &&
-    typeof config.updateOrCreate.formType === 'string' &&
-    (config.updateOrCreate.formType === 'create' || config.updateOrCreate.formType === 'update') &&
-    typeof config.updateOrCreate.formName === 'string' &&
-    config.updateOrCreate.formName.length > 0
-  ) {
-    const updatedConfig = {
-      ...config,
-      updateOrCreate: {
-        formType: 'create' as 'create',
-        formName: config.updateOrCreate.formName,
       },
       userSettings: {
         theme: 'light' as 'light',

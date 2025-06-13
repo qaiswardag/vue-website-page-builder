@@ -53,28 +53,28 @@ const features = [
 ]
 
 const configPageBuilder = {
-  userForPageBuilder: {
-    name: 'John Doe',
-  },
+  // userForPageBuilder: {
+  //   name: 'John Doe',
+  // },
   updateOrCreate: {
     formType: 'update',
     formName: 'news',
   },
-  pageBuilderLogo: {
-    src: '/logo/logo.svg',
-    other: 'red',
-  },
-  resourceData: {
-    title: 'Demo Article',
-    id: 1,
-  },
-  userSettings: {
-    // theme: 'light',
-    // language: 'en',
-    // autoSave: true,
-  },
+  // pageBuilderLogo: {
+  //   src: '/logo/logo.svg',
+  //   other: 'red',
+  // },
+  // resourceData: {
+  //   title: 'Demo Article',
+  //   id: 1,
+  // },
+  // userSettings: {
+  //   // theme: 'light',
+  //   // language: 'en',
+  //   // autoSave: true,
+  // },
   settings: {
-    brandcolor: '#DB93B0',
+    brandColor: '#DB93B0',
   },
 }
 

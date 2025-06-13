@@ -172,7 +172,7 @@ const handleConfig = function (config) {
     config === undefined ||
     (config && Object.keys(config).length === 0 && config.constructor === Object)
   ) {
-    console.log('1')
+    console.log('0000')
     pageBuilderClass.setConfigPageBuilder(defaultConfigValues)
     return
   }
@@ -244,8 +244,6 @@ onMounted(async () => {
   pageBuilderClass.removeHoveredAndSelected()
 
   await pageBuilderClass.setEventListenersForElements()
-
-  console.log('config for page builder to work with:', config)
 })
 </script>
 

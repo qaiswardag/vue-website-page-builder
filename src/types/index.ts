@@ -107,6 +107,10 @@ export interface PageBuilderConfig {
     autoSave: boolean
     [key: string]: unknown
   } | null
+  settings?: {
+    brandColor: string
+    [key: string]: unknown
+  } | null
 }
 // Tailwind utility interfaces
 export interface TailwindColors {
