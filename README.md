@@ -360,6 +360,37 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+
+// Recommended HTML wrapper for optimal layout and responsiveness:
+// Wrap your components using the following structure to ensure proper spacing and alignment:
+//
+// <section>
+//   <div class="relative py-4">
+//     <div class="mx-auto max-w-7xl lg:px-4 px-2">
+//       <div class="break-words">
+//         <!-- Your HTML layout goes here -->
+//       </div>
+//     </div>
+//   </div>
+// </section>
+
+
+const existingResourceFromBackend = [
+  {
+    html_code:
+      '<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h2>Component Example One</h2></div></div></div></section>',
+    id: null,
+    title: 'Header H2',
+  },
+  {
+    html_code:
+      '<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words" selected=""><h3>Component Example Two</h3></div></div></div></section>',
+    id: null,
+    title: 'Header H3',
+  },
+]
+
+
 // Populating page builder with existing resource content from backend
 pageBuilderClass.loadExistingContent(existingResourceFromBackend)
 </script>
