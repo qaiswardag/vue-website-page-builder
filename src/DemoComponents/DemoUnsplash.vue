@@ -155,19 +155,21 @@ onMounted(async () => {
               }
             "
             type="submit"
-            class="myPrimaryButton"
+            class="myPrimaryTag break-keep mr-4"
           >
             Search
           </button>
         </div>
       </form>
       <div v-if="getUnsplashImages && getUnsplashImages.results" class="mt-2">
-        <div class="flex lg:justify-between justify-end items-center gap-2 py-2 mb-1">
+        <div
+          class="flex lg:justify-between justify-end items-center gap-2 py-2 px-2 mb-1 rounded-full border border-gray-200 shadow-sm"
+        >
           <div class="lg:flex hidden justify-left items-center gap-2">
             <button
               @click="searchByOrientation('landscape')"
               type="button"
-              class="myPrimaryButton hover:bg-myPrimaryBrandColor focus:outline-none focus:ring-0"
+              class="myPrimaryTag"
               :class="{
                 'bg-myPrimaryBrandColor text-white': getOrientationValue === 'landscape',
                 '': getOrientationValue !== 'landscape',
@@ -178,7 +180,7 @@ onMounted(async () => {
             <button
               @click="searchByOrientation('portrait')"
               type="button"
-              class="myPrimaryButton hover:bg-myPrimaryBrandColor focus:outline-none focus:ring-0"
+              class="myPrimaryTag"
               :class="{
                 'bg-myPrimaryBrandColor text-white': getOrientationValue === 'portrait',
                 '': getOrientationValue !== 'portrait',
@@ -189,7 +191,7 @@ onMounted(async () => {
             <button
               @click="searchByOrientation('squarish')"
               type="button"
-              class="myPrimaryButton hover:bg-myPrimaryBrandColor focus:outline-none focus:ring-0"
+              class="myPrimaryTag"
               :class="{
                 'bg-myPrimaryBrandColor text-white': getOrientationValue === 'squarish',
                 '': getOrientationValue !== 'squarish',
@@ -228,7 +230,7 @@ onMounted(async () => {
             <button
               v-if="Number(getCurrentPageNumber) > 1"
               :disabled="Number(getCurrentPageNumber) < 1"
-              class="myPrimaryButton"
+              class="myPrimaryTag"
               @click="previousPage(Number(getCurrentPageNumber--))"
             >
               {{
@@ -236,12 +238,12 @@ onMounted(async () => {
               }}
             </button>
 
-            <span class="myPrimaryTag p-2.5">
+            <span class="myPrimaryTag py-2.5 px-4">
               {{ Number(getCurrentPageNumber) }}
             </span>
             <button
               :disabled="Number(getCurrentPageNumber) >= getUnsplashImages.total_pages"
-              class="myPrimaryButton"
+              class="myPrimaryTag"
               :class="{
                 'opacity-50': Number(getCurrentPageNumber) >= getUnsplashImages.total_pages,
               }"
@@ -254,7 +256,7 @@ onMounted(async () => {
           </nav>
         </div>
 
-        <div class="min-h-[34rem] max-h-[34rem] flex gap-6">
+        <div class="min-h-[33rem] max-h-[33rem] flex gap-6">
           <div class="w-9/12 pr-1 rounded-lg overflow-y-auto">
             <div class="grid md:grid-cols-4 sm:grid-cols-4 grid-cols-2 gap-2">
               <div
