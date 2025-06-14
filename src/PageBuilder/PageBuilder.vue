@@ -269,25 +269,27 @@ onMounted(async () => {
         <main class="flex flex-col h-full grow rounded-2xl duration-300 shadow-2xl">
           <div
             id="pagebuilder-toolbar-area"
-            class="flex items-center justify-between rounded-t-2xl bg-myPrimaryLightGrayColor"
+            class="flex items-center justify-between rounded-t-2xl bg-myPrimaryLightGrayColor min-w-[30rem]"
           >
             <div
               @click="pageBuilderClass.clearHtmlSelection()"
-              class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 pl-2 h-24 w-full mr-4"
+              class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 pl-2 h-24 w-full min-w-36"
             >
-              <button
-                class="myPrimaryButton"
-                @click="pageBuilderClass.saveComponentsLocalStorage"
-                type="button"
-              >
-                <span class="material-symbols-outlined"> save </span>
-                Save
-              </button>
+              <div>
+                <button
+                  class="myPrimaryButton"
+                  @click="pageBuilderClass.saveComponentsLocalStorage"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined"> save </span>
+                  Save
+                </button>
+              </div>
             </div>
 
             <div
               @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex justify-center items-center h-24 w-full"
+              class="flex justify-center items-center h-24 w-full pl-4"
             >
               <OptionsDropdown @previewCurrentDesign="previewCurrentDesign"></OptionsDropdown>
             </div>
@@ -392,10 +394,12 @@ onMounted(async () => {
               <!-- Added Components to DOM # end -->
 
               <!-- Add Component # start -->
+
               <div
                 @click="pageBuilderClass.clearHtmlSelection()"
                 id="pagebuilder-bottom-components-area"
-                class="border-t border-gray-200 pt-8 pb-b text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-2 mx-4"
+                class="pt-8 pb-b text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-2 mx-4"
+                :class="{ 'border-t border-gray-200': getComponents.length > 0 }"
               >
                 <div class="flex items-center justify-center gap-2 font-medium">
                   <span class="lg:block hidden">
