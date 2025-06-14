@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue'
 const unsplashKey = import.meta.env.VITE_UNSPLASH_KEY
 import { usePageBuilderModal } from '../composables/usePageBuilderModal'
+import { delay } from '../composables/delay'
+import { preloadImage } from '../composables/preloadImage'
 import PageBuilderClass from '../composables/PageBuilderClass.ts'
 import { sharedPageBuilderStore } from '../stores/shared-store'
 
@@ -12,6 +14,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 const getIsLoading = ref(false)
+const getIsLoadingImage = ref(false)
 const getSearchTerm = ref('')
 const getCurrentPageNumber = ref(1)
 const getOrientationValue = ref('')
@@ -62,9 +65,18 @@ const fetchUnsplash = async function () {
     getIsLoading.value = false
   }
 }
-const handleImageClick = function (data) {
-  getCurrentImage.value = data.url ? data.url : ''
-  getCurrentUser.value = data.user ? data.user : ''
+
+const handleImageClick = async function (data) {
+  getIsLoadingImage.value = true
+
+  if (data.url) {
+    await preloadImage(data.url)
+  }
+
+  await delay(100)
+  getCurrentImage.value = data.url || ''
+
+  getIsLoadingImage.value = false
 }
 
 const searchByOrientation = function (orientationParameter) {
@@ -287,7 +299,19 @@ onMounted(async () => {
           </div>
           <!-- Sidebar # start -->
           <div class="w-3/12 overflow-y-auto">
-            <template v-if="getCurrentImage">
+            <template v-if="getIsLoadingImage">
+              <div class="flex items-center justify-center mt-4">
+                <div
+                  class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                >
+                  <span
+                    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                  >
+                </div>
+              </div>
+            </template>
+            <template v-if="getCurrentImage && !getIsLoadingImage">
               <img
                 class="mx-auto block w-full object-cover object-center cursor-pointer"
                 :src="`${getCurrentImage}`"
