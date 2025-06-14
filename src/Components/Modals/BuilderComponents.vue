@@ -44,12 +44,14 @@ const firstButtonBuilder = function () {
             {{ title }}
           </h3>
         </div>
-        <div
+        <button
+          type="button"
           class="h-10 w-10 flex-start cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
           @click="firstButtonBuilder"
+          aria-label="Close"
         >
           <span class="material-symbols-outlined"> close </span>
-        </div>
+        </button>
       </div>
 
       <div class="p-4">

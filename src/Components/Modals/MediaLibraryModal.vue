@@ -58,7 +58,7 @@ const thirdButton = function () {
 
 // Provide close function for custom components
 const closeMediaLibraryModal = () => {
-  firstButton() // This triggers the close by emitting to parent
+  firstButton()
 }
 provide('closeMediaLibraryModal', closeMediaLibraryModal)
 </script>
@@ -105,12 +105,14 @@ provide('closeMediaLibraryModal', closeMediaLibraryModal)
 
                 <div class="flex-end">
                   <div class="flex-end">
-                    <div
+                    <button
+                      type="button"
                       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0 text-myPrimaryDarkGrayColor"
                       @click="firstButton"
+                      aria-label="Close"
                     >
                       <span class="material-symbols-outlined"> close </span>
-                    </div>
+                    </button>
                   </div>
                 </div>
               </div>
