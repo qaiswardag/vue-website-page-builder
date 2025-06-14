@@ -1,7 +1,7 @@
 {
   "name": "@myissue/vue-website-page-builder",
   "version": "v3.2.29",
-  "description": "🚧 DEVELOPMENT VERSION - Vue.js page builder component with drag & drop functionality. Not ready for production use.",
+  "description": "Vue 3 page builder component with drag & drop functionality.",
   "type": "module",
   "main": "./dist/vue-website-page-builder.umd.cjs",
   "module": "./dist/vue-website-page-builder.js",
