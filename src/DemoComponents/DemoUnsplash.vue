@@ -129,7 +129,7 @@ onMounted(async () => {
 
 <template>
   <div>
-    <div v-if="!getIsLoading">
+    <div>
       <form
         @submit.prevent="
           () => {
@@ -173,8 +173,9 @@ onMounted(async () => {
           </button>
         </div>
       </form>
-      <div v-if="getUnsplashImages && getUnsplashImages.results" class="mt-2">
+      <div class="mt-2">
         <div
+          v-if="getUnsplashImages && getUnsplashImages.results"
           class="flex lg:justify-between justify-end items-center gap-2 py-2 px-2 mb-1 rounded-full border border-gray-200 shadow-sm"
         >
           <div class="lg:flex hidden justify-left items-center gap-2">
@@ -269,8 +270,23 @@ onMounted(async () => {
         </div>
 
         <div class="min-h-[33rem] max-h-[33rem] flex gap-6">
-          <div class="w-9/12 pr-1 rounded-lg overflow-y-auto">
-            <div class="grid md:grid-cols-4 sm:grid-cols-4 grid-cols-2 gap-2">
+          <div
+            v-if="getUnsplashImages && getUnsplashImages.results"
+            class="w-9/12 pr-1 rounded-lg overflow-y-auto"
+          >
+            <div v-if="getIsLoading">
+              <div class="flex items-center justify-center mt-4">
+                <div
+                  class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                >
+                  <span
+                    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                  >
+                </div>
+              </div>
+            </div>
+            <div v-if="!getIsLoading" class="grid md:grid-cols-4 sm:grid-cols-4 grid-cols-2 gap-2">
               <div
                 v-for="image in getUnsplashImages.results"
                 :key="image.id"
@@ -358,20 +374,8 @@ onMounted(async () => {
         <!-- Actions footer # end -->
       </div>
     </div>
-    <div v-else>
+    <div>
       <button class="sr-only">Focusable fallback</button>
     </div>
-    <template v-if="getIsLoading">
-      <div class="flex items-center justify-center mt-4">
-        <div
-          class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
-        >
-          <span
-            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
-            >Loading...</span
-          >
-        </div>
-      </div>
-    </template>
   </div>
 </template>
