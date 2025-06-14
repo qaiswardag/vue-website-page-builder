@@ -398,7 +398,7 @@ onMounted(async () => {
               <div
                 @click="pageBuilderClass.clearHtmlSelection()"
                 id="pagebuilder-bottom-components-area"
-                class="pt-8 pb-b text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-2 mx-4"
+                class="pt-8 pb-12 text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-2 mx-4"
                 :class="{ 'border-t border-gray-200': getComponents.length > 0 }"
               >
                 <div class="flex items-center justify-center gap-2 font-medium">
