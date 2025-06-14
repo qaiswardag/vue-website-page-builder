@@ -100,7 +100,7 @@ const nextPage = async function () {
 
 const applySelectedImage = async function (imageURL) {
   // Ensure the current image is set in the store with proper structure
-  pageBuilderClass.pageBuilderStateStore.setCurrentImage({
+  pageBuilderStateStore.setCurrentImage({
     src: `${imageURL}`,
   })
 
