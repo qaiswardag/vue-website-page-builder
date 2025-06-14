@@ -94,7 +94,7 @@ provide('closeMediaLibraryModal', closeMediaLibraryModal)
             leave-to="opacity-0 scale-95"
           >
             <div
-              class="font-sans relative min-h-[55rem] max-h-[55rem] my-2 inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-7xl sm:w-full"
+              class="font-sans relative my-2 inline-block align-bottom bg-white rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:align-middle sm:max-w-7xl sm:w-full"
             >
               <div
                 class="flex gap-2 justify-between items-center border-b border-gray-200 p-4 mb-2"
