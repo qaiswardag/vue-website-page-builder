@@ -26,9 +26,7 @@ watch(
 <template>
   <Listbox as="div" v-model="backgroundColor">
     <div class="relative">
-      <ListboxButton
-        class="w-max flex items-center px-2 text-[12.5px] gap-2 text-nowrap pl-2 pr-3 h-10 cursor-pointer rounded-full border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-      >
+      <ListboxButton class="w-max flex items-center myPrimaryTag">
         <div v-if="getBackgroundColor === 'none'" class="flex gap-2 items-center">
           <span class="material-symbols-outlined"> colors </span>
           <span class="block truncate text-[12.5px]">Background color </span>

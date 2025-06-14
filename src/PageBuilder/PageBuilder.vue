@@ -376,7 +376,7 @@ onMounted(async () => {
           </div>
 
           <EditGetElement></EditGetElement>
-          <div id="contains-pagebuilder" class="pl-4 pr-4 pb-4 overflow-y-auto h-screen pt-1">
+          <div id="contains-pagebuilder" class="pl-4 pr-4 pb-4 overflow-y-auto pt-1 h-[39rem]">
             <div id="pagebuilder">
               <div ref="draggableZone">
                 <!-- Added Components to DOM # start -->

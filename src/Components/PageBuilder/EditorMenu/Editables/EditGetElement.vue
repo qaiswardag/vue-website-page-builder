@@ -278,16 +278,15 @@ const handleModalIframeSrc = function () {
     </MediaLibraryModal>
 
     <div
-      class="z-20 py-1 px-2 h-20 flex items-center justify-center mt-2 mx-2 border-b border-myPrimaryLightGrayColor"
+      class="z-20 px-2 py-1 h-24 flex items-center justify-center mt-2 mx-2 border-b border-myPrimaryLightGrayColor"
     >
-      <div class="flex items-center justify-center divide-x divide-gray-200 py-1">
+      <div
+        class="flex items-center justify-center"
+        :class="{ 'rounded-full border border-gray-200 shadow-sm': getElement }"
+      >
         <template v-if="pageBuilderClass.ElOrFirstChildIsIframe()">
           <div class="px-2 flex items-center justify-start gap-2">
-            <button
-              @click="handleModalIframeSrc"
-              type="button"
-              class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-            >
+            <button @click="handleModalIframeSrc" type="button" class="myPrimaryTag">
               <span class="material-symbols-outlined"> play_circle </span>
               <span>Add YouTube</span>
             </button>
@@ -301,11 +300,7 @@ const handleModalIframeSrc = function () {
           "
         >
           <div class="px-2 flex items-center justify-start gap-2">
-            <button
-              @click="handleModalPreviewTiptap"
-              type="button"
-              class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-            >
+            <button @click="handleModalPreviewTiptap" type="button" class="myPrimaryTag">
               <span class="material-symbols-outlined"> edit </span>
               <span>Edit text</span>
             </button>
@@ -324,11 +319,7 @@ const handleModalIframeSrc = function () {
           "
         >
           <div class="px-2 flex items-center justify-start gap-2">
-            <button
-              @click="handleAddImage"
-              type="button"
-              class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
-            >
+            <button @click="handleAddImage" type="button" class="myPrimaryTag">
               <span class="material-symbols-outlined"> add_photo_alternate </span>
               <span>Update image</span>
             </button>

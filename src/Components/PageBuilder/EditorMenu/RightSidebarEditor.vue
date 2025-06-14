@@ -40,8 +40,8 @@ const isHeadingElement = computed(() => {
 </script>
 
 <template>
-  <div class="h-full w-80 bg-white">
-    <div class="h-screen flex flex-col">
+  <div class="h-full w-80">
+    <div class="flex max-h-[50rem] flex-col">
       <div class="flex flex-row justify-between pt-7 pr-4 pl-4 items-center mb-3">
         <button
           type="button"

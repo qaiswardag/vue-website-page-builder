@@ -209,28 +209,30 @@ onMounted(() => {
       <div v-if="pageBuilderClass.selectedElementIsValidText() && editor">
         <div class="relative rounded-lg">
           <div
-            class="flex justify-between myPrimaryGap items-center divide-x divide-gray-200 py-4 px-4 overflow-x-auto border-b border-gray-20"
+            class="flex justify-between myPrimaryGap items-center py-4 px-4 overflow-x-auto border-b border-gray-200"
           >
             <div>
               <div>
-                <div class="px-2 flex items-center justify-start gap-2">
+                <div
+                  class="px-2 flex items-center justify-start gap-2 p-2 rounded-full border border-gray-200 shadow-sm"
+                >
                   <button
                     @click="pageBuilderStateStore.setShowModalTipTap(false)"
                     type="button"
-                    class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                    class="myPrimaryTag"
                   >
                     <span class="material-symbols-outlined"> Save </span>
-                    <span>Save</span>
+                    <span>Save & Close</span>
                   </button>
                 </div>
               </div>
             </div>
-            <div class="flex items-center 0 divide-x divide-gray-200">
+            <div class="flex items-center p-2 rounded-full border border-gray-200 shadow-sm">
               <div class="px-2 flex items-center justify-start gap-2">
                 <button
                   @click="editor.chain().focus().setHardBreak().run()"
                   type="button"
-                  class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                  class="myPrimaryTag"
                 >
                   <span class="material-symbols-outlined"> keyboard_return </span>
                   <span>Line break</span>
@@ -241,7 +243,7 @@ onMounted(() => {
                 <button
                   @click="editor.chain().focus().toggleBold().run()"
                   type="button"
-                  class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                  class="myPrimaryTag"
                   :class="{
                     'bg-myPrimaryLinkColor text-white': editor.isActive('bold'),
                   }"
@@ -255,7 +257,7 @@ onMounted(() => {
                 <button
                   @click="handleURL"
                   type="button"
-                  class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                  class="myPrimaryTag"
                   :class="{
                     'bg-myPrimaryLinkColor text-white': editor.isActive('link'),
                   }"
@@ -269,7 +271,7 @@ onMounted(() => {
                 <button
                   @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
                   type="button"
-                  class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                  class="myPrimaryTag"
                   :class="{
                     'bg-myPrimaryLinkColor text-white': editor.isActive('heading', {
                       level: 2,
@@ -285,7 +287,7 @@ onMounted(() => {
                 <button
                   @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
                   type="button"
-                  class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                  class="myPrimaryTag"
                   :class="{
                     'bg-myPrimaryLinkColor text-white': editor.isActive('heading', {
                       level: 3,
@@ -301,7 +303,7 @@ onMounted(() => {
                 <button
                   @click="editor.chain().focus().toggleBulletList().run()"
                   type="button"
-                  class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                  class="myPrimaryTag"
                   :class="{
                     'bg-myPrimaryLinkColor text-white': editor.isActive('bulletList'),
                   }"
