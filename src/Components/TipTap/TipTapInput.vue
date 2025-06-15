@@ -107,7 +107,8 @@ const handleURL = function () {
   typeModal.value = 'success'
   gridColumnModal.value = 2
   titleModal.value = 'Enter URL'
-  descriptionModal.value = null
+  descriptionModal.value =
+    'Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.'
   firstButtonModal.value = 'Close'
   secondButtonModal.value = urlEnteret.value ? 'Remove url' : null
   thirdButtonModal.value = 'Save'
@@ -179,7 +180,7 @@ onMounted(() => {
 <template>
   <div>
     <DynamicModalBuilder
-      maxWidth="2xl"
+      maxWidth="4xl"
       :showDynamicModalBuilder="showModalUrl"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
@@ -194,7 +195,6 @@ onMounted(() => {
     >
       <header></header>
       <main>
-        <h3 class="myQuaternaryHeader mb-4">Add URL</h3>
         <div class="myInputGroup">
           <label class="myPrimaryInputLabel" for="roles"><span>Enter URL</span></label
           ><input v-model="urlEnteret" class="myPrimaryInput mt-1" type="url" placeholder="url" />
