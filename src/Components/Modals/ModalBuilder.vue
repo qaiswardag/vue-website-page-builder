@@ -2,10 +2,6 @@
 import { computed } from 'vue'
 
 const props = defineProps({
-  hideHeader: {
-    type: Boolean,
-    default: false,
-  },
   title: {
     type: String,
     required: true,
@@ -64,26 +60,26 @@ const maxWidthClass = computed(() => {
       <div class="fixed inset-0 bg-black/50 transition-opacity" @click="handleClose"></div>
 
       <div
-        class="relative inline-block bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all min-w-[96vh] min-h-[98vh] max-w-[96vh] max-h-[98vh] overflow-y-auto sm:w-full p-4"
+        class="relative inline-block bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all max-w-[96vh] max-h-[100vh] overflow-y-auto sm:w-full px-4"
         :class="[
           maxWidthClass ? maxWidthClass : '',
           minHeight ? minHeight : '',
           maxHeight ? maxHeight : '',
         ]"
       >
-        <template v-if="!hideHeader">
-          <div class="lg:h-20 flex items-center justify-between border-b border-gray-200 bg-white">
-            <h3 as="h3" class="myQuaternaryHeader my-0 py-0">
-              {{ title }}
-            </h3>
-            <div
-              class="h-10 w-10 flex-end cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
-              @click="handleClose"
-            >
-              <span class="material-symbols-outlined"> close </span>
-            </div>
+        <div
+          class="lg:h-16 flex items-center justify-between border-b border-gray-200 bg-white mb-2"
+        >
+          <h3 as="h3" class="myQuaternaryHeader my-0 py-0">
+            {{ title }}
+          </h3>
+          <div
+            class="h-10 w-10 flex-end cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
+            @click="handleClose"
+          >
+            <span class="material-symbols-outlined"> close </span>
           </div>
-        </template>
+        </div>
         <slot></slot>
       </div>
     </div>

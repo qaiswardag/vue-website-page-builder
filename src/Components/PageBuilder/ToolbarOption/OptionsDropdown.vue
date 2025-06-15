@@ -3,6 +3,7 @@ import PageBuilderClass from '../../../composables/PageBuilderClass'
 import { ref, computed } from 'vue'
 import PageBuilderSettings from '../Settings/PageBuilderSettings.vue'
 import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
+
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
 
 // Use shared store instance
@@ -109,53 +110,24 @@ const handleSettings = function () {
   <div
     class="font-sans w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
   >
-    <!-- User -->
-    <template
-      v-if="
-        getConfigPageBuilder &&
-        getConfigPageBuilder.userForPageBuilder &&
-        getConfigPageBuilder.userForPageBuilder.name
-      "
-    >
-      <div class="cursor-defualt">
+    <div class="flex flex-col gap-8 mt-4">
+      <div
+        @click="handleSettings"
+        class="cursor-pointer border border-gray-200 rounded-full px-4 py-4 bg-red-100"
+      >
+        <div class="flex items-center justify-left gap-2 text-sm">Settings</div>
+      </div>
+
+      <!-- Delete All Components -->
+      <div
+        @click="deleteAllComponents"
+        class="cursor-pointer border border-gray-200 rounded-full px-4 py-4 bg-red-100"
+      >
         <div class="flex items-center justify-left gap-2 text-sm">
-          <div>{{ getConfigPageBuilder.userForPageBuilder.name }}</div>
+          <span class="group-hover:text-white"> Delete Layout </span>
         </div>
       </div>
-    </template>
-
-    <!-- Settings -->
-
-    <div @click="handleSettings" class="cursor-pointer">
-      <div class="flex items-center justify-left gap-2 text-sm">Settings</div>
     </div>
-
-    <!-- Delete All Components -->
-    <div @click="deleteAllComponents" class="cursor-pointer">
-      <div class="flex items-center justify-left gap-2 text-sm">
-        <span class="group-hover:text-white"> Delete Layout </span>
-      </div>
-    </div>
-
-    <DynamicModalBuilder
-      maxWidth="5xl"
-      :showDynamicModalBuilder="showSettings"
-      :type="typeModalSettings"
-      :gridColumnAmount="gridColumnModalSettings"
-      :title="titleModalSettings"
-      :description="descriptionModalSettings"
-      :firstButtonText="firstButtonModalSettings"
-      :secondButtonText="secondButtonModalSettings"
-      :thirdButtonText="thirdButtonModalSettings"
-      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicSettings"
-      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicSettings"
-      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicSettings"
-    >
-      <header></header>
-      <main>
-        <PageBuilderSettings> </PageBuilderSettings>
-      </main>
-    </DynamicModalBuilder>
 
     <DynamicModalBuilder
       :showDynamicModalBuilder="showModalDeleteAllComponents"

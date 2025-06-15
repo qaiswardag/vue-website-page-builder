@@ -89,56 +89,7 @@ const thirdButtonBuilder = function () {
     <div
       class="font-sans w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
     >
-      <template v-if="simpleModal !== true">
-        <div class="flex items-center border-b border-gray-200 p-4 mb-2">
-          <div class="flex-1">
-            <div v-if="type === 'default'"></div>
-
-            <div class="flex gap-2 justify-start items-center">
-              <div
-                v-if="type === 'success'"
-                class="h-10 w-10 flex-end cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
-              >
-                <span class="material-symbols-outlined"> check </span>
-              </div>
-
-              <div
-                v-if="type === 'warning'"
-                class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white"
-              >
-                <span class="material-symbols-outlined"> notification_important </span>
-              </div>
-
-              <div
-                v-if="type === 'delete'"
-                class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white"
-              >
-                <span class="material-symbols-outlined"> delete </span>
-              </div>
-
-              <div
-                v-if="type === 'danger'"
-                class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white"
-              >
-                <span class="material-symbols-outlined"> warning </span>
-              </div>
-
-              <h3 as="h3" class="myQuaternaryHeader my-0 py-0">
-                {{ title }}
-              </h3>
-            </div>
-          </div>
-
-          <div
-            class="h-10 w-10 flex-end cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
-            @click="firstButtonBuilder"
-          >
-            <span class="material-symbols-outlined"> close </span>
-          </div>
-        </div>
-      </template>
-
-      <div :class="{ 'pr-4 pb-4 pl-4': simpleModal !== true }">
+      <div :class="{ 'pr-4 pb-4': simpleModal !== true }">
         <template v-if="simpleModal !== true">
           <div v-html="description" class="myPrimaryParagraph mb-6"></div>
         </template>
@@ -150,7 +101,7 @@ const thirdButtonBuilder = function () {
     </div>
 
     <template v-if="simpleModal !== true">
-      <div class="bg-slate-50 px-2 py-4 flex sm:justify-end justify-center">
+      <div class="py-4 flex sm:justify-end justify-center border-t border-gray-200 mt-4">
         <slot name="footer" />
         <div
           :class="{

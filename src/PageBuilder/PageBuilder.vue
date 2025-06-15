@@ -1,16 +1,15 @@
 <script setup>
 import { onMounted, computed, ref, watch, provide } from 'vue'
 import PageBuilderClass from '../composables/PageBuilderClass.ts'
-import PageBuilderPreviewModal from '../Components/Modals/PageBuilderPreviewModal.vue'
+import ModalBuilder from '../Components/Modals/ModalBuilder.vue'
 import Preview from './Preview.vue'
 import ComponentTopMenu from '../Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue'
 import EditGetElement from '../Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue'
 import BuilderComponents from '../Components/Modals/BuilderComponents.vue'
-import ModalBuilder from '../Components/Modals/ModalBuilder.vue'
 import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
 import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
 import { updateOrCreateIsFalsy } from '../helpers/passedPageBuilderConfig'
-import OptionsDropdown from '../Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
+import ToolbarOption from '../Components/PageBuilder/ToolbarOption/ToolbarOption.vue'
 
 /**
  * Props for PageBuilder component
@@ -65,17 +64,18 @@ const previewCurrentDesign = function () {
   pageBuilderClass.previewCurrentDesign()
 }
 const openPageBuilderPreviewModal = ref(false)
-const firstPageBuilderPreviewModalButton = ref(null)
 
 const handlePageBuilderPreview = function () {
   previewCurrentDesign()
 
   openPageBuilderPreviewModal.value = true
   // handle click
-  firstPageBuilderPreviewModalButton.value = function () {
-    openPageBuilderPreviewModal.value = false
-  }
   // end modal
+}
+
+const firstPageBuilderPreviewModalButton = function () {
+  console.log('luk den..')
+  openPageBuilderPreviewModal.value = false
 }
 
 const showModalAddComponent = ref(false)
@@ -183,14 +183,6 @@ watch(
   { immediate: true },
 )
 
-const openSettingsModal = ref(false)
-
-const openSettings = function () {
-  openSettingsModal.value = true
-}
-const handleSettings = function () {
-  openSettingsModal.value = false
-}
 onMounted(async () => {
   const config = getConfigPageBuilder.value
   handleConfig(config)
@@ -213,27 +205,38 @@ onMounted(async () => {
       id="pagebuilder-top-area"
       class="px-4 pb-4 mx-4 my-4 rounded-xl"
     >
-      <!-- Logo # start -->
-      <div
-        v-if="
-          getConfigPageBuilder &&
-          getConfigPageBuilder.pageBuilderLogo &&
-          getConfigPageBuilder.pageBuilderLogo.src
-        "
-        class="flex items-center divide-x divide-gray-200"
-      >
-        <div class="pr-4">
-          <img class="h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
+      <div class="flex justify-between items-center">
+        <!-- Logo # start -->
+        <div>
+          <div
+            v-if="
+              getConfigPageBuilder &&
+              getConfigPageBuilder.pageBuilderLogo &&
+              getConfigPageBuilder.pageBuilderLogo.src
+            "
+            class="flex items-center divide-x divide-gray-200"
+          >
+            <div class="pr-4">
+              <img class="h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
+            </div>
+            <span class="myPrimaryParagraph font-medium pl-4">Editing Page </span>
+          </div>
+          <div v-else>
+            <div class="pr-6">
+              <span class="myPrimaryParagraph font-medium">Editing Page </span>
+            </div>
+          </div>
         </div>
-        <span class="myPrimaryParagraph font-medium pl-4">Editing Page </span>
-      </div>
-      <div v-else>
-        <div class="pr-6">
-          <span class="myPrimaryParagraph font-medium">Editing Page </span>
+        <!-- Logo # end -->
+
+        <!-- Options # Start -->
+        <div>
+          <ToolbarOption></ToolbarOption>
         </div>
+        <!-- Options # Start -->
       </div>
     </div>
-    <!-- Logo # end -->
+
     <BuilderComponents
       v-if="showModalAddComponent"
       :show="showModalAddComponent"
@@ -242,21 +245,14 @@ onMounted(async () => {
       :CustomBuilderComponents="props.CustomBuilderComponents"
       @firstModalButtonSearchComponentsFunction="firstModalButtonSearchComponentsFunction"
     ></BuilderComponents>
-    <PageBuilderPreviewModal
-      :show="openPageBuilderPreviewModal"
-      @firstPageBuilderPreviewModalButton="firstPageBuilderPreviewModalButton"
+
+    <ModalBuilder
+      title="Preview"
+      :showModalBuilder="openPageBuilderPreviewModal"
+      @closeMainModalBuilder="firstPageBuilderPreviewModalButton"
+      maxWidth="screen"
     >
       <Preview></Preview>
-    </PageBuilderPreviewModal>
-    <ModalBuilder
-      title="Open Options"
-      maxWidth="4xl"
-      :showModalBuilder="openSettingsModal"
-      @closeMainModalBuilder="handleSettings"
-      minHeight=""
-      maxHeight=""
-    >
-      <OptionsDropdown></OptionsDropdown>
     </ModalBuilder>
 
     <div>
@@ -305,13 +301,6 @@ onMounted(async () => {
                   Save
                 </button>
               </div>
-            </div>
-
-            <div
-              @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex justify-center items-center h-24 w-full pl-4"
-            >
-              <button @click="openSettings" type="button">Open Options</button>
             </div>
 
             <div

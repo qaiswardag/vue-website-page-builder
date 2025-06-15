@@ -1,11 +1,9 @@
 <script setup>
-import AdvancedPageBuilderSettings from './AdvancedPageBuilderSettings.vue'
 import { ref, computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
 import PageBuilderClass from '../../../composables/PageBuilderClass.ts'
 import { isEmptyObject } from '../../../helpers/isEmptyObject.ts'
-import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
 const version = __APP_VERSION__
 
 // Use shared store instance
@@ -49,89 +47,14 @@ const handleDownloadHTML = function () {
 
   generateHTML('downloaded_html.html', downloadedComponents.value.join(''))
 }
-
-// Settings
-const showSettings = ref(false)
-// use dynamic model
-const typeModalSettings = ref('')
-const gridColumnModalSettings = ref(Number(1))
-const titleModalSettings = ref('')
-const descriptionModalSettings = ref('')
-const firstButtonModalSettings = ref('')
-const secondButtonModalSettings = ref(null)
-const thirdButtonModalSettings = ref(null)
-// set dynamic modal handle functions
-const firstModalButtonFunctionDynamicSettings = ref(null)
-const secondModalButtonFunctionDynamicSettings = ref(null)
-const thirdModalButtonFunctionDynamicSettings = ref(null)
-
-// handle slideover window
-const handleAdvancedSettingsSlideOver = function () {
-  showSettings.value = true
-  typeModalSettings.value = 'default'
-  gridColumnModalSettings.value = 2
-  titleModalSettings.value = 'Advanced Settings'
-  descriptionModalSettings.value = null
-  firstButtonModalSettings.value = 'Close'
-  secondButtonModalSettings.value = null
-  thirdButtonModalSettings.value = null
-
-  // handle click
-  firstModalButtonFunctionDynamicSettings.value = function () {
-    showSettings.value = false
-  }
-  //
-  // handle click
-  secondModalButtonFunctionDynamicSettings.value = function () {}
-  thirdModalButtonFunctionDynamicSettings.value = function () {}
-  // end modal
-}
 </script>
 
 <template>
   <div>
-    <DynamicModalBuilder
-      maxWidth="5xl"
-      :showDynamicModalBuilder="showSettings"
-      :type="typeModalSettings"
-      :gridColumnAmount="gridColumnModalSettings"
-      :title="titleModalSettings"
-      :description="descriptionModalSettings"
-      :firstButtonText="firstButtonModalSettings"
-      :secondButtonText="secondButtonModalSettings"
-      :thirdButtonText="thirdButtonModalSettings"
-      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicSettings"
-      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicSettings"
-      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicSettings"
-    >
-      <header></header>
-      <main>
-        <AdvancedPageBuilderSettings></AdvancedPageBuilderSettings>
-      </main>
-    </DynamicModalBuilder>
-
     <!-- Advanced Settings - start -->
     <div class="flex gap-4 flex-col divide-y divide-gray-300">
-      <div class="flex items-left flex-col gap-2">
-        <h3 class="myQuaternaryHeader">Selections Overview</h3>
-        <p class="myPrimaryParagraph text-xs">
-          Manage advanced settings here. Like an overview of Selected Element, Component, and
-          Components in real-time.
-        </p>
-
-        <div class="my-4">
-          <button
-            @click="handleAdvancedSettingsSlideOver"
-            type="button"
-            class="myPrimaryButton text"
-          >
-            Advanced Settings
-          </button>
-        </div>
-      </div>
-
       <!-- Advanced Settings - start -->
-      <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
+      <div class="mb-4 pb-8 border-b border-myPrimbryLightGrayColor">
         <div class="flex items-left flex-col gap-1">
           <h3 class="myQuaternaryHeader">Configuration Overview</h3>
           <p class="myPrimaryParagraph text-xs">
@@ -544,7 +467,7 @@ const handleAdvancedSettingsSlideOver = function () {
         </p>
       </div>
 
-      <div class="mt-4 whitespace-pre-wrap text-white overflow-hidden bg-gray-900 max-w-2xl">
+      <div class="mt-4 whitespace-pre-wrap text-white overflow-hidden bg-gray-900">
         <div class="flex bg-gray-800/40 ring-1 ring-white/5">
           <div class="-mb-px flex text-xs font-medium text-myPrimaryMediumGrayColor">
             <div class="px-4 py-4 text-white">Configuration</div>

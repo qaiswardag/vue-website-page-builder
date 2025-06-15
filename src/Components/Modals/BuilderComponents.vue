@@ -47,7 +47,7 @@ const firstButtonBuilder = function () {
         <div v-else><DefaultBuilderComponents /></div>
       </div>
     </div>
-    <div class="bg-slate-50 px-2 py-4 flex sm:justify-end justify-center">
+    <div class="py-4 flex sm:justify-end justify-center border-t border-gray-200 mt-4">
       <div class="sm:w-3/6 w-full px-2 my-2 flex gap-2 justify-end">
         <button
           v-if="firstButtonText"

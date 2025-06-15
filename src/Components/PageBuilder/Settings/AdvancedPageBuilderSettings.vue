@@ -43,7 +43,7 @@ function prettifyHtml(html) {
       <!-- Types - start -->
       <div>
         <h4 class="myPrimaryParagraph text-sm pb-2">Types</h4>
-        <div class="text-white overflow-hidden bg-gray-900 max-w-2xl">
+        <div class="text-white overflow-hidden bg-gray-900">
           <div class="flex bg-gray-800/40 ring-1 ring-white/5">
             <div class="-mb-px flex text-xs font-medium text-myPrimaryMediumGrayColor">
               <div class="px-4 py-4 text-white">Types</div>
@@ -81,7 +81,7 @@ function prettifyHtml(html) {
       <!-- Code Block Component - start-->
       <div>
         <h4 class="myPrimaryParagraph text-sm pb-2">Content</h4>
-        <div class="overflow-hidden bg-gray-900 max-w-2xl">
+        <div class="overflow-hidden bg-gray-900">
           <div class="flex bg-gray-800/40 ring-1 ring-white/5">
             <div class="-mb-px flex text-xs font-medium text-myPrimaryMediumGrayColor">
               <div
