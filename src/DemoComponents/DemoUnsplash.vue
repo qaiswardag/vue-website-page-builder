@@ -355,17 +355,13 @@ onMounted(async () => {
 
         <!-- Actions footer # start -->
         <div class="px-4 py-3 flex gap-2 border-t border-gray-200 mt-4 justify-end">
-          <button
-            @click="closeMediaLibraryModal"
-            class="mySecondaryButton focus:ring-2 focus:ring-blue-500"
-            type="button"
-          >
+          <button @click="closeMediaLibraryModal" class="mySecondaryButton" type="button">
             Close
           </button>
           <button
             v-if="getCurrentImage && typeof getCurrentImage === 'string'"
             @click="applySelectedImage(getCurrentImage)"
-            class="myPrimaryButton focus:ring-2 focus:ring-blue-500"
+            class="myPrimaryButton"
             type="button"
           >
             Select image
