@@ -40,73 +40,71 @@ const isHeadingElement = computed(() => {
 </script>
 
 <template>
-  <div class="h-full w-80">
-    <div class="flex max-h-[50rem] flex-col">
-      <div class="flex flex-row justify-between pt-7 pr-4 pl-4 items-center mb-3">
-        <button
-          type="button"
-          @click="$emit('closeEditor')"
-          class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+  <div class="flex max-h-[50rem] flex-col">
+    <div class="flex flex-row justify-between pt-7 pr-4 pl-4 items-center mb-3">
+      <button
+        type="button"
+        @click="$emit('closeEditor')"
+        class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+      >
+        <span class="material-symbols-outlined"> close </span>
+      </button>
+      <p class="font-medium text-sm">
+        Editing
+        <span class="lowercase">&lt;{{ elementTag }}&gt;</span>
+      </p>
+    </div>
+
+    <div class="pl-3 pr-3 mb-4 overflow-y-scroll md:pb-24 pb-12">
+      <div v-show="isHeadingElement === true">
+        <article>
+          <ImageEditor> </ImageEditor>
+        </article>
+        <article>
+          <TipTap></TipTap>
+        </article>
+        <article
+          v-if="
+            false &&
+            $page.props.user.superadmin !== null &&
+            $page.props.user.superadmin.role === 'admin'
+          "
         >
-          <span class="material-symbols-outlined"> close </span>
-        </button>
-        <p class="font-medium text-sm">
-          Editing
-          <span class="lowercase">&lt;{{ elementTag }}&gt;</span>
-        </p>
+          <LinkEditor></LinkEditor>
+        </article>
+        <article
+          v-if="
+            false &&
+            $page.props.user.superadmin !== null &&
+            $page.props.user.superadmin.role === 'admin'
+          "
+        >
+          <Typography></Typography>
+        </article>
+
+        <article>
+          <OpacityEditor> </OpacityEditor>
+        </article>
+        <article>
+          <PaddingPlusMargin> </PaddingPlusMargin>
+        </article>
+        <article>
+          <BorderRadius></BorderRadius>
+        </article>
+        <article>
+          <Borders></Borders>
+        </article>
+        <article>
+          <ClassEditor></ClassEditor>
+        </article>
       </div>
 
-      <div class="pl-3 pr-3 mb-4 overflow-y-scroll md:pb-24 pb-12">
-        <div v-show="isHeadingElement === true">
-          <article>
-            <ImageEditor> </ImageEditor>
-          </article>
-          <article>
-            <TipTap></TipTap>
-          </article>
-          <article
-            v-if="
-              false &&
-              $page.props.user.superadmin !== null &&
-              $page.props.user.superadmin.role === 'admin'
-            "
-          >
-            <LinkEditor></LinkEditor>
-          </article>
-          <article
-            v-if="
-              false &&
-              $page.props.user.superadmin !== null &&
-              $page.props.user.superadmin.role === 'admin'
-            "
-          >
-            <Typography></Typography>
-          </article>
-
-          <article>
-            <OpacityEditor> </OpacityEditor>
-          </article>
-          <article>
-            <PaddingPlusMargin> </PaddingPlusMargin>
-          </article>
-          <article>
-            <BorderRadius></BorderRadius>
-          </article>
-          <article>
-            <Borders></Borders>
-          </article>
-          <article>
-            <ClassEditor></ClassEditor>
-          </article>
-        </div>
-
-        <div>
-          <article>
-            <ElementEditor></ElementEditor>
-          </article>
-        </div>
-        <article class="min-h-[12em]"></article>
+      <div>
+        <article>
+          <ElementEditor></ElementEditor>
+        </article>
       </div>
+      <article class="min-h-[12em]"></article>
     </div>
   </div>
 </template>

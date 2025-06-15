@@ -198,10 +198,10 @@ onMounted(async () => {
 <template>
   <div
     id="builder-container"
-    class="font-sans max-w-full m-1 border-2 border-myPrimaryLinkColor inset-x-0 z-10 bg-white overflow-x-scroll pt-2 rounded-lg p-2"
+    class="font-sans max-w-full m-1 border border-gray-600 inset-x-0 z-10 bg-white overflow-x-scroll"
   >
-    <div id="pagebuilder-top-area" class="px-4 pb-4 mx-4 my-4 rounded-xl">
-      <div class="flex justify-between items-center">
+    <div id="pagebuilder-top-area" class="px-4 pt-2 pb-4 mx-4 mb-4 mt-2">
+      <div class="flex justify-between items-center pb-2 border-b border-gray-200">
         <!-- Logo # start -->
         <div @click="pageBuilderClass.clearHtmlSelection()">
           <div
@@ -252,13 +252,13 @@ onMounted(async () => {
     </ModalBuilder>
 
     <div>
-      <div class="relative h-full flex">
+      <div class="relative h-full flex pb-2 gap-2">
         <div
           @click.self="pageBuilderClass.clearHtmlSelection()"
           id="pagebuilder-left-area"
-          class="min-w-[3.5rem] pt-6 pb-2 my-2 mx-2 bg-myPrimaryLightGrayColor rounded-full shadow"
+          class="min-w-[3.5rem] pt-6 pb-2 ml-2 bg-myPrimaryLightGrayColor rounded-full shadow-sm"
         >
-          <div class="mx-2 flex flex-col myPrimaryGap">
+          <div class="mx-2 flex flex-col myPrimaryGap items-stretch">
             <div class="flex gap-2 items-center justify-center">
               <button
                 type="button"
@@ -278,7 +278,10 @@ onMounted(async () => {
             </div>
           </div>
         </div>
-        <main class="flex flex-col h-full grow rounded-2xl duration-300 shadow-2xl">
+        <main
+          class="flex flex-col h-full grow rounded-2xl duration-300 shadow-sm items-stretch"
+          :class="{ 'mr-2': !getMenuRight, '': getMenuRight }"
+        >
           <div
             id="pagebuilder-toolbar-area"
             class="flex items-center justify-between rounded-t-2xl bg-myPrimaryLightGrayColor min-w-[30rem]"
@@ -437,8 +440,8 @@ onMounted(async () => {
         <aside
           aria-label="Menu"
           id="pagebuilder-right-area"
-          :class="{ 'w-0': !getMenuRight, 'w-80 ml-4': getMenuRight }"
-          class="h-full duration-300 z-20 flex-shrink-0 overflow-hidden shadow-2xl rounded-l-2xl bg-white"
+          :class="{ 'w-0': !getMenuRight, 'w-80 mr-2 items-stretch': getMenuRight }"
+          class="duration-300 z-20 flex-shrink-0 overflow-hidden shadow-sm rounded-l-2xl bg-myPrimaryLightGrayColor"
         >
           <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
           </RightSidebarEditor>

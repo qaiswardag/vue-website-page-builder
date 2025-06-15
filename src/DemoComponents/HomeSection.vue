@@ -126,7 +126,7 @@ onMounted(async () => {
           </a>
         </p>
       </div>
-      <div>
+      <div class="m-2">
         <!--   :CustomBuilderComponents="DemoBuilderComponents" -->
         <PageBuilder :CustomMediaLibraryComponent="DemoMediaLibraryComponent"></PageBuilder>
       </div>
