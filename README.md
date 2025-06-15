@@ -139,6 +139,7 @@ Get up and running quickly by importing the PageBuilder component, setting up yo
   - `userSettings` to set user preferences such as theme, language, or autoSave
   - `brandColor` set brand’s primary color, which will be used for key UI elements in the builder in the `settings` config
   - `formName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
+  - Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., name and user image).
 
 ```vue
 <script setup>
@@ -157,7 +158,7 @@ const configPageBuilder = {
   pageBuilderLogo: {
     src: '/logo/logo.svg',
   },
-  userForPageBuilder: { name: 'John Doe' },
+  userForPageBuilder: { name: 'John Doe', image: '/jane_doe.jpg' },
   resourceData: {
     title: 'Demo Article',
     id: 1,
@@ -190,7 +191,7 @@ pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 You can display your company logo in the Page Builder interface and set the currently logged-in user by passing both a logo URL and user information in your config object:
 
 - **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
-- **Logged-in User:** Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., for audit trails, personalization, or permissions).
+- **Logged-in User:** Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., name and user image).
 
 **Basic Usage:**
 
@@ -211,7 +212,7 @@ const configPageBuilder = {
   pageBuilderLogo: {
     src: '/logo/logo.svg',
   },
-  userForPageBuilder: { name: 'John Doe' },
+  userForPageBuilder: { name: 'John Doe', image: '/jane_doe.jpg' },
 }
 
 // Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component

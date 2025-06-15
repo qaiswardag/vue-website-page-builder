@@ -89,6 +89,7 @@ export interface User {
 // Specific user interface for page builder usage
 export interface PageBuilderUser {
   name: string
+  image: string
 }
 
 // Page Builder Configuration interface

@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import FullWidthElement from '../Components/Layouts/FullWidthElement.vue'
 import PageBuilder from '../PageBuilder/PageBuilder.vue'
 import PageBuilderClass from '../composables/PageBuilderClass.ts'
@@ -65,7 +65,8 @@ const features = [
 
 const configPageBuilder = {
   userForPageBuilder: {
-    name: 'John Doe',
+    name: 'Jane Doe',
+    image: '/jane_doe.jpg',
   },
   updateOrCreate: {
     formType: 'create',
