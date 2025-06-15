@@ -66,7 +66,6 @@ const features = [
 const configPageBuilder = {
   userForPageBuilder: {
     name: 'Jane Doe',
-    image: '/jane_doe.jpg',
   },
   updateOrCreate: {
     formType: 'create',

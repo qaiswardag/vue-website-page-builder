@@ -114,7 +114,7 @@ const openHTMLSettings = function () {
         "
       >
         <div
-          class="text-white flex-shrink-0 h-8 w-8 rounded-full bg-myPrimaryBrandColor flex justify-center items-center text-xs rounded-l-full"
+          class="text-white rounded-full bg-myPrimaryBrandColor flex justify-center items-center text-xs h-8 min-h-8 max-h-8 w-8 min-w-8 max-w-8"
         >
           {{
             typeof getConfigPageBuilder.userForPageBuilder.name === 'string' &&
