@@ -1,6 +1,5 @@
 <script setup>
 import ModalBuilder from './ModalBuilder.vue'
-import {} from '@headlessui/vue'
 
 defineProps({
   showDynamicModalBuilder: {
@@ -80,6 +79,7 @@ const thirdButtonBuilder = function () {
 
 <template>
   <ModalBuilder
+    :title="title"
     :showModalBuilder="showDynamicModalBuilder"
     @closeMainModalBuilder="firstButtonBuilder"
     :maxWidth="maxWidth"
@@ -138,7 +138,7 @@ const thirdButtonBuilder = function () {
         </div>
       </template>
 
-      <div :class="{ 'p-4': simpleModal !== true }">
+      <div :class="{ 'pr-4 pb-4 pl-4': simpleModal !== true }">
         <template v-if="simpleModal !== true">
           <div v-html="description" class="myPrimaryParagraph mb-6"></div>
         </template>

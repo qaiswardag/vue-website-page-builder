@@ -21,8 +21,6 @@ const secondButtonMedia = ref(null)
 const thirdButtonMedia = ref(null)
 // set dynamic modal handle functions
 const firstMediaButtonFunction = ref(null)
-const secondMediaButtonFunction = ref(null)
-const thirdMediaButtonFunction = ref(null)
 
 // get current image from store
 const getBasePrimaryImage = computed(() => {
@@ -43,16 +41,6 @@ const handleAddImage = function () {
   firstMediaButtonFunction.value = function () {
     // close media library modal
     showMediaLibraryModal.value = false
-  }
-  //
-  // handle click
-  secondMediaButtonFunction.value = function () {
-    isLoading.value = true
-    pageBuilderClass.updateBasePrimaryImage({ type: 'unsplash' })
-
-    // close media library modal
-    showMediaLibraryModal.value = false
-    isLoading.value = false
   }
   //
   // end modal
@@ -77,8 +65,6 @@ const handleAddImage = function () {
       :thirdButtonText="thirdButtonMedia"
       :customMediaComponent="customMediaComponent"
       @firstMediaButtonFunction="firstMediaButtonFunction"
-      @secondMediaButtonFunction="secondMediaButtonFunction"
-      @thirdMediaButtonFunction="thirdMediaButtonFunction"
     >
     </MediaLibraryModal>
   </div>

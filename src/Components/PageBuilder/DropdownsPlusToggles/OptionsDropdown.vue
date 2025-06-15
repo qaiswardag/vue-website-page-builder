@@ -1,10 +1,6 @@
 <script setup>
-import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/vue'
 import PageBuilderClass from '../../../composables/PageBuilderClass'
 import { ref, computed } from 'vue'
-import PageBuilderPreviewModal from '../../Modals/PageBuilderPreviewModal.vue'
-import Preview from '../../../PageBuilder/Preview.vue'
-import SlideOverRight from '../Slidebars/SlideOverRight.vue'
 import PageBuilderSettings from '../Settings/PageBuilderSettings.vue'
 import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
@@ -17,7 +13,6 @@ const getConfigPageBuilder = computed(() => {
 })
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
-const emit = defineEmits(['previewCurrentDesign'])
 
 const showModalDeleteAllComponents = ref(false)
 //
@@ -33,22 +28,6 @@ const thirdButtonModal = ref(null)
 const firstModalButtonFunctionDynamicModalBuilder = ref(null)
 const secondModalButtonFunctionDynamicModalBuilder = ref(null)
 const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
-
-const showSettingsSlideOverRight = ref(false)
-const titleSettingsSlideOverRight = ref(null)
-const openPageBuilderPreviewModal = ref(false)
-const firstPageBuilderPreviewModalButton = ref(null)
-
-const handlePageBuilderPreview = function () {
-  emit('previewCurrentDesign')
-
-  openPageBuilderPreviewModal.value = true
-  // handle click
-  firstPageBuilderPreviewModalButton.value = function () {
-    openPageBuilderPreviewModal.value = false
-  }
-  // end modal
-}
 
 const deleteAllComponents = function () {
   showModalDeleteAllComponents.value = true
@@ -88,30 +67,96 @@ const deleteAllComponents = function () {
   // end modal
 }
 
-// handle slideover window
-const handleSettingsSlideOver = function () {
-  // pageBuilderStateStore.setComponent(null)
+// Settings
+const showSettings = ref(false)
+// use dynamic model
+const typeModalSettings = ref('')
+const gridColumnModalSettings = ref(Number(1))
+const titleModalSettings = ref('')
+const descriptionModalSettings = ref('')
+const firstButtonModalSettings = ref('')
+const secondButtonModalSettings = ref(null)
+const thirdButtonModalSettings = ref(null)
+// set dynamic modal handle functions
+const firstModalButtonFunctionDynamicSettings = ref(null)
+const secondModalButtonFunctionDynamicSettings = ref(null)
+const thirdModalButtonFunctionDynamicSettings = ref(null)
 
-  titleSettingsSlideOverRight.value = 'Settings'
-  showSettingsSlideOverRight.value = true
-}
 // handle slideover window
-const settingsSlideOverButton = function () {
-  // pageBuilderStateStore.setComponent(null)
+const handleSettings = function () {
+  showSettings.value = true
+  typeModalSettings.value = 'default'
+  gridColumnModalSettings.value = 2
+  titleModalSettings.value = 'Settings'
+  descriptionModalSettings.value = null
+  firstButtonModalSettings.value = 'Close'
+  secondButtonModalSettings.value = null
+  thirdButtonModalSettings.value = null
 
-  showSettingsSlideOverRight.value = false
+  // handle click
+  firstModalButtonFunctionDynamicSettings.value = function () {
+    showSettings.value = false
+  }
+  //
+  // handle click
+  secondModalButtonFunctionDynamicSettings.value = function () {}
+  thirdModalButtonFunctionDynamicSettings.value = function () {}
+  // end modal
 }
 </script>
 
 <template>
-  <div>
-    <SlideOverRight
-      :open="showSettingsSlideOverRight"
-      :title="titleSettingsSlideOverRight"
-      @slideOverButton="settingsSlideOverButton"
+  <div
+    class="font-sans w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
+  >
+    <!-- User -->
+    <template
+      v-if="
+        getConfigPageBuilder &&
+        getConfigPageBuilder.userForPageBuilder &&
+        getConfigPageBuilder.userForPageBuilder.name
+      "
     >
-      <PageBuilderSettings> </PageBuilderSettings>
-    </SlideOverRight>
+      <div class="cursor-defualt">
+        <div class="flex items-center justify-left gap-2 text-sm">
+          <div>{{ getConfigPageBuilder.userForPageBuilder.name }}</div>
+        </div>
+      </div>
+    </template>
+
+    <!-- Settings -->
+
+    <div @click="handleSettings" class="cursor-pointer">
+      <div class="flex items-center justify-left gap-2 text-sm">Settings</div>
+    </div>
+
+    <!-- Delete All Components -->
+    <div @click="deleteAllComponents" class="cursor-pointer">
+      <div class="flex items-center justify-left gap-2 text-sm">
+        <span class="group-hover:text-white"> Delete Layout </span>
+      </div>
+    </div>
+
+    <DynamicModalBuilder
+      maxWidth="5xl"
+      :showDynamicModalBuilder="showSettings"
+      :type="typeModalSettings"
+      :gridColumnAmount="gridColumnModalSettings"
+      :title="titleModalSettings"
+      :description="descriptionModalSettings"
+      :firstButtonText="firstButtonModalSettings"
+      :secondButtonText="secondButtonModalSettings"
+      :thirdButtonText="thirdButtonModalSettings"
+      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicSettings"
+      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicSettings"
+      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicSettings"
+    >
+      <header></header>
+      <main>
+        <PageBuilderSettings> </PageBuilderSettings>
+      </main>
+    </DynamicModalBuilder>
+
     <DynamicModalBuilder
       :showDynamicModalBuilder="showModalDeleteAllComponents"
       :type="typeModal"
@@ -128,102 +173,5 @@ const settingsSlideOverButton = function () {
       <header></header>
       <main></main>
     </DynamicModalBuilder>
-    <Menu as="div" class="myPrimaryParagraph relative lg:inline-block hidden text-left mr-4">
-      <div>
-        <MenuButton
-          class="inline-flex items-center gap-2 justify-center w-full rounded-md border border-gray-300 shadow-sm pl-4 pr-6 py-2 bg-white text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-emerald-600"
-        >
-          <span class="material-symbols-outlined text-[16px]"> keyboard_command_key </span>
-          <span class="text-sm"> Options </span>
-        </MenuButton>
-      </div>
-
-      <transition
-        enter-active-class="transition ease-out duration-100"
-        enter-from-class="transform opacity-0 scale-95"
-        enter-to-class="transform opacity-100 scale-100"
-        leave-active-class="transition ease-in duration-75"
-        leave-from-class="transform opacity-100 scale-100"
-        leave-to-class="transform opacity-0 scale-95"
-      >
-        <MenuItems
-          class="z-50 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
-        >
-          <div class="py-1">
-            <template
-              v-if="
-                getConfigPageBuilder &&
-                getConfigPageBuilder.userForPageBuilder &&
-                getConfigPageBuilder.userForPageBuilder.name
-              "
-            >
-              <MenuItem v-slot="{ active }">
-                <div
-                  class="cursor-defualt"
-                  :class="[
-                    active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2 break-all',
-                  ]"
-                >
-                  <div class="flex items-center justify-left gap-2 text-sm">
-                    <div>
-                      {{ getConfigPageBuilder.userForPageBuilder.name }}
-                    </div>
-                  </div>
-                </div>
-              </MenuItem>
-            </template>
-
-            <p>
-              <MenuItem v-slot="{ active }">
-                <div
-                  @click="handlePageBuilderPreview"
-                  class="cursor-pointer"
-                  :class="[
-                    active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2',
-                  ]"
-                >
-                  <div class="flex items-center justify-left gap-2 text-sm">Preview</div>
-                </div>
-              </MenuItem>
-
-              <MenuItem v-slot="{ active }">
-                <div
-                  @click="handleSettingsSlideOver"
-                  class="cursor-pointer"
-                  :class="[
-                    active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2',
-                  ]"
-                >
-                  <div class="flex items-center justify-left gap-2 text-sm">Settings</div>
-                </div>
-              </MenuItem>
-              <MenuItem v-slot="{ active }">
-                <div
-                  @click="deleteAllComponents"
-                  class="cursor-pointer"
-                  :class="[
-                    active ? 'bg-myPrimaryLightGrayColor text-gray-900' : 'text-gray-700',
-                    'block px-4 py-2',
-                  ]"
-                >
-                  <div class="flex items-center justify-left gap-2 text-sm">
-                    <span class="group-hover:text-white"> Delete Layout </span>
-                  </div>
-                </div>
-              </MenuItem>
-            </p>
-          </div>
-        </MenuItems>
-      </transition>
-    </Menu>
-    <PageBuilderPreviewModal
-      :show="openPageBuilderPreviewModal"
-      @firstPageBuilderPreviewModalButton="firstPageBuilderPreviewModalButton"
-    >
-      <Preview></Preview>
-    </PageBuilderPreviewModal>
   </div>
 </template>

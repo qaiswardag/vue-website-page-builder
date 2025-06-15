@@ -1,11 +1,11 @@
 <script setup>
-import SlideOverRightParent from '../Slidebars/SlideOverRightParent.vue'
 import AdvancedPageBuilderSettings from './AdvancedPageBuilderSettings.vue'
 import { ref, computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
 import PageBuilderClass from '../../../composables/PageBuilderClass.ts'
 import { isEmptyObject } from '../../../helpers/isEmptyObject.ts'
+import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
 const version = __APP_VERSION__
 
 // Use shared store instance
@@ -14,24 +14,11 @@ const pageBuilderStateStore = sharedPageBuilderStore
 // Initialize PageBuilder with store
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-const showAdvancedSettingsSlideOverRight = ref(false)
-const titleSettingsSlideOverRight = ref('')
 const downloadedComponents = ref(null)
 
 const getConfigPageBuilder = computed(() => {
   return pageBuilderStateStore.getConfigPageBuilder
 })
-
-// handle slideover window
-const handleAdvancedSettingsSlideOver = function () {
-  titleSettingsSlideOverRight.value = 'Advanced Settings'
-  showAdvancedSettingsSlideOverRight.value = true
-}
-
-// handle slideover window
-const settingsAdvancedSlideOverButton = function () {
-  showAdvancedSettingsSlideOverRight.value = false
-}
 
 const getComponents = computed(() => {
   return pageBuilderStateStore.getComponents
@@ -62,21 +49,69 @@ const handleDownloadHTML = function () {
 
   generateHTML('downloaded_html.html', downloadedComponents.value.join(''))
 }
+
+// Settings
+const showSettings = ref(false)
+// use dynamic model
+const typeModalSettings = ref('')
+const gridColumnModalSettings = ref(Number(1))
+const titleModalSettings = ref('')
+const descriptionModalSettings = ref('')
+const firstButtonModalSettings = ref('')
+const secondButtonModalSettings = ref(null)
+const thirdButtonModalSettings = ref(null)
+// set dynamic modal handle functions
+const firstModalButtonFunctionDynamicSettings = ref(null)
+const secondModalButtonFunctionDynamicSettings = ref(null)
+const thirdModalButtonFunctionDynamicSettings = ref(null)
+
+// handle slideover window
+const handleAdvancedSettingsSlideOver = function () {
+  showSettings.value = true
+  typeModalSettings.value = 'default'
+  gridColumnModalSettings.value = 2
+  titleModalSettings.value = 'Advanced Settings'
+  descriptionModalSettings.value = null
+  firstButtonModalSettings.value = 'Close'
+  secondButtonModalSettings.value = null
+  thirdButtonModalSettings.value = null
+
+  // handle click
+  firstModalButtonFunctionDynamicSettings.value = function () {
+    showSettings.value = false
+  }
+  //
+  // handle click
+  secondModalButtonFunctionDynamicSettings.value = function () {}
+  thirdModalButtonFunctionDynamicSettings.value = function () {}
+  // end modal
+}
 </script>
 
 <template>
   <div>
-    <SlideOverRightParent
-      :open="showAdvancedSettingsSlideOverRight"
-      :title="titleSettingsSlideOverRight"
-      @slideOverButton="settingsAdvancedSlideOverButton"
+    <DynamicModalBuilder
+      maxWidth="5xl"
+      :showDynamicModalBuilder="showSettings"
+      :type="typeModalSettings"
+      :gridColumnAmount="gridColumnModalSettings"
+      :title="titleModalSettings"
+      :description="descriptionModalSettings"
+      :firstButtonText="firstButtonModalSettings"
+      :secondButtonText="secondButtonModalSettings"
+      :thirdButtonText="thirdButtonModalSettings"
+      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicSettings"
+      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicSettings"
+      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicSettings"
     >
-      <AdvancedPageBuilderSettings></AdvancedPageBuilderSettings>
-    </SlideOverRightParent>
+      <header></header>
+      <main>
+        <AdvancedPageBuilderSettings></AdvancedPageBuilderSettings>
+      </main>
+    </DynamicModalBuilder>
+
     <!-- Advanced Settings - start -->
-    <div
-      class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor flex gap-4 flex-col divide-y divide-gray-300"
-    >
+    <div class="flex gap-4 flex-col divide-y divide-gray-300">
       <div class="flex items-left flex-col gap-2">
         <h3 class="myQuaternaryHeader">Selections Overview</h3>
         <p class="myPrimaryParagraph text-xs">

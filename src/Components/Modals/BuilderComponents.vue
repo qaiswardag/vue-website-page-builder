@@ -29,6 +29,7 @@ const firstButtonBuilder = function () {
 
 <template>
   <ModalBuilder
+    :title="title"
     maxWidth="5xl"
     :showModalBuilder="show"
     @closeMainModalBuilder="firstButtonBuilder"
@@ -38,23 +39,7 @@ const firstButtonBuilder = function () {
     <div
       class="font-sans w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
     >
-      <div class="flex items-center border-b border-gray-200 p-4 mb-2">
-        <div class="flex-1">
-          <h3 class="tertiaryHeader my-0 py-0">
-            {{ title }}
-          </h3>
-        </div>
-        <button
-          type="button"
-          class="h-10 w-10 flex-start cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
-          @click="firstButtonBuilder"
-          aria-label="Close"
-        >
-          <span class="material-symbols-outlined"> close </span>
-        </button>
-      </div>
-
-      <div class="p-4">
+      <div>
         <!-- Only show custom search component if provided -->
         <div v-if="CustomBuilderComponents">
           <component :is="CustomBuilderComponents" />

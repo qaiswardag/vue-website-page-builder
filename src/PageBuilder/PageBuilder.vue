@@ -6,10 +6,12 @@ import Preview from './Preview.vue'
 import ComponentTopMenu from '../Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue'
 import EditGetElement from '../Components/PageBuilder/EditorMenu/Editables/EditGetElement.vue'
 import BuilderComponents from '../Components/Modals/BuilderComponents.vue'
-import OptionsDropdown from '../Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
+import ModalBuilder from '../Components/Modals/ModalBuilder.vue'
 import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
 import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
 import { updateOrCreateIsFalsy } from '../helpers/passedPageBuilderConfig'
+import OptionsDropdown from '../Components/PageBuilder/DropdownsPlusToggles/OptionsDropdown.vue'
+
 /**
  * Props for PageBuilder component
  * @typedef {Object} Props
@@ -181,6 +183,14 @@ watch(
   { immediate: true },
 )
 
+const openSettingsModal = ref(false)
+
+const openSettings = function () {
+  openSettingsModal.value = true
+}
+const handleSettings = function () {
+  openSettingsModal.value = false
+}
 onMounted(async () => {
   const config = getConfigPageBuilder.value
   handleConfig(config)
@@ -238,6 +248,16 @@ onMounted(async () => {
     >
       <Preview></Preview>
     </PageBuilderPreviewModal>
+    <ModalBuilder
+      title="Open Options"
+      maxWidth="4xl"
+      :showModalBuilder="openSettingsModal"
+      @closeMainModalBuilder="handleSettings"
+      minHeight=""
+      maxHeight=""
+    >
+      <OptionsDropdown></OptionsDropdown>
+    </ModalBuilder>
 
     <div>
       <div class="relative h-full flex">
@@ -291,7 +311,7 @@ onMounted(async () => {
               @click.self="pageBuilderClass.clearHtmlSelection()"
               class="flex justify-center items-center h-24 w-full pl-4"
             >
-              <OptionsDropdown @previewCurrentDesign="previewCurrentDesign"></OptionsDropdown>
+              <button @click="openSettings" type="button">Open Options</button>
             </div>
 
             <div
