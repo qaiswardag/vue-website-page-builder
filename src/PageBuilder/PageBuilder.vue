@@ -279,7 +279,7 @@ onMounted(async () => {
           </div>
         </div>
         <main
-          class="flex flex-col h-full grow rounded-2xl duration-300 shadow-sm items-stretch"
+          class="flex flex-col h-full grow rounded-tr-2xl rounded-tl-2xl border border-gray-200 items-stretch"
           :class="{ 'mr-2': !getMenuRight, '': getMenuRight }"
         >
           <div
@@ -440,8 +440,11 @@ onMounted(async () => {
         <aside
           aria-label="Menu"
           id="pagebuilder-right-area"
-          :class="{ 'w-0': !getMenuRight, 'w-80 mr-2 items-stretch': getMenuRight }"
-          class="duration-300 z-20 flex-shrink-0 overflow-hidden shadow-sm rounded-l-2xl bg-myPrimaryLightGrayColor"
+          :class="{
+            'w-0': !getMenuRight,
+            'w-80 mr-2 bg-myPrimaryLightGrayColor items-stretch': getMenuRight,
+          }"
+          class="duration-300 z-20 flex-shrink-0 overflow-hidden shadow-sm rounded-l-2xl"
         >
           <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
           </RightSidebarEditor>

@@ -31,7 +31,7 @@ watch(
 </script>
 
 <template>
-  <div class="my-3 py-3">
+  <div class="my-2 py-2">
     <label class="myPrimaryInputLabel"> Opacity</label>
 
     <Listbox as="div" v-model="opacityVueModel">

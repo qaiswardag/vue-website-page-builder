@@ -8,6 +8,7 @@ import ManageOpacity from './ManageOpacity.vue'
   <EditorAccordion>
     <template #title>Opacity settings</template>
     <template #content>
+      <p class="myPrimaryParagraph font-medium py-0 my-4">Opacity</p>
       <!-- Text color - end -->
       <ManageOpacity></ManageOpacity>
       <ManageBackgroundOpacity></ManageBackgroundOpacity>

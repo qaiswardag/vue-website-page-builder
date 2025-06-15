@@ -57,13 +57,14 @@ const isHeadingElement = computed(() => {
 
     <div class="pl-3 pr-3 mb-4 overflow-y-scroll md:pb-24 pb-12">
       <div v-show="isHeadingElement === true">
-        <article>
+        <article class="py-0.5">
           <ImageEditor> </ImageEditor>
         </article>
-        <article>
+        <article class="py-0.5">
           <TipTap></TipTap>
         </article>
         <article
+          class="py-0.5"
           v-if="
             false &&
             $page.props.user.superadmin !== null &&
@@ -73,6 +74,7 @@ const isHeadingElement = computed(() => {
           <LinkEditor></LinkEditor>
         </article>
         <article
+          class="py-0.5"
           v-if="
             false &&
             $page.props.user.superadmin !== null &&
@@ -82,29 +84,29 @@ const isHeadingElement = computed(() => {
           <Typography></Typography>
         </article>
 
-        <article>
+        <article class="py-0.5">
           <OpacityEditor> </OpacityEditor>
         </article>
-        <article>
+        <article class="py-0.5">
           <PaddingPlusMargin> </PaddingPlusMargin>
         </article>
-        <article>
+        <article class="py-0.5">
           <BorderRadius></BorderRadius>
         </article>
-        <article>
+        <article class="py-0.5">
           <Borders></Borders>
         </article>
-        <article>
+        <article class="py-0.5">
           <ClassEditor></ClassEditor>
         </article>
       </div>
 
       <div>
-        <article>
+        <article class="py-0.5">
           <ElementEditor></ElementEditor>
         </article>
       </div>
-      <article class="min-h-[12em]"></article>
+      <article class="py-0.5"></article>
     </div>
   </div>
 </template>

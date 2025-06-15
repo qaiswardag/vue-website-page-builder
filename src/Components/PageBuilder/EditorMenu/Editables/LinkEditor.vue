@@ -109,7 +109,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
       </div>
       <!-- Hyperlink ability / end -->
       <div v-if="getHyperlinkAbility === true">
-        <div class="my-3 py-3">
+        <div class="my-2 py-2">
           <div class="flex items-center justify-between gap-2 w-full">
             <p class="myPrimaryParagraph">Enable hyperlink</p>
             <!-- Toggle start -->
@@ -211,7 +211,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
           </div>
         </div>
         <!-- no attached url - end -->
-        <div v-if="hyperlinkEnable === true" class="my-3 py-3">
+        <div v-if="hyperlinkEnable === true" class="my-2 py-2">
           <div class="relative flex items-center w-full border myPrimaryInput py-0 p-0">
             <input
               v-model="urlInput"
@@ -238,7 +238,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
             {{ getHyperlinkError }}
           </p>
 
-          <div class="my-3 py-3">
+          <div class="my-2 py-2">
             <div class="flex items-center justify-between gap-2 w-full">
               <p class="myPrimaryParagraph">Open in new tab</p>
               <!-- Toggle start -->

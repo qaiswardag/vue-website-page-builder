@@ -77,7 +77,7 @@ watch(
     <template #title>Border Radius</template>
     <template #content>
       <p class="myPrimaryParagraph font-medium py-0 my-4">Global</p>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Border Radius </label>
         <select
           v-model="borderRadiusGlobal"
@@ -94,7 +94,7 @@ watch(
         </select>
       </div>
       <p class="myPrimaryParagraph font-medium py-0 my-4">Specific</p>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Border Radius top left </label>
         <select
           v-model="borderRadiusTopLeft"
@@ -110,7 +110,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Border Radius top right </label>
         <select
           v-model="borderRadiusTopRight"
@@ -126,7 +126,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Border Radius bottom left </label>
         <select
           v-model="borderRadiusBottomleft"
@@ -142,7 +142,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Border Radius bottom right </label>
         <select
           v-model="borderRadiusBottomRight"

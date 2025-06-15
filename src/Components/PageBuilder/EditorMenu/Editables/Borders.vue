@@ -54,7 +54,9 @@ watch(
   <EditorAccordion>
     <template #title>Border Style, Width & Color</template>
     <template #content>
-      <div class="my-3 py-3">
+      <p class="myPrimaryParagraph font-medium py-0 my-4">Border</p>
+
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Border Style </label>
         <select
           v-model="borderStyle"
@@ -70,7 +72,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Border Width </label>
         <select
           v-model="borderWidth"

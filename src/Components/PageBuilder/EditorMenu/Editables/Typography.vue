@@ -103,7 +103,7 @@ watch(
     <template #content>
       <!-- FONT SIZES -->
       <p class="myPrimaryParagraph font-medium py-0 my-4">Font sizes</p>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Font Base </label>
         <select
           v-model="fontBase"
@@ -116,7 +116,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Font desktop size </label>
         <select
           v-model="fontDesktop"
@@ -129,7 +129,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Font tablet size </label>
         <select
           v-model="fontTablet"
@@ -142,7 +142,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Font mobile size </label>
         <select
           v-model="fontMobile"
@@ -157,7 +157,7 @@ watch(
       </div>
       <hr />
       <p class="myPrimaryParagraph font-medium py-0 my-4">Font general</p>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Font weight </label>
         <select
           v-model="fontWeight"
@@ -170,7 +170,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Font family </label>
         <select
           v-model="fontFamily"
@@ -183,7 +183,7 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-3 py-3">
+      <div class="my-2 py-2">
         <label class="myPrimaryInputLabel"> Font Style </label>
         <select
           v-model="fontStyle"
