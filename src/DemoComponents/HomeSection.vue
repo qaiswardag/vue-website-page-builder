@@ -69,7 +69,7 @@ const configPageBuilder = {
     image: '/jane_doe.jpg',
   },
   updateOrCreate: {
-    formType: 'create',
+    formType: 'create' as 'create',
     formName: 'news',
   },
   pageBuilderLogo: {
@@ -80,7 +80,7 @@ const configPageBuilder = {
     id: 1,
   },
   userSettings: {
-    theme: 'light',
+    theme: 'light' as 'light',
     language: 'en',
     autoSave: true,
   },
@@ -92,7 +92,9 @@ const configPageBuilder = {
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 
 onMounted(async () => {
-  if (localStorage.getItem(getLocalStorageItemName.value)) {
+  if (typeof getLocalStorageItemName.value === 'string' && getLocalStorageItemName.value) {
+    if (localStorage.getItem(getLocalStorageItemName.value)) {
+    }
   } else {
     pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
   }
