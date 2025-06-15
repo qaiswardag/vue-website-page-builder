@@ -335,7 +335,7 @@ onMounted(async () => {
               />
               <div class="md:px-3 px-2">
                 <div>
-                  <h3 class="font-normal text-gray-900">Information</h3>
+                  <p class="myPrimaryParagraph font-normal text-gray-900 pt-4">Information</p>
                   <dl class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
                     <div class="py-3 flex justify-between text-sm font-normal items-center">
                       <dt class="text-gray-500">From:</dt>

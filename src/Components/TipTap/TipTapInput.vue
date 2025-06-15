@@ -214,7 +214,7 @@ onMounted(() => {
             <div>
               <div>
                 <div
-                  class="px-2 flex items-center justify-start gap-2 p-2 rounded-full border border-gray-200 shadow-sm"
+                  class="px-2 flex items-center justify-start gap-2 p-1 rounded-full border border-gray-200 shadow-sm"
                 >
                   <button
                     @click="pageBuilderStateStore.setShowModalTipTap(false)"
@@ -227,7 +227,7 @@ onMounted(() => {
                 </div>
               </div>
             </div>
-            <div class="flex items-center p-2 rounded-full border border-gray-200 shadow-sm">
+            <div class="flex items-center p-1 rounded-full border border-gray-200 shadow-sm">
               <div class="px-2 flex items-center justify-start gap-2">
                 <button
                   @click="editor.chain().focus().setHardBreak().run()"

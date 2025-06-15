@@ -96,87 +96,90 @@ const openHTMLSettings = function () {
 </script>
 
 <template>
-  <div class="flex gap-2 items-center myPrimaryParagraph font-medium text-xs">
-    <!-- User Start -->
+  <div>
     <div
-      class="lg:block hidden text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-2 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
-      v-if="
-        getConfigPageBuilder &&
-        getConfigPageBuilder.userForPageBuilder &&
-        getConfigPageBuilder.userForPageBuilder.name
-      "
+      class="flex gap-2 items-center myPrimaryParagraph font-medium text-xs py-1 px-2 rounded-full border border-gray-200 shadow-sm"
     >
-      <div>{{ getConfigPageBuilder.userForPageBuilder.name }}</div>
+      <!-- User Start -->
+      <div
+        class=""
+        v-if="
+          getConfigPageBuilder &&
+          getConfigPageBuilder.userForPageBuilder &&
+          getConfigPageBuilder.userForPageBuilder.name
+        "
+      >
+        <div
+          class="text-white flex-shrink-0 h-10 w-10 rounded-full bg-myPrimaryBrandColor flex justify-center items-center text-xs rounded-l-full"
+        >
+          {{
+            typeof getConfigPageBuilder.userForPageBuilder.name === 'string' &&
+            getConfigPageBuilder.userForPageBuilder.name[0]
+          }}
+        </div>
+      </div>
+      <!-- User End -->
+
+      <!-- Main Settings Start -->
+      <button class="lg:block hidden myPrimaryTag" type="button" @click="openMainSettings">
+        Main Settings
+      </button>
+      <!-- Main Settings End -->
+      <!-- HTML Settings Start -->
+      <button class="lg:block hidden myPrimaryTag" type="button" @click="openHTMLSettings">
+        HTML Overview
+      </button>
+      <!-- HTML Settings End -->
+
+      <!--Delete Layout Start -->
+      <button
+        class="lg:block hidden myPrimaryTag bg-myPrimaryErrorColor text-white"
+        type="button"
+        @click="deleteAllComponents"
+      >
+        Delete Layout
+      </button>
+
+      <!--Delete Layout End -->
     </div>
-    <!-- User End -->
 
-    <!-- Main Settings Start -->
-    <button
-      class="lg:block hidden text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-2 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
-      type="button"
-      @click="openMainSettings"
+    <ModalBuilder
+      maxWidth="5xl"
+      :showModalBuilder="showMainSettings"
+      title="Main Settings"
+      @closeMainModalBuilder="handleMainSettings"
+      minHeight=""
+      maxHeight=""
     >
-      Main Settings
-    </button>
-    <!-- Main Settings End -->
-    <!-- HTML Settings Start -->
-    <button
-      class="lg:block hidden text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-2 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
-      type="button"
-      @click="openHTMLSettings"
-    >
-      HTML Settings
-    </button>
-    <!-- HTML Settings End -->
+      <PageBuilderSettings> </PageBuilderSettings>
+    </ModalBuilder>
 
-    <!--Delete Layout Start -->
-    <button
-      class="lg:block hidden text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-2 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
-      type="button"
-      @click="deleteAllComponents"
+    <ModalBuilder
+      maxWidth="5xl"
+      :showModalBuilder="showHTMLSettings"
+      title="Selected HTML"
+      @closeMainModalBuilder="handleHTMLSettings"
+      minHeight=""
+      maxHeight=""
     >
-      Delete Layout
-    </button>
+      <AdvancedPageBuilderSettings> </AdvancedPageBuilderSettings>
+    </ModalBuilder>
 
-    <!--Delete Layout End -->
+    <DynamicModalBuilder
+      :showDynamicModalBuilder="showModalDeleteAllComponents"
+      :type="typeModal"
+      :gridColumnAmount="gridColumnModal"
+      :title="titleModal"
+      :description="descriptionModal"
+      :firstButtonText="firstButtonModal"
+      :secondButtonText="secondButtonModal"
+      :thirdButtonText="thirdButtonModal"
+      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicModalBuilder"
+      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicModalBuilder"
+      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicModalBuilder"
+    >
+      <header></header>
+      <main></main>
+    </DynamicModalBuilder>
   </div>
-
-  <ModalBuilder
-    maxWidth="5xl"
-    :showModalBuilder="showMainSettings"
-    title="Main Settings"
-    @closeMainModalBuilder="handleMainSettings"
-    minHeight=""
-    maxHeight=""
-  >
-    <PageBuilderSettings> </PageBuilderSettings>
-  </ModalBuilder>
-
-  <ModalBuilder
-    maxWidth="5xl"
-    :showModalBuilder="showHTMLSettings"
-    title="Advanced Settings"
-    @closeMainModalBuilder="handleHTMLSettings"
-    minHeight=""
-    maxHeight=""
-  >
-    <AdvancedPageBuilderSettings> </AdvancedPageBuilderSettings>
-  </ModalBuilder>
-
-  <DynamicModalBuilder
-    :showDynamicModalBuilder="showModalDeleteAllComponents"
-    :type="typeModal"
-    :gridColumnAmount="gridColumnModal"
-    :title="titleModal"
-    :description="descriptionModal"
-    :firstButtonText="firstButtonModal"
-    :secondButtonText="secondButtonModal"
-    :thirdButtonText="thirdButtonModal"
-    @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonFunctionDynamicModalBuilder"
-    @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonFunctionDynamicModalBuilder"
-    @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicModalBuilder"
-  >
-    <header></header>
-    <main></main>
-  </DynamicModalBuilder>
 </template>

@@ -36,7 +36,7 @@ const firstButtonBuilder = function () {
     minHeight=""
     maxHeight=""
   >
-    <div class="w-full inset-x-0 h-[80vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
+    <div class="w-full inset-x-0 h-[75vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
       <div>
         <!-- Only show custom search component if provided -->
         <div v-if="CustomBuilderComponents">

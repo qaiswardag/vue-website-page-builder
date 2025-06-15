@@ -34,8 +34,7 @@ function prettifyHtml(html) {
 <template>
   <div class="w-full inset-x-0 h-[90vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
     <div class="flex items-left flex-col myPrimaryGap border-myPrimaryMediumGrayColor">
-      <h4 class="myQuaternaryHeader">Selected HTML</h4>
-      <p class="myPrimaryParagraph text-xs">
+      <p class="myPrimaryParagraph">
         Overview of Selected Element, Component, and Components. This section provides real-time
         updates based on your HTML selection.
       </p>
@@ -115,25 +114,22 @@ function prettifyHtml(html) {
                   {{ getComponent === null ? 'NULL' : typeof getComponent }}
                 </p>
               </div>
-              <div
-                v-if="getElement"
-                class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
-              >
-                <div class="bg-gray-50 pt-4 pb-1 border-b border-gray-200">
+              <div v-if="getElement" class="overflow-hidden border-2 border-white mb-6">
+                <div class="bg-gray-900 pt-4 pb-1 border-b border-gray-200">
                   <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-300">
-                      <thead class="bg-gray-50">
+                      <thead class="bg-gray-900">
                         <tr>
                           <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
                           >
-                            Selected HTML:
+                            Selected HTML
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-white divide-y divide-gray-200">
+                      <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-gray-500">
+                          <td class="px-6 py-4 text-sm text-white">
                             {{ getElement?.outerHTML }}
                           </td>
                         </tr>
@@ -142,18 +138,18 @@ function prettifyHtml(html) {
                   </div>
                   <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-300">
-                      <thead class="bg-gray-50">
+                      <thead class="bg-gray-900">
                         <tr>
                           <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
                           >
-                            Element src:
+                            Element src
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-white divide-y divide-gray-200">
+                      <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-gray-500 whitespace-pre-line">
+                          <td class="px-6 py-4 text-sm text-white whitespace-pre-line">
                             {{ getElement?.src ? getElement?.src : typeof getElement?.src }}
                           </td>
                         </tr>
@@ -163,18 +159,18 @@ function prettifyHtml(html) {
                 </div>
                 <div class="overflow-x-auto">
                   <table class="min-w-full divide-y divide-gray-300">
-                    <thead class="bg-gray-50">
+                    <thead class="bg-gray-900">
                       <tr>
                         <th
-                          class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                          class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
                         >
                           Element classes
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="bg-gray-900 divide-y divide-gray-200">
                       <tr>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td class="px-6 py-4 text-sm text-white">
                           {{
                             getElement?.classList
                               ? getElement?.classList
@@ -194,25 +190,22 @@ function prettifyHtml(html) {
                   {{ getComponent === null ? 'NULL' : typeof getComponent }}
                 </p>
               </div>
-              <div
-                v-if="getComponent"
-                class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg"
-              >
-                <div class="bg-gray-50 pt-4 pb-1 border-b border-gray-200">
+              <div v-if="getComponent" class="overflow-hidden border-2 border-white mb-6">
+                <div class="bg-gray-900 pt-4 pb-1 border-b border-gray-200">
                   <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-300">
-                      <thead class="bg-gray-50">
+                      <thead class="bg-gray-900">
                         <tr>
                           <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
                           >
                             ID
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-white divide-y divide-gray-200">
+                      <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-gray-500">
+                          <td class="px-6 py-4 text-sm text-white">
                             {{ getComponent?.id }}
                           </td>
                         </tr>
@@ -221,18 +214,18 @@ function prettifyHtml(html) {
                   </div>
                   <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-300">
-                      <thead class="bg-gray-50">
+                      <thead class="bg-gray-900">
                         <tr>
                           <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider border-t"
                           >
                             Title
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-white divide-y divide-gray-200">
+                      <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-gray-500 whitespace-pre-line">
+                          <td class="px-6 py-4 text-sm text-white whitespace-pre-line">
                             {{ getComponent?.title }}
                           </td>
                         </tr>
@@ -242,20 +235,20 @@ function prettifyHtml(html) {
                 </div>
                 <div class="overflow-x-auto">
                   <table class="min-w-full divide-y divide-gray-300">
-                    <thead class="bg-gray-50">
+                    <thead class="bg-gray-900">
                       <tr>
                         <th
-                          class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                          class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
                         >
                           HTML Code
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="bg-white divide-y divide-gray-200">
+                    <tbody class="bg-gray-900 divide-y divide-gray-200">
                       <tr>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td class="px-6 py-4 text-sm text-white">
                           <pre
-                            class="py-4 text-sm text-gray-500 whitespace-pre-lines font-sans flex items-start justify-left"
+                            class="py-4 text-sm text-white whitespace-pre-lines font-sans flex items-start justify-left"
                           >
                               <code class="font-sans" v-html="prettifyHtml(getComponent?.html_code)"></code>
                             </pre>
@@ -277,24 +270,24 @@ function prettifyHtml(html) {
                 <div
                   v-for="component in getComponents"
                   :key="component.id"
-                  class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg mb-6"
+                  class="overflow-hidden border-2 border-white mb-6"
                 >
                   <!-- ID and Title above the table, styled to look connected -->
-                  <div class="bg-gray-50 pt-4 pb-1 border-b border-gray-200">
+                  <div class="bg-gray-900 pt-4 pb-1 border-b border-gray-200">
                     <div class="overflow-x-auto">
                       <table class="min-w-full divide-y divide-gray-300">
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-900">
                           <tr>
                             <th
-                              class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                              class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
                             >
                               ID
                             </th>
                           </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody class="bg-gray-900 divide-y divide-gray-200">
                           <tr>
-                            <td class="px-6 py-4 text-sm text-gray-500">
+                            <td class="px-6 py-4 text-sm text-white">
                               {{ component.id }}
                             </td>
                           </tr>
@@ -303,18 +296,18 @@ function prettifyHtml(html) {
                     </div>
                     <div class="overflow-x-auto">
                       <table class="min-w-full divide-y divide-gray-300">
-                        <thead class="bg-gray-50">
+                        <thead class="bg-gray-900">
                           <tr>
                             <th
-                              class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                              class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider border-t"
                             >
                               Title
                             </th>
                           </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200">
+                        <tbody class="bg-gray-900 divide-y divide-gray-200">
                           <tr>
-                            <td class="px-6 py-4 text-sm text-gray-500 whitespace-pre-line">
+                            <td class="px-6 py-4 text-sm text-white whitespace-pre-line">
                               {{ component.title }}
                             </td>
                           </tr>
@@ -324,20 +317,20 @@ function prettifyHtml(html) {
                   </div>
                   <div class="overflow-x-auto">
                     <table class="min-w-full divide-y divide-gray-300">
-                      <thead class="bg-gray-50">
+                      <thead class="bg-gray-900">
                         <tr>
                           <th
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-900 tracking-wider"
+                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
                           >
                             HTML Code
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-white divide-y divide-gray-200">
+                      <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-gray-500">
+                          <td class="px-6 py-4 text-sm text-white">
                             <pre
-                              class="py-4 text-sm text-gray-500 whitespace-pre-lines font-sans flex items-start justify-left"
+                              class="py-4 text-sm text-white whitespace-pre-lines font-sans flex items-start justify-left"
                             >
                               <code class="font-sans" v-html="prettifyHtml(component.html_code)"></code>
                             </pre>
