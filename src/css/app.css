@@ -335,7 +335,7 @@
   }
 
   .myInputGroup {
-    @apply w-full self-start mb-2;
+    @apply w-full self-start mb-2 px-2;
   }
   .myDoActionButtonSection {
     @apply px-4 py-4 border border-myPrimaryLightGrayColor rounded sm:px-6 text-right mt-1 bg-gray-50;

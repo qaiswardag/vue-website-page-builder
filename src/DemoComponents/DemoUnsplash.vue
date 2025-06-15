@@ -314,7 +314,7 @@ onMounted(async () => {
             </div>
           </div>
           <!-- Sidebar # start -->
-          <div class="w-3/12 overflow-y-auto">
+          <aside class="w-3/12 overflow-y-auto">
             <template v-if="getIsLoadingImage">
               <div class="flex items-center justify-center mt-4">
                 <div
@@ -349,7 +349,7 @@ onMounted(async () => {
                 </div>
               </div>
             </template>
-          </div>
+          </aside>
         </div>
         <!-- Sidebar # end -->
 

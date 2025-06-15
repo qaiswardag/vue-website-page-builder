@@ -179,6 +179,7 @@ onMounted(() => {
 <template>
   <div>
     <DynamicModalBuilder
+      maxWidth="2xl"
       :showDynamicModalBuilder="showModalUrl"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
@@ -193,6 +194,7 @@ onMounted(() => {
     >
       <header></header>
       <main>
+        <h3 class="myQuaternaryHeader mb-4">Add URL</h3>
         <div class="myInputGroup">
           <label class="myPrimaryInputLabel" for="roles"><span>Enter URL</span></label
           ><input v-model="urlEnteret" class="myPrimaryInput mt-1" type="url" placeholder="url" />

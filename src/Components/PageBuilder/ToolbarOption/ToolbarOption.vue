@@ -122,7 +122,7 @@ const openHTMLSettings = function () {
 
       <!-- Main Settings Start -->
       <button class="lg:block hidden myPrimaryTag" type="button" @click="openMainSettings">
-        Main Settings
+        Config Overview
       </button>
       <!-- Main Settings End -->
       <!-- HTML Settings Start -->

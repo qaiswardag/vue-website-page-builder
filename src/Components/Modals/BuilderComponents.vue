@@ -30,7 +30,7 @@ const firstButtonBuilder = function () {
 <template>
   <ModalBuilder
     :title="title"
-    maxWidth="lg:7xl"
+    maxWidth="7xl"
     :showModalBuilder="show"
     @closeMainModalBuilder="firstButtonBuilder"
     minHeight=""

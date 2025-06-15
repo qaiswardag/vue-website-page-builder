@@ -233,7 +233,7 @@ const handleModalIframeSrc = function () {
     <DynamicModalBuilder
       :simpleModal="true"
       :showDynamicModalBuilder="getShowModalTipTap"
-      maxWidth="5xl"
+      maxWidth="6xl"
       :type="typeModal"
       :gridColumnAmount="gridColumnModal"
       :title="titleModal"
