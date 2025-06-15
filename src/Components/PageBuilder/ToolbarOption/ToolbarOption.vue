@@ -99,7 +99,7 @@ const openHTMLSettings = function () {
   <div class="flex gap-2 items-center myPrimaryParagraph font-medium text-xs">
     <!-- User Start -->
     <div
-      class="lg:block hidden"
+      class="lg:block hidden text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-2 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
       v-if="
         getConfigPageBuilder &&
         getConfigPageBuilder.userForPageBuilder &&
@@ -111,14 +111,33 @@ const openHTMLSettings = function () {
     <!-- User End -->
 
     <!-- Main Settings Start -->
-    <button type="button" @click="openMainSettings">Main Settings</button>
+    <button
+      class="lg:block hidden text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-2 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+      type="button"
+      @click="openMainSettings"
+    >
+      Main Settings
+    </button>
     <!-- Main Settings End -->
     <!-- HTML Settings Start -->
-    <button type="button" @click="openHTMLSettings">HTML Settings</button>
+    <button
+      class="lg:block hidden text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-2 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+      type="button"
+      @click="openHTMLSettings"
+    >
+      HTML Settings
+    </button>
     <!-- HTML Settings End -->
 
     <!--Delete Layout Start -->
-    <button type="button" @click="deleteAllComponents">Delete Layout</button>
+    <button
+      class="lg:block hidden text-gray-900 hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-full text-xs px-2 py-2 text-center me-2 mb-2 dark:border-gray-600 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-800"
+      type="button"
+      @click="deleteAllComponents"
+    >
+      Delete Layout
+    </button>
+
     <!--Delete Layout End -->
   </div>
 

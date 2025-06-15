@@ -50,7 +50,7 @@ const handleDownloadHTML = function () {
 </script>
 
 <template>
-  <div>
+  <div class="w-full inset-x-0 h-[90vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
     <!-- Advanced Settings - start -->
     <div class="flex gap-4 flex-col divide-y divide-gray-300">
       <!-- Advanced Settings - start -->

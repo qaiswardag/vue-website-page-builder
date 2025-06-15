@@ -30,15 +30,13 @@ const firstButtonBuilder = function () {
 <template>
   <ModalBuilder
     :title="title"
-    maxWidth="5xl"
+    maxWidth="lg:7xl"
     :showModalBuilder="show"
     @closeMainModalBuilder="firstButtonBuilder"
     minHeight=""
     maxHeight=""
   >
-    <div
-      class="font-sans w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
-    >
+    <div class="w-full inset-x-0 h-[80vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
       <div>
         <!-- Only show custom search component if provided -->
         <div v-if="CustomBuilderComponents">

@@ -30,18 +30,18 @@ const handleClose = () => {
 
 const maxWidthClass = computed(() => {
   return {
-    sm: 'sm:max-w-sm',
-    md: 'sm:max-w-md',
-    lg: 'sm:max-w-lg',
-    xl: 'sm:max-w-xl',
-    '2xl': 'sm:max-w-2xl',
-    '3xl': 'sm:max-w-3xl',
-    '4xl': 'sm:max-w-4xl',
-    '5xl': 'sm:max-w-5xl',
-    '6xl': 'sm:max-w-6xl',
-    '7xl': 'sm:max-w-7xl',
-    full: 'sm:max-w-full', // 100% width
-    screen: 'sm:w-screen sm:max-w-none', // truly full screen
+    sm: 'lg:max-w-sm',
+    md: 'lg:max-w-md',
+    lg: 'lg:max-w-lg',
+    xl: 'lg:max-w-xl',
+    '2xl': 'lg:max-w-2xl',
+    '3xl': 'lg:max-w-3xl',
+    '4xl': 'lg:max-w-4xl',
+    '5xl': 'lg:max-w-5xl',
+    '6xl': 'lg:max-w-6xl',
+    '7xl': 'lg:max-w-7xl',
+    full: 'lg:max-w-full', // 100% width
+    screen: 'lg:w-screen sm:max-w-none', // truly full screen
   }[props.maxWidth]
 })
 </script>
@@ -60,16 +60,14 @@ const maxWidthClass = computed(() => {
       <div class="fixed inset-0 bg-black/50 transition-opacity" @click="handleClose"></div>
 
       <div
-        class="relative inline-block bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all max-w-[96vh] max-h-[100vh] overflow-y-auto sm:w-full px-4"
+        class="relative inline-block bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all max-w-[96vh] max-h-[98vh] overflow-y-auto w-full px-4"
         :class="[
           maxWidthClass ? maxWidthClass : '',
           minHeight ? minHeight : '',
           maxHeight ? maxHeight : '',
         ]"
       >
-        <div
-          class="lg:h-16 flex items-center justify-between border-b border-gray-200 bg-white mb-2"
-        >
+        <div class="h-16 flex items-center justify-between border-b border-gray-200 bg-white mb-2">
           <h3 as="h3" class="myQuaternaryHeader my-0 py-0">
             {{ title }}
           </h3>

@@ -32,7 +32,7 @@ function prettifyHtml(html) {
 </script>
 
 <template>
-  <div class="my-8">
+  <div class="w-full inset-x-0 h-[90vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
     <div class="flex items-left flex-col myPrimaryGap border-myPrimaryMediumGrayColor">
       <h4 class="myQuaternaryHeader">Selected HTML</h4>
       <p class="myPrimaryParagraph text-xs">
