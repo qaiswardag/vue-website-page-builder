@@ -12,17 +12,15 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
   <div>
     <div class="blockease-linear duration-200 block ease-linear">
       <template v-if="pageBuilderClass.selectedElementIsValidText()">
-        <div
-          class="border-t border-myPrimaryLightGrayColor flex flex-row justify-between items-center pl-3 pr-3 py-5 duration-200 hover:bg-myPrimaryLightGrayColor"
-        >
+        <div class="flex items-center justify-center mb-6">
           <div class="px-2 flex items-center justify-start gap-2">
             <button
               @click="pageBuilderStateStore.setShowModalTipTap(true)"
               type="button"
-              class="text-[12.5px] gap-2 text-nowrap pl-2 pr-3 w-full h-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+              class="myPrimaryTag"
             >
               <span class="material-symbols-outlined"> edit </span>
-              <span>Edit text</span>
+              <span>Edit text and links</span>
             </button>
           </div>
         </div>

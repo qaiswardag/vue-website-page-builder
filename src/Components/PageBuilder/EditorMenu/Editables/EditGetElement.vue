@@ -288,7 +288,7 @@ const handleModalIframeSrc = function () {
           <div class="px-2 flex items-center justify-start gap-2">
             <button @click="handleModalPreviewTiptap" type="button" class="myPrimaryTag">
               <span class="material-symbols-outlined"> edit </span>
-              <span>Edit text</span>
+              <span>Edit text and links</span>
             </button>
           </div>
           <div class="px-2">

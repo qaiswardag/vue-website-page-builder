@@ -81,7 +81,7 @@ const handleImageClick = async function (data) {
 
 const searchByOrientation = function (orientationParameter) {
   // check if search term length is more than 0
-  if (getSearchTerm.value.length > 0 && getOrientationValue.value !== orientationParameter) {
+  if (getOrientationValue.value !== orientationParameter) {
     getOrientationValue.value = orientationParameter
     getCurrentPageNumber.value = 1
     fetchUnsplash()
