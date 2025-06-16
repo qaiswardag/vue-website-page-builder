@@ -1260,6 +1260,7 @@ class PageBuilderClass {
     }
   }
 
+  // save to local storage
   async saveComponentsLocalStorage() {
     await this.nextTick
     this.synchronizeDOMAndComponents()
@@ -1275,6 +1276,9 @@ class PageBuilderClass {
         JSON.stringify(this.getComponents.value),
       )
     }
+
+    // Re-attach event listeners after saving
+    await this.setEventListenersForElements()
   }
 
   async removeItemComponentsLocalStorageCreate() {

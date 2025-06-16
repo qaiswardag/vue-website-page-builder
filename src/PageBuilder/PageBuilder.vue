@@ -209,6 +209,15 @@ watch(
   { immediate: true },
 )
 
+const successfullySaved = ref(false)
+
+const onSaveLayoutClick = async function () {
+  pageBuilderClass.saveComponentsLocalStorage()
+  successfullySaved.value = true
+  await delay(1000)
+  successfullySaved.value = false
+}
+
 onMounted(async () => {
   const config = getConfigPageBuilder.value
   handleConfig(config)
@@ -341,6 +350,26 @@ onMounted(async () => {
                     </div>
                   </button>
                 </div>
+              </div>
+
+              <div class="flex gap-2 items-center ml-6">
+                <button
+                  class="myPrimaryButton h-8 items-center"
+                  @click="onSaveLayoutClick"
+                  :disabled="successfullySaved"
+                  type="button"
+                >
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined">Raven</span>
+                    <span> Save </span>
+                  </div>
+                  <div
+                    v-if="successfullySaved"
+                    class="myPrimaryParagraph lg:block hidden items-center h-full"
+                  >
+                    <span class="material-symbols-outlined text-white"> check </span>
+                  </div>
+                </button>
               </div>
             </div>
 
