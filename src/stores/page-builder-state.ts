@@ -59,7 +59,7 @@ interface PageBuilderState {
   currentPreviewImage: string | null
 
   // User State
-  isLoading: boolean
+  isSaving: boolean
 }
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
@@ -115,7 +115,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     currentPreviewImage: null,
 
     // User State
-    isLoading: false,
+    isSaving: false,
   }),
   getters: {
     // Core Page Builder Getters
@@ -262,7 +262,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
 
     // User Getters
-    getIsLoading: (state: PageBuilderState): boolean => state.isLoading,
+    getIsSaving: (state: PageBuilderState): boolean => state.isSaving,
   },
   actions: {
     setComponentArrayAddMethod(payload: string | null): void {
@@ -448,8 +448,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
 
     // User Actions
-    setIsLoading(payload: boolean): void {
-      this.isLoading = payload
+    setIsSaving(payload: boolean): void {
+      this.isSaving = payload
     },
   },
 })

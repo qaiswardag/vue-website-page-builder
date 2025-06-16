@@ -68,14 +68,14 @@ const editor = useEditor({
 })
 
 // watch for changes in textContent and update store and textContentVueModel
-watch(textContent, (newValue) => {
+watch(textContent, async (newValue) => {
   if (!pageBuilderClass.selectedElementIsValidText()) return
 
   if (getElement.value) {
     pageBuilderStateStore.setTextAreaVueModel(newValue)
 
     if (typeof newValue === 'string' && newValue !== textContentVueModel.value) {
-      pageBuilderClass.handleTextInput(newValue)
+      await pageBuilderClass.handleTextInput(newValue)
     }
   }
 })
@@ -224,7 +224,7 @@ onMounted(() => {
                     class="myPrimaryTag"
                   >
                     <span class="material-symbols-outlined"> Save </span>
-                    <span>Save & Close</span>
+                    <span>Close with Changes</span>
                   </button>
                 </div>
               </div>

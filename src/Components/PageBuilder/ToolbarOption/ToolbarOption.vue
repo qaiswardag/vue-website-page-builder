@@ -49,18 +49,19 @@ const deleteAllComponents = function () {
   }
   //
   // handle click
-  thirdModalButtonFunctionDynamicModalBuilder.value = function () {
+  thirdModalButtonFunctionDynamicModalBuilder.value = async function () {
     pageBuilderClass.deleteAllComponents()
-    pageBuilderClass.clearHtmlSelection()
+    await pageBuilderClass.clearHtmlSelection()
+
     if (
       getConfigPageBuilder.value.updateOrCreate &&
       typeof getConfigPageBuilder.value.updateOrCreate.formType === 'string'
     ) {
       if (getConfigPageBuilder.value.updateOrCreate.formType === 'create') {
-        pageBuilderClass.removeItemComponentsLocalStorageCreate()
+        await pageBuilderClass.removeItemComponentsLocalStorageCreate()
       }
       if (getConfigPageBuilder.value.updateOrCreate.formType === 'update') {
-        pageBuilderClass.removeItemComponentsLocalStorageUpdate()
+        await pageBuilderClass.removeItemComponentsLocalStorageUpdate()
       }
     }
 
@@ -160,7 +161,12 @@ const openHTMLSettings = function () {
       <button
         class="cursor-pointer lg:block hidden myPrimaryTag"
         type="button"
-        @click="openMainSettings"
+        @click="
+          () => {
+            pageBuilderClass.clearHtmlSelection()
+            openMainSettings()
+          }
+        "
       >
         Config Overview
       </button>
@@ -179,7 +185,12 @@ const openHTMLSettings = function () {
       <button
         class="cursor-pointer lg:block hidden myPrimaryTag bg-myPrimaryErrorColor text-white"
         type="button"
-        @click="deleteAllComponents"
+        @click="
+          () => {
+            pageBuilderClass.clearHtmlSelection()
+            deleteAllComponents()
+          }
+        "
       >
         Delete Layout
       </button>

@@ -15,8 +15,8 @@ const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Super simple component addition with professional modal closing!
-const handleDropComponent = function (componentObject: ComponentObject) {
-  pageBuilderClass.addComponent(componentObject)
+const handleDropComponent = async function (componentObject: ComponentObject) {
+  await pageBuilderClass.addComponent(componentObject)
   closeAddComponentModal()
 }
 

@@ -11,6 +11,7 @@ import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared
 import { updateOrCreateIsFalsy } from '../helpers/passedPageBuilderConfig'
 import ToolbarOption from '../Components/PageBuilder/ToolbarOption/ToolbarOption.vue'
 import { delay } from '../composables/delay'
+import { debounceAsync } from '../composables/debounceAsync'
 
 /**
  * Props for PageBuilder component
@@ -58,6 +59,10 @@ const getConfigPageBuilder = computed(() => {
   return pageBuilderStateStore.getConfigPageBuilder
 })
 
+const getIsSaving = computed(() => {
+  return pageBuilderStateStore.getIsSaving
+})
+
 const getMenuRight = computed(() => {
   return pageBuilderStateStore.getMenuRight
 })
@@ -83,8 +88,8 @@ const titleModalAddComponent = ref('')
 const firstButtonTextSearchComponents = ref('')
 const firstModalButtonSearchComponentsFunction = ref(null)
 
-const handleAddComponent = function () {
-  pageBuilderClass.clearHtmlSelection()
+const handleAddComponent = async function () {
+  await pageBuilderClass.clearHtmlSelection()
 
   //
   titleModalAddComponent.value = 'Add Components to Page'
@@ -108,12 +113,21 @@ const getElement = computed(() => {
   return pageBuilderStateStore.getElement
 })
 
+// auto save logic
+// if (
+//   getConfigPageBuilder &&
+//   typeof getConfigPageBuilder.value.userSettings.autoSave === 'boolean' &&
+//   getConfigPageBuilder.value.userSettings.autoSave
+// ) {
+//   await pageBuilderClass.onAutoOrSaveClick()
+// }
+
 const getElementAttributes = computed(() => {
   if (!getElement.value || !(getElement.value instanceof HTMLElement)) {
-    return new Object()
+    return ''
   }
 
-  // Extract the attributes you want to watch
+  // Extract the attributes to watch
   const attributesToWatch = {
     src: getElement.value.getAttribute('src'),
     href: getElement.value.getAttribute('href'),
@@ -125,12 +139,12 @@ const getElementAttributes = computed(() => {
   return attributesToWatch
 })
 
-const autoSavingSatus = ref(false)
+const debounce = debounceAsync(300)
+
+let debounceTimer = ref(null)
 
 watch(getElementAttributes, async (newAttributes, oldAttributes) => {
-  autoSavingSatus.value = true
-
-  // Check if any of the specified attributes have changed
+  // Only run if attributes actually changed
   if (
     newAttributes?.src !== oldAttributes?.src ||
     newAttributes?.href !== oldAttributes?.href ||
@@ -138,33 +152,24 @@ watch(getElementAttributes, async (newAttributes, oldAttributes) => {
     newAttributes?.class !== oldAttributes?.class ||
     newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
-    await pageBuilderClass.handlePageBuilderMethods()
-    await pageBuilderClass.setEventListenersForElements()
-    autoSaveWithStatus(newAttributes, oldAttributes)
-  }
-})
-
-async function autoSaveWithStatus(newAttributes, oldAttributes) {
-  // Check if config is set
-  if (
-    getConfigPageBuilder.value &&
-    getConfigPageBuilder.value.userSettings &&
-    getConfigPageBuilder.value.userSettings.autoSave
-  ) {
-    // Check if auto save it set to true for the user
+    // auto save logic
     if (
+      getConfigPageBuilder &&
       typeof getConfigPageBuilder.value.userSettings.autoSave === 'boolean' &&
       getConfigPageBuilder.value.userSettings.autoSave
-      // Check if auto save it set to true for the user
     ) {
-      console.log('kommer den her..')
-      await delay(500)
-      // await pageBuilderClass.autoSave()
+      await pageBuilderClass.onAutoOrSaveClick()
+      return
     }
+
+    if (debounceTimer.value) clearTimeout(debounceTimer.value)
+    debounceTimer.value = setTimeout(async () => {
+      console.log('CHECK COUNT FOR THIS WATCHER')
+      await pageBuilderClass.handlePageBuilderMethods()
+      await pageBuilderClass.setEventListenersForElements()
+    }, 200)
   }
-  // set loading to false
-  autoSavingSatus.value = false
-}
+})
 
 const handleSelectComponent = function (componentObject) {
   pageBuilderStateStore.setComponent(componentObject)
@@ -209,22 +214,13 @@ watch(
   { immediate: true },
 )
 
-const successfullySaved = ref(false)
-
-const onSaveLayoutClick = async function () {
-  pageBuilderClass.saveComponentsLocalStorage()
-  successfullySaved.value = true
-  await delay(1000)
-  successfullySaved.value = false
-}
-
 onMounted(async () => {
   const config = getConfigPageBuilder.value
   handleConfig(config)
 
   pageBuilderClass.updateLocalStorageItemName()
 
-  pageBuilderClass.removeHoveredAndSelected()
+  await pageBuilderClass.clearHtmlSelection()
 
   await pageBuilderClass.setEventListenersForElements()
 })
@@ -236,7 +232,10 @@ onMounted(async () => {
     class="font-sans max-w-full m-1 border border-gray-600 inset-x-0 z-10 bg-white overflow-x-scroll"
   >
     <div id="pagebuilder-top-area" class="px-4 pt-2 pb-4 mx-4 mb-4 mt-2">
-      <div class="flex justify-between items-center pb-2 border-b border-gray-200">
+      <div
+        @click.self="pageBuilderClass.clearHtmlSelection()"
+        class="flex justify-between items-center pb-2 border-b border-gray-200"
+      >
         <!-- Logo # start -->
         <div @click="pageBuilderClass.clearHtmlSelection()">
           <div
@@ -322,55 +321,39 @@ onMounted(async () => {
             class="flex items-center justify-between rounded-t-2xl bg-myPrimaryLightGrayColor min-w-[30rem]"
           >
             <div
-              @click="pageBuilderClass.clearHtmlSelection()"
+              @click.self="pageBuilderClass.clearHtmlSelection()"
               class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 pl-2 h-24 w-full min-w-36"
             >
-              <div>
-                <div>
-                  <button
-                    class="myPrimaryButton h-8"
-                    @click="pageBuilderClass.saveComponentsLocalStorage"
-                    type="button"
-                  >
-                    <div v-if="!autoSavingSatus" class="flex items-center gap-2">
-                      <span class="material-symbols-outlined">save</span>
-                      <span> Save </span>
-                    </div>
-
-                    <div v-if="autoSavingSatus" class="flex items-center gap-2">
-                      <span>
-                        <span class="relative flex size-3">
-                          <span
-                            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-100 opacity-75"
-                          ></span>
-                          <span class="relative inline-flex size-3 rounded-full bg-white"></span>
-                        </span>
-                      </span>
-                      <div>Saving</div>
-                    </div>
-                  </button>
-                </div>
-              </div>
-
-              <div class="flex gap-2 items-center ml-6">
-                <button
-                  class="myPrimaryButton h-8 items-center"
-                  @click="onSaveLayoutClick"
-                  :disabled="successfullySaved"
-                  type="button"
+              <button
+                class="myPrimaryButton h-6 flex gap-2"
+                @click.stop="
+                  async () => {
+                    await pageBuilderClass.clearHtmlSelection()
+                    await pageBuilderClass.onAutoOrSaveClick()
+                  }
+                "
+                type="button"
+                :disabled="getIsSaving"
+              >
+                <div
+                  v-if="!getIsSaving"
+                  class="h-10 w-4 cursor-pointer rounded-full flex items-center justify-center"
                 >
-                  <div class="flex items-center gap-2">
-                    <span class="material-symbols-outlined">Raven</span>
-                    <span> Save </span>
-                  </div>
-                  <div
-                    v-if="successfullySaved"
-                    class="myPrimaryParagraph lg:block hidden items-center h-full"
-                  >
-                    <span class="material-symbols-outlined text-white"> check </span>
-                  </div>
-                </button>
-              </div>
+                  <span class="material-symbols-outlined">save</span>
+                </div>
+                <div
+                  v-if="getIsSaving"
+                  class="h-10 w-4 cursor-pointer rounded-full flex items-center justify-center"
+                >
+                  <span class="relative flex size-3">
+                    <span
+                      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-400 opacity-75"
+                    ></span>
+                    <span class="relative inline-flex size-3 rounded-full bg-green-200"></span>
+                  </span>
+                </div>
+                <div>Save</div>
+              </button>
             </div>
 
             <div

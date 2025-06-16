@@ -45,7 +45,6 @@ class PageBuilderClass {
   private getRestoredElement: ComputedRef<string | null>
   private getComponentArrayAddMethod: ComputedRef<string | null>
   private NoneListernesTags: string[]
-  private showRunningMethodLogs: boolean
   private delay: ReturnType<typeof delay>
   private observer?: MutationObserverType
 
@@ -62,7 +61,6 @@ class PageBuilderClass {
      * we can prevent redundant addition of the same event listener to an element.
      * This helps in managing the memory usage and performance of the application.
      */
-    this.elementsWithListeners = new WeakSet()
 
     this.nextTick = nextTick()
 
@@ -111,16 +109,14 @@ class PageBuilderClass {
       'BR',
     ]
 
-    this.showRunningMethodLogs = false
-
     this.delay = delay
   }
 
   // Load existing content from HTML when in update mode
-  clearHtmlSelection(): void {
+  async clearHtmlSelection(): Promise<void> {
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
-    this.removeHoveredAndSelected()
+    await this.#removeHoveredAndSelected()
   }
   // Load existing content from HTML when in update mode
   setConfigPageBuilder(data: PageBuilderConfig): void {
@@ -132,12 +128,6 @@ class PageBuilderClass {
     CSSArray: string[],
     mutationName: string,
   ): string | undefined {
-    //
-    //
-    if (this.showRunningMethodLogs) {
-      console.log('#applyElementClassChanges')
-    }
-
     const currentHTMLElement = this.getElement.value
     if (!currentHTMLElement) return
 
@@ -181,10 +171,6 @@ class PageBuilderClass {
   #applyHelperCSSToElements(element: HTMLElement): void {
     this.#wrapElementInDivIfExcluded(element)
 
-    if (this.showRunningMethodLogs) {
-      console.log('#applyHelperCSSToElements')
-    }
-
     if (element.tagName === 'IMG') {
       element.classList.add('smooth-transition')
     }
@@ -198,10 +184,6 @@ class PageBuilderClass {
   }
 
   #wrapElementInDivIfExcluded(element: HTMLElement): void {
-    if (this.showRunningMethodLogs) {
-      console.log('#wrapElementInDivIfExcluded')
-    }
-
     if (!element) return
 
     if (
@@ -215,7 +197,7 @@ class PageBuilderClass {
     }
   }
 
-  #handleElementClick = (e: Event, element: HTMLElement): void => {
+  #handleElementClick = async (e: Event, element: HTMLElement): void => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -238,10 +220,6 @@ class PageBuilderClass {
   }
 
   #handleMouseOver = (e: Event, element: HTMLElement): void => {
-    if (this.showRunningMethodLogs) {
-      console.log('#handleMouseOver')
-    }
-
     e.preventDefault()
     e.stopPropagation()
 
@@ -260,10 +238,6 @@ class PageBuilderClass {
   }
 
   #handleMouseLeave = (e: Event): void => {
-    if (this.showRunningMethodLogs) {
-      console.log('#handleMouseLeave')
-    }
-
     e.preventDefault()
     e.stopPropagation()
 
@@ -286,9 +260,7 @@ class PageBuilderClass {
    * attach event listeners to each element within a 'section'
    */
   setEventListenersForElements = async () => {
-    if (this.showRunningMethodLogs) {
-      console.log('setEventListenersForElements')
-    }
+    this.elementsWithListeners = new WeakSet()
 
     const pagebuilder = document.querySelector('#pagebuilder')
 
@@ -298,7 +270,7 @@ class PageBuilderClass {
     await nextTick()
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
-    pagebuilder.querySelectorAll('section *').forEach(async (element) => {
+    pagebuilder.querySelectorAll('section *').forEach((element) => {
       // exclude NoneListernesTags && additional Tags for not listening
       if (this.isEditableElement(element)) {
         if (this.elementsWithListeners && !this.elementsWithListeners.has(element)) {
@@ -317,58 +289,73 @@ class PageBuilderClass {
   }
 
   /**
-   * The Intersection Observer API provides a way to asynchronously observe changes in the
-   * intersection of a target element with an ancestor element or with a top-level document's viewport.
+   * onAutoOrSaveClick is responsible for handling auto-save logic when certain element attributes change.
+   *
+   * IMPORTANT:
+   * We only trigger auto-save (saveComponentsLocalStorage) when `getElement.value` is falsy.
+   *
+   * REASON:
+   * - When `getElement.value` is truthy, it means a DOM element is currently selected or being edited.
+   * - Saving at this point can cause issues with syncing the DOM and JS state, especially if the DOM is being mutated or re-rendered.
+   * - By only saving when `getElement.value` is falsy (i.e., no element is selected), we avoid race conditions, stale references, and potential call stack issues.
+   * - This ensures that auto-save only happens when the user is not actively editing or interacting with a specific element, keeping the state and DOM in sync.
+   *
+   * WHERE TO USE:
+   * - This logic should be used in any watcher or handler that triggers auto-save based on attribute changes.
+   * - Always check for a falsy `getElement.value` before calling saveComponentsLocalStorage.
    */
-  synchronizeDOMAndComponents = async () => {
-    if (this.showRunningMethodLogs) {
-      console.log('synchronizeDOMAndComponents')
-    }
-    if (!this.getComponents.value) {
-      this.pageBuilderStateStore.setComponents([])
-    }
 
-    const pagebuilder = document.querySelector('#pagebuilder')
+  onAutoOrSaveClick = async () => {
+    const passedConfig = this.pageBuilderStateStore.getConfigPageBuilder
 
-    if (pagebuilder) {
-      const hoveredElement = pagebuilder.querySelector('[hovered]')
-      if (hoveredElement) {
-        hoveredElement.removeAttribute('hovered')
-      }
+    // Check if config is set
+    if (passedConfig && passedConfig.userSettings && passedConfig.userSettings.autoSave) {
+      //
+      //
+      // Check if auto save it set to true for the user
+      if (
+        typeof passedConfig.userSettings.autoSave === 'boolean' &&
+        passedConfig.userSettings.autoSave
+        // Check if auto save it set to true for the user
+      ) {
+        //
+        //
+        // Only auto-save to local storage when no element is selected (this.getElement.value is falsy)
+        // See explanation above for why this is important.
+        if (!this.getElement.value) {
+          this.pageBuilderStateStore.setIsSaving(true)
+          await this.delay(500)
 
-      this.getComponents.value?.forEach((component) => {
-        const section = pagebuilder.querySelector(`section[data-componentid="${component.id}"]`)
+          console.log('auto save is true and el is falsy')
+          await this.saveComponentsLocalStorage()
 
-        if (section) {
-          component.html_code = section.outerHTML
+          this.pageBuilderStateStore.setIsSaving(false)
         }
-      })
-
-      // Initialize the MutationObserver
-      this.observer = new MutationObserver((mutationsList, observer) => {
-        // Once we have seen a mutation, stop observing and resolve the promise
-        observer.disconnect()
-      })
-
-      // Start observing the pagebuilder with the configured parameters
-      this.observer.observe(pagebuilder, {
-        attributes: true,
-        childList: true,
-        subtree: true,
-      })
-
-      // Use the MutationObserver to wait for the next DOM change
-      await new Promise<void>((resolve) => {
-        resolve()
-      })
+      }
     }
+
+    // Check if auto save it set to false for the user
+    if (
+      typeof passedConfig.userSettings.autoSave === 'boolean' &&
+      !passedConfig.userSettings.autoSave
+      // Check if auto save it set to true for the user
+    ) {
+      // Only auto-save to local storage when no element is selected (this.getElement.value is falsy)
+      // See explanation above for why this is important.
+      if (!this.getElement.value) {
+        this.pageBuilderStateStore.setIsSaving(true)
+        await this.delay(500)
+
+        console.log('auto save is false and el is falsy')
+        await this.saveComponentsLocalStorage()
+
+        this.pageBuilderStateStore.setIsSaving(false)
+      }
+    }
+    this.pageBuilderStateStore.setIsSaving(false)
   }
 
   cloneCompObjForDOMInsertion(componentObject: ComponentObject): ComponentObject {
-    if (this.showRunningMethodLogs) {
-      console.log('cloneCompObjForDOMInsertion')
-    }
-
     // Deep clone clone component
     const clonedComponent = { ...componentObject }
 
@@ -435,11 +422,7 @@ class PageBuilderClass {
     return clonedComponent
   }
 
-  async removeHoveredAndSelected() {
-    if (this.showRunningMethodLogs) {
-      console.log('removeHoveredAndSelected')
-    }
-
+  async #removeHoveredAndSelected() {
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
     const pagebuilder = document.querySelector('#pagebuilder')
@@ -459,10 +442,6 @@ class PageBuilderClass {
   }
 
   async currentClasses() {
-    if (this.showRunningMethodLogs) {
-      console.log('handleAddClasses')
-    }
-
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
     // convert classList to array
@@ -473,10 +452,6 @@ class PageBuilderClass {
   }
 
   handleAddClasses(userSelectedClass: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleAddClasses')
-    }
-
     if (
       typeof userSelectedClass === 'string' &&
       userSelectedClass !== '' &&
@@ -496,10 +471,6 @@ class PageBuilderClass {
   }
 
   handleRemoveClasses(userSelectedClass: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleRemoveClasses')
-    }
-
     // remove selected class from element
     if (this.getElement.value?.classList.contains(userSelectedClass)) {
       this.getElement.value?.classList.remove(userSelectedClass)
@@ -510,10 +481,6 @@ class PageBuilderClass {
   }
 
   handleDeleteElement() {
-    if (this.showRunningMethodLogs) {
-      console.log('handleDeleteElement')
-    }
-
     // Get the element to be deleted
     const element = this.getElement.value
 
@@ -549,10 +516,6 @@ class PageBuilderClass {
   }
 
   async handleRestoreElement() {
-    if (this.showRunningMethodLogs) {
-      console.log('handleRestoreElement')
-    }
-
     // Get the stored deleted element and its parent
     if (this.getRestoredElement.value && this.getParentElement.value) {
       // Create a new element from the stored outerHTML
@@ -579,10 +542,6 @@ class PageBuilderClass {
   }
 
   handleFontWeight(userSelectedFontWeight?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleFontWeight')
-    }
-
     this.#applyElementClassChanges(
       userSelectedFontWeight,
       tailwindFontStyles.fontWeight,
@@ -590,10 +549,6 @@ class PageBuilderClass {
     )
   }
   handleFontFamily(userSelectedFontFamily?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleFontFamily')
-    }
-
     this.#applyElementClassChanges(
       userSelectedFontFamily,
       tailwindFontStyles.fontFamily,
@@ -601,10 +556,6 @@ class PageBuilderClass {
     )
   }
   handleFontStyle(userSelectedFontStyle?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleFontStyle')
-    }
-
     this.#applyElementClassChanges(
       userSelectedFontStyle,
       tailwindFontStyles.fontStyle,
@@ -612,10 +563,6 @@ class PageBuilderClass {
     )
   }
   handleVerticalPadding(userSelectedVerticalPadding?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleVerticalPadding')
-    }
-
     this.#applyElementClassChanges(
       userSelectedVerticalPadding,
       tailwindPaddingAndMargin.verticalPadding,
@@ -623,10 +570,6 @@ class PageBuilderClass {
     )
   }
   handleHorizontalPadding(userSelectedHorizontalPadding?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleHorizontalPadding')
-    }
-
     this.#applyElementClassChanges(
       userSelectedHorizontalPadding,
       tailwindPaddingAndMargin.horizontalPadding,
@@ -635,10 +578,6 @@ class PageBuilderClass {
   }
 
   handleVerticalMargin(userSelectedVerticalMargin?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleVerticalMargin')
-    }
-
     this.#applyElementClassChanges(
       userSelectedVerticalMargin,
       tailwindPaddingAndMargin.verticalMargin,
@@ -646,10 +585,6 @@ class PageBuilderClass {
     )
   }
   handleHorizontalMargin(userSelectedHorizontalMargin?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleHorizontalMargin')
-    }
-
     this.#applyElementClassChanges(
       userSelectedHorizontalMargin,
       tailwindPaddingAndMargin.horizontalMargin,
@@ -659,10 +594,6 @@ class PageBuilderClass {
 
   // border color, style & width / start
   handleBorderStyle(borderStyle?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleBorderStyle')
-    }
-
     this.#applyElementClassChanges(
       borderStyle,
       tailwindBorderStyleWidthPlusColor.borderStyle,
@@ -670,10 +601,6 @@ class PageBuilderClass {
     )
   }
   handleBorderWidth(borderWidth?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleBorderWidth')
-    }
-
     this.#applyElementClassChanges(
       borderWidth,
       tailwindBorderStyleWidthPlusColor.borderWidth,
@@ -681,10 +608,6 @@ class PageBuilderClass {
     )
   }
   handleBorderColor(borderColor?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleBorderColor')
-    }
-
     this.#applyElementClassChanges(
       borderColor,
       tailwindBorderStyleWidthPlusColor.borderColor,
@@ -707,10 +630,6 @@ class PageBuilderClass {
 
   // border radius / start
   handleBorderRadiusGlobal(borderRadiusGlobal?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleBorderRadiusGlobal')
-    }
-
     this.#applyElementClassChanges(
       borderRadiusGlobal,
       tailwindBorderRadius.roundedGlobal,
@@ -718,10 +637,6 @@ class PageBuilderClass {
     )
   }
   handleBorderRadiusTopLeft(borderRadiusTopLeft?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleBorderRadiusTopLeft')
-    }
-
     this.#applyElementClassChanges(
       borderRadiusTopLeft,
       tailwindBorderRadius.roundedTopLeft,
@@ -729,10 +644,6 @@ class PageBuilderClass {
     )
   }
   handleBorderRadiusTopRight(borderRadiusTopRight?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleBorderRadiusTopRight')
-    }
-
     this.#applyElementClassChanges(
       borderRadiusTopRight,
       tailwindBorderRadius.roundedTopRight,
@@ -740,10 +651,6 @@ class PageBuilderClass {
     )
   }
   handleBorderRadiusBottomleft(borderRadiusBottomleft?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleBorderRadiusBottomleft')
-    }
-
     this.#applyElementClassChanges(
       borderRadiusBottomleft,
       tailwindBorderRadius.roundedBottomLeft,
@@ -751,10 +658,6 @@ class PageBuilderClass {
     )
   }
   handleBorderRadiusBottomRight(borderRadiusBottomRight?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleBorderRadiusBottomRight')
-    }
-
     this.#applyElementClassChanges(
       borderRadiusBottomRight,
       tailwindBorderRadius.roundedBottomRight,
@@ -764,10 +667,6 @@ class PageBuilderClass {
   // border radius / end
 
   handleFontSize(userSelectedFontSize?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleFontSize')
-    }
-
     if (!userSelectedFontSize) return
     if (!this.getElement.value) return
 
@@ -868,10 +767,6 @@ class PageBuilderClass {
   }
 
   handleBackgroundOpacity(opacity?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleBackgroundOpacity')
-    }
-
     this.#applyElementClassChanges(
       opacity,
       tailwindOpacities.backgroundOpacities,
@@ -879,26 +774,14 @@ class PageBuilderClass {
     )
   }
   handleOpacity(opacity?: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleOpacity')
-    }
-
     this.#applyElementClassChanges(opacity, tailwindOpacities.opacities, 'setOpacity')
   }
 
   deleteAllComponents() {
-    if (this.showRunningMethodLogs) {
-      console.log('deleteAllComponents')
-    }
-
     this.pageBuilderStateStore.setComponents([])
   }
 
   deleteComponent() {
-    if (this.showRunningMethodLogs) {
-      console.log('deleteComponent')
-    }
-
     if (!this.getComponents.value || !this.getComponent.value) return
 
     // Find the index of the component to delete
@@ -922,10 +805,6 @@ class PageBuilderClass {
   // move component
   // runs when html components are rearranged
   moveComponent(direction: number): void {
-    if (this.showRunningMethodLogs) {
-      console.log('moveComponent')
-    }
-
     if (!this.getComponents.value || !this.getComponent.value) return
 
     if (this.getComponents.value.length <= 1) return
@@ -956,10 +835,6 @@ class PageBuilderClass {
   }
 
   ensureTextAreaHasContent = () => {
-    if (this.showRunningMethodLogs) {
-      console.log('ensureTextAreaHasContent')
-    }
-
     if (!this.getElement.value) return
 
     // text content
@@ -985,10 +860,6 @@ class PageBuilderClass {
 
   //
   handleTextInput = async (textContentVueModel: string): Promise<void> => {
-    if (this.showRunningMethodLogs) {
-      console.log('handleTextInput')
-    }
-
     // // text content
     if (typeof this.getElement.value?.innerHTML !== 'string') {
       return
@@ -1050,10 +921,6 @@ class PageBuilderClass {
   }
 
   previewCurrentDesign() {
-    if (this.showRunningMethodLogs) {
-      console.log('previewCurrentDesign')
-    }
-
     this.pageBuilderStateStore.setElement(null)
 
     const pagebuilder = document.querySelector('#pagebuilder')
@@ -1260,14 +1127,60 @@ class PageBuilderClass {
     }
   }
 
+  /**
+   * Components from DOM → JS (not JS → DOM).
+   * Saving the current DOM state into JS this.getComponents (for example, before saving to localStorage).
+   * This function Only copies the current DOM HTML into JS this.getComponents (component.html_code).
+   */
+  #domToComponentsSync = async () => {
+    if (!this.getComponents.value) {
+      this.pageBuilderStateStore.setComponents([])
+
+      const pagebuilder = document.querySelector('#pagebuilder')
+      if (!pagebuilder) return
+
+      // Clear the current DOM
+      pagebuilder.innerHTML = ''
+
+      // Render each component's HTML into the DOM
+      this.getComponents.value?.forEach((component) => {
+        const tempDiv = document.createElement('div')
+        tempDiv.innerHTML = component.html_code || ''
+        const section = tempDiv.firstElementChild
+        if (section) pagebuilder.appendChild(section)
+      })
+    }
+
+    const pagebuilder = document.querySelector('#pagebuilder')
+
+    if (pagebuilder) {
+      const hoveredElement = pagebuilder.querySelector('[hovered]')
+      if (hoveredElement) {
+        hoveredElement.removeAttribute('hovered')
+      }
+
+      this.getComponents.value?.forEach((component) => {
+        // selection is the actual DOM element currently rendered in the browser with that data-componentid.
+        const section = pagebuilder.querySelector(`section[data-componentid="${component.id}"]`)
+
+        if (section) {
+          component.html_code = section.outerHTML
+          component.id = section.getAttribute('data-componentid') || component.id
+          component.title = section.getAttribute('title') || component.title
+        }
+      })
+
+      // Use the MutationObserver to wait for the next DOM change
+      await new Promise<void>((resolve) => {
+        resolve()
+      })
+    }
+  }
+
   // save to local storage
   async saveComponentsLocalStorage() {
     await this.nextTick
-    this.synchronizeDOMAndComponents()
-
-    if (this.showRunningMethodLogs) {
-      console.log('saveComponentsLocalStorage')
-    }
+    await this.#domToComponentsSync()
 
     await this.nextTick
     if (this.getLocalStorageItemName.value) {
@@ -1277,15 +1190,10 @@ class PageBuilderClass {
       )
     }
 
-    // Re-attach event listeners after saving
     await this.setEventListenersForElements()
   }
 
   async removeItemComponentsLocalStorageCreate() {
-    if (this.showRunningMethodLogs) {
-      console.log('removeItemComponentsLocalStorageCreate')
-    }
-
     await this.nextTick
 
     if (this.getLocalStorageItemName.value) {
@@ -1295,9 +1203,6 @@ class PageBuilderClass {
 
   async removeItemComponentsLocalStorageUpdate() {
     console.log('removeItemComponentsLocalStorageUpdate')
-    if (this.showRunningMethodLogs) {
-      console.log('saveComponentsLocalStorageUpdate')
-    }
 
     if (this.getLocalStorageItemName.value) {
       localStorage.removeItem(this.getLocalStorageItemName.value)
@@ -1305,10 +1210,6 @@ class PageBuilderClass {
   }
 
   areComponentsStoredInLocalStorage() {
-    if (this.showRunningMethodLogs) {
-      console.log('areComponentsStoredInLocalStorage')
-    }
-
     if (!this.getLocalStorageItemName.value) return false
 
     if (
@@ -1327,10 +1228,6 @@ class PageBuilderClass {
   //
   //
   async updateBasePrimaryImage(data?: { type: string }): Promise<void> {
-    if (this.showRunningMethodLogs) {
-      console.log('updateBasePrimaryImage')
-    }
-
     if (!this.getElement.value) return
 
     // If data is provided, check for specific type (backward compatibility)
@@ -1348,10 +1245,6 @@ class PageBuilderClass {
   }
 
   showBasePrimaryImage() {
-    if (this.showRunningMethodLogs) {
-      console.log('showBasePrimaryImage')
-    }
-
     if (!this.getElement.value) return
 
     const currentImageContainer = document.createElement('div')
@@ -1379,10 +1272,6 @@ class PageBuilderClass {
     urlInput: string | null,
     openHyperlinkInNewTab: boolean,
   ) {
-    if (this.showRunningMethodLogs) {
-      console.log('#addHyperlinkToElement')
-    }
-
     if (!this.getElement.value) return
 
     // Check if element is a proper DOM element and has closest method
@@ -1475,10 +1364,6 @@ class PageBuilderClass {
   }
 
   #checkForHyperlink() {
-    if (this.showRunningMethodLogs) {
-      console.log('#checkForHyperlink')
-    }
-
     if (!this.getElement.value) return
 
     const hyperlink = this.getElement.value.querySelector('a')
@@ -1511,10 +1396,6 @@ class PageBuilderClass {
     urlInput?: string | null,
     openHyperlinkInNewTab?: boolean,
   ): void {
-    if (this.showRunningMethodLogs) {
-      console.log('handleHyperlink')
-    }
-
     this.pageBuilderStateStore.setHyperlinkAbility(true)
 
     if (!this.getElement.value) return
@@ -1558,10 +1439,6 @@ class PageBuilderClass {
 
   // Helper method for custom components to easily add components
   async addComponent(componentObject: ComponentObject): Promise<void> {
-    if (this.showRunningMethodLogs) {
-      console.log('addComponent')
-    }
-
     try {
       const clonedComponent = this.cloneCompObjForDOMInsertion({
         html_code: componentObject.html_code,
@@ -1595,9 +1472,6 @@ class PageBuilderClass {
    *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
    */
   setComponentsFromData(data: string): void {
-    if (this.showRunningMethodLogs) {
-      console.log('setComponentsFromData')
-    }
     // Auto-detect if input is JSON or HTML
     const trimmedData = data.trim()
 
@@ -1663,10 +1537,6 @@ class PageBuilderClass {
 
   // Load existing content from HTML when in update mode
   loadExistingContent(data?: string, injectCustomHTMLSections?: boolean): void {
-    if (this.showRunningMethodLogs) {
-      console.log('loadExistingContent')
-    }
-
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
     if (injectCustomHTMLSections && data !== undefined) {
@@ -1686,10 +1556,6 @@ class PageBuilderClass {
         this.setComponentsFromData(data)
       }
     }
-  }
-
-  async autoSave(): boolean {
-    await this.saveComponentsLocalStorage()
   }
 
   async handlePageBuilderMethods(): Promise<void> {
