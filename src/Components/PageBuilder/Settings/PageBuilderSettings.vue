@@ -69,7 +69,7 @@ const handleDownloadHTML = function () {
             <h4 class="myQuaternaryHeader text-sm mb-2">Version Information</h4>
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-300">
+                <table class="min-w-full">
                   <thead class="bg-gray-50">
                     <tr>
                       <th
@@ -117,7 +117,7 @@ const handleDownloadHTML = function () {
             <h4 class="myQuaternaryHeader text-sm mb-2">Resource Data</h4>
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-300">
+                <table class="min-w-full">
                   <thead class="bg-gray-50">
                     <tr>
                       <th
@@ -169,7 +169,7 @@ const handleDownloadHTML = function () {
             <h4 class="myQuaternaryHeader text-sm mb-2">User Information</h4>
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-300">
+                <table class="min-w-full">
                   <thead class="bg-gray-50">
                     <tr>
                       <th
@@ -221,7 +221,7 @@ const handleDownloadHTML = function () {
             <h4 class="myQuaternaryHeader text-sm mb-2">User Settings</h4>
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-300">
+                <table class="min-w-full">
                   <thead class="bg-gray-50">
                     <tr>
                       <th
@@ -309,7 +309,7 @@ const handleDownloadHTML = function () {
             <h4 class="myQuaternaryHeader text-sm mb-2">Logo Configuration</h4>
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-300">
+                <table class="min-w-full">
                   <thead class="bg-gray-50">
                     <tr>
                       <th
@@ -377,7 +377,7 @@ const handleDownloadHTML = function () {
             <h4 class="myQuaternaryHeader text-sm mb-2">Form Type</h4>
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <div class="overflow-x-auto">
-                <table class="min-w-full divide-y divide-gray-300">
+                <table class="min-w-full">
                   <thead class="bg-gray-50">
                     <tr>
                       <th

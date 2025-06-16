@@ -114,22 +114,20 @@ function prettifyHtml(html) {
                   {{ getComponent === null ? 'NULL' : typeof getComponent }}
                 </p>
               </div>
-              <div v-if="getElement" class="overflow-hidden border-2 border-white mb-6">
+              <div v-if="getElement" class="overflow-hidden border border-gray-100 mb-6 rounded">
                 <div class="bg-gray-900 pt-4 pb-1 border-b border-gray-200">
                   <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-300">
+                    <table class="min-w-full">
                       <thead class="bg-gray-900">
                         <tr>
-                          <th
-                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
-                          >
-                            Selected HTML
+                          <th class="px-6 py-3 text-left text-sm text-white font-normal">
+                            Selected HTML:
                           </th>
                         </tr>
                       </thead>
                       <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-white">
+                          <td class="px-6 py-3 text-left text-sm text-white font-normal border-b">
                             {{ getElement?.outerHTML }}
                           </td>
                         </tr>
@@ -137,19 +135,19 @@ function prettifyHtml(html) {
                     </table>
                   </div>
                   <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-300">
+                    <table class="min-w-full">
                       <thead class="bg-gray-900">
                         <tr>
-                          <th
-                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
-                          >
-                            Element src
+                          <th class="px-6 py-3 text-left text-sm text-white font-normal">
+                            Element src:
                           </th>
                         </tr>
                       </thead>
                       <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-white whitespace-pre-line">
+                          <td
+                            class="px-6 py-3 text-left text-sm text-white font-normal whitespace-pre-line"
+                          >
                             {{ getElement?.src ? getElement?.src : typeof getElement?.src }}
                           </td>
                         </tr>
@@ -158,19 +156,17 @@ function prettifyHtml(html) {
                   </div>
                 </div>
                 <div class="overflow-x-auto">
-                  <table class="min-w-full divide-y divide-gray-300">
+                  <table class="min-w-full">
                     <thead class="bg-gray-900">
                       <tr>
-                        <th
-                          class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
-                        >
-                          Element classes
+                        <th class="px-6 py-3 text-left text-sm text-white font-normal">
+                          Element classes:
                         </th>
                       </tr>
                     </thead>
                     <tbody class="bg-gray-900 divide-y divide-gray-200">
                       <tr>
-                        <td class="px-6 py-4 text-sm text-white">
+                        <td class="px-6 py-3 text-left text-sm text-white font-normal">
                           {{
                             getElement?.classList
                               ? getElement?.classList
@@ -190,22 +186,18 @@ function prettifyHtml(html) {
                   {{ getComponent === null ? 'NULL' : typeof getComponent }}
                 </p>
               </div>
-              <div v-if="getComponent" class="overflow-hidden border-2 border-white mb-6">
+              <div v-if="getComponent" class="overflow-hidden border border-gray-100 mb-6 rounded">
                 <div class="bg-gray-900 pt-4 pb-1 border-b border-gray-200">
                   <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-300">
+                    <table class="min-w-full">
                       <thead class="bg-gray-900">
                         <tr>
-                          <th
-                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
-                          >
-                            ID
-                          </th>
+                          <th class="px-6 py-3 text-left text-sm text-white font-normal">ID:</th>
                         </tr>
                       </thead>
                       <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-white">
+                          <td class="px-6 py-3 text-left text-sm text-white font-normal">
                             {{ getComponent?.id }}
                           </td>
                         </tr>
@@ -213,19 +205,19 @@ function prettifyHtml(html) {
                     </table>
                   </div>
                   <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-300">
+                    <table class="min-w-full">
                       <thead class="bg-gray-900">
                         <tr>
-                          <th
-                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider border-t"
-                          >
-                            Title
+                          <th class="px-6 py-3 text-left text-sm text-white font-normal border-t">
+                            Title:
                           </th>
                         </tr>
                       </thead>
                       <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-white whitespace-pre-line">
+                          <td
+                            class="px-6 py-3 text-left text-sm text-white font-normal whitespace-pre-line"
+                          >
                             {{ getComponent?.title }}
                           </td>
                         </tr>
@@ -234,21 +226,19 @@ function prettifyHtml(html) {
                   </div>
                 </div>
                 <div class="overflow-x-auto">
-                  <table class="min-w-full divide-y divide-gray-300">
+                  <table class="min-w-full">
                     <thead class="bg-gray-900">
                       <tr>
-                        <th
-                          class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
-                        >
-                          HTML Code
+                        <th class="px-6 py-3 text-left text-sm text-white font-normal">
+                          HTML Code:
                         </th>
                       </tr>
                     </thead>
                     <tbody class="bg-gray-900 divide-y divide-gray-200">
                       <tr>
-                        <td class="px-6 py-4 text-sm text-white">
+                        <td class="px-6 py-3 text-left text-sm text-white font-normal">
                           <pre
-                            class="py-4 text-sm text-white whitespace-pre-lines font-sans flex items-start justify-left"
+                            class="text-sm text-white whitespace-pre-lines font-sans flex items-start justify-left"
                           >
                               <code class="font-sans" v-html="prettifyHtml(getComponent?.html_code)"></code>
                             </pre>
@@ -270,24 +260,20 @@ function prettifyHtml(html) {
                 <div
                   v-for="component in getComponents"
                   :key="component.id"
-                  class="overflow-hidden border-2 border-white mb-6"
+                  class="overflow-hidden border border-gray-100 mb-6 rounded"
                 >
-                  <!-- ID and Title above the table, styled to look connected -->
+                  <!-- Id and Title above the table, styled to look connected -->
                   <div class="bg-gray-900 pt-4 pb-1 border-b border-gray-200">
                     <div class="overflow-x-auto">
-                      <table class="min-w-full divide-y divide-gray-300">
+                      <table class="min-w-full">
                         <thead class="bg-gray-900">
                           <tr>
-                            <th
-                              class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
-                            >
-                              ID
-                            </th>
+                            <th class="px-6 py-3 text-left text-sm text-white font-normal">ID:</th>
                           </tr>
                         </thead>
                         <tbody class="bg-gray-900 divide-y divide-gray-200">
                           <tr>
-                            <td class="px-6 py-4 text-sm text-white">
+                            <td class="px-6 py-3 text-left text-sm text-white font-normal">
                               {{ component.id }}
                             </td>
                           </tr>
@@ -295,19 +281,19 @@ function prettifyHtml(html) {
                       </table>
                     </div>
                     <div class="overflow-x-auto">
-                      <table class="min-w-full divide-y divide-gray-300">
+                      <table class="min-w-full">
                         <thead class="bg-gray-900">
                           <tr>
-                            <th
-                              class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider border-t"
-                            >
-                              Title
+                            <th class="px-6 py-3 text-left text-sm text-white font-normal border-t">
+                              Title:
                             </th>
                           </tr>
                         </thead>
                         <tbody class="bg-gray-900 divide-y divide-gray-200">
                           <tr>
-                            <td class="px-6 py-4 text-sm text-white whitespace-pre-line">
+                            <td
+                              class="px-6 py-3 text-left text-sm text-white font-normal whitespace-pre-line"
+                            >
                               {{ component.title }}
                             </td>
                           </tr>
@@ -316,21 +302,19 @@ function prettifyHtml(html) {
                     </div>
                   </div>
                   <div class="overflow-x-auto">
-                    <table class="min-w-full divide-y divide-gray-300">
+                    <table class="min-w-full">
                       <thead class="bg-gray-900">
                         <tr>
-                          <th
-                            class="px-6 py-3 text-left text-xs font-medium text-white tracking-wider"
-                          >
-                            HTML Code
+                          <th class="px-6 py-3 text-left text-sm text-white font-normal">
+                            HTML Code:
                           </th>
                         </tr>
                       </thead>
                       <tbody class="bg-gray-900 divide-y divide-gray-200">
                         <tr>
-                          <td class="px-6 py-4 text-sm text-white">
+                          <td class="px-6 py-3 text-left text-sm text-white font-normal">
                             <pre
-                              class="py-4 text-sm text-white whitespace-pre-lines font-sans flex items-start justify-left"
+                              class="text-sm text-white whitespace-pre-lines font-sans flex items-start justify-left"
                             >
                               <code class="font-sans" v-html="prettifyHtml(component.html_code)"></code>
                             </pre>
