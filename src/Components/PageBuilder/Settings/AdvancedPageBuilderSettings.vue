@@ -49,23 +49,16 @@ function prettifyHtml(html) {
             </div>
           </div>
           <div class="px-4 pb-8 pt-4 text-white text-xs">
-            <p v-if="getElement === null || getElement === undefined" class="text-xs pb-2"></p>
-            <p v-if="getElement !== null && getElement !== undefined" class="text-xs pb-2">
+            <p class="text-xs pb-2">
               <span>Element type: </span>
               <span>
                 {{ typeof getElement }}
               </span>
             </p>
 
-            <p v-if="getComponent === null || getComponent === undefined" class="text-xs pb-2">
+            <p class="text-xs pb-2">
               <span>Component type: </span>
-              {{ JSON.stringify(getComponent) }}
-            </p>
-            <p v-if="getComponent !== null && getComponent !== undefined" class="text-xs pb-2">
-              <span>Component type: </span>
-              <span>
-                {{ Array.isArray(getComponent) === true ? 'array' : typeof getComponent }}
-              </span>
+              {{ typeof getComponent }}
             </p>
             <p class="text-xs pb-2">
               <span>Components: </span>
@@ -111,7 +104,7 @@ function prettifyHtml(html) {
             <div v-if="current === 'element'">
               <div v-if="!getComponent">
                 <p class="pb-2">
-                  {{ getComponent === null ? 'NULL' : typeof getComponent }}
+                  {{ getComponent === null ? 'No Element selected' : typeof getComponent }}
                 </p>
               </div>
               <div v-if="getElement" class="overflow-hidden border border-gray-100 mb-6 rounded">
@@ -183,7 +176,7 @@ function prettifyHtml(html) {
             <div v-if="current === 'component'">
               <div v-if="!getComponent">
                 <p class="pb-2">
-                  {{ getComponent === null ? 'NULL' : typeof getComponent }}
+                  {{ getComponent === null ? 'No Component selected' : typeof getComponent }}
                 </p>
               </div>
               <div v-if="getComponent" class="overflow-hidden border border-gray-100 mb-6 rounded">
@@ -250,9 +243,13 @@ function prettifyHtml(html) {
               </div>
             </div>
             <div v-if="current === 'components'">
-              <div v-if="!getComponents">
+              <div>
                 <p class="pb-2">
-                  {{ getComponents === null ? 'NULL' : typeof getComponents }}
+                  {{
+                    Array.isArray(getComponents) && getComponents.length === 0
+                      ? 'No Components added yet'
+                      : ''
+                  }}
                 </p>
               </div>
 
