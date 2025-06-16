@@ -1,6 +1,8 @@
 <script setup>
 import { computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
+import PageBuilderClass from '../../../composables/PageBuilderClass.ts'
+
 import ClassEditor from './Editables/ClassEditor.vue'
 import ImageEditor from './Editables/ImageEditor.vue'
 import OpacityEditor from './Editables/OpacityEditor.vue'
@@ -17,6 +19,9 @@ import ElementEditor from './Editables/ElementEditor.vue'
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
+
+// Initialize PageBuilder with store
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // emit
 const emit = defineEmits(['closeEditor'])
@@ -56,16 +61,13 @@ const isHeadingElement = computed(() => {
     </div>
 
     <div class="pl-3 pr-3 mb-4 overflow-y-scroll">
-      <div v-show="isHeadingElement === true">
+      <div v-show="getElement && pageBuilderClass.isEditableElement(getElement)">
         <article class="mb-1">
           <ImageEditor> </ImageEditor>
         </article>
         <article class="mb-1">
           <TipTap></TipTap>
         </article>
-        <!-- <article v-if="false" class="my-1 bg-white">
-          <LinkEditor></LinkEditor>
-        </article> -->
         <article
           class="my-1 bg-white"
           v-if="

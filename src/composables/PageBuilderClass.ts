@@ -45,9 +45,7 @@ class PageBuilderClass {
   private getParentElement: ComputedRef<HTMLElement | null>
   private getRestoredElement: ComputedRef<string | null>
   private getComponentArrayAddMethod: ComputedRef<string | null>
-  private headerTags: string[]
-  private additionalTagsNoneListernes: string[]
-  private structuringTags: string[]
+  private NoneListernesTags: string[]
   private showRunningMethodLogs: boolean
   private delay: ReturnType<typeof delay>
   private observer?: MutationObserverType
@@ -95,9 +93,15 @@ class PageBuilderClass {
       () => this.pageBuilderStateStore.getComponentArrayAddMethod,
     )
 
-    this.headerTags = ['P', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'IFRAME']
-
-    this.additionalTagsNoneListernes = [
+    this.NoneListernesTags = [
+      'P',
+      'H1',
+      'H2',
+      'H3',
+      'H4',
+      'H5',
+      'H6',
+      'IFRAME',
       'UL',
       'OL',
       'LI',
@@ -108,18 +112,6 @@ class PageBuilderClass {
       'SPAN',
       'BLOCKQUOTE',
       'BR',
-    ]
-
-    this.structuringTags = [
-      'DIV',
-      'IFRAME',
-      'HEADER',
-      'NAV',
-      'MAIN',
-      'ARTICLE',
-      'SECTION',
-      'ASIDE',
-      'FOOTER',
     ]
 
     this.showRunningMethodLogs = false
@@ -285,6 +277,11 @@ class PageBuilderClass {
     }
   }
 
+  isEditableElement(el: Element | null): boolean {
+    if (!el) return false
+    return !this.NoneListernesTags.includes(el.tagName)
+  }
+
   /**
    * The function is used to
    * attach event listeners to each element within a 'section'
@@ -304,10 +301,7 @@ class PageBuilderClass {
 
     pagebuilder.querySelectorAll('section *').forEach(async (element) => {
       // exclude headerTags && additional Tags for not listening
-      if (
-        !this.headerTags.includes(element.tagName) &&
-        !this.additionalTagsNoneListernes.includes(element.tagName)
-      ) {
+      if (this.isEditableElement(element)) {
         if (this.elementsWithListeners && !this.elementsWithListeners.has(element)) {
           this.elementsWithListeners.add(element)
           // Type assertion to HTMLElement since we know these are DOM elements
@@ -1285,7 +1279,6 @@ class PageBuilderClass {
   }
 
   async removeItemComponentsLocalStorageCreate() {
-    console.log('removeItemComponentsLocalStorageCreate')
     if (this.showRunningMethodLogs) {
       console.log('removeItemComponentsLocalStorageCreate')
     }
