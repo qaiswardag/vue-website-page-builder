@@ -24,7 +24,9 @@ Lightweight & Minimalist Page Builder with an elegant and intuitive design, focu
 
 Build responsive pages like listings, jobs or blog posts and manage content easily using the free Click & Drop Page Builder.
 
-To star the repository, simply click on the **Star** button located at the top-right corner of the GitHub page. Thank you in advance for your support! 🙌
+To star the repository, simply click on the **Star** button located at the top-right corner of the GitHub page.
+
+<img style="max-width: 100%;" src="./public/home/editor.jpg" alt="Vue Website Page Builder - the editor" />
 
 ## Demo
 
@@ -37,7 +39,7 @@ create and enhance digital experiences with Vue on any backend.
 
 A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.
 
-<img style="max-width: 100%;" src="./public/home/builder3.jpg" alt="Vue Website Page Builder" />
+<img style="max-width: 100%;" src="./public/home/media_library.jpg" alt="Vue Website Page Builder - the editor" />
 
 ## Features
 
@@ -62,6 +64,8 @@ The Page Builder is packed with features:
 
 Powerful Page Builder for any growing merchants, brands, &
 agencies. Empower users to create the perfect content with the Page Builder.
+
+<img style="max-width: 100%;" src="./public/home/text_editor.jpg" alt="Vue Website Page Builder - the media library" />
 
 ## Technical details
 

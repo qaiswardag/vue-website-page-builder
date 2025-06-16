@@ -115,8 +115,7 @@ onMounted(async () => {
           The web builder for stunning pages. Enable users to design and publish modern pages at any
           scale. Build responsive pages like listings, jobs or blog posts and manage content easily
           using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition
-          API, Pinia, CSS, Tailwind CSS and HTML
-          <br />
+          API, Pinia, CSS, Tailwind CSS and HTML.
           <a
             class="text-myPrimaryLinkColor font-medium"
             href="https://github.com/qaiswardag/vue-website-page-builder"
@@ -124,9 +123,25 @@ onMounted(async () => {
           >
             Go to the GitHub repository.
           </a>
+
+          <br />
         </p>
+        <div class="mt-4">
+          <p class="myPrimaryParagraph font-normal">
+            Download or install our powerful, flexible, and easy-to-use free Vue 3 Page Builder via
+            <br />
+            <strong> npm:</strong>
+            <a
+              class="text-myPrimaryLinkColor"
+              href="https://www.npmjs.com/package/@myissue/vue-website-page-builder"
+              target="_blank"
+            >
+              @myissue/vue-website-page-builder
+            </a>
+          </p>
+        </div>
       </div>
-      <div class="m-2">
+      <div class="m-4">
         <!--   :CustomBuilderComponents="DemoBuilderComponents" -->
         <PageBuilder :CustomMediaLibraryComponent="DemoMediaLibraryComponent"></PageBuilder>
       </div>
