@@ -1278,6 +1278,9 @@ class PageBuilderClass {
         JSON.stringify(this.getComponents.value),
       )
     }
+
+    // Re-attach event listeners after saving
+    await this.setEventListenersForElements()
   }
 
   async removeItemComponentsLocalStorageCreate() {
