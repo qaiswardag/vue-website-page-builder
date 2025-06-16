@@ -205,6 +205,8 @@ class PageBuilderClass {
       console.log('#wrapElementInDivIfExcluded')
     }
 
+    if (!element) return
+
     if (
       this.NoneListernesTags.includes(element.tagName) &&
       ((element.previousElementSibling && element.previousElementSibling.tagName === 'IMG') ||
