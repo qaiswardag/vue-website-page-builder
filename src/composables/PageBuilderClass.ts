@@ -206,7 +206,7 @@ class PageBuilderClass {
     }
 
     if (
-      this.headerTags.includes(element.tagName) &&
+      this.NoneListernesTags.includes(element.tagName) &&
       ((element.previousElementSibling && element.previousElementSibling.tagName === 'IMG') ||
         (element.nextElementSibling && element.nextElementSibling.tagName === 'IMG'))
     ) {
@@ -300,7 +300,7 @@ class PageBuilderClass {
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
     pagebuilder.querySelectorAll('section *').forEach(async (element) => {
-      // exclude headerTags && additional Tags for not listening
+      // exclude NoneListernesTags && additional Tags for not listening
       if (this.isEditableElement(element)) {
         if (this.elementsWithListeners && !this.elementsWithListeners.has(element)) {
           this.elementsWithListeners.add(element)
