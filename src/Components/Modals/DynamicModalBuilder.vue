@@ -61,18 +61,15 @@ const emit = defineEmits([
 
 // first button function
 const firstButtonBuilder = function () {
-  console.log('VUE.js DynamicModalBuilder — firstButtonBuilder raaan')
   emit('firstModalButtonFunctionDynamicModalBuilder')
 }
 // second button  function
 const secondButtonBuilder = function () {
-  console.log(' VUE.js DynamicModalBuilder — secondButtonBuilder raaan')
   emit('secondModalButtonFunctionDynamicModalBuilder')
 }
 
 // third button function
 const thirdButtonBuilder = function () {
-  console.log(' VUE.js DynamicModalBuilder — thirdButtonBuilder raaan')
   emit('thirdModalButtonFunctionDynamicModalBuilder')
 }
 </script>

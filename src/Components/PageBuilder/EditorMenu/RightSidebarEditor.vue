@@ -55,26 +55,19 @@ const isHeadingElement = computed(() => {
       </p>
     </div>
 
-    <div class="pl-3 pr-3 mb-4 overflow-y-scroll md:pb-24 pb-12">
+    <div class="pl-3 pr-3 mb-4 overflow-y-scroll">
       <div v-show="isHeadingElement === true">
-        <article class="py-0.5">
+        <article class="mb-1">
           <ImageEditor> </ImageEditor>
         </article>
-        <article class="py-0.5">
+        <article class="mb-1">
           <TipTap></TipTap>
         </article>
-        <article
-          class="py-0.5"
-          v-if="
-            false &&
-            $page.props.user.superadmin !== null &&
-            $page.props.user.superadmin.role === 'admin'
-          "
-        >
+        <!-- <article v-if="false" class="my-1 bg-white">
           <LinkEditor></LinkEditor>
-        </article>
+        </article> -->
         <article
-          class="py-0.5"
+          class="my-1 bg-white"
           v-if="
             false &&
             $page.props.user.superadmin !== null &&
@@ -84,29 +77,29 @@ const isHeadingElement = computed(() => {
           <Typography></Typography>
         </article>
 
-        <article class="py-0.5">
+        <article class="my-1 bg-white">
           <OpacityEditor> </OpacityEditor>
         </article>
-        <article class="py-0.5">
+        <article class="my-1 bg-white">
           <PaddingPlusMargin> </PaddingPlusMargin>
         </article>
-        <article class="py-0.5">
+        <article class="my-1 bg-white">
           <BorderRadius></BorderRadius>
         </article>
-        <article class="py-0.5">
+        <article class="my-1 bg-white">
           <Borders></Borders>
         </article>
-        <article class="py-0.5">
+        <article class="my-1 bg-white">
           <ClassEditor></ClassEditor>
         </article>
       </div>
 
       <div>
-        <article class="py-0.5">
+        <article class="my-1 bg-white">
           <ElementEditor></ElementEditor>
         </article>
       </div>
-      <article class="py-0.5"></article>
+      <article class="mt-1 bg-white"></article>
     </div>
   </div>
 </template>

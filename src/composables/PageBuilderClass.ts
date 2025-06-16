@@ -1695,9 +1695,6 @@ class PageBuilderClass {
   async handlePageBuilderMethods(): Promise<void> {
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
-    this.pageBuilderStateStore.setParentElement(null)
-    this.pageBuilderStateStore.setRestoredElement(null)
-
     // handle custom URL
     this.handleHyperlink(undefined, null, false)
     // handle opacity

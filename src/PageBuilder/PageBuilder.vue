@@ -74,7 +74,6 @@ const handlePageBuilderPreview = function () {
 }
 
 const firstPageBuilderPreviewModalButton = function () {
-  console.log('luk den..')
   openPageBuilderPreviewModal.value = false
 }
 
