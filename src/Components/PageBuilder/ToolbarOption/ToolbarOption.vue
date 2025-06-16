@@ -157,19 +157,27 @@ const openHTMLSettings = function () {
       <!-- User With image End -->
 
       <!-- Main Settings Start -->
-      <button class="lg:block hidden myPrimaryTag" type="button" @click="openMainSettings">
+      <button
+        class="cursor-pointer lg:block hidden myPrimaryTag"
+        type="button"
+        @click="openMainSettings"
+      >
         Config Overview
       </button>
       <!-- Main Settings End -->
       <!-- HTML Settings Start -->
-      <button class="lg:block hidden myPrimaryTag" type="button" @click="openHTMLSettings">
+      <button
+        class="cursor-pointer lg:block hidden myPrimaryTag"
+        type="button"
+        @click="openHTMLSettings"
+      >
         HTML Overview
       </button>
       <!-- HTML Settings End -->
 
       <!--Delete Layout Start -->
       <button
-        class="lg:block hidden myPrimaryTag bg-myPrimaryErrorColor text-white"
+        class="cursor-pointer lg:block hidden myPrimaryTag bg-myPrimaryErrorColor text-white"
         type="button"
         @click="deleteAllComponents"
       >
