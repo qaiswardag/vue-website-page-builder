@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, computed, ref, watch, provide } from 'vue'
+import { onMounted, computed, ref, watch, provide, nextTick } from 'vue'
 import PageBuilderClass from '../composables/PageBuilderClass.ts'
 import ModalBuilder from '../Components/Modals/ModalBuilder.vue'
 import Preview from './Preview.vue'
@@ -10,6 +10,7 @@ import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSideba
 import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
 import { updateOrCreateIsFalsy } from '../helpers/passedPageBuilderConfig'
 import ToolbarOption from '../Components/PageBuilder/ToolbarOption/ToolbarOption.vue'
+import { delay } from '../composables/delay'
 
 /**
  * Props for PageBuilder component
@@ -124,7 +125,11 @@ const getElementAttributes = computed(() => {
   return attributesToWatch
 })
 
+const autoSavingSatus = ref(false)
+
 watch(getElementAttributes, async (newAttributes, oldAttributes) => {
+  autoSavingSatus.value = true
+
   // Check if any of the specified attributes have changed
   if (
     newAttributes?.src !== oldAttributes?.src ||
@@ -133,11 +138,33 @@ watch(getElementAttributes, async (newAttributes, oldAttributes) => {
     newAttributes?.class !== oldAttributes?.class ||
     newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
-    // Trigger your method when any of the specified attributes change
     await pageBuilderClass.handlePageBuilderMethods()
     await pageBuilderClass.setEventListenersForElements()
+    autoSaveWithStatus(newAttributes, oldAttributes)
   }
 })
+
+async function autoSaveWithStatus(newAttributes, oldAttributes) {
+  // Check if config is set
+  if (
+    getConfigPageBuilder.value &&
+    getConfigPageBuilder.value.userSettings &&
+    getConfigPageBuilder.value.userSettings.autoSave
+  ) {
+    // Check if auto save it set to true for the user
+    if (
+      typeof getConfigPageBuilder.value.userSettings.autoSave === 'boolean' &&
+      getConfigPageBuilder.value.userSettings.autoSave
+      // Check if auto save it set to true for the user
+    ) {
+      console.log('kommer den her..')
+      await delay(500)
+      // await pageBuilderClass.autoSave()
+    }
+  }
+  // set loading to false
+  autoSavingSatus.value = false
+}
 
 const handleSelectComponent = function (componentObject) {
   pageBuilderStateStore.setComponent(componentObject)
@@ -181,6 +208,15 @@ watch(
   },
   { immediate: true },
 )
+
+const successfullySaved = ref(false)
+
+const onSaveLayoutClick = async function () {
+  pageBuilderClass.saveComponentsLocalStorage()
+  successfullySaved.value = true
+  await delay(1000)
+  successfullySaved.value = false
+}
 
 onMounted(async () => {
   const config = getConfigPageBuilder.value
@@ -290,13 +326,49 @@ onMounted(async () => {
               class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 pl-2 h-24 w-full min-w-36"
             >
               <div>
+                <div>
+                  <button
+                    class="myPrimaryButton h-8"
+                    @click="pageBuilderClass.saveComponentsLocalStorage"
+                    type="button"
+                  >
+                    <div v-if="!autoSavingSatus" class="flex items-center gap-2">
+                      <span class="material-symbols-outlined">save</span>
+                      <span> Save </span>
+                    </div>
+
+                    <div v-if="autoSavingSatus" class="flex items-center gap-2">
+                      <span>
+                        <span class="relative flex size-3">
+                          <span
+                            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-100 opacity-75"
+                          ></span>
+                          <span class="relative inline-flex size-3 rounded-full bg-white"></span>
+                        </span>
+                      </span>
+                      <div>Saving</div>
+                    </div>
+                  </button>
+                </div>
+              </div>
+
+              <div class="flex gap-2 items-center ml-6">
                 <button
-                  class="myPrimaryButton"
-                  @click="pageBuilderClass.saveComponentsLocalStorage"
+                  class="myPrimaryButton h-8 items-center"
+                  @click="onSaveLayoutClick"
+                  :disabled="successfullySaved"
                   type="button"
                 >
-                  <span class="material-symbols-outlined"> save </span>
-                  Save
+                  <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined">Raven</span>
+                    <span> Save </span>
+                  </div>
+                  <div
+                    v-if="successfullySaved"
+                    class="myPrimaryParagraph lg:block hidden items-center h-full"
+                  >
+                    <span class="material-symbols-outlined text-white"> check </span>
+                  </div>
                 </button>
               </div>
             </div>
