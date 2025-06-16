@@ -32,7 +32,6 @@ class PageBuilderClass {
   private elementsWithListeners: WeakSet<Element>
   private nextTick: Promise<void>
   private containsPagebuilder: Element | null
-  private timer: number | null
   private pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>
   private getTextAreaVueModel: ComputedRef<string | null>
   private getLocalStorageItemName: ComputedRef<string | null>
@@ -68,8 +67,6 @@ class PageBuilderClass {
     this.nextTick = nextTick()
 
     this.containsPagebuilder = document.querySelector('#contains-pagebuilder')
-
-    this.timer = null
 
     this.pageBuilderStateStore = pageBuilderStateStore
 
@@ -116,7 +113,7 @@ class PageBuilderClass {
 
     this.showRunningMethodLogs = false
 
-    this.delay = delay()
+    this.delay = delay
   }
 
   // Load existing content from HTML when in update mode
@@ -1685,6 +1682,10 @@ class PageBuilderClass {
         this.setComponentsFromData(data)
       }
     }
+  }
+
+  async autoSave(): boolean {
+    await this.saveComponentsLocalStorage()
   }
 
   async handlePageBuilderMethods(): Promise<void> {
