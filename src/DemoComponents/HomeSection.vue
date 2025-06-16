@@ -116,13 +116,6 @@ onMounted(async () => {
           scale. Build responsive pages like listings, jobs or blog posts and manage content easily
           using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition
           API, Pinia, CSS, Tailwind CSS and HTML.
-          <a
-            class="text-myPrimaryLinkColor font-medium"
-            href="https://github.com/qaiswardag/vue-website-page-builder"
-            target="_blank"
-          >
-            Go to the GitHub repository.
-          </a>
 
           <br />
         </p>
@@ -154,14 +147,6 @@ onMounted(async () => {
           A Page Builder designed for growth. Build your website pages with ready-made components
           that are fully customizable and always responsive, designed to fit every need. A powerful
           Page Builder for growing merchants, brands, and agencies.
-          <br />
-          <a
-            class="text-myPrimaryLinkColor font-medium"
-            href="https://github.com/qaiswardag/vue-website-page-builder"
-            target="_blank"
-          >
-            Go to the GitHub repository.
-          </a>
         </p>
       </template>
       <template #content>
