@@ -293,7 +293,7 @@ class PageBuilderClass {
         this.pageBuilderStateStore.setIsSaving(false)
       }
     }
-    if (!passedConfig.userSettings) {
+    if (passedConfig && !passedConfig.userSettings) {
       this.pageBuilderStateStore.setIsSaving(true)
       await this.delay(200)
 
@@ -325,7 +325,7 @@ class PageBuilderClass {
         this.pageBuilderStateStore.setIsSaving(false)
       }
     }
-    if (!passedConfig.userSettings) {
+    if (passedConfig && !passedConfig.userSettings) {
       this.pageBuilderStateStore.setIsSaving(true)
       await this.delay(200)
 
