@@ -122,7 +122,7 @@ const openHTMLSettings = function () {
             getConfigPageBuilder.userForPageBuilder.name[0]
           }}
         </div>
-        <div class="hidden text-xs h-8 lg:flex items-center">
+        <div class="hidden text-xs h-8 lg:flex items-center font-normal">
           {{ getConfigPageBuilder.userForPageBuilder.name }}
         </div>
       </div>
@@ -159,7 +159,7 @@ const openHTMLSettings = function () {
 
       <!-- Main Settings Start -->
       <button
-        class="cursor-pointer lg:block hidden myPrimaryTag"
+        class="cursor-pointer lg:block hidden myPrimaryTag font-normal"
         type="button"
         @click="
           () => {
@@ -173,7 +173,7 @@ const openHTMLSettings = function () {
       <!-- Main Settings End -->
       <!-- HTML Settings Start -->
       <button
-        class="cursor-pointer lg:block hidden myPrimaryTag"
+        class="cursor-pointer lg:block hidden myPrimaryTag font-normal"
         type="button"
         @click="openHTMLSettings"
       >
@@ -183,7 +183,7 @@ const openHTMLSettings = function () {
 
       <!--Delete Layout Start -->
       <button
-        class="cursor-pointer lg:block hidden myPrimaryTag bg-myPrimaryErrorColor text-white"
+        class="cursor-pointer lg:block hidden myPrimaryTag font-normal bg-myPrimaryErrorColor text-white"
         type="button"
         @click="
           () => {
