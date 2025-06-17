@@ -322,7 +322,7 @@ class PageBuilderClass {
         //
         // Only auto-save to local storage when no element is selected (this.getElement.value is falsy)
         // See explanation above for why this is important.
-        if (!this.getElement.value) {
+        if (true || !this.getElement.value) {
           this.pageBuilderStateStore.setIsSaving(true)
           await this.delay(500)
 
@@ -1133,64 +1133,42 @@ class PageBuilderClass {
    * This function Only copies the current DOM HTML into JS this.getComponents (component.html_code).
    */
   #domToComponentsSync = async () => {
-    if (!this.getComponents.value) {
-      this.pageBuilderStateStore.setComponents([])
-
-      const pagebuilder = document.querySelector('#pagebuilder')
-      if (!pagebuilder) return
-
-      // Clear the current DOM
-      pagebuilder.innerHTML = ''
-
-      // Render each component's HTML into the DOM
-      this.getComponents.value?.forEach((component) => {
-        const tempDiv = document.createElement('div')
-        tempDiv.innerHTML = component.html_code || ''
-        const section = tempDiv.firstElementChild
-        if (section) pagebuilder.appendChild(section)
-      })
-    }
-
     const pagebuilder = document.querySelector('#pagebuilder')
+    if (!pagebuilder) return
 
-    if (pagebuilder) {
-      const hoveredElement = pagebuilder.querySelector('[hovered]')
-      if (hoveredElement) {
-        hoveredElement.removeAttribute('hovered')
-      }
+    const hoveredElement = pagebuilder.querySelector('[hovered]')
 
-      this.getComponents.value?.forEach((component) => {
-        // selection is the actual DOM element currently rendered in the browser with that data-componentid.
-        const section = pagebuilder.querySelector(`section[data-componentid="${component.id}"]`)
-
-        if (section) {
-          component.html_code = section.outerHTML
-          component.id = section.getAttribute('data-componentid') || component.id
-          component.title = section.getAttribute('title') || component.title
-        }
-      })
-
-      // Use the MutationObserver to wait for the next DOM change
-      await new Promise<void>((resolve) => {
-        resolve()
-      })
+    if (hoveredElement) {
+      hoveredElement.removeAttribute('hovered')
     }
+
+    const componentsToSave = []
+    pagebuilder.querySelectorAll('section[data-componentid]').forEach((section) => {
+      componentsToSave.push({
+        html_code: section.outerHTML,
+        id: section.getAttribute('data-componentid'),
+        title:
+          section.getAttribute('title') ||
+          section.getAttribute('data-componentid') ||
+          'Untitled Component',
+      })
+    })
+
+    if (this.getLocalStorageItemName.value) {
+      localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(componentsToSave))
+    }
+
+    console.log('gemt denne:', componentsToSave)
+
+    // No DOM mutation here!
+    await new Promise<void>((resolve) => resolve())
   }
 
   // save to local storage
   async saveComponentsLocalStorage() {
     await this.nextTick
+
     await this.#domToComponentsSync()
-
-    await this.nextTick
-    if (this.getLocalStorageItemName.value) {
-      localStorage.setItem(
-        this.getLocalStorageItemName.value,
-        JSON.stringify(this.getComponents.value),
-      )
-    }
-
-    await this.setEventListenersForElements()
   }
 
   async removeItemComponentsLocalStorageCreate() {
@@ -1559,6 +1537,7 @@ class PageBuilderClass {
   }
 
   async handlePageBuilderMethods(): Promise<void> {
+    console.log('handlePageBuilderMethods is running...')
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
     // handle custom URL

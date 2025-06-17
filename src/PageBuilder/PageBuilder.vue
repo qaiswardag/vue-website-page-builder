@@ -11,7 +11,7 @@ import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared
 import { updateOrCreateIsFalsy } from '../helpers/passedPageBuilderConfig'
 import ToolbarOption from '../Components/PageBuilder/ToolbarOption/ToolbarOption.vue'
 import { delay } from '../composables/delay'
-import { debounceAsync } from '../composables/debounceAsync'
+import { useDebounce } from '../composables/useDebounce.ts'
 
 /**
  * Props for PageBuilder component
@@ -113,15 +113,6 @@ const getElement = computed(() => {
   return pageBuilderStateStore.getElement
 })
 
-// auto save logic
-// if (
-//   getConfigPageBuilder &&
-//   typeof getConfigPageBuilder.value.userSettings.autoSave === 'boolean' &&
-//   getConfigPageBuilder.value.userSettings.autoSave
-// ) {
-//   await pageBuilderClass.onAutoOrSaveClick()
-// }
-
 const getElementAttributes = computed(() => {
   if (!getElement.value || !(getElement.value instanceof HTMLElement)) {
     return ''
@@ -139,9 +130,8 @@ const getElementAttributes = computed(() => {
   return attributesToWatch
 })
 
-const debounce = debounceAsync(300)
-
-let debounceTimer = ref(null)
+const debounceAutoSave = useDebounce()
+const debounceManual = useDebounce()
 
 watch(getElementAttributes, async (newAttributes, oldAttributes) => {
   // Only run if attributes actually changed
@@ -152,19 +142,24 @@ watch(getElementAttributes, async (newAttributes, oldAttributes) => {
     newAttributes?.class !== oldAttributes?.class ||
     newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
-    // auto save logic
+    // User settings auto-save logic
     if (
       getConfigPageBuilder &&
       typeof getConfigPageBuilder.value.userSettings.autoSave === 'boolean' &&
       getConfigPageBuilder.value.userSettings.autoSave
     ) {
-      await pageBuilderClass.onAutoOrSaveClick()
+      debounceAutoSave(async () => {
+        console.log('1: COUNT THE WATCHER')
+        await pageBuilderClass.onAutoOrSaveClick()
+        await pageBuilderClass.handlePageBuilderMethods()
+        // await pageBuilderClass.setEventListenersForElements()
+      }, 200)
       return
     }
 
-    if (debounceTimer.value) clearTimeout(debounceTimer.value)
-    debounceTimer.value = setTimeout(async () => {
-      console.log('CHECK COUNT FOR THIS WATCHER')
+    // Debounced manual save logic
+    debounceManual(async () => {
+      console.log('2: COUNT THE WATCHER')
       await pageBuilderClass.handlePageBuilderMethods()
       await pageBuilderClass.setEventListenersForElements()
     }, 200)

@@ -68,14 +68,7 @@ const isHeadingElement = computed(() => {
         <article class="mb-1">
           <TipTap></TipTap>
         </article>
-        <article
-          class="my-1 bg-white"
-          v-if="
-            false &&
-            $page.props.user.superadmin !== null &&
-            $page.props.user.superadmin.role === 'admin'
-          "
-        >
+        <article v-if="false" class="my-1 bg-white">
           <Typography></Typography>
         </article>
 

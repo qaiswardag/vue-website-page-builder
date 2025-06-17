@@ -55,6 +55,7 @@ const handleAddImage = function () {
 
 const loadingImage = async function (imageURL) {
   getIsLoadingImage.value = true
+
   if (imageURL && typeof imageURL === 'string' && imageURL.length > 2) {
     try {
       await preloadImage(imageURL)

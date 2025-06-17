@@ -27,7 +27,6 @@ const fetchUnsplash = async function () {
   getIsLoading.value = true
 
   localStorage.setItem('unsplash-query', getSearchTerm.value)
-  localStorage.setItem('unsplash-page', getCurrentPageNumber.value)
 
   if (
     getUnsplashImages.value &&
@@ -90,11 +89,13 @@ const searchByOrientation = function (orientationParameter) {
 //
 // load images for previous page
 const previousPage = function () {
+  localStorage.setItem('unsplash-page', getCurrentPageNumber.value)
   fetchUnsplash()
 }
 
 // load images for next page
 const nextPage = async function () {
+  localStorage.setItem('unsplash-page', getCurrentPageNumber.value)
   fetchUnsplash()
 }
 
