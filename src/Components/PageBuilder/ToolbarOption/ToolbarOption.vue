@@ -115,7 +115,7 @@ const openHTMLSettings = function () {
         "
       >
         <div
-          class="text-white rounded-full bg-myPrimaryBrandColor flex justify-center items-center text-xs h-8 min-h-8 max-h-8 w-8 min-w-8 max-w-8"
+          class="text-white rounded-full bg-myPrimaryBrandColor flex justify-center items-center text-xs h-8 min-h-8 max-h-8 w-8 min-w-8 max-w-8 font-normal"
         >
           {{
             typeof getConfigPageBuilder.userForPageBuilder.name === 'string' &&
@@ -150,7 +150,7 @@ const openHTMLSettings = function () {
             class="block inset-0 object-top h-8 min-h-8 max-h-8 w-8 min-w-8 max-w-8 object-cover rounded-full"
           />
         </div>
-        <div class="hidden text-xs h-8 lg:flex items-center">
+        <div class="hidden text-xs h-8 lg:flex items-center font-normal">
           {{ getConfigPageBuilder.userForPageBuilder.name }}
         </div>
       </div>
