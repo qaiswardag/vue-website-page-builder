@@ -1483,6 +1483,8 @@ class PageBuilderClass {
 
   // Load existing content from HTML when in update mode
   loadExistingContent(data?: string, injectCustomHTMLSections?: boolean): void {
+    this.pageBuilderStateStore.setComponents([])
+
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return
 
     if (injectCustomHTMLSections && data !== undefined) {
@@ -1492,8 +1494,6 @@ class PageBuilderClass {
     const storedData = this.areComponentsStoredInLocalStorage()
 
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
-      this.pageBuilderStateStore.setComponents([])
-
       if (storedData) {
         this.setComponentsFromData(storedData)
       }
