@@ -175,7 +175,7 @@ const toggleDropDown = function () {
           </button>
           <div
             :class="[
-              'absolute left-0 -ml-16 flex flex-col gap-3 shadow-lg bg-white w-max rounded-2xl transition-all duration-200 ease-out pt-4 pr-4 pb-4 pl-2 mt-2 border border-gray-100',
+              'absolute left-0 -ml-16 flex flex-col gap-3 shadow-lg bg-white w-max rounded-2xl transition-all duration-200 ease-out pt-4 pr-4 pb-4 pl-2 mt-2 border border-gray-100 z-30',
               openDropDown
                 ? 'opacity-100 translate-y-0 pointer-events-auto'
                 : 'opacity-0 -translate-y-2 pointer-events-none',
