@@ -197,6 +197,20 @@ const handleDownloadHTML = function () {
                     </tr>
                     <tr>
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        Image
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="flex items-center space-x-3">
+                          <img
+                            class="block inset-0 object-top h-10 min-h-10 max-h-10 w-10 min-w-10 max-w-10 object-cover rounded-full"
+                            :src="getConfigPageBuilder.userForPageBuilder.image"
+                            alt="image"
+                          />
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         Image URL
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
@@ -333,13 +347,11 @@ const handleDownloadHTML = function () {
                       </td>
                       <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         <div class="flex items-center space-x-3">
-                          <div class="border-r border-gray-200 pr-6">
-                            <img
-                              class="h-3"
-                              :src="getConfigPageBuilder.pageBuilderLogo.src"
-                              alt="Logo"
-                            />
-                          </div>
+                          <img
+                            class="h-4"
+                            :src="getConfigPageBuilder.pageBuilderLogo.src"
+                            alt="Logo"
+                          />
                         </div>
                       </td>
                     </tr>
