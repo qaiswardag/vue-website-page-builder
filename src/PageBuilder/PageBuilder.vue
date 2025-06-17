@@ -301,7 +301,7 @@ onMounted(async () => {
           >
             <div
               @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex myPrimaryGap items-center overflow-x-scroll pt-4 pb-2 pl-2 h-24 w-full min-w-36"
+              class="flex myPrimaryGap items-center pt-4 pb-2 pl-2 h-24 w-full min-w-36"
             >
               <button
                 class="myPrimaryButton h-6 flex gap-2"

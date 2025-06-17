@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { nextTick } from 'vue'
-import PageBuilderClass from '../composables/PageBuilderClass.ts'
 
 import type {
   ComponentObject,
@@ -267,12 +266,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getIsSaving: (state: PageBuilderState): boolean => state.isSaving,
   },
   actions: {
-    initPageBuilderClass() {
-      // Only initialize once
-      if (!this.pageBuilderClass) {
-        this.pageBuilderClass = new PageBuilderClass(this)
-      }
-    },
     setComponentArrayAddMethod(payload: string | null): void {
       this.componentArrayAddMethod = payload
     },
@@ -280,10 +273,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       this.localStorageItemName = payload
     },
     setShowModalTipTap(payload: boolean): void {
-      if (!payload) {
-        this.initPageBuilderClass()
-        this.pageBuilderClass.handleAutoSave()
-      }
       this.showModalTipTap = payload
     },
     setMenuRight(payload: boolean): void {

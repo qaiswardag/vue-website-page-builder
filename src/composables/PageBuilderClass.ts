@@ -283,8 +283,7 @@ class PageBuilderClass {
       // Enabled auto save
       if (
         typeof passedConfig.userSettings.autoSave === 'boolean' &&
-        passedConfig.userSettings.autoSave &&
-        typeof passedConfig.userSettings.autoSave !== false
+        passedConfig.userSettings.autoSave !== false
       ) {
         this.pageBuilderStateStore.setIsSaving(true)
         await this.delay(200)
@@ -1410,6 +1409,11 @@ class PageBuilderClass {
     } else {
       this.#parseJSONComponents(trimmedData)
     }
+  }
+
+  toggleTipTapModal(status: boolean): void {
+    this.pageBuilderStateStore.setShowModalTipTap(status)
+    this.handleAutoSave()
   }
 
   // Private method to parse JSON components

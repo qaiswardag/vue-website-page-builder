@@ -219,12 +219,12 @@ onMounted(() => {
                   class="px-2 flex items-center justify-start gap-2 w-max p-1 rounded-full border border-gray-200 shadow-sm"
                 >
                   <button
-                    @click="pageBuilderStateStore.setShowModalTipTap(false)"
+                    @click="pageBuilderClass.toggleTipTapModal(false)"
                     type="button"
                     class="myPrimaryTag"
                   >
                     <span class="material-symbols-outlined"> Save </span>
-                    <span>Close with Changes</span>
+                    <span>Save</span>
                   </button>
                 </div>
               </div>

@@ -45,7 +45,7 @@ const secondModalButtonFunctionDynamicModalBuilder = ref(null)
 const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 
 const handleModalPreviewTiptap = function () {
-  pageBuilderStateStore.setShowModalTipTap(true)
+  pageBuilderClass.toggleTipTapModal(true)
 
   typeModal.value = 'success'
   gridColumnModal.value = 2
@@ -58,11 +58,11 @@ const handleModalPreviewTiptap = function () {
   // handle click
 
   firstModalButtonFunctionDynamicModalBuilder.value = function () {
-    pageBuilderStateStore.setShowModalTipTap(false)
+    pageBuilderClass.toggleTipTapModal(false)
   }
 
   thirdModalButtonFunctionDynamicModalBuilder.value = function () {
-    pageBuilderStateStore.setShowModalTipTap(false)
+    pageBuilderClass.toggleTipTapModal(true)
   }
 }
 

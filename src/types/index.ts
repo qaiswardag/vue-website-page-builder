@@ -1,3 +1,12 @@
+import type PageBuilderClass from '../composables/PageBuilderClass.ts'
+
+export interface PageBuilderState {
+  // ...other state properties...
+  pageBuilderClass: PageBuilderClass | null
+  isSaving: boolean
+  // etc.
+}
+
 // Central type definitions for the Vue Page Builder project
 
 // Component and Image interfaces

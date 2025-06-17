@@ -1,5 +1,5 @@
-<script setup>
-import PageBuilderClass from '../../composables/PageBuilderClass.ts'
+<script setup lang="ts">
+import PageBuilderClass from '../../composables/PageBuilderClass'
 import { sharedPageBuilderStore } from '../../stores/shared-store'
 
 // Use shared store instance
@@ -15,7 +15,7 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
         <div class="flex items-center justify-center mb-6">
           <div class="px-2 flex items-center justify-start gap-2 w-max">
             <button
-              @click="pageBuilderStateStore.setShowModalTipTap(true)"
+              @click="pageBuilderClass.toggleTipTapModal(true)"
               type="button"
               class="myPrimaryTag"
             >
