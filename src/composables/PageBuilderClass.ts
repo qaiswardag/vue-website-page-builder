@@ -291,7 +291,15 @@ class PageBuilderClass {
         await this.saveComponentsLocalStorage()
 
         this.pageBuilderStateStore.setIsSaving(false)
-      } else return
+      }
+    }
+    if (!passedConfig.userSettings) {
+      this.pageBuilderStateStore.setIsSaving(true)
+      await this.delay(200)
+
+      await this.saveComponentsLocalStorage()
+
+      this.pageBuilderStateStore.setIsSaving(false)
     }
   }
 
@@ -315,7 +323,15 @@ class PageBuilderClass {
         await this.saveComponentsLocalStorage()
 
         this.pageBuilderStateStore.setIsSaving(false)
-      } else return
+      }
+    }
+    if (!passedConfig.userSettings) {
+      this.pageBuilderStateStore.setIsSaving(true)
+      await this.delay(200)
+
+      await this.saveComponentsLocalStorage()
+
+      this.pageBuilderStateStore.setIsSaving(false)
     }
   }
 
