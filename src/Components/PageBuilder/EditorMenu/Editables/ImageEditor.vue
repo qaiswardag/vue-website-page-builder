@@ -63,6 +63,7 @@ const loadingImage = async function (imageURL) {
 
   if (imageURL && typeof imageURL === 'string' && imageURL.length > 2) {
     await preloadImage(imageURL)
+    await delay(200)
     getIsLoadingImage.value = false
   }
 }
