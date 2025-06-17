@@ -1158,8 +1158,6 @@ class PageBuilderClass {
       localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(componentsToSave))
     }
 
-    console.log('gemt denne:', componentsToSave)
-
     // No DOM mutation here!
     await new Promise<void>((resolve) => resolve())
   }
@@ -1537,7 +1535,6 @@ class PageBuilderClass {
   }
 
   async handlePageBuilderMethods(): Promise<void> {
-    console.log('handlePageBuilderMethods is running...')
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
     // handle custom URL
