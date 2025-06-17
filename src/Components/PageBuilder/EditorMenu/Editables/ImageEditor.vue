@@ -62,13 +62,8 @@ const loadingImage = async function (imageURL) {
   getIsLoadingImage.value = true
 
   if (imageURL && typeof imageURL === 'string' && imageURL.length > 2) {
-    try {
-      await preloadImage(imageURL)
-    } catch (err) {
-      console.log('Unable getting the image:', err)
-    } finally {
-      getIsLoadingImage.value = false
-    }
+    await preloadImage(imageURL)
+    getIsLoadingImage.value = false
   }
 }
 </script>

@@ -15,7 +15,6 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
     (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string') ||
     (config.updateOrCreate && isEmptyObject(config.updateOrCreate))
   ) {
-    console.log('aaaa')
     const updatedConfig = {
       ...config,
       updateOrCreate: {
@@ -36,14 +35,13 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
     config.updateOrCreate.formType !== 'update' &&
     typeof config.formName !== 'string'
   ) {
-    console.log('bbbb')
     const updatedConfig = {
       ...config,
       updateOrCreate: {
-        formType: 'create' as 'create',
+        formType: 'create',
         formName: 'post',
       },
-    }
+    } as const
 
     pageBuilderClass.setConfigPageBuilder(updatedConfig)
     return true
@@ -59,7 +57,6 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
     (typeof config.updateOrCreate.formName === 'string' &&
       config.updateOrCreate.formName.length === 0)
   ) {
-    console.log('cccc')
     const updatedConfig = {
       ...config,
       updateOrCreate: {

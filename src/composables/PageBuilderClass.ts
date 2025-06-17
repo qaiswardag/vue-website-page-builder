@@ -288,71 +288,50 @@ class PageBuilderClass {
     })
   }
 
-  /**
-   * onAutoOrSaveClick is responsible for handling auto-save logic when certain element attributes change.
-   *
-   * IMPORTANT:
-   * We only trigger auto-save (saveComponentsLocalStorage) when `getElement.value` is falsy.
-   *
-   * REASON:
-   * - When `getElement.value` is truthy, it means a DOM element is currently selected or being edited.
-   * - Saving at this point can cause issues with syncing the DOM and JS state, especially if the DOM is being mutated or re-rendered.
-   * - By only saving when `getElement.value` is falsy (i.e., no element is selected), we avoid race conditions, stale references, and potential call stack issues.
-   * - This ensures that auto-save only happens when the user is not actively editing or interacting with a specific element, keeping the state and DOM in sync.
-   *
-   * WHERE TO USE:
-   * - This logic should be used in any watcher or handler that triggers auto-save based on attribute changes.
-   * - Always check for a falsy `getElement.value` before calling saveComponentsLocalStorage.
-   */
-
-  onAutoOrSaveClick = async () => {
+  handleAutoSave = async () => {
     const passedConfig = this.pageBuilderStateStore.getConfigPageBuilder
 
     // Check if config is set
-    if (passedConfig && passedConfig.userSettings && passedConfig.userSettings.autoSave) {
+    if (passedConfig && passedConfig.userSettings) {
       //
       //
-      // Check if auto save it set to true for the user
+      // Enabled auto save
       if (
         typeof passedConfig.userSettings.autoSave === 'boolean' &&
         passedConfig.userSettings.autoSave
-        // Check if auto save it set to true for the user
       ) {
-        //
-        //
-        // Only auto-save to local storage when no element is selected (this.getElement.value is falsy)
-        // See explanation above for why this is important.
-        if (true || !this.getElement.value) {
-          this.pageBuilderStateStore.setIsSaving(true)
-          await this.delay(500)
-
-          console.log('auto save is true and el is falsy')
-          await this.saveComponentsLocalStorage()
-
-          this.pageBuilderStateStore.setIsSaving(false)
-        }
-      }
-    }
-
-    // Check if auto save it set to false for the user
-    if (
-      typeof passedConfig.userSettings.autoSave === 'boolean' &&
-      !passedConfig.userSettings.autoSave
-      // Check if auto save it set to true for the user
-    ) {
-      // Only auto-save to local storage when no element is selected (this.getElement.value is falsy)
-      // See explanation above for why this is important.
-      if (!this.getElement.value) {
         this.pageBuilderStateStore.setIsSaving(true)
-        await this.delay(500)
+        await this.delay(200)
 
-        console.log('auto save is false and el is falsy')
         await this.saveComponentsLocalStorage()
 
         this.pageBuilderStateStore.setIsSaving(false)
-      }
+      } else return
     }
-    this.pageBuilderStateStore.setIsSaving(false)
+  }
+
+  handleManualSave = async () => {
+    const passedConfig = this.pageBuilderStateStore.getConfigPageBuilder
+
+    // Check if config is set
+    if (passedConfig && passedConfig.userSettings) {
+      //
+      //
+      // Enabled auto save
+      if (
+        (typeof passedConfig.userSettings.autoSave === 'boolean' &&
+          !passedConfig.userSettings.autoSave) ||
+        (typeof passedConfig.userSettings.autoSave === 'boolean' &&
+          passedConfig.userSettings.autoSave)
+      ) {
+        this.pageBuilderStateStore.setIsSaving(true)
+        await this.delay(200)
+
+        await this.saveComponentsLocalStorage()
+
+        this.pageBuilderStateStore.setIsSaving(false)
+      } else return
+    }
   }
 
   cloneCompObjForDOMInsertion(componentObject: ComponentObject): ComponentObject {
@@ -973,14 +952,6 @@ class PageBuilderClass {
   }
 
   updateLocalStorageItemName(): void {
-    // const updateOrCreate =
-    //   this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType || 'create'
-
-    console.log(
-      'config for page builder to work with:',
-      this.pageBuilderStateStore.getConfigPageBuilder,
-    )
-
     const updateOrCreate = this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType
 
     const resourceData = this.pageBuilderStateStore.getConfigPageBuilder?.resourceData
@@ -1178,8 +1149,6 @@ class PageBuilderClass {
   }
 
   async removeItemComponentsLocalStorageUpdate() {
-    console.log('removeItemComponentsLocalStorageUpdate')
-
     if (this.getLocalStorageItemName.value) {
       localStorage.removeItem(this.getLocalStorageItemName.value)
     }

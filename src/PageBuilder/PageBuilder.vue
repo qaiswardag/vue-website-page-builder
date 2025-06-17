@@ -130,7 +130,7 @@ const getElementAttributes = computed(() => {
   return attributesToWatch
 })
 
-const debounceAutoSave = useDebounce()
+const debounce = useDebounce()
 const debounceManual = useDebounce()
 
 watch(getElementAttributes, async (newAttributes, oldAttributes) => {
@@ -142,24 +142,8 @@ watch(getElementAttributes, async (newAttributes, oldAttributes) => {
     newAttributes?.class !== oldAttributes?.class ||
     newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
-    // User settings auto-save logic
-    if (
-      getConfigPageBuilder &&
-      typeof getConfigPageBuilder.value.userSettings.autoSave === 'boolean' &&
-      getConfigPageBuilder.value.userSettings.autoSave
-    ) {
-      debounceAutoSave(async () => {
-        console.log('1: COUNT THE WATCHER')
-        await pageBuilderClass.onAutoOrSaveClick()
-        await pageBuilderClass.handlePageBuilderMethods()
-        // await pageBuilderClass.setEventListenersForElements()
-      }, 200)
-      return
-    }
-
-    // Debounced manual save logic
-    debounceManual(async () => {
-      console.log('2: COUNT THE WATCHER')
+    debounce(async () => {
+      await pageBuilderClass.handleAutoSave()
       await pageBuilderClass.handlePageBuilderMethods()
       // await pageBuilderClass.setEventListenersForElements()
     }, 200)
@@ -324,7 +308,7 @@ onMounted(async () => {
                 @click.stop="
                   async () => {
                     await pageBuilderClass.clearHtmlSelection()
-                    await pageBuilderClass.onAutoOrSaveClick()
+                    await pageBuilderClass.handleManualSave()
                   }
                 "
                 type="button"
