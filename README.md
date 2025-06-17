@@ -276,6 +276,7 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+
 // Populating page builder with existing resource content
 pageBuilderClass.loadExistingContent(existingResourceFromBackend)
 </script>
@@ -322,7 +323,6 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing with essential configuration
 pageBuilderClass.setConfigPageBuilder(configPageBuilder)
-// No need to call loadExistingContent; the builder will auto-restore from local storage if available
 </script>
 
 <template>
@@ -363,23 +363,7 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing with essential configuration
-pageBuilderClass.setConfigPageBuilder(configPageBuilder)
-
-// Recommended HTML wrapper for optimal layout and responsiveness:
-// Wrap your components using the following structure to ensure proper spacing and alignment:
-//
-// <section>
-//   <div class="relative py-4">
-//     <div class="mx-auto max-w-7xl lg:px-4 px-2">
-//       <div class="break-words">
-//         <!-- Your HTML layout goes here -->
-//       </div>
-//     </div>
-//   </div>
-// </section>
-
-
+// Saved content in DB from already created content using the Page Builder
 const existingResourceFromBackend = [
   {
     html_code:
