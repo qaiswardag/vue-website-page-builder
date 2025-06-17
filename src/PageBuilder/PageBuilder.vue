@@ -194,8 +194,6 @@ watch(
 )
 
 onMounted(async () => {
-  pageBuilderStateStore.setComponents(null)
-
   const config = getConfigPageBuilder.value
   handleConfig(config)
 
