@@ -95,12 +95,6 @@ const handleHTMLSettings = function () {
 const openHTMLSettings = function () {
   showHTMLSettings.value = true
 }
-
-const openDropDown = ref(false)
-
-const toggleDropDown = function () {
-  openDropDown.value = !openDropDown.value
-}
 </script>
 
 <template>
@@ -165,77 +159,59 @@ const toggleDropDown = function () {
 
       <div>
         <!-- Component Start -->
-        <div class="relative">
+        <div class="relative group">
           <button
-            @click="toggleDropDown"
             type="button"
             class="cursor-pointer lg:flex myPrimaryTag font-normal w-max text-xs"
           >
             <span> Options </span>
           </button>
           <div
-            :class="[
-              'absolute left-0 -ml-16 flex flex-col gap-3 shadow-lg bg-white w-max rounded-2xl transition-all duration-200 ease-out pt-4 pr-4 pb-4 pl-2 mt-2 border border-gray-100 z-30',
-              openDropDown
-                ? 'opacity-100 translate-y-0 pointer-events-auto'
-                : 'opacity-0 -translate-y-2 pointer-events-none',
-            ]"
+            class="absolute left-0 -ml-16 -mt-2 flex flex-col gap-3 shadow-lg bg-white w-max border border-gray-100 rounded-2xl transition-all duration-200 ease-out pt-4 pr-4 pb-4 pl-2 z-30 opacity-0 pointer-events-none -translate-y-2 group-hover:opacity-100 group-hover:pointer-events-auto group-hover:translate-y-0"
           >
-            <!-- Close - start -->
-            <div class="flex items-center justify-between bg-white mb-2">
-              <span as="h3" class="myPriamryParagraph text-xs">Close</span>
-              <div
-                @click="toggleDropDown"
-                class="h-10 w-10 flex-end cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
-              >
-                <span class="material-symbols-outlined"> close </span>
-              </div>
-            </div>
-            <!-- Close - end -->
-
             <!-- Main Settings Start -->
             <button
-              class="cursor-pointer lg:flex myPrimaryTag font-normal w-max border-none m-0"
-              type="button"
               @click="
                 () => {
                   pageBuilderClass.clearHtmlSelection()
                   openMainSettings()
                 }
               "
+              class="cursor-pointer lg:flex myPrimaryTag font-normal w-max border-none m-0"
+              type="button"
             >
               Config Overview
             </button>
             <!-- Main Settings End -->
+
             <!-- HTML Settings Start -->
             <button
+              @click="openHTMLSettings"
               class="cursor-pointer lg:flex myPrimaryTag font-normal w-max border-none m-0"
               type="button"
-              @click="openHTMLSettings"
             >
               HTML Overview
             </button>
             <!-- HTML Settings End -->
 
-            <!--Delete Layout Start -->
+            <!-- Delete Layout Start -->
             <button
-              class="cursor-pointer lg:flex myPrimaryTag font-normal w-max border-none m-0 bg-myPrimaryErrorColor text-white"
-              type="button"
               @click="
                 () => {
                   pageBuilderClass.clearHtmlSelection()
                   deleteAllComponents()
                 }
               "
+              class="cursor-pointer lg:flex myPrimaryTag font-normal w-max border-none m-0 bg-myPrimaryErrorColor text-white"
+              type="button"
             >
               Delete Layout
             </button>
+            <!-- Delete Layout End -->
           </div>
         </div>
-        <!-- Component End  -->
       </div>
-
-      <!--Delete Layout End -->
+      <!-- Component End -->
     </div>
 
     <ModalBuilder
