@@ -13,7 +13,7 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
     <div class="blockease-linear duration-200 block ease-linear">
       <template v-if="pageBuilderClass.selectedElementIsValidText()">
         <div class="flex items-center justify-center mb-6">
-          <div class="px-2 flex items-center justify-start gap-2">
+          <div class="px-2 flex items-center justify-start gap-2 w-max">
             <button
               @click="pageBuilderStateStore.setShowModalTipTap(true)"
               type="button"

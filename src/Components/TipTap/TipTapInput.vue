@@ -216,7 +216,7 @@ onMounted(() => {
             <div>
               <div>
                 <div
-                  class="px-2 flex items-center justify-start gap-2 p-1 rounded-full border border-gray-200 shadow-sm"
+                  class="px-2 flex items-center justify-start gap-2 w-max p-1 rounded-full border border-gray-200 shadow-sm"
                 >
                   <button
                     @click="pageBuilderStateStore.setShowModalTipTap(false)"
@@ -230,7 +230,7 @@ onMounted(() => {
               </div>
             </div>
             <div class="flex items-center p-1 rounded-full border border-gray-200 shadow-sm">
-              <div class="px-2 flex items-center justify-start gap-2">
+              <div class="px-2 flex items-center justify-start gap-2 w-max">
                 <button
                   @click="editor.chain().focus().setHardBreak().run()"
                   type="button"
@@ -241,7 +241,7 @@ onMounted(() => {
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2">
+              <div class="px-2 flex items-center justify-start gap-2 w-max">
                 <button
                   @click="editor.chain().focus().toggleBold().run()"
                   type="button"
@@ -255,7 +255,7 @@ onMounted(() => {
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2">
+              <div class="px-2 flex items-center justify-start gap-2 w-max">
                 <button
                   @click="handleURL"
                   type="button"
@@ -269,7 +269,7 @@ onMounted(() => {
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2">
+              <div class="px-2 flex items-center justify-start gap-2 w-max">
                 <button
                   @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
                   type="button"
@@ -285,7 +285,7 @@ onMounted(() => {
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2">
+              <div class="px-2 flex items-center justify-start gap-2 w-max">
                 <button
                   @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
                   type="button"
@@ -301,7 +301,7 @@ onMounted(() => {
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2">
+              <div class="px-2 flex items-center justify-start gap-2 w-max">
                 <button
                   @click="editor.chain().focus().toggleBulletList().run()"
                   type="button"
@@ -320,7 +320,7 @@ onMounted(() => {
           <editor-content
             id="page-builder-editor"
             :editor="editor"
-            class="px-4 pt-6 pb-12 bg-white rounded-lg lg:min-h-[20rem] lg:max-h-[30rem] md:min-h-[20rem] md:max-h-[20rem] min-h-[20rem] max-h-[20rem] overflow-y-auto"
+            class="p-2 prounded-lg lg:min-h-[20rem] lg:max-h-[30rem] md:min-h-[20rem] md:max-h-[20rem] min-h-[20rem] max-h-[20rem] overflow-y-auto"
           />
         </div>
       </div>

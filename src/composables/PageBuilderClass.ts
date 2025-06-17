@@ -29,7 +29,6 @@ import { delay } from './delay'
 
 class PageBuilderClass {
   // Class properties with types
-  private elementsWithListeners: WeakSet<Element>
   private nextTick: Promise<void>
   private containsPagebuilder: Element | null
   private pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>
@@ -45,23 +44,10 @@ class PageBuilderClass {
   private getRestoredElement: ComputedRef<string | null>
   private getComponentArrayAddMethod: ComputedRef<string | null>
   private NoneListernesTags: string[]
-  private delay: ReturnType<typeof delay>
+  private delay: (ms?: number) => Promise<void>
   private observer?: MutationObserverType
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
-    /**
-     * Initialize an instance variable 'elementsWithListeners' as a WeakSet.
-     *
-     * A WeakSet is a special type of Set that holds weak references to its elements,
-     * meaning that an element could be garbage collected if there is no other reference to it.
-     * This is especially useful in the context of managing DOM elements and their associated events,
-     * as it allows for efficient and automated cleanup of references to DOM elements that have been removed.
-     *
-     * By checking if an element is in this WeakSet before attaching an event listener,
-     * we can prevent redundant addition of the same event listener to an element.
-     * This helps in managing the memory usage and performance of the application.
-     */
-
     this.nextTick = nextTick()
 
     this.containsPagebuilder = document.querySelector('#contains-pagebuilder')
@@ -197,7 +183,7 @@ class PageBuilderClass {
     }
   }
 
-  #handleElementClick = async (e: Event, element: HTMLElement): void => {
+  #handleElementClick = async (e: Event, element: HTMLElement): Promise<void> => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -260,7 +246,7 @@ class PageBuilderClass {
    * attach event listeners to each element within a 'section'
    */
   setEventListenersForElements = async () => {
-    this.elementsWithListeners = new WeakSet()
+    const elementsWithListeners = new WeakSet<Element>()
 
     const pagebuilder = document.querySelector('#pagebuilder')
 
@@ -273,8 +259,8 @@ class PageBuilderClass {
     pagebuilder.querySelectorAll('section *').forEach((element) => {
       // exclude NoneListernesTags && additional Tags for not listening
       if (this.isEditableElement(element)) {
-        if (this.elementsWithListeners && !this.elementsWithListeners.has(element)) {
-          this.elementsWithListeners.add(element)
+        if (elementsWithListeners && !elementsWithListeners.has(element)) {
+          elementsWithListeners.add(element)
           // Type assertion to HTMLElement since we know these are DOM elements
           const htmlElement = element as HTMLElement
           // Attach event listeners directly to individual elements
@@ -294,11 +280,11 @@ class PageBuilderClass {
     // Check if config is set
     if (passedConfig && passedConfig.userSettings) {
       //
-      //
       // Enabled auto save
       if (
         typeof passedConfig.userSettings.autoSave === 'boolean' &&
-        passedConfig.userSettings.autoSave
+        passedConfig.userSettings.autoSave &&
+        typeof passedConfig.userSettings.autoSave !== false
       ) {
         this.pageBuilderStateStore.setIsSaving(true)
         await this.delay(200)
@@ -1113,7 +1099,8 @@ class PageBuilderClass {
       hoveredElement.removeAttribute('hovered')
     }
 
-    const componentsToSave = []
+    const componentsToSave: { html_code: string; id: string | null; title: string }[] = []
+
     pagebuilder.querySelectorAll('section[data-componentid]').forEach((section) => {
       componentsToSave.push({
         html_code: section.outerHTML,
@@ -1175,17 +1162,11 @@ class PageBuilderClass {
   async updateBasePrimaryImage(data?: { type: string }): Promise<void> {
     if (!this.getElement.value) return
 
-    // If data is provided, check for specific type (backward compatibility)
-    if (data && data.type === 'unsplash' && this.getCurrentImage.value) {
-      if (this.getCurrentImage.value.src) {
-        await this.nextTick
-        this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.src}`)
-      }
-    }
     // If no data provided, apply current image if available (new simplified usage)
     if (this.getCurrentImage.value && this.getCurrentImage.value.src) {
       await this.nextTick
       this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.src}`)
+      await this.handleAutoSave()
     }
   }
 

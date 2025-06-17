@@ -69,7 +69,6 @@ const loadingImage = async function (imageURL) {
 </script>
 <template>
   <div>
-    <p class="my-4">ok: {{ getBasePrimaryImage ? 'true' : 'false' }}</p>
     <div v-show="getIsLoadingImage">
       <div class="flex items-center justify-center mt-4 min-h-80">
         <div

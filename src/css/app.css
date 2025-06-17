@@ -507,6 +507,11 @@ h3 {
 #page-builder-editor-editable-area a {
   pointer-events: none;
 }
+/* CSS for content inside page builder # start */
+#page-builder-editor .tiptap {
+  background: #fff;
+  min-height: 25rem;
+}
 
 #page-builder-editor-editable-area #youtube-video::before {
   content: 'Select Video Element';

@@ -27,10 +27,6 @@ const getShowModalTipTap = computed(() => {
   return result
 })
 
-const getRestoredElement = computed(() => {
-  return pageBuilderStateStore.getRestoredElement
-})
-
 const getComponent = computed(() => {
   return pageBuilderStateStore.getComponent
 })
@@ -76,7 +72,6 @@ const getBasePrimaryImage = computed(() => {
   return pageBuilderStateStore.getBasePrimaryImage
 })
 
-const isLoading = ref(false)
 //
 // use media library
 const showMediaLibraryModal = ref(false)
@@ -271,7 +266,7 @@ const handleModalIframeSrc = function () {
         :class="{ 'rounded-full border border-gray-200 shadow-sm': getElement }"
       >
         <template v-if="pageBuilderClass.ElOrFirstChildIsIframe()">
-          <div class="px-2 flex items-center justify-start gap-2">
+          <div class="px-2 flex items-center justify-start gap-2 w-max">
             <button @click="handleModalIframeSrc" type="button" class="myPrimaryTag">
               <span class="material-symbols-outlined"> play_circle </span>
               <span>Add YouTube</span>
@@ -285,7 +280,7 @@ const handleModalIframeSrc = function () {
             !pageBuilderClass.ElOrFirstChildIsIframe()
           "
         >
-          <div class="px-2 flex items-center justify-start gap-2">
+          <div class="px-2 flex items-center justify-start gap-2 w-max">
             <button @click="handleModalPreviewTiptap" type="button" class="myPrimaryTag">
               <span class="material-symbols-outlined"> edit </span>
               <span>Edit text and links</span>
@@ -304,7 +299,7 @@ const handleModalIframeSrc = function () {
             !pageBuilderClass.ElOrFirstChildIsIframe()
           "
         >
-          <div class="px-2 flex items-center justify-start gap-2">
+          <div class="px-2 flex items-center justify-start gap-2 w-max">
             <button @click="handleAddImage" type="button" class="myPrimaryTag">
               <span class="material-symbols-outlined"> add_photo_alternate </span>
               <span>Update image</span>

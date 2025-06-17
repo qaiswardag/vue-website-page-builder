@@ -28,7 +28,7 @@ const getRestoredElement = computed(() => {
         <div class="border-b border-gray-200 mb-4 pb-8 pt-4">
           <p class="myPrimaryParagraph font-medium py-0">Restore</p>
           <label class="myPrimaryInputLabel"> Restore the last deleted HTML element.</label>
-          <div class="px-2 flex items-center justify-start gap-2">
+          <div class="px-2 flex items-center justify-start gap-2 w-max">
             <button
               @click="pageBuilderClass.handleRestoreElement"
               type="button"
@@ -47,7 +47,7 @@ const getRestoredElement = computed(() => {
           Delete the currently selected HTML element from the page.</label
         >
 
-        <div class="px-2 flex items-center justify-start gap-2">
+        <div class="px-2 flex items-center justify-start gap-2 w-max">
           <button
             @click="pageBuilderClass.handleDeleteElement"
             type="button"

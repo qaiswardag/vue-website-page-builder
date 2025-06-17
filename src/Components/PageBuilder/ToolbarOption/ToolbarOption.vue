@@ -106,12 +106,13 @@ const openHTMLSettings = function () {
       <div
         class="flex items-center myPrimaryTag py-0"
         v-if="
-          (getConfigPageBuilder &&
+          getConfigPageBuilder &&
+          ((getConfigPageBuilder &&
             getConfigPageBuilder.userForPageBuilder &&
             getConfigPageBuilder.userForPageBuilder.name &&
             !getConfigPageBuilder.userForPageBuilder.image) ||
-          (typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
-            getConfigPageBuilder.userForPageBuilder.image.length < 2)
+            (typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
+              getConfigPageBuilder.userForPageBuilder.image.length < 2))
         "
       >
         <div

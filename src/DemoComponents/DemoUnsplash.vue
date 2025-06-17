@@ -25,8 +25,8 @@ const getUnsplashImages = ref([])
 
 const fetchUnsplash = async function () {
   getIsLoading.value = true
-
   localStorage.setItem('unsplash-query', getSearchTerm.value)
+  localStorage.setItem('unsplash-page', getCurrentPageNumber.value)
 
   if (
     getUnsplashImages.value &&
@@ -356,7 +356,16 @@ onMounted(async () => {
 
         <!-- Actions footer # start -->
         <div class="px-4 py-3 flex gap-2 border-t border-gray-200 mt-4 justify-end">
-          <button @click="closeMediaLibraryModal" class="mySecondaryButton" type="button">
+          <button
+            @click="
+              () => {
+                closeMediaLibraryModal()
+                localStorage.setItem('unsplash-page', getCurrentPageNumber)
+              }
+            "
+            class="mySecondaryButton"
+            type="button"
+          >
             Close
           </button>
           <button
