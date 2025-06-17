@@ -161,7 +161,7 @@ watch(getElementAttributes, async (newAttributes, oldAttributes) => {
     debounceManual(async () => {
       console.log('2: COUNT THE WATCHER')
       await pageBuilderClass.handlePageBuilderMethods()
-      await pageBuilderClass.setEventListenersForElements()
+      // await pageBuilderClass.setEventListenersForElements()
     }, 200)
   }
 })
