@@ -48,7 +48,7 @@ const maxWidthClass = computed(() => {
 
 <template>
   <teleport to="body">
-    <div>
+    <div class="font-sans">
       <!-- Modal -->
       <div
         v-if="showModalBuilder"
