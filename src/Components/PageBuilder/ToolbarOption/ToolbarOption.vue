@@ -165,7 +165,7 @@ const toggleDropDown = function () {
 
       <div>
         <!-- Component Start -->
-        <div class="relative z-30">
+        <div class="relative">
           <button
             @click="toggleDropDown"
             type="button"
