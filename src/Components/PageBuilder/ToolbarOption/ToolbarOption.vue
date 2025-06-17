@@ -95,12 +95,18 @@ const handleHTMLSettings = function () {
 const openHTMLSettings = function () {
   showHTMLSettings.value = true
 }
+
+const openDropDown = ref(false)
+
+const toggleDropDown = function () {
+  openDropDown.value = !openDropDown.value
+}
 </script>
 
 <template>
   <div>
     <div
-      class="flex gap-2 items-center myPrimaryParagraph font-medium text-xs py-1 px-2 rounded-full lg:border lg:border-gray-200 lg:shadow-sm"
+      class="flex gap-2 items-center myPrimaryParagraph font-medium text-xs py-1 px-2 rounded-full lg:border lg:border-gray-200 lg:shadow-sm lg:mr-10"
     >
       <!-- User No image Start-->
       <div
@@ -131,7 +137,7 @@ const openHTMLSettings = function () {
 
       <!-- User With image Start-->
       <div
-        class="flex items-center lg:myPrimaryTag py-0 gap-4"
+        class="flex items-center lg:myPrimaryTag py-0 gap-4 w-max"
         v-if="
           getConfigPageBuilder &&
           getConfigPageBuilder.userForPageBuilder &&
@@ -157,43 +163,77 @@ const openHTMLSettings = function () {
 
       <!-- User With image End -->
 
-      <!-- Main Settings Start -->
-      <button
-        class="cursor-pointer lg:block hidden myPrimaryTag font-normal"
-        type="button"
-        @click="
-          () => {
-            pageBuilderClass.clearHtmlSelection()
-            openMainSettings()
-          }
-        "
-      >
-        Config Overview
-      </button>
-      <!-- Main Settings End -->
-      <!-- HTML Settings Start -->
-      <button
-        class="cursor-pointer lg:block hidden myPrimaryTag font-normal"
-        type="button"
-        @click="openHTMLSettings"
-      >
-        HTML Overview
-      </button>
-      <!-- HTML Settings End -->
+      <div>
+        <!-- Component Start -->
+        <div class="relative z-30">
+          <button
+            @click="toggleDropDown"
+            type="button"
+            class="cursor-pointer lg:flex myPrimaryTag font-normal w-max text-xs"
+          >
+            <span> Options </span>
+          </button>
+          <div
+            :class="[
+              'absolute left-0 -ml-16 flex flex-col gap-3 shadow-lg bg-white w-max rounded-2xl transition-all duration-200 ease-out pt-4 pr-4 pb-4 pl-2 mt-2 border border-gray-100',
+              openDropDown
+                ? 'opacity-100 translate-y-0 pointer-events-auto'
+                : 'opacity-0 -translate-y-2 pointer-events-none',
+            ]"
+          >
+            <!-- Close - start -->
+            <div class="flex items-center justify-between bg-white mb-2">
+              <span as="h3" class="myPriamryParagraph text-xs">Close</span>
+              <div
+                @click="toggleDropDown"
+                class="h-10 w-10 flex-end cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
+              >
+                <span class="material-symbols-outlined"> close </span>
+              </div>
+            </div>
+            <!-- Close - end -->
 
-      <!--Delete Layout Start -->
-      <button
-        class="cursor-pointer lg:block hidden myPrimaryTag font-normal bg-myPrimaryErrorColor text-white"
-        type="button"
-        @click="
-          () => {
-            pageBuilderClass.clearHtmlSelection()
-            deleteAllComponents()
-          }
-        "
-      >
-        Delete Layout
-      </button>
+            <!-- Main Settings Start -->
+            <button
+              class="cursor-pointer lg:flex myPrimaryTag font-normal w-max border-none m-0"
+              type="button"
+              @click="
+                () => {
+                  pageBuilderClass.clearHtmlSelection()
+                  openMainSettings()
+                }
+              "
+            >
+              Config Overview
+            </button>
+            <!-- Main Settings End -->
+            <!-- HTML Settings Start -->
+            <button
+              class="cursor-pointer lg:flex myPrimaryTag font-normal w-max border-none m-0"
+              type="button"
+              @click="openHTMLSettings"
+            >
+              HTML Overview
+            </button>
+            <!-- HTML Settings End -->
+
+            <!--Delete Layout Start -->
+            <button
+              class="cursor-pointer lg:flex myPrimaryTag font-normal w-max border-none m-0 bg-myPrimaryErrorColor text-white"
+              type="button"
+              @click="
+                () => {
+                  pageBuilderClass.clearHtmlSelection()
+                  deleteAllComponents()
+                }
+              "
+            >
+              Delete Layout
+            </button>
+          </div>
+        </div>
+        <!-- Component End  -->
+      </div>
 
       <!--Delete Layout End -->
     </div>

@@ -210,7 +210,7 @@ onMounted(async () => {
     id="builder-container"
     class="font-sans max-w-full m-1 border border-gray-600 inset-x-0 z-10 bg-white overflow-x-scroll"
   >
-    <div id="pagebuilder-top-area" class="px-4 pt-2 pb-4 mx-4 mb-4 mt-2">
+    <div id="pagebuilder-top-area" class="lg:px-4 pt-2 pb-4 mx-4 mb-4 mt-2">
       <div
         @click.self="pageBuilderClass.clearHtmlSelection()"
         class="flex justify-between items-center pb-2 border-b border-gray-200"
