@@ -1492,6 +1492,8 @@ class PageBuilderClass {
     const storedData = this.areComponentsStoredInLocalStorage()
 
     if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
+      this.pageBuilderStateStore.setComponents([])
+
       if (storedData) {
         this.setComponentsFromData(storedData)
       }
