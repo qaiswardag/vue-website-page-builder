@@ -34,6 +34,11 @@ const getBasePrimaryImage = computed(() => {
   return pageBuilderStateStore.getBasePrimaryImage
 })
 
+// get current image from store
+const getElement = computed(() => {
+  return pageBuilderStateStore.getElement
+})
+
 const handleAddImage = function () {
   // open modal to true
   showMediaLibraryModal.value = true
@@ -69,6 +74,7 @@ const loadingImage = async function (imageURL) {
 </script>
 <template>
   <div>
+    <p class="my-4">ok: {{ getBasePrimaryImage ? 'true' : 'false' }}</p>
     <div v-show="getIsLoadingImage">
       <div class="flex items-center justify-center mt-4 min-h-80">
         <div
