@@ -88,10 +88,12 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Page Builder
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         <span
                           class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
                         >
@@ -136,18 +138,22 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr v-if="getConfigPageBuilder?.resourceData?.title">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Title
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         {{ getConfigPageBuilder.resourceData.title }}
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.resourceData?.id">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         ID
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         {{ getConfigPageBuilder.resourceData.id }}
                       </td>
                     </tr>
@@ -188,18 +194,22 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         User Name
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         {{ getConfigPageBuilder.userForPageBuilder.name }}
                       </td>
                     </tr>
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Image
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         <div class="flex items-center space-x-3">
                           <img
                             class="block inset-0 object-top h-10 min-h-10 max-h-10 w-10 min-w-10 max-w-10 object-cover rounded-full"
@@ -210,10 +220,12 @@ const handleDownloadHTML = function () {
                       </td>
                     </tr>
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Image URL
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         {{ getConfigPageBuilder.userForPageBuilder.image }}
                       </td>
                     </tr>
@@ -254,26 +266,32 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr v-if="getConfigPageBuilder?.userSettings?.theme">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Theme
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         {{ getConfigPageBuilder.userSettings.theme }}
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.userSettings?.language">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Language
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         {{ getConfigPageBuilder.userSettings.language }}
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.userSettings?.autoSave !== undefined">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Auto Save
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         <span
                           class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                           :class="
@@ -287,10 +305,12 @@ const handleDownloadHTML = function () {
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.userSettings?.notifications !== undefined">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Notifications
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         <span
                           class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                           :class="
@@ -342,10 +362,12 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Logo
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         <div class="flex items-center space-x-3">
                           <img
                             class="h-4"
@@ -356,10 +378,12 @@ const handleDownloadHTML = function () {
                       </td>
                     </tr>
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Logo URL
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         <div class="flex items-center space-x-3">
                           <div class="border-r border-gray-200 pr-6">
                             <div class="flex items-center space-x-3">
@@ -408,10 +432,12 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Form Type
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         <span
                           class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                           :class="
@@ -445,10 +471,12 @@ const handleDownloadHTML = function () {
                         getConfigPageBuilder.updateOrCreate.formName.length > 0
                       "
                     >
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                      <td
+                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 w-96"
+                      >
                         Form Name
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-20">
                         <span
                           class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
                         >
