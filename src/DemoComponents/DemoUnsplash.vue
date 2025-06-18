@@ -271,10 +271,7 @@ onMounted(async () => {
         </div>
 
         <div class="min-h-[33rem] max-h-[33rem] flex gap-6">
-          <div
-            v-if="getUnsplashImages && getUnsplashImages.results"
-            class="w-9/12 pr-1 rounded-lg overflow-y-auto"
-          >
+          <div class="w-9/12 pr-1 rounded-lg overflow-y-auto">
             <div v-if="getIsLoading">
               <div class="flex items-center justify-center mt-4">
                 <div
@@ -287,23 +284,36 @@ onMounted(async () => {
                 </div>
               </div>
             </div>
-            <div v-if="!getIsLoading" class="grid md:grid-cols-4 sm:grid-cols-4 grid-cols-2 gap-2">
+            <div v-if="getUnsplashImages && getUnsplashImages.results">
               <div
-                v-for="image in getUnsplashImages.results"
-                :key="image.id"
-                @click="handleImageClick({ url: image.urls.regular, user: image.user.name })"
-                class="border border-gray-200 my-2 px-2 p-2 cursor-pointer"
+                v-if="!getIsLoading"
+                class="grid md:grid-cols-4 sm:grid-cols-4 grid-cols-2 gap-2"
               >
-                <img
-                  :alt="image.user.name"
-                  class="group block w-full overflow-hidden cursor-pointer"
-                  :src="image.urls.thumb"
-                />
-                <p class="myPrimaryParagraph text-xs font-normal mt-2">By: {{ image.user.name }}</p>
+                <div
+                  v-for="image in getUnsplashImages.results"
+                  :key="image.id"
+                  @click="handleImageClick({ url: image.urls.regular, user: image.user.name })"
+                  class="border border-gray-200 my-2 px-2 p-2 cursor-pointer"
+                >
+                  <img
+                    :alt="image.user.name"
+                    class="group block w-full overflow-hidden cursor-pointer"
+                    :src="image.urls.thumb"
+                  />
+                  <p class="myPrimaryParagraph text-xs font-normal mt-2">
+                    By: {{ image.user.name }}
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div v-if="getUnsplashImages.results.length < 1">
+            <div
+              v-if="
+                getUnsplashImages &&
+                getUnsplashImages.results &&
+                getUnsplashImages.results.length < 1
+              "
+            >
               <p class="myPrimaryParagraph py-4 px-4">
                 <span v-if="getCurrentPageNumber === 1">
                   We did not find any images. Make a new search.
