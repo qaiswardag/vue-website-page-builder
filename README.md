@@ -8,6 +8,11 @@
 
 A Vue 3 page builder component with drag & drop functionality for creating dynamic web pages.
 
+Tailored for Vue Developers
+If you're a Vue 3 developer, this builder feels right at home. It installs quickly via npm and supports full customization through props and configuration objects. You can even set specific user settings like theme, language, and autosave preferences, making it a personalized experience for every user.
+
+Integration is seamless, and your data is safely stored in the browser's local storage. You can retrieve both HTML content and metadata when you're ready to publish, giving you total control over content output.
+
 ## Installation
 
 The web builder for stunning pages. Enable users to design and publish modern pages at any scale.
@@ -54,6 +59,7 @@ The Page Builder is packed with features:
 - **Reordering**: Change the order of your content without hassle.
 - **True Visual Editing**: See your changes in real-time as you make them.
 - **Media Library**: Access and manage your media files.
+- **Local Storage & Auto-Save**: Never lose your work - changes are saved as you go.
 - **Unsplash**: Unsplash Integration.
 - **Responsive Editing**: Ensure your site looks great on all devices.
 - **Text Editing:** Edit text content live and in real-time.
