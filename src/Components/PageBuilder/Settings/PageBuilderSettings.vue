@@ -207,7 +207,14 @@ const handleDownloadHTML = function () {
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         <div class="min-w-[30rem] w-max">Image</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td
+                        v-if="
+                          getConfigPageBuilder.userForPageBuilder.image &&
+                          typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
+                          getConfigPageBuilder.userForPageBuilder.image.length > 2
+                        "
+                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                      >
                         <div class="min-w-[30rem] w-max">
                           <div class="flex items-center space-x-3">
                             <img
@@ -223,7 +230,14 @@ const handleDownloadHTML = function () {
                       <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                         <div class="min-w-[30rem] w-max">Image URL</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                      <td
+                        v-if="
+                          getConfigPageBuilder.userForPageBuilder.image &&
+                          typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
+                          getConfigPageBuilder.userForPageBuilder.image.length > 2
+                        "
+                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                      >
                         <div class="min-w-[30rem] w-max">
                           {{ getConfigPageBuilder.userForPageBuilder.image }}
                         </div>
