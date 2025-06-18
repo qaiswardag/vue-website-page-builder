@@ -847,9 +847,7 @@ class PageBuilderClass {
     }
   }
 
-  //
   handleTextInput = async (textContentVueModel: string): Promise<void> => {
-    // // text content
     if (typeof this.getElement.value?.innerHTML !== 'string') {
       return
     }
@@ -1364,7 +1362,6 @@ class PageBuilderClass {
     if (parentHyperlink !== null) {
       this.pageBuilderStateStore.setHyperlinkAbility(false)
     }
-    //
     const elementTag = this.getElement.value?.tagName.toUpperCase()
 
     if (

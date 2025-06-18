@@ -245,6 +245,45 @@ The Page Builder automatically manages all changes using the browser's local sto
 - **Auto-Save:** The builder periodically auto-saves your changes to local storage, so you don't have to worry about losing your work.
 - **Manual Save:** When the user clicks the Save button, the current state is also saved to local storage.
 
+### Getting HTML Content from Local Storage for Form Submission
+
+To use the builder’s saved data in your form submission, you may want both the combined HTML content and the titles of each component. The PageBuilderClass provides a method to access the latest saved state from local storage. The example below demonstrates how to retrieve and parse this data, combining all component HTML into a single string and collecting all titles into an array. This is useful if you want to display or store both the rendered content and the structure or headings of your page.
+
+You should call this logic when you want to submit or save the builder’s output, for example, when the user clicks a “Save” or “Publish” button. The code safely parses the local storage data, handles errors, and assigns the results to your form fields.
+
+```js
+<script setup>
+import {
+    PageBuilder,
+    PageBuilderClass,
+    sharedPageBuilderStore,
+} from "@myissue/vue-website-page-builder";
+import "@myissue/vue-website-page-builder/style.css";
+
+// Make sure to initialize these before using
+const pageBuilderStateStore = sharedPageBuilderStore;
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
+
+let storedComponents = pageBuilderClass.areComponentsStoredInLocalStorage();
+let content = "";
+
+try {
+    storedComponents = JSON.parse(storedComponents);
+    content = Array.isArray(storedComponents)
+        ? storedComponents.map((component) => component.html_code).join("")
+        : "";
+} catch (e) {
+    console.error(
+        "Unable to parse storedComponents from localStorage:",
+        e
+    );
+    content = "";
+} finally {
+    postForm.content = content;
+}
+<script>
+```
+
 #### Resource-Specific Storage Keys
 
 Each save is stored in local storage using a unique key. The key is determined by whether you are creating a new resource or updating an existing one:
