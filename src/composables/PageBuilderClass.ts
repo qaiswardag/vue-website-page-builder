@@ -285,21 +285,30 @@ class PageBuilderClass {
         typeof passedConfig.userSettings.autoSave === 'boolean' &&
         passedConfig.userSettings.autoSave !== false
       ) {
+        if (this.pageBuilderStateStore.getIsSaving) return
+
+        try {
+          this.pageBuilderStateStore.setIsSaving(true)
+          await this.delay(1000)
+          await this.saveComponentsLocalStorage()
+        } catch (err) {
+          console.error('Error trying auto save.', err)
+        } finally {
+          this.pageBuilderStateStore.setIsSaving(false)
+        }
+      }
+    }
+    if (passedConfig && !passedConfig.userSettings) {
+      try {
         this.pageBuilderStateStore.setIsSaving(true)
         await this.delay(200)
 
         await this.saveComponentsLocalStorage()
-
+      } catch (err) {
+        console.error('Error trying saving.', err)
+      } finally {
         this.pageBuilderStateStore.setIsSaving(false)
       }
-    }
-    if (passedConfig && !passedConfig.userSettings) {
-      this.pageBuilderStateStore.setIsSaving(true)
-      await this.delay(200)
-
-      await this.saveComponentsLocalStorage()
-
-      this.pageBuilderStateStore.setIsSaving(false)
     }
   }
 
@@ -1429,7 +1438,10 @@ class PageBuilderClass {
 
   toggleTipTapModal(status: boolean): void {
     this.pageBuilderStateStore.setShowModalTipTap(status)
-    this.handleAutoSave()
+
+    if (!status) {
+      this.handleAutoSave()
+    }
   }
 
   // Private method to parse JSON components

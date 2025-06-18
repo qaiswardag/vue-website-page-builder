@@ -88,19 +88,17 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Page Builder
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Page Builder</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        <span
-                          class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
-                        >
-                          {{ version }}
-                        </span>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          <span
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                          >
+                            {{ version }}
+                          </span>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
@@ -140,27 +138,23 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr v-if="getConfigPageBuilder?.resourceData?.title">
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Title
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Title</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        {{ getConfigPageBuilder.resourceData.title }}
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          {{ getConfigPageBuilder.resourceData.title }}
+                        </div>
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.resourceData?.id">
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        ID
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">ID</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        {{ getConfigPageBuilder.resourceData.id }}
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          {{ getConfigPageBuilder.resourceData.id }}
+                        </div>
                       </td>
                     </tr>
                   </tbody>
@@ -200,45 +194,39 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        User Name
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">User Name</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        {{ getConfigPageBuilder.userForPageBuilder.name }}
-                      </td>
-                    </tr>
-                    <tr>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Image
-                      </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        <div class="flex items-center space-x-3">
-                          <img
-                            class="block inset-0 object-top h-10 min-h-10 max-h-10 w-10 min-w-10 max-w-10 object-cover rounded-full"
-                            :src="getConfigPageBuilder.userForPageBuilder.image"
-                            alt="image"
-                          />
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          {{ getConfigPageBuilder.userForPageBuilder.name }}
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Image URL
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Image</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        {{ getConfigPageBuilder.userForPageBuilder.image }}
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          <div class="flex items-center space-x-3">
+                            <img
+                              class="block inset-0 object-top h-10 min-h-10 max-h-10 w-10 min-w-10 max-w-10 object-cover rounded-full"
+                              :src="getConfigPageBuilder.userForPageBuilder.image"
+                              alt="image"
+                            />
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Image URL</div>
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          {{ getConfigPageBuilder.userForPageBuilder.image }}
+                        </div>
                       </td>
                     </tr>
                   </tbody>
@@ -278,71 +266,67 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr v-if="getConfigPageBuilder?.userSettings?.theme">
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Theme
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Theme</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        {{ getConfigPageBuilder.userSettings.theme }}
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          {{ getConfigPageBuilder.userSettings.theme }}
+                        </div>
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.userSettings?.language">
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Language
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Language</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        {{ getConfigPageBuilder.userSettings.language }}
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          {{ getConfigPageBuilder.userSettings.language }}
+                        </div>
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.userSettings?.autoSave !== undefined">
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Auto Save
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Auto Save</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        <span
-                          class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                          :class="
-                            getConfigPageBuilder.userSettings.autoSave
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-red-100 text-red-800'
-                          "
-                        >
-                          {{ getConfigPageBuilder.userSettings.autoSave ? 'Enabled' : 'Disabled' }}
-                        </span>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          <span
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                            :class="
+                              getConfigPageBuilder.userSettings.autoSave
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-red-100 text-red-800'
+                            "
+                          >
+                            {{
+                              getConfigPageBuilder.userSettings.autoSave ? 'Enabled' : 'Disabled'
+                            }}
+                          </span>
+                        </div>
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.userSettings?.notifications !== undefined">
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Notifications
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Notifications</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        <span
-                          class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                          :class="
-                            getConfigPageBuilder.userSettings.notifications
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-red-100 text-red-800'
-                          "
-                        >
-                          {{
-                            getConfigPageBuilder.userSettings.notifications ? 'Enabled' : 'Disabled'
-                          }}
-                        </span>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          <span
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                            :class="
+                              getConfigPageBuilder.userSettings.notifications
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-red-100 text-red-800'
+                            "
+                          >
+                            {{
+                              getConfigPageBuilder.userSettings.notifications
+                                ? 'Enabled'
+                                : 'Disabled'
+                            }}
+                          </span>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
@@ -382,38 +366,34 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Logo
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Logo</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        <div class="flex items-center space-x-3">
-                          <img
-                            class="h-4"
-                            :src="getConfigPageBuilder.pageBuilderLogo.src"
-                            alt="Logo"
-                          />
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          <div class="flex items-center space-x-3">
+                            <img
+                              class="h-4"
+                              :src="getConfigPageBuilder.pageBuilderLogo.src"
+                              alt="Logo"
+                            />
+                          </div>
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Logo URL
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Logo URL</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        <div class="flex items-center space-x-3">
-                          <div class="border-r border-gray-200 pr-6">
-                            <div class="flex items-center space-x-3">
-                              <span class="whitespace-nowrap">{{
-                                getConfigPageBuilder.pageBuilderLogo.src
-                              }}</span>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          <div class="flex items-center space-x-3">
+                            <div class="border-r border-gray-200 pr-6">
+                              <div class="flex items-center space-x-3">
+                                <span class="whitespace-nowrap">{{
+                                  getConfigPageBuilder.pageBuilderLogo.src
+                                }}</span>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -437,7 +417,7 @@ const handleDownloadHTML = function () {
             <h4 class="myQuaternaryHeader text-sm mb-2">Form Type</h4>
             <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
               <div class="overflow-x-auto">
-                <table class="min-w-full">
+                <table class="w-max">
                   <thead class="bg-gray-50">
                     <tr>
                       <th
@@ -456,39 +436,37 @@ const handleDownloadHTML = function () {
                   </thead>
                   <tbody class="bg-white divide-y divide-gray-200">
                     <tr>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Form Type
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Form Type</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        <span
-                          class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                          :class="
-                            getConfigPageBuilder.updateOrCreate === 'create'
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-blue-100 text-blue-800'
-                          "
-                        >
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
                           <span
-                            v-if="
-                              getConfigPageBuilder &&
-                              getConfigPageBuilder.updateOrCreate.formType === 'create'
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                            :class="
+                              getConfigPageBuilder.updateOrCreate === 'create'
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-blue-100 text-blue-800'
                             "
                           >
-                            {{ getConfigPageBuilder.updateOrCreate.formType }}
+                            <span
+                              v-if="
+                                getConfigPageBuilder &&
+                                getConfigPageBuilder.updateOrCreate.formType === 'create'
+                              "
+                            >
+                              {{ getConfigPageBuilder.updateOrCreate.formType }}
+                            </span>
+                            <span
+                              v-if="
+                                getConfigPageBuilder &&
+                                getConfigPageBuilder.updateOrCreate.formType === 'update'
+                              "
+                            >
+                              {{ getConfigPageBuilder.updateOrCreate.formType }}
+                            </span>
                           </span>
-                          <span
-                            v-if="
-                              getConfigPageBuilder &&
-                              getConfigPageBuilder.updateOrCreate.formType === 'update'
-                            "
-                          >
-                            {{ getConfigPageBuilder.updateOrCreate.formType }}
-                          </span>
-                        </span>
+                        </div>
                       </td>
                     </tr>
                     <tr
@@ -497,19 +475,17 @@ const handleDownloadHTML = function () {
                         getConfigPageBuilder.updateOrCreate.formName.length > 0
                       "
                     >
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 min-w-72 max-w-72"
-                      >
-                        Form Name
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                        <div class="min-w-[30rem] w-max">Form Name</div>
                       </td>
-                      <td
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500 min-w-64 max-w-64"
-                      >
-                        <span
-                          class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
-                        >
-                          {{ getConfigPageBuilder.updateOrCreate.formName }}
-                        </span>
+                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <div class="min-w-[30rem] w-max">
+                          <span
+                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                          >
+                            {{ getConfigPageBuilder.updateOrCreate.formName }}
+                          </span>
+                        </div>
                       </td>
                     </tr>
                   </tbody>
