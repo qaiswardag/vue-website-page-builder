@@ -52,7 +52,7 @@ const maxWidthClass = computed(() => {
       <!-- Modal -->
       <div
         v-if="showModalBuilder"
-        class="fixed inset-0 z-50 flex items-center justify-center mx-4"
+        class="fixed inset-0 z-40 flex items-center justify-center mx-4"
         role="dialog"
         aria-modal="true"
         aria-labelledby="dialog-title"
