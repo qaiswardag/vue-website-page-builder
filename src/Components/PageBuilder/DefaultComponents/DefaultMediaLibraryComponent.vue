@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-h-40">
     <p class="myPrimaryParagraph">
       Provide your own Media Library Component to integrate a custom media picker into the Page
       Builder.

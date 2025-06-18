@@ -36,13 +36,13 @@ const firstButtonBuilder = function () {
     minHeight=""
     maxHeight=""
   >
-    <div class="w-full inset-x-0 h-[75vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
+    <div class="w-full inset-x-0 bg-white overflow-x-scroll lg:pt-2 pt-2">
       <div>
         <!-- Only show custom search component if provided -->
         <div v-if="CustomBuilderComponents">
           <component :is="CustomBuilderComponents" />
         </div>
-        <div v-else><DefaultBuilderComponents /></div>
+        <div class="h-[75vh]" v-else><DefaultBuilderComponents /></div>
       </div>
     </div>
     <div class="py-4 flex sm:justify-end justify-center border-t border-gray-200 mt-4">
