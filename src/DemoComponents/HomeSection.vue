@@ -95,10 +95,10 @@ pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 
 onMounted(async () => {
   if (typeof getLocalStorageItemName.value === 'string' && getLocalStorageItemName.value) {
-    if (localStorage.getItem(getLocalStorageItemName.value)) {
-      pageBuilderClass.loadExistingContent(
-        JSON.stringify(localStorage.getItem(getLocalStorageItemName.value)),
-      )
+    const value = localStorage.getItem(getLocalStorageItemName.value)
+
+    if (value) {
+      pageBuilderClass.loadExistingContent(JSON.stringify(value))
     } else {
       pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
       // pageBuilderClass.loadExistingContent(rawHTML, true)

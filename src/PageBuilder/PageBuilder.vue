@@ -199,6 +199,8 @@ onMounted(async () => {
 
   pageBuilderClass.updateLocalStorageItemName()
 
+  pageBuilderClass.deleteOldPageBuilderLocalStorage()
+
   await pageBuilderClass.clearHtmlSelection()
 
   await pageBuilderClass.setEventListenersForElements()

@@ -958,7 +958,10 @@ class PageBuilderClass {
   }
 
   updateLocalStorageItemName(): void {
-    const updateOrCreate = this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType
+    const updateOrCreate =
+      this.pageBuilderStateStore.getConfigPageBuilder &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType
 
     const resourceData = this.pageBuilderStateStore.getConfigPageBuilder?.resourceData
 
@@ -1132,7 +1135,7 @@ class PageBuilderClass {
       localStorage.setItem(
         this.getLocalStorageItemName.value,
         JSON.stringify({
-          savedAt: new Date().toISOString(),
+          pageBuilderContentSavedAt: new Date().toISOString(),
           components: componentsToSave,
         }),
       )
@@ -1154,6 +1157,61 @@ class PageBuilderClass {
 
     if (this.getLocalStorageItemName.value) {
       localStorage.removeItem(this.getLocalStorageItemName.value)
+    }
+  }
+
+  //
+  deleteOldPageBuilderLocalStorage(): void {
+    if (
+      this.pageBuilderStateStore.getConfigPageBuilder &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
+    ) {
+      let oldCountLocalStorages = 0
+      const deletedItemsLog: { Number: number; Key: string; SavedAt: string }[] = []
+
+      // const pastTime = new Date(Date.now() - 1 * 60 * 1000) // 1 minute
+      const pastTime = new Date(Date.now() - 14 * 24 * 60 * 60 * 1000) // 2 weeks
+
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i)
+
+        if (!key) continue
+        if (!key.startsWith('page-builder-update-resource-')) continue
+
+        try {
+          const storeComponents = localStorage.getItem(key)
+          if (!storeComponents) continue
+
+          const storeComponentsParsed = JSON.parse(storeComponents)
+          const savedAt = storeComponentsParsed.pageBuilderContentSavedAt
+          if (savedAt) {
+            const savedAtDate = new Date(savedAt)
+
+            if (savedAtDate < pastTime) {
+              oldCountLocalStorages++
+              deletedItemsLog.push({
+                Number: oldCountLocalStorages,
+                Key: key,
+                SavedAt: savedAt,
+              })
+
+              // Delete old items
+              localStorage.removeItem(key)
+            }
+          }
+        } catch (e) {
+          // Ignore parse errors for unrelated keys
+        }
+      }
+
+      if (deletedItemsLog.length > 0) {
+        console.info(
+          `Deleted ${deletedItemsLog.length} localStorage item(s) older than ${pastTime} days:`,
+        )
+        console.table(deletedItemsLog)
+      }
     }
   }
 
@@ -1431,19 +1489,20 @@ class PageBuilderClass {
     }
   }
 
-  // Private method to parse JSON components and save savedAt to localStorage
+  // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
   #parseJSONComponents(jsonData: string): void {
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
-      let savedAt: string | undefined = undefined
+      let pageBuilderContentSavedAt: string | undefined = undefined
 
       // Support both old and new structure
       if (Array.isArray(parsedData)) {
         componentsArray = parsedData
       } else if (parsedData && Array.isArray(parsedData.components)) {
         componentsArray = parsedData.components
-        savedAt = parsedData.savedAt
+
+        pageBuilderContentSavedAt = parsedData.pageBuilderContentSavedAt
       }
 
       let savedCurrentDesign: ComponentObject[] = []
@@ -1479,9 +1538,9 @@ class PageBuilderClass {
 
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
 
-      // Save to localStorage with savedAt using the correct key
+      // Save to localStorage with pageBuilderContentSavedAt using the correct key
       const dataToSave = {
-        savedAt: savedAt || new Date().toISOString(),
+        pageBuilderContentSavedAt: parsedData.pageBuilderContentSavedAt || new Date().toISOString(),
         components: savedCurrentDesign,
       }
 
@@ -1549,13 +1608,23 @@ class PageBuilderClass {
 
     const storedData = this.areComponentsStoredInLocalStorage()
 
-    if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'create') {
+    if (
+      this.pageBuilderStateStore.getConfigPageBuilder &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'create'
+    ) {
       if (storedData) {
         this.setComponentsFromData(storedData)
       }
     }
 
-    if (this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formType === 'update') {
+    if (
+      this.pageBuilderStateStore.getConfigPageBuilder &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
+    ) {
       if (data) {
         this.setComponentsFromData(data)
       }
