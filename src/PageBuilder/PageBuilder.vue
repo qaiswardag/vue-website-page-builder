@@ -226,7 +226,7 @@ const handlerRumeEditingForUpdate = async function () {
   secondModalButtonResumeEditingFunction.value = function () {}
   thirdModalButtonResumeEditingFunction.value = async function () {
     isLoadingResumeEditing.value = true
-    await delay(1000)
+    await delay(600)
     await pageBuilderClass.resumeEditingForUpdate()
     isLoadingResumeEditing.value = false
     showModalResumeEditing.value = false

@@ -1234,7 +1234,7 @@ class PageBuilderClass {
         const draft = localStorage.getItem(key)
         if (draft) {
           try {
-            await this.delay(1000)
+            await this.delay(500)
             const draftParsed = JSON.parse(draft)
             const dbComponents = this.getComponents.value
             return JSON.stringify(draftParsed.components) !== JSON.stringify(dbComponents)
