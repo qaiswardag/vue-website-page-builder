@@ -17,6 +17,11 @@ defineProps({
     default: false,
     required: false,
   },
+  isLoading: {
+    type: Boolean,
+    default: false,
+    required: false,
+  },
   disabledWhichButton: {
     type: String,
     default: '',
@@ -97,7 +102,7 @@ const thirdButtonBuilder = function () {
       </div>
     </div>
 
-    <template v-if="simpleModal !== true">
+    <template v-if="simpleModal !== true && !isLoading">
       <div class="py-4 flex sm:justify-end justify-center border-t border-gray-200 mt-4">
         <slot name="footer" />
         <div
@@ -359,6 +364,18 @@ const thirdButtonBuilder = function () {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </template>
+    <template v-if="isLoading">
+      <div class="flex items-center my-2 py-4 px-2 justify-end">
+        <div
+          class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+        >
+          <span
+            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+            >Loading...</span
+          >
         </div>
       </div>
     </template>

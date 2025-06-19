@@ -71,7 +71,7 @@ const configPageBuilder = {
     image: '/jane_doe.jpg',
   },
   updateOrCreate: {
-    formType: 'create' as 'create',
+    formType: 'update' as 'update',
     formName: 'news',
   },
   pageBuilderLogo: {

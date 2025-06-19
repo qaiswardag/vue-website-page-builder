@@ -50,6 +50,8 @@ class PageBuilderClass {
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.nextTick = nextTick()
 
+    this.hasStartedEditing = false
+
     this.containsPagebuilder = document.querySelector('#contains-pagebuilder')
 
     this.pageBuilderStateStore = pageBuilderStateStore
@@ -275,6 +277,7 @@ class PageBuilderClass {
   }
 
   handleAutoSave = async () => {
+    this.startEditing()
     const passedConfig = this.pageBuilderStateStore.getConfigPageBuilder
 
     // Check if config is set
@@ -312,6 +315,7 @@ class PageBuilderClass {
   }
 
   handleManualSave = async () => {
+    this.startEditing()
     const passedConfig = this.pageBuilderStateStore.getConfigPageBuilder
 
     // Check if config is set
@@ -1215,6 +1219,66 @@ class PageBuilderClass {
     }
   }
 
+  async hasLocalDraftForUpdate(): boolean {
+    if (this.hasStartedEditing) return false
+
+    if (
+      this.pageBuilderStateStore.getConfigPageBuilder &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
+    ) {
+      const key = this.getLocalStorageItemName.value
+      if (typeof key === 'string') {
+        const draft = localStorage.getItem(key)
+        if (draft) {
+          try {
+            await this.delay(1000)
+            const draftParsed = JSON.parse(draft)
+            const dbComponents = this.getComponents.value
+            return JSON.stringify(draftParsed.components) !== JSON.stringify(dbComponents)
+          } catch (e) {
+            return false
+          }
+        }
+      }
+    }
+    return false
+  }
+
+  // Call this when the user starts editing (e.g., on first change or when resuming a draft)
+  startEditing() {
+    this.hasStartedEditing = true
+  }
+
+  async resumeEditingForUpdate() {
+    if (
+      this.pageBuilderStateStore.getConfigPageBuilder &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
+    ) {
+      const key = this.getLocalStorageItemName.value
+      if (typeof key === 'string') {
+        const savedCurrentDesign = localStorage.getItem(key)
+        if (savedCurrentDesign) {
+          try {
+            const parsed = JSON.parse(savedCurrentDesign)
+            if (parsed && Array.isArray(parsed.components)) {
+              this.pageBuilderStateStore.setComponents(parsed.components)
+              localStorage.removeItem(key)
+              await nextTick()
+              await this.setEventListenersForElements()
+              await this.handleAutoSave()
+            }
+          } catch (e) {
+            console.error('Failed to parse local draft:', e)
+          }
+        }
+      }
+    }
+  }
+
   getStorageItemNameForResource(): string | null {
     return this.getLocalStorageItemName.value
   }
@@ -1223,6 +1287,7 @@ class PageBuilderClass {
 
     if (
       this.getLocalStorageItemName.value &&
+      typeof this.getLocalStorageItemName.value === 'string' &&
       localStorage.getItem(this.getLocalStorageItemName.value)
     ) {
       const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)

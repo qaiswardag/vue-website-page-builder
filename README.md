@@ -558,6 +558,13 @@ Example `existingResourceFromBackend`:
 ]
 ```
 
+### Automatic Draft Recovery for Updates
+
+When you set `formType: 'update'` in your config, the Page Builder will automatically check for any unsaved draft in local storage for that resource.  
+If a draft is found, the user will be prompted to either continue where they left off or use the version currently loaded from your backend.
+
+No extra setup is required—just set `formType: 'update'` and the feature is enabled by default.
+
 ### Customization
 
 Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.

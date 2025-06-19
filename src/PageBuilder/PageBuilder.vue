@@ -12,12 +12,13 @@ import { updateOrCreateIsFalsy } from '../helpers/passedPageBuilderConfig'
 import ToolbarOption from '../Components/PageBuilder/ToolbarOption/ToolbarOption.vue'
 import { delay } from '../composables/delay'
 import { useDebounce } from '../composables/useDebounce.ts'
+import DynamicModalBuilder from '../Components/Modals/DynamicModalBuilder.vue'
 
 /**
  * Props for PageBuilder component
  * @typedef {Object} Props
  * @property {Object|null} CustomMediaLibraryComponent - Custom media component
- * @property {Object|null} CustomBuilderComponents - Custom search component
+ * @property {Object|null} CustomBuilderComponents - Custom component
  * @property {Object} configPageBuilder - Configuration object containing:
  */
 const props = defineProps({
@@ -192,6 +193,47 @@ watch(
   },
   { immediate: true },
 )
+const gridColumnModalResumeEditing = ref(Number(1))
+const typeModal = ref('')
+const showModalResumeEditing = ref(false)
+const titleModalResumeEditing = ref('')
+const descriptionModalResumeEditing = ref('')
+const firstButtonResumeEditing = ref('')
+const secondButtonResumeEditing = ref(null)
+const thirdButtonResumeEditing = ref(null)
+const firstModalButtonResumeEditingFunction = ref(null)
+const secondModalButtonResumeEditingFunction = ref(null)
+const thirdModalButtonResumeEditingFunction = ref(null)
+
+const isLoadingResumeEditing = ref(null)
+
+const handlerRumeEditingForUpdate = async function () {
+  await pageBuilderClass.clearHtmlSelection()
+
+  typeModal.value = 'default'
+  titleModalResumeEditing.value = 'Continue Your Work?'
+  descriptionModalResumeEditing.value =
+    'We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently saved?'
+  firstButtonResumeEditing.value = 'Use Saved Version'
+  secondButtonResumeEditing.value = null
+  thirdButtonResumeEditing.value = 'Continue Where I Left Off'
+  showModalResumeEditing.value = true
+
+  firstModalButtonResumeEditingFunction.value = function () {
+    showModalResumeEditing.value = false
+  }
+
+  secondModalButtonResumeEditingFunction.value = function () {}
+  thirdModalButtonResumeEditingFunction.value = async function () {
+    isLoadingResumeEditing.value = true
+    await delay(1000)
+    await pageBuilderClass.resumeEditingForUpdate()
+    isLoadingResumeEditing.value = false
+    showModalResumeEditing.value = false
+  }
+
+  // end modal
+}
 
 onMounted(async () => {
   const config = getConfigPageBuilder.value
@@ -204,6 +246,10 @@ onMounted(async () => {
   await pageBuilderClass.clearHtmlSelection()
 
   await pageBuilderClass.setEventListenersForElements()
+
+  if (await pageBuilderClass.hasLocalDraftForUpdate()) {
+    handlerRumeEditingForUpdate()
+  }
 })
 </script>
 
@@ -266,6 +312,24 @@ onMounted(async () => {
       <Preview></Preview>
     </ModalBuilder>
 
+    <DynamicModalBuilder
+      :showDynamicModalBuilder="showModalResumeEditing"
+      :isLoading="isLoadingResumeEditing"
+      :type="typeModal"
+      :gridColumnAmount="gridColumnModalResumeEditing"
+      :title="titleModalResumeEditing"
+      :description="descriptionModalResumeEditing"
+      :firstButtonText="firstButtonResumeEditing"
+      :secondButtonText="secondButtonResumeEditing"
+      :thirdButtonText="thirdButtonResumeEditing"
+      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonResumeEditingFunction"
+      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonResumeEditingFunction"
+      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonResumeEditingFunction"
+    >
+      <header></header>
+      <main></main>
+    </DynamicModalBuilder>
+
     <div>
       <div class="relative h-full flex pb-2 gap-2">
         <div
@@ -306,7 +370,7 @@ onMounted(async () => {
               class="flex myPrimaryGap items-center pt-4 pb-2 pl-2 h-24 w-full min-w-36"
             >
               <button
-                class="myPrimaryButton h-6 flex gap-2"
+                class="mySecondaryButton h-6 flex gap-2"
                 @click.stop="
                   async () => {
                     await pageBuilderClass.clearHtmlSelection()
@@ -335,6 +399,8 @@ onMounted(async () => {
                 </div>
                 <div>Save</div>
               </button>
+
+              <!-- Continue editing # end -->
             </div>
 
             <div
