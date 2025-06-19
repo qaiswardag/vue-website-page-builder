@@ -46,6 +46,7 @@ class PageBuilderClass {
   private NoneListernesTags: string[]
   private delay: (ms?: number) => Promise<void>
   private observer?: MutationObserverType
+  private hasStartedEditing: boolean = false
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.nextTick = nextTick()
@@ -1219,7 +1220,7 @@ class PageBuilderClass {
     }
   }
 
-  async hasLocalDraftForUpdate(): boolean {
+  async hasLocalDraftForUpdate(): Promise<boolean> {
     if (this.hasStartedEditing) return false
 
     if (
