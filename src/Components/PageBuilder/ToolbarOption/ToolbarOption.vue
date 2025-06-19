@@ -58,10 +58,10 @@ const deleteAllComponents = function () {
       typeof getConfigPageBuilder.value.updateOrCreate.formType === 'string'
     ) {
       if (getConfigPageBuilder.value.updateOrCreate.formType === 'create') {
-        await pageBuilderClass.removeItemComponentsLocalStorageCreate()
+        await pageBuilderClass.removeItemComponentsLocalStorage()
       }
       if (getConfigPageBuilder.value.updateOrCreate.formType === 'update') {
-        await pageBuilderClass.removeItemComponentsLocalStorageUpdate()
+        await pageBuilderClass.removeItemComponentsLocalStorage()
       }
     }
 

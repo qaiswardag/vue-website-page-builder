@@ -1149,7 +1149,7 @@ class PageBuilderClass {
     await this.#domToComponentsSync()
   }
 
-  async removeItemComponentsLocalStorageCreate() {
+  async removeItemComponentsLocalStorage() {
     await this.nextTick
 
     if (this.getLocalStorageItemName.value) {
@@ -1157,12 +1157,9 @@ class PageBuilderClass {
     }
   }
 
-  async removeItemComponentsLocalStorageUpdate() {
-    if (this.getLocalStorageItemName.value) {
-      localStorage.removeItem(this.getLocalStorageItemName.value)
-    }
+  getStorageItemNameForResource(): string | null {
+    return this.getLocalStorageItemName.value
   }
-
   areComponentsStoredInLocalStorage() {
     if (!this.getLocalStorageItemName.value) return false
 

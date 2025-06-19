@@ -318,7 +318,7 @@ try {
 <script>
 ```
 
-#### Clearing the Draft After Successful Creation
+#### Resetting the Builder After Successful Resource Creation
 
 After you have successfully created a new resource (such as a post, article, or listing) using the Page Builder with formType: 'create', it is important to clear the builder’s draft state and remove the corresponding local storage entry. This ensures that old drafts do not appear the next time the builder is opened for a new resource.
 
@@ -347,8 +347,45 @@ const configPageBuilder = {
 
 pageBuilderClass.setConfigPageBuilder(configPageBuilder);
 
+const createResource = async function(){
 pageBuilderClass.deleteAllComponents();
-await pageBuilderClass.removeItemComponentsLocalStorageCreate();
+await pageBuilderClass.removeItemComponentsLocalStorage();
+};
+<script>
+```
+
+#### Resetting the Builder After Successful Resource Update
+
+After you have successfully updated an existing resource (such as a post, article, or listing) using the Page Builder with formType: 'update', you should clear the builder’s state and remove the corresponding local storage entry. This prevents outdated drafts from being loaded the next time you edit the same resource.
+
+```js
+<script setup>
+import {
+    PageBuilder,
+    PageBuilderClass,
+    sharedPageBuilderStore,
+} from "@myissue/vue-website-page-builder";
+import "@myissue/vue-website-page-builder/style.css";
+
+// Make sure to initialize these before using
+const pageBuilderStateStore = sharedPageBuilderStore;
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
+
+
+const configPageBuilder = {
+  updateOrCreate: {
+    formType: 'update',
+    formName: 'article',
+  },
+};
+
+pageBuilderClass.setConfigPageBuilder(configPageBuilder);
+
+const updateResource = async function() {
+  pageBuilderClass.deleteAllComponents();
+  await pageBuilderClass.removeItemComponentsLocalStorage();
+};
+
 <script>
 ```
 
