@@ -1433,7 +1433,7 @@ class PageBuilderClass {
 
   // Private method to parse JSON components and save savedAt to localStorage
   #parseJSONComponents(jsonData: string): void {
-    console.log('kommer den til 1:')
+    console.log(1111)
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
@@ -1445,7 +1445,6 @@ class PageBuilderClass {
       } else if (parsedData && Array.isArray(parsedData.components)) {
         componentsArray = parsedData.components
         savedAt = parsedData.savedAt
-        this.savedAt = savedAt // Optionally store savedAt in the class
       }
 
       let savedCurrentDesign: ComponentObject[] = []
@@ -1565,7 +1564,7 @@ class PageBuilderClass {
     }
   }
 
-  async toggleTipTapModal(status: boolean): void {
+  async toggleTipTapModal(status: boolean): Promise<void> {
     this.pageBuilderStateStore.setShowModalTipTap(status)
 
     if (!status) {

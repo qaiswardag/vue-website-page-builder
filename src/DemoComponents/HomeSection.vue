@@ -100,9 +100,9 @@ onMounted(async () => {
         JSON.stringify(localStorage.getItem(getLocalStorageItemName.value)),
       )
     } else {
-      // pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
+      pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
       // pageBuilderClass.loadExistingContent(rawHTML, true)
-      pageBuilderClass.loadExistingContent(JSON.stringify(oldhtmlfromdb), true)
+      // pageBuilderClass.loadExistingContent(JSON.stringify(oldhtmlfromdb), true)
     }
   }
 })
