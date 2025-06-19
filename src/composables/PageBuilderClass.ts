@@ -1134,35 +1134,8 @@ class PageBuilderClass {
       })
     })
 
-    if (
-      this.pageBuilderStateStore.getConfigPageBuilder &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
-    ) {
-      if (
-        typeof this.getLocalStorageItemName.value === 'string' &&
-        this.getLocalStorageItemName.value
-      ) {
-        const item = {
-          components: componentsToSave,
-          savedAt: new Date().toISOString(),
-        }
-        localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(item))
-
-        return
-      }
-    }
-
-    if (
-      typeof this.getLocalStorageItemName.value === 'string' &&
-      this.getLocalStorageItemName.value
-    ) {
-      const item = {
-        components: componentsToSave,
-        savedAt: new Date().toISOString(),
-      }
-      localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(item))
+    if (this.getLocalStorageItemName.value) {
+      localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(componentsToSave))
     }
 
     // No DOM mutation here!
