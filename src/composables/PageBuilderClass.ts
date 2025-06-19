@@ -1140,16 +1140,24 @@ class PageBuilderClass {
       typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
       this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
     ) {
-      const item = {
-        components: componentsToSave,
-        savedAt: new Date().toISOString(),
-      }
-      localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(item))
+      if (
+        typeof this.getLocalStorageItemName.value === 'string' &&
+        this.getLocalStorageItemName.value
+      ) {
+        const item = {
+          components: componentsToSave,
+          savedAt: new Date().toISOString(),
+        }
+        localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(item))
 
-      return
+        return
+      }
     }
 
-    if (this.getLocalStorageItemName.value) {
+    if (
+      typeof this.getLocalStorageItemName.value === 'string' &&
+      this.getLocalStorageItemName.value
+    ) {
       const item = {
         components: componentsToSave,
         savedAt: new Date().toISOString(),
