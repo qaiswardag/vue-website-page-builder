@@ -303,9 +303,10 @@ let contentFromPageBuilder = "";
 
 try {
     storedComponents = JSON.parse(storedComponents);
-    contentFromPageBuilder = Array.isArray(storedComponents)
-        ? storedComponents.map((component) => component.html_code).join("")
-        : "";
+    contentFromPageBuilder = storedComponents && Array.isArray(storedComponents.components)
+        ? storedComponents.components
+          .map((component) => component.html_code).join("")
+          : "";
 } catch (e) {
     console.error(
         "Unable to parse storedComponents from localStorage:",
