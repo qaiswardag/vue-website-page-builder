@@ -289,8 +289,8 @@ class PageBuilderClass {
 
         try {
           this.pageBuilderStateStore.setIsSaving(true)
-          await this.delay(1000)
           await this.saveComponentsLocalStorage()
+          await this.delay(300)
         } catch (err) {
           console.error('Error trying auto save.', err)
         } finally {
@@ -301,9 +301,8 @@ class PageBuilderClass {
     if (passedConfig && !passedConfig.userSettings) {
       try {
         this.pageBuilderStateStore.setIsSaving(true)
-        await this.delay(200)
-
         await this.saveComponentsLocalStorage()
+        await this.delay(300)
       } catch (err) {
         console.error('Error trying saving.', err)
       } finally {
@@ -327,18 +326,16 @@ class PageBuilderClass {
           passedConfig.userSettings.autoSave)
       ) {
         this.pageBuilderStateStore.setIsSaving(true)
-        await this.delay(200)
-
         await this.saveComponentsLocalStorage()
+        await this.delay(5000)
 
         this.pageBuilderStateStore.setIsSaving(false)
       }
     }
     if (passedConfig && !passedConfig.userSettings) {
       this.pageBuilderStateStore.setIsSaving(true)
-      await this.delay(200)
-
       await this.saveComponentsLocalStorage()
+      await this.delay(300)
 
       this.pageBuilderStateStore.setIsSaving(false)
     }
