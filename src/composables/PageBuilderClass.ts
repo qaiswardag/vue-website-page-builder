@@ -1433,7 +1433,6 @@ class PageBuilderClass {
 
   // Private method to parse JSON components and save savedAt to localStorage
   #parseJSONComponents(jsonData: string): void {
-    console.log(1111)
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
@@ -1499,7 +1498,6 @@ class PageBuilderClass {
   }
   // Private method to parse HTML components
   #parseHTMLComponents(htmlData: string): void {
-    console.log(2222)
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')
