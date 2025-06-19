@@ -1134,8 +1134,27 @@ class PageBuilderClass {
       })
     })
 
+    if (
+      this.pageBuilderStateStore.getConfigPageBuilder &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
+    ) {
+      const item = {
+        components: componentsToSave,
+        savedAt: new Date().toISOString(),
+      }
+      localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(item))
+
+      return
+    }
+
     if (this.getLocalStorageItemName.value) {
-      localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(componentsToSave))
+      const item = {
+        components: componentsToSave,
+        savedAt: new Date().toISOString(),
+      }
+      localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(item))
     }
 
     // No DOM mutation here!
