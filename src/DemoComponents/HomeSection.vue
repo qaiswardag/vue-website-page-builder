@@ -98,7 +98,6 @@ onMounted(async () => {
         JSON.stringify(localStorage.getItem(getLocalStorageItemName.value)),
       )
     } else {
-      console.log('den eer:', JSON.stringify(html))
       pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
     }
   }
