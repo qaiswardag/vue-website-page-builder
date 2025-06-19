@@ -327,7 +327,7 @@ class PageBuilderClass {
       ) {
         this.pageBuilderStateStore.setIsSaving(true)
         await this.saveComponentsLocalStorage()
-        await this.delay(500)
+        await this.delay(300)
 
         this.pageBuilderStateStore.setIsSaving(false)
       }
