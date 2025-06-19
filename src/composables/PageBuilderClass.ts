@@ -389,6 +389,12 @@ class PageBuilderClass {
       // Generate a unique ID using uuidv4() and assign it to the section
       section.dataset.componentid = uuidv4()
 
+      // Set the title attribute if present
+      if (clonedComponent.title) {
+        section.setAttribute('title', clonedComponent.title)
+        section.setAttribute('data-component-title', clonedComponent.title)
+      }
+
       // Find all images within elements with "flex" or "grid" classes inside the section
       const images = section.querySelectorAll('img')
 
@@ -1124,10 +1130,7 @@ class PageBuilderClass {
       componentsToSave.push({
         html_code: section.outerHTML,
         id: section.getAttribute('data-componentid'),
-        title:
-          section.getAttribute('title') ||
-          section.getAttribute('data-componentid') ||
-          'Untitled Component',
+        title: section.getAttribute('data-component-title') || 'Untitled Component',
       })
     })
 
@@ -1395,6 +1398,7 @@ class PageBuilderClass {
       // Wait for the DOM to update before setting event listeners
       await nextTick()
       await this.setEventListenersForElements()
+      await this.handleAutoSave()
     } catch (error) {
       console.error('Error adding component:', error)
     }
@@ -1427,59 +1431,103 @@ class PageBuilderClass {
     }
   }
 
-  toggleTipTapModal(status: boolean): void {
-    this.pageBuilderStateStore.setShowModalTipTap(status)
-
-    if (!status) {
-      this.handleAutoSave()
-    }
-  }
-
   // Private method to parse JSON components
   #parseJSONComponents(jsonData: string): void {
+    console.log(1111)
     try {
       const parsedData = JSON.parse(jsonData)
       let savedCurrentDesign: ComponentObject[] = []
 
-      // Load ComponentObjects from parsed data
       if (Array.isArray(parsedData) && parsedData.length > 0) {
-        // Data is always ComponentObjects with html_code, id, and title
-        savedCurrentDesign = parsedData
+        savedCurrentDesign = parsedData.map((component: ComponentObject) => {
+          const parser = new DOMParser()
+          const doc = parser.parseFromString(component.html_code, 'text/html')
+          const section = doc.querySelector('section')
+
+          if (section) {
+            // Ensure data-componentid exists
+            if (!section.hasAttribute('data-componentid')) {
+              const newId = uuidv4()
+              section.setAttribute('data-componentid', newId)
+              component.id = newId
+            } else {
+              component.id = section.getAttribute('data-componentid')!
+            }
+
+            // Ensure data-component-title exists
+            const title = component.title || 'Untitled Component'
+            section.setAttribute('data-component-title', title)
+            component.title = title
+
+            // Ensure all images have data-image
+            const images = section.querySelectorAll('img')
+            images.forEach((img) => {
+              if (!img.hasAttribute('data-image')) {
+                img.setAttribute('data-image', uuidv4())
+              }
+            })
+
+            // Update html_code with modified section
+            component.html_code = section.outerHTML
+          }
+
+          return component
+        })
       }
 
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
     } catch (error) {
       console.error('Error parsing JSON components:', error)
-      // Set empty array on error to ensure consistent state
       this.pageBuilderStateStore.setComponents([])
     }
   }
 
   // Private method to parse HTML components
   #parseHTMLComponents(htmlData: string): void {
+    console.log(2222)
     try {
-      // Parse the HTML content using DOMParser
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')
 
-      // Select all <section> elements with data-componentid attribute
-      const sectionElements = doc.querySelectorAll('section[data-componentid]')
+      // Select all <section> elements (with or without data-componentid)
+      const sectionElements = doc.querySelectorAll('section')
 
       const extractedSections: ComponentObject[] = []
-      // Loop through the selected elements and extract outerHTML
       sectionElements.forEach((section) => {
         const htmlElement = section as HTMLElement
+
+        // Ensure data-componentid exists
+        if (!htmlElement.hasAttribute('data-componentid')) {
+          htmlElement.setAttribute('data-componentid', uuidv4())
+        }
+        const componentId = htmlElement.getAttribute('data-componentid')!
+
+        // Ensure data-component-title exists
+        const title =
+          htmlElement.getAttribute('title') ||
+          htmlElement.getAttribute('data-component-title') ||
+          'Untitled Component'
+
+        htmlElement.setAttribute('data-component-title', title)
+
+        // Ensure all images have data-image
+        const images = htmlElement.querySelectorAll('img')
+        images.forEach((img) => {
+          if (!img.hasAttribute('data-image')) {
+            img.setAttribute('data-image', uuidv4())
+          }
+        })
+
         extractedSections.push({
           html_code: htmlElement.outerHTML,
-          id: htmlElement.dataset.componentid || null,
-          title: htmlElement.title || htmlElement.dataset.componentid || 'Untitled Component',
+          id: componentId,
+          title: title,
         })
       })
 
       this.pageBuilderStateStore.setComponents(extractedSections)
     } catch (error) {
       console.error('Error parsing HTML components:', error)
-      // Set empty array on error to ensure consistent state
       this.pageBuilderStateStore.setComponents([])
     }
   }
@@ -1506,6 +1554,14 @@ class PageBuilderClass {
       if (data) {
         this.setComponentsFromData(data)
       }
+    }
+  }
+
+  async toggleTipTapModal(status: boolean): void {
+    this.pageBuilderStateStore.setShowModalTipTap(status)
+
+    if (!status) {
+      await this.handleAutoSave()
     }
   }
 

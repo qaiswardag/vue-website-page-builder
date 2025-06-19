@@ -504,7 +504,7 @@ h3 {
 /* Manage P, Link, H1, H2 # end */
 
 /* CSS for content inside page builder # start */
-#page-builder-editor-editable-area a {
+#pagebuilder a {
   pointer-events: none;
 }
 /* CSS for content inside page builder # start */
@@ -513,7 +513,7 @@ h3 {
   min-height: 25rem;
 }
 
-#page-builder-editor-editable-area #youtube-video::before {
+#pagebuilder #youtube-video::before {
   content: 'Select Video Element';
   font-family: 'Jost';
   background: #16a34a !important;
@@ -537,34 +537,34 @@ h3 {
 }
 
 @media (min-width: 640px) {
-  #page-builder-editor-editable-area #youtube-video::before {
+  #pagebuilder #youtube-video::before {
     font-size: 0.9rem !important;
     width: auto;
   }
 }
 
-#page-builder-editor-editable-area #youtube-video:hover::before {
+#pagebuilder #youtube-video:hover::before {
   text-decoration: none;
   cursor: pointer;
 }
 
 #page-builder-editor a,
-#page-builder-editor-editable-area a {
+#pagebuilder a {
   text-decoration: underline;
 }
 
 #page-builder-editor #linktree p,
-#page-builder-editor-editable-area #linktree p {
+#pagebuilder #linktree p {
   width: 100%;
 }
 
 #page-builder-editor #linktree a,
-#page-builder-editor-editable-area #linktree a {
+#pagebuilder #linktree a {
   @apply py-4 px-2 block w-full;
 }
 
 #page-builder-editor #linktree a,
-#page-builder-editor-editable-area #linktree a {
+#pagebuilder #linktree a {
   text-decoration: none;
   font-weight: 500;
   color: inherit !important;
@@ -572,20 +572,20 @@ h3 {
   cursor: pointer;
 }
 #page-builder-editor strong,
-#page-builder-editor-editable-area strong {
+#pagebuilder strong {
   font-weight: 500;
 }
 
 #page-builder-editor ol,
-#page-builder-editor-editable-area ol,
+#pagebuilder ol,
 #page-builder-editor ul,
-#page-builder-editor-editable-area ul {
+#pagebuilder ul {
   list-style: disc !important;
   padding: 1rem 0rem;
 }
 
 #page-builder-editor li,
-#page-builder-editor-editable-area li {
+#pagebuilder li {
   line-height: 2.2rem;
   margin-left: 1.5em; /* Adjust this value as needed */
 }

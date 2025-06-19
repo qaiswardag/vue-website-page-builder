@@ -8,6 +8,7 @@ import DemoBuilderComponents from './DemoBuilderComponents.vue'
 import { computed, onMounted } from 'vue'
 import { sharedPageBuilderStore } from '../stores/shared-store'
 import html from './html.json'
+import { rawHTML } from './rawHTML'
 
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
@@ -98,7 +99,8 @@ onMounted(async () => {
         JSON.stringify(localStorage.getItem(getLocalStorageItemName.value)),
       )
     } else {
-      pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
+      // pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
+      pageBuilderClass.loadExistingContent(rawHTML, true)
     }
   }
 })
