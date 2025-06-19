@@ -318,6 +318,40 @@ try {
 <script>
 ```
 
+#### Clearing the Draft After Successful Creation
+
+After you have successfully created a new resource (such as a post, article, or listing) using the Page Builder with formType: 'create', it is important to clear the builder’s draft state and remove the corresponding local storage entry. This ensures that old drafts do not appear the next time the builder is opened for a new resource.
+
+Always call these methods after a successful post or resource creation to ensure users start with a fresh builder the next time they create a new resource.
+
+```js
+<script setup>
+import {
+    PageBuilder,
+    PageBuilderClass,
+    sharedPageBuilderStore,
+} from "@myissue/vue-website-page-builder";
+import "@myissue/vue-website-page-builder/style.css";
+
+// Make sure to initialize these before using
+const pageBuilderStateStore = sharedPageBuilderStore;
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
+
+
+const configPageBuilder = {
+  updateOrCreate: {
+    formType: 'create',
+    formName: 'article',
+  },
+};
+
+pageBuilderClass.setConfigPageBuilder(configPageBuilder);
+
+pageBuilderClass.deleteAllComponents();
+await pageBuilderClass.removeItemComponentsLocalStorageCreate();
+<script>
+```
+
 #### Resource-Specific Storage Keys
 
 Each save is stored in local storage using a unique key. The key is determined by whether you are creating a new resource or updating an existing one:
