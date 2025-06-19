@@ -398,11 +398,6 @@ class PageBuilderClass {
       // Find all images within elements with "flex" or "grid" classes inside the section
       const images = section.querySelectorAll('img')
 
-      // Add a unique ID as a data attribute to each image element
-      images.forEach((image) => {
-        image.setAttribute('data-image', uuidv4())
-      })
-
       // Update the clonedComponent id with the newly generated unique ID
       clonedComponent.id = section.dataset.componentid
 
@@ -1119,7 +1114,6 @@ class PageBuilderClass {
     if (!pagebuilder) return
 
     const hoveredElement = pagebuilder.querySelector('[hovered]')
-
     if (hoveredElement) {
       hoveredElement.removeAttribute('hovered')
     }
@@ -1135,7 +1129,13 @@ class PageBuilderClass {
     })
 
     if (this.getLocalStorageItemName.value) {
-      localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(componentsToSave))
+      localStorage.setItem(
+        this.getLocalStorageItemName.value,
+        JSON.stringify({
+          savedAt: new Date().toISOString(),
+          components: componentsToSave,
+        }),
+      )
     }
 
     // No DOM mutation here!
@@ -1431,15 +1431,27 @@ class PageBuilderClass {
     }
   }
 
-  // Private method to parse JSON components
+  // Private method to parse JSON components and save savedAt to localStorage
   #parseJSONComponents(jsonData: string): void {
-    console.log(1111)
+    console.log('kommer den til 1:')
     try {
       const parsedData = JSON.parse(jsonData)
+      let componentsArray: ComponentObject[] = []
+      let savedAt: string | undefined = undefined
+
+      // Support both old and new structure
+      if (Array.isArray(parsedData)) {
+        componentsArray = parsedData
+      } else if (parsedData && Array.isArray(parsedData.components)) {
+        componentsArray = parsedData.components
+        savedAt = parsedData.savedAt
+        this.savedAt = savedAt // Optionally store savedAt in the class
+      }
+
       let savedCurrentDesign: ComponentObject[] = []
 
-      if (Array.isArray(parsedData) && parsedData.length > 0) {
-        savedCurrentDesign = parsedData.map((component: ComponentObject) => {
+      if (componentsArray.length > 0) {
+        savedCurrentDesign = componentsArray.map((component: ComponentObject) => {
           const parser = new DOMParser()
           const doc = parser.parseFromString(component.html_code, 'text/html')
           const section = doc.querySelector('section')
@@ -1459,14 +1471,6 @@ class PageBuilderClass {
             section.setAttribute('data-component-title', title)
             component.title = title
 
-            // Ensure all images have data-image
-            const images = section.querySelectorAll('img')
-            images.forEach((img) => {
-              if (!img.hasAttribute('data-image')) {
-                img.setAttribute('data-image', uuidv4())
-              }
-            })
-
             // Update html_code with modified section
             component.html_code = section.outerHTML
           }
@@ -1476,12 +1480,24 @@ class PageBuilderClass {
       }
 
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
+
+      // Save to localStorage with savedAt using the correct key
+      const dataToSave = {
+        savedAt: savedAt || new Date().toISOString(),
+        components: savedCurrentDesign,
+      }
+
+      if (
+        this.getLocalStorageItemName.value &&
+        typeof this.getLocalStorageItemName.value === 'string'
+      ) {
+        localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(dataToSave))
+      }
     } catch (error) {
       console.error('Error parsing JSON components:', error)
       this.pageBuilderStateStore.setComponents([])
     }
   }
-
   // Private method to parse HTML components
   #parseHTMLComponents(htmlData: string): void {
     console.log(2222)
@@ -1509,14 +1525,6 @@ class PageBuilderClass {
           'Untitled Component'
 
         htmlElement.setAttribute('data-component-title', title)
-
-        // Ensure all images have data-image
-        const images = htmlElement.querySelectorAll('img')
-        images.forEach((img) => {
-          if (!img.hasAttribute('data-image')) {
-            img.setAttribute('data-image', uuidv4())
-          }
-        })
 
         extractedSections.push({
           html_code: htmlElement.outerHTML,

@@ -7,6 +7,7 @@ import DemoMediaLibraryComponent from './DemoMediaLibraryComponent.vue'
 import DemoBuilderComponents from './DemoBuilderComponents.vue'
 import { computed, onMounted } from 'vue'
 import { sharedPageBuilderStore } from '../stores/shared-store'
+import oldhtmlfromdb from './oldhtmlfromdb.json'
 import html from './html.json'
 import { rawHTML } from './rawHTML'
 
@@ -83,7 +84,7 @@ const configPageBuilder = {
   userSettings: {
     theme: 'light' as 'light',
     language: 'en',
-    autoSave: true,
+    autoSave: false,
   },
   settings: {
     brandColor: '#DB93B0',
@@ -100,7 +101,8 @@ onMounted(async () => {
       )
     } else {
       // pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
-      pageBuilderClass.loadExistingContent(rawHTML, true)
+      // pageBuilderClass.loadExistingContent(rawHTML, true)
+      pageBuilderClass.loadExistingContent(JSON.stringify(oldhtmlfromdb), true)
     }
   }
 })
