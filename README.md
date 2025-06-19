@@ -9,9 +9,11 @@
 A Vue 3 page builder component with drag & drop functionality for creating dynamic web pages.
 
 Tailored for Vue Developers
-If you're a Vue 3 developer, this builder feels right at home. It installs quickly via npm and supports full customization through props and configuration objects. You can even set specific user settings like theme, language, and autosave preferences, making it a personalized experience for every user.
+If you're a Vue 3 developer, this builder feels right at home. It installs quickly via npm and supports full customization through props and configuration objects. You can even set specific user settings like image, name, theme, language, and autosave preferences, making it a personalized experience for every user.
 
-Integration is seamless, and your data is safely stored in the browser's local storage. You can retrieve both HTML content and metadata when you're ready to publish, giving you total control over content output.
+Integration is easy, and content is safely auto stored in the browser's local storage. You can retrieve HTML content when you're ready to publish, giving you total control over content output.
+
+Want to include your company logo in the editor toolbar or reflect your brand's color scheme throughout the builder interface? Done. With robust configuration options, branding the builder to match your product or client identity is quick and effortless.
 
 ## Installation
 
@@ -257,6 +259,21 @@ To use the builder’s saved data in your form submission, you may want both the
 
 You should call this logic when you want to submit or save the builder’s output, for example, when the user clicks a “Save” or “Publish” button. The code safely parses the local storage data, handles errors, and assigns the results to your form fields.
 
+**Important:**
+To retrieve the correct content from local storage, you must pass the same resourceData (such as formType and formName) to the Page Builder that was used when the content was originally saved. If the resource data does not match, the Page Builder will look for a different local storage key and may not find the expected content.
+Example:
+
+```js
+const configPageBuilder = {
+  updateOrCreate: {
+    formType: 'create',
+    formName: 'article',
+  },
+}
+```
+
+Example Getting HTML Content from Local Storage for Form Submission
+
 ```js
 <script setup>
 import {
@@ -270,12 +287,23 @@ import "@myissue/vue-website-page-builder/style.css";
 const pageBuilderStateStore = sharedPageBuilderStore;
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
 
+
+const configPageBuilder = {
+  updateOrCreate: {
+    formType: 'create',
+    formName: 'article',
+  },
+};
+
+pageBuilderClass.setConfigPageBuilder(configPageBuilder);
+
+
 let storedComponents = pageBuilderClass.areComponentsStoredInLocalStorage();
-let content = "";
+let contentFromPageBuilder = "";
 
 try {
     storedComponents = JSON.parse(storedComponents);
-    content = Array.isArray(storedComponents)
+    contentFromPageBuilder = Array.isArray(storedComponents)
         ? storedComponents.map((component) => component.html_code).join("")
         : "";
 } catch (e) {
@@ -283,9 +311,9 @@ try {
         "Unable to parse storedComponents from localStorage:",
         e
     );
-    content = "";
+    contentFromPageBuilder = "";
 } finally {
-    postForm.content = content;
+    yourForm.content = contentFromPageBuilder;
 }
 <script>
 ```
