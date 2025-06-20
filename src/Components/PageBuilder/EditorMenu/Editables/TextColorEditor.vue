@@ -17,7 +17,7 @@ watch(
   getTextColor,
   async (newValue) => {
     textColor.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )

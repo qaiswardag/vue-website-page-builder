@@ -298,7 +298,7 @@ const configPageBuilder = {
 pageBuilderClass.setConfigPageBuilder(configPageBuilder);
 
 
-let storedComponents = pageBuilderClass.areComponentsStoredInLocalStorage();
+let storedComponents = pageBuilderClass.loadStoredComponentsFromStorage();
 let contentFromPageBuilder = "";
 
 try {

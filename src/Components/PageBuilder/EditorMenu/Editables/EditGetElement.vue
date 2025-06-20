@@ -276,7 +276,7 @@ const handleModalIframeSrc = function () {
 
         <template
           v-if="
-            pageBuilderClass.selectedElementIsValidText() &&
+            pageBuilderClass.isSelectedElementValidText() &&
             !pageBuilderClass.ElOrFirstChildIsIframe()
           "
         >

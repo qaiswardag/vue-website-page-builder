@@ -23,7 +23,7 @@ const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // remove component
-const deleteComponent = function (e) {
+const deleteSelectedComponent = function (e) {
   showModalDeleteComponent.value = true
   typeModal.value = 'delete'
   gridColumnModal.value = 2
@@ -40,7 +40,7 @@ const deleteComponent = function (e) {
   //
   // handle click
   thirdModalButtonFunctionDynamicModalBuilder.value = function () {
-    pageBuilderClass.deleteComponent()
+    pageBuilderClass.deleteSelectedComponent()
 
     showModalDeleteComponent.value = false
   }
@@ -68,7 +68,7 @@ const deleteComponent = function (e) {
   <div class="flex flex-col items-center justify-center myPrimaryGap">
     <div class="flex gap-2 items-center justify-center">
       <div
-        @click="deleteComponent()"
+        @click="deleteSelectedComponent()"
         class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white text-myPrimaryErrorColor"
       >
         <span class="material-symbols-outlined"> delete_forever </span>
@@ -77,14 +77,14 @@ const deleteComponent = function (e) {
 
     <button
       type="button"
-      @click="pageBuilderClass.moveComponent(-1)"
+      @click="pageBuilderClass.reorderComponent(-1)"
       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
     >
       <span class="material-symbols-outlined"> move_up </span>
     </button>
     <button
       type="button"
-      @click="pageBuilderClass.moveComponent(1)"
+      @click="pageBuilderClass.reorderComponent(1)"
       class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
     >
       <span class="material-symbols-outlined"> move_down </span>

@@ -11,7 +11,7 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 <template>
   <div>
     <div class="blockease-linear duration-200 block ease-linear">
-      <template v-if="pageBuilderClass.selectedElementIsValidText()">
+      <template v-if="pageBuilderClass.isSelectedElementValidText()">
         <div class="flex items-center justify-center mb-6">
           <div class="px-2 flex items-center justify-start gap-2 w-max">
             <button

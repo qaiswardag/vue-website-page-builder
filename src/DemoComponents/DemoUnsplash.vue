@@ -112,17 +112,8 @@ const applySelectedImage = async function (imageURL) {
 
 // on mounted
 onMounted(async () => {
-  let term = ''
-  let page = 1
-  if (localStorage.getItem('unsplash-query') && localStorage.getItem('unsplash-query').length > 0) {
-    term = getSearchTerm.value = localStorage.getItem('unsplash-query')
-    page = getCurrentPageNumber.value = localStorage.getItem('unsplash-page')
-    fetchUnsplash()
-  }
-
-  term ? getSearchTerm.value : 'Magazine'
-  page ? getCurrentPageNumber.value : 1
-  fetchUnsplash()
+  getSearchTerm.value = localStorage.getItem('unsplash-query') || 'Magazine'
+  getCurrentPageNumber.value = Number(localStorage.getItem('unsplash-page')) || 1
 
   await fetchUnsplash()
 })

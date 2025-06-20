@@ -43,7 +43,7 @@ watch(
   getFontBase,
   async (newValue) => {
     fontBase.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -51,7 +51,7 @@ watch(
   getFontDesktop,
   async (newValue) => {
     fontDesktop.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -59,7 +59,7 @@ watch(
   getFontTablet,
   async (newValue) => {
     fontTablet.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -67,7 +67,7 @@ watch(
   getFontMobile,
   async (newValue) => {
     fontMobile.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -75,7 +75,7 @@ watch(
   getFontWeight,
   async (newValue) => {
     fontWeight.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -83,7 +83,7 @@ watch(
   getFontFamily,
   async (newValue) => {
     fontFamily.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -91,7 +91,7 @@ watch(
   getFontStyle,
   async (newValue) => {
     fontStyle.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )

@@ -25,7 +25,7 @@ const inputClass = ref('')
 
 const handleAddClasses = async function () {
   pageBuilderClass.handleAddClasses(inputClass.value)
-  await pageBuilderClass.handlePageBuilderMethods()
+  await pageBuilderClass.initializeElementStyles()
 
   inputClass.value = ''
 }
@@ -43,7 +43,7 @@ const handleAddClasses = async function () {
           @click="
             async () => {
               pageBuilderClass.handleRemoveClasses(className)
-              await pageBuilderClass.handlePageBuilderMethods()
+              await pageBuilderClass.initializeElementStyles()
             }
           "
         >

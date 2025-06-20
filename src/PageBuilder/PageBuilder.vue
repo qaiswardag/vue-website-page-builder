@@ -132,7 +132,6 @@ const getElementAttributes = computed(() => {
 })
 
 const debounce = useDebounce()
-const debounceManual = useDebounce()
 
 watch(getElementAttributes, async (newAttributes, oldAttributes) => {
   // Only run if attributes actually changed
@@ -145,8 +144,7 @@ watch(getElementAttributes, async (newAttributes, oldAttributes) => {
   ) {
     debounce(async () => {
       await pageBuilderClass.handleAutoSave()
-      await pageBuilderClass.handlePageBuilderMethods()
-      // await pageBuilderClass.setEventListenersForElements()
+      await pageBuilderClass.initializeElementStyles()
     }, 200)
   }
 })
@@ -245,7 +243,7 @@ onMounted(async () => {
 
   await pageBuilderClass.clearHtmlSelection()
 
-  await pageBuilderClass.setEventListenersForElements()
+  await pageBuilderClass.addListenersToEditableElements()
 
   if (await pageBuilderClass.hasLocalDraftForUpdate()) {
     handlerRumeEditingForUpdate()

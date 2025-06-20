@@ -28,7 +28,7 @@ watch(
   getBorderStyle,
   async (newValue) => {
     borderStyle.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -36,7 +36,7 @@ watch(
   getBorderWidth,
   async (newValue) => {
     borderWidth.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -44,7 +44,7 @@ watch(
   getBorderColor,
   async (newValue) => {
     borderColor.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )

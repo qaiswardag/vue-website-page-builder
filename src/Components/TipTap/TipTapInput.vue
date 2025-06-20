@@ -69,7 +69,7 @@ const editor = useEditor({
 
 // watch for changes in textContent and update store and textContentVueModel
 watch(textContent, async (newValue) => {
-  if (!pageBuilderClass.selectedElementIsValidText()) return
+  if (!pageBuilderClass.isSelectedElementValidText()) return
 
   if (getElement.value) {
     pageBuilderStateStore.setTextAreaVueModel(newValue)
@@ -81,7 +81,7 @@ watch(textContent, async (newValue) => {
 })
 
 const TipTapSetContent = function () {
-  if (!pageBuilderClass.selectedElementIsValidText()) return
+  if (!pageBuilderClass.isSelectedElementValidText()) return
 
   if (editor.value) {
     editor.value.commands.setContent(getElement.value.innerHTML)
@@ -208,7 +208,7 @@ onMounted(() => {
     </DynamicModalBuilder>
 
     <div class="blockease-linear duration-200 block ease-linear">
-      <div v-if="pageBuilderClass.selectedElementIsValidText() && editor">
+      <div v-if="pageBuilderClass.isSelectedElementValidText() && editor">
         <div class="relative rounded-lg">
           <div
             class="flex justify-between myPrimaryGap items-center py-4 px-4 overflow-x-auto border-b border-gray-200"

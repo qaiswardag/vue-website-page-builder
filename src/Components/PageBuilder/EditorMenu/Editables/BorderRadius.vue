@@ -34,7 +34,7 @@ watch(
   getBorderRadiusGlobal,
   async (newValue) => {
     borderRadiusGlobal.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -42,7 +42,7 @@ watch(
   getBorderRadiusTopLeft,
   async (newValue) => {
     borderRadiusTopLeft.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -50,7 +50,7 @@ watch(
   getBorderRadiusTopRight,
   async (newValue) => {
     borderRadiusTopRight.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -58,7 +58,7 @@ watch(
   getBorderRadiusBottomleft,
   async (newValue) => {
     borderRadiusBottomleft.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -66,7 +66,7 @@ watch(
   getBorderRadiusBottomRight,
   async (newValue) => {
     borderRadiusBottomRight.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )

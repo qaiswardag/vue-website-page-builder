@@ -17,7 +17,7 @@ watch(
   getBackgroundColor,
   async (newValue) => {
     backgroundColor.value = newValue
-    await pageBuilderClass.handlePageBuilderMethods()
+    await pageBuilderClass.initializeElementStyles()
   },
   { immediate: true },
 )

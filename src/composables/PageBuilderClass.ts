@@ -248,7 +248,7 @@ class PageBuilderClass {
    * The function is used to
    * attach event listeners to each element within a 'section'
    */
-  setEventListenersForElements = async () => {
+  addListenersToEditableElements = async () => {
     const elementsWithListeners = new WeakSet<Element>()
 
     const pagebuilder = document.querySelector('#pagebuilder')
@@ -400,9 +400,6 @@ class PageBuilderClass {
         section.setAttribute('data-component-title', clonedComponent.title)
       }
 
-      // Find all images within elements with "flex" or "grid" classes inside the section
-      const images = section.querySelectorAll('img')
-
       // Update the clonedComponent id with the newly generated unique ID
       clonedComponent.id = section.dataset.componentid
 
@@ -433,7 +430,7 @@ class PageBuilderClass {
     }
   }
 
-  async currentClasses() {
+  async #syncCurrentClasses() {
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
     // convert classList to array
@@ -498,7 +495,7 @@ class PageBuilderClass {
 
     // if parent element tag is section remove the hole component
     if (element.parentElement?.tagName === 'SECTION') {
-      this.deleteComponent()
+      this.deleteSelectedComponent()
     }
 
     // Remove the element from the DOM
@@ -530,7 +527,7 @@ class PageBuilderClass {
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
 
-    await this.setEventListenersForElements()
+    await this.addListenersToEditableElements()
   }
 
   handleFontWeight(userSelectedFontWeight?: string): void {
@@ -773,7 +770,7 @@ class PageBuilderClass {
     this.pageBuilderStateStore.setComponents([])
   }
 
-  deleteComponent() {
+  deleteSelectedComponent() {
     if (!this.getComponents.value || !this.getComponent.value) return
 
     // Find the index of the component to delete
@@ -796,7 +793,7 @@ class PageBuilderClass {
 
   // move component
   // runs when html components are rearranged
-  moveComponent(direction: number): void {
+  reorderComponent(direction: number): void {
     if (!this.getComponents.value || !this.getComponent.value) return
 
     if (this.getComponents.value.length <= 1) return
@@ -884,7 +881,7 @@ class PageBuilderClass {
   //
   //
   //
-  selectedElementIsValidText() {
+  isSelectedElementValidText() {
     let reachedElseStatement = false
 
     // Get all child elements of the parentDiv
@@ -1269,7 +1266,7 @@ class PageBuilderClass {
               this.pageBuilderStateStore.setComponents(parsed.components)
               localStorage.removeItem(key)
               await nextTick()
-              await this.setEventListenersForElements()
+              await this.addListenersToEditableElements()
               await this.handleAutoSave()
             }
           } catch (e) {
@@ -1283,7 +1280,7 @@ class PageBuilderClass {
   getStorageItemNameForResource(): string | null {
     return this.getLocalStorageItemName.value
   }
-  areComponentsStoredInLocalStorage() {
+  loadStoredComponentsFromStorage() {
     if (!this.getLocalStorageItemName.value) return false
 
     if (
@@ -1302,7 +1299,7 @@ class PageBuilderClass {
   }
   //
   //
-  async updateBasePrimaryImage(data?: { type: string }): Promise<void> {
+  async updateBasePrimaryImage(): Promise<void> {
     if (!this.getElement.value) return
 
     // If no data provided, apply current image if available (new simplified usage)
@@ -1313,7 +1310,7 @@ class PageBuilderClass {
     }
   }
 
-  showBasePrimaryImage() {
+  setBasePrimaryImageFromCurrent() {
     if (!this.getElement.value) return
 
     const currentImageContainer = document.createElement('div')
@@ -1521,7 +1518,7 @@ class PageBuilderClass {
 
       // Wait for the DOM to update before setting event listeners
       await nextTick()
-      await this.setEventListenersForElements()
+      await this.addListenersToEditableElements()
       await this.handleAutoSave()
     } catch (error) {
       console.error('Error adding component:', error)
@@ -1672,7 +1669,7 @@ class PageBuilderClass {
       this.setComponentsFromData(data)
     }
 
-    const storedData = this.areComponentsStoredInLocalStorage()
+    const storedData = this.loadStoredComponentsFromStorage()
 
     if (
       this.pageBuilderStateStore.getConfigPageBuilder &&
@@ -1705,7 +1702,7 @@ class PageBuilderClass {
     }
   }
 
-  async handlePageBuilderMethods(): Promise<void> {
+  async initializeElementStyles(): Promise<void> {
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
     // handle custom URL
@@ -1715,7 +1712,7 @@ class PageBuilderClass {
     // handle BG opacity
     this.handleBackgroundOpacity(undefined)
     // displayed image
-    this.showBasePrimaryImage()
+    this.setBasePrimaryImageFromCurrent()
     // border style
     this.handleBorderStyle(undefined)
     // border width
@@ -1753,7 +1750,7 @@ class PageBuilderClass {
     // handle text color
     this.handleTextColor(undefined)
     // handle classes
-    await this.currentClasses()
+    await this.#syncCurrentClasses()
   }
 }
 
