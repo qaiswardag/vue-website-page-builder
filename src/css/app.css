@@ -299,21 +299,19 @@
     |--------------------------------------------------------------------------
     */
   .myPrimaryFormWithActions {
-    @apply flex flex-col myPrimaryGap md:pb-4  px-2 rounded;
+    @apply flex flex-col myPrimaryGap px-2 rounded md:pb-4;
   }
   .myPrimaryContentLayout {
-    @apply md:flex md:flex-row flex flex-col myPrimaryGap;
+    @apply flex flex-col myPrimaryGap md:flex md:flex-row;
   }
-
   .myPrimaryFormTitleDescription {
     @apply flex flex-col w-full;
   }
-
   .myPrimaryFormMain {
-    @apply md:w-8/12 flex flex-col myPrimaryGap;
+    @apply flex flex-col myPrimaryGap md:w-8/12;
   }
   .myPrimaryFormSidebar {
-    @apply md:w-4/12 flex flex-col myPrimaryGap;
+    @apply flex flex-col myPrimaryGap md:w-4/12;
   }
   .myPrimaryActions {
     @apply px-4 py-6 rounded bg-myPrimaryLightGrayColor shadow-sm;
