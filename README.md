@@ -108,21 +108,6 @@ yarn install
 bun install
 ```
 
-### Important: CSS Import Required
-
-The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading:
-
-```js
-import '@myissue/vue-website-page-builder/style.css'
-```
-
-This import automatically includes:
-
-- ✅ Page Builder styles
-- ✅ Google Fonts (Jost, Cormorant - no additional setup needed)
-- ✅ Google Material Icons (no additional setup needed)
-- ✅ Responsive design utilities
-
 ### Quick Start
 
 Get up and running quickly and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages.
@@ -139,6 +124,51 @@ import '@myissue/vue-website-page-builder/style.css'
   <PageBuilder />
 </template>
 ```
+
+### Important: CSS Import Required
+
+The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading:
+
+```js
+import '@myissue/vue-website-page-builder/style.css'
+```
+
+This import automatically includes:
+
+- ✅ Page Builder styles
+- ✅ Google Fonts (Jost, Cormorant - no additional setup needed)
+- ✅ Google Material Icons (no additional setup needed)
+- ✅ Responsive design utilities
+
+### Rendering Only the HTML Output from the Page Builder in Other Frameworks (React, Nuxt, etc.)
+
+If you use the Page Builder to generate HTML pages and want to render them in another application (such as React, Nuxt, or any server-side app), simply install the Page Builder package in your target project and import its CSS file. This ensures that all Tailwind and builder-specific styles are applied to the rendered HTML.
+
+```js
+import '@myissue/vue-website-page-builder/style.css'
+```
+
+This will apply all the necessary styles to any HTML output from the builder, even if you render it with `dangerouslySetInnerHTML`, `v-html`, or similar methods.
+
+**Example (React):**
+
+```jsx
+import '@myissue/vue-website-page-builder/style.css'
+
+function MyPage({ html }) {
+  return <div dangerouslySetInnerHTML={{ __html: html }} />
+}
+```
+
+**Example (Nuxt/Vue):**
+
+```js
+import '@myissue/vue-website-page-builder/style.css'
+```
+
+Then use `v-html` to render the HTML.
+
+> **Note:** You do not need to import any Vue components if you only want to render the HTML. Just import the CSS file.
 
 ### Optional: Provide Config to PageBuilder
 
@@ -563,11 +593,38 @@ Example `existingResourceFromBackend`:
 When you set `formType: 'update'` in your config, the Page Builder will automatically check for any unsaved draft in local storage for that resource.  
 If a draft is found, the user will be prompted to either continue where they left off or use the version currently loaded from your backend.
 
-No extra setup is required—just set `formType: 'update'` and the feature is enabled by default.
+- `formName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
+  - Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., name and user image).
+  - No extra setup is required—just set `formType: 'update'` and the feature is enabled by default.
 
-### Customization
+```js
+<script setup>
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
 
-Customizing the page builder is made simple since all the logic resides in the PageBuilder Class.
+const pageBuilderStateStore = sharedPageBuilderStore
+
+const configPageBuilder = {
+  updateOrCreate: {
+    formType: 'update',
+    formName: 'article',
+  },
+}
+
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+// Initializing with essential configuration
+pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
+</script>
+
+<template>
+  <PageBuilder />
+</template>
+```
 
 ### Custom Components
 
