@@ -2,6 +2,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 export default {
+  prefix: 'builderx-',
   content: [
     './css/app.css',
     './src/**/*.{vue,js,ts,jsx,tsx,json,html}',
