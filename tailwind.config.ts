@@ -4,7 +4,7 @@ const defaultTheme = require('tailwindcss/defaultTheme')
 export default {
   content: [
     './css/app.css',
-    './src/**/*.{vue,js,ts,jsx,tsx,json}',
+    './src/**/*.{vue,js,ts,jsx,tsx,json,html}',
     './public/json/**/*.json',
     './public/**/*.html',
   ],
