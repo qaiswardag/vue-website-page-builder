@@ -108,8 +108,8 @@ class PageBuilderClass {
     await this.#removeHoveredAndSelected()
   }
   // Load existing content from HTML when in update mode
-  setConfigPageBuilder(data: PageBuilderConfig): void {
-    this.pageBuilderStateStore.setConfigPageBuilder(data)
+  applyPageBuilderConfig(data: PageBuilderConfig): void {
+    this.pageBuilderStateStore.applyPageBuilderConfig(data)
   }
 
   #applyElementClassChanges(
@@ -1660,7 +1660,7 @@ class PageBuilderClass {
   }
 
   // Load existing content from HTML when in update mode
-  loadExistingContent(data?: string, injectCustomHTMLSections?: boolean): void {
+  mountComponentsToDOM(data?: string, injectCustomHTMLSections?: boolean): void {
     this.pageBuilderStateStore.setComponents([])
 
     if (!this.pageBuilderStateStore.getConfigPageBuilder) return

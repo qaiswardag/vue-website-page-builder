@@ -169,7 +169,7 @@ const handleConfig = function (config) {
     config === undefined ||
     (config && Object.keys(config).length === 0 && config.constructor === Object)
   ) {
-    pageBuilderClass.setConfigPageBuilder(defaultConfigValues)
+    pageBuilderClass.applyPageBuilderConfig(defaultConfigValues)
     return
   }
 
@@ -186,7 +186,7 @@ watch(
     pageBuilderClass.updateLocalStorageItemName()
 
     if (config && config.updateOrCreate && config.updateOrCreate.formType === 'create') {
-      pageBuilderClass.loadExistingContent()
+      pageBuilderClass.mountComponentsToDOM()
     }
   },
   { immediate: true },

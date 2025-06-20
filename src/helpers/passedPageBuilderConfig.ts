@@ -23,7 +23,7 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
       },
     }
 
-    pageBuilderClass.setConfigPageBuilder(updatedConfig)
+    pageBuilderClass.applyPageBuilderConfig(updatedConfig)
     return true
   }
 
@@ -43,7 +43,7 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
       },
     } as const
 
-    pageBuilderClass.setConfigPageBuilder(updatedConfig)
+    pageBuilderClass.applyPageBuilderConfig(updatedConfig)
     return true
   }
 
@@ -65,7 +65,7 @@ export const updateOrCreateIsFalsy = function (config: PageBuilderConfig) {
       },
     }
 
-    pageBuilderClass.setConfigPageBuilder(updatedConfig)
+    pageBuilderClass.applyPageBuilderConfig(updatedConfig)
     return true
   }
 }

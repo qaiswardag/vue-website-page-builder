@@ -91,18 +91,18 @@ const configPageBuilder = {
   },
 }
 
-pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
 
 onMounted(async () => {
   if (typeof getLocalStorageItemName.value === 'string' && getLocalStorageItemName.value) {
     const value = localStorage.getItem(getLocalStorageItemName.value)
 
     if (value) {
-      pageBuilderClass.loadExistingContent(JSON.stringify(value))
+      pageBuilderClass.mountComponentsToDOM(JSON.stringify(value))
     } else {
-      pageBuilderClass.loadExistingContent(JSON.stringify(html), true)
-      // pageBuilderClass.loadExistingContent(rawHTML, true)
-      // pageBuilderClass.loadExistingContent(JSON.stringify(oldhtmlfromdb), true)
+      pageBuilderClass.mountComponentsToDOM(JSON.stringify(html), true)
+      // pageBuilderClass.mountComponentsToDOM(rawHTML, true)
+      // pageBuilderClass.mountComponentsToDOM(JSON.stringify(oldhtmlfromdb), true)
     }
   }
 })

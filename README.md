@@ -190,7 +190,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing with essential configuration
-pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
 </script>
 
 <template>
@@ -202,12 +202,12 @@ pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 
 You can display your company logo in the Page Builder interface and set the currently logged-in user by passing both a logo URL and user information in your config object:
 
-- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
+- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.applyPageBuilderConfig(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
 - **Logged-in User:** Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., name and user image).
 
 **Basic Usage:**
 
-- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
+- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderClass.applyPageBuilderConfig(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
 
 Basic Usage:
 
@@ -232,7 +232,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing with essential configuration
-pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
 </script>
 
 <template>
@@ -295,7 +295,7 @@ const configPageBuilder = {
   },
 };
 
-pageBuilderClass.setConfigPageBuilder(configPageBuilder);
+pageBuilderClass.applyPageBuilderConfig(configPageBuilder);
 
 
 let storedComponents = pageBuilderClass.loadStoredComponentsFromStorage();
@@ -346,7 +346,7 @@ const configPageBuilder = {
   },
 };
 
-pageBuilderClass.setConfigPageBuilder(configPageBuilder);
+pageBuilderClass.applyPageBuilderConfig(configPageBuilder);
 
 const createResource = async function(){
 pageBuilderClass.deleteAllComponents();
@@ -380,7 +380,7 @@ const configPageBuilder = {
   },
 };
 
-pageBuilderClass.setConfigPageBuilder(configPageBuilder);
+pageBuilderClass.applyPageBuilderConfig(configPageBuilder);
 
 const updateResource = async function() {
   pageBuilderClass.deleteAllComponents();
@@ -420,10 +420,10 @@ const configPageBuilder = {
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing with essential configuration
-pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
 
 // Populating page builder with existing resource content
-pageBuilderClass.loadExistingContent(existingResourceFromBackend)
+pageBuilderClass.mountComponentsToDOM(existingResourceFromBackend)
 </script>
 
 
@@ -467,7 +467,7 @@ const configPageBuilder = {
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing with essential configuration
-pageBuilderClass.setConfigPageBuilder(configPageBuilder)
+pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
 </script>
 
 <template>
@@ -482,9 +482,9 @@ pageBuilderClass.setConfigPageBuilder(configPageBuilder)
 To load existing content that was created with this PageBuilder from any backend:
 
 - Use `sharedPageBuilderStore` to ensure the external `PageBuilderClass` and internal `PageBuilder` component share the same state.
-- Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state. Use the `loadExistingContent()` method to load existing content into the page builder.
+- Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state. Use the `mountComponentsToDOM()` method to load existing content into the page builder.
 - The `PageBuilderClass` uses the shared store to maintain state consistency between external operations and the internal `PageBuilder` component, ensuring that when you load content externally it appears correctly in the PageBuilder interface.
-- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.setConfigPageBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
+- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.applyPageBuilderConfig(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
 
 **Example: Set `formType` to "update" for editing an existing resource**
 
@@ -526,7 +526,7 @@ const existingResourceFromBackend = [
 
 
 // Populating page builder with existing resource content from backend
-pageBuilderClass.loadExistingContent(existingResourceFromBackend)
+pageBuilderClass.mountComponentsToDOM(existingResourceFromBackend)
 </script>
 
 <template>

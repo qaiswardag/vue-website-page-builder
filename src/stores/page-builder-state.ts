@@ -436,7 +436,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       localStorage.setItem('preview', payload)
     },
 
-    setConfigPageBuilder(payload: PageBuilderConfig | null): void {
+    applyPageBuilderConfig(payload: PageBuilderConfig | null): void {
       this.configPageBuilder = payload
     },
 
