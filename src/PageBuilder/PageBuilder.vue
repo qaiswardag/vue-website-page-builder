@@ -271,7 +271,7 @@ onMounted(async () => {
             "
             class="flex items-center divide-x divide-gray-200"
           >
-            <div class="pr-4">
+            <div id="pagebuilder-logo-main" class="pr-4">
               <img class="h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
             </div>
             <span class="myPrimaryParagraph font-medium pl-4">Editing Page </span>
