@@ -689,29 +689,12 @@ import YourCustomBuilderComponents from './ComponentsPageBuilder/YourCustomBuild
 
 ### Fonts or Icons Not Displaying
 
-If fonts (Jost, Cormorant) or Material Icons are not displaying correctly, verify that:
+If fonts or Material Icons are not displaying correctly, verify that:
 
 1. **CSS Import**: Ensure you're importing the CSS file:
 
    ```js
    import '@myissue/vue-website-page-builder/style.css'
-   ```
-
-2. **Network Access**: The package loads fonts and icons from Google Fonts CDN. Ensure your application can access:
-
-   ```
-   https://fonts.googleapis.com/css2?family=Jost:*
-   https://fonts.googleapis.com/css2?family=Cormorant:*
-   https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined
-
-   ```
-
-3. **Content Security Policy**: If using CSP, allow Google Fonts:
-   ```html
-   <meta
-     http-equiv="Content-Security-Policy"
-     content="font-src 'self' https://fonts.googleapis.com;"
-   />
    ```
 
 ## Contributing
