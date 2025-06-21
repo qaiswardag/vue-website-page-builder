@@ -50,51 +50,59 @@ const handleDownloadHTML = function () {
 </script>
 
 <template>
-  <div class="w-full inset-x-0 h-[90vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
+  <div
+    class="pbx-w-full pbx-inset-x-0 pbx-h-[90vh] pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2"
+  >
     <!-- Advanced Settings - start -->
-    <div class="flex gap-4 flex-col divide-y divide-gray-300">
+    <div class="pbx-flex pbx-gap-4 pbx-flex-col pbx-divide-y pbx-divide-gray-300">
       <!-- Advanced Settings - start -->
-      <div class="mb-4 pb-8 border-b border-myPrimbryLightGrayColor">
-        <div class="flex items-left flex-col gap-1">
-          <h3 class="myQuaternaryHeader">Configuration Overview</h3>
-          <p class="myPrimaryParagraph text-xs">
+      <div class="pbx-mb-4 pbx-pb-8 pbx-border-b pbx-border-myPrimbryLightGrayColor">
+        <div class="pbx-flex pbx-items-left pbx-flex-col pbx-gap-1">
+          <h3 class="pbx-myQuaternaryHeader">Configuration Overview</h3>
+          <p class="pbx-myPrimaryParagraph pbx-text-xs">
             A summary of current user preferences, application settings, and system metadata
             including UI theme, language, saved components, and logo configuration.
           </p>
         </div>
 
         <!-- Version Information Table - start -->
-        <div class="px-2">
-          <div class="mt-8">
-            <h4 class="myQuaternaryHeader text-sm mb-2">Version Information</h4>
-            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <div class="overflow-x-auto">
-                <table class="min-w-full">
-                  <thead class="bg-gray-50">
+        <div class="pbx-px-2">
+          <div class="pbx-mt-8">
+            <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">Version Information</h4>
+            <div
+              class="pbx-overflow-hidden pbx-shadow pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 md:pbx-rounded-lg"
+            >
+              <div class="pbx-overflow-x-auto">
+                <table class="pbx-min-w-full">
+                  <thead class="pbx-bg-gray-50">
                     <tr>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Component
                       </th>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Version
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="pbx-bg-white pbx-divide-y pbx-divide-gray-200">
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Page Builder</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Page Builder</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium pbx-bg-blue-100 pbx-text-blue-800"
                           >
                             {{ version }}
                           </span>
@@ -110,49 +118,59 @@ const handleDownloadHTML = function () {
 
           <!-- Resource Data Table - start -->
           <div
-            class="mt-4"
+            class="pbx-mt-4"
             v-if="
               getConfigPageBuilder?.resourceData &&
               !isEmptyObject(getConfigPageBuilder.resourceData)
             "
           >
-            <h4 class="myQuaternaryHeader text-sm mb-2">Resource Data</h4>
-            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <div class="overflow-x-auto">
-                <table class="min-w-full">
-                  <thead class="bg-gray-50">
+            <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">Resource Data</h4>
+            <div
+              class="pbx-overflow-hidden pbx-shadow pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 md:pbx-rounded-lg"
+            >
+              <div class="pbx-overflow-x-auto">
+                <table class="pbx-min-w-full">
+                  <thead class="pbx-bg-gray-50">
                     <tr>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Property
                       </th>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Value
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="pbx-bg-white pbx-divide-y pbx-divide-gray-200">
                     <tr v-if="getConfigPageBuilder?.resourceData?.title">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Title</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Title</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           {{ getConfigPageBuilder.resourceData.title }}
                         </div>
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.resourceData?.id">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">ID</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">ID</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           {{ getConfigPageBuilder.resourceData.id }}
                         </div>
                       </td>
@@ -166,46 +184,54 @@ const handleDownloadHTML = function () {
 
           <!-- User Information Table - start -->
           <div
-            class="mt-8"
+            class="pbx-mt-8"
             v-if="
               getConfigPageBuilder?.userForPageBuilder &&
               !isEmptyObject(getConfigPageBuilder.userForPageBuilder)
             "
           >
-            <h4 class="myQuaternaryHeader text-sm mb-2">User Information</h4>
-            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <div class="overflow-x-auto">
-                <table class="min-w-full">
-                  <thead class="bg-gray-50">
+            <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">User Information</h4>
+            <div
+              class="pbx-overflow-hidden pbx-shadow pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 md:pbx-rounded-lg"
+            >
+              <div class="pbx-overflow-x-auto">
+                <table class="pbx-min-w-full">
+                  <thead class="pbx-bg-gray-50">
                     <tr>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Property
                       </th>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Value
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="pbx-bg-white pbx-divide-y pbx-divide-gray-200">
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">User Name</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">User Name</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           {{ getConfigPageBuilder.userForPageBuilder.name }}
                         </div>
                       </td>
                     </tr>
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Image</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Image</div>
                       </td>
                       <td
                         v-if="
@@ -213,12 +239,12 @@ const handleDownloadHTML = function () {
                           typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
                           getConfigPageBuilder.userForPageBuilder.image.length > 2
                         "
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
-                        <div class="min-w-[30rem] w-max">
-                          <div class="flex items-center space-x-3">
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
+                          <div class="pbx-flex pbx-items-center pbx-space-x-3">
                             <img
-                              class="block inset-0 object-top h-10 min-h-10 max-h-10 w-10 min-w-10 max-w-10 object-cover rounded-full"
+                              class="pbx-block pbx-inset-0 pbx-object-top pbx-h-10 pbx-min-h-10 pbx-max-h-10 pbx-w-10 pbx-min-w-10 pbx-max-w-10 pbx-object-cover pbx-rounded-full"
                               :src="getConfigPageBuilder.userForPageBuilder.image"
                               alt="image"
                             />
@@ -227,8 +253,10 @@ const handleDownloadHTML = function () {
                       </td>
                     </tr>
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Image URL</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Image URL</div>
                       </td>
                       <td
                         v-if="
@@ -236,9 +264,9 @@ const handleDownloadHTML = function () {
                           typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
                           getConfigPageBuilder.userForPageBuilder.image.length > 2
                         "
-                        class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
-                        <div class="min-w-[30rem] w-max">
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           {{ getConfigPageBuilder.userForPageBuilder.image }}
                         </div>
                       </td>
@@ -252,61 +280,75 @@ const handleDownloadHTML = function () {
 
           <!-- User Settings Table - start -->
           <div
-            class="mt-8"
+            class="pbx-mt-8"
             v-if="
               getConfigPageBuilder?.userSettings &&
               !isEmptyObject(getConfigPageBuilder.userSettings)
             "
           >
-            <h4 class="myQuaternaryHeader text-sm mb-2">User Settings</h4>
-            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <div class="overflow-x-auto">
-                <table class="min-w-full">
-                  <thead class="bg-gray-50">
+            <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">User Settings</h4>
+            <div
+              class="pbx-overflow-hidden pbx-shadow pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 md:pbx-rounded-lg"
+            >
+              <div class="pbx-overflow-x-auto">
+                <table class="pbx-min-w-full">
+                  <thead class="pbx-bg-gray-50">
                     <tr>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Setting
                       </th>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Value
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="pbx-bg-white pbx-divide-y pbx-divide-gray-200">
                     <tr v-if="getConfigPageBuilder?.userSettings?.theme">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Theme</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Theme</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           {{ getConfigPageBuilder.userSettings.theme }}
                         </div>
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.userSettings?.language">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Language</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Language</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           {{ getConfigPageBuilder.userSettings.language }}
                         </div>
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.userSettings?.autoSave !== undefined">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Auto Save</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Auto Save</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
                               getConfigPageBuilder.userSettings.autoSave
                                 ? 'bg-green-100 text-green-800'
@@ -321,13 +363,17 @@ const handleDownloadHTML = function () {
                       </td>
                     </tr>
                     <tr v-if="getConfigPageBuilder?.userSettings?.notifications !== undefined">
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Notifications</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Notifications</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
                               getConfigPageBuilder.userSettings.notifications
                                 ? 'bg-green-100 text-green-800'
@@ -352,42 +398,48 @@ const handleDownloadHTML = function () {
 
           <!-- Page Builder Logo Table - start -->
           <div
-            class="mt-8"
+            class="pbx-mt-8"
             v-if="
               getConfigPageBuilder.pageBuilderLogo &&
               !isEmptyObject(getConfigPageBuilder.pageBuilderLogo)
             "
           >
-            <h4 class="myQuaternaryHeader text-sm mb-2">Logo Configuration</h4>
-            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <div class="overflow-x-auto">
-                <table class="min-w-full">
-                  <thead class="bg-gray-50">
+            <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">Logo Configuration</h4>
+            <div
+              class="pbx-overflow-hidden pbx-shadow pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 md:pbx-rounded-lg"
+            >
+              <div class="pbx-overflow-x-auto">
+                <table class="pbx-min-w-full">
+                  <thead class="pbx-bg-gray-50">
                     <tr>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Property
                       </th>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Value
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="pbx-bg-white pbx-divide-y pbx-divide-gray-200">
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Logo</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Logo</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
-                          <div class="flex items-center space-x-3">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
+                          <div class="pbx-flex pbx-items-center pbx-space-x-3">
                             <img
-                              class="h-4"
+                              class="pbx-h-4"
                               :src="getConfigPageBuilder.pageBuilderLogo.src"
                               alt="Logo"
                             />
@@ -396,15 +448,19 @@ const handleDownloadHTML = function () {
                       </td>
                     </tr>
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Logo URL</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Logo URL</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
-                          <div class="flex items-center space-x-3">
-                            <div class="border-r border-gray-200 pr-6">
-                              <div class="flex items-center space-x-3">
-                                <span class="whitespace-nowrap">{{
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
+                          <div class="pbx-flex pbx-items-center pbx-space-x-3">
+                            <div class="pbx-pr-6">
+                              <div class="pbx-flex pbx-items-center pbx-space-x-3">
+                                <span class="pbx-whitespace-nowrap">{{
                                   getConfigPageBuilder.pageBuilderLogo.src
                                 }}</span>
                               </div>
@@ -422,41 +478,47 @@ const handleDownloadHTML = function () {
 
           <!-- Form Type Table - start -->
           <div
-            class="mt-8"
+            class="pbx-mt-8"
             v-if="
               getConfigPageBuilder?.updateOrCreate &&
               !isEmptyObject(getConfigPageBuilder.updateOrCreate)
             "
           >
-            <h4 class="myQuaternaryHeader text-sm mb-2">Form Type</h4>
-            <div class="overflow-hidden shadow ring-1 ring-black ring-opacity-5 md:rounded-lg">
-              <div class="overflow-x-auto">
-                <table class="w-max">
-                  <thead class="bg-gray-50">
+            <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">Form Type</h4>
+            <div
+              class="pbx-overflow-hidden pbx-shadow pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 md:pbx-rounded-lg"
+            >
+              <div class="pbx-overflow-x-auto">
+                <table class="pbx-w-max">
+                  <thead class="pbx-bg-gray-50">
                     <tr>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Mode
                       </th>
                       <th
                         scope="col"
-                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
                         Description
                       </th>
                     </tr>
                   </thead>
-                  <tbody class="bg-white divide-y divide-gray-200">
+                  <tbody class="pbx-bg-white pbx-divide-y pbx-divide-gray-200">
                     <tr>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Form Type</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Form Type</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
                               getConfigPageBuilder.updateOrCreate === 'create'
                                 ? 'bg-green-100 text-green-800'
@@ -489,13 +551,17 @@ const handleDownloadHTML = function () {
                         getConfigPageBuilder.updateOrCreate.formName.length > 0
                       "
                     >
-                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                        <div class="min-w-[30rem] w-max">Form Name</div>
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">Form Name</div>
                       </td>
-                      <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                        <div class="min-w-[30rem] w-max">
+                      <td
+                        class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
+                      >
+                        <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium"
+                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                           >
                             {{ getConfigPageBuilder.updateOrCreate.formName }}
                           </span>
@@ -513,13 +579,13 @@ const handleDownloadHTML = function () {
     </div>
     <!-- Advanced Settings - end -->
     <!-- Download Layout HTML - start -->
-    <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
-      <div class="flex items-left flex-col gap-1">
-        <h3 class="myQuaternaryHeader">Download Page as HTML</h3>
-        <p class="myPrimaryParagraph text-xs">Download current page layout.</p>
+    <div class="pbx-mt-4 pbx-mb-4 pbx-py-8 pbx-border-b pbx-border-myPrimbryLightGrayColor">
+      <div class="pbx-flex pbx-items-left pbx-flex-col pbx-gap-1">
+        <h3 class="pbx-myQuaternaryHeader">Download Page as HTML</h3>
+        <p class="pbx-myPrimaryParagraph pbx-text-xs">Download current page layout.</p>
       </div>
-      <div class="mt-4">
-        <button @click="handleDownloadHTML" type="button" class="myPrimaryButton">
+      <div class="pbx-mt-4">
+        <button @click="handleDownloadHTML" type="button" class="pbx-myPrimaryButton">
           Download HTML file
         </button>
       </div>
@@ -527,24 +593,28 @@ const handleDownloadHTML = function () {
     <!-- Download Layout HTML - end -->
 
     <!-- Congig - start -->
-    <div class="mt-4 mb-4 py-8 border-b border-myPrimbryLightGrayColor">
-      <div class="flex items-left flex-col gap-1">
-        <h3 class="myQuaternaryHeader">Complete Configuration Overview</h3>
-        <p class="myPrimaryParagraph text-xs">
+    <div class="pbx-mt-4 pbx-mb-4 pbx-py-8 pbx-border-b pbx-border-myPrimbryLightGrayColor">
+      <div class="pbx-flex pbx-items-left pbx-flex-col pbx-gap-1">
+        <h3 class="pbx-myQuaternaryHeader">Complete Configuration Overview</h3>
+        <p class="pbx-myPrimaryParagraph pbx-text-xs">
           omplete configuration object currently used by the Page Builder. It includes information
           about the user, form behavior, branding settings, and other context-specific data needed
           for rendering and managing the builder environment.
         </p>
       </div>
 
-      <div class="mt-4 whitespace-pre-wrap text-white overflow-hidden bg-gray-900">
-        <div class="flex bg-gray-800/40 ring-1 ring-white/5">
-          <div class="-mb-px flex text-xs font-medium text-myPrimaryMediumGrayColor">
-            <div class="px-4 py-4 text-white">Configuration</div>
+      <div
+        class="pbx-mt-4 pbx-whitespace-pre-wrap pbx-text-white pbx-overflow-hidden pbx-bg-gray-900"
+      >
+        <div class="pbx-flex bg-gray-800/40 pbx-ring-1 ring-white/5">
+          <div
+            class="pbx-mb-px pbx-flex pbx-text-xs pbx-font-medium pbx-text-myPrimaryMediumGrayColor"
+          >
+            <div class="pbx-px-4 pbx-py-4 pbx-text-white">Configuration</div>
           </div>
         </div>
-        <div class="px-4 pb-8 pt-4 text-white text-xs break-all">
-          <p class="myPrimaryParagraph text-xs text-white">
+        <div class="pbx-px-4 pbx-pb-8 pbx-pt-4 pbx-text-white pbx-text-xs pbx-break-all">
+          <p class="pbx-myPrimaryParagraph pbx-text-xs pbx-text-white">
             config: {{ JSON.stringify(getConfigPageBuilder, null, 4) }}
           </p>
         </div>

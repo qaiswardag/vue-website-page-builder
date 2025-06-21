@@ -9,25 +9,25 @@ defineProps({
     Type: Boolean,
     default: true,
   },
-});
+})
 </script>
 
 <template>
   <!-- chimp start -->
-  <div class="myPrimaryWidthScreenModule">
+  <div class="pbx-myPrimaryWidthScreenModule">
     <template v-if="headerArea">
-      <div class="myPrimaryContentSection">
-        <h2 class="mySecondaryHeader">
+      <div class="pbx-myPrimaryContentSection">
+        <h2 class="pbx-mySecondaryHeader">
           <slot name="title" />
         </h2>
         <template v-if="descriptionArea === true">
-          <p class="myPrimaryParagraph font-normal">
+          <p class="pbx-myPrimaryParagraph pbx-font-normal">
             <slot name="description" />
           </p>
         </template>
       </div>
     </template>
-    <div class="myPrimaryContentSection">
+    <div class="pbx-myPrimaryContentSection">
       <slot name="content" />
     </div>
   </div>

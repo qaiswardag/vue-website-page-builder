@@ -6,11 +6,10 @@ import ManageOpacity from './ManageOpacity.vue'
 
 <template>
   <EditorAccordion>
-    <template #title>Opacity settings</template>
+    <template #title>Opacity & Transparency </template>
     <template #content>
-      <p class="myPrimaryParagraph font-medium py-0 my-4">Opacity</p>
-      <!-- Text color - end -->
       <ManageOpacity></ManageOpacity>
+      <hr />
       <ManageBackgroundOpacity></ManageBackgroundOpacity>
     </template>
   </EditorAccordion>

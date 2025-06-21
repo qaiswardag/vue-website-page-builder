@@ -7,6 +7,13 @@ import { generateComponentPreview } from '../../../utils/componentPreviews'
 import type { ComponentObject } from '../../../types'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
 
+defineProps({
+  customMediaComponent: {
+    type: Object,
+    default: null,
+  },
+})
+
 // Get modal close function
 const { closeAddComponentModal } = usePageBuilderModal()
 
@@ -42,20 +49,23 @@ const getSvgPreview = (title: string) => {
 <template>
   <div>
     <!-- Helper Components Section -->
-    <div class="mb-8">
-      <h3 class="myQuaternaryHeader mb-4">Helper Components</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div class="pbx-mb-8">
+      <h3 class="pbx-myQuaternaryHeader pbx-mb-4">Helper Components</h3>
+      <div
+        class="pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 lg:pbx-grid-cols-4 pbx-gap-4"
+      >
+        NOW: Did user include custom media component: {{ customMediaComponent ? 'true' : 'false' }}
         <div
           v-for="helper in componentHelpers"
           :key="helper.title"
-          class="border border-gray-200 overflow-hidden hover:border-myPrimaryLinkColor duration-100 cursor-pointer p-4"
+          class="pbx-border pbx-border-gray-200 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer pbx-p-4"
           @click="handleDropComponent(helper)"
         >
-          <div class="max-h-72 cursor-pointer object-contain bg-white mx-auto">
-            <div v-if="false" class="mr-2" v-html="helper.icon"></div>
-            <h4 class="myPrimaryParagraph text-base font-medium">{{ helper.title }}</h4>
+          <div class="pbx-max-h-72 pbx-cursor-pointer pbx-object-contain pbx-bg-white pbx-mx-auto">
+            <div v-if="false" class="pbx-mr-2" v-html="helper.icon"></div>
+            <h4 class="pbx-myPrimaryParagraph pbx-text-base pbx-font-medium">{{ helper.title }}</h4>
           </div>
-          <div class="myPrimaryParagraph text-xs font-normal pt-2">
+          <div class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-pt-2">
             Click to add {{ helper.title.toLowerCase() }} component
           </div>
         </div>
@@ -63,27 +73,29 @@ const getSvgPreview = (title: string) => {
     </div>
 
     <!-- Regular Components Section -->
-    <div>
-      <h3 class="myQuaternaryHeader mb-4">Layout Components</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div v-if="customMediaComponent">
+      <h3 class="pbx-myQuaternaryHeader pbx-mb-4">Layout Components</h3>
+      <div class="pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 pbx-gap-4">
         <div
           v-for="comp in components[0].components.data"
           :key="comp.title"
-          class="border border-gray-200 overflow-hidden hover:border-myPrimaryLinkColor duration-100 cursor-pointer"
+          class="pbx-border pbx-border-gray-200 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer"
           @click="handleDropComponent(convertToComponentObject(comp))"
         >
           <div
-            class="overflow-hidden whitespace-pre-line flex-1 h-auto border-b border-gray-200 lg:py-10 py-8 px-2"
+            class="pbx-overflow-hidden pbx-whitespace-pre-line pbx-flex-1 pbx-h-auto pbx-border-b pbx-border-gray-200 lg:pbx-py-10 pbx-py-8 pbx-px-2"
           >
             <!-- Use SVG preview instead of external images -->
             <div
-              class="max-h-72 cursor-pointer bg-white mx-auto flex items-center justify-center"
+              class="pbx-max-h-72 pbx-cursor-pointer pbx-bg-white pbx-mx-auto pbx-flex pbx-items-center pbx-justify-center"
               v-html="getSvgPreview(comp.title)"
             ></div>
           </div>
-          <div class="p-3">
-            <h4 class="myPrimaryParagraph text-sm font-normal">{{ comp.title }}</h4>
-            <div class="myPrimaryParagraph text-xs font-normal pt-2">Click to add component</div>
+          <div class="pbx-p-3">
+            <h4 class="pbx-myPrimaryParagraph pbx-text-sm pbx-font-normal">{{ comp.title }}</h4>
+            <div class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-pt-2">
+              Click to add component
+            </div>
           </div>
         </div>
       </div>

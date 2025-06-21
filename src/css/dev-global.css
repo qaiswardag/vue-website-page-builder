@@ -1,0 +1,137 @@
+/* Tailwind’s base layer includes global CSS resets and element styles that are not prefixed. 
+These styles affect all HTML elements (like input, button, h1, etc.) in the consuming app. */
+@tailwind base;
+
+.smooth-transition {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Manage P, Link, H1, H2 # end */
+
+/* CSS for content inside page builder # start */
+#pagebuilder a {
+  pointer-events: none;
+}
+/* CSS for content inside page builder # start */
+#page-builder-editor .tiptap {
+  background: #fff;
+  min-height: 25rem;
+}
+
+#pagebuilder #youtube-video::before {
+  content: 'Select Video Element';
+  font-family: 'Jost';
+  background: #16a34a !important;
+  color: white;
+  text-decoration: none;
+  margin-right: 8px;
+  vertical-align: middle;
+  min-height: 3rem;
+  padding: 0.75rem 0.75rem;
+  white-space: nowrap;
+  word-break: keep-all;
+  font-weight: 500;
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  margin-bottom: 20px;
+  font-size: 0.8rem !important;
+}
+
+@media (min-width: 640px) {
+  #pagebuilder #youtube-video::before {
+    font-size: 0.9rem !important;
+    width: auto;
+  }
+}
+
+#pagebuilder #youtube-video:hover::before {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#page-builder-editor a,
+#pagebuilder a {
+  text-decoration: underline;
+}
+
+#page-builder-editor #linktree p,
+#pagebuilder #linktree p {
+  width: 100%;
+}
+
+#page-builder-editor #linktree a,
+#pagebuilder #linktree a {
+  @apply pbx-py-4 pbx-px-2 pbx-block pbx-w-full;
+}
+
+#page-builder-editor #linktree a,
+#pagebuilder #linktree a {
+  text-decoration: none;
+  font-weight: 500;
+  color: inherit !important;
+  width: 100%;
+  cursor: pointer;
+}
+#page-builder-editor strong,
+#pagebuilder strong {
+  font-weight: 500;
+}
+
+#page-builder-editor ol,
+#pagebuilder ol,
+#page-builder-editor ul,
+#pagebuilder ul {
+  list-style: disc !important;
+  padding: 1rem 0rem;
+}
+
+#page-builder-editor li,
+#pagebuilder li {
+  line-height: 2.2rem;
+  margin-left: 1.5em;
+}
+
+/* Scrollbar Styles  - start */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: black transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 25px;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px; /* Add height for horizontal scrollbar */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 25px;
+  border: none;
+}
+
+/* Add overflow-x property to enable horizontal scrollbar */
+.scrollable {
+  overflow-x: auto;
+  overflow-y: auto;
+  /* Add any other desired styles for the scrollable element */
+}
+/* Scrollbar Styles  - end */
+
+.tailwind-pagination-package {
+  box-shadow: none !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 6px 0px;
+  justify-content: center;
+}

@@ -89,11 +89,11 @@ const thirdButtonBuilder = function () {
     <slot name="content" />
 
     <div
-      class="font-sans w-full relative inline-block align-bottom text-left overflow-hidden transform transition-all sm:align-middle"
+      class="pbx-font-sans pbx-w-full pbx-relative pbx-inline-block pbx-align-bottom pbx-text-left pbx-overflow-hidden pbx-transform pbx-transition-all sm:pbx-align-middle"
     >
-      <div :class="{ 'pr-4 pb-4': simpleModal !== true }">
+      <div :class="{ 'pbx-pr-4 pbx-pb-4': simpleModal !== true }">
         <template v-if="simpleModal !== true">
-          <div v-html="description" class="myPrimaryParagraph mb-6"></div>
+          <div v-html="description" class="pbx-myPrimaryParagraph pbx-mb-6"></div>
         </template>
 
         <slot name="header"></slot>
@@ -103,20 +103,22 @@ const thirdButtonBuilder = function () {
     </div>
 
     <template v-if="simpleModal !== true && !isLoading">
-      <div class="py-4 flex sm:justify-end justify-center border-t border-gray-200 mt-4">
+      <div
+        class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center pbx-border-t pbx-border-gray-200 pbx-mt-4"
+      >
         <slot name="footer" />
         <div
           :class="{
-            'sm:grid-cols-1': gridColumnAmount === 1,
-            'sm:grid-cols-2': gridColumnAmount === 2,
-            'sm:grid-cols-3': gridColumnAmount === 3,
+            'sm:pbx-grid-cols-1': gridColumnAmount === 1,
+            'sm:pbx-grid-cols-2': gridColumnAmount === 2,
+            'sm:pbx-grid-cols-3': gridColumnAmount === 3,
           }"
-          class="sm:items-end sm:justify-end flex sm:flex-row flex-col myPrimaryGap sm:w-5/6 w-full"
+          class="sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full"
         >
           <button
             v-if="firstButtonText"
             ref="firstButtonRef"
-            class="mySecondaryButton"
+            class="pbx-mySecondaryButton"
             type="button"
             @click="firstButtonBuilder"
           >
@@ -126,20 +128,18 @@ const thirdButtonBuilder = function () {
           <div v-if="secondButtonText">
             <div v-if="disabled && disabledWhichButton === 'secondButtonBuilder'">
               <button
-                class="flex items-center gap-2 myPrimaryButton bg-yellow-300 hover:bg-yellow-400 text-myPrimaryDarkGrayColor hover:text-myPrimaryDarkGrayColor focus:ring-yellow-400 w-full"
-                :class="{
-                  'opacity-25 cursor-default': disabled,
-                }"
+                class="pbx-flex pbx-items-center pbx-gap-2 pbx-myPrimaryButton pbx-bg-yellow-300 hover:pbx-bg-yellow-400 pbx-text-myPrimaryDarkGrayColor hover:pbx-text-myPrimaryDarkGrayColor focus:pbx-ring-yellow-400 pbx-w-full"
+                :class="{ 'pbx-opacity-25 pbx-cursor-default': disabled }"
                 :disabled="disabled"
                 type="button"
                 @click="secondButtonBuilder"
               >
                 <div>
                   <Transition name="bounce">
-                    <div role="status" class="flex items-center">
+                    <div role="status" class="pbx-flex pbx-items-center">
                       <svg
                         aria-hidden="true"
-                        class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"
+                        class="pbx-w-4 pbx-h-4 pbx-animate-spin pbx-text-white-600 pbx-fill-gray-800 pbx-flex pbx-items-center"
                         stroke-width="1.5"
                         viewBox="0 0 100 101"
                         fill="none"
@@ -163,7 +163,7 @@ const thirdButtonBuilder = function () {
 
             <div v-if="!disabled || disabledWhichButton !== 'secondButtonBuilder'">
               <button
-                class="myPrimaryButton bg-yellow-300 hover:bg-yellow-400 text-myPrimaryDarkGrayColor hover:text-myPrimaryDarkGrayColor focus:ring-yellow-400 w-full"
+                class="pbx-myPrimaryButton pbx-bg-yellow-300 hover:pbx-bg-yellow-400 pbx-text-myPrimaryDarkGrayColor hover:pbx-text-myPrimaryDarkGrayColor focus:pbx-ring-yellow-400 pbx-w-full"
                 type="button"
                 @click="secondButtonBuilder"
               >
@@ -176,19 +176,17 @@ const thirdButtonBuilder = function () {
             <div v-if="type === 'default'">
               <div v-if="disabled && disabledWhichButton === 'thirdButtonBuilder'">
                 <button
-                  class="flex items-center gap-2 myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
-                  :class="{
-                    'opacity-25 cursor-default': disabled,
-                  }"
+                  class="pbx-flex pbx-items-center pbx-gap-2 pbx-myPrimaryButton pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-myPrimaryLinkColor focus:pbx-ring-myPrimaryLinkColor hover:pbx-bg-myPrimaryLinkColor pbx-w-full"
+                  :class="{ 'pbx-opacity-25 pbx-cursor-default': disabled }"
                   :disabled="disabled"
                   type="button"
                 >
                   <div>
                     <Transition name="bounce">
-                      <div role="status" class="flex items-center">
+                      <div role="status" class="pbx-flex pbx-items-center">
                         <svg
                           aria-hidden="true"
-                          class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"
+                          class="pbx-w-4 pbx-h-4 pbx-animate-spin pbx-text-white-600 pbx-fill-gray-800 pbx-flex pbx-items-center"
                           stroke-width="1.5"
                           viewBox="0 0 100 101"
                           fill="none"
@@ -212,7 +210,7 @@ const thirdButtonBuilder = function () {
 
               <div v-if="!disabled || disabledWhichButton !== 'thirdButtonBuilder'">
                 <button
-                  class="myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
+                  class="pbx-myPrimaryButton pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-myPrimaryLinkColor focus:pbx-ring-myPrimaryLinkColor hover:pbx-bg-myPrimaryLinkColor pbx-w-full"
                   type="button"
                   @click="thirdButtonBuilder"
                 >
@@ -223,19 +221,17 @@ const thirdButtonBuilder = function () {
             <div v-if="type === 'success'">
               <div v-if="disabled && disabledWhichButton === 'thirdButtonBuilder'">
                 <button
-                  class="flex items-center gap-2 myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
-                  :class="{
-                    'opacity-25 cursor-default': disabled,
-                  }"
+                  class="pbx-flex pbx-items-center pbx-gap-2 pbx-myPrimaryButton pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-myPrimaryLinkColor focus:pbx-ring-myPrimaryLinkColor hover:pbx-bg-myPrimaryLinkColor pbx-w-full"
+                  :class="{ 'pbx-opacity-25 pbx-cursor-default': disabled }"
                   :disabled="disabled"
                   type="button"
                 >
                   <div>
                     <Transition name="bounce">
-                      <div role="status" class="flex items-center">
+                      <div role="status" class="pbx-flex pbx-items-center">
                         <svg
                           aria-hidden="true"
-                          class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"
+                          class="pbx-w-4 pbx-h-4 pbx-animate-spin pbx-text-white-600 pbx-fill-gray-800 pbx-flex pbx-items-center"
                           stroke-width="1.5"
                           viewBox="0 0 100 101"
                           fill="none"
@@ -259,7 +255,7 @@ const thirdButtonBuilder = function () {
 
               <div v-if="!disabled || disabledWhichButton !== 'thirdButtonBuilder'">
                 <button
-                  class="myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
+                  class="pbx-myPrimaryButton pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-myPrimaryLinkColor focus:pbx-ring-myPrimaryLinkColor hover:pbx-bg-myPrimaryLinkColor pbx-w-full"
                   type="button"
                   @click="thirdButtonBuilder"
                 >
@@ -271,19 +267,17 @@ const thirdButtonBuilder = function () {
             <div v-if="type === 'warning'">
               <div v-if="disabled && disabledWhichButton === 'thirdButtonBuilder'">
                 <button
-                  class="flex items-center gap-2 myPrimaryButton bg-myPrimaryLinkColor focus-visible:ring-myPrimaryLinkColor focus:ring-myPrimaryLinkColor hover:bg-myPrimaryLinkColor w-full"
-                  :class="{
-                    'opacity-25 cursor-default': disabled,
-                  }"
+                  class="pbx-flex pbx-items-center pbx-gap-2 pbx-myPrimaryButton pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-myPrimaryLinkColor focus:pbx-ring-myPrimaryLinkColor hover:pbx-bg-myPrimaryLinkColor pbx-w-full"
+                  :class="{ 'pbx-opacity-25 pbx-cursor-default': disabled }"
                   :disabled="disabled"
                   type="button"
                 >
                   <div>
                     <Transition name="bounce">
-                      <div role="status" class="flex items-center">
+                      <div role="status" class="pbx-flex pbx-items-center">
                         <svg
                           aria-hidden="true"
-                          class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"
+                          class="pbx-w-4 pbx-h-4 pbx-animate-spin pbx-text-white-600 pbx-fill-gray-800 pbx-flex pbx-items-center"
                           stroke-width="1.5"
                           viewBox="0 0 100 101"
                           fill="none"
@@ -307,7 +301,7 @@ const thirdButtonBuilder = function () {
 
               <div v-if="!disabled || disabledWhichButton !== 'thirdButtonBuilder'">
                 <button
-                  class="flex items-center gap-2 myPrimaryButton bg-myPrimaryErrorColor hover:bg-red-600 text-white focus:ring-myPrimaryErrorColor w-full"
+                  class="pbx-flex pbx-items-center pbx-gap-2 pbx-myPrimaryButton pbx-bg-myPrimaryErrorColor hover:pbx-bg-red-600 pbx-text-white focus:pbx-ring-myPrimaryErrorColor pbx-w-full"
                   type="button"
                   @click="thirdButtonBuilder"
                 >
@@ -319,19 +313,17 @@ const thirdButtonBuilder = function () {
             <div v-if="type === 'danger' || type === 'delete'">
               <div v-if="disabled && disabledWhichButton === 'thirdButtonBuilder'">
                 <button
-                  class="flex items-center gap-2 myPrimaryButton bg-myPrimaryErrorColor hover:bg-red-600 text-white focus:ring-myPrimaryErrorColor w-full"
-                  :class="{
-                    'opacity-25 cursor-default': disabled,
-                  }"
+                  class="pbx-flex pbx-items-center pbx-gap-2 pbx-myPrimaryButton pbx-bg-myPrimaryErrorColor hover:pbx-bg-red-600 pbx-text-white focus:pbx-ring-myPrimaryErrorColor pbx-w-full"
+                  :class="{ 'pbx-opacity-25 pbx-cursor-default': disabled }"
                   :disabled="disabled"
                   type="button"
                 >
                   <div>
                     <Transition name="bounce">
-                      <div role="status" class="flex items-center">
+                      <div role="status" class="pbx-flex pbx-items-center">
                         <svg
                           aria-hidden="true"
-                          class="w-4 h-4 animate-spin text-white-600 fill-gray-800 flex items-center"
+                          class="pbx-w-4 pbx-h-4 pbx-animate-spin pbx-text-white-600 pbx-fill-gray-800 pbx-flex pbx-items-center"
                           stroke-width="1.5"
                           viewBox="0 0 100 101"
                           fill="none"
@@ -355,7 +347,7 @@ const thirdButtonBuilder = function () {
 
               <div v-if="!disabled || disabledWhichButton !== 'thirdButtonBuilder'">
                 <button
-                  class="flex items-center gap-2 myPrimaryButton bg-myPrimaryErrorColor hover:bg-red-600 text-white focus:ring-myPrimaryErrorColor w-full"
+                  class="pbx-flex pbx-items-center pbx-gap-2 pbx-myPrimaryButton pbx-bg-myPrimaryErrorColor hover:pbx-bg-red-600 pbx-text-white focus:pbx-ring-myPrimaryErrorColor pbx-w-full"
                   type="button"
                   @click="thirdButtonBuilder"
                 >
@@ -368,12 +360,12 @@ const thirdButtonBuilder = function () {
       </div>
     </template>
     <template v-if="isLoading">
-      <div class="flex items-center my-2 py-4 px-2 justify-end">
+      <div class="pbx-flex pbx-items-center pbx-my-2 pbx-py-4 pbx-px-2 pbx-justify-end">
         <div
-          class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
         >
           <span
-            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+            class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
             >Loading...</span
           >
         </div>

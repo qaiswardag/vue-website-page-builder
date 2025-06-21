@@ -1,27 +1,9 @@
 <script setup>
-import { ref, computed } from 'vue'
-import { sharedPageBuilderStore } from '../stores/shared-store'
-
-const pageBuilderStateStore = sharedPageBuilderStore
-
-const getConfigPageBuilder = computed(() => {
-  return pageBuilderStateStore.getConfigPageBuilder
-})
-
-const emit = defineEmits(['firstPageBuilderPreviewModalButton'])
-
-// first button function
-const firstButton = async function () {
-  emit('firstPageBuilderPreviewModalButton')
-}
+import { ref } from 'vue'
 
 const htmlPage = ref('')
 
 const previewData = localStorage.getItem('preview')
-
-// htmlPage.value = JSON.parse(htmlPage.value);
-// // join
-// htmlPage.value = htmlPage.value.join("");
 
 if (previewData) {
   try {
@@ -38,7 +20,9 @@ if (previewData) {
 
 <template>
   <div>
-    <div class="w-full inset-x-0 h-[90vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
+    <div
+      class="pbx-w-full pbx-inset-x-0 pbx-h-[90vh] pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2"
+    >
       <div id="page-builder-editor">
         <div class="" v-html="htmlPage"></div>
       </div>

@@ -195,11 +195,19 @@ onMounted(() => {
     >
       <header></header>
       <main>
-        <div class="myInputGroup">
-          <label class="myPrimaryInputLabel" for="roles"><span>Enter URL</span></label
-          ><input v-model="urlEnteret" class="myPrimaryInput mt-1" type="url" placeholder="url" />
-          <div v-if="urlError" class="min-h-[2.5rem] flex items-center justify-start">
-            <p class="myPrimaryInputError mt-2 mb-0 py-0 self-start">
+        <div class="pbx-myInputGroup">
+          <label class="pbx-myPrimaryInputLabel" for="roles"><span>Enter URL</span></label
+          ><input
+            v-model="urlEnteret"
+            class="pbx-myPrimaryInput pbx-mt-1"
+            type="url"
+            placeholder="url"
+          />
+          <div
+            v-if="urlError"
+            class="pbx-min-h-[2.5rem] pbx-flex pbx-items-center pbx-justify-start"
+          >
+            <p class="pbx-myPrimaryInputError pbx-mt-2 pbx-mb-0 pbx-py-0 pbx-self-start">
               {{ urlError }}
             </p>
           </div>
@@ -207,21 +215,21 @@ onMounted(() => {
       </main>
     </DynamicModalBuilder>
 
-    <div class="blockease-linear duration-200 block ease-linear">
+    <div class="pbx-blockease-linear pbx-duration-200 pbx-block pbx-ease-linear">
       <div v-if="pageBuilderClass.isSelectedElementValidText() && editor">
-        <div class="relative rounded-lg">
+        <div class="pbx-relative pbx-rounded-lg">
           <div
-            class="flex justify-between myPrimaryGap items-center py-4 px-4 overflow-x-auto border-b border-gray-200"
+            class="pbx-flex pbx-justify-between pbx-myPrimaryGap pbx-items-center pbx-py-4 pbx-px-4 pbx-overflow-x-auto pbx-border-b pbx-border-gray-200"
           >
             <div>
               <div>
                 <div
-                  class="px-2 flex items-center justify-start gap-2 w-max p-1 rounded-full border border-gray-200 shadow-sm"
+                  class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max pbx-p-1 pbx-rounded-full pbx-border pbx-border-gray-200 pbx-shadow-sm"
                 >
                   <button
                     @click="pageBuilderClass.toggleTipTapModal(false)"
                     type="button"
-                    class="myPrimaryTag"
+                    class="pbx-myPrimaryTag"
                   >
                     <span class="material-symbols-outlined"> Save </span>
                     <span>Save</span>
@@ -229,53 +237,51 @@ onMounted(() => {
                 </div>
               </div>
             </div>
-            <div class="flex items-center p-1 rounded-full border border-gray-200 shadow-sm">
-              <div class="px-2 flex items-center justify-start gap-2 w-max">
+            <div
+              class="pbx-flex pbx-items-center pbx-p-1 pbx-rounded-full pbx-border pbx-border-gray-200 pbx-shadow-sm"
+            >
+              <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
                 <button
                   @click="editor.chain().focus().setHardBreak().run()"
                   type="button"
-                  class="myPrimaryTag"
+                  class="pbx-myPrimaryTag"
                 >
                   <span class="material-symbols-outlined"> keyboard_return </span>
                   <span>Line break</span>
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2 w-max">
+              <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
                 <button
                   @click="editor.chain().focus().toggleBold().run()"
                   type="button"
-                  class="myPrimaryTag"
-                  :class="{
-                    'bg-myPrimaryLinkColor text-white': editor.isActive('bold'),
-                  }"
+                  class="pbx-myPrimaryTag"
+                  :class="{ 'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('bold') }"
                 >
                   <span class="material-symbols-outlined"> format_bold </span>
                   <span>Bold</span>
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2 w-max">
+              <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
                 <button
                   @click="handleURL"
                   type="button"
-                  class="myPrimaryTag"
-                  :class="{
-                    'bg-myPrimaryLinkColor text-white': editor.isActive('link'),
-                  }"
+                  class="pbx-myPrimaryTag"
+                  :class="{ 'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('link') }"
                 >
                   <span class="material-symbols-outlined"> link </span>
                   <span>Link</span>
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2 w-max">
+              <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
                 <button
                   @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
                   type="button"
-                  class="myPrimaryTag"
+                  class="pbx-myPrimaryTag"
                   :class="{
-                    'bg-myPrimaryLinkColor text-white': editor.isActive('heading', {
+                    'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('heading', {
                       level: 2,
                     }),
                   }"
@@ -285,13 +291,13 @@ onMounted(() => {
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2 w-max">
+              <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
                 <button
                   @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
                   type="button"
-                  class="myPrimaryTag"
+                  class="pbx-myPrimaryTag"
                   :class="{
-                    'bg-myPrimaryLinkColor text-white': editor.isActive('heading', {
+                    'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('heading', {
                       level: 3,
                     }),
                   }"
@@ -301,13 +307,13 @@ onMounted(() => {
                 </button>
               </div>
 
-              <div class="px-2 flex items-center justify-start gap-2 w-max">
+              <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
                 <button
                   @click="editor.chain().focus().toggleBulletList().run()"
                   type="button"
-                  class="myPrimaryTag"
+                  class="pbx-myPrimaryTag"
                   :class="{
-                    'bg-myPrimaryLinkColor text-white': editor.isActive('bulletList'),
+                    'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('bulletList'),
                   }"
                 >
                   <span class="material-symbols-outlined"> list </span>
@@ -320,7 +326,7 @@ onMounted(() => {
           <editor-content
             id="page-builder-editor"
             :editor="editor"
-            class="p-2 prounded-lg lg:min-h-[20rem] lg:max-h-[30rem] md:min-h-[20rem] md:max-h-[20rem] min-h-[20rem] max-h-[20rem] overflow-y-auto"
+            class="pbx-p-2 pbx-prounded-lg lg:pbx-min-h-[20rem] lg:pbx-max-h-[30rem] md:pbx-min-h-[20rem] md:pbx-max-h-[20rem] pbx-min-h-[20rem] pbx-max-h-[20rem] pbx-overflow-y-auto"
           />
         </div>
       </div>

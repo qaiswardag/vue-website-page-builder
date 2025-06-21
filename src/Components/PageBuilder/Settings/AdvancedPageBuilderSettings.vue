@@ -32,35 +32,41 @@ function prettifyHtml(html) {
 </script>
 
 <template>
-  <div class="w-full inset-x-0 h-[90vh] bg-white overflow-x-scroll lg:pt-2 pt-2">
-    <div class="flex items-left flex-col myPrimaryGap border-myPrimaryMediumGrayColor">
-      <p class="myPrimaryParagraph">
+  <div
+    class="pbx-w-full pbx-inset-x-0 pbx-h-[90vh] pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2"
+  >
+    <div
+      class="pbx-flex pbx-items-left pbx-flex-col pbx-myPrimaryGap pbx-border-myPrimaryMediumGrayColor"
+    >
+      <p class="pbx-myPrimaryParagraph">
         Overview of Selected Element, Component, and Components. This section provides real-time
         updates based on your HTML selection.
       </p>
 
       <!-- Types - start -->
       <div>
-        <h4 class="myPrimaryParagraph text-xs pb-2">Types</h4>
-        <div class="text-gray-100 overflow-hidden bg-stone-800">
-          <div class="flex bg-stone-800 ring-1 ring-white/5">
-            <div class="-mb-px flex text-xs font-medium text-myPrimaryMediumGrayColor">
-              <div class="px-4 py-4 text-gray-100">Types</div>
+        <h4 class="pbx-myPrimaryParagraph pbx-text-xs pbx-pb-2">Types</h4>
+        <div class="pbx-text-gray-100 pbx-overflow-hidden pbx-bg-stone-800">
+          <div class="pbx-flex pbx-bg-stone-800 pbx-ring-1 ring-white/5">
+            <div
+              class="pbx-mb-px pbx-flex pbx-text-xs pbx-font-medium pbx-text-myPrimaryMediumGrayColor"
+            >
+              <div class="pbx-px-4 pbx-py-4 pbx-text-gray-100">Types</div>
             </div>
           </div>
-          <div class="px-4 pb-8 pt-4 text-gray-100 text-xs">
-            <p class="text-xs pb-2">
+          <div class="pbx-px-4 pbx-pb-8 pbx-pt-4 pbx-text-gray-100 pbx-text-xs">
+            <p class="pbx-text-xs pbx-pb-2">
               <span>Element type: </span>
               <span>
                 {{ typeof getElement }}
               </span>
             </p>
 
-            <p class="text-xs pb-2">
+            <p class="pbx-text-xs pbx-pb-2">
               <span>Component type: </span>
               {{ typeof getComponent }}
             </p>
-            <p class="text-xs pb-2">
+            <p class="pbx-text-xs pbx-pb-2">
               <span>Components: </span>
               <span>
                 {{ Array.isArray(getComponents) === true ? 'array' : typeof getComponents }}
@@ -72,56 +78,63 @@ function prettifyHtml(html) {
       <!-- Types - end -->
       <!-- Code Block Component - start-->
       <div>
-        <h4 class="myPrimaryParagraph text-xs pb-2">Content</h4>
-        <div class="overflow-hidden bg-stone-800">
-          <div class="flex bg-stone-800 ring-1 ring-white/5">
-            <div class="-mb-px flex text-xs font-medium text-myPrimaryMediumGrayColor">
+        <h4 class="pbx-myPrimaryParagraph pbx-text-xs pbx-pb-2">Content</h4>
+        <div class="pbx-overflow-hidden pbx-bg-stone-800">
+          <div class="pbx-flex pbx-bg-stone-800 pbx-ring-1 ring-white/5">
+            <div
+              class="pbx-mb-px pbx-flex pbx-text-xs pbx-font-medium pbx-text-myPrimaryMediumGrayColor"
+            >
               <div
                 @click="updateCurrentTab('element')"
-                class="px-4 py-4 cursor-pointer"
-                :class="[current === 'element' ? 'text-gray-100' : '']"
+                class="pbx-px-4 pbx-py-4 pbx-cursor-pointer"
+                :class="[current === 'element' ? 'pbx-text-gray-100' : '']"
               >
                 Element
               </div>
               <div
                 @click="updateCurrentTab('component')"
-                class="px-4 py-4 cursor-pointer"
-                :class="[current === 'component' ? 'text-gray-100' : '']"
+                class="pbx-px-4 pbx-py-4 pbx-cursor-pointer"
+                :class="[current === 'component' ? 'pbx-text-gray-100' : '']"
               >
                 Component
               </div>
               <div
                 @click="updateCurrentTab('components')"
-                class="px-4 py-4 cursor-pointer"
-                :class="[current === 'components' ? 'text-gray-100' : '']"
+                class="pbx-px-4 pbx-py-4 pbx-cursor-pointer"
+                :class="[current === 'components' ? 'pbx-text-gray-100' : '']"
               >
-                Components
+                Components added
                 {{ Array.isArray(getComponents) && getComponents.length }}
               </div>
             </div>
           </div>
-          <div class="px-4 pb-8 pt-4 text-gray-100 text-xs break-all">
+          <div class="pbx-px-4 pbx-pb-8 pbx-pt-4 pbx-text-gray-100 pbx-text-xs pbx-break-all">
             <div v-if="current === 'element'">
               <div v-if="!getComponent">
-                <p class="pb-2 text-xs">
+                <p class="pbx-pb-2 pbx-text-xs">
                   {{ getComponent === null ? 'No Element selected' : typeof getComponent }}
                 </p>
               </div>
-              <div v-if="getElement" class="overflow-hidden border border-gray-100 mb-6">
-                <div class="bg-stone-800 pt-4 pb-1 border-b border-gray-200">
-                  <div class="overflow-x-auto">
-                    <table class="min-w-full">
-                      <thead class="bg-stone-800">
+              <div
+                v-if="getElement"
+                class="pbx-overflow-hidden pbx-border pbx-border-gray-100 pbx-mb-6"
+              >
+                <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b pbx-border-gray-200">
+                  <div class="pbx-overflow-x-auto">
+                    <table class="pbx-min-w-full">
+                      <thead class="pbx-bg-stone-800">
                         <tr>
-                          <th class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                          <th
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                          >
                             Selected HTML:
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-stone-800 divide-y divide-gray-200">
+                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
-                            class="px-6 py-3 text-left text-xs text-gray-100 font-normal border-b"
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-b"
                           >
                             {{ getElement?.outerHTML }}
                           </td>
@@ -129,19 +142,21 @@ function prettifyHtml(html) {
                       </tbody>
                     </table>
                   </div>
-                  <div class="overflow-x-auto">
-                    <table class="min-w-full">
-                      <thead class="bg-stone-800">
+                  <div class="pbx-overflow-x-auto">
+                    <table class="pbx-min-w-full">
+                      <thead class="pbx-bg-stone-800">
                         <tr>
-                          <th class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                          <th
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                          >
                             Element src:
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-stone-800 divide-y divide-gray-200">
+                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
-                            class="px-6 py-3 text-left text-xs text-gray-100 font-normal whitespace-pre-line"
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-whitespace-pre-line"
                           >
                             {{ getElement?.src ? getElement?.src : typeof getElement?.src }}
                           </td>
@@ -150,18 +165,22 @@ function prettifyHtml(html) {
                     </table>
                   </div>
                 </div>
-                <div class="overflow-x-auto">
-                  <table class="min-w-full">
-                    <thead class="bg-stone-800">
+                <div class="pbx-overflow-x-auto">
+                  <table class="pbx-min-w-full">
+                    <thead class="pbx-bg-stone-800">
                       <tr>
-                        <th class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                        <th
+                          class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                        >
                           Element classes:
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="bg-stone-800 divide-y divide-gray-200">
+                    <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                       <tr>
-                        <td class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                        <td
+                          class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                        >
                           {{
                             getElement?.classList
                               ? getElement?.classList
@@ -177,43 +196,52 @@ function prettifyHtml(html) {
 
             <div v-if="current === 'component'">
               <div v-if="!getComponent">
-                <p class="pb-2 text-xs">
+                <p class="pbx-pb-2 pbx-text-xs">
                   {{ getComponent === null ? 'No Component selected' : typeof getComponent }}
                 </p>
               </div>
-              <div v-if="getComponent" class="overflow-hidden border border-gray-100 mb-6">
-                <div class="bg-stone-800 pt-4 pb-1 border-b border-gray-200">
-                  <div class="overflow-x-auto">
-                    <table class="min-w-full">
-                      <thead class="bg-stone-800">
+              <div
+                v-if="getComponent"
+                class="pbx-overflow-hidden pbx-border pbx-border-gray-100 pbx-mb-6"
+              >
+                <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b pbx-border-gray-200">
+                  <div class="pbx-overflow-x-auto">
+                    <table class="pbx-min-w-full">
+                      <thead class="pbx-bg-stone-800">
                         <tr>
-                          <th class="px-6 py-3 text-left text-xs text-gray-100 font-normal">ID:</th>
+                          <th
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                          >
+                            ID:
+                          </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-stone-800 divide-y divide-gray-200">
+                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                         <tr>
-                          <td class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                          <td
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                          >
                             {{ getComponent?.id }}
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
-                  <div class="overflow-x-auto">
-                    <table class="min-w-full">
-                      <thead class="bg-stone-800">
+                  <div class="pbx-overflow-x-auto">
+                    <table class="pbx-min-w-full">
+                      <thead class="pbx-bg-stone-800">
                         <tr>
                           <th
-                            class="px-6 py-3 text-left text-xs text-gray-100 font-normal border-t"
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-t"
                           >
                             Title:
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-stone-800 divide-y divide-gray-200">
+                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
-                            class="px-6 py-3 text-left text-xs text-gray-100 font-normal whitespace-pre-line"
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-whitespace-pre-line"
                           >
                             {{ getComponent?.title }}
                           </td>
@@ -222,22 +250,26 @@ function prettifyHtml(html) {
                     </table>
                   </div>
                 </div>
-                <div class="overflow-x-auto">
-                  <table class="min-w-full">
-                    <thead class="bg-stone-800">
+                <div class="pbx-overflow-x-auto">
+                  <table class="pbx-min-w-full">
+                    <thead class="pbx-bg-stone-800">
                       <tr>
-                        <th class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                        <th
+                          class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                        >
                           HTML Code:
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="bg-stone-800 divide-y divide-gray-200">
+                    <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                       <tr>
-                        <td class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                        <td
+                          class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                        >
                           <pre
-                            class="text-xs text-gray-100 whitespace-pre-lines font-sans flex items-start justify-left"
+                            class="pbx-text-xs pbx-text-gray-100 pbx-whitespace-pre-lines pbx-font-sans pbx-flex pbx-items-start pbx-justify-left"
                           >
-                              <code class="font-sans" v-html="prettifyHtml(getComponent?.html_code)"></code>
+                              <code class="pbx-font-sans" v-html="prettifyHtml(getComponent?.html_code)"></code>
                             </pre>
                         </td>
                       </tr>
@@ -247,57 +279,55 @@ function prettifyHtml(html) {
               </div>
             </div>
             <div v-if="current === 'components'">
-              <div>
-                <p class="pb-2 text-xs">
-                  {{
-                    Array.isArray(getComponents) && getComponents.length === 0
-                      ? 'No Components added yet'
-                      : ''
-                  }}
-                </p>
+              <div v-if="Array.isArray(getComponents) && getComponents.length === 0">
+                <p class="pbx-pb-2 pbx-text-xs">No Components added yet</p>
               </div>
 
               <div v-if="getComponents">
                 <div
                   v-for="component in getComponents"
                   :key="component.id"
-                  class="overflow-hidden border border-gray-100 mb-6"
+                  class="pbx-overflow-hidden pbx-border pbx-border-gray-100 pbx-mb-6"
                 >
                   <!-- Id and Title above the table, styled to look connected -->
-                  <div class="bg-stone-800 pt-4 pb-1 border-b border-gray-200">
-                    <div class="overflow-x-auto">
-                      <table class="min-w-full">
-                        <thead class="bg-stone-800">
+                  <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b pbx-border-gray-200">
+                    <div class="pbx-overflow-x-auto">
+                      <table class="pbx-min-w-full">
+                        <thead class="pbx-bg-stone-800">
                           <tr>
-                            <th class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                            <th
+                              class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                            >
                               ID:
                             </th>
                           </tr>
                         </thead>
-                        <tbody class="bg-stone-800 divide-y divide-gray-200">
+                        <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                           <tr>
-                            <td class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                            <td
+                              class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                            >
                               {{ component.id }}
                             </td>
                           </tr>
                         </tbody>
                       </table>
                     </div>
-                    <div class="overflow-x-auto">
-                      <table class="min-w-full">
-                        <thead class="bg-stone-800">
+                    <div class="pbx-overflow-x-auto">
+                      <table class="pbx-min-w-full">
+                        <thead class="pbx-bg-stone-800">
                           <tr>
                             <th
-                              class="px-6 py-3 text-left text-xs text-gray-100 font-normal border-t"
+                              class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-t"
                             >
                               Title:
                             </th>
                           </tr>
                         </thead>
-                        <tbody class="bg-stone-800 divide-y divide-gray-200">
+                        <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                           <tr>
                             <td
-                              class="px-6 py-3 text-left text-xs text-gray-100 font-normal whitespace-pre-line"
+                              class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-whitespace-pre-line"
                             >
                               {{ component.title }}
                             </td>
@@ -306,22 +336,26 @@ function prettifyHtml(html) {
                       </table>
                     </div>
                   </div>
-                  <div class="overflow-x-auto">
-                    <table class="min-w-full">
-                      <thead class="bg-stone-800">
+                  <div class="pbx-overflow-x-auto">
+                    <table class="pbx-min-w-full">
+                      <thead class="pbx-bg-stone-800">
                         <tr>
-                          <th class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                          <th
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                          >
                             HTML Code:
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="bg-stone-800 divide-y divide-gray-200">
+                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                         <tr>
-                          <td class="px-6 py-3 text-left text-xs text-gray-100 font-normal">
+                          <td
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
+                          >
                             <pre
-                              class="text-xs text-gray-100 whitespace-pre-lines font-sans flex items-start justify-left"
+                              class="pbx-text-xs pbx-text-gray-100 pbx-whitespace-pre-lines pbx-font-sans pbx-flex pbx-items-start pbx-justify-left"
                             >
-                              <code class="font-sans" v-html="prettifyHtml(component.html_code)"></code>
+                              <code class="pbx-font-sans" v-html="prettifyHtml(component.html_code)"></code>
                             </pre>
                           </td>
                         </tr>

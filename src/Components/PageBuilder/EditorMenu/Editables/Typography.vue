@@ -102,13 +102,13 @@ watch(
     <template #title> Typographies </template>
     <template #content>
       <!-- FONT SIZES -->
-      <p class="myPrimaryParagraph font-medium py-0 my-4">Font sizes</p>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Font Base </label>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Font Appearance</p>
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Font Size </label>
         <select
           v-model="fontBase"
-          class="myPrimarySelect"
-          @change="pageBuilderClass.handleFontSize(fontBase)"
+          class="pbx-myPrimarySelect"
+          @change="pageBuilderClass.handleFontSizeBase(fontBase)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontSize in tailwindFontSizes.fontBase" :key="fontSize">
@@ -116,65 +116,54 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Font desktop size </label>
-        <select
-          v-model="fontDesktop"
-          class="myPrimarySelect"
-          @change="pageBuilderClass.handleFontSize(fontDesktop)"
-        >
-          <option disabled value="">Select</option>
-          <option v-for="fontSize in tailwindFontSizes.fontDesktop" :key="fontSize">
-            {{ fontSize }}
-          </option>
-        </select>
-      </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Font tablet size </label>
-        <select
-          v-model="fontTablet"
-          class="myPrimarySelect"
-          @change="pageBuilderClass.handleFontSize(fontTablet)"
-        >
-          <option disabled value="">Select</option>
-          <option v-for="fontSize in tailwindFontSizes.fontTablet" :key="fontSize">
-            {{ fontSize }}
-          </option>
-        </select>
-      </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Font mobile size </label>
-        <select
-          v-model="fontMobile"
-          class="myPrimarySelect"
-          @change="pageBuilderClass.handleFontSize(fontMobile)"
-        >
-          <option disabled value="">Select</option>
-          <option v-for="fontSize in tailwindFontSizes.fontMobile" :key="fontSize">
-            {{ fontSize }}
-          </option>
-        </select>
-      </div>
+      <template v-if="false">
+        <div class="pbx-my-2 pbx-py-2">
+          <label class="pbx-myPrimaryInputLabel"> Font desktop size </label>
+          <select
+            v-model="fontDesktop"
+            class="pbx-myPrimarySelect"
+            @change="pageBuilderClass.handleFontSizeDesktop(fontDesktop)"
+          >
+            <option disabled value="">Select</option>
+            <option v-for="fontSize in tailwindFontSizes.fontDesktop" :key="fontSize">
+              {{ fontSize }}
+            </option>
+          </select>
+        </div>
+        <div class="pbx-my-2 pbx-py-2">
+          <label class="pbx-myPrimaryInputLabel"> Font tablet size </label>
+          <select
+            v-model="fontTablet"
+            class="pbx-myPrimarySelect"
+            @change="pageBuilderClass.handleFontSizeTablet(fontTablet)"
+          >
+            <option disabled value="">Select</option>
+            <option v-for="fontSize in tailwindFontSizes.fontTablet" :key="fontSize">
+              {{ fontSize }}
+            </option>
+          </select>
+        </div>
+        <div class="pbx-my-2 pbx-py-2">
+          <label class="pbx-myPrimaryInputLabel"> Font small screens </label>
+          <select
+            v-model="fontMobile"
+            class="pbx-myPrimarySelect"
+            @change="pageBuilderClass.handleFontSizeMobile(fontMobile)"
+          >
+            <option disabled value="">Select</option>
+            <option v-for="fontSize in tailwindFontSizes.fontMobile" :key="fontSize">
+              {{ fontSize }}
+            </option>
+          </select>
+        </div>
+      </template>
       <hr />
-      <p class="myPrimaryParagraph font-medium py-0 my-4">Font general</p>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Font weight </label>
-        <select
-          v-model="fontWeight"
-          class="myPrimarySelect"
-          @change="pageBuilderClass.handleFontWeight(fontWeight)"
-        >
-          <option disabled value="">Select</option>
-          <option v-for="fontWeight in tailwindFontStyles.fontWeight" :key="fontWeight">
-            {{ fontWeight }}
-          </option>
-        </select>
-      </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Font family </label>
+      <!-- FONT FAMILY -->
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Font family </label>
         <select
           v-model="fontFamily"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleFontFamily(fontFamily)"
         >
           <option disabled value="">Select</option>
@@ -183,11 +172,27 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Font Style </label>
+      <hr />
+
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Font weight </label>
+        <select
+          v-model="fontWeight"
+          class="pbx-myPrimarySelect"
+          @change="pageBuilderClass.handleFontWeight(fontWeight)"
+        >
+          <option disabled value="">Select</option>
+          <option v-for="fontWeight in tailwindFontStyles.fontWeight" :key="fontWeight">
+            {{ fontWeight }}
+          </option>
+        </select>
+      </div>
+      <hr />
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Font Style </label>
         <select
           v-model="fontStyle"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleFontStyle(fontStyle)"
         >
           <option disabled value="">Select</option>

@@ -48,10 +48,10 @@ provide('closeMediaLibraryModal', closeMediaLibraryModal)
     :title="title"
     :showModalBuilder="open"
     @closeMainModalBuilder="firstButton"
-    maxWidth="7xl"
+    maxWidth="6xl"
   >
     <!-- Show only custom media component if provided -->
-    <div v-if="customMediaComponent" class="w-full">
+    <div v-if="customMediaComponent" class="pbx-w-full">
       <component :is="customMediaComponent" />
     </div>
     <div v-else>

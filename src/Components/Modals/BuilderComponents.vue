@@ -1,6 +1,8 @@
 <script setup>
 import ModalBuilder from '../Modals/ModalBuilder.vue'
 import DefaultBuilderComponents from '../PageBuilder/DefaultComponents/DefaultBuilderComponents.vue'
+import { inject } from 'vue'
+const customMediaComponent = inject('CustomMediaComponent')
 
 defineProps({
   firstButtonText: {
@@ -30,27 +32,31 @@ const firstButtonBuilder = function () {
 <template>
   <ModalBuilder
     :title="title"
-    maxWidth="7xl"
+    maxWidth="6xl"
     :showModalBuilder="show"
     @closeMainModalBuilder="firstButtonBuilder"
     minHeight=""
     maxHeight=""
   >
-    <div class="w-full inset-x-0 bg-white overflow-x-scroll lg:pt-2 pt-2">
+    <div class="pbx-w-full pbx-inset-x-0 pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2">
       <div>
         <!-- Only show custom search component if provided -->
         <div v-if="CustomBuilderComponents">
           <component :is="CustomBuilderComponents" />
         </div>
-        <div class="h-[75vh]" v-else><DefaultBuilderComponents /></div>
+        <div class="pbx-h-[75vh]" v-else>
+          <DefaultBuilderComponents :customMediaComponent="customMediaComponent" />
+        </div>
       </div>
     </div>
-    <div class="py-4 flex sm:justify-end justify-center border-t border-gray-200 mt-4">
-      <div class="sm:w-3/6 w-full px-2 my-2 flex gap-2 justify-end">
+    <div
+      class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center pbx-border-t pbx-border-gray-200 pbx-mt-4"
+    >
+      <div class="sm:pbx-w-3/6 pbx-w-full pbx-px-2 pbx-my-2 pbx-flex pbx-gap-2 pbx-justify-end">
         <button
           v-if="firstButtonText"
           ref="firstButtonRef"
-          class="mySecondaryButton"
+          class="pbx-mySecondaryButton"
           type="button"
           @click="firstButtonBuilder"
         >

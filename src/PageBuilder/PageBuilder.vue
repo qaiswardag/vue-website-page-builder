@@ -254,12 +254,12 @@ onMounted(async () => {
 <template>
   <div
     id="builder-container"
-    class="font-sans max-w-full m-1 border border-gray-600 inset-x-0 z-10 bg-white overflow-x-scroll"
+    class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-scroll"
   >
-    <div id="pagebuilder-top-area" class="lg:px-4 pt-2 pb-4 mx-4 mb-4 mt-2">
+    <div id="pagebuilder-top-area" class="lg:pbx-px-4 pbx-pt-2 pbx-pb-4 pbx-mx-4 pbx-mb-4 pbx-mt-2">
       <div
         @click.self="pageBuilderClass.clearHtmlSelection()"
-        class="flex justify-between items-center pb-2 border-b border-gray-200"
+        class="pbx-flex pbx-justify-between pbx-items-center pbx-pb-2 pbx-border-b pbx-border-gray-200"
       >
         <!-- Logo # start -->
         <div @click="pageBuilderClass.clearHtmlSelection()">
@@ -269,16 +269,16 @@ onMounted(async () => {
               getConfigPageBuilder.pageBuilderLogo &&
               getConfigPageBuilder.pageBuilderLogo.src
             "
-            class="flex items-center divide-x divide-gray-200"
+            class="pbx-flex pbx-items-center pbx-divide-x pbx-divide-gray-200"
           >
-            <div id="pagebuilder-logo-main" class="pr-4">
-              <img class="h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
+            <div id="pagebuilder-logo-main" class="pbx-pr-4">
+              <img class="pbx-h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
             </div>
-            <span class="myPrimaryParagraph font-medium pl-4">Editing Page </span>
+            <span class="pbx-myPrimaryParagraph pbx-font-medium pbx-pl-4">Editing Page </span>
           </div>
           <div v-else>
-            <div class="pr-6">
-              <span class="myPrimaryParagraph font-medium">Editing Page </span>
+            <div class="pbx-pr-6">
+              <span class="pbx-myPrimaryParagraph pbx-font-medium">Editing Page </span>
             </div>
           </div>
         </div>
@@ -329,14 +329,14 @@ onMounted(async () => {
     </DynamicModalBuilder>
 
     <div>
-      <div class="relative h-full flex pb-2 gap-2">
+      <div class="pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2">
         <div
           @click.self="pageBuilderClass.clearHtmlSelection()"
           id="pagebuilder-left-area"
-          class="min-w-[3.5rem] pt-6 pb-2 ml-2 bg-myPrimaryLightGrayColor rounded-full shadow-sm"
+          class="pbx-min-w-[3.5rem] pbx-pt-6 pbx-pb-2 pbx-ml-2 pbx-bg-myPrimaryLightGrayColor pbx-rounded-full pbx-shadow-sm"
         >
-          <div class="mx-2 flex flex-col myPrimaryGap items-stretch">
-            <div class="flex gap-2 items-center justify-center">
+          <div class="pbx-mx-2 pbx-flex pbx-flex-col pbx-myPrimaryGap pbx-items-stretch">
+            <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
               <button
                 type="button"
                 @click="
@@ -345,9 +345,9 @@ onMounted(async () => {
                     handleAddComponent()
                   }
                 "
-                class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
               >
-                <span class="myMediumIcon material-symbols-outlined"> interests </span>
+                <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
               </button>
             </div>
             <div @click.self="pageBuilderClass.clearHtmlSelection()">
@@ -356,19 +356,19 @@ onMounted(async () => {
           </div>
         </div>
         <main
-          class="flex flex-col h-full grow rounded-tr-2xl rounded-tl-2xl border border-gray-200 items-stretch"
-          :class="{ 'mr-2': !getMenuRight, '': getMenuRight }"
+          class="pbx-flex pbx-flex-col pbx-h-full pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border pbx-border-gray-200 pbx-items-stretch"
+          :class="{ 'pbx-mr-2': !getMenuRight, '': getMenuRight }"
         >
           <div
             id="pagebuilder-toolbar-area"
-            class="flex items-center justify-between rounded-t-2xl bg-myPrimaryLightGrayColor min-w-[30rem]"
+            class="pbx-flex pbx-items-center pbx-justify-between pbx-rounded-t-2xl pbx-bg-myPrimaryLightGrayColor pbx-min-w-[30rem]"
           >
             <div
               @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex myPrimaryGap items-center pt-4 pb-2 pl-2 h-24 w-full min-w-36"
+              class="pbx-flex pbx-myPrimaryGap pbx-items-center pbx-pt-4 pbx-pb-2 pbx-pl-2 pbx-h-24 pbx-w-full pbx-min-w-36"
             >
               <button
-                class="mySecondaryButton h-6 flex gap-2"
+                class="pbx-mySecondaryButton pbx-h-6 pbx-flex pbx-gap-2"
                 @click.stop="
                   async () => {
                     await pageBuilderClass.clearHtmlSelection()
@@ -380,19 +380,21 @@ onMounted(async () => {
               >
                 <div
                   v-if="!getIsSaving"
-                  class="h-10 w-4 cursor-pointer rounded-full flex items-center justify-center"
+                  class="pbx-h-10 pbx-w-4 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-justify-center"
                 >
                   <span class="material-symbols-outlined">save</span>
                 </div>
                 <div
                   v-if="getIsSaving"
-                  class="h-10 w-4 cursor-pointer rounded-full flex items-center justify-center"
+                  class="pbx-h-10 pbx-w-4 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-justify-center"
                 >
-                  <span class="relative flex size-3">
+                  <span class="pbx-relative pbx-flex pbx-size-3">
                     <span
-                      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-gray-400 opacity-75"
+                      class="pbx-absolute pbx-inline-flex pbx-h-full pbx-w-full pbx-animate-ping pbx-rounded-full pbx-bg-gray-400 pbx-opacity-75"
                     ></span>
-                    <span class="relative inline-flex size-3 rounded-full bg-green-200"></span>
+                    <span
+                      class="pbx-relative pbx-inline-flex pbx-size-3 pbx-rounded-full pbx-bg-green-200"
+                    ></span>
                   </span>
                 </div>
                 <div>Save</div>
@@ -403,11 +405,11 @@ onMounted(async () => {
 
             <div
               @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex justify-end py-2 pr-2 h-24 w-full"
+              class="pbx-flex pbx-justify-end pbx-py-2 pbx-pr-2 pbx-h-24 pbx-w-full"
             >
               <div
                 @click.self="pageBuilderClass.clearHtmlSelection()"
-                class="flex items-center justify-center gap-4"
+                class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4"
               >
                 <button
                   type="button"
@@ -418,18 +420,18 @@ onMounted(async () => {
                     }
                   "
                 >
-                  <div class="flex items-center justify-center gap-2">
-                    <span class="lg:block hidden">
-                      <div class="whitespace-nowrap">Add new Components</div>
+                  <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2">
+                    <span class="lg:pbx-block pbx-hidden">
+                      <div class="pbx-whitespace-nowrap">Add new Components</div>
                     </span>
                     <span
-                      class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                      class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
                     >
-                      <span class="myMediumIcon material-symbols-outlined"> interests </span>
+                      <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
                     </span>
                   </div>
                 </button>
-                <div class="flex items-center justify-center gap-4">
+                <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4">
                   <button
                     type="button"
                     @click="
@@ -441,13 +443,13 @@ onMounted(async () => {
                       }
                     "
                   >
-                    <div class="flex items-center justify-center gap-2">
-                      <div class="whitespace-nowrap lg:block hidden">Preview</div>
+                    <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2">
+                      <div class="pbx-whitespace-nowrap lg:pbx-block pbx-hidden">Preview</div>
 
                       <span
-                        class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                        class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
                       >
-                        <span class="myMediumIcon material-symbols-outlined"> visibility </span>
+                        <span class="pbx-myMediumIcon material-symbols-outlined"> visibility </span>
                       </span>
                     </div>
                   </button>
@@ -457,24 +459,24 @@ onMounted(async () => {
 
             <div
               @click.self="pageBuilderClass.clearHtmlSelection()"
-              class="flex justify-end py-2 pr-2 w-full h-24"
+              class="pbx-flex pbx-justify-end pbx-py-2 pbx-pr-2 pbx-w-full pbx-h-24"
             >
               <div
                 @click.self="pageBuilderClass.clearHtmlSelection()"
-                class="flex items-center justify-center gap-4"
+                class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4"
               >
                 <button
                   type="button"
                   v-if="getMenuRight === false"
                   @click="pageBuilderStateStore.setMenuRight(true)"
                 >
-                  <div class="flex items-center justify-center gap-2">
-                    <span class="lg:block hidden"> Styling </span>
+                  <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2">
+                    <span class="lg:pbx-block pbx-hidden"> Styling </span>
 
                     <span
-                      class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+                      class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
                     >
-                      <span class="myMediumIcon material-symbols-outlined"> more_vert </span>
+                      <span class="pbx-myMediumIcon material-symbols-outlined"> more_vert </span>
                     </span>
                   </div>
                 </button>
@@ -483,7 +485,10 @@ onMounted(async () => {
           </div>
 
           <EditGetElement></EditGetElement>
-          <div id="contains-pagebuilder" class="pl-4 pr-4 pb-4 overflow-y-auto pt-1 h-[39rem]">
+          <div
+            id="contains-pagebuilder"
+            class="pbx-pl-4 pbx-pr-4 pbx-pb-4 pbx-overflow-y-auto pbx-pt-1 pbx-h-[39rem]"
+          >
             <div id="pagebuilder">
               <div ref="draggableZone">
                 <!-- Added Components to DOM # start -->
@@ -491,9 +496,9 @@ onMounted(async () => {
                   v-for="component in getComponents"
                   :key="component.id"
                   id="page-builder-editor-editable-area"
-                  class="bg-white grow"
+                  class="pbx-bg-white pbx-grow"
                 >
-                  <div @mouseup="handleSelectComponent(component)" class="relative group">
+                  <div @mouseup="handleSelectComponent(component)" class="pbx-relative group">
                     <div v-html="component.html_code"></div>
                   </div>
                 </div>
@@ -505,16 +510,16 @@ onMounted(async () => {
               <div
                 @click="pageBuilderClass.clearHtmlSelection()"
                 id="pagebuilder-bottom-components-area"
-                class="pt-8 pb-12 text-center focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 my-2 mx-4"
-                :class="{ 'border-t border-gray-200': getComponents.length > 0 }"
+                class="pbx-pt-8 pbx-pb-12 pbx-text-center focus:pbx-outline-none focus:pbx-ring-2 focus:pbx-ring-indigo-500 focus:pbx-ring-offset-2 pbx-my-2 pbx-mx-4"
+                :class="{ 'pbx-border-t pbx-border-gray-200': getComponents.length > 0 }"
               >
-                <div class="flex items-center justify-center gap-2 font-medium">
-                  <span class="lg:block hidden">
+                <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-font-medium">
+                  <span class="lg:pbx-block pbx-hidden">
                     <div>Add new components to the bottom of the page</div>
                   </span>
                 </div>
 
-                <div class="mt-6 flex items-center gap-2 justify-center">
+                <div class="pbx-mt-6 pbx-flex pbx-items-center pbx-gap-2 pbx-justify-center">
                   <button
                     @click="
                       () => {
@@ -523,10 +528,10 @@ onMounted(async () => {
                       }
                     "
                     type="button"
-                    class="myPrimaryButton flex items-center gap-2 justify-center"
+                    class="pbx-myPrimaryButton pbx-flex pbx-items-center pbx-gap-2 pbx-justify-center"
                   >
-                    <span class="myMediumIcon material-symbols-outlined"> interests </span>
-                    <span class="font-medium"> Add new Components </span>
+                    <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
+                    <span class="pbx-font-medium"> Add new Components </span>
                   </button>
                 </div>
               </div>
@@ -540,10 +545,10 @@ onMounted(async () => {
           aria-label="Menu"
           id="pagebuilder-right-area"
           :class="{
-            'w-0': !getMenuRight,
-            'w-80 mr-2 bg-myPrimaryLightGrayColor items-stretch': getMenuRight,
+            'pbx-w-0': !getMenuRight,
+            'pbx-w-80 pbx-mr-2 pbx-bg-myPrimaryLightGrayColor pbx-items-stretch': getMenuRight,
           }"
-          class="duration-300 z-20 flex-shrink-0 overflow-hidden shadow-sm rounded-l-2xl"
+          class="pbx-duration-300 pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-shadow-sm pbx-rounded-l-2xl"
         >
           <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
           </RightSidebarEditor>

@@ -42,7 +42,7 @@ const fetchUnsplash = async function () {
 
   try {
     const response = await fetch(
-      `https://api.unsplash.com/search/photos?page=${getCurrentPageNumber.value}&per_page=24&query=${getSearchTerm.value || 'magazine'}${orientationParam}`,
+      `https://api.unsplash.com/search/photos?page=${getCurrentPageNumber.value}&per_page=24&query=${getSearchTerm.value || 'kinfolk'}${orientationParam}`,
       {
         headers: {
           'Accept-Version': 'v1',
@@ -112,7 +112,7 @@ const applySelectedImage = async function (imageURL) {
 
 // on mounted
 onMounted(async () => {
-  getSearchTerm.value = localStorage.getItem('unsplash-query') || 'Magazine'
+  getSearchTerm.value = localStorage.getItem('unsplash-query') || 'kinfolk'
   getCurrentPageNumber.value = Number(localStorage.getItem('unsplash-page')) || 1
 
   await fetchUnsplash()
@@ -132,20 +132,22 @@ onMounted(async () => {
       >
         <label
           for="default-search"
-          class="mb-2 text-sm font-normal text-gray-900 sr-only dark:text-gray-300"
+          class="pbx-mb-2 pbx-text-sm pbx-font-normal pbx-text-gray-900 pbx-sr-only dark:pbx-text-gray-300"
           >Search</label
         >
 
-        <div class="mysearchBarWithOptions">
-          <div class="relative w-full">
-            <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+        <div class="pbx-mysearchBarWithOptions">
+          <div class="pbx-relative pbx-w-full">
+            <div
+              class="pbx-flex pbx-absolute pbx-inset-y-0 pbx-left-0 pbx-items-center pbx-pl-3 pbx-pointer-events-none"
+            >
               <span class="material-symbols-outlined"> search </span>
             </div>
             <input
               type="search"
               id="search_query"
               v-model="getSearchTerm"
-              class="myPrimarySearchInput"
+              class="pbx-myPrimarySearchInput"
               autocomplete="off"
               placeholder="Search..."
             />
@@ -159,24 +161,24 @@ onMounted(async () => {
               }
             "
             type="submit"
-            class="myPrimaryTag break-keep mr-4"
+            class="pbx-myPrimaryTag pbx-break-keep pbx-mr-4"
           >
             Search
           </button>
         </div>
       </form>
-      <div class="mt-2">
+      <div class="pbx-mt-2">
         <div
           v-if="getUnsplashImages && getUnsplashImages.results"
-          class="flex lg:justify-between justify-end items-center gap-2 py-2 px-2 mb-1 rounded-full border border-gray-200 shadow-sm"
+          class="pbx-flex lg:pbx-justify-between pbx-justify-end pbx-items-center pbx-gap-2 pbx-py-2 pbx-px-2 pbx-mb-1 pbx-rounded-full pbx-border pbx-border-gray-200 pbx-shadow-sm"
         >
-          <div class="lg:flex hidden justify-left items-center gap-2">
+          <div class="lg:pbx-flex pbx-hidden pbx-justify-left pbx-items-center pbx-gap-2">
             <button
               @click="searchByOrientation('landscape')"
               type="button"
-              class="myPrimaryTag"
+              class="pbx-myPrimaryTag"
               :class="{
-                'bg-myPrimaryBrandColor text-white': getOrientationValue === 'landscape',
+                'pbx-bg-myPrimaryBrandColor pbx-text-white': getOrientationValue === 'landscape',
                 '': getOrientationValue !== 'landscape',
               }"
             >
@@ -185,9 +187,9 @@ onMounted(async () => {
             <button
               @click="searchByOrientation('portrait')"
               type="button"
-              class="myPrimaryTag"
+              class="pbx-myPrimaryTag"
               :class="{
-                'bg-myPrimaryBrandColor text-white': getOrientationValue === 'portrait',
+                'pbx-bg-myPrimaryBrandColor pbx-text-white': getOrientationValue === 'portrait',
                 '': getOrientationValue !== 'portrait',
               }"
             >
@@ -196,9 +198,9 @@ onMounted(async () => {
             <button
               @click="searchByOrientation('squarish')"
               type="button"
-              class="myPrimaryTag"
+              class="pbx-myPrimaryTag"
               :class="{
-                'bg-myPrimaryBrandColor text-white': getOrientationValue === 'squarish',
+                'pbx-bg-myPrimaryBrandColor pbx-text-white': getOrientationValue === 'squarish',
                 '': getOrientationValue !== 'squarish',
               }"
             >
@@ -212,21 +214,28 @@ onMounted(async () => {
               viewBox="0 0 24 24"
               stroke-width="2"
               stroke="currentColor"
-              class="w-4 h-4 cursor-pointer"
+              class="pbx-w-4 pbx-h-4 pbx-cursor-pointer"
             >
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
 
-          <nav class="flex items-center gap-2 justify-start" aria-label="Pagination">
-            <p class="myPrimaryParagraph text-xs italic">
+          <nav
+            class="pbx-flex pbx-items-center pbx-gap-2 pbx-justify-start"
+            aria-label="Pagination"
+          >
+            <p class="pbx-myPrimaryParagraph pbx-text-xs pbx-italic">
               Total pages {{ getUnsplashImages.total_pages }}
             </p>
-            <p class="myPrimaryParagraph text-xs italic">Images {{ getUnsplashImages.total }}</p>
-            <div class="flex flex-1 justify-between sm:justify-end items-center gap-2">
+            <p class="pbx-myPrimaryParagraph pbx-text-xs pbx-italic">
+              Images {{ getUnsplashImages.total }}
+            </p>
+            <div
+              class="pbx-flex pbx-flex-1 pbx-justify-between sm:pbx-justify-end pbx-items-center pbx-gap-2"
+            >
               <span
                 v-if="Number(getCurrentPageNumber) !== 1"
-                class="myPrimaryParagraph text-xs italic pr-2 pl-1 cursor-pointer underline"
+                class="pbx-myPrimaryParagraph pbx-text-xs pbx-italic pbx-pr-2 pbx-pl-1 pbx-cursor-pointer pbx-underline"
                 @click="nextPage(Number((getCurrentPageNumber = 1)))"
               >
                 First page
@@ -235,7 +244,7 @@ onMounted(async () => {
             <button
               v-if="Number(getCurrentPageNumber) > 1"
               :disabled="Number(getCurrentPageNumber) < 1"
-              class="myPrimaryTag"
+              class="pbx-myPrimaryTag"
               @click="previousPage(Number(getCurrentPageNumber--))"
             >
               {{
@@ -243,14 +252,14 @@ onMounted(async () => {
               }}
             </button>
 
-            <span class="myPrimaryTag py-2.5 px-4">
+            <span class="pbx-myPrimaryTag py-2.5 pbx-px-4">
               {{ Number(getCurrentPageNumber) }}
             </span>
             <button
               :disabled="Number(getCurrentPageNumber) >= getUnsplashImages.total_pages"
-              class="myPrimaryTag"
+              class="pbx-myPrimaryTag"
               :class="{
-                'opacity-50': Number(getCurrentPageNumber) >= getUnsplashImages.total_pages,
+                'pbx-opacity-50': Number(getCurrentPageNumber) >= getUnsplashImages.total_pages,
               }"
               @click="nextPage(Number(getCurrentPageNumber++))"
             >
@@ -261,15 +270,15 @@ onMounted(async () => {
           </nav>
         </div>
 
-        <div class="min-h-[33rem] max-h-[33rem] flex gap-6">
-          <div class="w-9/12 pr-1 rounded-lg overflow-y-auto">
+        <div class="pbx-min-h-[33rem] pbx-max-h-[33rem] pbx-flex pbx-gap-6">
+          <div class="pbx-w-9/12 pbx-pr-1 pbx-rounded-lg pbx-overflow-y-auto">
             <div v-if="getIsLoading">
-              <div class="flex items-center justify-center mt-4">
+              <div class="pbx-flex pbx-items-center pbx-justify-center pbx-mt-4">
                 <div
-                  class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                  class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
                 >
                   <span
-                    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
                     >Loading...</span
                   >
                 </div>
@@ -278,20 +287,20 @@ onMounted(async () => {
             <div v-if="getUnsplashImages && getUnsplashImages.results">
               <div
                 v-if="!getIsLoading"
-                class="grid md:grid-cols-4 sm:grid-cols-4 grid-cols-2 gap-2"
+                class="pbx-grid md:pbx-grid-cols-4 sm:pbx-grid-cols-4 pbx-grid-cols-2 pbx-gap-2"
               >
                 <div
                   v-for="image in getUnsplashImages.results"
                   :key="image.id"
                   @click="handleImageClick({ url: image.urls.regular, user: image.user.name })"
-                  class="border border-gray-200 my-2 px-2 p-2 cursor-pointer"
+                  class="pbx-border pbx-border-gray-200 pbx-my-2 pbx-px-2 pbx-p-2 pbx-cursor-pointer"
                 >
                   <img
                     :alt="image.user.name"
-                    class="group block w-full overflow-hidden cursor-pointer"
+                    class="pbx-group pbx-block pbx-w-full pbx-overflow-hidden pbx-cursor-pointer"
                     :src="image.urls.thumb"
                   />
-                  <p class="myPrimaryParagraph text-xs font-normal mt-2">
+                  <p class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-mt-2">
                     By: {{ image.user.name }}
                   </p>
                 </div>
@@ -305,25 +314,29 @@ onMounted(async () => {
                 getUnsplashImages.results.length < 1
               "
             >
-              <p class="myPrimaryParagraph py-4 px-4">
+              <p class="pbx-myPrimaryParagraph pbx-py-4 pbx-px-4">
                 <span v-if="getCurrentPageNumber === 1">
                   We did not find any images. Make a new search.
                 </span>
-                <span v-if="getCurrentPageNumber > 1" @click="nextPage(1)" class="myPrimaryLink">
+                <span
+                  v-if="getCurrentPageNumber > 1"
+                  @click="nextPage(1)"
+                  class="pbx-myPrimaryLink"
+                >
                   No results on current page. Navigate to First Page.
                 </span>
               </p>
             </div>
           </div>
           <!-- Sidebar # start -->
-          <aside class="w-3/12 overflow-y-auto">
+          <aside class="pbx-w-3/12 pbx-overflow-y-auto">
             <template v-if="getIsLoadingImage">
-              <div class="flex items-center justify-center mt-4">
+              <div class="pbx-flex pbx-items-center pbx-justify-center pbx-mt-4">
                 <div
-                  class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+                  class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
                 >
                   <span
-                    class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+                    class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
                     >Loading...</span
                   >
                 </div>
@@ -331,21 +344,29 @@ onMounted(async () => {
             </template>
             <template v-if="getCurrentImage && !getIsLoadingImage">
               <img
-                class="mx-auto block w-full object-cover object-center cursor-pointer"
+                class="pbx-mx-auto pbx-block pbx-w-full pbx-object-cover pbx-object-center pbx-cursor-pointer"
                 :src="`${getCurrentImage}`"
                 alt="file"
               />
-              <div class="md:px-3 px-2">
+              <div class="md:pbx-px-3 pbx-px-2">
                 <div>
-                  <p class="myPrimaryParagraph font-normal text-gray-900 pt-4">Information</p>
-                  <dl class="mt-2 border-t border-b border-gray-200 divide-y divide-gray-200">
-                    <div class="py-3 flex justify-between text-sm font-normal items-center">
-                      <dt class="text-gray-500">From:</dt>
-                      <dd class="text-gray-900">Unsplash</dd>
+                  <p class="pbx-myPrimaryParagraph pbx-font-normal pbx-text-gray-900 pbx-pt-4">
+                    Information
+                  </p>
+                  <dl
+                    class="pbx-mt-2 pbx-border-t pbx-border-b pbx-border-gray-200 pbx-divide-y pbx-divide-gray-200"
+                  >
+                    <div
+                      class="pbx-py-3 pbx-flex pbx-justify-between pbx-text-sm pbx-font-normal pbx-items-center"
+                    >
+                      <dt class="pbx-text-gray-500">From:</dt>
+                      <dd class="pbx-text-gray-900">Unsplash</dd>
                     </div>
-                    <div class="py-3 flex justify-between text-sm font-normal items-center">
-                      <dt class="text-gray-500">By:</dt>
-                      <dd class="text-gray-900">{{ getCurrentUser }}</dd>
+                    <div
+                      class="pbx-py-3 pbx-flex pbx-justify-between pbx-text-sm pbx-font-normal pbx-items-center"
+                    >
+                      <dt class="pbx-text-gray-500">By:</dt>
+                      <dd class="pbx-text-gray-900">{{ getCurrentUser }}</dd>
                     </div>
                   </dl>
                 </div>
@@ -356,7 +377,9 @@ onMounted(async () => {
         <!-- Sidebar # end -->
 
         <!-- Actions footer # start -->
-        <div class="px-4 py-3 flex gap-2 border-t border-gray-200 mt-4 justify-end">
+        <div
+          class="pbx-px-4 pbx-py-3 pbx-flex pbx-gap-2 pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-justify-end"
+        >
           <button
             @click="
               () => {
@@ -364,7 +387,7 @@ onMounted(async () => {
                 localStorage.setItem('unsplash-page', getCurrentPageNumber)
               }
             "
-            class="mySecondaryButton"
+            class="pbx-mySecondaryButton"
             type="button"
           >
             Close
@@ -372,7 +395,7 @@ onMounted(async () => {
           <button
             v-if="getCurrentImage && typeof getCurrentImage === 'string'"
             @click="applySelectedImage(getCurrentImage)"
-            class="myPrimaryButton"
+            class="pbx-myPrimaryButton"
             type="button"
           >
             Select image
@@ -382,7 +405,7 @@ onMounted(async () => {
       </div>
     </div>
     <div>
-      <button class="sr-only">Focusable fallback</button>
+      <button class="pbx-sr-only">Focusable fallback</button>
     </div>
   </div>
 </template>

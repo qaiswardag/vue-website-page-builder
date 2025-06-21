@@ -9,13 +9,15 @@ const handleButton = function () {
 
 <template>
   <nav
-    class="px-6 py-6 mx-auto flex items-center justify-between bg-gray-50 lg:h-[10vh] h-[10vh]"
+    class="pbx-px-6 pbx-py-6 pbx-mx-auto pbx-flex pbx-items-center pbx-justify-between pbx-bg-gray-50 lg:pbx-h-[10vh] pbx-h-[10vh]"
     aria-label="Global"
   >
-    <img class="h-6" src="/logo/logo.svg" alt="Logo" />
+    <img class="pbx-h-6" src="/logo/logo.svg" alt="Logo" />
 
-    <div class="flex lg:gap-x-12 myPrimaryGap">
-      <div class="text-lg font-medium text-myPrimaryDarkGrayColor flex gap-2 items-center">
+    <div class="pbx-flex lg:pbx-gap-x-12 pbx-myPrimaryGap">
+      <div
+        class="pbx-text-lg pbx-font-medium pbx-text-myPrimaryDarkGrayColor pbx-flex pbx-gap-2 pbx-items-center"
+      >
         Page Builder
       </div>
     </div>

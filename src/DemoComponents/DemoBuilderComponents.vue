@@ -1,5 +1,5 @@
 <template>
   <div>
-    <p class="myPrimaryParagraph">Demo builder components here</p>
+    <p class="pbx-myPrimaryParagraph">Demo builder components here</p>
   </div>
 </template>

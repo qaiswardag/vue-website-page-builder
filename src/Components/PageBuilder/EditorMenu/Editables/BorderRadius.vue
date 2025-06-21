@@ -76,12 +76,12 @@ watch(
   <EditorAccordion>
     <template #title>Border Radius</template>
     <template #content>
-      <p class="myPrimaryParagraph font-medium py-0 my-4">Global</p>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Border Radius </label>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Global</p>
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Border Radius </label>
         <select
           v-model="borderRadiusGlobal"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleBorderRadiusGlobal(borderRadiusGlobal)"
         >
           <option disabled value="">Select</option>
@@ -93,12 +93,12 @@ watch(
           </option>
         </select>
       </div>
-      <p class="myPrimaryParagraph font-medium py-0 my-4">Specific</p>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Border Radius top left </label>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Specific</p>
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Border Radius top left </label>
         <select
           v-model="borderRadiusTopLeft"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleBorderRadiusTopLeft(borderRadiusTopLeft)"
         >
           <option disabled value="">Select</option>
@@ -110,11 +110,11 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Border Radius top right </label>
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Border Radius top right </label>
         <select
           v-model="borderRadiusTopRight"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleBorderRadiusTopRight(borderRadiusTopRight)"
         >
           <option disabled value="">Select</option>
@@ -126,11 +126,11 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Border Radius bottom left </label>
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Border Radius bottom left </label>
         <select
           v-model="borderRadiusBottomleft"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleBorderRadiusBottomleft(borderRadiusBottomleft)"
         >
           <option disabled value="">Select</option>
@@ -142,11 +142,11 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Border Radius bottom right </label>
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Border Radius bottom right </label>
         <select
           v-model="borderRadiusBottomRight"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleBorderRadiusBottomRight(borderRadiusBottomRight)"
         >
           <option disabled value="">Select</option>

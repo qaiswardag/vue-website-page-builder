@@ -110,12 +110,12 @@ onMounted(async () => {
 
 <template>
   <div>
-    <div class="myPrimaryWidthScreenModule bg-red-50 lg:block">
-      <div class="myPrimaryContentSection">
-        <h2 class="mySecondaryHeader">
+    <div class="pbx-myPrimaryWidthScreenModule pbx-bg-red-50 lg:pbx-block">
+      <div class="pbx-myPrimaryContentSection">
+        <h2 class="pbx-mySecondaryHeader">
           Bring your vision to life and create impressive pages using a click & drop Page Builder
         </h2>
-        <p class="myPrimaryParagraph font-normal">
+        <p class="pbx-myPrimaryParagraph pbx-font-normal">
           The web builder for stunning pages. Enable users to design and publish modern pages at any
           scale. Build responsive pages like listings, jobs or blog posts and manage content easily
           using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition
@@ -123,13 +123,13 @@ onMounted(async () => {
 
           <br />
         </p>
-        <div class="mt-4">
-          <p class="myPrimaryParagraph font-normal">
+        <div class="pbx-mt-4">
+          <p class="pbx-myPrimaryParagraph pbx-font-normal">
             Download or install our powerful, flexible, and easy-to-use free Vue 3 Page Builder via
             <br />
             <strong> npm:</strong>
             <a
-              class="text-myPrimaryLinkColor"
+              class="pbx-text-myPrimaryLinkColor"
               href="https://www.npmjs.com/package/@myissue/vue-website-page-builder"
               target="_blank"
             >
@@ -138,32 +138,36 @@ onMounted(async () => {
           </p>
         </div>
       </div>
-      <div class="m-4">
+      <div class="pbx-m-4">
         <!--   :CustomBuilderComponents="DemoBuilderComponents" -->
         <PageBuilder :CustomMediaLibraryComponent="DemoMediaLibraryComponent"></PageBuilder>
       </div>
     </div>
 
-    <FullWidthElement :descriptionArea="true" class="bg-gray-50">
+    <FullWidthElement :descriptionArea="true" class="pbx-bg-gray-50">
       <template #title>Everything you need. Break free from design limitations </template>
       <template #description>
-        <p class="myPrimaryParagraph font-normal">
+        <p class="pbx-myPrimaryParagraph pbx-font-normal">
           A Page Builder designed for growth. Build your website pages with ready-made components
           that are fully customizable and always responsive, designed to fit every need. A powerful
           Page Builder for growing merchants, brands, and agencies.
         </p>
       </template>
       <template #content>
-        <div class="grid grid-cols-1 gap-8 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 mt-8">
+        <div
+          class="pbx-grid pbx-grid-cols-1 pbx-gap-8 sm:pbx-grid-cols-2 md:pbx-grid-cols-2 lg:pbx-grid-cols-4 pbx-mt-8"
+        >
           <div
             v-for="feature in features"
             :key="feature.name"
-            class="bg-red-200 bg-opacity-20 hover:bg-opacity-10 w-full lg:min-h-[20rem] min-h-[12rem] relative col-span-1 flex flex-col text-center rounded-lg shadow-sm outline outline-2 outline-offset-8 outline-yellow-400"
+            class="pbx-bg-red-200 pbx-bg-opacity-20 hover:pbx-bg-opacity-10 pbx-w-full lg:pbx-min-h-[20rem] pbx-min-h-[12rem] pbx-relative pbx-col-span-1 pbx-flex pbx-flex-col pbx-text-center pbx-rounded-lg pbx-shadow-sm pbx-outline pbx-outline-2 pbx-outline-offset-8 pbx-outline-yellow-400"
           >
-            <div class="bg-black/0 absolute top-0 left-0 w-full h-full rounded-lg"></div>
-            <div class="px-2 pt-8 absolute top-0 w-full">
-              <p class="myTertiaryHeader">{{ feature.name }}</p>
-              <p class="myPrimaryParagraph font-medium drop-shadow-sm">
+            <div
+              class="pbx-bg-black/0 pbx-absolute pbx-top-0 pbx-left-0 pbx-w-full pbx-h-full pbx-rounded-lg"
+            ></div>
+            <div class="pbx-px-2 pbx-pt-8 pbx-absolute pbx-top-0 pbx-w-full">
+              <p class="pbx-myTertiaryHeader">{{ feature.name }}</p>
+              <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-drop-shadow-sm">
                 {{ feature.description }}
               </p>
             </div>

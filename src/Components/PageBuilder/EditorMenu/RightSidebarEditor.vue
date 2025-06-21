@@ -7,8 +7,8 @@ import ClassEditor from './Editables/ClassEditor.vue'
 import ImageEditor from './Editables/ImageEditor.vue'
 import OpacityEditor from './Editables/OpacityEditor.vue'
 import Typography from './Editables/Typography.vue'
-import PaddingPlusMargin from './Editables/PaddingPlusMargin.vue'
-import DeleteElement from './Editables/DeleteElement.vue'
+import Padding from './Editables/Padding.vue'
+import Margin from './Editables/Margin.vue'
 import BorderRadius from './Editables/BorderRadius.vue'
 import BackgroundColorEditor from './Editables/BackgroundColorEditor.vue'
 import Borders from './Editables/Borders.vue'
@@ -45,56 +45,61 @@ const isHeadingElement = computed(() => {
 </script>
 
 <template>
-  <div class="flex max-h-[50rem] flex-col">
-    <div class="flex flex-row justify-between pt-7 pr-4 pl-4 items-center mb-3">
+  <div class="pbx-flex pbx-max-h-[50rem] pbx-flex-col">
+    <div
+      class="pbx-flex pbx-flex-row pbx-justify-between pbx-pt-7 pbx-pr-4 pbx-pl-4 pbx-items-center pbx-mb-3"
+    >
       <button
         type="button"
         @click="$emit('closeEditor')"
-        class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+        class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
       >
         <span class="material-symbols-outlined"> close </span>
       </button>
-      <p class="font-medium text-sm">
+      <p class="pbx-font-medium pbx-text-sm">
         Editing
-        <span class="lowercase">&lt;{{ elementTag }}&gt;</span>
+        <span class="pbx-lowercase">&lt;{{ elementTag }}&gt;</span>
       </p>
     </div>
 
-    <div class="pl-3 pr-3 mb-4 overflow-y-scroll">
+    <div class="pbx-pl-3 pbx-pr-3 pbx-mb-4 pbx-overflow-y-scroll">
       <div v-show="getElement && pageBuilderClass.isEditableElement(getElement)">
-        <article class="mb-1">
+        <article class="pbx-mb-1">
           <ImageEditor> </ImageEditor>
         </article>
-        <article class="mb-1">
+        <article class="pbx-mb-1">
           <TipTap></TipTap>
         </article>
-        <article v-if="false" class="my-1 bg-white">
+        <article class="pbx-my-1 pbx-bg-white">
           <Typography></Typography>
         </article>
 
-        <article class="my-1 bg-white">
+        <article class="pbx-my-1 pbx-bg-white">
           <OpacityEditor> </OpacityEditor>
         </article>
-        <article class="my-1 bg-white">
-          <PaddingPlusMargin> </PaddingPlusMargin>
+        <article class="pbx-my-1 pbx-bg-white">
+          <Padding> </Padding>
         </article>
-        <article class="my-1 bg-white">
+        <article class="pbx-my-1 pbx-bg-white">
+          <Margin> </Margin>
+        </article>
+        <article class="pbx-my-1 pbx-bg-white">
           <BorderRadius></BorderRadius>
         </article>
-        <article class="my-1 bg-white">
+        <article class="pbx-my-1 pbx-bg-white">
           <Borders></Borders>
         </article>
-        <article class="my-1 bg-white">
+        <article class="pbx-my-1 pbx-bg-white">
           <ClassEditor></ClassEditor>
         </article>
       </div>
 
       <div>
-        <article class="my-1 bg-white">
+        <article class="pbx-my-1 pbx-bg-white">
           <ElementEditor></ElementEditor>
         </article>
       </div>
-      <article class="mt-1 bg-white"></article>
+      <article class="pbx-mt-1 pbx-bg-white"></article>
     </div>
   </div>
 </template>

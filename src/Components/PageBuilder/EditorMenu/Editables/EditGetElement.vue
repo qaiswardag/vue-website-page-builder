@@ -210,13 +210,16 @@ const handleModalIframeSrc = function () {
     >
       <header></header>
       <main>
-        <div class="myInputGroup">
-          <div class="myPrimaryFormOrganizationHeaderDescriptionSection">
-            <div class="myPrimaryFormOrganizationHeader">
-              <label for="video" class="myPrimaryInputLabel">Video url:</label>
-              <input v-model="iframeSrc" type="text" class="myPrimaryInput" name="video" />
-              <div v-if="urlError" class="min-h-[2.5rem] flex items-center justify-start">
-                <p class="myPrimaryInputError mt-2 mb-0 py-0 self-start">
+        <div class="pbx-myInputGroup">
+          <div class="pbx-myPrimaryFormOrganizationHeaderDescriptionSection">
+            <div class="pbx-myPrimaryFormOrganizationHeader">
+              <label for="video" class="pbx-myPrimaryInputLabel">Video url:</label>
+              <input v-model="iframeSrc" type="text" class="pbx-myPrimaryInput" name="video" />
+              <div
+                v-if="urlError"
+                class="pbx-min-h-[2.5rem] pbx-flex pbx-items-center pbx-justify-start"
+              >
+                <p class="pbx-myPrimaryInputError pbx-mt-2 pbx-mb-0 pbx-py-0 pbx-self-start">
                   {{ urlError }}
                 </p>
               </div>
@@ -241,7 +244,7 @@ const handleModalIframeSrc = function () {
       @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonFunctionDynamicModalBuilder"
     >
       <header></header>
-      <main class="overflow-y-auto">
+      <main class="pbx-overflow-y-auto">
         <TipTapInput></TipTapInput>
       </main>
     </DynamicModalBuilder>
@@ -259,15 +262,15 @@ const handleModalIframeSrc = function () {
     </MediaLibraryModal>
 
     <div
-      class="z-20 px-2 py-1 h-24 flex items-center justify-center mt-2 mx-2 border-b border-myPrimaryLightGrayColor"
+      class="pbx-z-20 pbx-px-2 pbx-py-1 pbx-h-24 pbx-flex pbx-items-center pbx-justify-center pbx-mt-2 pbx-mx-2 pbx-border-b pbx-border-myPrimaryLightGrayColor"
     >
       <div
-        class="flex items-center justify-center"
-        :class="{ 'rounded-full border border-gray-200 shadow-sm': getElement }"
+        class="pbx-flex pbx-items-center pbx-justify-center"
+        :class="{ 'pbx-rounded-full pbx-border pbx-border-gray-200 pbx-shadow-sm': getElement }"
       >
         <template v-if="pageBuilderClass.ElOrFirstChildIsIframe()">
-          <div class="px-2 flex items-center justify-start gap-2 w-max">
-            <button @click="handleModalIframeSrc" type="button" class="myPrimaryTag">
+          <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
+            <button @click="handleModalIframeSrc" type="button" class="pbx-myPrimaryTag">
               <span class="material-symbols-outlined"> play_circle </span>
               <span>Add YouTube</span>
             </button>
@@ -280,13 +283,13 @@ const handleModalIframeSrc = function () {
             !pageBuilderClass.ElOrFirstChildIsIframe()
           "
         >
-          <div class="px-2 flex items-center justify-start gap-2 w-max">
-            <button @click="handleModalPreviewTiptap" type="button" class="myPrimaryTag">
+          <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
+            <button @click="handleModalPreviewTiptap" type="button" class="pbx-myPrimaryTag">
               <span class="material-symbols-outlined"> edit </span>
               <span>Edit text and links</span>
             </button>
           </div>
-          <div class="px-2">
+          <div class="pbx-px-2">
             <TextColorEditor></TextColorEditor>
           </div>
         </template>
@@ -299,8 +302,8 @@ const handleModalIframeSrc = function () {
             !pageBuilderClass.ElOrFirstChildIsIframe()
           "
         >
-          <div class="px-2 flex items-center justify-start gap-2 w-max">
-            <button @click="handleAddImage" type="button" class="myPrimaryTag">
+          <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
+            <button @click="handleAddImage" type="button" class="pbx-myPrimaryTag">
               <span class="material-symbols-outlined"> add_photo_alternate </span>
               <span>Update image</span>
             </button>
@@ -315,7 +318,7 @@ const handleModalIframeSrc = function () {
             !pageBuilderClass.ElOrFirstChildIsIframe()
           "
         >
-          <div class="px-2">
+          <div class="pbx-px-2">
             <BackgroundColorEditor></BackgroundColorEditor>
           </div>
         </template>

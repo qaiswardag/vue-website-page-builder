@@ -17,12 +17,12 @@ const getRestoredElement = computed(() => {
   <EditorAccordion>
     <template #title>Delete or restore</template>
     <template #content>
-      <div class="my-2">
+      <div class="pbx-my-2">
         <button
           v-if="getRestoredElement !== null"
           @click="pageBuilderClass.handleRestoreElement"
           type="button"
-          class="myPrimaryButton gap-2 items-center w-full"
+          class="pbx-myPrimaryButton pbx-gap-2 pbx-items-center pbx-w-full"
         >
           <span class="material-symbols-outlined"> refresh </span>
           Restore Element
@@ -31,9 +31,9 @@ const getRestoredElement = computed(() => {
           v-if="getRestoredElement === null"
           @click="pageBuilderClass.handleDeleteElement"
           type="button"
-          class="myPrimaryDeleteButton gap-2 items-center w-full"
+          class="pbx-myPrimaryDeleteButton pbx-gap-2 pbx-items-center pbx-w-full"
         >
-          <span class="myMediumIcon material-symbols-outlined"> delete </span>
+          <span class="pbx-myMediumIcon material-symbols-outlined"> delete </span>
           Delete Element
         </button>
       </div>

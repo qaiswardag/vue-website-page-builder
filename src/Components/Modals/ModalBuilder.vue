@@ -30,37 +30,41 @@ const handleClose = () => {
 
 const maxWidthClass = computed(() => {
   return {
-    sm: 'lg:max-w-sm',
-    md: 'lg:max-w-md',
-    lg: 'lg:max-w-lg',
-    xl: 'lg:max-w-xl',
-    '2xl': 'lg:max-w-2xl',
-    '3xl': 'lg:max-w-3xl',
-    '4xl': 'lg:max-w-4xl',
-    '5xl': 'lg:max-w-5xl',
-    '6xl': 'lg:max-w-6xl',
-    '7xl': 'lg:max-w-7xl',
-    full: 'lg:max-w-full', // 100% width
-    screen: 'lg:w-screen sm:max-w-none', // truly full screen
+    sm: 'lg:pbx-max-w-sm',
+    md: 'lg:pbx-max-w-md',
+    lg: 'lg:pbx-max-w-lg',
+    xl: 'lg:pbx-max-w-xl',
+    '2xl': 'lg:pbx-max-w-2xl',
+    '3xl': 'lg:pbx-max-w-3xl',
+    '4xl': 'lg:pbx-max-w-4xl',
+    '5xl': 'lg:pbx-max-w-5xl',
+    '6xl': 'lg:pbx-max-w-6xl',
+    '7xl': 'lg:pbx-max-w-7xl',
+    full: 'lg:pbx-max-w-full', // 100% width
+    screen: 'lg:w-screen sm:pbx-max-w-none', // truly full screen
   }[props.maxWidth]
 })
 </script>
 
 <template>
   <teleport to="body">
-    <div class="font-sans">
+    <div class="pbx-font-sans">
       <!-- Modal -->
       <div
         v-if="showModalBuilder"
-        class="fixed inset-0 z-40 flex items-center justify-center mx-4"
+        class="pbx-fixed pbx-inset-0 pbx-z-40 pbx-flex pbx-items-center pbx-justify-center pbx-mx-4"
         role="dialog"
         aria-modal="true"
         aria-labelledby="dialog-title"
       >
         <!-- Backdrop -->
-        <div class="fixed inset-0 bg-black/50 transition-opacity" @click="handleClose"></div>
         <div
-          class="relative inline-block bg-white rounded-xl text-left overflow-hidden shadow-xl transform transition-all max-w-[96vh] max-h-[98vh] overflow-y-auto w-full px-4"
+          class="pbx-fixed pbx-inset-0 pbx-bg-black/50 pbx-transition-opacity"
+          @click="handleClose"
+        ></div>
+
+        <div
+          class="pbx-relative pbx-inline-block pbx-bg-white pbx-rounded-xl pbx-text-left pbx-overflow-hidden pbx-shadow-xl pbx-transform pbx-transition-all pbx-max-w-[96vh] pbx-max-h-[98vh] pbx-overflow-y-auto pbx-w-full pbx-px-4"
           :class="[
             maxWidthClass ? maxWidthClass : '',
             minHeight ? minHeight : '',
@@ -68,13 +72,13 @@ const maxWidthClass = computed(() => {
           ]"
         >
           <div
-            class="h-16 flex items-center justify-between border-b border-gray-200 bg-white mb-2"
+            class="pbx-h-16 pbx-flex pbx-items-center pbx-justify-between pbx-border-b pbx-border-gray-200 pbx-bg-white pbx-mb-2"
           >
-            <h3 as="h3" class="myQuaternaryHeader my-0 py-0">
+            <h3 as="h3" class="pbx-myQuaternaryHeader pbx-my-0 pbx-py-0">
               {{ title }}
             </h3>
             <div
-              class="h-10 w-10 flex-end cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white hover:fill-white focus-visible:ring-0"
+              class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
               @click="handleClose"
             >
               <span class="material-symbols-outlined"> close </span>

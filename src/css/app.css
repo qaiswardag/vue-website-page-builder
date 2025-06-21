@@ -3,7 +3,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500;1,600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0');
 
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
 @layer components {
@@ -12,8 +11,8 @@
     | Widgets
     |--------------------------------------------------------------------------
     */
-  .myPrimaryWidget {
-    @apply py-8 px-4 border border-myPrimaryLightGrayColor rounded-md bg-white;
+  .pbx-myPrimaryWidget {
+    @apply pbx-py-8 pbx-px-4 pbx-border pbx-border-myPrimaryLightGrayColor pbx-rounded-md pbx-bg-white;
   }
 
   /*
@@ -21,22 +20,21 @@
     | Modules
     |--------------------------------------------------------------------------
     */
+  .pbx-myModulePyMargin {
+    @apply md:pbx-mb-0 pbx-mb-0;
+  }
+  .pbx-myModulePadding {
+    @apply md:pbx-py-28 pbx-py-16;
+  }
 
-  .myModulePyMargin {
-    @apply md:mb-0 mb-0;
+  .pbx-myPrimaryWidthScreenModule {
+    @apply pbx-myModulePyMargin pbx-myModulePadding;
   }
-  .myModulePadding {
-    @apply md:py-28 py-16;
+  .pbx-myPrimaryModule {
+    @apply pbx-max-w-7xl pbx-mx-auto pbx-myModulePyMargin pbx-myModulePadding;
   }
-
-  .myPrimaryWidthScreenModule {
-    @apply myModulePyMargin myModulePadding;
-  }
-  .myPrimaryModule {
-    @apply max-w-7xl mx-auto myModulePyMargin myModulePadding;
-  }
-  .myPrimaryContentSection {
-    @apply max-w-7xl mx-auto md:px-4 px-4 lg:pb-10 md:pb-8 pb-6;
+  .pbx-myPrimaryContentSection {
+    @apply pbx-max-w-7xl pbx-mx-auto md:pbx-px-4 pbx-px-4 lg:pbx-pb-10 md:pbx-pb-8 pbx-pb-6;
   }
 
   /*
@@ -44,18 +42,18 @@
     | Helpers
     |--------------------------------------------------------------------------
     */
-  .myPrimarySection {
-    @apply lg:pb-8 lg:pt-20 md:py-8 py-8;
+  .pbx-myPrimarySection {
+    @apply lg:pbx-pb-8 lg:pbx-pt-20 md:pbx-py-8 pbx-py-8;
   }
 
-  .myPrimaryWarningAlertMessage {
-    @apply myPrimarySection myTertiaryHeader text-yellow-400 text-center;
+  .pbx-myPrimaryWarningAlertMessage {
+    @apply pbx-myPrimarySection pbx-myTertiaryHeader pbx-text-yellow-400 pbx-text-center;
   }
-  .myFocus {
-    @apply focus-within:border-2 focus-within:border-myPrimaryBrandColor;
+  .pbx-myFocus {
+    @apply focus-within:pbx-border-2 focus-within:pbx-border-myPrimaryBrandColor;
   }
-  .myActiveLinkColor {
-    @apply text-myPrimaryBrandColor;
+  .pbx-myActiveLinkColor {
+    @apply pbx-text-myPrimaryBrandColor;
   }
 
   /*
@@ -63,36 +61,36 @@
     | Tags
     |--------------------------------------------------------------------------
     */
-  .myPrimaryTag {
-    @apply min-h-[3rem] my-2 px-3 py-2
-        text-xs break-all 
-        inline-flex gap-1 items-center justify-center 
-        rounded-full border border-transparent
-        text-myPrimaryDarkGrayColor bg-myPrimaryLightMediumGrayColor 
-        sm:w-auto shadow-sm hover:shadow;
+  .pbx-myPrimaryTag {
+    @apply pbx-min-h-[3rem] pbx-my-2 pbx-px-3 pbx-py-2
+            pbx-text-xs pbx-break-all 
+            pbx-inline-flex pbx-gap-1 pbx-items-center pbx-justify-center 
+            pbx-rounded-full pbx-border pbx-border-transparent
+            pbx-text-myPrimaryDarkGrayColor pbx-bg-myPrimaryLightMediumGrayColor 
+            sm:pbx-w-auto pbx-shadow-sm hover:pbx-shadow;
   }
   /*
     |--------------------------------------------------------------------------
     | Thumbnail
     |--------------------------------------------------------------------------
     */
-  .myPrimarythumbnailLogo {
-    @apply mx-auto block mt-2 mb-6 w-40 transition-all rounded-md object-cover cursor-pointer;
+  .pbx-myPrimarythumbnailLogo {
+    @apply pbx-mx-auto pbx-block pbx-mt-2 pbx-mb-6 pbx-w-40 pbx-transition-all pbx-rounded-md pbx-object-cover pbx-cursor-pointer;
   }
-  .myPrimarythumbnailInsertPreview {
-    @apply block md:h-16 md:w-16 h-16 w-16 hover:shadow-sm transition-all cursor-pointer rounded-full object-cover;
+  .pbx-myPrimarythumbnailInsertPreview {
+    @apply pbx-block md:pbx-h-16 md:pbx-w-16 pbx-h-16 pbx-w-16 hover:pbx-shadow-sm pbx-transition-all pbx-cursor-pointer pbx-rounded-full pbx-object-cover;
   }
   /*
     |--------------------------------------------------------------------------
     | Primary paragraphs
     |--------------------------------------------------------------------------
     */
-  .myPrimaryParagraph {
-    @apply font-normal text-myPrimaryDarkGrayColor lg:text-base text-sm;
+  .pbx-myPrimaryParagraph {
+    @apply pbx-font-normal pbx-text-myPrimaryDarkGrayColor lg:pbx-text-base pbx-text-sm;
   }
 
-  .myPrimaryParagraphError {
-    @apply myPrimaryParagraph mt-1 italic text-myPrimaryErrorColor;
+  .pbx-myPrimaryParagraphError {
+    @apply pbx-myPrimaryParagraph pbx-mt-1 pbx-italic pbx-text-myPrimaryErrorColor;
   }
 
   /*
@@ -100,42 +98,20 @@
     | Headers
     |--------------------------------------------------------------------------
     */
-
-  .myPrimaryHeader {
-    @apply lg:text-7xl md:text-6xl text-5xl font-medium break-words lg:mb-8 md:mb-4 mb-2 text-myPrimaryDarkGrayColor;
+  .pbx-myPrimaryHeader {
+    @apply lg:pbx-text-7xl md:pbx-text-6xl pbx-text-5xl pbx-font-medium pbx-break-words lg:pbx-mb-8 md:pbx-mb-4 pbx-mb-2 pbx-text-myPrimaryDarkGrayColor;
   }
 
-  .mySecondaryHeader {
-    @apply font-['Cormorant'] font-medium break-words lg:text-5xl md:text-4xl text-3xl lg:mb-8 md:mb-4 mb-2 text-myPrimaryDarkGrayColor;
+  .pbx-mySecondaryHeader {
+    @apply pbx-font-['Cormorant'] pbx-font-medium pbx-break-words lg:pbx-text-5xl md:pbx-text-4xl pbx-text-3xl lg:pbx-mb-8 md:pbx-mb-4 pbx-mb-2 pbx-text-myPrimaryDarkGrayColor;
   }
 
-  .myTertiaryHeader {
-    @apply font-medium break-words lg:text-3xl md:text-2xl text-2xl lg:mb-8 md:mb-4 mb-2 text-myPrimaryDarkGrayColor;
+  .pbx-myTertiaryHeader {
+    @apply pbx-font-medium pbx-break-words lg:pbx-text-3xl md:pbx-text-2xl pbx-text-2xl lg:pbx-mb-8 md:pbx-mb-4 pbx-mb-2 pbx-text-myPrimaryDarkGrayColor;
   }
 
-  .myQuaternaryHeader {
-    @apply font-medium break-words lg:text-xl md:text-lg text-base lg:mb-4 md:mb-2 mb-2 text-myPrimaryDarkGrayColor;
-  }
-
-  .video-background {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: -1;
-  }
-
-  .video-background video {
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+  .pbx-myQuaternaryHeader {
+    @apply pbx-font-medium pbx-break-words lg:pbx-text-xl md:pbx-text-lg pbx-text-base lg:pbx-mb-4 md:pbx-mb-2 pbx-mb-2 pbx-text-myPrimaryDarkGrayColor;
   }
 
   /*
@@ -143,18 +119,18 @@
     | Links
     |--------------------------------------------------------------------------
     */
-  .myPrimaryLink {
-    @apply text-myPrimaryLinkColor 
-        focus:outline-none
-        focus:ring-0 focus:ring-myPrimaryLinkColor
-        focus-visible:ring-0 focus-visible:ring-myPrimaryLinkColor cursor-pointer;
+  .pbx-myPrimaryLink {
+    @apply pbx-text-myPrimaryLinkColor 
+            focus:pbx-outline-none
+            focus:pbx-ring-0 focus:pbx-ring-myPrimaryLinkColor
+            focus-visible:pbx-ring-0 focus-visible:pbx-ring-myPrimaryLinkColor pbx-cursor-pointer;
   }
 
-  .myPrimaryActiveLink {
-    @apply text-red-600 text-sm
-        focus:outline-none
-        focus:ring-0 focus:ring-red-500
-        focus-visible:ring-0 focus-visible:ring-red-500;
+  .pbx-myPrimaryActiveLink {
+    @apply pbx-text-red-600 pbx-text-sm
+            focus:pbx-outline-none
+            focus:pbx-ring-0 focus:pbx-ring-red-500
+            focus-visible:pbx-ring-0 focus-visible:pbx-ring-red-500;
   }
 
   /*
@@ -162,52 +138,50 @@
     | Buttons
     |--------------------------------------------------------------------------
     */
-
-  .myPrimaryMenuTextButton {
-    @apply lg:flex lg:gap-2 lg:items-center focus:outline-none cursor-pointer rounded-full px-1.5 py-1.5 font-medium;
+  .pbx-myPrimaryMenuTextButton {
+    @apply lg:pbx-flex lg:pbx-gap-2 lg:pbx-items-center focus:pbx-outline-none pbx-cursor-pointer pbx-rounded-full pbx-px-1.5 pbx-py-1.5 pbx-font-medium;
   }
-  .myRadio {
-    @apply w-5 h-5 text-myPrimaryBrandColor bg-myPrimaryLightGrayColor border-gray-300 focus:ring-myPrimaryBrandColor dark:focus:ring-myPrimaryBrandColor dark:ring-offset-gray-800 focus:ring-2 dark:bg-myPrimaryDarkGrayColor dark:border-gray-600;
-  }
-
-  .myPrimaryButton {
-    @apply min-h-[3rem] lg:px-4 lg:py-3 px-3 py-3
-        sm:text-sm text-xs whitespace-nowrap break-keep font-medium inline-flex gap-1 items-center justify-center rounded-full border border-transparent bg-myPrimaryLinkColor text-white shadow-sm hover:bg-myPrimaryLinkColor sm:w-auto
-        focus:outline-none focus:ring-2 focus:ring-myPrimaryLinkColor focus:ring-offset-2
-        focus-visible:ring-2 focus-visible:ring-myPrimaryLinkColor;
+  .pbx-myRadio {
+    @apply pbx-w-5 pbx-h-5 pbx-text-myPrimaryBrandColor pbx-bg-myPrimaryLightGrayColor pbx-border-gray-300 focus:pbx-ring-myPrimaryBrandColor dark:focus:pbx-ring-myPrimaryBrandColor dark:pbx-ring-offset-gray-800 focus:pbx-ring-2 dark:pbx-bg-myPrimaryDarkGrayColor dark:pbx-border-gray-600;
   }
 
-  .mySecondaryButton {
-    @apply myPrimaryButton bg-myPrimaryLightMediumGrayColor hover:bg-myPrimaryLightMediumGrayColor hover:bg-opacity-90 focus:ring-myPrimaryLightGrayColor text-myPrimaryDarkGrayColor hover:text-myPrimaryDarkGrayColor shadow-sm;
+  .pbx-myPrimaryButton {
+    @apply pbx-min-h-[3rem] lg:pbx-px-4 lg:pbx-py-3 pbx-px-3 pbx-py-3
+            sm:pbx-text-sm pbx-text-xs pbx-whitespace-nowrap pbx-break-keep pbx-font-medium pbx-inline-flex pbx-gap-1 pbx-items-center pbx-justify-center pbx-rounded-full pbx-border pbx-border-transparent pbx-bg-myPrimaryLinkColor pbx-text-white pbx-shadow-sm hover:pbx-bg-myPrimaryLinkColor sm:pbx-w-auto
+            focus:pbx-outline-none focus:pbx-ring-2 focus:pbx-ring-myPrimaryLinkColor focus:pbx-ring-offset-2
+            focus-visible:pbx-ring-2 focus-visible:pbx-ring-myPrimaryLinkColor;
   }
 
-  .myPrimaryDeleteButton {
-    @apply myPrimaryButton bg-myPrimaryErrorColor hover:bg-myPrimaryErrorColor focus:ring-myPrimaryErrorColor;
+  .pbx-mySecondaryButton {
+    @apply pbx-myPrimaryButton pbx-bg-myPrimaryLightMediumGrayColor hover:pbx-bg-myPrimaryLightMediumGrayColor hover:pbx-bg-opacity-90 focus:pbx-ring-myPrimaryLightGrayColor pbx-text-myPrimaryDarkGrayColor hover:pbx-text-myPrimaryDarkGrayColor pbx-shadow-sm;
   }
 
-  .myPrimaryToggleButton {
-    @apply w-full inline-flex items-center justify-center px-4 py-2 sm:text-sm text-sm font-semibold text-myPrimaryDarkGrayColor shadow-sm focus:outline-none focus:ring-2 focus:ring-myPrimaryBrandColor focus:ring-offset-2 bg-myPrimaryLightGrayColor hover:bg-myPrimaryBrandColor hover:text-white;
+  .pbx-myPrimaryDeleteButton {
+    @apply pbx-myPrimaryButton pbx-bg-myPrimaryErrorColor hover:pbx-bg-myPrimaryErrorColor focus:pbx-ring-myPrimaryErrorColor;
+  }
+
+  .pbx-myPrimaryToggleButton {
+    @apply pbx-w-full pbx-inline-flex pbx-items-center pbx-justify-center pbx-px-4 pbx-py-2 sm:pbx-text-sm pbx-text-sm pbx-font-semibold pbx-text-myPrimaryDarkGrayColor pbx-shadow-sm focus:pbx-outline-none focus:pbx-ring-2 focus:pbx-ring-myPrimaryBrandColor focus:pbx-ring-offset-2 pbx-bg-myPrimaryLightGrayColor hover:pbx-bg-myPrimaryBrandColor hover:pbx-text-white;
   }
   /*
     |--------------------------------------------------------------------------
     | Buttons With no background
     |--------------------------------------------------------------------------
     */
-
-  .myPrimaryButtonNoBackground {
-    @apply myPrimaryParagraph font-medium  text-myPrimaryBrandColor 
-        focus:outline-none cursor-pointer;
+  .pbx-myPrimaryButtonNoBackground {
+    @apply pbx-myPrimaryParagraph pbx-font-medium pbx-text-myPrimaryBrandColor 
+            focus:pbx-outline-none pbx-cursor-pointer;
   }
   /*
     |--------------------------------------------------------------------------
     | Icons
     |--------------------------------------------------------------------------
     */
-  .mySmallIcon {
-    @apply shrink-0 h-4 w-4 m-2 stroke-[1.5px] flex justify-center items-center;
+  .pbx-mySmallIcon {
+    @apply pbx-shrink-0 pbx-h-4 pbx-w-4 pbx-m-2 pbx-stroke-[1.5px] pbx-flex pbx-justify-center pbx-items-center;
   }
-  .myMediumIcon {
-    @apply shrink-0 h-6 w-6 stroke-[1.5px] flex justify-center items-center;
+  .pbx-myMediumIcon {
+    @apply pbx-shrink-0 pbx-h-6 pbx-w-6 pbx-stroke-[1.5px] pbx-flex pbx-justify-center pbx-items-center;
   }
 
   /*
@@ -215,45 +189,44 @@
     | Tables
     |--------------------------------------------------------------------------
     */
-
-  .myTableContainerPlusScrollButton {
-    @apply relative p-2 border-gray-400 border rounded;
+  .pbx-myTableContainerPlusScrollButton {
+    @apply pbx-relative pbx-p-2 pbx-border-gray-400 pbx-border pbx-rounded;
   }
-  .myScrollButtonContainer {
-    @apply sticky z-10 h-12 top-16 left-0 right-0 flex items-center justify-center myPrimaryGap bg-myPrimaryLightGrayColor bg-opacity-50;
+  .pbx-myScrollButtonContainer {
+    @apply pbx-sticky pbx-z-10 pbx-h-12 pbx-top-16 pbx-left-0 pbx-right-0 pbx-flex pbx-items-center pbx-justify-center pbx-myPrimaryGap pbx-bg-myPrimaryLightGrayColor pbx-bg-opacity-50;
   }
-  .myTableContainer {
-    @apply overflow-x-auto myPrimarySection py-0 px-0;
+  .pbx-myTableContainer {
+    @apply pbx-overflow-x-auto pbx-myPrimarySection pbx-py-0 pbx-px-0;
   }
-  .myTableSubContainer {
-    @apply min-w-full align-middle;
+  .pbx-myTableSubContainer {
+    @apply pbx-min-w-full pbx-align-middle;
   }
-  .myPrimaryTable {
-    @apply text-sm divide-y divide-myPrimaryLightGrayColor table-fixed min-w-full text-left mb-20;
+  .pbx-myPrimaryTable {
+    @apply pbx-text-sm pbx-divide-y pbx-divide-myPrimaryLightGrayColor pbx-table-fixed pbx-min-w-full pbx-text-left pbx-mb-20;
   }
-  .myPrimaryTableCaption {
-    @apply bg-white myPrimaryParagraph py-4;
+  .pbx-myPrimaryTableCaption {
+    @apply pbx-bg-white pbx-myPrimaryParagraph pbx-py-4;
   }
-  .myPrimaryTableTHead {
-    @apply bg-gray-50;
+  .pbx-myPrimaryTableTHead {
+    @apply pbx-bg-gray-50;
   }
-  .myPrimaryTableTr {
-    @apply divide-x divide-gray-300;
+  .pbx-myPrimaryTableTr {
+    @apply pbx-divide-x pbx-divide-gray-300;
   }
-  .myPrimaryTableTh {
-    @apply px-6 py-4 font-normal text-gray-900;
+  .pbx-myPrimaryTableTh {
+    @apply pbx-px-6 pbx-py-4 pbx-font-normal pbx-text-gray-900;
   }
-  .myPrimaryTableTBody {
-    @apply divide-y divide-gray-100 border-t border-gray-100 bg-white;
+  .pbx-myPrimaryTableTBody {
+    @apply pbx-divide-y pbx-divide-gray-100 pbx-border-t pbx-border-gray-100 pbx-bg-white;
   }
-  .myPrimaryTableTBodyTr {
-    @apply divide-x myPrimaryParagraph bg-white hover:bg-red-50;
+  .pbx-myPrimaryTableTBodyTr {
+    @apply pbx-divide-x pbx-myPrimaryParagraph pbx-bg-white hover:pbx-bg-red-50;
   }
-  .myPrimaryTableTBodyTd {
-    @apply px-6 py-4 whitespace-pre myPrimaryParagraph;
+  .pbx-myPrimaryTableTBodyTd {
+    @apply pbx-px-6 pbx-py-4 pbx-whitespace-pre pbx-myPrimaryParagraph;
   }
-  .myPrimaryResourceTableBodyTdTitle {
-    @apply whitespace-normal;
+  .pbx-myPrimaryResourceTableBodyTdTitle {
+    @apply pbx-whitespace-normal;
   }
 
   /*
@@ -261,8 +234,8 @@
     | Grid
     |--------------------------------------------------------------------------
     */
-  .myPrimaryGap {
-    @apply gap-4;
+  .pbx-myPrimaryGap {
+    @apply pbx-gap-4;
   }
 
   /*
@@ -270,9 +243,8 @@
     | Breadcrumbs
     |--------------------------------------------------------------------------
     */
-
-  .myBreadcrumbsContainer {
-    @apply flex items-center justify-start gap-1 py-2 pl-4 pr-2 font-medium;
+  .pbx-myBreadcrumbsContainer {
+    @apply pbx-flex pbx-items-center pbx-justify-start pbx-gap-1 pbx-py-2 pbx-pl-4 pbx-pr-2 pbx-font-medium;
   }
 
   /*
@@ -280,17 +252,16 @@
     | Search Bars
     |--------------------------------------------------------------------------
     */
-
-  .mysearchBarWithOptions {
-    @apply flex gap-2 pl-4 rounded-full border border-gray-200 bg-myPrimaryLightGrayColor;
+  .pbx-mysearchBarWithOptions {
+    @apply pbx-flex pbx-gap-2 pbx-pl-4 pbx-rounded-full pbx-border pbx-border-gray-200 pbx-bg-myPrimaryLightGrayColor;
   }
 
-  .myPrimarySearchInput {
-    @apply myPrimaryInput text-sm py-4 border-none outline-none pl-10 h-full bg-transparent focus:ring-0 focus:ring-offset-0 focus:border-none focus:bg-transparent focus:outline-none shadow-none;
+  .pbx-myPrimarySearchInput {
+    @apply pbx-myPrimaryInput pbx-text-sm pbx-py-4 pbx-border-none pbx-outline-none pbx-pl-10 pbx-h-full pbx-bg-transparent focus:pbx-ring-0 focus:pbx-ring-offset-0 focus:pbx-border-none focus:pbx-bg-transparent focus:pbx-outline-none pbx-shadow-none;
   }
 
-  .myPrimarySearchButton {
-    @apply rounded-r-full text-sm lg:pl-8 lg:pr-10 pl-4 pr-4 text-center border-l border-gray-300 font-medium hover:bg-gray-200;
+  .pbx-myPrimarySearchButton {
+    @apply pbx-rounded-r-full pbx-text-sm lg:pbx-pl-8 lg:pbx-pr-10 pbx-pl-4 pbx-pr-4 pbx-text-center pbx-border-l pbx-border-gray-300 pbx-font-medium hover:pbx-bg-gray-200;
   }
 
   /*
@@ -298,347 +269,91 @@
     | Forms
     |--------------------------------------------------------------------------
     */
-  .myPrimaryFormWithActions {
-    @apply flex flex-col myPrimaryGap px-2 rounded md:pb-4;
+  .pbx-myPrimaryFormWithActions {
+    @apply pbx-flex pbx-flex-col pbx-myPrimaryGap pbx-px-2 pbx-rounded md:pbx-pb-4;
   }
-  .myPrimaryContentLayout {
-    @apply flex flex-col myPrimaryGap md:flex md:flex-row;
+  .pbx-myPrimaryContentLayout {
+    @apply pbx-flex pbx-flex-col pbx-myPrimaryGap md:pbx-flex md:pbx-flex-row;
   }
-  .myPrimaryFormTitleDescription {
-    @apply flex flex-col w-full;
+  .pbx-myPrimaryFormTitleDescription {
+    @apply pbx-flex pbx-flex-col pbx-w-full;
   }
-  .myPrimaryFormMain {
-    @apply flex flex-col myPrimaryGap md:w-8/12;
+  .pbx-myPrimaryFormMain {
+    @apply pbx-flex pbx-flex-col pbx-myPrimaryGap md:pbx-w-8/12;
   }
-  .myPrimaryFormSidebar {
-    @apply flex flex-col myPrimaryGap md:w-4/12;
+  .pbx-myPrimaryFormSidebar {
+    @apply pbx-flex pbx-flex-col pbx-myPrimaryGap md:pbx-w-4/12;
   }
-  .myPrimaryActions {
-    @apply px-4 py-6 rounded bg-myPrimaryLightGrayColor shadow-sm;
-  }
-
-  .myInputsOrganization {
-    @apply px-4 pt-4 pb-4 bg-white rounded-lg border border-gray-200;
+  .pbx-myPrimaryActions {
+    @apply pbx-px-4 pbx-py-6 pbx-rounded pbx-bg-myPrimaryLightGrayColor pbx-shadow-sm;
   }
 
-  .myPrimaryFormOrganizationHeaderDescriptionSection {
-    @apply mb-4;
-  }
-  .myPrimaryFormOrganizationHeader {
-    @apply myQuaternaryHeader m-0 pt-4;
+  .pbx-myInputsOrganization {
+    @apply pbx-px-4 pbx-pt-4 pbx-pb-4 pbx-bg-white pbx-rounded-lg pbx-border pbx-border-gray-200;
   }
 
-  .myInputsFamily {
-    @apply flex items-center myPrimaryGap;
+  .pbx-myPrimaryFormOrganizationHeaderDescriptionSection {
+    @apply pbx-mb-4;
+  }
+  .pbx-myPrimaryFormOrganizationHeader {
+    @apply pbx-myQuaternaryHeader pbx-m-0 pbx-pt-4;
   }
 
-  .myInputGroup {
-    @apply w-full self-start mb-2 px-2;
-  }
-  .myDoActionButtonSection {
-    @apply px-4 py-4 border border-myPrimaryLightGrayColor rounded sm:px-6 text-right mt-1 bg-gray-50;
+  .pbx-myInputsFamily {
+    @apply pbx-flex pbx-items-center pbx-myPrimaryGap;
   }
 
-  .myPrimaryInputLabel {
-    @apply my-0 block text-sm font-normal text-myPrimaryDarkGrayColor text-left mb-2;
+  .pbx-myInputGroup {
+    @apply pbx-w-full pbx-self-start pbx-mb-2 pbx-px-2;
+  }
+  .pbx-myDoActionButtonSection {
+    @apply pbx-px-4 pbx-py-4 pbx-border pbx-border-myPrimaryLightGrayColor pbx-rounded sm:pbx-px-6 pbx-text-right pbx-mt-1 pbx-bg-gray-50;
   }
 
-  .myPrimaryFormFocus {
-    @apply focus:ring-2 focus:ring-myPrimaryLinkColor  focus:ring-offset-2 focus:border focus:border-gray-200;
-  }
-  .myPrimaryInput {
-    @apply block pr-8 text-left bg-white w-full sm:text-sm font-normal text-myPrimaryDarkGrayColor placeholder:font-normal placeholder:accent-gray-300  focus:bg-white rounded-md py-3 px-3  border border-gray-300 shadow-sm focus:outline-none myPrimaryFormFocus h-full;
-  }
-  .myPrimaryInputNoBorder {
-    @apply myPrimaryInput placeholder:accent-gray-300  focus:bg-none rounded-md py-3 px-3  border-none focus:outline-none focus:ring-0 focus:ring-offset-0 focus:border-none shadow-none;
-  }
-  .myPrimaryInputReadonly {
-    @apply myPrimaryInput bg-gray-50 focus:ring-0 focus:bg-myPrimaryLightGrayColor focus:border-myPrimaryMediumGrayColor;
+  .pbx-myPrimaryInputLabel {
+    @apply pbx-my-0 pbx-block pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor pbx-text-left pbx-mb-2;
   }
 
-  .myPrimaryInputError {
-    @apply mt-1 myPrimaryParagraph block font-normal text-myPrimaryErrorColor text-left;
+  .pbx-myPrimaryFormFocus {
+    @apply focus:pbx-ring-2 focus:pbx-ring-myPrimaryLinkColor focus:pbx-ring-offset-2 focus:pbx-border focus:pbx-border-gray-200;
+  }
+  .pbx-myPrimaryInput {
+    @apply pbx-block pbx-pr-8 pbx-text-left pbx-bg-white pbx-w-full sm:pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor placeholder:pbx-font-normal placeholder:pbx-accent-gray-300 focus:pbx-bg-white pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border pbx-border-gray-300 pbx-shadow-sm focus:pbx-outline-none pbx-myPrimaryFormFocus pbx-h-full;
+  }
+  .pbx-myPrimaryInputNoBorder {
+    @apply pbx-myPrimaryInput pbx-placeholder:accent-gray-300 focus:pbx-bg-none pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border-none focus:pbx-outline-none focus:pbx-ring-0 focus:pbx-ring-offset-0 focus:pbx-border-none pbx-shadow-none;
+  }
+  .pbx-myPrimaryInputReadonly {
+    @apply pbx-myPrimaryInput pbx-bg-gray-50 focus:pbx-ring-0 focus:pbx-bg-myPrimaryLightGrayColor focus:pbx-border-myPrimaryMediumGrayColor;
   }
 
-  .myPrimaryHiddenInputField {
-    @apply px-0;
+  .pbx-myPrimaryInputError {
+    @apply pbx-mt-1 pbx-myPrimaryParagraph pbx-block pbx-font-normal pbx-text-myPrimaryErrorColor pbx-text-left;
   }
 
-  .myPrimaryTextArea {
-    @apply block w-full sm:text-sm font-normal text-myPrimaryDarkGrayColor placeholder:font-normal placeholder:accent-gray-400 bg-gray-50 focus:bg-white rounded-md py-3 px-3 border border-gray-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-myPrimaryLinkColor focus:border-transparent;
+  .pbx-myPrimaryHiddenInputField {
+    @apply pbx-px-0;
   }
 
-  .myPrimaryCheckbox {
-    @apply focus:ring-myPrimaryBrandColor h-5 w-5 text-myPrimaryBrandColor border-gray-400 rounded-md;
+  .pbx-myPrimaryTextArea {
+    @apply pbx-block pbx-w-full sm:pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor pbx-placeholder:font-normal pbx-placeholder:accent-gray-400 pbx-bg-gray-50 focus:pbx-bg-white pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border pbx-border-gray-300 pbx-shadow-sm focus:pbx-outline-none focus:pbx-ring-2 focus:pbx-ring-myPrimaryLinkColor focus:pbx-border-transparent;
   }
 
-  .myPrimarySelect {
-    @apply relative myPrimaryInput w-full;
-  }
-  .myPrimaryFakeSelect {
-    @apply hover:ring-myPrimaryLinkColor border border-gray-300 flex flex-row justify-between items-center myPrimaryGap py-2.5 pl-3 pr-1 cursor-pointer hover:border-transparent hover:ring-2 rounded-md;
-  }
-  .myPrimaryFakeSelectNoHover {
-    @apply myPrimaryFakeSelect focus:outline-none focus:border-transparent hover:border-transparent;
+  .pbx-myPrimaryCheckbox {
+    @apply focus:pbx-ring-myPrimaryBrandColor pbx-h-5 pbx-w-5 pbx-text-myPrimaryBrandColor pbx-border-gray-400 pbx-rounded-md;
   }
 
-  .myPrimaryColorPreview {
-    @apply aspect-square  border border-gray-200 cursor-pointer  min-h-[1.5rem] rounded-sm;
+  .pbx-myPrimarySelect {
+    @apply pbx-relative pbx-myPrimaryInput pbx-w-full;
+  }
+  .pbx-myPrimaryFakeSelect {
+    @apply hover:pbx-ring-myPrimaryLinkColor pbx-border pbx-border-gray-300 pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-myPrimaryGap pbx-py-2.5 pbx-pl-3 pbx-pr-1 pbx-cursor-pointer hover:pbx-border-transparent hover:pbx-ring-2 pbx-rounded-md;
+  }
+  .pbx-myPrimaryFakeSelectNoHover {
+    @apply pbx-myPrimaryFakeSelect focus:pbx-outline-none focus:pbx-border-transparent hover:pbx-border-transparent;
+  }
+
+  .pbx-myPrimaryColorPreview {
+    @apply pbx-aspect-square pbx-border pbx-border-gray-200 pbx-cursor-pointer pbx-min-h-[1.5rem] pbx-rounded-sm;
   }
 }
-
-/* CSS styles for VueQuill - start */
-.ql-toolbar.ql-snow {
-  border-top-right-radius: 10px 10px;
-  border-top-left-radius: 10px 10px;
-}
-
-.ql-editor {
-  min-height: 200px;
-}
-
-/* example 1 */
-/* table transitions */
-.table-enter-active,
-.table-leave-active {
-  transition: opacity 0.3s ease;
-}
-
-.table-enter-from,
-.table-leave-to {
-  opacity: 0;
-}
-
-/* example 2 */
-/* tags transitions */
-.tags-enter-from {
-  opacity: 0.6;
-  transform: translateX(10px);
-}
-
-.tags-enter-active {
-  /*animation: wobble 0.5s ease;*/
-  transition: all 0.2s ease;
-}
-
-.tags-leave-to {
-  opacity: 0.1;
-  transform: translateX(5px);
-}
-
-.tags-leave-active {
-  transition: all 0.1s ease;
-  position: absolute; /* for move transition after item leaves */
-}
-
-.tags-move {
-  transition: all 0.1s ease;
-}
-
-/* Scrollbar Styles  - start */
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: black transparent;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 25px;
-}
-
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 6px;
-  height: 6px; /* Add height for horizontal scrollbar */
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: black;
-  border-radius: 25px;
-  border: none;
-}
-
-/* Add overflow-x property to enable horizontal scrollbar */
-.scrollable {
-  overflow-x: auto;
-  overflow-y: auto;
-  /* Add any other desired styles for the scrollable element */
-}
-/* Scrollbar Styles  - end */
-
-.tailwind-pagination-package {
-  box-shadow: none !important;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 6px 0px;
-  justify-content: center;
-}
-.tailwind-pagination-package > :first-child,
-.tailwind-pagination-package > :last-child {
-  border-radius: 100%;
-}
-
-.smooth-transition {
-  transition: opacity 0.3s ease-in-out;
-}
-
-/* Manage P, Link, H1, H2 # start */
-p {
-  @apply font-normal lg:text-base text-base;
-}
-
-a {
-  @apply text-myPrimaryLinkColor;
-}
-
-h2 {
-  @apply text-3xl mt-4 mb-3 font-medium;
-}
-h3 {
-  @apply text-2xl mt-4 mb-3 font-medium;
-}
-/* Manage P, Link, H1, H2 # end */
-
-/* CSS for content inside page builder # start */
-#pagebuilder a {
-  pointer-events: none;
-}
-/* CSS for content inside page builder # start */
-#page-builder-editor .tiptap {
-  background: #fff;
-  min-height: 25rem;
-}
-
-#pagebuilder #youtube-video::before {
-  content: 'Select Video Element';
-  font-family: 'Jost';
-  background: #16a34a !important;
-  color: white;
-  text-decoration: none;
-  margin-right: 8px;
-  vertical-align: middle;
-  min-height: 3rem;
-  padding: 0.75rem 0.75rem;
-  white-space: nowrap;
-  word-break: keep-all;
-  font-weight: 500;
-  display: inline-flex;
-  gap: 0.25rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 9999px;
-  border: 1px solid transparent;
-  margin-bottom: 20px;
-  font-size: 0.8rem !important;
-}
-
-@media (min-width: 640px) {
-  #pagebuilder #youtube-video::before {
-    font-size: 0.9rem !important;
-    width: auto;
-  }
-}
-
-#pagebuilder #youtube-video:hover::before {
-  text-decoration: none;
-  cursor: pointer;
-}
-
-#page-builder-editor a,
-#pagebuilder a {
-  text-decoration: underline;
-}
-
-#page-builder-editor #linktree p,
-#pagebuilder #linktree p {
-  width: 100%;
-}
-
-#page-builder-editor #linktree a,
-#pagebuilder #linktree a {
-  @apply py-4 px-2 block w-full;
-}
-
-#page-builder-editor #linktree a,
-#pagebuilder #linktree a {
-  text-decoration: none;
-  font-weight: 500;
-  color: inherit !important;
-  width: 100%;
-  cursor: pointer;
-}
-#page-builder-editor strong,
-#pagebuilder strong {
-  font-weight: 500;
-}
-
-#page-builder-editor ol,
-#pagebuilder ol,
-#page-builder-editor ul,
-#pagebuilder ul {
-  list-style: disc !important;
-  padding: 1rem 0rem;
-}
-
-#page-builder-editor li,
-#pagebuilder li {
-  line-height: 2.2rem;
-  margin-left: 1.5em; /* Adjust this value as needed */
-}
-/* CSS for content inside page builder #end*/
-
-/* CSS for Vue datepicker # start */
-:root {
-  /*General*/
-  --dp-border-radius: 40px; /*Configurable border-radius*/
-  --dp-cell-border-radius: 4px; /*Specific border radius for the calendar cell*/
-  --dp-common-transition: all 0.1s ease-in; /*Generic transition applied on buttons and calendar cells*/
-}
-
-#builder-container {
-}
-
-.dp__action_row {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center;
-  margin: 0 0 10px 0;
-}
-.dp__today {
-  background: transparent !important;
-  border: 2px solid #ff5252 !important;
-  color: #ff5252 !important;
-  border-radius: 100% !important;
-}
-
-.dp__active_date {
-  background: #ff5252 !important;
-  border: #ff5252 !important;
-  color: #fff !important;
-  border-radius: 100% !important;
-}
-
-.dp__date_hover:hover {
-  background: #f1f1f1 !important;
-  border: #f1f1f1 !important;
-  color: #000 !important;
-  border-radius: 100% !important;
-}
-
-.dp__action_button {
-  background: #ff5252 !important;
-  border: #000 !important;
-  color: #fff !important;
-  border-radius: 8px !important;
-  padding: 1rem 1rem !important;
-  font-weight: 500;
-}
-.dp__overlay_cell_active {
-  background: #ff5252 !important;
-  border: #000 !important;
-  color: #fff !important;
-}
-
-/* CSS for Vue datepicker # end */

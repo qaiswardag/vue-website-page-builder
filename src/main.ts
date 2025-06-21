@@ -1,3 +1,4 @@
+import './css/dev-global.css'
 import './css/app.css'
 
 import { createApp } from 'vue'

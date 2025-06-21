@@ -61,14 +61,13 @@ watch(
 </script>
 <template>
   <EditorAccordion>
-    <template #title>Padding & Margin</template>
+    <template #title>Padding</template>
     <template #content>
-      <p class="myPrimaryParagraph font-medium py-0 my-4">Padding</p>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Padding Y-axis </label>
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Vertical Padding </label>
         <select
           v-model="fontVerticalPadding"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleVerticalPadding(fontVerticalPadding)"
         >
           <option disabled value="">Select</option>
@@ -80,11 +79,12 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Padding X-axis </label>
+      <hr />
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Horizontal Padding </label>
         <select
           v-model="fontHorizontalPadding"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleHorizontalPadding(fontHorizontalPadding)"
         >
           <option disabled value="">Select</option>
@@ -93,39 +93,6 @@ watch(
             :key="horizontalPadding"
           >
             {{ horizontalPadding }}
-          </option>
-        </select>
-      </div>
-      <p class="myPrimaryParagraph font-medium py-0 my-4">Margin</p>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Margin Y-axis </label>
-        <select
-          v-model="fontVerticalMargin"
-          class="myPrimarySelect"
-          @change="pageBuilderClass.handleVerticalMargin(fontVerticalMargin)"
-        >
-          <option disabled value="">Select</option>
-          <option
-            v-for="verticalMargin in tailwindPaddingPlusMargin.verticalMargin"
-            :key="verticalMargin"
-          >
-            {{ verticalMargin }}
-          </option>
-        </select>
-      </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Margin X-axis </label>
-        <select
-          v-model="fontHorizontalMargin"
-          class="myPrimarySelect"
-          @change="pageBuilderClass.handleHorizontalMargin(fontHorizontalMargin)"
-        >
-          <option disabled value="">Select</option>
-          <option
-            v-for="horizontalMargin in tailwindPaddingPlusMargin.horizontalMargin"
-            :key="horizontalMargin"
-          >
-            {{ horizontalMargin }}
           </option>
         </select>
       </div>

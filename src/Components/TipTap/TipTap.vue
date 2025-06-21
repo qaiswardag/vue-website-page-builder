@@ -10,14 +10,14 @@ const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 <template>
   <div>
-    <div class="blockease-linear duration-200 block ease-linear">
+    <div class="pbx-blockease-linear pbx-duration-200 pbx-block pbx-ease-linear">
       <template v-if="pageBuilderClass.isSelectedElementValidText()">
-        <div class="flex items-center justify-center mb-6">
-          <div class="px-2 flex items-center justify-start gap-2 w-max">
+        <div class="pbx-flex pbx-items-center pbx-justify-center pbx-mb-6">
+          <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
             <button
               @click="pageBuilderClass.toggleTipTapModal(true)"
               type="button"
-              class="myPrimaryTag"
+              class="pbx-myPrimaryTag"
             >
               <span class="material-symbols-outlined"> edit </span>
               <span>Edit text and links</span>

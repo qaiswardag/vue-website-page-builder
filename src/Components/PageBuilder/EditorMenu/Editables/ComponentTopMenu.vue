@@ -65,11 +65,11 @@ const deleteSelectedComponent = function (e) {
     <header></header>
     <main></main>
   </DynamicModalBuilder>
-  <div class="flex flex-col items-center justify-center myPrimaryGap">
-    <div class="flex gap-2 items-center justify-center">
+  <div class="pbx-flex pbx-flex-col pbx-items-center pbx-justify-center pbx-myPrimaryGap">
+    <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
       <div
         @click="deleteSelectedComponent()"
-        class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryErrorColor hover:text-white text-myPrimaryErrorColor"
+        class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryErrorColor hover:pbx-text-white pbx-text-myPrimaryErrorColor"
       >
         <span class="material-symbols-outlined"> delete_forever </span>
       </div>
@@ -78,14 +78,14 @@ const deleteSelectedComponent = function (e) {
     <button
       type="button"
       @click="pageBuilderClass.reorderComponent(-1)"
-      class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+      class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
     >
       <span class="material-symbols-outlined"> move_up </span>
     </button>
     <button
       type="button"
       @click="pageBuilderClass.reorderComponent(1)"
-      class="h-10 w-10 cursor-pointer rounded-full flex items-center border-none justify-center bg-gray-50 aspect-square hover:bg-myPrimaryLinkColor hover:text-white focus-visible:ring-0"
+      class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
     >
       <span class="material-symbols-outlined"> move_down </span>
     </button>

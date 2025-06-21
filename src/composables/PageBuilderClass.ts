@@ -1,23 +1,11 @@
 // Type definitions
-import type {
-  ComponentObject,
-  ImageObject,
-  TimerHandle,
-  MutationObserver as MutationObserverType,
-  TailwindColors,
-  TailwindOpacities,
-  TailwindFontSizes,
-  TailwindFontStyles,
-  TailwindPaddingAndMargin,
-  TailwindBorderRadius,
-  TailwindBorderStyleWidthColor,
-  PageBuilderConfig,
-} from '../types'
+import type { ComponentObject, ImageObject, PageBuilderConfig } from '../types'
+
 import type { usePageBuilderStateStore } from '../stores/page-builder-state'
 
+import tailwindFontSizes from '../utils/builder/tailwind-font-sizes'
 import tailwindColors from '../utils/builder/tailwaind-colors'
 import tailwindOpacities from '../utils/builder/tailwind-opacities'
-import tailwindFontSizes from '../utils/builder/tailwind-font-sizes'
 import tailwindFontStyles from '../utils/builder/tailwind-font-styles'
 import tailwindPaddingAndMargin from '../utils/builder/tailwind-padding-margin'
 import tailwindBorderRadius from '../utils/builder/tailwind-border-radius'
@@ -31,6 +19,7 @@ class PageBuilderClass {
   // Class properties with types
   private nextTick: Promise<void>
   private containsPagebuilder: Element | null
+  // private pageBuilder: Element | null
   private pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>
   private getTextAreaVueModel: ComputedRef<string | null>
   private getLocalStorageItemName: ComputedRef<string | null>
@@ -45,16 +34,13 @@ class PageBuilderClass {
   private getComponentArrayAddMethod: ComputedRef<string | null>
   private NoneListernesTags: string[]
   private delay: (ms?: number) => Promise<void>
-  private observer?: MutationObserverType
   private hasStartedEditing: boolean = false
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.nextTick = nextTick()
 
     this.hasStartedEditing = false
-
     this.containsPagebuilder = document.querySelector('#contains-pagebuilder')
-
     this.pageBuilderStateStore = pageBuilderStateStore
 
     this.getTextAreaVueModel = computed(() => this.pageBuilderStateStore.getTextAreaVueModel)
@@ -391,6 +377,14 @@ class PageBuilderClass {
     // Add the component id to the section element
     const section = doc.querySelector('section')
     if (section) {
+      // Prefix all classes inside the section
+      section.querySelectorAll('[class]').forEach((el) => {
+        el.setAttribute(
+          'class',
+          this.#addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
+        )
+      })
+
       // Generate a unique ID using uuidv4() and assign it to the section
       section.dataset.componentid = uuidv4()
 
@@ -655,104 +649,30 @@ class PageBuilderClass {
   }
   // border radius / end
 
-  handleFontSize(userSelectedFontSize?: string): void {
-    if (!userSelectedFontSize) return
-    if (!this.getElement.value) return
+  handleFontSizeBase(userSelectedFontSize?: string): void {
+    this.#applyElementClassChanges(userSelectedFontSize, tailwindFontSizes.fontBase, 'setFontBase')
+  }
 
-    let fontBase = tailwindFontSizes.fontBase.find((size: string) => {
-      return this.getElement.value?.classList.contains(size)
-    })
-    if (fontBase === undefined) {
-      fontBase = 'base:none'
-    }
-
-    let fontDesktop = tailwindFontSizes.fontDesktop.find((size: string) => {
-      return this.getElement.value?.classList.contains(size)
-    })
-    if (fontDesktop === undefined) {
-      fontDesktop = 'lg:none'
-    }
-
-    let fontTablet = tailwindFontSizes.fontTablet.find((size: string) => {
-      return this.getElement.value?.classList.contains(size)
-    })
-    if (fontTablet === undefined) {
-      fontTablet = 'md:none'
-    }
-
-    let fontMobile = tailwindFontSizes.fontMobile.find((size: string) => {
-      return this.getElement.value?.classList.contains(size)
-    })
-    if (fontMobile === undefined) {
-      fontMobile = 'sm:none'
-    }
-
-    // set fonts
-    this.pageBuilderStateStore.setFontBase(fontBase)
-    this.pageBuilderStateStore.setFontDesktop(fontDesktop)
-    this.pageBuilderStateStore.setFontTablet(fontTablet)
-    this.pageBuilderStateStore.setFontMobile(fontMobile)
-
-    const getFontBase = computed(() => {
-      return this.pageBuilderStateStore.getFontBase
-    })
-    const getFontDesktop = computed(() => {
-      return this.pageBuilderStateStore.getFontDesktop
-    })
-    const getFontTablet = computed(() => {
-      return this.pageBuilderStateStore.getFontTablet
-    })
-    const getFontMobile = computed(() => {
-      return this.pageBuilderStateStore.getFontMobile
-    })
-
-    if (userSelectedFontSize !== undefined && this.getElement.value) {
-      if (
-        !userSelectedFontSize.includes('sm:') &&
-        !userSelectedFontSize.includes('md:') &&
-        !userSelectedFontSize.includes('lg:')
-      ) {
-        if (getFontBase.value) {
-          this.getElement.value.classList.remove(getFontBase.value)
-        }
-        if (!userSelectedFontSize.includes('base:none')) {
-          this.getElement.value.classList.add(userSelectedFontSize)
-        }
-
-        this.pageBuilderStateStore.setFontBase(userSelectedFontSize)
-      }
-      if (userSelectedFontSize.includes('lg:')) {
-        if (getFontDesktop.value) {
-          this.getElement.value.classList.remove(getFontDesktop.value)
-        }
-        if (!userSelectedFontSize.includes('lg:none')) {
-          this.getElement.value.classList.add(userSelectedFontSize)
-        }
-
-        this.pageBuilderStateStore.setFontDesktop(userSelectedFontSize)
-      }
-      if (userSelectedFontSize.includes('md:')) {
-        if (getFontTablet.value) {
-          this.getElement.value.classList.remove(getFontTablet.value)
-        }
-        if (!userSelectedFontSize.includes('md:none')) {
-          this.getElement.value.classList.add(userSelectedFontSize)
-        }
-
-        this.pageBuilderStateStore.setFontTablet(userSelectedFontSize)
-      }
-      if (userSelectedFontSize.includes('sm:')) {
-        if (getFontMobile.value) {
-          this.getElement.value.classList.remove(getFontMobile.value)
-        }
-        if (!userSelectedFontSize.includes('sm:none')) {
-          this.getElement.value.classList.add(userSelectedFontSize)
-        }
-
-        this.pageBuilderStateStore.setFontMobile(userSelectedFontSize)
-      }
-      this.pageBuilderStateStore.setElement(this.getElement.value)
-    }
+  handleFontSizeDesktop(userSelectedFontSize?: string): void {
+    this.#applyElementClassChanges(
+      userSelectedFontSize,
+      tailwindFontSizes.fontDesktop,
+      'setFontDesktop',
+    )
+  }
+  handleFontSizeTablet(userSelectedFontSize?: string): void {
+    this.#applyElementClassChanges(
+      userSelectedFontSize,
+      tailwindFontSizes.fontTablet,
+      'setFontTablet',
+    )
+  }
+  handleFontSizeMobile(userSelectedFontSize?: string): void {
+    this.#applyElementClassChanges(
+      userSelectedFontSize,
+      tailwindFontSizes.fontMobile,
+      'setFontMobile',
+    )
   }
 
   handleBackgroundOpacity(opacity?: string): void {
@@ -1526,6 +1446,25 @@ class PageBuilderClass {
   }
 
   /**
+   * Automatically add Tailwind pbx- prefix to Tailwind classes in imported HTML (if not already present),
+   * process each element’s class attribute and update the classes accordingly.
+   */
+
+  #addTailwindPrefixToClasses(classList: string, prefix = 'pbx-'): string {
+    return classList
+      .split(/\s+/)
+      .map((cls) => {
+        if (!cls || cls.startsWith(prefix)) return cls
+        const parts = cls.split(':')
+        const base = parts.pop()!
+        if (base.startsWith(prefix)) return cls
+        // Always prefix if not already prefixed
+        return [...parts, prefix + base].join(':')
+      })
+      .join(' ')
+  }
+
+  /**
    * Parse and set components from JSON or HTML data
    *
    * Supports:
@@ -1557,15 +1496,11 @@ class PageBuilderClass {
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
-      let pageBuilderContentSavedAt: string | undefined = undefined
-
       // Support both old and new structure
       if (Array.isArray(parsedData)) {
         componentsArray = parsedData
       } else if (parsedData && Array.isArray(parsedData.components)) {
         componentsArray = parsedData.components
-
-        pageBuilderContentSavedAt = parsedData.pageBuilderContentSavedAt
       }
 
       let savedCurrentDesign: ComponentObject[] = []
@@ -1577,6 +1512,14 @@ class PageBuilderClass {
           const section = doc.querySelector('section')
 
           if (section) {
+            // Process all elements inside section to add prefix to classes
+            section.querySelectorAll('[class]').forEach((el) => {
+              el.setAttribute(
+                'class',
+                this.#addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
+              )
+            })
+
             // Ensure data-componentid exists
             if (!section.hasAttribute('data-componentid')) {
               const newId = uuidv4()
@@ -1730,7 +1673,10 @@ class PageBuilderClass {
     // border radius
     this.handleBorderRadiusBottomRight(undefined)
     // handle font size
-    this.handleFontSize(undefined)
+    this.handleFontSizeBase(undefined)
+    this.handleFontSizeDesktop(undefined)
+    this.handleFontSizeTablet(undefined)
+    this.handleFontSizeMobile(undefined)
     // handle font weight
     this.handleFontWeight(undefined)
     // handle font family

@@ -22,17 +22,17 @@ const getRestoredElement = computed(() => {
   <EditorAccordion v-if="getElement || getRestoredElement">
     <template #title>Selected HTML Element</template>
     <template #content>
-      <div class="flex flex-row flex-wrap gap-2 mt-2"></div>
+      <div class="pbx-flex pbx-flex-row pbx-flex-wrap pbx-gap-2 pbx-mt-2"></div>
       <!-- delete & restore element # start -->
       <template v-if="getRestoredElement">
-        <div class="border-b border-gray-200 mb-4 pb-8 pt-4">
-          <p class="myPrimaryParagraph font-medium py-0">Restore</p>
-          <label class="myPrimaryInputLabel"> Restore the last deleted HTML element.</label>
-          <div class="px-2 flex items-center justify-start gap-2 w-max">
+        <div class="pbx-border-b pbx-border-gray-200 pbx-mb-4 pbx-pb-8 pbx-pt-4">
+          <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0">Restore</p>
+          <label class="pbx-myPrimaryInputLabel"> Restore the last deleted HTML element.</label>
+          <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
             <button
               @click="pageBuilderClass.handleRestoreElement"
               type="button"
-              class="myPrimaryButton w-full mt-4"
+              class="pbx-myPrimaryButton pbx-w-full pbx-mt-4"
             >
               <span class="material-symbols-outlined"> undo </span>
               <span>Restore</span>
@@ -42,18 +42,18 @@ const getRestoredElement = computed(() => {
       </template>
 
       <template v-if="getElement">
-        <p class="myPrimaryParagraph font-medium py-0 mb-4 pt-4">Delete</p>
-        <label class="myPrimaryInputLabel">
+        <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-mb-4 pbx-pt-4">Delete</p>
+        <label class="pbx-myPrimaryInputLabel">
           Delete the currently selected HTML element from the page.</label
         >
 
-        <div class="px-2 flex items-center justify-start gap-2 w-max">
+        <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
           <button
             @click="pageBuilderClass.handleDeleteElement"
             type="button"
-            class="myPrimaryDeleteButton w-full mt-4"
+            class="pbx-myPrimaryDeleteButton pbx-w-full pbx-mt-4"
           >
-            <span class="hover:text-white">Delete element</span>
+            <span class="hover:pbx-text-white">Delete element</span>
           </button>
         </div>
       </template>

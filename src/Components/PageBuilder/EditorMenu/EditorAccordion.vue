@@ -1,10 +1,10 @@
 <template>
-  <div class="flex flex-col border border-gray-400" :class="{ 'pb-8': expanded }">
+  <div class="pbx-flex pbx-flex-col pbx-border pbx-border-gray-400" :class="{ '': expanded }">
     <div
-      class="flex flex-row justify-between items-center pl-3 pr-3 py-5 cursor-pointer duration-200 hover:bg-myPrimaryLightGrayColor border-b border-gray-200"
+      class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor pbx-border-b pbx-border-gray-200"
       @click="expanded = !expanded"
     >
-      <p class="myPrimaryParagraph font-medium my-0 py-0">
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-my-0 pbx-py-0">
         <slot name="title" />
       </p>
 
@@ -15,7 +15,10 @@
         <span class="material-symbols-outlined"> chevron_right </span>
       </template>
     </div>
-    <div :class="[expanded ? 'block' : 'hidden']" class="px-4 ease-linear duration-75">
+    <div
+      :class="[expanded ? 'pbx-block' : 'pbx-hidden']"
+      class="pbx-px-4 pbx-ease-linear pbx-duration-75"
+    >
       <slot name="content" />
     </div>
   </div>

@@ -54,13 +54,13 @@ watch(
   <EditorAccordion>
     <template #title>Border Style, Width & Color</template>
     <template #content>
-      <p class="myPrimaryParagraph font-medium py-0 my-4">Border</p>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Border</p>
 
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Border Style </label>
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Border Style </label>
         <select
           v-model="borderStyle"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleBorderStyle(borderStyle)"
         >
           <option disabled value="">Select</option>
@@ -72,11 +72,11 @@ watch(
           </option>
         </select>
       </div>
-      <div class="my-2 py-2">
-        <label class="myPrimaryInputLabel"> Border Width </label>
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Border Width </label>
         <select
           v-model="borderWidth"
-          class="myPrimarySelect"
+          class="pbx-myPrimarySelect"
           @change="pageBuilderClass.handleBorderWidth(borderWidth)"
         >
           <option disabled value="">Select</option>
@@ -89,37 +89,37 @@ watch(
         </select>
       </div>
 
-      <label class="myPrimaryInputLabel"> Border Color </label>
+      <label class="pbx-myPrimaryInputLabel"> Border Color </label>
       <Listbox as="div" v-model="borderColor">
-        <div class="relative mt-2">
-          <ListboxButton class="myPrimarySelect">
-            <span class="flex items-center gap-2">
+        <div class="pbx-relative pbx-mt-2">
+          <ListboxButton class="pbx-myPrimarySelect">
+            <span class="pbx-flex pbx-items-center pbx-gap-2">
               <div v-if="getBorderColor === 'none'">
-                <div class="myPrimaryColorPreview border-none">
+                <div class="pbx-myPrimaryColorPreview pbx-border-none">
                   <span class="material-symbols-outlined"> ev_shadow </span>
                 </div>
               </div>
               <div
                 v-if="borderColor !== 'none'"
-                class="aspect-square w-6 h-6 border border-gray-100 rounded-sm"
+                class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border pbx-border-gray-100 pbx-rounded-sm"
                 :class="`bg-${borderColor?.replace('border-', '')}`"
               ></div>
-              <span class="block truncate">{{ borderColor }}</span>
+              <span class="pbx-block pbx-truncate">{{ borderColor }}</span>
             </span>
             <span
-              class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2"
+              class="pbx-pointer-events-none pbx-absolute pbx-inset-y-0 pbx-right-0 pbx-ml-3 pbx-flex pbx-items-center pbx-pr-2"
             >
               <span class="material-symbols-outlined"> keyboard_arrow_down </span>
             </span>
           </ListboxButton>
 
           <transition
-            leave-active-class="transition ease-in duration-100"
-            leave-from-class="opacity-100"
-            leave-to-class="opacity-0"
+            leave-active-class="pbx-transition pbx-ease-in pbx-duration-100"
+            leave-from-class="pbx-opacity-100"
+            leave-to-class="pbx-opacity-0"
           >
             <ListboxOptions
-              class="absolute z-10 mt-1 max-h-56 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+              class="pbx-absolute pbx-z-10 pbx-mt-1 pbx-max-h-56 pbx-w-full pbx-overflow-auto pbx-rounded-md pbx-bg-white pbx-py-1 pbx-text-base pbx-shadow-lg pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 focus:pbx-outline-none sm:pbx-text-sm"
             >
               <ListboxOption
                 as="template"
@@ -131,24 +131,26 @@ watch(
               >
                 <li
                   :class="[
-                    active ? 'bg-myPrimaryLinkColor text-white' : 'text-myPrimaryDarkGrayColor',
-                    'relative cursor-default select-none py-2 pl-3 pr-9',
+                    active
+                      ? 'pbx-bg-myPrimaryLinkColor pbx-text-white'
+                      : 'pbx-text-myPrimaryDarkGrayColor',
+                    'pbx-relative pbx-cursor-default pbx-select-none pbx-py-2 pbx-pl-3 pbx-pr-9',
                   ]"
                 >
-                  <div class="flex items-center">
+                  <div class="pbx-flex pbx-items-center">
                     <div v-if="color === 'none'">
-                      <div class="myPrimaryColorPreview border-none">
+                      <div class="pbx-myPrimaryColorPreview pbx-border-none">
                         <span class="material-symbols-outlined"> ev_shadow </span>
                       </div>
                     </div>
 
                     <div
                       v-if="color !== 'none'"
-                      class="aspect-square w-6 h-6 bg-gray-950"
+                      class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-bg-gray-950"
                       :class="`bg-${color.replace('border-', '')}`"
                     ></div>
-                    <span v-if="color === 'none'" class="ml-3">Transparent</span>
-                    <span v-if="color !== 'none'" class="ml-3">{{ color }}</span>
+                    <span v-if="color === 'none'" class="pbx-ml-3">Transparent</span>
+                    <span v-if="color !== 'none'" class="pbx-ml-3">{{ color }}</span>
                   </div>
                 </li>
               </ListboxOption>

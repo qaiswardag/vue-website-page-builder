@@ -71,12 +71,12 @@ const loadingImage = async function (imageURL) {
 <template>
   <div>
     <div v-show="getIsLoadingImage">
-      <div class="flex items-center justify-center mt-4 min-h-80">
+      <div class="pbx-flex pbx-items-center pbx-justify-center pbx-mt-4 pbx-min-h-80">
         <div
-          class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+          class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
         >
           <span
-            class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]"
+            class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
             >Loading...</span
           >
         </div>
@@ -84,7 +84,7 @@ const loadingImage = async function (imageURL) {
     </div>
     <div v-show="getBasePrimaryImage && !getIsLoadingImage">
       <img
-        class="object-cover object-center w-full cursor-pointer"
+        class="pbx-object-cover pbx-object-center pbx-w-full pbx-cursor-pointer"
         :src="getBasePrimaryImage"
         @click="handleAddImage"
         alt="image"

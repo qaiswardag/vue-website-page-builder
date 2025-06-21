@@ -3,29 +3,31 @@ const version = __APP_VERSION__
 </script>
 
 <template>
-  <div class="flex justify-between gap-2 bg-red-100 py-10 lg:px-12 px-4">
+  <div
+    class="pbx-flex pbx-justify-between pbx-gap-2 pbx-bg-red-100 pbx-py-10 lg:pbx-px-12 pbx-px-4"
+  >
     <div>
-      <p class="myPrimaryParagraph">
+      <p class="pbx-myPrimaryParagraph">
         <a
           href="https://www.npmjs.com/package/@myissue/vue-website-page-builder"
           target="_blank"
-          class="myPrimaryLink text-myPrimaryDarkGrayColor"
+          class="pbx-myPrimaryLink pbx-text-myPrimaryDarkGrayColor"
         >
           Install via npm
         </a>
       </p>
-      <p class="myPrimaryParagraph mt-3">
+      <p class="pbx-myPrimaryParagraph pbx-mt-3">
         <a
           href="https://github.com/qaiswardag/vue-website-page-builder"
           target="_blank"
-          class="myPrimaryLink text-myPrimaryDarkGrayColor"
+          class="pbx-myPrimaryLink pbx-text-myPrimaryDarkGrayColor"
         >
           View on GitHub
         </a>
       </p>
     </div>
-    <p class="myPrimaryParagraph mt-3">
-      <span class="text-myPrimaryDarkGrayColor text-sm">{{ version }}</span>
+    <p class="pbx-myPrimaryParagraph pbx-mt-3">
+      <span class="pbx-text-myPrimaryDarkGrayColor pbx-text-sm">{{ version }}</span>
     </p>
   </div>
 </template>
