@@ -102,7 +102,7 @@ const handleDownloadHTML = function () {
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium pbx-bg-blue-100 pbx-text-blue-800"
+                            class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium pbx-bg-blue-100 pbx-text-blue-800"
                           >
                             {{ version }}
                           </span>
@@ -348,7 +348,7 @@ const handleDownloadHTML = function () {
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
+                            class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
                               getConfigPageBuilder.userSettings.autoSave
                                 ? 'bg-green-100 text-green-800'
@@ -373,7 +373,7 @@ const handleDownloadHTML = function () {
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
+                            class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
                               getConfigPageBuilder.userSettings.notifications
                                 ? 'bg-green-100 text-green-800'
@@ -518,7 +518,7 @@ const handleDownloadHTML = function () {
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
+                            class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
                               getConfigPageBuilder.updateOrCreate === 'create'
                                 ? 'bg-green-100 text-green-800'
@@ -561,7 +561,7 @@ const handleDownloadHTML = function () {
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
                           <span
-                            class="pbx-inline-flex pbx-items-center px-2.5 py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
+                            class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                           >
                             {{ getConfigPageBuilder.updateOrCreate.formName }}
                           </span>

@@ -252,7 +252,7 @@ onMounted(async () => {
               }}
             </button>
 
-            <span class="pbx-myPrimaryTag py-2.5 pbx-px-4">
+            <span class="pbx-myPrimaryTag pbx-py-2.5 pbx-px-4">
               {{ Number(getCurrentPageNumber) }}
             </span>
             <button
