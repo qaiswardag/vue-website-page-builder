@@ -1,7 +1,7 @@
 {
   "components": [
     {
-      "html_code": "<section><div class=\"relative py-4\"><div class=\"mx-auto max-w-7xl lg:px-4 px-2\"><div class=\"break-words\"><h2><strong>Demo Content</strong></h2></div></div></div></section>",
+      "html_code": "<section><div class=\"relative py-4\"><div class=\"mx-auto max-w-7xl lg:px-4 px-2\"><div class=\"pbx-break-words pbx-text-5xl\"><h2><strong>Demo Content</strong></h2></div></div></div></section>",
       "title": "Header H2"
     },
     {
@@ -10,12 +10,12 @@
       "title": "Text"
     },
     {
-      "html_code": "<section>\n<div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2 bg-black\"><div class=\"mx-auto max-w-7xl\"><div class=\"myPrimaryGap grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-[9/16] smooth-transition rounded-tl-full\" src=\"https://images.unsplash.com/photo-1632765866070-3fadf25d3d5b?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMTI0Mzl8MHwxfHNlYXJjaHwxMjh8fG1vZGVsfGVufDB8fHx8MTc0OTgzMDgzMXww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080\" alt=\"provider\" data-image=\"b2fb2e61-c916-4195-9cd2-c1d25747b4f7\">  </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-[9/16] smooth-transition rounded-full\" src=\"https://images.unsplash.com/photo-1542513217-0b0eedf7005d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMTI0Mzl8MHwxfHNlYXJjaHwxMDR8fG1vZGVsfGVufDB8fHx8MTc0OTgzMDc5MXww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080\" alt=\"provider\" data-image=\"fdf36a14-f7ef-4025-942f-c87b20b18005\">  </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-[9/16] smooth-transition rounded-br-full\" src=\"https://images.unsplash.com/photo-1574015974293-817f0ebebb74?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMTI0Mzl8MHwxfHNlYXJjaHwyNnx8bW9kZWx8ZW58MHx8fHwxNzQ5ODMwNzM1fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080\" alt=\"provider\" data-image=\"618a74a7-5d41-4dce-937c-130dd7490569\"></div></div> </div></div>\n</section>",
+      "html_code": "<section>\n<div class=\"w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2 bg-black\"><div class=\"mx-auto max-w-7xl m\"><div class=\"myPrimaryGap grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3\"> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-[9/16] smooth-transition rounded-tl-full\" src=\"https://images.unsplash.com/photo-1632765866070-3fadf25d3d5b?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMTI0Mzl8MHwxfHNlYXJjaHwxMjh8fG1vZGVsfGVufDB8fHx8MTc0OTgzMDgzMXww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080\" alt=\"provider\" data-image=\"b2fb2e61-c916-4195-9cd2-c1d25747b4f7\">  </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-[9/16] smooth-transition rounded-full\" src=\"https://images.unsplash.com/photo-1542513217-0b0eedf7005d?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMTI0Mzl8MHwxfHNlYXJjaHwxMDR8fG1vZGVsfGVufDB8fHx8MTc0OTgzMDc5MXww&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080\" alt=\"provider\" data-image=\"fdf36a14-f7ef-4025-942f-c87b20b18005\">  </div> <div class=\"flex-1 py-2\"> <img class=\"object-cover w-full object-top aspect-[9/16] smooth-transition rounded-br-full\" src=\"https://images.unsplash.com/photo-1574015974293-817f0ebebb74?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMTI0Mzl8MHwxfHNlYXJjaHwyNnx8bW9kZWx8ZW58MHx8fHwxNzQ5ODMwNzM1fDA&amp;ixlib=rb-4.1.0&amp;q=80&amp;w=1080\" alt=\"provider\" data-image=\"618a74a7-5d41-4dce-937c-130dd7490569\"></div></div> </div></div>\n</section>",
 
       "title": "3 Vertical Images"
     },
     {
-      "html_code": "<section><div class=\"relative py-4\"><div class=\"mx-auto max-w-7xl lg:px-4 px-2\"><div class=\"break-words\"><h3>The web builder for stunning pages</h3></div></div></div></section>",
+      "html_code": "<section><div class=\"relative py-4\"><div class=\"mx-auto max-w-7xl lg:px-4 px-2\"><div class=\"pbx-break-words pbx-text-3xl mt-6\"><h3>The web builder for stunning pages</h3></div></div></div></section>",
 
       "title": "Header H3"
     },
@@ -30,7 +30,7 @@
       "title": "2 Vertical Images"
     },
     {
-      "html_code": "<section><div class=\"relative py-4\" selected=\"\"><div class=\"mx-auto max-w-7xl lg:px-4 px-2\"><div class=\"break-words\"><h3>Just publish it with Vue</h3></div></div></div></section>",
+      "html_code": "<section><div class=\"relative py-4\" selected=\"\"><div class=\"mx-auto max-w-7xl lg:px-4 px-2\"><div class=\"pbx-break-words pbx-text-3xl mt-6\"><h3>Just publish it with Vue</h3></div></div></div></section>",
 
       "title": "Header H3"
     },
