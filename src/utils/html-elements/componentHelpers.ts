@@ -9,8 +9,8 @@ const componentHelpers: ComponentHelper[] = [
   {
     html_code: `
     <section>
-    <div class="relative py-4">
-    <div class="mx-auto max-w-7xl lg:px-4 px-2">
+    <div class="pbx-relative pbx-py-4">
+    <div class="pbx-mx-auto max-w-7xl lg:pbx-px-4 pbx-px-2">
     <div>
     <p><strong>Text</strong></p><p>Tempus imperdiet nulla malesuada pellentesque elit eget gravida cum sociis. Erat nam at lectus urna duis convallis convallis. Congue mauris rhoncus aenean vel elit scelerisque. 
     Turpis tincidunt id aliquet risus feugiat in ante. Tincidunt dui ut ornare lectus sit. Ipsum dolor sit amet consectetur. Viverra ipsum nunc aliquet bibendum enim facilisis gravida neque convallis.<br><br>Dignissim sodales ut eu sem integer vitae justo eget magna. 
@@ -31,7 +31,7 @@ const componentHelpers: ComponentHelper[] = [
     `,
   },
   {
-    html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h2>Sunt in culpa qui officia deserunt</h2></div></div></div></section>`,
+    html_code: `<section><div class="pbx-relative pbx-py-4"><div class="pbx-mx-auto max-w-7xl lg:pbx-px-4 pbx-px-2"><div class="pbx-break-words"><h2>Sunt in culpa qui officia deserunt</h2></div></div></div></section>`,
     id: null,
     title: 'Header H2',
     icon: `
@@ -41,7 +41,7 @@ const componentHelpers: ComponentHelper[] = [
     `,
   },
   {
-    html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h3>Sunt in culpa qui officia deserunt</h3></div></div></div></section>`,
+    html_code: `<section><div class="pbx-relative pbx-py-4"><div class="pbx-mx-auto max-w-7xl lg:pbx-px-4 pbx-px-2"><div class="pbx-break-words"><h3>Sunt in culpa qui officia deserunt</h3></div></div></div></section>`,
     id: null,
     title: 'Header H3',
     icon: `
@@ -53,14 +53,14 @@ const componentHelpers: ComponentHelper[] = [
   {
     html_code: `
     <section>
-    <div class="py-4">
-    <div class="mx-auto max-w-7xl w-full pt-6 pb-6 bg-gray-100">
-    <div  id="youtube-video" class="w-full aspect-video p-4">
+    <div class="pbx-py-4">
+    <div class="pbx-mx-auto max-w-7xl pbx-w-full pbx-pt-6 pbx-pb-6 pbx-bg-gray-100">
+    <div  id="youtube-video" class="pbx-w-full pbx-aspect-video pbx-p-4">
 
     <iframe
     frameborder="0" 
     allowfullscreen
-    class="w-full aspect-video"
+    class="pbx-w-full pbx-aspect-video"
     src="" 
     allow="accelerometer; autoplay; clipboard-write;" allowfullscreen>
     </iframe>
@@ -77,7 +77,7 @@ const componentHelpers: ComponentHelper[] = [
     `,
   },
   {
-    html_code: `<section><div class="relative py-8"><div class="absolute inset-0 flex items-center" aria-hidden="true"><div class="w-full border-4 border-gray-800 leading-none"></div></div><div class="relative flex justify-start"></div></div></section>`,
+    html_code: `<section><div class="pbx-relative pbx-py-8"><div class="pbx-absolute pbx-inset-0 pbx-flex pbx-items-center" aria-hidden="true"><div class="pbx-w-full pbx-border-4 pbx-border-gray-800 pbx-leading-none"></div></div><div class="pbx-relative pbx-flex pbx-justify-start"></div></div></section>`,
     id: null,
     title: 'Break Divider',
     icon: `
@@ -87,7 +87,7 @@ const componentHelpers: ComponentHelper[] = [
     `,
   },
   {
-    html_code: `<section>\n<div class=\"w-full md:pt-2 md:pb-2 pt-4 pb-4 lg:px-4 px-2\">\n<div class=\"mx-auto max-w-7xl\">\n<div id=\"linktree\"\nclass=\"flex items-centre justify-start font-medium text-black bg-gray-200\">\n\n<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.google.com\">Link to landing page</a>\n</div>\n</div>\n</div>\n</section>`,
+    html_code: `<section>\n<div class=\"w-full md:pt-2 md:pbx-pb-2 pt-4 pbx-pb-4 lg:px-4 px-2\">\n<div class=\"mx-auto max-w-7xl\">\n<div id=\"linktree\"\nclass=\"flex items-centre justify-start font-medium text-black bg-gray-200\">\n\n<a target=\"_blank\" rel=\"noopener noreferrer nofollow\" href=\"https://www.google.com\">Link to landing page</a>\n</div>\n</div>\n</div>\n</section>`,
     id: null,
     title: 'Link',
     icon: `
