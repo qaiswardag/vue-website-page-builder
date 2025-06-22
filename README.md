@@ -121,17 +121,16 @@ bun install
 
 Get up and running quickly and initializing the builder in your Vue project. The following below code example demonstrates the minimal setup required to start building pages.
 
-- The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading.
-
 - You must explicitly call initPageBuilder() once in your app entry (e.g. main.ts) before using any Page Builder features.
 
-Then, use `getPageBuilder()` anywhere to access the shared builder instance.
+- Then, use `getPageBuilder()` anywhere to access the shared builder instance.
+
+- Import the CSS file once, ideally in your `main.js`/`main.ts` or root component for proper styling and automatic icon loading..
 
 ```typescript
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
-
 import { initPageBuilder } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
 
@@ -180,9 +179,12 @@ await pageBuilderService.startBuilder(configPageBuilder)
 </template>
 ```
 
-### Important: CSS Import Required The Page Builder requires its CSS file to be imported for
+### Important: CSS Import Required
 
-proper styling and automatic icon loading:
+The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading.
+
+**You only need to import the CSS file once, ideally in your `main.js`/`main.ts` or root component.**  
+If you have already imported it in your app entry, you do not need to import it again in individual components.
 
 ```vue
 <script setup>

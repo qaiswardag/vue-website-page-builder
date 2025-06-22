@@ -818,7 +818,7 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setComponents([])
   }
 
-  deleteSelectedComponent() {
+  async deleteSelectedComponent() {
     if (!this.getComponents.value || !this.getComponent.value) return
 
     // Find the index of the component to delete
@@ -834,6 +834,8 @@ export class PageBuilderService {
     // Remove the component from the array
     this.getComponents.value.splice(indexToDelete, 1)
     this.pageBuilderStateStore.setComponents(this.getComponents.value)
+    await nextTick()
+    await this.addListenersToEditableElements()
 
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)

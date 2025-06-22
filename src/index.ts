@@ -21,3 +21,5 @@ import './css/app.css'
 export { sharedPageBuilderPinia, sharedPageBuilderStore } from './stores/shared-store'
 
 // export { PageBuilderService } from './composables/PageBuilderService.ts'
+
+export { initPageBuilder, getPageBuilder } from './composables/builderInstance'
