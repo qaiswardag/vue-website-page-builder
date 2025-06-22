@@ -188,52 +188,41 @@ class PageBuilderClass {
     }
   }
 
+  /**
+   * Initializes the Page Builder with the provided configuration.
+   * Handles config validation, local storage, and sets up the builder state.
+   */
   async start(config: PageBuilderConfig): Promise<void> {
+    // Show a global loading indicator while initializing
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
+
+    // Wait briefly to ensure UI updates and async processes settle
     await this.delay(300)
-    //
-    //
-    //
-    //
-    //
+
+    // Store the provided config in the builder's state store
     this.pageBuilderStateStore.setPageBuilderConfig(config)
 
+    // Validate and normalize the config (ensure required fields are present)
     this.#validateConfig(config)
+
+    // Update the localStorage key name based on the config/resource
     this.#updateLocalStorageItemName()
 
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+    // If there is a local draft for this resource, mark it in the state
     if (await this.#hasLocalDraftForUpdate()) {
       this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
     }
-    //
-    //
-    //
-    //
-    //
-    //
-    //
 
+    // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
 
+    // Clear any selected HTML elements in the builder UI
     await this.clearHtmlSelection()
 
+    // Attach event listeners to all editable elements in the builder
     await this.addListenersToEditableElements()
 
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
+    // Hide the global loading indicator and mark the builder as started
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
     this.pageBuilderStateStore.setBuilderStarted(true)
   }
