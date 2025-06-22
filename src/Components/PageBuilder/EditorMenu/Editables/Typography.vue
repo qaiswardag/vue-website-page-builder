@@ -1,15 +1,15 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import tailwindFontSizes from '../../../../utils/builder/tailwind-font-sizes'
 import tailwindFontStyles from '../../../../utils/builder/tailwind-font-styles'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
+import { getPageBuilder } from '../../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const fontBase = ref(null)
 const fontDesktop = ref(null)
 const fontTablet = ref(null)

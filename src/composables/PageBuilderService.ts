@@ -16,7 +16,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { delay } from './delay'
 import { isEmptyObject } from '../helpers/isEmptyObject'
 
-class PageBuilderClass {
+export class PageBuilderService {
   // Class properties with types
   private nextTick: Promise<void>
   private containsPagebuilder: Element | null
@@ -36,6 +36,7 @@ class PageBuilderClass {
   private NoneListernesTags: string[]
   private delay: (ms?: number) => Promise<void>
   private hasStartedEditing: boolean = false
+  private qaiswardag: string = ''
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.nextTick = nextTick()
@@ -85,6 +86,16 @@ class PageBuilderClass {
     ]
 
     this.delay = delay
+  }
+
+  // Set the value
+  setQW(newValue: string): void {
+    this.qaiswardag = newValue
+  }
+
+  // Get the value
+  getQW(): string {
+    return this.qaiswardag
   }
 
   // Load existing content from HTML when in update mode
@@ -1834,5 +1845,3 @@ class PageBuilderClass {
     await this.#syncCurrentClasses()
   }
 }
-
-export default PageBuilderClass

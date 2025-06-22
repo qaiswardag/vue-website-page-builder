@@ -1,7 +1,6 @@
 <script setup>
 import { computed, ref, inject } from 'vue'
 import MediaLibraryModal from '../../../Modals/MediaLibraryModal.vue'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import { preloadImage } from '../../../../composables/preloadImage'
 import { delay } from '../../../../composables/delay'
@@ -10,9 +9,6 @@ import { delay } from '../../../../composables/delay'
 const pageBuilderStateStore = sharedPageBuilderStore
 const customMediaComponent = inject('CustomMediaComponent')
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
-
-const isLoading = ref(false)
 const getIsLoadingImage = ref(false)
 
 // use media library
@@ -32,11 +28,6 @@ const getBasePrimaryImage = computed(() => {
     loadingImage(pageBuilderStateStore.getBasePrimaryImage)
   }
   return pageBuilderStateStore.getBasePrimaryImage
-})
-
-// get current image from store
-const getElement = computed(() => {
-  return pageBuilderStateStore.getElement
 })
 
 const handleAddImage = function () {

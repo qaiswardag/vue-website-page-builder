@@ -1,6 +1,5 @@
 <script setup>
-import { onMounted, computed, ref, watch, provide, nextTick } from 'vue'
-import PageBuilderClass from '../composables/PageBuilderClass.ts'
+import { onMounted, computed, ref, watch, provide } from 'vue'
 import ModalBuilder from '../Components/Modals/ModalBuilder.vue'
 import Preview from './Preview.vue'
 import ComponentTopMenu from '../Components/PageBuilder/EditorMenu/Editables/ComponentTopMenu.vue'
@@ -12,8 +11,9 @@ import ToolbarOption from '../Components/PageBuilder/ToolbarOption/ToolbarOption
 import { delay } from '../composables/delay'
 import { useDebounce } from '../composables/useDebounce.ts'
 import DynamicModalBuilder from '../Components/Modals/DynamicModalBuilder.vue'
-import GlobalLoader from '@/Components/Loaders/GlobalLoader.vue'
-
+import GlobalLoader from '../Components/Loaders/GlobalLoader.vue'
+import { getPageBuilder } from '../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 /**
  * Props for PageBuilder component
  * @typedef {Object} Props
@@ -36,9 +36,6 @@ const props = defineProps({
 const internalPinia = sharedPageBuilderPinia
 
 const pageBuilderStateStore = sharedPageBuilderStore
-
-// Initialize PageBuilder with store
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Provide store for child components (all pointing to the same consolidated store)
 provide('pageBuilderStateStore', pageBuilderStateStore)
@@ -265,8 +262,11 @@ const ensureBuilderInitialized = function () {
   }
 }
 
-// Check if Builder started
+pageBuilderClass.setQW('PageBuilder.vue')
+const getQWPageBuilder = pageBuilderClass.getQW()
+
 onMounted(async () => {
+  // Check if Builder started
   await delay(5000)
   ensureBuilderInitialized()
 

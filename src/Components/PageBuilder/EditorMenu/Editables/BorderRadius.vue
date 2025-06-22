@@ -2,13 +2,12 @@
 import { ref, computed, watch } from 'vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import EditorAccordion from '../EditorAccordion.vue'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import tailwindBorderRadius from '../../../../utils/builder/tailwind-border-radius'
+import { getPageBuilder } from '../../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
-// Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const borderRadiusGlobal = ref(null)
 const borderRadiusTopLeft = ref(null)
 const borderRadiusTopRight = ref(null)

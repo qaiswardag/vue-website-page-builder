@@ -6,8 +6,10 @@ import PageBuilderSettings from '../Settings/PageBuilderSettings.vue'
 import AdvancedPageBuilderSettings from '../Settings/AdvancedPageBuilderSettings.vue'
 import { preloadImage } from '../../../composables/preloadImage'
 
-import PageBuilderClass from '../../../composables/PageBuilderClass'
 import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
+
+import { getPageBuilder } from '../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -15,8 +17,6 @@ const pageBuilderStateStore = sharedPageBuilderStore
 const getPageBuilderConfig = computed(() => {
   return pageBuilderStateStore.getPageBuilderConfig
 })
-
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 const showModalDeleteAllComponents = ref(false)
 //
@@ -95,6 +95,8 @@ const handleHTMLSettings = function () {
 const openHTMLSettings = function () {
   showHTMLSettings.value = true
 }
+
+const getQWPageBuilder = pageBuilderClass.getQW()
 </script>
 
 <template>

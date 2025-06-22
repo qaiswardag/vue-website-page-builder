@@ -1,16 +1,16 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import EditorAccordion from '../EditorAccordion.vue'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import tailwindBorderStyleWidthPlusColor from '../../../../utils/builder/tailwind-border-style-width-color'
 import tailwindColors from '../../../../utils/builder/tailwaind-colors'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
+import { getPageBuilder } from '../../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const borderStyle = ref(null)
 const borderWidth = ref(null)
 const borderColor = ref(null)

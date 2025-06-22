@@ -2,10 +2,11 @@
 import { useEditor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
 import { computed, onBeforeMount, onMounted, ref, watch } from 'vue'
-import PageBuilderClass from '../../composables/PageBuilderClass.ts'
 import Link from '@tiptap/extension-link'
 import DynamicModalBuilder from '../Modals/DynamicModalBuilder.vue'
 import { sharedPageBuilderStore } from '../../stores/shared-store'
+import { getPageBuilder } from '../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -25,8 +26,6 @@ const firstModalButtonFunctionDynamicModalBuilder = ref(null)
 const secondModalButtonFunctionDynamicModalBuilder = ref(null)
 const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
-
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement
 })
@@ -36,6 +35,7 @@ const textContent = computed(() => {
   if (editor.value) {
     return editor.value.getHTML()
   }
+  return null
 })
 
 const getElementtextContentLength = ref(0)

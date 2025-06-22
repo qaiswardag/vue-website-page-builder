@@ -5,8 +5,6 @@ export { default as Preview } from './PageBuilder/Preview.vue'
 // Export stores (consolidated into single store)
 export { usePageBuilderStateStore } from './stores/page-builder-state'
 
-export { default as PageBuilderClass } from './composables/PageBuilderClass.ts'
-
 // Export composables
 export { usePageBuilderModal } from './composables/usePageBuilderModal'
 
@@ -21,3 +19,5 @@ import './css/app.css'
 
 // Export shared store instances for external access
 export { sharedPageBuilderPinia, sharedPageBuilderStore } from './stores/shared-store'
+
+// export { PageBuilderService } from './composables/PageBuilderService.ts'

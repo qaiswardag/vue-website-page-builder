@@ -1,22 +1,16 @@
 <script setup lang="ts">
 import FullWidthElement from '../Components/Layouts/FullWidthElement.vue'
 import PageBuilder from '../PageBuilder/PageBuilder.vue'
-import PageBuilderClass from '../composables/PageBuilderClass.ts'
 
 import DemoMediaLibraryComponent from './DemoMediaLibraryComponent.vue'
 import DemoBuilderComponents from './DemoBuilderComponents.vue'
-import { computed, onMounted } from 'vue'
-import { sharedPageBuilderStore } from '../stores/shared-store'
+import { onMounted } from 'vue'
 import oldhtmlfromdb from './oldhtmlfromdb.json'
 import html from './html.json'
 import { rawHTML } from './rawHTML'
 
-const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
-
-const getLocalStorageItemName = computed(() => {
-  return pageBuilderStateStore.getLocalStorageItemName
-})
+import { getPageBuilder } from '../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 const features = [
   {

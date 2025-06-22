@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import componentHelpers from '../../../utils/html-elements/componentHelpers'
 import components from '../../../utils/html-elements/component'
-import PageBuilderClass from '../../../composables/PageBuilderClass'
 import { usePageBuilderModal } from '../../../composables/usePageBuilderModal'
 import { generateComponentPreview } from '../../../utils/componentPreviews'
 import type { ComponentObject } from '../../../types'
-import { sharedPageBuilderStore } from '../../../stores/shared-store'
+import { getPageBuilder } from '../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 defineProps({
   customMediaComponent: {
@@ -16,10 +16,6 @@ defineProps({
 
 // Get modal close function
 const { closeAddComponentModal } = usePageBuilderModal()
-
-const pageBuilderStateStore = sharedPageBuilderStore
-
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Super simple component addition with professional modal closing!
 const handleDropComponent = async function (componentObject: ComponentObject) {

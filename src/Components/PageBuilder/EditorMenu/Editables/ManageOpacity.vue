@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import tailwindOpacities from '../../../../utils/builder/tailwind-opacities'
 import {
   Listbox,
@@ -10,10 +9,11 @@ import {
   ListboxOptions,
 } from '@headlessui/vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
+import { getPageBuilder } from '../../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const opacityVueModel = ref(null)
 const getOpacity = computed(() => {
   return pageBuilderStateStore.getOpacity

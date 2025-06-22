@@ -1,13 +1,14 @@
 <script setup>
 import { ref, computed, watch } from 'vue'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import tailwindColors from '../../../../utils/builder/tailwaind-colors'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
+import { getPageBuilder } from '../../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
 const backgroundColor = ref(null)
 const getBackgroundColor = computed(() => {
   return pageBuilderStateStore.getBackgroundColor

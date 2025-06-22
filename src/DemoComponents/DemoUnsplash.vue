@@ -4,14 +4,13 @@ const unsplashKey = import.meta.env.VITE_UNSPLASH_KEY
 import { usePageBuilderModal } from '../composables/usePageBuilderModal'
 import { delay } from '../composables/delay'
 import { preloadImage } from '../composables/preloadImage'
-import PageBuilderClass from '../composables/PageBuilderClass.ts'
 import { sharedPageBuilderStore } from '../stores/shared-store'
+import { getPageBuilder } from '../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 const { closeMediaLibraryModal } = usePageBuilderModal()
 
 const pageBuilderStateStore = sharedPageBuilderStore
-
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 const getIsLoading = ref(false)
 const getIsLoadingImage = ref(false)

@@ -2,12 +2,13 @@
 import { ref, computed, watch } from 'vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import EditorAccordion from '../EditorAccordion.vue'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import { getPageBuilder } from '../../../../composables/builderInstance'
+
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const currentClasses = ref(null)
 const getCurrentClasses = computed(() => {
   return pageBuilderStateStore.getCurrentClasses

@@ -1,11 +1,6 @@
 <script setup lang="ts">
-import PageBuilderClass from '../../composables/PageBuilderClass'
-import { sharedPageBuilderStore } from '../../stores/shared-store'
-
-// Use shared store instance
-const pageBuilderStateStore = sharedPageBuilderStore
-
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+import { getPageBuilder } from '../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 </script>
 
 <template>

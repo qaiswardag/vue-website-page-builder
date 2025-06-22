@@ -2,13 +2,13 @@
 import { ref, computed, watch } from 'vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import EditorAccordion from '../EditorAccordion.vue'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import tailwindPaddingPlusMargin from '../../../../utils/builder/tailwind-padding-margin'
+import { getPageBuilder } from '../../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const fontVerticalPadding = ref(null)
 const fontHorizontalPadding = ref(null)
 const fontVerticalMargin = ref(null)

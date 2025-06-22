@@ -1,8 +1,6 @@
 <script setup>
 import { computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
-import PageBuilderClass from '../../../composables/PageBuilderClass.ts'
-
 import ClassEditor from './Editables/ClassEditor.vue'
 import ImageEditor from './Editables/ImageEditor.vue'
 import OpacityEditor from './Editables/OpacityEditor.vue'
@@ -16,12 +14,10 @@ import LinkEditor from './Editables/LinkEditor.vue'
 import TipTap from '../../TipTap/TipTap.vue'
 import EditGetElement from './Editables/EditGetElement.vue'
 import ElementEditor from './Editables/ElementEditor.vue'
-
+import { getPageBuilder } from '../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
-
-// Initialize PageBuilder with store
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // emit
 const emit = defineEmits(['closeEditor'])
@@ -42,6 +38,9 @@ const isHeadingElement = computed(() => {
     getElement.value instanceof HTMLImageElement
   )
 })
+
+pageBuilderClass.setQW('RightSidebarEditor.vue')
+const getQWPageBuilder = pageBuilderClass.getQW()
 </script>
 
 <template>

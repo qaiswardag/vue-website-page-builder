@@ -1,13 +1,12 @@
 <script setup>
 import { computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
 import EditorAccordion from '../EditorAccordion.vue'
+import { getPageBuilder } from '../../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
-
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement

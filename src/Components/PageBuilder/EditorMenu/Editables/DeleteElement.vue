@@ -2,12 +2,12 @@
 import EditorAccordion from '../EditorAccordion.vue'
 import { computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
+import { getPageBuilder } from '../../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 const getRestoredElement = computed(() => {
   return pageBuilderStateStore.getRestoredElement
 })

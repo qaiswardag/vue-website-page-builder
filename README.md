@@ -119,11 +119,31 @@ bun install
 
 ### Quick Start
 
-Get up and running quickly and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages.
+Get up and running quickly and initializing the builder in your Vue project. The following below code example demonstrates the minimal setup required to start building pages.
 
 - The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading.
-- Page Builder Initialization The Page Builder does not initialize automatically. Instead, you are
-  responsible for explicitly calling the `startBuilder` method before using any of its features.
+
+- You must explicitly call createPageBuilder() once in your app entry (e.g. main.ts) before using any Page Builder features.
+
+Then, use `getPageBuilder()` anywhere to access the shared builder instance.
+
+```typescript
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import App from './App.vue'
+
+import { createPageBuilder } from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+// 🔑 Initialize shared builder instance (MUST be called once)
+createPageBuilder()
+
+const app = createApp(App)
+app.use(createPinia())
+app.mount('#app')
+```
+
+**Accessing** the Shared Page Builder Instance
 
 ```vue
 <script setup>
@@ -134,40 +154,6 @@ import {
 } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
 
-const configPageBuilder = {
-  updateOrCreate: {
-   formType: 'create'
-    formName: 'article',
-  },
-}
-
-// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
-const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
-
-// Initializing Page Builder with essential configuration
-await pageBuilderClass.startBuilder(configPageBuilder)
-</script>
-
-<template>
-  <PageBuilder />
-</template>
-```
-
-Page Builder Initialization The Page Builder does not initialize automatically. Instead, you are
-responsible for explicitly calling the `startBuilder` method before using any of its features. This
-approach gives you full control over when and how the builder is configured — especially useful when
-dealing with asynchronous operations or user-defined settings. Before interacting with the Page
-Bilder, you must call the start method and pass in your configuration: ```vue
-
-```vue
-<script setup>
-import {
-  PageBuilder,
-  PageBuilderClass,
-  sharedPageBuilderStore,
-} from '@myissue/vue-website-page-builder'
-import '@myissue/vue-website-page-builder/style.css'
 
 const configPageBuilder = {
   updateOrCreate: {
@@ -176,11 +162,10 @@ const configPageBuilder = {
   },
 }
 
-// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing Page Builder with essential configuration
+
 await pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 
@@ -188,6 +173,90 @@ await pageBuilderClass.startBuilder(configPageBuilder)
   <PageBuilder />
 </template>
 ```
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
+
+# Remove this
 
 ### Important: CSS Import Required
 
@@ -323,7 +392,7 @@ const configPageBuilder = {
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing Page Builder with essential configuration
+
 await pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 
@@ -365,7 +434,6 @@ const configPageBuilder = {
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing Page Builder with essential configuration
 await pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 
@@ -417,7 +485,6 @@ import {
 } from "@myissue/vue-website-page-builder";
 import "@myissue/vue-website-page-builder/style.css";
 
-// Make sure to initialize these before using
 const pageBuilderStateStore = sharedPageBuilderStore;
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
 
@@ -468,7 +535,6 @@ import {
 } from "@myissue/vue-website-page-builder";
 import "@myissue/vue-website-page-builder/style.css";
 
-// Make sure to initialize these before using
 const pageBuilderStateStore = sharedPageBuilderStore;
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
 
@@ -502,7 +568,6 @@ import {
 } from "@myissue/vue-website-page-builder";
 import "@myissue/vue-website-page-builder/style.css";
 
-// Make sure to initialize these before using
 const pageBuilderStateStore = sharedPageBuilderStore;
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
 
@@ -552,7 +617,6 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing Page Builder with essential configuration
 await pageBuilderClass.startBuilder(configPageBuilder)
 
 // Populating page builder with existing resource content
@@ -597,7 +661,6 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing Page Builder with essential configuration
 await pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 
@@ -717,7 +780,6 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing Page Builder with essential configuration
 pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 

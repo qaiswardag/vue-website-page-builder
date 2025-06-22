@@ -1,11 +1,8 @@
 <script setup>
 import DynamicModalBuilder from '../../../Modals/DynamicModalBuilder.vue'
 import { computed, ref } from 'vue'
-import PageBuilderClass from '../../../../composables/PageBuilderClass.ts'
-import { sharedPageBuilderStore } from '../../../../stores/shared-store'
-
-// Use shared store instance
-const pageBuilderStateStore = sharedPageBuilderStore
+import { getPageBuilder } from '../../../../composables/builderInstance'
+const pageBuilderService = getPageBuilder()
 
 const showModalDeleteComponent = ref(false)
 // use dynamic model
@@ -20,7 +17,6 @@ const thirdButtonModal = ref(null)
 const firstModalButtonFunctionDynamicModalBuilder = ref(null)
 const secondModalButtonFunctionDynamicModalBuilder = ref(null)
 const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // remove component
 const deleteSelectedComponent = function (e) {
