@@ -146,7 +146,7 @@ app.mount('#app')
 
 #### Accessing the Shared Page Builder Service
 
-Once you have initialized the Page Builder service in your application, you can access the shared instance anywhere by using the getPageBuilder() composable. This ensures you are always working with the same underlying builder service and state, keeping your application consistent and synchronized.
+Once you have initialized the Page Builder service in your application (by calling `initPageBuilder()` once in your app entry), you can access the shared instance anywhere by using the `getPageBuilder()` composable. This ensures you are always working with the same underlying builder service and state, keeping your application consistent and synchronized.
 
 **Why Access the Shared Instance?**
 The Page Builder is implemented as a singleton service. This means there is only one instance that manages all page-building logic and state across your app. Using this shared instance avoids creating multiple, isolated copies of the builder, which can lead to data inconsistencies, synchronization issues, and unpredictable behavior.
@@ -155,20 +155,16 @@ The Page Builder is implemented as a singleton service. This means there is only
 By accessing the shared instance, your components and modules interact with the same centralized service, allowing smooth and reliable updates and coordination. This guarantees that all builder actions and state changes are reflected everywhere in your app.
 
 **How to Use the Shared Instance**
-Whenever you need to interact with the Page Builder service, import and call the getPageBuilder() function. This will return the existing instance you initialized earlier — no need to create a new one.
+Whenever you need to interact with the Page Builder service, import and call the `getPageBuilder()` function. This will return the existing instance you initialized earlier — no need to create a new one.
 
 ```vue
 <script setup>
-import {
-  PageBuilder,
-getPageBuilder,
-} from '@myissue/vue-website-page-builder'
+import { PageBuilder, getPageBuilder } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
-
 
 const configPageBuilder = {
   updateOrCreate: {
-    formType: 'create'
+    formType: 'create',
     formName: 'article',
   },
 }
@@ -184,12 +180,14 @@ await pageBuilderService.startBuilder(configPageBuilder)
 </template>
 ```
 
-### Important: CSS Import Required
+### Important: CSS Import Required The Page Builder requires its CSS file to be imported for
 
-The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading:
+proper styling and automatic icon loading:
 
-```js
+```vue
+<script setup>
 import '@myissue/vue-website-page-builder/style.css'
+</script>
 ```
 
 This import automatically includes:
@@ -227,8 +225,10 @@ The Page Builder automatically adds a `pbx-` prefix to **all CSS classes** it ge
 
 **When** you import the builder’s CSS file:
 
-```js
+```vue
+<script setup>
 import '@myissue/vue-website-page-builder/style.css'
+</script>
 ```
 
 **What does this mean for you?**
@@ -240,8 +240,10 @@ import '@myissue/vue-website-page-builder/style.css'
 
 If you use the Page Builder to generate HTML pages and want to render them in another application (such as React, Nuxt, or any server-side app), simply install the Page Builder package in your target project and import its CSS file. This ensures that all Tailwind and builder-specific styles are applied to the rendered HTML.
 
-```js
+```vue
+<script setup>
 import '@myissue/vue-website-page-builder/style.css'
+</script>
 ```
 
 This will apply all the necessary styles to any HTML output from the builder, even if you render it with `dangerouslySetInnerHTML`, `v-html`, or similar methods.
@@ -258,8 +260,10 @@ function MyPage({ html }) {
 
 **Example (Nuxt/Vue):**
 
-```js
+```vue
+<script setup>
 import '@myissue/vue-website-page-builder/style.css'
+</script>
 ```
 
 Then use `v-html` to render the HTML.
@@ -679,7 +683,7 @@ Example `existingResourceFromBackend`:
 
 ### Automatic Draft Recovery for Updates
 
-When you set `formType: 'update'` in your config, the Page Builder will automatically check for any unsaved draft in local storage for that resource.  
+When you set `formType: 'update'` in your config, the Page Builder will automatically check for any unsaved draft in local storage for that resource.
 If a draft is found, the user will be prompted to either continue where they left off or use the version currently loaded from your backend.
 
 - `formName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
@@ -776,3 +780,7 @@ We would greatly appreciate it if you could star the GitHub repository. Starring
 ## License
 
 [MIT License](./LICENSE)
+
+```
+
+```

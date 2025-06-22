@@ -9,6 +9,7 @@ import { preloadImage } from '../../../composables/preloadImage'
 import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
 
 import { getPageBuilder } from '../../../composables/builderInstance'
+import { delay } from '@/composables/delay'
 const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
@@ -18,6 +19,7 @@ const getPageBuilderConfig = computed(() => {
   return pageBuilderStateStore.getPageBuilderConfig
 })
 
+const isDeletingLayout = ref(false)
 const showModalDeleteAllComponents = ref(false)
 //
 // use dynamic model
@@ -50,24 +52,14 @@ const deleteAllComponents = function () {
   //
   // handle click
   thirdModalButtonFunctionDynamicModalBuilder.value = async function () {
+    isDeletingLayout.value = true
     pageBuilderService.deleteAllComponents()
     await pageBuilderService.clearHtmlSelection()
+    await pageBuilderService.removeItemComponentsLocalStorage()
 
-    if (
-      getPageBuilderConfig.value.updateOrCreate &&
-      typeof getPageBuilderConfig.value.updateOrCreate.formType === 'string'
-    ) {
-      if (getPageBuilderConfig.value.updateOrCreate.formType === 'create') {
-        await pageBuilderService.removeItemComponentsLocalStorage()
-      }
-      if (getPageBuilderConfig.value.updateOrCreate.formType === 'update') {
-        await pageBuilderService.removeItemComponentsLocalStorage()
-      }
-    }
-
-    // if(getPageBuilderConfig.updateOrCreate && getPageBuilderConfig.updateOrCreate){}
-
+    await delay(500)
     showModalDeleteAllComponents.value = false
+    isDeletingLayout.value = false
   }
   // end modal
 }
@@ -242,6 +234,7 @@ const openHTMLSettings = function () {
       :gridColumnAmount="gridColumnModal"
       :title="titleModal"
       :description="descriptionModal"
+      :isLoading="isDeletingLayout"
       :firstButtonText="firstButtonModal"
       :secondButtonText="secondButtonModal"
       :thirdButtonText="thirdButtonModal"

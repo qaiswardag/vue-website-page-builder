@@ -92,7 +92,7 @@ const thirdButtonBuilder = function () {
     <div
       class="pbx-min-h-32 pbx-h-max pbx-font-sans pbx-w-full pbx-relative pbx-inline-block pbx-align-bottom pbx-text-left pbx-overflow-hidden pbx-transform pbx-transition-all sm:pbx-align-middle"
     >
-      <div :class="{ 'pbx-pr-4 pbx-pb-4': simpleModal !== true }">
+      <div :class="{ 'pbx-pr-4 pbx-pb-4': !simpleModal }">
         <template v-if="simpleModal !== true">
           <div v-html="description" class="pbx-myPrimaryParagraph pbx-mb-6"></div>
         </template>
@@ -141,6 +141,11 @@ const thirdButtonBuilder = function () {
           <button
             v-if="thirdButtonText"
             class="pbx-myPrimaryButton pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-myPrimaryLinkColor focus:pbx-ring-myPrimaryLinkColor hover:pbx-bg-myPrimaryLinkColor pbx-w-full"
+            :class="[
+              type === 'danger' || type === 'delete'
+                ? 'pbx-bg-red-600 focus-visible:pbx-ring-red-600 focus:pbx-ring-red-600 hover:pbx-bg-red-600'
+                : 'pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-myPrimaryLinkColor focus:pbx-ring-myPrimaryLinkColor hover:pbx-bg-myPrimaryLinkColor',
+            ]"
             type="button"
             @click="thirdButtonBuilder"
           >

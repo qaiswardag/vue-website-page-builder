@@ -19,7 +19,7 @@ const secondModalButtonFunctionDynamicModalBuilder = ref(null)
 const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 
 // remove component
-const deleteSelectedComponent = function (e) {
+const deleteSelectedComponent = function () {
   showModalDeleteComponent.value = true
   typeModal.value = 'delete'
   gridColumnModal.value = 2

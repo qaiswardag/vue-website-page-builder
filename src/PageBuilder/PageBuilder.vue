@@ -240,18 +240,18 @@ const handleRestoreOriginalContent = async function () {
   descriptionModalRestore.value =
     'Are you sure you want to restore the original content from the database? This will overwrite your current page layout.'
   firstButtonRestore.value = 'Close'
-  secondButtonRestore.value = 'Restore original Content'
-  thirdButtonRestore.value = null
+  secondButtonRestore.value = null
+  thirdButtonRestore.value = 'Restore original Content'
 
   firstModalButtonRestoreFunction.value = function () {
     showModalRestore.value = false
   }
 
-  secondModalButtonRestoreFunction.value = async function () {
+  secondModalButtonRestoreFunction.value = async function () {}
+  thirdModalButtonRestoreFunction.value = async function () {
     await pageBuilderService.restoreOriginalContent()
     showModalRestore.value = false
   }
-  thirdModalButtonRestoreFunction.value = async function () {}
 
   // end modal
 }
