@@ -201,7 +201,7 @@ const handlerRumeEditingForUpdate = async function () {
 
   titleModalResumeEditing.value = 'Continue Your Work?'
   descriptionModalResumeEditing.value =
-    'We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently saved?'
+    'We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?'
   firstButtonResumeEditing.value = 'Use Saved Version'
   secondButtonResumeEditing.value = null
   thirdButtonResumeEditing.value = 'Continue Where I Left Off'
