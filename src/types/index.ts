@@ -90,6 +90,96 @@ export interface PageBuilderStateStore {
   [key: string]: unknown
 }
 
+export type FormName =
+  // --- Content ---
+  | 'post'
+  | 'article'
+  | 'blog'
+  | 'news'
+  | 'page'
+  | 'faq'
+  | 'testimonial'
+  | 'case-study'
+  | 'press-release'
+
+  // --- Commerce ---
+  | 'product'
+  | 'products'
+  | 'category'
+  | 'collection'
+  | 'brand'
+  | 'coupon'
+  | 'discount'
+  | 'shop'
+  | 'cart'
+  | 'checkout'
+
+  // --- User / Team ---
+  | 'profile'
+  | 'account'
+  | 'team'
+  | 'team-member'
+  | 'author'
+  | 'customer'
+  | 'user'
+
+  // --- Business / Services ---
+  | 'service'
+  | 'services'
+  | 'package'
+  | 'plan'
+  | 'pricing'
+  | 'subscription'
+
+  // --- Job / Careers ---
+  | 'job'
+  | 'job-listing'
+  | 'career'
+  | 'applicant'
+
+  // --- Events / Scheduling ---
+  | 'event'
+  | 'events'
+  | 'webinar'
+  | 'appointment'
+  | 'reservation'
+  | 'schedule'
+
+  // --- Directory / Listings ---
+  | 'listing'
+  | 'directory'
+  | 'location'
+  | 'vendor'
+  | 'company'
+
+  // --- Media ---
+  | 'gallery'
+  | 'image'
+  | 'video'
+  | 'media'
+  | 'audio'
+  | 'file'
+
+  // --- Support / Feedback ---
+  | 'contact'
+  | 'support'
+  | 'ticket'
+  | 'feedback'
+  | 'review'
+  | 'inquiry'
+  | 'report'
+
+  // --- Misc ---
+  | 'setting'
+  | 'configuration'
+  | 'integration'
+  | 'theme'
+  | 'language'
+  | 'menu'
+  | 'navigation'
+  | 'tag'
+  | 'meta'
+
 // User interfaces
 export interface User {
   name: string
@@ -103,22 +193,22 @@ export interface PageBuilderUser {
 
 // Page Builder Configuration interface
 export interface PageBuilderConfig {
-  updateOrCreate?: {
+  updateOrCreate: {
     formType: 'create' | 'update'
-    formName?: string
+    formName: FormName
   }
   pageBuilderLogo?: { src: string } | null
-  resourceData?: { title: string; id: number } | null
+  resourceData?: { title: string; id?: number } | null
   userForPageBuilder?: { name: string } | null
   [key: string]: unknown
   userSettings?: {
-    theme: 'light' | 'dark' | 'auto'
-    language: string
-    autoSave: boolean
+    theme?: 'light' | 'dark' | 'auto'
+    language?: string
+    autoSave?: boolean
     [key: string]: unknown
   } | null
   settings?: {
-    brandColor: string
+    brandColor?: string
     [key: string]: unknown
   } | null
 }

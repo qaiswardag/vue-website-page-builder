@@ -139,7 +139,7 @@ The HTML of each component must be wrapped inside a `<section></section>`. The P
 </div>
 ```
 
-```javascript
+```typescript
 interface Components {
   html_code: string
   id: string | null

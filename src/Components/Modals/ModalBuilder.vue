@@ -10,6 +10,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  type: {
+    type: String,
+    default: 'success',
+  },
   maxWidth: {
     type: String,
     default: '2xl',
@@ -64,7 +68,7 @@ const maxWidthClass = computed(() => {
         ></div>
 
         <div
-          class="pbx-relative pbx-inline-block pbx-bg-white pbx-rounded-xl pbx-text-left pbx-overflow-hidden pbx-shadow-xl pbx-transform pbx-transition-all pbx-max-w-[96vh] pbx-max-h-[98vh] pbx-overflow-y-auto pbx-w-full pbx-px-4"
+          class="pbx-relative pbx-inline-block pbx-bg-white pbx-rounded-xl pbx-text-left pbx-overflow-hidden pbx-shadow-xl pbx-transform pbx-transition-all pbx-max-w-[96vh] pbx-max-h-[98vh] pbx-overflow-y-auto pbx-w-full"
           :class="[
             maxWidthClass ? maxWidthClass : '',
             minHeight ? minHeight : '',
@@ -72,7 +76,11 @@ const maxWidthClass = computed(() => {
           ]"
         >
           <div
-            class="pbx-h-16 pbx-flex pbx-items-center pbx-justify-between pbx-border-b pbx-border-gray-200 pbx-bg-white pbx-mb-2"
+            class="pbx-h-16 pbx-bg-white pbx-px-4 pbx-border-b pbx-border-gray-200 pbx-mb-2 pbx-flex pbx-items-center pbx-justify-between"
+            :class="[
+              type === 'warning' ? 'pbx-bg-yellow-200' : '',
+              type === 'delete' ? 'pbx-bg-yellow-600' : '',
+            ]"
           >
             <h3 as="h3" class="pbx-myQuaternaryHeader pbx-my-0 pbx-py-0">
               {{ title }}
@@ -84,7 +92,9 @@ const maxWidthClass = computed(() => {
               <span class="material-symbols-outlined"> close </span>
             </div>
           </div>
-          <slot></slot>
+          <div class="pbx-px-4 pbx-min-h-32">
+            <slot></slot>
+          </div>
         </div>
       </div>
     </div>

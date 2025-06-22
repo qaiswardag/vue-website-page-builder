@@ -8,7 +8,6 @@ import EditGetElement from '../Components/PageBuilder/EditorMenu/Editables/EditG
 import BuilderComponents from '../Components/Modals/BuilderComponents.vue'
 import RightSidebarEditor from '../Components/PageBuilder/EditorMenu/RightSidebarEditor.vue'
 import { sharedPageBuilderPinia, sharedPageBuilderStore } from '../stores/shared-store'
-import { updateOrCreateIsFalsy } from '../helpers/passedPageBuilderConfig'
 import ToolbarOption from '../Components/PageBuilder/ToolbarOption/ToolbarOption.vue'
 import { delay } from '../composables/delay'
 import { useDebounce } from '../composables/useDebounce.ts'
@@ -56,12 +55,8 @@ const closeAddComponentModal = () => {
 }
 provide('closeAddComponentModal', closeAddComponentModal)
 
-const getConfigPageBuilder = computed(() => {
-  return pageBuilderStateStore.getConfigPageBuilder
-})
-
-const getIsSaving = computed(() => {
-  return pageBuilderStateStore.getIsSaving
+const getPageBuilderConfig = computed(() => {
+  return pageBuilderStateStore.getPageBuilderConfig
 })
 
 const getMenuRight = computed(() => {
@@ -70,14 +65,15 @@ const getMenuRight = computed(() => {
 const previewCurrentDesign = function () {
   pageBuilderClass.previewCurrentDesign()
 }
+const openAppNotStartedModal = ref(false)
 const openPageBuilderPreviewModal = ref(false)
 
+const handlAppNotStartedModal = function () {
+  openAppNotStartedModal.value = false
+}
 const handlePageBuilderPreview = function () {
   previewCurrentDesign()
-
   openPageBuilderPreviewModal.value = true
-  // handle click
-  // end modal
 }
 
 const firstPageBuilderPreviewModalButton = function () {
@@ -105,13 +101,22 @@ const handleAddComponent = async function () {
   // end modal
 }
 
-const getComponents = computed(() => {
-  const components = pageBuilderStateStore.getComponents
-  return components
+const getHasLocalDraftForUpdate = computed(() => {
+  return pageBuilderStateStore.getHasLocalDraftForUpdate
 })
 
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement
+})
+
+const getComponents = computed(() => {
+  return pageBuilderStateStore.getComponents
+})
+
+watch(getHasLocalDraftForUpdate, (newVal) => {
+  if (newVal) {
+    handlerRumeEditingForUpdate()
+  }
 })
 
 const getElementAttributes = computed(() => {
@@ -155,42 +160,23 @@ const handleSelectComponent = function (componentObject) {
 
 const draggableZone = ref(null)
 
-const defaultConfigValues = {
-  updateOrCreate: {
-    formType: 'create',
-    formName: 'post',
-  },
-}
+const getIsLoadingGlobal = computed(() => {
+  return pageBuilderStateStore.getIsLoadingGlobal
+})
+const getIsSaving = computed(() => {
+  return pageBuilderStateStore.getIsSaving
+})
 
-const handleConfig = function (config) {
-  // Set config for page builder if not set by user
-  if (
-    config === null ||
-    config === undefined ||
-    (config && Object.keys(config).length === 0 && config.constructor === Object)
-  ) {
-    pageBuilderClass.applyPageBuilderConfig(defaultConfigValues)
-    return
+const getIsResumeEditing = computed(() => {
+  if (pageBuilderStateStore.getIsResumeEditing) {
+    handlerRumeEditingForUpdate()
   }
+  return pageBuilderStateStore.getIsResumeEditing
+})
+const getIsRestoring = computed(() => {
+  return pageBuilderStateStore.getIsRestoring
+})
 
-  if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
-    if (updateOrCreateIsFalsy(config)) {
-      return
-    }
-  }
-}
-
-watch(
-  () => getConfigPageBuilder.value,
-  (config) => {
-    pageBuilderClass.updateLocalStorageItemName()
-
-    if (config && config.updateOrCreate && config.updateOrCreate.formType === 'create') {
-      pageBuilderClass.mountComponentsToDOM()
-    }
-  },
-  { immediate: true },
-)
 const gridColumnModalResumeEditing = ref(Number(1))
 const typeModal = ref('')
 const showModalResumeEditing = ref(false)
@@ -203,51 +189,75 @@ const firstModalButtonResumeEditingFunction = ref(null)
 const secondModalButtonResumeEditingFunction = ref(null)
 const thirdModalButtonResumeEditingFunction = ref(null)
 
-const isLoadingResumeEditing = ref(null)
-
 const handlerRumeEditingForUpdate = async function () {
   await pageBuilderClass.clearHtmlSelection()
 
   typeModal.value = 'default'
+  showModalResumeEditing.value = true
+
   titleModalResumeEditing.value = 'Continue Your Work?'
   descriptionModalResumeEditing.value =
     'We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently saved?'
   firstButtonResumeEditing.value = 'Use Saved Version'
-  secondButtonResumeEditing.value = null
+  secondButtonResumeEditing.value = 'null'
   thirdButtonResumeEditing.value = 'Continue Where I Left Off'
-  showModalResumeEditing.value = true
 
   firstModalButtonResumeEditingFunction.value = function () {
     showModalResumeEditing.value = false
   }
 
   secondModalButtonResumeEditingFunction.value = function () {}
+
   thirdModalButtonResumeEditingFunction.value = async function () {
-    isLoadingResumeEditing.value = true
-    await delay(600)
     await pageBuilderClass.resumeEditingForUpdate()
-    isLoadingResumeEditing.value = false
+
     showModalResumeEditing.value = false
   }
 
   // end modal
 }
 
-onMounted(async () => {
-  const config = getConfigPageBuilder.value
-  handleConfig(config)
+const gridColumnModalRestore = ref(Number(1))
+const typeModalRestore = ref('')
+const showModalRestore = ref(false)
+const titleModalRestore = ref('')
+const descriptionModalRestore = ref('')
+const firstButtonRestore = ref('')
+const secondButtonRestore = ref(null)
+const thirdButtonRestore = ref(null)
+const firstModalButtonRestoreFunction = ref(null)
+const secondModalButtonRestoreFunction = ref(null)
+const thirdModalButtonRestoreFunction = ref(null)
 
-  pageBuilderClass.updateLocalStorageItemName()
-
-  pageBuilderClass.deleteOldPageBuilderLocalStorage()
-
+const handleRestoreOriginalContent = async function () {
   await pageBuilderClass.clearHtmlSelection()
 
-  await pageBuilderClass.addListenersToEditableElements()
+  typeModalRestore.value = 'delete'
+  showModalRestore.value = true
 
-  if (await pageBuilderClass.hasLocalDraftForUpdate()) {
-    handlerRumeEditingForUpdate()
+  titleModalRestore.value = 'Do you want to restore the original content from the database?'
+  descriptionModalRestore.value =
+    'Are you sure you want to restore the original content from the database? This will overwrite your current page layout.'
+  firstButtonRestore.value = 'Close'
+  secondButtonRestore.value = 'Use original Content'
+  thirdButtonRestore.value = 'Trick'
+
+  firstModalButtonRestoreFunction.value = function () {
+    showModalRestore.value = false
   }
+
+  secondModalButtonRestoreFunction.value = async function () {
+    await pageBuilderClass.restoreOriginalContent()
+    showModalRestore.value = false
+  }
+  thirdModalButtonRestoreFunction.value = async function () {
+    console.log('This is a test button')
+  }
+
+  // end modal
+}
+onMounted(async () => {
+  openAppNotStartedModal.value = true
 })
 </script>
 
@@ -257,22 +267,25 @@ onMounted(async () => {
     class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-scroll"
   >
     <div id="pagebuilder-top-area" class="lg:pbx-px-4 pbx-pt-2 pbx-pb-4 pbx-mx-4 pbx-mb-4 pbx-mt-2">
+      <p class="pbx-font-bold pbx-my-4 pbx-py-4 pbx-bottom-2 pbx-border-red-300 rounded-3xl">
+        ok getIsLoadingGlobal: {{ JSON.stringify(getIsLoadingGlobal) }}
+      </p>
       <div
         @click.self="pageBuilderClass.clearHtmlSelection()"
-        class="pbx-flex pbx-justify-between pbx-items-center pbx-pb-2 pbx-border-b pbx-border-gray-200"
+        class="pbx-min-h-24 pbx-flex pbx-justify-between pbx-items-center pbx-pb-2 pbx-border-b pbx-border-gray-200"
       >
         <!-- Logo # start -->
         <div @click="pageBuilderClass.clearHtmlSelection()">
           <div
             v-if="
-              getConfigPageBuilder &&
-              getConfigPageBuilder.pageBuilderLogo &&
-              getConfigPageBuilder.pageBuilderLogo.src
+              getPageBuilderConfig &&
+              getPageBuilderConfig.pageBuilderLogo &&
+              getPageBuilderConfig.pageBuilderLogo.src
             "
             class="pbx-flex pbx-items-center pbx-divide-x pbx-divide-gray-200"
           >
             <div id="pagebuilder-logo-main" class="pbx-pr-4">
-              <img class="pbx-h-6" :src="getConfigPageBuilder.pageBuilderLogo.src" alt="Logo" />
+              <img class="pbx-h-6" :src="getPageBuilderConfig.pageBuilderLogo.src" alt="Logo" />
             </div>
             <span class="pbx-myPrimaryParagraph pbx-font-medium pbx-pl-4">Editing Page </span>
           </div>
@@ -302,6 +315,18 @@ onMounted(async () => {
     ></BuilderComponents>
 
     <ModalBuilder
+      title="The builder hasn’t started ye"
+      :showModalBuilder="openAppNotStartedModal"
+      @closeMainModalBuilder="handlAppNotStartedModal"
+      type="delete"
+      maxWidth="2xl"
+    >
+      The builder hasn’t started yet. If this screen doesn’t go away soon, it may just need a little
+      setup in the background. You can safely contact support and ask them to initialize the builder
+      by running the start method.
+    </ModalBuilder>
+
+    <ModalBuilder
       title="Preview"
       :showModalBuilder="openPageBuilderPreviewModal"
       @closeMainModalBuilder="firstPageBuilderPreviewModalButton"
@@ -312,7 +337,7 @@ onMounted(async () => {
 
     <DynamicModalBuilder
       :showDynamicModalBuilder="showModalResumeEditing"
-      :isLoading="isLoadingResumeEditing"
+      :isLoading="getIsResumeEditing"
       :type="typeModal"
       :gridColumnAmount="gridColumnModalResumeEditing"
       :title="titleModalResumeEditing"
@@ -323,6 +348,23 @@ onMounted(async () => {
       @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonResumeEditingFunction"
       @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonResumeEditingFunction"
       @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonResumeEditingFunction"
+    >
+      <header></header>
+      <main></main>
+    </DynamicModalBuilder>
+    <DynamicModalBuilder
+      :showDynamicModalBuilder="showModalRestore"
+      :isLoading="getIsRestoring"
+      :type="typeModalRestore"
+      :gridColumnAmount="gridColumnModalRestore"
+      :title="titleModalRestore"
+      :description="descriptionModalRestore"
+      :firstButtonText="firstButtonRestore"
+      :secondButtonText="secondButtonRestore"
+      :thirdButtonText="thirdButtonRestore"
+      @firstModalButtonFunctionDynamicModalBuilder="firstModalButtonRestoreFunction"
+      @secondModalButtonFunctionDynamicModalBuilder="secondModalButtonRestoreFunction"
+      @thirdModalButtonFunctionDynamicModalBuilder="thirdModalButtonRestoreFunction"
     >
       <header></header>
       <main></main>
@@ -398,6 +440,38 @@ onMounted(async () => {
                   </span>
                 </div>
                 <div>Save</div>
+              </button>
+              <button
+                class="pbx-mySecondaryButton pbx-h-6 pbx-flex pbx-gap-2"
+                @click.stop="
+                  async () => {
+                    await pageBuilderClass.clearHtmlSelection()
+                    await handleRestoreOriginalContent()
+                  }
+                "
+                type="button"
+                :disabled="getIsRestoring"
+              >
+                <div
+                  v-if="!getIsRestoring"
+                  class="pbx-h-10 pbx-w-4 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-justify-center"
+                >
+                  <span class="material-symbols-outlined">cloud_circle</span>
+                </div>
+                <div
+                  v-if="getIsRestoring"
+                  class="pbx-h-10 pbx-w-4 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-justify-center"
+                >
+                  <span class="pbx-relative pbx-flex pbx-size-3">
+                    <span
+                      class="pbx-absolute pbx-inline-flex pbx-h-full pbx-w-full pbx-animate-ping pbx-rounded-full pbx-bg-gray-400 pbx-opacity-75"
+                    ></span>
+                    <span
+                      class="pbx-relative pbx-inline-flex pbx-size-3 pbx-rounded-full pbx-bg-green-200"
+                    ></span>
+                  </span>
+                </div>
+                <div>Restore Original Content</div>
               </button>
 
               <!-- Continue editing # end -->

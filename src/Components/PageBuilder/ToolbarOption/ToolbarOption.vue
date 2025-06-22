@@ -12,8 +12,8 @@ import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-const getConfigPageBuilder = computed(() => {
-  return pageBuilderStateStore.getConfigPageBuilder
+const getPageBuilderConfig = computed(() => {
+  return pageBuilderStateStore.getPageBuilderConfig
 })
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
@@ -54,18 +54,18 @@ const deleteAllComponents = function () {
     await pageBuilderClass.clearHtmlSelection()
 
     if (
-      getConfigPageBuilder.value.updateOrCreate &&
-      typeof getConfigPageBuilder.value.updateOrCreate.formType === 'string'
+      getPageBuilderConfig.value.updateOrCreate &&
+      typeof getPageBuilderConfig.value.updateOrCreate.formType === 'string'
     ) {
-      if (getConfigPageBuilder.value.updateOrCreate.formType === 'create') {
+      if (getPageBuilderConfig.value.updateOrCreate.formType === 'create') {
         await pageBuilderClass.removeItemComponentsLocalStorage()
       }
-      if (getConfigPageBuilder.value.updateOrCreate.formType === 'update') {
+      if (getPageBuilderConfig.value.updateOrCreate.formType === 'update') {
         await pageBuilderClass.removeItemComponentsLocalStorage()
       }
     }
 
-    // if(getConfigPageBuilder.updateOrCreate && getConfigPageBuilder.updateOrCreate){}
+    // if(getPageBuilderConfig.updateOrCreate && getPageBuilderConfig.updateOrCreate){}
 
     showModalDeleteAllComponents.value = false
   }
@@ -106,24 +106,24 @@ const openHTMLSettings = function () {
       <div
         class="pbx-flex pbx-items-center pbx-myPrimaryTag pbx-py-0"
         v-if="
-          getConfigPageBuilder &&
-          getConfigPageBuilder.userForPageBuilder &&
-          getConfigPageBuilder.userForPageBuilder.name &&
-          (!getConfigPageBuilder.userForPageBuilder.image ||
-            (typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
-              getConfigPageBuilder.userForPageBuilder.image?.length < 2))
+          getPageBuilderConfig &&
+          getPageBuilderConfig.userForPageBuilder &&
+          getPageBuilderConfig.userForPageBuilder.name &&
+          (!getPageBuilderConfig.userForPageBuilder.image ||
+            (typeof getPageBuilderConfig.userForPageBuilder.image === 'string' &&
+              getPageBuilderConfig.userForPageBuilder.image?.length < 2))
         "
       >
         <div
           class="pbx-text-white pbx-rounded-full pbx-bg-myPrimaryBrandColor pbx-flex pbx-justify-center pbx-items-center pbx-text-xs pbx-h-8 pbx-min-h-8 pbx-max-h-8 pbx-w-8 pbx-min-w-8 pbx-max-w-8 pbx-font-normal"
         >
           {{
-            typeof getConfigPageBuilder.userForPageBuilder.name === 'string' &&
-            getConfigPageBuilder.userForPageBuilder.name[0]
+            typeof getPageBuilderConfig.userForPageBuilder.name === 'string' &&
+            getPageBuilderConfig.userForPageBuilder.name[0]
           }}
         </div>
         <div class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal">
-          {{ getConfigPageBuilder.userForPageBuilder.name }}
+          {{ getPageBuilderConfig.userForPageBuilder.name }}
         </div>
       </div>
 
@@ -133,12 +133,12 @@ const openHTMLSettings = function () {
       <div
         class="pbx-flex pbx-items-center lg:pbx-myPrimaryTag pbx-py-0 pbx-gap-4 pbx-w-max"
         v-if="
-          getConfigPageBuilder &&
-          getConfigPageBuilder.userForPageBuilder &&
-          getConfigPageBuilder.userForPageBuilder.name &&
-          getConfigPageBuilder.userForPageBuilder.image &&
-          typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
-          getConfigPageBuilder.userForPageBuilder.image.length > 2
+          getPageBuilderConfig &&
+          getPageBuilderConfig.userForPageBuilder &&
+          getPageBuilderConfig.userForPageBuilder.name &&
+          getPageBuilderConfig.userForPageBuilder.image &&
+          typeof getPageBuilderConfig.userForPageBuilder.image === 'string' &&
+          getPageBuilderConfig.userForPageBuilder.image.length > 2
         "
       >
         <div
@@ -146,12 +146,12 @@ const openHTMLSettings = function () {
         >
           <img
             alt="avatar"
-            :src="`${getConfigPageBuilder.userForPageBuilder.image}`"
+            :src="`${getPageBuilderConfig.userForPageBuilder.image}`"
             class="pbx-block pbx-inset-0 pbx-object-top pbx-h-8 pbx-min-h-8 pbx-max-h-8 pbx-w-8 pbx-min-w-8 pbx-max-w-8 pbx-object-cover pbx-rounded-full"
           />
         </div>
         <div class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal">
-          {{ getConfigPageBuilder.userForPageBuilder.name }}
+          {{ getPageBuilderConfig.userForPageBuilder.name }}
         </div>
       </div>
 

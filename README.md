@@ -258,8 +258,8 @@ const configPageBuilder = {
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing with essential configuration
-pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
+// Initializing Page Builder with essential configuration
+await pageBuilderClass.start(configPageBuilder)
 </script>
 
 <template>
@@ -271,12 +271,12 @@ pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
 
 You can display your company logo in the Page Builder interface and set the currently logged-in user by passing both a logo URL and user information in your config object:
 
-- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.applyPageBuilderConfig(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
+- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.start(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
 - **Logged-in User:** Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., name and user image).
 
 **Basic Usage:**
 
-- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderClass.applyPageBuilderConfig(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
+- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderClass.start(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
 
 Basic Usage:
 
@@ -300,8 +300,8 @@ const configPageBuilder = {
 const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing with essential configuration
-pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
+// Initializing Page Builder with essential configuration
+await pageBuilderClass.start(configPageBuilder)
 </script>
 
 <template>
@@ -343,7 +343,7 @@ const configPageBuilder = {
 
 Example Getting HTML Content from Local Storage for Form Submission
 
-```js
+```vue
 <script setup>
 import {
     PageBuilder,
@@ -364,7 +364,7 @@ const configPageBuilder = {
   },
 };
 
-pageBuilderClass.applyPageBuilderConfig(configPageBuilder);
+await pageBuilderClass.start(configPageBuilder);
 
 
 let storedComponents = pageBuilderClass.loadStoredComponentsFromStorage();
@@ -394,7 +394,7 @@ After you have successfully created a new resource (such as a post, article, or 
 
 Always call these methods after a successful post or resource creation to ensure users start with a fresh builder the next time they create a new resource.
 
-```js
+```vue
 <script setup>
 import {
     PageBuilder,
@@ -415,7 +415,7 @@ const configPageBuilder = {
   },
 };
 
-pageBuilderClass.applyPageBuilderConfig(configPageBuilder);
+await pageBuilderClass.start(configPageBuilder);
 
 const createResource = async function(){
 pageBuilderClass.deleteAllComponents();
@@ -428,7 +428,7 @@ await pageBuilderClass.removeItemComponentsLocalStorage();
 
 After you have successfully updated an existing resource (such as a post, article, or listing) using the Page Builder with formType: 'update', you should clear the builder’s state and remove the corresponding local storage entry. This prevents outdated drafts from being loaded the next time you edit the same resource.
 
-```js
+```vue
 <script setup>
 import {
     PageBuilder,
@@ -449,7 +449,7 @@ const configPageBuilder = {
   },
 };
 
-pageBuilderClass.applyPageBuilderConfig(configPageBuilder);
+await pageBuilderClass.start(configPageBuilder);
 
 const updateResource = async function() {
   pageBuilderClass.deleteAllComponents();
@@ -468,7 +468,7 @@ Each save is stored in local storage using a unique key. The key is determined b
 
 You can further customize and uniquely identify the storage key by providing a `formName` in your `configPageBuilder`:
 
-```js
+```vue
 <script setup>
 import {
   PageBuilder,
@@ -476,7 +476,6 @@ import {
   sharedPageBuilderStore,
 } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
-
 
 const configPageBuilder = {
   updateOrCreate: {
@@ -488,14 +487,12 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing with essential configuration
-pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
+// Initializing Page Builder with essential configuration
+await pageBuilderClass.start(configPageBuilder)
 
 // Populating page builder with existing resource content
 pageBuilderClass.mountComponentsToDOM(existingResourceFromBackend)
 </script>
-
-
 
 <template>
   <PageBuilder />
@@ -515,7 +512,7 @@ If a user started creating a new resource but hasn't finished (e.g., they want t
 
 **Example: Set `formType` to "create" for continuing a new resource draft**
 
-```js
+```vue
 <script setup>
 import {
   PageBuilder,
@@ -535,8 +532,8 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing with essential configuration
-pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
+// Initializing Page Builder with essential configuration
+await pageBuilderClass.start(configPageBuilder)
 </script>
 
 <template>
@@ -553,11 +550,11 @@ To load existing content that was created with this PageBuilder from any backend
 - Use `sharedPageBuilderStore` to ensure the external `PageBuilderClass` and internal `PageBuilder` component share the same state.
 - Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state. Use the `mountComponentsToDOM()` method to load existing content into the page builder.
 - The `PageBuilderClass` uses the shared store to maintain state consistency between external operations and the internal `PageBuilder` component, ensuring that when you load content externally it appears correctly in the PageBuilder interface.
-- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.applyPageBuilderConfig(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
+- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.start(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
 
 **Example: Set `formType` to "update" for editing an existing resource**
 
-```js
+```vue
 <script setup>
 import {
   PageBuilder,
@@ -592,7 +589,6 @@ const existingResourceFromBackend = [
     title: 'Header H3',
   },
 ]
-
 
 // Populating page builder with existing resource content from backend
 pageBuilderClass.mountComponentsToDOM(existingResourceFromBackend)
@@ -636,7 +632,7 @@ If a draft is found, the user will be prompted to either continue where they lef
   - Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., name and user image).
   - No extra setup is required—just set `formType: 'update'` and the feature is enabled by default.
 
-```js
+```vue
 <script setup>
 import {
   PageBuilder,
@@ -656,8 +652,8 @@ const configPageBuilder = {
 
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
-// Initializing with essential configuration
-pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
+// Initializing Page Builder with essential configuration
+pageBuilderClass.start(configPageBuilder)
 </script>
 
 <template>
@@ -691,11 +687,11 @@ import YourCustomBuilderComponents from './ComponentsPageBuilder/YourCustomBuild
 
 If fonts or Material Icons are not displaying correctly, verify that:
 
-1. **CSS Import**: Ensure you're importing the CSS file:
+**CSS Import**: Ensure you're importing the CSS file:
 
-   ```js
-   import '@myissue/vue-website-page-builder/style.css'
-   ```
+```js
+import '@myissue/vue-website-page-builder/style.css'
+```
 
 ## Contributing
 

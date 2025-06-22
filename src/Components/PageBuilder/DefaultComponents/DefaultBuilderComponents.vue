@@ -54,7 +54,6 @@ const getSvgPreview = (title: string) => {
       <div
         class="pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 lg:pbx-grid-cols-4 pbx-gap-4"
       >
-        NOW: Did user include custom media component: {{ customMediaComponent ? 'true' : 'false' }}
         <div
           v-for="helper in componentHelpers"
           :key="helper.title"

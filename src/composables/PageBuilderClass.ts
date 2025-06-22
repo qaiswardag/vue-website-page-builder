@@ -14,6 +14,7 @@ import { computed, ref, nextTick } from 'vue'
 import type { ComputedRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { delay } from './delay'
+import { isEmptyObject } from '../helpers/isEmptyObject'
 
 class PageBuilderClass {
   // Class properties with types
@@ -38,7 +39,6 @@ class PageBuilderClass {
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.nextTick = nextTick()
-
     this.hasStartedEditing = false
     this.containsPagebuilder = document.querySelector('#contains-pagebuilder')
     this.pageBuilderStateStore = pageBuilderStateStore
@@ -93,9 +93,149 @@ class PageBuilderClass {
     this.pageBuilderStateStore.setElement(null)
     await this.#removeHoveredAndSelected()
   }
-  // Load existing content from HTML when in update mode
-  applyPageBuilderConfig(data: PageBuilderConfig): void {
-    this.pageBuilderStateStore.applyPageBuilderConfig(data)
+
+  #ensureUpdateOrCreateConfig(config: PageBuilderConfig): void {
+    // Case A: updateOrCreate is missing or an empty object
+    if (!config.updateOrCreate || (config.updateOrCreate && isEmptyObject(config.updateOrCreate))) {
+      const updatedConfig = {
+        ...config,
+        updateOrCreate: {
+          formType: 'create',
+          formName: 'post',
+        },
+      } as const
+
+      this.pageBuilderStateStore.setPageBuilderConfig(updatedConfig)
+      return
+    }
+
+    // Case B: formType is valid ('create' or 'update'), but formName is missing or an empty string
+    if (
+      (config.updateOrCreate &&
+        typeof config.updateOrCreate.formType === 'string' &&
+        (config.updateOrCreate.formType === 'create' ||
+          config.updateOrCreate.formType === 'update') &&
+        typeof config.updateOrCreate.formName !== 'string') ||
+      (typeof config.updateOrCreate.formName === 'string' &&
+        config.updateOrCreate.formName.length === 0)
+    ) {
+      const updatedConfig = {
+        ...config,
+        updateOrCreate: {
+          formType: config.updateOrCreate.formType,
+          formName: 'post',
+        },
+      } as const
+      this.pageBuilderStateStore.setPageBuilderConfig(updatedConfig)
+    }
+
+    // Case C: formType is missing or not a valid string like ('create' or 'update') but formName is valid string
+    if (
+      (config.updateOrCreate && typeof config.updateOrCreate.formType !== 'string') ||
+      (typeof config.updateOrCreate.formType === 'string' &&
+        config.updateOrCreate.formType !== 'create' &&
+        config.updateOrCreate.formType !== 'update' &&
+        typeof config.updateOrCreate.formName === 'string' &&
+        config.updateOrCreate.formName.length !== 0)
+    ) {
+      const updatedConfig = {
+        ...config,
+        updateOrCreate: {
+          formType: 'create',
+          formName: config.updateOrCreate.formName,
+        },
+      } as const
+
+      this.pageBuilderStateStore.setPageBuilderConfig(updatedConfig)
+      return
+    }
+
+    // Case D: formType exists but is not 'create' or 'update', and formName is missing or invalid
+    if (
+      config.updateOrCreate &&
+      typeof config.updateOrCreate.formType === 'string' &&
+      config.updateOrCreate.formType !== 'create' &&
+      config.updateOrCreate.formType !== 'update' &&
+      typeof config.formName !== 'string'
+    ) {
+      const updatedConfig = {
+        ...config,
+        updateOrCreate: {
+          formType: 'create',
+          formName: 'post',
+        },
+      } as const
+
+      this.pageBuilderStateStore.setPageBuilderConfig(updatedConfig)
+    }
+  }
+
+  #validateConfig(config: PageBuilderConfig): void {
+    const defaultConfigValues = {
+      updateOrCreate: {
+        formType: 'create',
+        formName: 'post',
+      },
+    } as const
+
+    // Set config for page builder if not set by user
+    if (!config || (config && Object.keys(config).length === 0 && config.constructor === Object)) {
+      this.pageBuilderStateStore.setPageBuilderConfig(defaultConfigValues)
+    }
+
+    if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
+      this.#ensureUpdateOrCreateConfig(config)
+    }
+  }
+
+  async start(config: PageBuilderConfig): Promise<void> {
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
+    await this.delay(2000)
+    //
+    //
+    //
+    //
+    //
+    this.pageBuilderStateStore.setPageBuilderConfig(config)
+
+    this.#validateConfig(config)
+    this.#updateLocalStorageItemName()
+
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    if (await this.#hasLocalDraftForUpdate()) {
+      this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+    }
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    this.pageBuilderStateStore.setBuilderStarted(true)
+
+    this.deleteOldPageBuilderLocalStorage()
+
+    await this.clearHtmlSelection()
+
+    await this.addListenersToEditableElements()
+
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
 
   #applyElementClassChanges(
@@ -265,7 +405,7 @@ class PageBuilderClass {
 
   handleAutoSave = async () => {
     this.startEditing()
-    const passedConfig = this.pageBuilderStateStore.getConfigPageBuilder
+    const passedConfig = this.pageBuilderStateStore.getPageBuilderConfig
 
     // Check if config is set
     if (passedConfig && passedConfig.userSettings) {
@@ -280,7 +420,7 @@ class PageBuilderClass {
         try {
           this.pageBuilderStateStore.setIsSaving(true)
           await this.saveComponentsLocalStorage()
-          await this.delay(300)
+          await this.delay(500)
         } catch (err) {
           console.error('Error trying auto save.', err)
         } finally {
@@ -303,7 +443,7 @@ class PageBuilderClass {
 
   handleManualSave = async () => {
     this.startEditing()
-    const passedConfig = this.pageBuilderStateStore.getConfigPageBuilder
+    const passedConfig = this.pageBuilderStateStore.getPageBuilderConfig
 
     // Check if config is set
     if (passedConfig && passedConfig.userSettings) {
@@ -575,7 +715,6 @@ class PageBuilderClass {
     )
   }
 
-  // border color, style & width / start
   handleBorderStyle(borderStyle?: string): void {
     this.#applyElementClassChanges(
       borderStyle,
@@ -611,7 +750,6 @@ class PageBuilderClass {
     this.#applyElementClassChanges(color, tailwindColors.textColorVariables, 'setTextColor')
   }
 
-  // border radius / start
   handleBorderRadiusGlobal(borderRadiusGlobal?: string): void {
     this.#applyElementClassChanges(
       borderRadiusGlobal,
@@ -879,16 +1017,16 @@ class PageBuilderClass {
       .replace(/^-+|-+$/g, '') // Remove leading/trailing hyphens
   }
 
-  updateLocalStorageItemName(): void {
+  #updateLocalStorageItemName(): void {
     const updateOrCreate =
-      this.pageBuilderStateStore.getConfigPageBuilder &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType
 
-    const resourceData = this.pageBuilderStateStore.getConfigPageBuilder?.resourceData
+    const resourceData = this.pageBuilderStateStore.getPageBuilderConfig?.resourceData
 
     const resourceFormName =
-      this.pageBuilderStateStore.getConfigPageBuilder?.updateOrCreate?.formName
+      this.pageBuilderStateStore.getPageBuilderConfig?.updateOrCreate?.formName
 
     // Logic for create resource
     if (updateOrCreate === 'create') {
@@ -906,9 +1044,6 @@ class PageBuilderClass {
     // Logic for create
     // Logic for update and with resource form name
     if (updateOrCreate === 'update') {
-      //
-      //
-      //
       if (typeof resourceFormName === 'string' && resourceFormName.length > 0) {
         //
         //
@@ -1053,14 +1188,16 @@ class PageBuilderClass {
       })
     })
 
-    if (this.getLocalStorageItemName.value) {
-      localStorage.setItem(
-        this.getLocalStorageItemName.value,
-        JSON.stringify({
-          pageBuilderContentSavedAt: new Date().toISOString(),
-          components: componentsToSave,
-        }),
-      )
+    // Save to localStorage with pageBuilderContentSavedAt using the correct key
+    const dataToSave = {
+      components: componentsToSave,
+      pageBuilderContentSavedAt: new Date().toISOString(),
+    }
+
+    const keyForSavingFromDomToLocal = this.getLocalStorageItemName.value
+
+    if (keyForSavingFromDomToLocal && typeof keyForSavingFromDomToLocal === 'string') {
+      localStorage.setItem(keyForSavingFromDomToLocal, JSON.stringify(dataToSave))
     }
 
     // No DOM mutation here!
@@ -1085,10 +1222,10 @@ class PageBuilderClass {
   //
   deleteOldPageBuilderLocalStorage(): void {
     if (
-      this.pageBuilderStateStore.getConfigPageBuilder &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
     ) {
       let oldCountLocalStorages = 0
       const deletedItemsLog: { Number: number; Key: string; SavedAt: string }[] = []
@@ -1137,14 +1274,14 @@ class PageBuilderClass {
     }
   }
 
-  async hasLocalDraftForUpdate(): Promise<boolean> {
+  async #hasLocalDraftForUpdate(): Promise<boolean> {
     if (this.hasStartedEditing) return false
 
     if (
-      this.pageBuilderStateStore.getConfigPageBuilder &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
     ) {
       const key = this.getLocalStorageItemName.value
       if (typeof key === 'string') {
@@ -1152,10 +1289,13 @@ class PageBuilderClass {
         if (draft) {
           try {
             await this.delay(500)
-            const draftParsed = JSON.parse(draft)
-            const dbComponents = this.getComponents.value
-            return JSON.stringify(draftParsed.components) !== JSON.stringify(dbComponents)
-          } catch (e) {
+
+            return true
+            // const dbComponents = this.getComponents.value
+            // const draftParsed = JSON.parse(draft)
+            // return JSON.stringify(draftParsed.components) !== JSON.stringify(dbComponents)
+          } catch (err) {
+            console.error('Unable to mount components to DOM.', err)
             return false
           }
         }
@@ -1169,31 +1309,71 @@ class PageBuilderClass {
     this.hasStartedEditing = true
   }
 
+  //
   async resumeEditingForUpdate() {
     if (
-      this.pageBuilderStateStore.getConfigPageBuilder &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
     ) {
       const key = this.getLocalStorageItemName.value
+
+      if (typeof key === 'string') {
+        const updateDraftFromLocalStorage = localStorage.getItem(key)
+
+        if (typeof updateDraftFromLocalStorage === 'string') {
+          this.mountComponentsToDOM(updateDraftFromLocalStorage)
+        }
+
+        return
+
+        if (true) {
+          const draftParsed = JSON.parse(draft)
+          const dbComponents = this.getComponents.value
+          const data = JSON.stringify(draftParsed.components) !== JSON.stringify(dbComponents)
+
+          return
+        }
+      }
       if (typeof key === 'string') {
         const savedCurrentDesign = localStorage.getItem(key)
         if (savedCurrentDesign) {
           try {
+            this.pageBuilderStateStore.setIsResumeEditing(true)
             const parsed = JSON.parse(savedCurrentDesign)
             if (parsed && Array.isArray(parsed.components)) {
+              await this.delay(300)
               this.pageBuilderStateStore.setComponents(parsed.components)
-              localStorage.removeItem(key)
               await nextTick()
               await this.addListenersToEditableElements()
               await this.handleAutoSave()
+              this.pageBuilderStateStore.setIsResumeEditing(false)
+              localStorage.removeItem(key)
             }
-          } catch (e) {
-            console.error('Failed to parse local draft:', e)
+          } catch (err) {
+            console.error('Failed to parse local draft:', err)
           }
         }
       }
+    }
+  }
+
+  //
+  async restoreOriginalContent() {
+    if (
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
+    ) {
+      this.pageBuilderStateStore.setIsRestoring(true)
+
+      await nextTick()
+      await this.addListenersToEditableElements()
+
+      await this.delay(300)
+      this.pageBuilderStateStore.setIsRestoring(false)
     }
   }
 
@@ -1476,9 +1656,9 @@ class PageBuilderClass {
    * @param data - JSON string (e.g., '[{"html_code":"...","id":"123","title":"..."}]')
    *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
    */
-  setComponentsFromData(data: string): void {
+  #setComponentsFromData(htmlString: string): void {
     // Auto-detect if input is JSON or HTML
-    const trimmedData = data.trim()
+    const trimmedData = htmlString.trim()
 
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
       // Looks like JSON - parse as JSON
@@ -1492,7 +1672,7 @@ class PageBuilderClass {
   }
 
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
-  #parseJSONComponents(jsonData: string): void {
+  async #parseJSONComponents(jsonData: string): Promise<void> {
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
@@ -1544,18 +1724,8 @@ class PageBuilderClass {
 
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
 
-      // Save to localStorage with pageBuilderContentSavedAt using the correct key
-      const dataToSave = {
-        pageBuilderContentSavedAt: parsedData.pageBuilderContentSavedAt || new Date().toISOString(),
-        components: savedCurrentDesign,
-      }
-
-      if (
-        this.getLocalStorageItemName.value &&
-        typeof this.getLocalStorageItemName.value === 'string'
-      ) {
-        localStorage.setItem(this.getLocalStorageItemName.value, JSON.stringify(dataToSave))
-      }
+      await this.clearHtmlSelection()
+      await this.addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing JSON components:', error)
       this.pageBuilderStateStore.setComponents([])
@@ -1602,37 +1772,39 @@ class PageBuilderClass {
     }
   }
 
-  // Load existing content from HTML when in update mode
-  mountComponentsToDOM(data?: string, injectCustomHTMLSections?: boolean): void {
+  /**
+   * Mount Components to DOM
+   * @param passedData - HTML/JSON string to inject (optional)
+   * @param preferLocalStorage - if true, always try localStorage first
+   */
+  mountComponentsToDOM(passedData: string): void {
     this.pageBuilderStateStore.setComponents([])
 
-    if (!this.pageBuilderStateStore.getConfigPageBuilder) return
+    if (!this.pageBuilderStateStore.getPageBuilderConfig) return
 
-    if (injectCustomHTMLSections && data !== undefined) {
-      this.setComponentsFromData(data)
-    }
-
-    const storedData = this.loadStoredComponentsFromStorage()
+    const localStorageData = this.loadStoredComponentsFromStorage()
 
     if (
-      this.pageBuilderStateStore.getConfigPageBuilder &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'create'
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'create'
     ) {
-      if (storedData) {
-        this.setComponentsFromData(storedData)
+      if (localStorageData) {
+        this.#setComponentsFromData(localStorageData)
+        return
       }
     }
 
     if (
-      this.pageBuilderStateStore.getConfigPageBuilder &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getConfigPageBuilder.updateOrCreate.formType === 'update'
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
     ) {
-      if (data) {
-        this.setComponentsFromData(data)
+      if (passedData) {
+        this.#setComponentsFromData(passedData)
+        return
       }
     }
   }
@@ -1646,6 +1818,7 @@ class PageBuilderClass {
   }
 
   async initializeElementStyles(): Promise<void> {
+    if (!this.pageBuilderStateStore.getPageBuilderConfig) return
     await new Promise((resolve) => requestAnimationFrame(resolve))
 
     // handle custom URL

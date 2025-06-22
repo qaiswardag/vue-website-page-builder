@@ -2,20 +2,16 @@
 import { ref, computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
-import PageBuilderClass from '../../../composables/PageBuilderClass.ts'
 import { isEmptyObject } from '../../../helpers/isEmptyObject.ts'
 const version = __APP_VERSION__
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-// Initialize PageBuilder with store
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
-
 const downloadedComponents = ref(null)
 
-const getConfigPageBuilder = computed(() => {
-  return pageBuilderStateStore.getConfigPageBuilder
+const getPageBuilderConfig = computed(() => {
+  return pageBuilderStateStore.getPageBuilderConfig
 })
 
 const getComponents = computed(() => {
@@ -80,7 +76,7 @@ const handleDownloadHTML = function () {
                         scope="col"
                         class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-font-medium pbx-text-gray-500 pbx-uppercase pbx-tracking-wider"
                       >
-                        Component
+                        App
                       </th>
                       <th
                         scope="col"
@@ -120,8 +116,8 @@ const handleDownloadHTML = function () {
           <div
             class="pbx-mt-4"
             v-if="
-              getConfigPageBuilder?.resourceData &&
-              !isEmptyObject(getConfigPageBuilder.resourceData)
+              getPageBuilderConfig?.resourceData &&
+              !isEmptyObject(getPageBuilderConfig.resourceData)
             "
           >
             <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">Resource Data</h4>
@@ -147,7 +143,7 @@ const handleDownloadHTML = function () {
                     </tr>
                   </thead>
                   <tbody class="pbx-bg-white pbx-divide-y pbx-divide-gray-200">
-                    <tr v-if="getConfigPageBuilder?.resourceData?.title">
+                    <tr v-if="getPageBuilderConfig?.resourceData?.title">
                       <td
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
                       >
@@ -157,11 +153,11 @@ const handleDownloadHTML = function () {
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
-                          {{ getConfigPageBuilder.resourceData.title }}
+                          {{ getPageBuilderConfig.resourceData.title }}
                         </div>
                       </td>
                     </tr>
-                    <tr v-if="getConfigPageBuilder?.resourceData?.id">
+                    <tr v-if="getPageBuilderConfig?.resourceData?.id">
                       <td
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
                       >
@@ -171,7 +167,7 @@ const handleDownloadHTML = function () {
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
-                          {{ getConfigPageBuilder.resourceData.id }}
+                          {{ getPageBuilderConfig.resourceData.id }}
                         </div>
                       </td>
                     </tr>
@@ -186,8 +182,8 @@ const handleDownloadHTML = function () {
           <div
             class="pbx-mt-8"
             v-if="
-              getConfigPageBuilder?.userForPageBuilder &&
-              !isEmptyObject(getConfigPageBuilder.userForPageBuilder)
+              getPageBuilderConfig?.userForPageBuilder &&
+              !isEmptyObject(getPageBuilderConfig.userForPageBuilder)
             "
           >
             <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">User Information</h4>
@@ -223,7 +219,7 @@ const handleDownloadHTML = function () {
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
-                          {{ getConfigPageBuilder.userForPageBuilder.name }}
+                          {{ getPageBuilderConfig.userForPageBuilder.name }}
                         </div>
                       </td>
                     </tr>
@@ -235,9 +231,9 @@ const handleDownloadHTML = function () {
                       </td>
                       <td
                         v-if="
-                          getConfigPageBuilder.userForPageBuilder.image &&
-                          typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
-                          getConfigPageBuilder.userForPageBuilder.image.length > 2
+                          getPageBuilderConfig.userForPageBuilder.image &&
+                          typeof getPageBuilderConfig.userForPageBuilder.image === 'string' &&
+                          getPageBuilderConfig.userForPageBuilder.image.length > 2
                         "
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
@@ -245,7 +241,7 @@ const handleDownloadHTML = function () {
                           <div class="pbx-flex pbx-items-center pbx-space-x-3">
                             <img
                               class="pbx-block pbx-inset-0 pbx-object-top pbx-h-10 pbx-min-h-10 pbx-max-h-10 pbx-w-10 pbx-min-w-10 pbx-max-w-10 pbx-object-cover pbx-rounded-full"
-                              :src="getConfigPageBuilder.userForPageBuilder.image"
+                              :src="getPageBuilderConfig.userForPageBuilder.image"
                               alt="image"
                             />
                           </div>
@@ -260,14 +256,14 @@ const handleDownloadHTML = function () {
                       </td>
                       <td
                         v-if="
-                          getConfigPageBuilder.userForPageBuilder.image &&
-                          typeof getConfigPageBuilder.userForPageBuilder.image === 'string' &&
-                          getConfigPageBuilder.userForPageBuilder.image.length > 2
+                          getPageBuilderConfig.userForPageBuilder.image &&
+                          typeof getPageBuilderConfig.userForPageBuilder.image === 'string' &&
+                          getPageBuilderConfig.userForPageBuilder.image.length > 2
                         "
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
-                          {{ getConfigPageBuilder.userForPageBuilder.image }}
+                          {{ getPageBuilderConfig.userForPageBuilder.image }}
                         </div>
                       </td>
                     </tr>
@@ -282,8 +278,8 @@ const handleDownloadHTML = function () {
           <div
             class="pbx-mt-8"
             v-if="
-              getConfigPageBuilder?.userSettings &&
-              !isEmptyObject(getConfigPageBuilder.userSettings)
+              getPageBuilderConfig?.userSettings &&
+              !isEmptyObject(getPageBuilderConfig.userSettings)
             "
           >
             <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">User Settings</h4>
@@ -309,7 +305,7 @@ const handleDownloadHTML = function () {
                     </tr>
                   </thead>
                   <tbody class="pbx-bg-white pbx-divide-y pbx-divide-gray-200">
-                    <tr v-if="getConfigPageBuilder?.userSettings?.theme">
+                    <tr v-if="getPageBuilderConfig?.userSettings?.theme">
                       <td
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
                       >
@@ -319,11 +315,11 @@ const handleDownloadHTML = function () {
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
-                          {{ getConfigPageBuilder.userSettings.theme }}
+                          {{ getPageBuilderConfig.userSettings.theme }}
                         </div>
                       </td>
                     </tr>
-                    <tr v-if="getConfigPageBuilder?.userSettings?.language">
+                    <tr v-if="getPageBuilderConfig?.userSettings?.language">
                       <td
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
                       >
@@ -333,11 +329,11 @@ const handleDownloadHTML = function () {
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
-                          {{ getConfigPageBuilder.userSettings.language }}
+                          {{ getPageBuilderConfig.userSettings.language }}
                         </div>
                       </td>
                     </tr>
-                    <tr v-if="getConfigPageBuilder?.userSettings?.autoSave !== undefined">
+                    <tr v-if="getPageBuilderConfig?.userSettings?.autoSave !== undefined">
                       <td
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
                       >
@@ -350,19 +346,19 @@ const handleDownloadHTML = function () {
                           <span
                             class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
-                              getConfigPageBuilder.userSettings.autoSave
+                              getPageBuilderConfig.userSettings.autoSave
                                 ? 'bg-green-100 text-green-800'
                                 : 'bg-red-100 text-red-800'
                             "
                           >
                             {{
-                              getConfigPageBuilder.userSettings.autoSave ? 'Enabled' : 'Disabled'
+                              getPageBuilderConfig.userSettings.autoSave ? 'Enabled' : 'Disabled'
                             }}
                           </span>
                         </div>
                       </td>
                     </tr>
-                    <tr v-if="getConfigPageBuilder?.userSettings?.notifications !== undefined">
+                    <tr v-if="getPageBuilderConfig?.userSettings?.notifications !== undefined">
                       <td
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-font-medium pbx-text-gray-900"
                       >
@@ -375,13 +371,13 @@ const handleDownloadHTML = function () {
                           <span
                             class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
-                              getConfigPageBuilder.userSettings.notifications
+                              getPageBuilderConfig.userSettings.notifications
                                 ? 'bg-green-100 text-green-800'
                                 : 'bg-red-100 text-red-800'
                             "
                           >
                             {{
-                              getConfigPageBuilder.userSettings.notifications
+                              getPageBuilderConfig.userSettings.notifications
                                 ? 'Enabled'
                                 : 'Disabled'
                             }}
@@ -400,8 +396,9 @@ const handleDownloadHTML = function () {
           <div
             class="pbx-mt-8"
             v-if="
-              getConfigPageBuilder.pageBuilderLogo &&
-              !isEmptyObject(getConfigPageBuilder.pageBuilderLogo)
+              getPageBuilderConfig &&
+              getPageBuilderConfig.pageBuilderLogo &&
+              !isEmptyObject(getPageBuilderConfig.pageBuilderLogo)
             "
           >
             <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">Logo Configuration</h4>
@@ -440,7 +437,7 @@ const handleDownloadHTML = function () {
                           <div class="pbx-flex pbx-items-center pbx-space-x-3">
                             <img
                               class="pbx-h-4"
-                              :src="getConfigPageBuilder.pageBuilderLogo.src"
+                              :src="getPageBuilderConfig.pageBuilderLogo.src"
                               alt="Logo"
                             />
                           </div>
@@ -461,7 +458,7 @@ const handleDownloadHTML = function () {
                             <div class="pbx-pr-6">
                               <div class="pbx-flex pbx-items-center pbx-space-x-3">
                                 <span class="pbx-whitespace-nowrap">{{
-                                  getConfigPageBuilder.pageBuilderLogo.src
+                                  getPageBuilderConfig.pageBuilderLogo.src
                                 }}</span>
                               </div>
                             </div>
@@ -480,8 +477,8 @@ const handleDownloadHTML = function () {
           <div
             class="pbx-mt-8"
             v-if="
-              getConfigPageBuilder?.updateOrCreate &&
-              !isEmptyObject(getConfigPageBuilder.updateOrCreate)
+              getPageBuilderConfig?.updateOrCreate &&
+              !isEmptyObject(getPageBuilderConfig.updateOrCreate)
             "
           >
             <h4 class="pbx-myQuaternaryHeader pbx-text-sm pbx-mb-2">Form Type</h4>
@@ -520,26 +517,26 @@ const handleDownloadHTML = function () {
                           <span
                             class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
-                              getConfigPageBuilder.updateOrCreate === 'create'
+                              getPageBuilderConfig.updateOrCreate === 'create'
                                 ? 'bg-green-100 text-green-800'
                                 : 'bg-blue-100 text-blue-800'
                             "
                           >
                             <span
                               v-if="
-                                getConfigPageBuilder &&
-                                getConfigPageBuilder.updateOrCreate.formType === 'create'
+                                getPageBuilderConfig &&
+                                getPageBuilderConfig.updateOrCreate.formType === 'create'
                               "
                             >
-                              {{ getConfigPageBuilder.updateOrCreate.formType }}
+                              {{ getPageBuilderConfig.updateOrCreate.formType }}
                             </span>
                             <span
                               v-if="
-                                getConfigPageBuilder &&
-                                getConfigPageBuilder.updateOrCreate.formType === 'update'
+                                getPageBuilderConfig &&
+                                getPageBuilderConfig.updateOrCreate.formType === 'update'
                               "
                             >
-                              {{ getConfigPageBuilder.updateOrCreate.formType }}
+                              {{ getPageBuilderConfig.updateOrCreate.formType }}
                             </span>
                           </span>
                         </div>
@@ -547,8 +544,8 @@ const handleDownloadHTML = function () {
                     </tr>
                     <tr
                       v-if="
-                        getConfigPageBuilder.updateOrCreate.formName &&
-                        getConfigPageBuilder.updateOrCreate.formName.length > 0
+                        getPageBuilderConfig.updateOrCreate.formName &&
+                        getPageBuilderConfig.updateOrCreate.formName.length > 0
                       "
                     >
                       <td
@@ -563,7 +560,7 @@ const handleDownloadHTML = function () {
                           <span
                             class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                           >
-                            {{ getConfigPageBuilder.updateOrCreate.formName }}
+                            {{ getPageBuilderConfig.updateOrCreate.formName }}
                           </span>
                         </div>
                       </td>
@@ -615,7 +612,7 @@ const handleDownloadHTML = function () {
         </div>
         <div class="pbx-px-4 pbx-pb-8 pbx-pt-4 pbx-text-white pbx-text-xs pbx-break-all">
           <p class="pbx-myPrimaryParagraph pbx-text-xs pbx-text-white">
-            config: {{ JSON.stringify(getConfigPageBuilder, null, 4) }}
+            config: {{ JSON.stringify(getPageBuilderConfig, null, 4) }}
           </p>
         </div>
       </div>

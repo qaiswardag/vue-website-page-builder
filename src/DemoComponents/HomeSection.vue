@@ -18,10 +18,6 @@ const getLocalStorageItemName = computed(() => {
   return pageBuilderStateStore.getLocalStorageItemName
 })
 
-const getComponents = computed(() => {
-  return pageBuilderStateStore.getComponents
-})
-
 const features = [
   {
     name: 'Live Drag & Drop Builder',
@@ -71,8 +67,8 @@ const configPageBuilder = {
     image: '/jane_doe.jpg',
   },
   updateOrCreate: {
-    formType: 'create' as 'create',
-    formName: 'news',
+    formType: 'update',
+    formName: 'collection',
   },
   pageBuilderLogo: {
     src: '/logo/logo.svg',
@@ -82,29 +78,32 @@ const configPageBuilder = {
     id: 1,
   },
   userSettings: {
-    theme: 'light' as 'light',
+    theme: 'light',
     language: 'en',
     autoSave: true,
   },
   settings: {
     brandColor: '#DB93B0',
   },
-}
-
-pageBuilderClass.applyPageBuilderConfig(configPageBuilder)
+} as const
 
 onMounted(async () => {
-  if (typeof getLocalStorageItemName.value === 'string' && getLocalStorageItemName.value) {
-    const value = localStorage.getItem(getLocalStorageItemName.value)
+  await pageBuilderClass.start(configPageBuilder)
+  pageBuilderClass.mountComponentsToDOM(JSON.stringify(html))
 
-    if (value) {
-      pageBuilderClass.mountComponentsToDOM(JSON.stringify(value))
-    } else {
-      pageBuilderClass.mountComponentsToDOM(JSON.stringify(html), true)
-      // pageBuilderClass.mountComponentsToDOM(rawHTML, true)
-      // pageBuilderClass.mountComponentsToDOM(JSON.stringify(oldhtmlfromdb), true)
-    }
-  }
+  //
+  //
+  //
+  //
+  //
+  //
+
+  // Testing: Creating New Resource
+  // pageBuilderClass.mountComponentsToDOM(rawHTML, true)
+  // pageBuilderClass.mountComponentsToDOM(JSON.stringify(oldhtmlfromdb), true)
+
+  // Testing: Updating Resource
+  // pageBuilderClass.mountComponentsToDOM(JSON.stringify(html))
 })
 </script>
 

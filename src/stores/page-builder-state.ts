@@ -60,7 +60,12 @@ interface PageBuilderState {
   currentPreviewImage: string | null
 
   // User State
+  builderStarted: boolean
+  isLoadingGlobal: boolean
   isSaving: boolean
+  hasLocalDraftForUpdate: boolean
+  isResumeEditing: boolean
+  isRestoring: boolean
 }
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
@@ -116,7 +121,12 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     currentPreviewImage: null,
 
     // User State
+    builderStarted: false,
+    isLoadingGlobal: false,
     isSaving: false,
+    hasLocalDraftForUpdate: false,
+    isResumeEditing: false,
+    isRestoring: false,
   }),
   getters: {
     // Core Page Builder Getters
@@ -250,7 +260,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       return state.basePrimaryImage
     },
 
-    getConfigPageBuilder(state: PageBuilderState): PageBuilderConfig | null {
+    getPageBuilderConfig(state: PageBuilderState): PageBuilderConfig | null {
       return state.configPageBuilder
     },
 
@@ -263,7 +273,12 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
 
     // User Getters
+    getBuilderStarted: (state: PageBuilderState): boolean => state.builderStarted,
+    getIsLoadingGlobal: (state: PageBuilderState): boolean => state.isLoadingGlobal,
     getIsSaving: (state: PageBuilderState): boolean => state.isSaving,
+    getHasLocalDraftForUpdate: (state: PageBuilderState): boolean => state.hasLocalDraftForUpdate,
+    getIsResumeEditing: (state: PageBuilderState): boolean => state.isResumeEditing,
+    getIsRestoring: (state: PageBuilderState): boolean => state.isRestoring,
   },
   actions: {
     setComponentArrayAddMethod(payload: string | null): void {
@@ -436,7 +451,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       localStorage.setItem('preview', payload)
     },
 
-    applyPageBuilderConfig(payload: PageBuilderConfig | null): void {
+    setPageBuilderConfig(payload: PageBuilderConfig | null): void {
       this.configPageBuilder = payload
     },
 
@@ -449,8 +464,23 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
 
     // User Actions
+    setBuilderStarted(payload: boolean): void {
+      this.builderStarted = payload
+    },
+    setIsLoadingGlobal(payload: boolean): void {
+      this.isLoadingGlobal = payload
+    },
     setIsSaving(payload: boolean): void {
       this.isSaving = payload
+    },
+    setHasLocalDraftForUpdate(payload: boolean): void {
+      this.hasLocalDraftForUpdate = payload
+    },
+    setIsResumeEditing(payload: boolean): void {
+      this.isResumeEditing = payload
+    },
+    setIsRestoring(payload: boolean): void {
+      this.isRestoring = payload
     },
   },
 })
