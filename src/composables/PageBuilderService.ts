@@ -24,7 +24,7 @@ export class PageBuilderService {
   private pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>
   private getTextAreaVueModel: ComputedRef<string | null>
   private getLocalStorageItemName: ComputedRef<string | null>
-  private getCurrentImage: ComputedRef<ImageObject>
+  private getApplyImageToSelection: ComputedRef<ImageObject>
   private getHyberlinkEnable: ComputedRef<boolean>
   private getComponents: ComputedRef<ComponentObject[] | null>
   private getComponent: ComputedRef<ComponentObject | null>
@@ -49,7 +49,9 @@ export class PageBuilderService {
       () => this.pageBuilderStateStore.getLocalStorageItemName,
     )
 
-    this.getCurrentImage = computed(() => this.pageBuilderStateStore.getCurrentImage)
+    this.getApplyImageToSelection = computed(
+      () => this.pageBuilderStateStore.getApplyImageToSelection,
+    )
     this.getHyberlinkEnable = computed(() => this.pageBuilderStateStore.getHyberlinkEnable)
     this.getComponents = computed(() => this.pageBuilderStateStore.getComponents)
 
@@ -1366,39 +1368,56 @@ export class PageBuilderService {
 
     return false
   }
-  //
-  //
-  async updateBasePrimaryImage(): Promise<void> {
+
+  /**
+   * Sets the image selected from the media library as the "pending" image
+   * to be applied to the currently selected element in the builder.
+   * This does not update the DOM immediately—call `applyPendingImageToSelectedElement` to commit.
+   * @param image - The image object to be staged for application
+   */
+  stageImageForSelectedElement(image: ImageObject) {
+    this.pageBuilderStateStore.setApplyImageToSelection(image)
+  }
+
+  /**
+   * Applies the staged image (set by `stageImageForSelectedElement`) to the currently selected element.
+   * This updates the builder state and triggers an auto-save.
+   * If no element is selected or no image is staged, nothing happens.
+   */
+  async applyPendingImageToSelectedElement(): Promise<void> {
     if (!this.getElement.value) return
 
-    // If no data provided, apply current image if available (new simplified usage)
-    if (this.getCurrentImage.value && this.getCurrentImage.value.src) {
+    // Only apply if an image is staged
+    if (this.getApplyImageToSelection.value && this.getApplyImageToSelection.value.src) {
       await this.nextTick
-      this.pageBuilderStateStore.setBasePrimaryImage(`${this.getCurrentImage.value.src}`)
+      this.pageBuilderStateStore.setBasePrimaryImage(`${this.getApplyImageToSelection.value.src}`)
+
       await this.handleAutoSave()
     }
   }
 
-  setBasePrimaryImageFromCurrent() {
+  /**
+   * Inspects the currently selected element and, if it contains exactly one <img> and no <div>,
+   * sets that image's src as the base primary image in the builder state.
+   * If the element does not meet these criteria, clears the base primary image.
+   */
+  setBasePrimaryImageFromSelectedElement() {
     if (!this.getElement.value) return
 
     const currentImageContainer = document.createElement('div')
-
     currentImageContainer.innerHTML = this.getElement.value.outerHTML
 
     // Get all img and div within the current image container
     const imgElements = currentImageContainer.getElementsByTagName('img')
     const divElements = currentImageContainer.getElementsByTagName('div')
 
-    // Check if there is exactly one img and no div
+    // If exactly one img and no div, set as base primary image
     if (imgElements.length === 1 && divElements.length === 0) {
-      // Return the source of the only img
-
       this.pageBuilderStateStore.setBasePrimaryImage(imgElements[0].src)
-
       return
     }
 
+    // Otherwise, clear the base primary image
     this.pageBuilderStateStore.setBasePrimaryImage(null)
   }
 
@@ -1818,7 +1837,7 @@ export class PageBuilderService {
     // handle BG opacity
     this.handleBackgroundOpacity(undefined)
     // displayed image
-    this.setBasePrimaryImageFromCurrent()
+    this.setBasePrimaryImageFromSelectedElement()
     // border style
     this.handleBorderStyle(undefined)
     // border width

@@ -83,7 +83,7 @@ export interface PageBuilderStateStore {
   setTextColor: (color: string) => void
   setBackgroundOpacity: (opacity: string) => void
   setOpacity: (opacity: string) => void
-  getCurrentImage: ImageObject | null
+  getApplyImageToSelection: ImageObject | null
   setCurrentImage: (image: ImageObject) => void
   getCurrentPreviewImage: string | null
   setCurrentPreviewImage: (url: string | null) => void

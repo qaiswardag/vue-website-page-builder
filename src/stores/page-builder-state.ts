@@ -56,7 +56,7 @@ interface PageBuilderState {
   configPageBuilder: PageBuilderConfig | null
 
   // Media Library State
-  currentImage: ImageObject
+  applyImageToSelection: ImageObject
   currentPreviewImage: string | null
 
   // User State
@@ -117,7 +117,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     configPageBuilder: null,
 
     // Media Library State
-    currentImage: { src: '' },
+    applyImageToSelection: { src: '' },
     currentPreviewImage: null,
 
     // User State
@@ -264,10 +264,10 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       return state.configPageBuilder
     },
 
-    // Media Library Getters
-    getCurrentImage(state: PageBuilderState): ImageObject {
-      return state.currentImage
+    getApplyImageToSelection(state: PageBuilderState): ImageObject {
+      return state.applyImageToSelection
     },
+
     getCurrentPreviewImage(state: PageBuilderState): string | null {
       return state.currentPreviewImage
     },
@@ -455,9 +455,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
       this.configPageBuilder = payload
     },
 
-    // Media Library Actions
-    setCurrentImage(payload: ImageObject): void {
-      this.currentImage = payload
+    setApplyImageToSelection(payload: ImageObject): void {
+      this.applyImageToSelection = payload
     },
     setCurrentPreviewImage(payload: string | null): void {
       this.currentPreviewImage = payload

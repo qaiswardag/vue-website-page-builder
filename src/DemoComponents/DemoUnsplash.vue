@@ -17,7 +17,7 @@ const getIsLoadingImage = ref(false)
 const getSearchTerm = ref('')
 const getCurrentPageNumber = ref(1)
 const getOrientationValue = ref('')
-const getCurrentImage = ref('')
+const getApplyImageToSelection = ref('')
 const getCurrentUser = ref('')
 
 const getUnsplashImages = ref([])
@@ -72,7 +72,7 @@ const handleImageClick = async function (data) {
   }
 
   await delay(100)
-  getCurrentImage.value = data.url || ''
+  getApplyImageToSelection.value = data.url || ''
 
   getIsLoadingImage.value = false
 }
@@ -100,11 +100,11 @@ const nextPage = async function () {
 
 const applySelectedImage = async function (imageURL) {
   // Ensure the current image is set in the store with proper structure
-  pageBuilderStateStore.setCurrentImage({
+  pageBuilderService.stageImageForSelectedElement({
     src: `${imageURL}`,
   })
 
-  await pageBuilderService.updateBasePrimaryImage()
+  await pageBuilderService.applyPendingImageToSelectedElement()
 
   closeMediaLibraryModal()
 }
@@ -341,10 +341,10 @@ onMounted(async () => {
                 </div>
               </div>
             </template>
-            <template v-if="getCurrentImage && !getIsLoadingImage">
+            <template v-if="getApplyImageToSelection && !getIsLoadingImage">
               <img
                 class="pbx-mx-auto pbx-block pbx-w-full pbx-object-cover pbx-object-center pbx-cursor-pointer"
-                :src="`${getCurrentImage}`"
+                :src="`${getApplyImageToSelection}`"
                 alt="file"
               />
               <div class="md:pbx-px-3 pbx-px-2">
@@ -392,8 +392,8 @@ onMounted(async () => {
             Close
           </button>
           <button
-            v-if="getCurrentImage && typeof getCurrentImage === 'string'"
-            @click="applySelectedImage(getCurrentImage)"
+            v-if="getApplyImageToSelection && typeof getApplyImageToSelection === 'string'"
+            @click="applySelectedImage(getApplyImageToSelection)"
             class="pbx-myPrimaryButton"
             type="button"
           >

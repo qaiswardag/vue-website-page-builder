@@ -53,14 +53,16 @@ const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 const { closeMediaLibraryModal } = usePageBuilderModal()
 
 const applySelectedImage = async function (imageURL) {
+
   // Set the selected image in the builder's state
-  pageBuilderStateStore.setCurrentImage({
+  pageBuilderService.stageImageForSelectedElemente({
     // the selected image URL
     src: imageURL,
   })
 
   // Update the builder's image block with the new image
-  await pageBuilderService.updateBasePrimaryImage()
+  await pageBuilderService.applyPendingImageToSelectedElement()
+
 
   // Close the media library modal
   closeMediaLibraryModal()
