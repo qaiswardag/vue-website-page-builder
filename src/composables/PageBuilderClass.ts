@@ -1323,37 +1323,10 @@ class PageBuilderClass {
         const updateDraftFromLocalStorage = localStorage.getItem(key)
 
         if (typeof updateDraftFromLocalStorage === 'string') {
+          this.pageBuilderStateStore.setIsResumeEditing(true)
+          await delay(500)
           this.mountComponentsToDOM(updateDraftFromLocalStorage)
-        }
-
-        return
-
-        if (true) {
-          const draftParsed = JSON.parse(draft)
-          const dbComponents = this.getComponents.value
-          const data = JSON.stringify(draftParsed.components) !== JSON.stringify(dbComponents)
-
-          return
-        }
-      }
-      if (typeof key === 'string') {
-        const savedCurrentDesign = localStorage.getItem(key)
-        if (savedCurrentDesign) {
-          try {
-            this.pageBuilderStateStore.setIsResumeEditing(true)
-            const parsed = JSON.parse(savedCurrentDesign)
-            if (parsed && Array.isArray(parsed.components)) {
-              await this.delay(300)
-              this.pageBuilderStateStore.setComponents(parsed.components)
-              await nextTick()
-              await this.addListenersToEditableElements()
-              await this.handleAutoSave()
-              this.pageBuilderStateStore.setIsResumeEditing(false)
-              localStorage.removeItem(key)
-            }
-          } catch (err) {
-            console.error('Failed to parse local draft:', err)
-          }
+          this.pageBuilderStateStore.setIsResumeEditing(false)
         }
       }
     }

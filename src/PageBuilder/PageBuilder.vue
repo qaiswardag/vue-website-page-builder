@@ -199,7 +199,7 @@ const handlerRumeEditingForUpdate = async function () {
   descriptionModalResumeEditing.value =
     'We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently saved?'
   firstButtonResumeEditing.value = 'Use Saved Version'
-  secondButtonResumeEditing.value = 'null'
+  secondButtonResumeEditing.value = null
   thirdButtonResumeEditing.value = 'Continue Where I Left Off'
 
   firstModalButtonResumeEditingFunction.value = function () {
@@ -335,6 +335,7 @@ onMounted(async () => {
       <Preview></Preview>
     </ModalBuilder>
 
+    <p>eeer den: {{ getIsResumeEditing }}</p>
     <DynamicModalBuilder
       :showDynamicModalBuilder="showModalResumeEditing"
       :isLoading="getIsResumeEditing"
