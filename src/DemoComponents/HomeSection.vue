@@ -90,20 +90,6 @@ const configPageBuilder = {
 onMounted(async () => {
   await pageBuilderClass.start(configPageBuilder)
   pageBuilderClass.mountComponentsToDOM(JSON.stringify(html))
-
-  //
-  //
-  //
-  //
-  //
-  //
-
-  // Testing: Creating New Resource
-  // pageBuilderClass.mountComponentsToDOM(rawHTML, true)
-  // pageBuilderClass.mountComponentsToDOM(JSON.stringify(oldhtmlfromdb), true)
-
-  // Testing: Updating Resource
-  // pageBuilderClass.mountComponentsToDOM(JSON.stringify(html))
 })
 </script>
 

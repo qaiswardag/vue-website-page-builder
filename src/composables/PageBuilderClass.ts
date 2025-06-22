@@ -190,7 +190,7 @@ class PageBuilderClass {
 
   async start(config: PageBuilderConfig): Promise<void> {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
-    await this.delay(2000)
+    await this.delay(300)
     //
     //
     //
@@ -218,7 +218,6 @@ class PageBuilderClass {
     //
     //
     //
-    this.pageBuilderStateStore.setBuilderStarted(true)
 
     this.deleteOldPageBuilderLocalStorage()
 
@@ -236,6 +235,7 @@ class PageBuilderClass {
     //
     //
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
+    this.pageBuilderStateStore.setBuilderStarted(true)
   }
 
   #applyElementClassChanges(

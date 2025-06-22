@@ -56,6 +56,9 @@ const closeAddComponentModal = () => {
 }
 provide('closeAddComponentModal', closeAddComponentModal)
 
+const getBuilderStarted = computed(() => {
+  return pageBuilderStateStore.getBuilderStarted
+})
 const getPageBuilderConfig = computed(() => {
   return pageBuilderStateStore.getPageBuilderConfig
 })
@@ -255,9 +258,21 @@ const handleRestoreOriginalContent = async function () {
 
   // end modal
 }
+
+const ensureBuilderInitialized = function () {
+  if (!getBuilderStarted.value) {
+    openAppNotStartedModal.value = true
+  }
+}
+
+// Check if Builder started
 onMounted(async () => {
-  await delay(10000)
-  openAppNotStartedModal.value = true
+  await delay(5000)
+  ensureBuilderInitialized()
+
+  // Re-check if Builder started
+  await delay(5000)
+  ensureBuilderInitialized()
 })
 </script>
 
@@ -313,18 +328,6 @@ onMounted(async () => {
     ></BuilderComponents>
 
     <ModalBuilder
-      title="The builder hasn’t started yet"
-      :showModalBuilder="openAppNotStartedModal"
-      @closeMainModalBuilder="handlAppNotStartedModal"
-      type="delete"
-      maxWidth="2xl"
-    >
-      The builder hasn’t started yet. If this screen doesn’t go away soon, it may just need a little
-      setup in the background. You can safely contact support and ask them to initialize the builder
-      by running the start method.
-    </ModalBuilder>
-
-    <ModalBuilder
       title="Preview"
       :showModalBuilder="openPageBuilderPreviewModal"
       @closeMainModalBuilder="firstPageBuilderPreviewModalButton"
@@ -367,6 +370,19 @@ onMounted(async () => {
       <header></header>
       <main></main>
     </DynamicModalBuilder>
+
+    <ModalBuilder
+      title="The builder hasn’t started yet"
+      :showModalBuilder="openAppNotStartedModal"
+      @closeMainModalBuilder="handlAppNotStartedModal"
+      type="delete"
+      maxWidth="2xl"
+      :backgroundOpacity="true"
+    >
+      The builder hasn’t started yet. If this screen doesn’t go away soon, it may just need a little
+      setup in the background. You can safely contact support and ask them to initialize the builder
+      by running the start method.
+    </ModalBuilder>
 
     <div>
       <div class="pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2">
