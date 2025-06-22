@@ -1746,6 +1746,7 @@ export class PageBuilderService {
    */
   mountComponentsToDOM(passedData: string): void {
     // Save the original content only once, in update mode, and only if passedData is provided
+    // Form type Update
     if (
       this.pageBuilderStateStore.getPageBuilderConfig &&
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
@@ -1761,6 +1762,20 @@ export class PageBuilderService {
 
     if (!this.pageBuilderStateStore.getPageBuilderConfig) return
 
+    // Form type Update
+    if (
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
+    ) {
+      if (passedData) {
+        this.#setComponentsFromData(passedData)
+        return
+      }
+    }
+
+    // Form type Create
     const localStorageData = this.loadStoredComponentsFromStorage()
 
     if (
@@ -1773,14 +1788,8 @@ export class PageBuilderService {
         this.#setComponentsFromData(localStorageData)
         return
       }
-    }
 
-    if (
-      this.pageBuilderStateStore.getPageBuilderConfig &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
-    ) {
+      // If no localStorage, but passedData exists (for demo), use it
       if (passedData) {
         this.#setComponentsFromData(passedData)
         return

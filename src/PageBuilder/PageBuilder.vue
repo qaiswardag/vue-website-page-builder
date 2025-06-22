@@ -420,6 +420,7 @@ onMounted(async () => {
               @click.self="pageBuilderService.clearHtmlSelection()"
               class="pbx-flex pbx-myPrimaryGap pbx-items-center pbx-pt-4 pbx-pb-2 pbx-pl-2 pbx-h-24 pbx-w-full pbx-min-w-36"
             >
+              <!-- Save Start -->
               <button
                 class="pbx-mySecondaryButton pbx-h-6 pbx-flex pbx-gap-2"
                 @click.stop="
@@ -452,42 +453,52 @@ onMounted(async () => {
                 </div>
                 <div>Save</div>
               </button>
-              <button
-                class="pbx-mySecondaryButton pbx-h-6 pbx-flex pbx-gap-2"
-                @click.stop="
-                  async () => {
-                    await pageBuilderService.clearHtmlSelection()
-                    await handleRestoreOriginalContent()
-                  }
-                "
-                type="button"
-                :disabled="getIsRestoring"
-              >
-                <div
-                  v-if="!getIsRestoring"
-                  class="pbx-h-10 pbx-w-4 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-justify-center"
-                >
-                  <span class="material-symbols-outlined"> settings_backup_restore </span>
-                </div>
-                <div
-                  v-if="getIsRestoring"
-                  class="pbx-h-10 pbx-w-4 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-justify-center"
-                >
-                  <span class="pbx-relative pbx-flex pbx-size-3">
-                    <span
-                      class="pbx-absolute pbx-inline-flex pbx-h-full pbx-w-full pbx-animate-ping pbx-rounded-full pbx-bg-gray-400 pbx-opacity-75"
-                    ></span>
-                    <span
-                      class="pbx-relative pbx-inline-flex pbx-size-3 pbx-rounded-full pbx-bg-green-200"
-                    ></span>
-                  </span>
-                </div>
-                <div>
-                  <span class="lg:pbx-block pbx-hidden"> Restore </span>
-                </div>
-              </button>
+              <!-- Save End -->
 
-              <!-- Continue editing # end -->
+              <!-- Restore Start -->
+              <template
+                v-if="
+                  getPageBuilderConfig &&
+                  getPageBuilderConfig.updateOrCreate &&
+                  getPageBuilderConfig.updateOrCreate.formType === 'update'
+                "
+              >
+                <button
+                  class="pbx-mySecondaryButton pbx-h-6 pbx-flex pbx-gap-2"
+                  @click.stop="
+                    async () => {
+                      await pageBuilderService.clearHtmlSelection()
+                      await handleRestoreOriginalContent()
+                    }
+                  "
+                  type="button"
+                  :disabled="getIsRestoring"
+                >
+                  <div
+                    v-if="!getIsRestoring"
+                    class="pbx-h-10 pbx-w-4 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-justify-center"
+                  >
+                    <span class="material-symbols-outlined"> settings_backup_restore </span>
+                  </div>
+                  <div
+                    v-if="getIsRestoring"
+                    class="pbx-h-10 pbx-w-4 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-justify-center"
+                  >
+                    <span class="pbx-relative pbx-flex pbx-size-3">
+                      <span
+                        class="pbx-absolute pbx-inline-flex pbx-h-full pbx-w-full pbx-animate-ping pbx-rounded-full pbx-bg-gray-400 pbx-opacity-75"
+                      ></span>
+                      <span
+                        class="pbx-relative pbx-inline-flex pbx-size-3 pbx-rounded-full pbx-bg-green-200"
+                      ></span>
+                    </span>
+                  </div>
+                  <div>
+                    <span class="lg:pbx-block pbx-hidden"> Restore </span>
+                  </div>
+                </button>
+              </template>
+              <!-- Restore End -->
             </div>
 
             <div
