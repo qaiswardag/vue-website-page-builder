@@ -130,6 +130,7 @@ const thirdButtonBuilder = function () {
           </button>
 
           <button
+            v-if="secondButtonText"
             class="pbx-myPrimaryButton pbx-bg-yellow-300 hover:pbx-bg-yellow-400 pbx-text-myPrimaryDarkGrayColor hover:pbx-text-myPrimaryDarkGrayColor focus:pbx-ring-yellow-400 pbx-w-full"
             type="button"
             @click="secondButtonBuilder"
@@ -138,6 +139,7 @@ const thirdButtonBuilder = function () {
           </button>
 
           <button
+            v-if="thirdButtonText"
             class="pbx-myPrimaryButton pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-myPrimaryLinkColor focus:pbx-ring-myPrimaryLinkColor hover:pbx-bg-myPrimaryLinkColor pbx-w-full"
             type="button"
             @click="thirdButtonBuilder"

@@ -76,13 +76,22 @@ const maxWidthClass = computed(() => {
           ]"
         >
           <div
-            class="pbx-h-16 pbx-bg-white pbx-px-4 pbx-border-b pbx-border-gray-200 pbx-mb-2 pbx-flex pbx-items-center pbx-justify-between"
+            class="pbx-h-16 pbx-px-4 pbx-border-b pbx-border-gray-200 pbx-mb-2 pbx-flex pbx-items-center pbx-justify-between"
             :class="[
-              type === 'warning' ? 'pbx-bg-yellow-200' : '',
-              type === 'delete' ? 'pbx-bg-yellow-600' : '',
+              type === 'success' && 'pbx-bg-green-600',
+              type === 'warning' && 'pbx-bg-yellow-400',
+              type === 'danger' && 'pbx-bg-red-400',
             ]"
           >
-            <h3 as="h3" class="pbx-myQuaternaryHeader pbx-my-0 pbx-py-0">
+            <h3
+              as="h3"
+              class="pbx-myQuaternaryHeader pbx-my-0 pbx-py-0"
+              :class="[
+                type === 'success' && 'pbx-text-white',
+                type === 'warning' && 'pbx-text-white',
+                type === 'danger' && 'pbx-text-white',
+              ]"
+            >
               {{ title }}
             </h3>
             <div

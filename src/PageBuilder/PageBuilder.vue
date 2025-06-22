@@ -12,6 +12,7 @@ import ToolbarOption from '../Components/PageBuilder/ToolbarOption/ToolbarOption
 import { delay } from '../composables/delay'
 import { useDebounce } from '../composables/useDebounce.ts'
 import DynamicModalBuilder from '../Components/Modals/DynamicModalBuilder.vue'
+import GlobalLoader from '@/Components/Loaders/GlobalLoader.vue'
 
 /**
  * Props for PageBuilder component
@@ -192,7 +193,7 @@ const thirdModalButtonResumeEditingFunction = ref(null)
 const handlerRumeEditingForUpdate = async function () {
   await pageBuilderClass.clearHtmlSelection()
 
-  typeModal.value = 'default'
+  typeModal.value = 'warning'
   showModalResumeEditing.value = true
 
   titleModalResumeEditing.value = 'Continue Your Work?'
@@ -232,7 +233,7 @@ const thirdModalButtonRestoreFunction = ref(null)
 const handleRestoreOriginalContent = async function () {
   await pageBuilderClass.clearHtmlSelection()
 
-  typeModalRestore.value = 'delete'
+  typeModalRestore.value = 'success'
   showModalRestore.value = true
 
   titleModalRestore.value = 'Do you want to restore the original content from the database?'
@@ -240,7 +241,7 @@ const handleRestoreOriginalContent = async function () {
     'Are you sure you want to restore the original content from the database? This will overwrite your current page layout.'
   firstButtonRestore.value = 'Close'
   secondButtonRestore.value = 'Use original Content'
-  thirdButtonRestore.value = 'Trick'
+  thirdButtonRestore.value = null
 
   firstModalButtonRestoreFunction.value = function () {
     showModalRestore.value = false
@@ -250,13 +251,12 @@ const handleRestoreOriginalContent = async function () {
     await pageBuilderClass.restoreOriginalContent()
     showModalRestore.value = false
   }
-  thirdModalButtonRestoreFunction.value = async function () {
-    console.log('This is a test button')
-  }
+  thirdModalButtonRestoreFunction.value = async function () {}
 
   // end modal
 }
 onMounted(async () => {
+  await delay(10000)
   openAppNotStartedModal.value = true
 })
 </script>
@@ -267,9 +267,7 @@ onMounted(async () => {
     class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-scroll"
   >
     <div id="pagebuilder-top-area" class="lg:pbx-px-4 pbx-pt-2 pbx-pb-4 pbx-mx-4 pbx-mb-4 pbx-mt-2">
-      <p class="pbx-font-bold pbx-my-4 pbx-py-4 pbx-bottom-2 pbx-border-red-300 rounded-3xl">
-        ok getIsLoadingGlobal: {{ JSON.stringify(getIsLoadingGlobal) }}
-      </p>
+      <GlobalLoader v-if="getIsLoadingGlobal"></GlobalLoader>
       <div
         @click.self="pageBuilderClass.clearHtmlSelection()"
         class="pbx-min-h-24 pbx-flex pbx-justify-between pbx-items-center pbx-pb-2 pbx-border-b pbx-border-gray-200"
@@ -315,7 +313,7 @@ onMounted(async () => {
     ></BuilderComponents>
 
     <ModalBuilder
-      title="The builder hasn’t started ye"
+      title="The builder hasn’t started yet"
       :showModalBuilder="openAppNotStartedModal"
       @closeMainModalBuilder="handlAppNotStartedModal"
       type="delete"
@@ -335,7 +333,6 @@ onMounted(async () => {
       <Preview></Preview>
     </ModalBuilder>
 
-    <p>eeer den: {{ getIsResumeEditing }}</p>
     <DynamicModalBuilder
       :showDynamicModalBuilder="showModalResumeEditing"
       :isLoading="getIsResumeEditing"
