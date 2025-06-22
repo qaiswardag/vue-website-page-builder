@@ -15,6 +15,13 @@ Integration is easy, and content is safely auto stored in the browser's local st
 
 Want to include your company logo in the editor toolbar or reflect your brand's color scheme throughout the builder interface? Done. With robust configuration options, branding the builder to match your product or client identity is quick and effortless.
 
+## 🚀 Start Within Minutes
+
+Easy setup and instant productivity.  
+**Get up and running in just a few steps—see [Quick Start](#quick-start) below!**
+
+---
+
 ## Installation
 
 The web builder for stunning pages. Enable users to design and publish modern pages at any scale.
@@ -114,12 +121,67 @@ bun install
 
 Get up and running quickly and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages.
 
-- The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading:
+- The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading.
+- Page Builder Initialization The Page Builder does not initialize automatically. Instead, you are
+  responsible for explicitly calling the `startBuilder` method before using any of its features.
 
 ```vue
 <script setup>
-import { PageBuilder } from '@myissue/vue-website-page-builder'
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
+
+const configPageBuilder = {
+  updateOrCreate: {
+   formType: 'create'
+    formName: 'article',
+  },
+}
+
+// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
+const pageBuilderStateStore = sharedPageBuilderStore
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+// Initializing Page Builder with essential configuration
+await pageBuilderClass.startBuilder(configPageBuilder)
+</script>
+
+<template>
+  <PageBuilder />
+</template>
+```
+
+Page Builder Initialization The Page Builder does not initialize automatically. Instead, you are
+responsible for explicitly calling the `startBuilder` method before using any of its features. This
+approach gives you full control over when and how the builder is configured — especially useful when
+dealing with asynchronous operations or user-defined settings. Before interacting with the Page
+Bilder, you must call the start method and pass in your configuration: ```vue
+
+```vue
+<script setup>
+import {
+  PageBuilder,
+  PageBuilderClass,
+  sharedPageBuilderStore,
+} from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+const configPageBuilder = {
+  updateOrCreate: {
+   formType: 'create'
+    formName: 'article',
+  },
+}
+
+// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
+const pageBuilderStateStore = sharedPageBuilderStore
+const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+
+// Initializing Page Builder with essential configuration
+await pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 
 <template>
@@ -219,6 +281,7 @@ Get up and running quickly by importing the PageBuilder component, setting up yo
   - `resourceData` to prefill the builder with initial data
   - `userSettings` to set user preferences such as theme, language, or autoSave
   - `brandColor` set brand’s primary color, which will be used for key UI elements in the builder in the `settings` config
+  - To retrieve the correct content from local storage, you must pass the same resourceData (such as formType and formName) to the Page Builder that was used when the content was originally saved. If the resource data does not match, the Page Builder will look for a different local storage key and may not find the expected content.
   - `formName` (recommended): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
   - Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., name and user image).
 
@@ -233,6 +296,7 @@ import '@myissue/vue-website-page-builder/style.css'
 
 const configPageBuilder = {
   updateOrCreate: {
+    formType: 'create'
     // Set the resource type for better local storage and multi-resource support
     formName: 'article',
   },
@@ -242,6 +306,7 @@ const configPageBuilder = {
   userForPageBuilder: { name: 'John Doe', image: '/jane_doe.jpg' },
   resourceData: {
     title: 'Demo Article',
+    // ID is optional for better local storage and multi-resource support
     id: 1,
   },
   userSettings: {
@@ -259,7 +324,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing Page Builder with essential configuration
-await pageBuilderClass.start(configPageBuilder)
+await pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 
 <template>
@@ -271,12 +336,12 @@ await pageBuilderClass.start(configPageBuilder)
 
 You can display your company logo in the Page Builder interface and set the currently logged-in user by passing both a logo URL and user information in your config object:
 
-- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.start(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
+- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.startBuilder(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
 - **Logged-in User:** Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., name and user image).
 
 **Basic Usage:**
 
-- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderClass.start(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
+- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderClass.startBuilder(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
 
 Basic Usage:
 
@@ -301,7 +366,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing Page Builder with essential configuration
-await pageBuilderClass.start(configPageBuilder)
+await pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 
 <template>
@@ -364,7 +429,7 @@ const configPageBuilder = {
   },
 };
 
-await pageBuilderClass.start(configPageBuilder);
+await pageBuilderClass.startBuilder(configPageBuilder);
 
 
 let storedComponents = pageBuilderClass.loadStoredComponentsFromStorage();
@@ -415,7 +480,7 @@ const configPageBuilder = {
   },
 };
 
-await pageBuilderClass.start(configPageBuilder);
+await pageBuilderClass.startBuilder(configPageBuilder);
 
 const createResource = async function(){
 pageBuilderClass.deleteAllComponents();
@@ -449,7 +514,7 @@ const configPageBuilder = {
   },
 };
 
-await pageBuilderClass.start(configPageBuilder);
+await pageBuilderClass.startBuilder(configPageBuilder);
 
 const updateResource = async function() {
   pageBuilderClass.deleteAllComponents();
@@ -488,7 +553,7 @@ const configPageBuilder = {
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing Page Builder with essential configuration
-await pageBuilderClass.start(configPageBuilder)
+await pageBuilderClass.startBuilder(configPageBuilder)
 
 // Populating page builder with existing resource content
 pageBuilderClass.mountComponentsToDOM(existingResourceFromBackend)
@@ -533,7 +598,7 @@ const configPageBuilder = {
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing Page Builder with essential configuration
-await pageBuilderClass.start(configPageBuilder)
+await pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 
 <template>
@@ -550,7 +615,7 @@ To load existing content that was created with this PageBuilder from any backend
 - Use `sharedPageBuilderStore` to ensure the external `PageBuilderClass` and internal `PageBuilder` component share the same state.
 - Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state. Use the `mountComponentsToDOM()` method to load existing content into the page builder.
 - The `PageBuilderClass` uses the shared store to maintain state consistency between external operations and the internal `PageBuilder` component, ensuring that when you load content externally it appears correctly in the PageBuilder interface.
-- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.start(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
+- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.startBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
 
 **Example: Set `formType` to "update" for editing an existing resource**
 
@@ -653,7 +718,7 @@ const configPageBuilder = {
 const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
 
 // Initializing Page Builder with essential configuration
-pageBuilderClass.start(configPageBuilder)
+pageBuilderClass.startBuilder(configPageBuilder)
 </script>
 
 <template>

@@ -192,7 +192,7 @@ class PageBuilderClass {
    * Initializes the Page Builder with the provided configuration.
    * Handles config validation, local storage, and sets up the builder state.
    */
-  async start(config: PageBuilderConfig): Promise<void> {
+  async startBuilder(config: PageBuilderConfig): Promise<void> {
     // Show a global loading indicator while initializing
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
 

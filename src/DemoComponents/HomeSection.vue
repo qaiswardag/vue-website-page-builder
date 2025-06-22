@@ -88,7 +88,7 @@ const configPageBuilder = {
 } as const
 
 onMounted(async () => {
-  await pageBuilderClass.start(configPageBuilder)
+  await pageBuilderClass.startBuilder(configPageBuilder)
   pageBuilderClass.mountComponentsToDOM(JSON.stringify(html))
 })
 </script>
