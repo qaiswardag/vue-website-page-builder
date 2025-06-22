@@ -36,7 +36,7 @@ export class PageBuilderService {
   private NoneListernesTags: string[]
   private delay: (ms?: number) => Promise<void>
   private hasStartedEditing: boolean = false
-  private qaiswardag: string = ''
+  private originalComponents: string | null = null
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.nextTick = nextTick()
@@ -86,16 +86,6 @@ export class PageBuilderService {
     ]
 
     this.delay = delay
-  }
-
-  // Set the value
-  setQW(newValue: string): void {
-    this.qaiswardag = newValue
-  }
-
-  // Get the value
-  getQW(): string {
-    return this.qaiswardag
   }
 
   // Load existing content from HTML when in update mode
@@ -1332,7 +1322,6 @@ export class PageBuilderService {
     }
   }
 
-  //
   async restoreOriginalContent() {
     if (
       this.pageBuilderStateStore.getPageBuilderConfig &&
@@ -1341,11 +1330,16 @@ export class PageBuilderService {
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
     ) {
       this.pageBuilderStateStore.setIsRestoring(true)
+      await this.delay(300)
+
+      // Restore the original content if available
+      if (this.originalComponents) {
+        this.mountComponentsToDOM(this.originalComponents)
+      }
 
       await nextTick()
       await this.addListenersToEditableElements()
 
-      await this.delay(300)
       this.pageBuilderStateStore.setIsRestoring(false)
     }
   }
@@ -1751,6 +1745,18 @@ export class PageBuilderService {
    * @param preferLocalStorage - if true, always try localStorage first
    */
   mountComponentsToDOM(passedData: string): void {
+    // Save the original content only once, in update mode, and only if passedData is provided
+    if (
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update' &&
+      passedData &&
+      !this.originalComponents
+    ) {
+      this.originalComponents = passedData
+    }
+
     this.pageBuilderStateStore.setComponents([])
 
     if (!this.pageBuilderStateStore.getPageBuilderConfig) return

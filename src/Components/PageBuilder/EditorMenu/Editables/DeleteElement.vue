@@ -20,7 +20,7 @@ const getRestoredElement = computed(() => {
       <div class="pbx-my-2">
         <button
           v-if="getRestoredElement !== null"
-          @click="pageBuilderClass.handleRestoreElement"
+          @click="pageBuilderService.handleRestoreElement"
           type="button"
           class="pbx-myPrimaryButton pbx-gap-2 pbx-items-center pbx-w-full"
         >
@@ -29,7 +29,7 @@ const getRestoredElement = computed(() => {
         </button>
         <button
           v-if="getRestoredElement === null"
-          @click="pageBuilderClass.handleDeleteElement"
+          @click="pageBuilderService.handleDeleteElement"
           type="button"
           class="pbx-myPrimaryDeleteButton pbx-gap-2 pbx-items-center pbx-w-full"
         >

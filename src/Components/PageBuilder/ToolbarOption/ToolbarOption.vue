@@ -50,18 +50,18 @@ const deleteAllComponents = function () {
   //
   // handle click
   thirdModalButtonFunctionDynamicModalBuilder.value = async function () {
-    pageBuilderClass.deleteAllComponents()
-    await pageBuilderClass.clearHtmlSelection()
+    pageBuilderService.deleteAllComponents()
+    await pageBuilderService.clearHtmlSelection()
 
     if (
       getPageBuilderConfig.value.updateOrCreate &&
       typeof getPageBuilderConfig.value.updateOrCreate.formType === 'string'
     ) {
       if (getPageBuilderConfig.value.updateOrCreate.formType === 'create') {
-        await pageBuilderClass.removeItemComponentsLocalStorage()
+        await pageBuilderService.removeItemComponentsLocalStorage()
       }
       if (getPageBuilderConfig.value.updateOrCreate.formType === 'update') {
-        await pageBuilderClass.removeItemComponentsLocalStorage()
+        await pageBuilderService.removeItemComponentsLocalStorage()
       }
     }
 
@@ -95,8 +95,6 @@ const handleHTMLSettings = function () {
 const openHTMLSettings = function () {
   showHTMLSettings.value = true
 }
-
-const getQWPageBuilder = pageBuilderClass.getQW()
 </script>
 
 <template>
@@ -175,7 +173,7 @@ const getQWPageBuilder = pageBuilderClass.getQW()
             <button
               @click="
                 () => {
-                  pageBuilderClass.clearHtmlSelection()
+                  pageBuilderService.clearHtmlSelection()
                   openMainSettings()
                 }
               "
@@ -200,7 +198,7 @@ const getQWPageBuilder = pageBuilderClass.getQW()
             <button
               @click="
                 () => {
-                  pageBuilderClass.clearHtmlSelection()
+                  pageBuilderService.clearHtmlSelection()
                   deleteAllComponents()
                 }
               "

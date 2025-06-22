@@ -43,7 +43,7 @@ watch(
   getFontBase,
   async (newValue) => {
     fontBase.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -51,7 +51,7 @@ watch(
   getFontDesktop,
   async (newValue) => {
     fontDesktop.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -59,7 +59,7 @@ watch(
   getFontTablet,
   async (newValue) => {
     fontTablet.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -67,7 +67,7 @@ watch(
   getFontMobile,
   async (newValue) => {
     fontMobile.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -75,7 +75,7 @@ watch(
   getFontWeight,
   async (newValue) => {
     fontWeight.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -83,7 +83,7 @@ watch(
   getFontFamily,
   async (newValue) => {
     fontFamily.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -91,7 +91,7 @@ watch(
   getFontStyle,
   async (newValue) => {
     fontStyle.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -108,7 +108,7 @@ watch(
         <select
           v-model="fontBase"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleFontSizeBase(fontBase)"
+          @change="pageBuilderService.handleFontSizeBase(fontBase)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontSize in tailwindFontSizes.fontBase" :key="fontSize">
@@ -122,7 +122,7 @@ watch(
           <select
             v-model="fontDesktop"
             class="pbx-myPrimarySelect"
-            @change="pageBuilderClass.handleFontSizeDesktop(fontDesktop)"
+            @change="pageBuilderService.handleFontSizeDesktop(fontDesktop)"
           >
             <option disabled value="">Select</option>
             <option v-for="fontSize in tailwindFontSizes.fontDesktop" :key="fontSize">
@@ -135,7 +135,7 @@ watch(
           <select
             v-model="fontTablet"
             class="pbx-myPrimarySelect"
-            @change="pageBuilderClass.handleFontSizeTablet(fontTablet)"
+            @change="pageBuilderService.handleFontSizeTablet(fontTablet)"
           >
             <option disabled value="">Select</option>
             <option v-for="fontSize in tailwindFontSizes.fontTablet" :key="fontSize">
@@ -148,7 +148,7 @@ watch(
           <select
             v-model="fontMobile"
             class="pbx-myPrimarySelect"
-            @change="pageBuilderClass.handleFontSizeMobile(fontMobile)"
+            @change="pageBuilderService.handleFontSizeMobile(fontMobile)"
           >
             <option disabled value="">Select</option>
             <option v-for="fontSize in tailwindFontSizes.fontMobile" :key="fontSize">
@@ -164,7 +164,7 @@ watch(
         <select
           v-model="fontFamily"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleFontFamily(fontFamily)"
+          @change="pageBuilderService.handleFontFamily(fontFamily)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontFamily in tailwindFontStyles.fontFamily" :key="fontFamily">
@@ -179,7 +179,7 @@ watch(
         <select
           v-model="fontWeight"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleFontWeight(fontWeight)"
+          @change="pageBuilderService.handleFontWeight(fontWeight)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontWeight in tailwindFontStyles.fontWeight" :key="fontWeight">
@@ -193,7 +193,7 @@ watch(
         <select
           v-model="fontStyle"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleFontStyle(fontStyle)"
+          @change="pageBuilderService.handleFontStyle(fontStyle)"
         >
           <option disabled value="">Select</option>
           <option v-for="fontStyle in tailwindFontStyles.fontStyle" :key="fontStyle">

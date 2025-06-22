@@ -44,7 +44,7 @@ const secondModalButtonFunctionDynamicModalBuilder = ref(null)
 const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 
 const handleModalPreviewTiptap = function () {
-  pageBuilderClass.toggleTipTapModal(true)
+  pageBuilderService.toggleTipTapModal(true)
 
   typeModal.value = 'success'
   gridColumnModal.value = 2
@@ -57,11 +57,11 @@ const handleModalPreviewTiptap = function () {
   // handle click
 
   firstModalButtonFunctionDynamicModalBuilder.value = function () {
-    pageBuilderClass.toggleTipTapModal(false)
+    pageBuilderService.toggleTipTapModal(false)
   }
 
   thirdModalButtonFunctionDynamicModalBuilder.value = function () {
-    pageBuilderClass.toggleTipTapModal(true)
+    pageBuilderService.toggleTipTapModal(true)
   }
 }
 
@@ -267,7 +267,7 @@ const handleModalIframeSrc = function () {
         class="pbx-flex pbx-items-center pbx-justify-center"
         :class="{ 'pbx-rounded-full pbx-border pbx-border-gray-200 pbx-shadow-sm': getElement }"
       >
-        <template v-if="pageBuilderClass.ElOrFirstChildIsIframe()">
+        <template v-if="pageBuilderService.ElOrFirstChildIsIframe()">
           <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
             <button @click="handleModalIframeSrc" type="button" class="pbx-myPrimaryTag">
               <span class="material-symbols-outlined"> play_circle </span>
@@ -278,8 +278,8 @@ const handleModalIframeSrc = function () {
 
         <template
           v-if="
-            pageBuilderClass.isSelectedElementValidText() &&
-            !pageBuilderClass.ElOrFirstChildIsIframe()
+            pageBuilderService.isSelectedElementValidText() &&
+            !pageBuilderService.ElOrFirstChildIsIframe()
           "
         >
           <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
@@ -298,7 +298,7 @@ const handleModalIframeSrc = function () {
             getElement &&
             getComponent &&
             getBasePrimaryImage !== null &&
-            !pageBuilderClass.ElOrFirstChildIsIframe()
+            !pageBuilderService.ElOrFirstChildIsIframe()
           "
         >
           <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
@@ -314,7 +314,7 @@ const handleModalIframeSrc = function () {
             getElement &&
             getElement.nodeType === 1 &&
             !getBasePrimaryImage &&
-            !pageBuilderClass.ElOrFirstChildIsIframe()
+            !pageBuilderService.ElOrFirstChildIsIframe()
           "
         >
           <div class="pbx-px-2">

@@ -30,7 +30,7 @@ watch(
   getFontVerticalPadding,
   async (newValue) => {
     fontVerticalPadding.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -38,7 +38,7 @@ watch(
   getFontHorizontalPadding,
   async (newValue) => {
     fontHorizontalPadding.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -46,7 +46,7 @@ watch(
   getFontVerticalMargin,
   async (newValue) => {
     fontVerticalMargin.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -54,7 +54,7 @@ watch(
   getFontHorizontalMargin,
   async (newValue) => {
     fontHorizontalMargin.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -68,7 +68,7 @@ watch(
         <select
           v-model="fontVerticalMargin"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleVerticalMargin(fontVerticalMargin)"
+          @change="pageBuilderService.handleVerticalMargin(fontVerticalMargin)"
         >
           <option disabled value="">Select</option>
           <option
@@ -85,7 +85,7 @@ watch(
         <select
           v-model="fontHorizontalMargin"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleHorizontalMargin(fontHorizontalMargin)"
+          @change="pageBuilderService.handleHorizontalMargin(fontHorizontalMargin)"
         >
           <option disabled value="">Select</option>
           <option

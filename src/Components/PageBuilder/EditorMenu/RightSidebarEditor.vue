@@ -38,9 +38,6 @@ const isHeadingElement = computed(() => {
     getElement.value instanceof HTMLImageElement
   )
 })
-
-pageBuilderClass.setQW('RightSidebarEditor.vue')
-const getQWPageBuilder = pageBuilderClass.getQW()
 </script>
 
 <template>
@@ -62,7 +59,7 @@ const getQWPageBuilder = pageBuilderClass.getQW()
     </div>
 
     <div class="pbx-pl-3 pbx-pr-3 pbx-mb-4 pbx-overflow-y-scroll">
-      <div v-show="getElement && pageBuilderClass.isEditableElement(getElement)">
+      <div v-show="getElement && pageBuilderService.isEditableElement(getElement)">
         <article class="pbx-mb-1">
           <ImageEditor> </ImageEditor>
         </article>

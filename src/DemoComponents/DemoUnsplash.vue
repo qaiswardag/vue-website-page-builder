@@ -104,7 +104,7 @@ const applySelectedImage = async function (imageURL) {
     src: `${imageURL}`,
   })
 
-  await pageBuilderClass.updateBasePrimaryImage()
+  await pageBuilderService.updateBasePrimaryImage()
 
   closeMediaLibraryModal()
 }

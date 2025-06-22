@@ -49,7 +49,7 @@ import YourMediaLibraryComponent from './ComponentsPageBuilder/YourMediaLibraryC
 
 // Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component and how components object should look like
 const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 const { closeMediaLibraryModal } = usePageBuilderModal()
 
 const applySelectedImage = async function (imageURL) {
@@ -60,7 +60,7 @@ const applySelectedImage = async function (imageURL) {
   })
 
   // Update the builder's image block with the new image
-  await pageBuilderClass.updateBasePrimaryImage()
+  await pageBuilderService.updateBasePrimaryImage()
 
   // Close the media library modal
   closeMediaLibraryModal()
@@ -100,7 +100,7 @@ import YourCustomBuilderComponents from './ComponentsPageBuilder/YourCustomBuild
 
 // Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component and how components object should look like
 const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 
 const injectComponentToBuilder = async function (componentObject) {
   const component = {
@@ -110,7 +110,7 @@ const injectComponentToBuilder = async function (componentObject) {
     title: componentObject.title,
   }
 
-  await pageBuilderClass.addComponent(component)
+  await pageBuilderService.addComponent(component)
   closeAddComponentModal()
 }
 </script>

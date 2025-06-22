@@ -357,3 +357,18 @@
     @apply pbx-aspect-square pbx-border pbx-border-gray-200 pbx-cursor-pointer pbx-min-h-[1.5rem] pbx-rounded-sm;
   }
 }
+
+/* p {
+  @apply pbx-font-normal lg:pbx-text-base pbx-text-base;
+} */
+
+a {
+  @apply pbx-text-myPrimaryLinkColor;
+}
+
+h2 {
+  @apply pbx-text-3xl pbx-mt-4 pbx-mb-3 pbx-font-medium;
+}
+h3 {
+  @apply pbx-text-2xl pbx-mt-4 pbx-mb-3 pbx-font-medium;
+}

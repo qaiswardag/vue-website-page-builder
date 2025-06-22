@@ -1,12 +1,12 @@
 // builderInstance.ts
-import { PageBuilderService } from '../composables/PageBuilderClass'
+import { PageBuilderService } from '../composables/PageBuilderService'
 import { sharedPageBuilderStore } from '../stores/shared-store'
 
 // Singleton instance
 let instance: PageBuilderService | null = null
 
 // Used to create and store the single instance
-export function createPageBuilder(): PageBuilderService {
+export function initPageBuilder(): PageBuilderService {
   if (!instance) {
     const pageBuilderStateStore = sharedPageBuilderStore
     instance = new PageBuilderService(pageBuilderStateStore)

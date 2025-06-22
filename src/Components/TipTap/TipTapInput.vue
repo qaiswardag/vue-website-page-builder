@@ -69,19 +69,19 @@ const editor = useEditor({
 
 // watch for changes in textContent and update store and textContentVueModel
 watch(textContent, async (newValue) => {
-  if (!pageBuilderClass.isSelectedElementValidText()) return
+  if (!pageBuilderService.isSelectedElementValidText()) return
 
   if (getElement.value) {
     pageBuilderStateStore.setTextAreaVueModel(newValue)
 
     if (typeof newValue === 'string' && newValue !== textContentVueModel.value) {
-      await pageBuilderClass.handleTextInput(newValue)
+      await pageBuilderService.handleTextInput(newValue)
     }
   }
 })
 
 const TipTapSetContent = function () {
-  if (!pageBuilderClass.isSelectedElementValidText()) return
+  if (!pageBuilderService.isSelectedElementValidText()) return
 
   if (editor.value) {
     editor.value.commands.setContent(getElement.value.innerHTML)
@@ -216,7 +216,7 @@ onMounted(() => {
     </DynamicModalBuilder>
 
     <div class="pbx-blockease-linear pbx-duration-200 pbx-block pbx-ease-linear">
-      <div v-if="pageBuilderClass.isSelectedElementValidText() && editor">
+      <div v-if="pageBuilderService.isSelectedElementValidText() && editor">
         <div class="pbx-relative pbx-rounded-lg">
           <div
             class="pbx-flex pbx-justify-between pbx-myPrimaryGap pbx-items-center pbx-py-4 pbx-px-4 pbx-overflow-x-auto pbx-border-b pbx-border-gray-200"
@@ -227,7 +227,7 @@ onMounted(() => {
                   class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max pbx-p-1 pbx-rounded-full pbx-border pbx-border-gray-200 pbx-shadow-sm"
                 >
                   <button
-                    @click="pageBuilderClass.toggleTipTapModal(false)"
+                    @click="pageBuilderService.toggleTipTapModal(false)"
                     type="button"
                     class="pbx-myPrimaryTag"
                   >

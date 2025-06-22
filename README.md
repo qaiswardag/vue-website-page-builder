@@ -123,7 +123,7 @@ Get up and running quickly and initializing the builder in your Vue project. The
 
 - The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading.
 
-- You must explicitly call createPageBuilder() once in your app entry (e.g. main.ts) before using any Page Builder features.
+- You must explicitly call initPageBuilder() once in your app entry (e.g. main.ts) before using any Page Builder features.
 
 Then, use `getPageBuilder()` anywhere to access the shared builder instance.
 
@@ -132,131 +132,57 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import App from './App.vue'
 
-import { createPageBuilder } from '@myissue/vue-website-page-builder'
+import { initPageBuilder } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
 
-// 🔑 Initialize shared builder instance (MUST be called once)
-createPageBuilder()
+// Initialize shared builder instance
+// MUST be called once
+initPageBuilder()
 
 const app = createApp(App)
 app.use(createPinia())
 app.mount('#app')
 ```
 
-**Accessing** the Shared Page Builder Instance
+#### Accessing the Shared Page Builder Service
+
+Once you have initialized the Page Builder service in your application, you can access the shared instance anywhere by using the getPageBuilder() composable. This ensures you are always working with the same underlying builder service and state, keeping your application consistent and synchronized.
+
+**Why Access the Shared Instance?**
+The Page Builder is implemented as a singleton service. This means there is only one instance that manages all page-building logic and state across your app. Using this shared instance avoids creating multiple, isolated copies of the builder, which can lead to data inconsistencies, synchronization issues, and unpredictable behavior.
+
+**There’s only one source of truth:**  
+By accessing the shared instance, your components and modules interact with the same centralized service, allowing smooth and reliable updates and coordination. This guarantees that all builder actions and state changes are reflected everywhere in your app.
+
+**How to Use the Shared Instance**
+Whenever you need to interact with the Page Builder service, import and call the getPageBuilder() function. This will return the existing instance you initialized earlier — no need to create a new one.
 
 ```vue
 <script setup>
 import {
   PageBuilder,
-  PageBuilderClass,
-  sharedPageBuilderStore,
+getPageBuilder,
 } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
 
 
 const configPageBuilder = {
   updateOrCreate: {
-   formType: 'create'
+    formType: 'create'
     formName: 'article',
   },
 }
 
-const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+// Retrieve Page Builder service instance
+const pageBuilderService = getPageBuilder()
 
-
-await pageBuilderClass.startBuilder(configPageBuilder)
+await pageBuilderService.startBuilder(configPageBuilder)
 </script>
 
 <template>
   <PageBuilder />
 </template>
 ```
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
-
-# Remove this
 
 ### Important: CSS Import Required
 
@@ -390,10 +316,10 @@ const configPageBuilder = {
 
 // Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
 const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 
 
-await pageBuilderClass.startBuilder(configPageBuilder)
+await pageBuilderService.startBuilder(configPageBuilder)
 </script>
 
 <template>
@@ -405,12 +331,12 @@ await pageBuilderClass.startBuilder(configPageBuilder)
 
 You can display your company logo in the Page Builder interface and set the currently logged-in user by passing both a logo URL and user information in your config object:
 
-- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderClass.startBuilder(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
+- **Company Logo:** Set the logo URL in your config object and pass it to the PageBuilder using `pageBuilderService.startBuilder(configPageBuilder)`. When provided, the logo will appear at the top of the Page Builder with proper spacing in the toolbar.
 - **Logged-in User:** Pass a `userForPageBuilder` object in your config to display or use the logged-in user's information within the builder (e.g., name and user image).
 
 **Basic Usage:**
 
-- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderClass.startBuilder(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
+- You can display your company logo in the page builder interface by setting the `src` in your config object and passing it to the PageBuilder using `pageBuilderService.startBuilder(configPageBuilder)`. When provided, the logo will appear in the top of the page builder.
 
 Basic Usage:
 
@@ -432,9 +358,9 @@ const configPageBuilder = {
 
 // Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component
 const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 
-await pageBuilderClass.startBuilder(configPageBuilder)
+await pageBuilderService.startBuilder(configPageBuilder)
 </script>
 
 <template>
@@ -486,7 +412,7 @@ import {
 import "@myissue/vue-website-page-builder/style.css";
 
 const pageBuilderStateStore = sharedPageBuilderStore;
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore);
 
 
 const configPageBuilder = {
@@ -496,10 +422,10 @@ const configPageBuilder = {
   },
 };
 
-await pageBuilderClass.startBuilder(configPageBuilder);
+await pageBuilderService.startBuilder(configPageBuilder);
 
 
-let storedComponents = pageBuilderClass.loadStoredComponentsFromStorage();
+let storedComponents = pageBuilderService.loadStoredComponentsFromStorage();
 let contentFromPageBuilder = "";
 
 try {
@@ -536,7 +462,7 @@ import {
 import "@myissue/vue-website-page-builder/style.css";
 
 const pageBuilderStateStore = sharedPageBuilderStore;
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore);
 
 
 const configPageBuilder = {
@@ -546,11 +472,11 @@ const configPageBuilder = {
   },
 };
 
-await pageBuilderClass.startBuilder(configPageBuilder);
+await pageBuilderService.startBuilder(configPageBuilder);
 
 const createResource = async function(){
-pageBuilderClass.deleteAllComponents();
-await pageBuilderClass.removeItemComponentsLocalStorage();
+pageBuilderService.deleteAllComponents();
+await pageBuilderService.removeItemComponentsLocalStorage();
 };
 <script>
 ```
@@ -569,7 +495,7 @@ import {
 import "@myissue/vue-website-page-builder/style.css";
 
 const pageBuilderStateStore = sharedPageBuilderStore;
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore);
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore);
 
 
 const configPageBuilder = {
@@ -579,11 +505,11 @@ const configPageBuilder = {
   },
 };
 
-await pageBuilderClass.startBuilder(configPageBuilder);
+await pageBuilderService.startBuilder(configPageBuilder);
 
 const updateResource = async function() {
-  pageBuilderClass.deleteAllComponents();
-  await pageBuilderClass.removeItemComponentsLocalStorage();
+  pageBuilderService.deleteAllComponents();
+  await pageBuilderService.removeItemComponentsLocalStorage();
 };
 
 <script>
@@ -615,12 +541,12 @@ const configPageBuilder = {
   // ...other config options
 }
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 
-await pageBuilderClass.startBuilder(configPageBuilder)
+await pageBuilderService.startBuilder(configPageBuilder)
 
 // Populating page builder with existing resource content
-pageBuilderClass.mountComponentsToDOM(existingResourceFromBackend)
+pageBuilderService.mountComponentsToDOM(existingResourceFromBackend)
 </script>
 
 <template>
@@ -659,9 +585,9 @@ const configPageBuilder = {
   },
 }
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 
-await pageBuilderClass.startBuilder(configPageBuilder)
+await pageBuilderService.startBuilder(configPageBuilder)
 </script>
 
 <template>
@@ -678,7 +604,7 @@ To load existing content that was created with this PageBuilder from any backend
 - Use `sharedPageBuilderStore` to ensure the external `PageBuilderClass` and internal `PageBuilder` component share the same state.
 - Import `PageBuilderClass` which contains all methods to manipulate and control the page builder state. Use the `mountComponentsToDOM()` method to load existing content into the page builder.
 - The `PageBuilderClass` uses the shared store to maintain state consistency between external operations and the internal `PageBuilder` component, ensuring that when you load content externally it appears correctly in the PageBuilder interface.
-- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderClass.startBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
+- Set `formType` to `"update"` in your config object and pass it to the PageBuilder using `pageBuilderService.startBuilder(configPageBuilder)`. This tells the PageBuilder that you're editing an existing resource rather than creating a new one, which affects how the component handles data and interactions.
 
 **Example: Set `formType` to "update" for editing an existing resource**
 
@@ -700,7 +626,7 @@ const configPageBuilder = {
   },
 }
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 
 // Saved content in DB from already created content using the Page Builder
 const existingResourceFromBackend = [
@@ -719,7 +645,7 @@ const existingResourceFromBackend = [
 ]
 
 // Populating page builder with existing resource content from backend
-pageBuilderClass.mountComponentsToDOM(existingResourceFromBackend)
+pageBuilderService.mountComponentsToDOM(existingResourceFromBackend)
 </script>
 
 <template>
@@ -778,9 +704,9 @@ const configPageBuilder = {
   },
 }
 
-const pageBuilderClass = new PageBuilderClass(pageBuilderStateStore)
+const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 
-pageBuilderClass.startBuilder(configPageBuilder)
+pageBuilderService.startBuilder(configPageBuilder)
 </script>
 
 <template>

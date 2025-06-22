@@ -25,8 +25,8 @@ watch(
 const inputClass = ref('')
 
 const handleAddClasses = async function () {
-  pageBuilderClass.handleAddClasses(inputClass.value)
-  await pageBuilderClass.initializeElementStyles()
+  pageBuilderService.handleAddClasses(inputClass.value)
+  await pageBuilderService.initializeElementStyles()
 
   inputClass.value = ''
 }
@@ -43,8 +43,8 @@ const handleAddClasses = async function () {
           class="pbx-myPrimaryTag pbx-cursor-pointer hover:pbx-bg-myPrimaryErrorColor hover:pbx-text-white pbx-text-xs pbx-py-2 pbx-font-medium"
           @click="
             async () => {
-              pageBuilderClass.handleRemoveClasses(className)
-              await pageBuilderClass.initializeElementStyles()
+              pageBuilderService.handleRemoveClasses(className)
+              await pageBuilderService.initializeElementStyles()
             }
           "
         >

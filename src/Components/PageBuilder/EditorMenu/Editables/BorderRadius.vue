@@ -33,7 +33,7 @@ watch(
   getBorderRadiusGlobal,
   async (newValue) => {
     borderRadiusGlobal.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -41,7 +41,7 @@ watch(
   getBorderRadiusTopLeft,
   async (newValue) => {
     borderRadiusTopLeft.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -49,7 +49,7 @@ watch(
   getBorderRadiusTopRight,
   async (newValue) => {
     borderRadiusTopRight.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -57,7 +57,7 @@ watch(
   getBorderRadiusBottomleft,
   async (newValue) => {
     borderRadiusBottomleft.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -65,7 +65,7 @@ watch(
   getBorderRadiusBottomRight,
   async (newValue) => {
     borderRadiusBottomRight.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -81,7 +81,7 @@ watch(
         <select
           v-model="borderRadiusGlobal"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleBorderRadiusGlobal(borderRadiusGlobal)"
+          @change="pageBuilderService.handleBorderRadiusGlobal(borderRadiusGlobal)"
         >
           <option disabled value="">Select</option>
           <option
@@ -98,7 +98,7 @@ watch(
         <select
           v-model="borderRadiusTopLeft"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleBorderRadiusTopLeft(borderRadiusTopLeft)"
+          @change="pageBuilderService.handleBorderRadiusTopLeft(borderRadiusTopLeft)"
         >
           <option disabled value="">Select</option>
           <option
@@ -114,7 +114,7 @@ watch(
         <select
           v-model="borderRadiusTopRight"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleBorderRadiusTopRight(borderRadiusTopRight)"
+          @change="pageBuilderService.handleBorderRadiusTopRight(borderRadiusTopRight)"
         >
           <option disabled value="">Select</option>
           <option
@@ -130,7 +130,7 @@ watch(
         <select
           v-model="borderRadiusBottomleft"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleBorderRadiusBottomleft(borderRadiusBottomleft)"
+          @change="pageBuilderService.handleBorderRadiusBottomleft(borderRadiusBottomleft)"
         >
           <option disabled value="">Select</option>
           <option
@@ -146,7 +146,7 @@ watch(
         <select
           v-model="borderRadiusBottomRight"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleBorderRadiusBottomRight(borderRadiusBottomRight)"
+          @change="pageBuilderService.handleBorderRadiusBottomRight(borderRadiusBottomRight)"
         >
           <option disabled value="">Select</option>
           <option

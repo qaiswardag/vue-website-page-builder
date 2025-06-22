@@ -59,12 +59,12 @@ const handleToggleHyperlinkEnable = async function (data) {
 
   // remove hyperlink
   if (hyperlinkEnable.value === false) {
-    pageBuilderClass.handleHyperlink(hyperlinkEnable.value, data)
+    pageBuilderService.handleHyperlink(hyperlinkEnable.value, data)
   }
 }
 // add hyperlink
 const handleHyperlink = function () {
-  pageBuilderClass.handleHyperlink(
+  pageBuilderService.handleHyperlink(
     hyperlinkEnable.value,
     urlInput.value,
     openHyperlinkInNewTab.value,
@@ -74,7 +74,7 @@ const handleHyperlink = function () {
 const handleToggleOpenHyperlinkInNewTab = async function () {
   await nextTick()
 
-  pageBuilderClass.handleHyperlink(
+  pageBuilderService.handleHyperlink(
     hyperlinkEnable.value,
     urlInput.value,
     openHyperlinkInNewTab.value,

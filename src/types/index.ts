@@ -1,8 +1,8 @@
-import type PageBuilderClass from '../composables/PageBuilderClass.ts'
+import type PageBuilderService from '../composables/PageBuilderService.ts'
 
 export interface PageBuilderState {
   // ...other state properties...
-  pageBuilderClass: PageBuilderClass | null
+  PageBuilderService: PageBuilderService | null
   isSaving: boolean
   // etc.
 }

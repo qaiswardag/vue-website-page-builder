@@ -19,7 +19,7 @@ const { closeAddComponentModal } = usePageBuilderModal()
 
 // Super simple component addition with professional modal closing!
 const handleDropComponent = async function (componentObject: ComponentObject) {
-  await pageBuilderClass.addComponent(componentObject)
+  await pageBuilderService.addComponent(componentObject)
   closeAddComponentModal()
 }
 

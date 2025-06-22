@@ -18,7 +18,7 @@ watch(
   getBackgroundColor,
   async (newValue) => {
     backgroundColor.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -52,7 +52,7 @@ watch(
           <ListboxOption
             as="template"
             v-for="color in tailwindColors.backgroundColorVariables"
-            @click="pageBuilderClass.handleBackgroundColor(backgroundColor)"
+            @click="pageBuilderService.handleBackgroundColor(backgroundColor)"
             :key="color"
             :value="color"
             v-slot="{ active, backgroundColor }"

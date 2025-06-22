@@ -23,7 +23,7 @@ watch(
   getOpacity,
   async (newValue) => {
     opacityVueModel.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -71,7 +71,7 @@ watch(
             <ListboxOption
               as="template"
               v-for="elementOpacity in tailwindOpacities.opacities"
-              @click="pageBuilderClass.handleOpacity(elementOpacity)"
+              @click="pageBuilderService.handleOpacity(elementOpacity)"
               :key="elementOpacity"
               :value="elementOpacity"
               v-slot="{ active }"

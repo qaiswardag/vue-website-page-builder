@@ -28,7 +28,7 @@ watch(
   getBorderStyle,
   async (newValue) => {
     borderStyle.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -36,7 +36,7 @@ watch(
   getBorderWidth,
   async (newValue) => {
     borderWidth.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -44,7 +44,7 @@ watch(
   getBorderColor,
   async (newValue) => {
     borderColor.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -61,7 +61,7 @@ watch(
         <select
           v-model="borderStyle"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleBorderStyle(borderStyle)"
+          @change="pageBuilderService.handleBorderStyle(borderStyle)"
         >
           <option disabled value="">Select</option>
           <option
@@ -77,7 +77,7 @@ watch(
         <select
           v-model="borderWidth"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderClass.handleBorderWidth(borderWidth)"
+          @change="pageBuilderService.handleBorderWidth(borderWidth)"
         >
           <option disabled value="">Select</option>
           <option
@@ -124,7 +124,7 @@ watch(
               <ListboxOption
                 as="template"
                 v-for="color in tailwindBorderStyleWidthPlusColor.borderColor"
-                @click="pageBuilderClass.handleBorderColor(borderColor)"
+                @click="pageBuilderService.handleBorderColor(borderColor)"
                 :key="color"
                 :value="color"
                 v-slot="{ active, borderColor }"

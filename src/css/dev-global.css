@@ -142,18 +142,3 @@ These styles affect all HTML elements (like input, button, h1, etc.) in the cons
   gap: 6px 0px;
   justify-content: center;
 }
-
-p {
-  @apply pbx-font-normal lg:pbx-text-base pbx-text-base;
-}
-
-a {
-  @apply pbx-text-myPrimaryLinkColor;
-}
-
-h2 {
-  @apply pbx-text-3xl pbx-mt-4 pbx-mb-3 pbx-font-medium;
-}
-h3 {
-  @apply pbx-text-2xl pbx-mt-4 pbx-mb-3 pbx-font-medium;
-}

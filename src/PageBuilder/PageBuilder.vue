@@ -64,7 +64,7 @@ const getMenuRight = computed(() => {
   return pageBuilderStateStore.getMenuRight
 })
 const previewCurrentDesign = function () {
-  pageBuilderClass.previewCurrentDesign()
+  pageBuilderService.previewCurrentDesign()
 }
 const openAppNotStartedModal = ref(false)
 const openPageBuilderPreviewModal = ref(false)
@@ -87,7 +87,7 @@ const firstButtonTextSearchComponents = ref('')
 const firstModalButtonSearchComponentsFunction = ref(null)
 
 const handleAddComponent = async function () {
-  await pageBuilderClass.clearHtmlSelection()
+  await pageBuilderService.clearHtmlSelection()
 
   //
   titleModalAddComponent.value = 'Add Components to Page'
@@ -149,8 +149,8 @@ watch(getElementAttributes, async (newAttributes, oldAttributes) => {
     newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
     debounce(async () => {
-      await pageBuilderClass.handleAutoSave()
-      await pageBuilderClass.initializeElementStyles()
+      await pageBuilderService.handleAutoSave()
+      await pageBuilderService.initializeElementStyles()
     }, 200)
   }
 })
@@ -191,7 +191,7 @@ const secondModalButtonResumeEditingFunction = ref(null)
 const thirdModalButtonResumeEditingFunction = ref(null)
 
 const handlerRumeEditingForUpdate = async function () {
-  await pageBuilderClass.clearHtmlSelection()
+  await pageBuilderService.clearHtmlSelection()
 
   typeModal.value = 'warning'
   showModalResumeEditing.value = true
@@ -210,7 +210,7 @@ const handlerRumeEditingForUpdate = async function () {
   secondModalButtonResumeEditingFunction.value = function () {}
 
   thirdModalButtonResumeEditingFunction.value = async function () {
-    await pageBuilderClass.resumeEditingForUpdate()
+    await pageBuilderService.resumeEditingForUpdate()
 
     showModalResumeEditing.value = false
   }
@@ -231,7 +231,7 @@ const secondModalButtonRestoreFunction = ref(null)
 const thirdModalButtonRestoreFunction = ref(null)
 
 const handleRestoreOriginalContent = async function () {
-  await pageBuilderClass.clearHtmlSelection()
+  await pageBuilderService.clearHtmlSelection()
 
   typeModalRestore.value = 'success'
   showModalRestore.value = true
@@ -240,7 +240,7 @@ const handleRestoreOriginalContent = async function () {
   descriptionModalRestore.value =
     'Are you sure you want to restore the original content from the database? This will overwrite your current page layout.'
   firstButtonRestore.value = 'Close'
-  secondButtonRestore.value = 'Use original Content'
+  secondButtonRestore.value = 'Restore original Content'
   thirdButtonRestore.value = null
 
   firstModalButtonRestoreFunction.value = function () {
@@ -248,7 +248,7 @@ const handleRestoreOriginalContent = async function () {
   }
 
   secondModalButtonRestoreFunction.value = async function () {
-    await pageBuilderClass.restoreOriginalContent()
+    await pageBuilderService.restoreOriginalContent()
     showModalRestore.value = false
   }
   thirdModalButtonRestoreFunction.value = async function () {}
@@ -261,9 +261,6 @@ const ensureBuilderInitialized = function () {
     openAppNotStartedModal.value = true
   }
 }
-
-pageBuilderClass.setQW('PageBuilder.vue')
-const getQWPageBuilder = pageBuilderClass.getQW()
 
 onMounted(async () => {
   // Check if Builder started
@@ -284,11 +281,11 @@ onMounted(async () => {
     <div id="pagebuilder-top-area" class="lg:pbx-px-4 pbx-pt-2 pbx-pb-4 pbx-mx-4 pbx-mb-4 pbx-mt-2">
       <GlobalLoader v-if="getIsLoadingGlobal"></GlobalLoader>
       <div
-        @click.self="pageBuilderClass.clearHtmlSelection()"
+        @click.self="pageBuilderService.clearHtmlSelection()"
         class="pbx-min-h-24 pbx-flex pbx-justify-between pbx-items-center pbx-pb-2 pbx-border-b pbx-border-gray-200"
       >
         <!-- Logo # start -->
-        <div @click="pageBuilderClass.clearHtmlSelection()">
+        <div @click="pageBuilderService.clearHtmlSelection()">
           <div
             v-if="
               getPageBuilderConfig &&
@@ -387,7 +384,7 @@ onMounted(async () => {
     <div>
       <div class="pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2">
         <div
-          @click.self="pageBuilderClass.clearHtmlSelection()"
+          @click.self="pageBuilderService.clearHtmlSelection()"
           id="pagebuilder-left-area"
           class="pbx-min-w-[3.5rem] pbx-pt-6 pbx-pb-2 pbx-ml-2 pbx-bg-myPrimaryLightGrayColor pbx-rounded-full pbx-shadow-sm"
         >
@@ -406,7 +403,7 @@ onMounted(async () => {
                 <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
               </button>
             </div>
-            <div @click.self="pageBuilderClass.clearHtmlSelection()">
+            <div @click.self="pageBuilderService.clearHtmlSelection()">
               <ComponentTopMenu v-if="getElement"></ComponentTopMenu>
             </div>
           </div>
@@ -420,15 +417,15 @@ onMounted(async () => {
             class="pbx-flex pbx-items-center pbx-justify-between pbx-rounded-t-2xl pbx-bg-myPrimaryLightGrayColor pbx-min-w-[30rem]"
           >
             <div
-              @click.self="pageBuilderClass.clearHtmlSelection()"
+              @click.self="pageBuilderService.clearHtmlSelection()"
               class="pbx-flex pbx-myPrimaryGap pbx-items-center pbx-pt-4 pbx-pb-2 pbx-pl-2 pbx-h-24 pbx-w-full pbx-min-w-36"
             >
               <button
                 class="pbx-mySecondaryButton pbx-h-6 pbx-flex pbx-gap-2"
                 @click.stop="
                   async () => {
-                    await pageBuilderClass.clearHtmlSelection()
-                    await pageBuilderClass.handleManualSave()
+                    await pageBuilderService.clearHtmlSelection()
+                    await pageBuilderService.handleManualSave()
                   }
                 "
                 type="button"
@@ -459,7 +456,7 @@ onMounted(async () => {
                 class="pbx-mySecondaryButton pbx-h-6 pbx-flex pbx-gap-2"
                 @click.stop="
                   async () => {
-                    await pageBuilderClass.clearHtmlSelection()
+                    await pageBuilderService.clearHtmlSelection()
                     await handleRestoreOriginalContent()
                   }
                 "
@@ -470,7 +467,7 @@ onMounted(async () => {
                   v-if="!getIsRestoring"
                   class="pbx-h-10 pbx-w-4 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-justify-center"
                 >
-                  <span class="material-symbols-outlined">cloud_circle</span>
+                  <span class="material-symbols-outlined"> settings_backup_restore </span>
                 </div>
                 <div
                   v-if="getIsRestoring"
@@ -485,18 +482,20 @@ onMounted(async () => {
                     ></span>
                   </span>
                 </div>
-                <div>Restore Original Content</div>
+                <div>
+                  <span class="lg:pbx-block pbx-hidden"> Restore </span>
+                </div>
               </button>
 
               <!-- Continue editing # end -->
             </div>
 
             <div
-              @click.self="pageBuilderClass.clearHtmlSelection()"
+              @click.self="pageBuilderService.clearHtmlSelection()"
               class="pbx-flex pbx-justify-end pbx-py-2 pbx-pr-2 pbx-h-24 pbx-w-full"
             >
               <div
-                @click.self="pageBuilderClass.clearHtmlSelection()"
+                @click.self="pageBuilderService.clearHtmlSelection()"
                 class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4"
               >
                 <button
@@ -526,7 +525,7 @@ onMounted(async () => {
                       () => {
                         pageBuilderStateStore.setMenuRight(false)
                         pageBuilderStateStore.setElement(null)
-                        pageBuilderClass.clearHtmlSelection()
+                        pageBuilderService.clearHtmlSelection()
                         handlePageBuilderPreview()
                       }
                     "
@@ -546,11 +545,11 @@ onMounted(async () => {
             </div>
 
             <div
-              @click.self="pageBuilderClass.clearHtmlSelection()"
+              @click.self="pageBuilderService.clearHtmlSelection()"
               class="pbx-flex pbx-justify-end pbx-py-2 pbx-pr-2 pbx-w-full pbx-h-24"
             >
               <div
-                @click.self="pageBuilderClass.clearHtmlSelection()"
+                @click.self="pageBuilderService.clearHtmlSelection()"
                 class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4"
               >
                 <button
@@ -596,7 +595,7 @@ onMounted(async () => {
               <!-- Add Component # start -->
 
               <div
-                @click="pageBuilderClass.clearHtmlSelection()"
+                @click="pageBuilderService.clearHtmlSelection()"
                 id="pagebuilder-bottom-components-area"
                 class="pbx-pt-8 pbx-pb-12 pbx-text-center focus:pbx-outline-none focus:pbx-ring-2 focus:pbx-ring-indigo-500 focus:pbx-ring-offset-2 pbx-my-2 pbx-mx-4"
                 :class="{ 'pbx-border-t pbx-border-gray-200': getComponents.length > 0 }"

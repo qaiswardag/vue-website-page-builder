@@ -36,7 +36,7 @@ const deleteSelectedComponent = function (e) {
   //
   // handle click
   thirdModalButtonFunctionDynamicModalBuilder.value = function () {
-    pageBuilderClass.deleteSelectedComponent()
+    pageBuilderService.deleteSelectedComponent()
 
     showModalDeleteComponent.value = false
   }
@@ -73,14 +73,14 @@ const deleteSelectedComponent = function (e) {
 
     <button
       type="button"
-      @click="pageBuilderClass.reorderComponent(-1)"
+      @click="pageBuilderService.reorderComponent(-1)"
       class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
     >
       <span class="material-symbols-outlined"> move_up </span>
     </button>
     <button
       type="button"
-      @click="pageBuilderClass.reorderComponent(1)"
+      @click="pageBuilderService.reorderComponent(1)"
       class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
     >
       <span class="material-symbols-outlined"> move_down </span>

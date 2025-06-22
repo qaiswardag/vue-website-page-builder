@@ -29,7 +29,7 @@ const getRestoredElement = computed(() => {
           <label class="pbx-myPrimaryInputLabel"> Restore the last deleted HTML element.</label>
           <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
             <button
-              @click="pageBuilderClass.handleRestoreElement"
+              @click="pageBuilderService.handleRestoreElement"
               type="button"
               class="pbx-myPrimaryButton pbx-w-full pbx-mt-4"
             >
@@ -48,7 +48,7 @@ const getRestoredElement = computed(() => {
 
         <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
           <button
-            @click="pageBuilderClass.handleDeleteElement"
+            @click="pageBuilderService.handleDeleteElement"
             type="button"
             class="pbx-myPrimaryDeleteButton pbx-w-full pbx-mt-4"
           >

@@ -17,7 +17,7 @@ watch(
   getTextColor,
   async (newValue) => {
     textColor.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -51,7 +51,7 @@ watch(
           <ListboxOption
             as="template"
             v-for="color in tailwindColors.textColorVariables"
-            @click="pageBuilderClass.handleTextColor(textColor)"
+            @click="pageBuilderService.handleTextColor(textColor)"
             :key="color"
             :value="color"
             v-slot="{ active, textColor }"

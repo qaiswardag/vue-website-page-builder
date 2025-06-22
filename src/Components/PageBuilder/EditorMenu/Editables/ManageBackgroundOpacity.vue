@@ -24,7 +24,7 @@ watch(
   getBackgroundOpacity,
   async (newValue) => {
     opacityVueModel.value = newValue
-    await pageBuilderClass.initializeElementStyles()
+    await pageBuilderService.initializeElementStyles()
   },
   { immediate: true },
 )
@@ -72,7 +72,7 @@ watch(
             <ListboxOption
               as="template"
               v-for="backgroundOpacity in tailwindOpacities.backgroundOpacities"
-              @click="pageBuilderClass.handleBackgroundOpacity(backgroundOpacity)"
+              @click="pageBuilderService.handleBackgroundOpacity(backgroundOpacity)"
               :key="backgroundOpacity"
               :value="backgroundOpacity"
               v-slot="{ active }"
