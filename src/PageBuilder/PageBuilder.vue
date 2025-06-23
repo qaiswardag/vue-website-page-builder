@@ -269,11 +269,11 @@ onMounted(async () => {
   }
 
   // Check if Builder started
-  await delay(6000)
+  await delay(10000)
   ensureBuilderInitialized()
 
   // Re-check if Builder started
-  await delay(6000)
+  await delay(10000)
   ensureBuilderInitialized()
 })
 </script>

@@ -195,10 +195,21 @@ export class PageBuilderService {
   }
 
   /**
-   * Initializes the Page Builder with the provided configuration.
-   * Handles config validation, local storage, and sets up the builder state.
+   * - Entry point for initializing the Page Builder.
+   * - Sets the builder as started in the state store.
+   * - Shows a global loading indicator.
+   * - Stores and validates the provided configuration.
+   * - Updates the localStorage key name based on the config/resource.
+   * - Completes builder initialization if the DOM is ready.
+   *
+   * @param config - The configuration object for the Page Builder.
    */
   async startBuilder(config: PageBuilderConfig): Promise<void> {
+    // Reactive flag signals to the UI that the builder has been successfully initialized
+    // Prevents builder actions to prevent errors caused by missing DOM .
+    this.pageBuilderStateStore.setBuilderStarted(true)
+
+    console.log('started page builder:')
     // Show a global loading indicator while initializing
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
 
@@ -213,25 +224,33 @@ export class PageBuilderService {
     // Update the localStorage key name based on the config/resource
     this.#updateLocalStorageItemName()
 
-    this.#completeBuilderInitialization()
+    this.completeBuilderInitialization()
   }
 
-  async #completeBuilderInitialization() {
-    this.pageBuilderStateStore.setIsLoadingGlobal(true)
-
+  async completeBuilderInitialization() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
+    console.log('completed page builder:')
+
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await this.delay(300)
 
     // Hide the global loading indicator and mark the builder as started
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
-    this.pageBuilderStateStore.setBuilderStarted(true)
 
-    // If there is a local draft for this resource, mark it in the state
+    // If there is a local draft for this resource show a Modal
     if (await this.hasLocalDraftForUpdate()) {
       this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
     }
+
+    // Deselect any selected or hovered elements in the builder UI
+    await this.clearHtmlSelection()
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
+
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
   }
@@ -1862,7 +1881,7 @@ export class PageBuilderService {
     if (this.pendingMountData && document.querySelector('#pagebuilder')) {
       await this.mountComponentsToDOM(this.pendingMountData)
       this.pendingMountData = null
-      this.#completeBuilderInitialization()
+      this.completeBuilderInitialization()
     }
   }
 
