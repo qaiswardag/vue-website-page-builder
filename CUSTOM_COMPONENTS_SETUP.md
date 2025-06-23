@@ -1,10 +1,10 @@
 # Custom Components Setup Guide
 
-This guide shows you how to create custom components that can be injected into the Vue Website Page Builder.
+This guide will walk you through creating custom components that can be injected into the Vue Website Page Builder.
 
 ## Quick Setup
 
-Create a `ComponentsPageBuilder` folder in your project for customizable components:
+Begin by creating a `ComponentsPageBuilder` folder in your project to organize your customizable components:
 
 ```
 your-project/
@@ -19,52 +19,40 @@ your-project/
 
 By default, the Page Builder does not include a built-in media library.
 
-This is intentional — without a custom media library, layout components that rely on images (like Image Blocks, Hero Sections, etc.) are disabled by default. Only helper components such as containers, headings, text, and buttons are available in this state.
+This is intentional—without a custom media library, layout components that rely on images (such as Image Blocks, Hero Sections, and similar) are disabled by default. Only helper components like containers, headings, text, and buttons are available in this state.
 
-To enable image-related components in the builder, you must inject your own media library by passing it to the PageBuilder via the `:CustomMediaLibraryComponent` prop:
+To enable image-related components in the builder, you must inject your own media library by passing it to the Page Builder via the `:CustomMediaLibraryComponent` prop:
 
-- Create a `ComponentsPageBuilder` folder in your project for your Media Library.
-- Pass your custom component to the builder using the `:CustomMediaLibraryComponent` prop:
+- Create a `ComponentsPageBuilder` folder in your project for your media library component.
+- Pass your custom component to the builder using the `:CustomMediaLibraryComponent` prop.
 
 #### 🟢 **You have full control over your media library UI**
 
-You are **completely free to design your media library** however you want.  
-You can use any UI, API, or logic for browsing, searching, and selecting images.
+You are free to design your media library however you wish.  
+Use any UI, API, or logic for browsing, searching, and selecting images.
 
 **The only requirement:**  
 When the user selects an image and clicks "Use Image" (or similar), you must run the following code to update the builder:
 
-Example:
-
 ```vue
 <script setup>
-import {
-  PageBuilder,
-  PageBuilderClass,
-  usePageBuilderModal,
-  sharedPageBuilderStore,
-} from '@myissue/vue-website-page-builder'
-import '@myissue/vue-website-page-builder/style.css'
+import { getPageBuilder, usePageBuilderModal } from '@myissue/vue-website-page-builder'
 import YourMediaLibraryComponent from './ComponentsPageBuilder/YourMediaLibraryComponent.vue'
 
-// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component and how components object should look like
-const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
+// Retrieve Page Builder service instance
+const pageBuilderService = getPageBuilder()
 const { closeMediaLibraryModal } = usePageBuilderModal()
 
 const applySelectedImage = async function (imageURL) {
-
   // Set the selected image in the builder's state
-  pageBuilderService.stageImageForSelectedElemente({
-    // the selected image URL
+  pageBuilderService.stageImageForSelectedElement({
     src: imageURL,
   })
 
-  // Update the builder's image block with the new image
+  // Update the builder's HTML image block with the new image
   await pageBuilderService.applyPendingImageToSelectedElement()
 
-
-  // Close the media library modal
+  // Close the Page Builder media library modal
   closeMediaLibraryModal()
 }
 </script>
@@ -76,37 +64,29 @@ const applySelectedImage = async function (imageURL) {
 </template>
 ```
 
----
+## Custom Layout Builder Component
 
-## Custom Layout Builder Components
+The Page Builder comes with a growing collection of built-in components, including both layout and helper components. These defaults are continuously improved and expanded.
 
-The Page Builder includes a growing collection of built-in components available out of the box, including layout components and helper components. These default components are continuously improved and expanded over time.
+If you want to use your own components—whether custom-designed or tailored to your application's needs—you can inject them directly into the builder.
 
-If you'd like to use your own components—whether custom-designed or tailored to specific needs—you can inject them directly into the builder.
-
-- Create a `ComponentsPageBuilder` folder in your project for your customizable components.
-- Tip: You can use a Modal to allow users to browse and select custom components.
-- Pass your custom component to the builder using the :CustomBuilderComponents prop.
-- When a user selects or drops a component from your custom component picker, you should inject it into the builder using a function like `injectComponentToBuilder`. See the code example below for how to implement this.
+- Create a `ComponentsPageBuilder` folder in your project for your custom components.
+- (Optional) Use a modal to let users browse and select custom components.
+- Pass your custom component to the builder using the `:CustomBuilderComponents` prop.
+- When a user selects or drops a component from your custom component picker, inject it into the builder using a function like `injectComponentToBuilder`. See the example below for implementation details.
 
 ```vue
 <script setup>
-import {
-  PageBuilder,
-  PageBuilderClass,
-  usePageBuilderModal,
-  sharedPageBuilderStore,
-} from '@myissue/vue-website-page-builder'
-import '@myissue/vue-website-page-builder/style.css'
+import { getPageBuilder, usePageBuilderModal } from '@myissue/vue-website-page-builder'
 import YourCustomBuilderComponents from './ComponentsPageBuilder/YourCustomBuilderComponents.vue'
 
-// Use sharedPageBuilderStore for shared state between PageBuilderClass and PageBuilder component and how components object should look like
-const pageBuilderStateStore = sharedPageBuilderStore
-const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
+// Retrieve Page Builder service instance
+const pageBuilderService = getPageBuilder()
+const { closeAddComponentModal } = usePageBuilderModal()
 
 const injectComponentToBuilder = async function (componentObject) {
   const component = {
-    // ID auto generated by the Page Builder
+    // ID will be auto-generated by the Page Builder
     id: null,
     html_code: componentObject.html_code,
     title: componentObject.title,
@@ -124,38 +104,41 @@ const injectComponentToBuilder = async function (componentObject) {
 </template>
 ```
 
-#### How should Components array look?
+#### How Should the Components Array Look?
 
-TypeScript interface for reference
+Each custom component you inject must be represented as an object with the following structure.  
+The Page Builder relies on a `<section></section>` wrapper to correctly render each component and attach event listeners.
 
-The HTML of each component must be wrapped inside a `<section></section>`. The Page Builder relies on this `<section>` wrapper to correctly render each component and attach event listeners.
-
-- So The Page Builder divides each component by looking for the `<section>` tag. Each component’s HTML must start with `<section>...</section>`.
-- Tip For optimal responsive layouts, wrap each component content inside:
+- **Required:** The HTML for each component must be wrapped inside a `<section>...</section>`. The builder uses this tag to identify and manage components.
+- **Tip:** For optimal responsive layouts, wrap your component content inside:
 
 ```html
-<div class="relative py-4">
-  <div class="mx-auto max-w-7xl lg:px-4 px-2">
-    <!-- Your content here -->
+<section>
+  <div class="relative py-4">
+    <div class="mx-auto max-w-7xl lg:px-4 px-2">
+      <!-- Your content here -->
+    </div>
   </div>
-</div>
+</section>
 ```
 
+**TypeScript interface for reference:**
+
 ```typescript
-interface Components {
+interface Component {
   html_code: string
   id: string | null
   title: string
 }
 
-const components: Components[] = [
+const components: Component[] = [
   {
-    html_code: `<div class="relative py-4"> <div class="mx-auto max-w-7xl lg:px-4 px-2"> <div class="break-words"> <h2>This is a component</h2> </div> </div> </div> </section>`,
+    html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h2>This is a component</h2></div></div></div></section>`,
     id: null,
     title: 'Header Example One',
   },
   {
-    html_code: `<div class="relative py-4"> <div class="mx-auto max-w-7xl lg:px-4 px-2"> <div class="break-words"> <h2>This is another component</h2> </div> </div> </div> </section>`,
+    html_code: `<section><div class="relative py-4"><div class="mx-auto max-w-7xl lg:px-4 px-2"><div class="break-words"><h2>This is another component</h2></div></div></div></section>`,
     id: null,
     title: 'Header Example Two',
   },
@@ -164,8 +147,8 @@ const components: Components[] = [
 
 ## Benefits of This Approach
 
-✅ **Full Control**: You decide where and when to create components
-✅ **Flexible**: Adapt to any project structure
-✅ **Secure**: No postinstall scripts to worry about
-✅ **Simple**: Clean package with clear documentation
-✅ **Optional**: Only create components you actually need
+✅ **Full Control:** Decide exactly where and when to create components within your application.  
+✅ **Flexible:** Easily adapt to any project structure or workflow.  
+✅ **Secure:** No postinstall scripts or hidden dependencies—just clean, safe code.  
+✅ **Simple:** Lightweight package with straightforward, well-documented setup.  
+✅ **Optional:** Only create and use the components you actually need—nothing extra.

@@ -1397,6 +1397,7 @@ export class PageBuilderService {
   getStorageItemNameForResource(): string | null {
     return this.getLocalStorageItemName.value
   }
+
   loadStoredComponentsFromStorage() {
     if (!this.getLocalStorageItemName.value) return false
 

@@ -83,12 +83,9 @@ const configPageBuilder = {
 
 onMounted(async () => {
   await pageBuilderService.startBuilder(configPageBuilder)
-  //
-  //
-  //
-  // await pageBuilderService.mountComponentsToDOM(JSON.stringify(html))
+  await pageBuilderService.mountComponentsToDOM(JSON.stringify(html))
   // await pageBuilderService.mountComponentsToDOM(JSON.stringify(oldhtmlfromdb))
-  await pageBuilderService.mountComponentsToDOM(rawHTML)
+  // await pageBuilderService.mountComponentsToDOM(rawHTML)
 })
 </script>
 
