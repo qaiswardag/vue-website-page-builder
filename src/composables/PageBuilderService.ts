@@ -203,7 +203,6 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
 
     // Wait briefly to ensure UI updates and async processes settle
-    await this.delay(300)
 
     // Store the provided config in the builder's state store
     this.pageBuilderStateStore.setPageBuilderConfig(config)
@@ -214,24 +213,27 @@ export class PageBuilderService {
     // Update the localStorage key name based on the config/resource
     this.#updateLocalStorageItemName()
 
-    // If there is a local draft for this resource, mark it in the state
-    if (await this.#hasLocalDraftForUpdate()) {
-      this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-    }
+    this.#completeBuilderInitialization()
+  }
 
-    // Clean up any old localStorage items related to previous builder sessions
-    this.deleteOldPageBuilderLocalStorage()
+  async #completeBuilderInitialization() {
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
 
-    // Deselect any selected or hovered elements in the builder UI
-    await this.clearHtmlSelection()
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-    await nextTick()
-    // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
+    const pagebuilder = document.querySelector('#pagebuilder')
+    if (!pagebuilder) return
+
+    await this.delay(300)
 
     // Hide the global loading indicator and mark the builder as started
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
     this.pageBuilderStateStore.setBuilderStarted(true)
+
+    // If there is a local draft for this resource, mark it in the state
+    if (await this.hasLocalDraftForUpdate()) {
+      this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+    }
+    // Clean up any old localStorage items related to previous builder sessions
+    this.deleteOldPageBuilderLocalStorage()
   }
 
   #applyElementClassChanges(
@@ -1270,7 +1272,12 @@ export class PageBuilderService {
     }
   }
 
-  async #hasLocalDraftForUpdate(): Promise<boolean> {
+  async hasLocalDraftForUpdate(): Promise<boolean> {
+    const pagebuilder = document.querySelector('#pagebuilder')
+    if (!pagebuilder) {
+      return true
+    }
+
     if (this.hasStartedEditing) return false
 
     if (
@@ -1284,12 +1291,9 @@ export class PageBuilderService {
         const draft = localStorage.getItem(key)
         if (draft) {
           try {
-            await this.delay(500)
+            await this.delay(1000)
 
             return true
-            // const dbComponents = this.getComponents.value
-            // const draftParsed = JSON.parse(draft)
-            // return JSON.stringify(draftParsed.components) !== JSON.stringify(dbComponents)
           } catch (err) {
             console.error('Unable to mount components to DOM.', err)
             return false
@@ -1319,10 +1323,10 @@ export class PageBuilderService {
         const updateDraftFromLocalStorage = localStorage.getItem(key)
 
         if (typeof updateDraftFromLocalStorage === 'string') {
-          this.pageBuilderStateStore.setIsResumeEditing(true)
+          this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
           await delay(500)
           this.mountComponentsToDOM(updateDraftFromLocalStorage)
-          this.pageBuilderStateStore.setIsResumeEditing(false)
+          this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
         }
       }
     }
@@ -1858,6 +1862,7 @@ export class PageBuilderService {
     if (this.pendingMountData && document.querySelector('#pagebuilder')) {
       await this.mountComponentsToDOM(this.pendingMountData)
       this.pendingMountData = null
+      this.#completeBuilderInitialization()
     }
   }
 

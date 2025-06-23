@@ -277,7 +277,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getIsLoadingGlobal: (state: PageBuilderState): boolean => state.isLoadingGlobal,
     getIsSaving: (state: PageBuilderState): boolean => state.isSaving,
     getHasLocalDraftForUpdate: (state: PageBuilderState): boolean => state.hasLocalDraftForUpdate,
-    getIsResumeEditing: (state: PageBuilderState): boolean => state.isResumeEditing,
+    getIsLoadingResumeEditing: (state: PageBuilderState): boolean => state.isResumeEditing,
     getIsRestoring: (state: PageBuilderState): boolean => state.isRestoring,
   },
   actions: {
@@ -475,7 +475,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     setHasLocalDraftForUpdate(payload: boolean): void {
       this.hasLocalDraftForUpdate = payload
     },
-    setIsResumeEditing(payload: boolean): void {
+    setIsLoadingResumeEditing(payload: boolean): void {
       this.isResumeEditing = payload
     },
     setIsRestoring(payload: boolean): void {

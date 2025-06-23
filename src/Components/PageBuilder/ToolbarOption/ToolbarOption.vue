@@ -188,12 +188,7 @@ const openHTMLSettings = function () {
 
             <!-- Delete Layout Start -->
             <button
-              @click="
-                () => {
-                  pageBuilderService.clearHtmlSelection()
-                  deleteAllComponents()
-                }
-              "
+              @click="deleteAllComponents"
               class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-font-normal pbx-w-max pbx-border-none pbx-m-0 pbx-bg-myPrimaryErrorColor pbx-text-white"
               type="button"
             >

@@ -102,16 +102,16 @@ const handleAddComponent = async function () {
   // end modal
 }
 
-const getHasLocalDraftForUpdate = computed(() => {
-  return pageBuilderStateStore.getHasLocalDraftForUpdate
-})
-
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement
 })
 
 const getComponents = computed(() => {
   return pageBuilderStateStore.getComponents
+})
+
+const getHasLocalDraftForUpdate = computed(() => {
+  return pageBuilderStateStore.getHasLocalDraftForUpdate
 })
 
 watch(getHasLocalDraftForUpdate, (newVal) => {
@@ -168,11 +168,11 @@ const getIsSaving = computed(() => {
   return pageBuilderStateStore.getIsSaving
 })
 
-const getIsResumeEditing = computed(() => {
-  if (pageBuilderStateStore.getIsResumeEditing) {
+const getIsLoadingResumeEditing = computed(() => {
+  if (pageBuilderStateStore.getIsLoadingResumeEditing) {
     handlerRumeEditingForUpdate()
   }
-  return pageBuilderStateStore.getIsResumeEditing
+  return pageBuilderStateStore.getIsLoadingResumeEditing
 })
 const getIsRestoring = computed(() => {
   return pageBuilderStateStore.getIsRestoring
@@ -340,7 +340,7 @@ onMounted(async () => {
 
     <DynamicModalBuilder
       :showDynamicModalBuilder="showModalResumeEditing"
-      :isLoading="getIsResumeEditing"
+      :isLoading="getIsLoadingResumeEditing"
       :type="typeModal"
       :gridColumnAmount="gridColumnModalResumeEditing"
       :title="titleModalResumeEditing"
