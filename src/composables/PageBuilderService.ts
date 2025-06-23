@@ -36,7 +36,10 @@ export class PageBuilderService {
   private NoneListernesTags: string[]
   private delay: (ms?: number) => Promise<void>
   private hasStartedEditing: boolean = false
+  // Hold data from Database or Backend for updated post
   private originalComponents: string | null = null
+  // Holds data to be mounted when #pagebuilder is not yet present in the DOM
+  private pendingMountData: string | null = null
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.nextTick = nextTick()
@@ -371,7 +374,6 @@ export class PageBuilderService {
     const elementsWithListeners = new WeakSet<Element>()
 
     const pagebuilder = document.querySelector('#pagebuilder')
-
     if (!pagebuilder) return
 
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
@@ -539,7 +541,6 @@ export class PageBuilderService {
 
   async #removeHoveredAndSelected() {
     const pagebuilder = document.querySelector('#pagebuilder')
-
     if (!pagebuilder) return
 
     const hoveredElement = pagebuilder.querySelector('[hovered]')
@@ -965,7 +966,6 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setElement(null)
 
     const pagebuilder = document.querySelector('#pagebuilder')
-
     if (!pagebuilder) return
 
     const addedHtmlComponents = ref<string[]>([])
@@ -1667,7 +1667,6 @@ export class PageBuilderService {
 
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
   async #parseJSONComponents(jsonData: string): Promise<void> {
-    console.log('Process JSON...:')
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
@@ -1730,7 +1729,6 @@ export class PageBuilderService {
   }
   // Private method to parse HTML components
   async #parseHTMLComponents(htmlData: string): Promise<void> {
-    console.log('Process HTML...:')
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')
@@ -1791,6 +1789,17 @@ export class PageBuilderService {
    * @param preferLocalStorage - if true, always try localStorage first
    */
   async mountComponentsToDOM(passedData: string): Promise<void> {
+    const pagebuilder = document.querySelector('#pagebuilder')
+
+    // If #pagebuilder is not present, cache the data and exit
+    if (!pagebuilder) {
+      this.pendingMountData = passedData
+      return
+    }
+
+    // Clear the cache if we are mounting now
+    this.pendingMountData = null
+
     this.pageBuilderStateStore.setComponents([])
 
     // On from type update Save Original Post
@@ -1840,6 +1849,18 @@ export class PageBuilderService {
     }
   }
 
+  statuspendingMountData(): string | null {
+    return this.pendingMountData
+  }
+
+  // Try re-mounting
+  async tryMountPendingData() {
+    if (this.pendingMountData && document.querySelector('#pagebuilder')) {
+      await this.mountComponentsToDOM(this.pendingMountData)
+      this.pendingMountData = null
+    }
+  }
+
   async toggleTipTapModal(status: boolean): Promise<void> {
     this.pageBuilderStateStore.setShowModalTipTap(status)
 
@@ -1854,14 +1875,10 @@ export class PageBuilderService {
   }
 
   async initializeElementStyles(): Promise<void> {
-    // Deselect any selected or hovered elements in the builder UI
-    await this.clearHtmlSelection()
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    // Wait for Vue to finish DOM updates before attaching event listeners.
+    // This ensure elements exist in the DOM.
     await nextTick()
-    // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
 
-    console.log('come her nu 3:')
     // handle custom URL
     this.handleHyperlink(undefined, null, false)
     // handle opacity
