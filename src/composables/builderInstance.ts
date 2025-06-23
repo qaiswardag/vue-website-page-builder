@@ -18,7 +18,7 @@ export function initPageBuilder(): PageBuilderService {
 export function getPageBuilder(): PageBuilderService {
   if (!instance) {
     throw new Error(
-      'PageBuilderService has not been created. Please call createPageBuilder() first in your App.vue or setup file.',
+      'PageBuilderService has not been created. Please call initPageBuilder() first in your App.vue or setup file.',
     )
   }
   return instance

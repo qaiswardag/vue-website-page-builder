@@ -90,7 +90,7 @@ export class PageBuilderService {
     this.delay = delay
   }
 
-  // Load existing content from HTML when in update mode
+  // Deselect any selected or hovered elements in the builder UI
   async clearHtmlSelection(): Promise<void> {
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
@@ -219,11 +219,12 @@ export class PageBuilderService {
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
 
-    // Clear any selected HTML elements in the builder UI
+    // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
-
-    // Attach event listeners to all editable elements in the builder
-    await this.addListenersToEditableElements()
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
 
     // Hide the global loading indicator and mark the builder as started
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
@@ -366,16 +367,15 @@ export class PageBuilderService {
    * The function is used to
    * attach event listeners to each element within a 'section'
    */
-  addListenersToEditableElements = async () => {
+  #addListenersToEditableElements = async () => {
     const elementsWithListeners = new WeakSet<Element>()
 
     const pagebuilder = document.querySelector('#pagebuilder')
 
     if (!pagebuilder) return
 
-    // Wait for any pending DOM updates
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
-    await new Promise((resolve) => requestAnimationFrame(resolve))
 
     pagebuilder.querySelectorAll('section *').forEach((element) => {
       // exclude NoneListernesTags && additional Tags for not listening
@@ -538,8 +538,6 @@ export class PageBuilderService {
   }
 
   async #removeHoveredAndSelected() {
-    await new Promise((resolve) => requestAnimationFrame(resolve))
-
     const pagebuilder = document.querySelector('#pagebuilder')
 
     if (!pagebuilder) return
@@ -557,8 +555,6 @@ export class PageBuilderService {
   }
 
   async #syncCurrentClasses() {
-    await new Promise((resolve) => requestAnimationFrame(resolve))
-
     // convert classList to array
     const classListArray = Array.from(this.getElement.value?.classList || [])
 
@@ -653,7 +649,10 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
 
-    await this.addListenersToEditableElements()
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
   }
 
   handleFontWeight(userSelectedFontWeight?: string): void {
@@ -836,8 +835,11 @@ export class PageBuilderService {
     // Remove the component from the array
     this.getComponents.value.splice(indexToDelete, 1)
     this.pageBuilderStateStore.setComponents(this.getComponents.value)
+
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
-    await this.addListenersToEditableElements()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
 
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
@@ -1341,8 +1343,10 @@ export class PageBuilderService {
         this.mountComponentsToDOM(this.originalComponents)
       }
 
+      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
       await nextTick()
-      await this.addListenersToEditableElements()
+      // Attach event listeners to all editable elements in the Builder
+      await this.#addListenersToEditableElements()
 
       this.pageBuilderStateStore.setIsRestoring(false)
     }
@@ -1604,9 +1608,11 @@ export class PageBuilderService {
         componentArrayAddMethod: this.getComponentArrayAddMethod.value || 'push',
       })
 
-      // Wait for the DOM to update before setting event listeners
+      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
       await nextTick()
-      await this.addListenersToEditableElements()
+      // Attach event listeners to all editable elements in the Builder
+      await this.#addListenersToEditableElements()
+
       await this.handleAutoSave()
     } catch (error) {
       console.error('Error adding component:', error)
@@ -1644,23 +1650,24 @@ export class PageBuilderService {
    * @param data - JSON string (e.g., '[{"html_code":"...","id":"123","title":"..."}]')
    *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
    */
-  #setComponentsFromData(htmlString: string): void {
+  async #setComponentsFromData(htmlString: string): Promise<void> {
     // Auto-detect if input is JSON or HTML
     const trimmedData = htmlString.trim()
 
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
       // Looks like JSON - parse as JSON
-      this.#parseJSONComponents(trimmedData)
+      await this.#parseJSONComponents(trimmedData)
     } else if (trimmedData.startsWith('<')) {
       // Looks like HTML - parse as HTML
-      this.#parseHTMLComponents(trimmedData)
+      await this.#parseHTMLComponents(trimmedData)
     } else {
-      this.#parseJSONComponents(trimmedData)
+      await this.#parseJSONComponents(trimmedData)
     }
   }
 
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
   async #parseJSONComponents(jsonData: string): Promise<void> {
+    console.log('Process JSON...:')
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
@@ -1712,15 +1719,18 @@ export class PageBuilderService {
 
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
 
-      await this.clearHtmlSelection()
-      await this.addListenersToEditableElements()
+      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+      await nextTick()
+      // Attach event listeners to all editable elements in the Builder
+      await this.#addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing JSON components:', error)
       this.pageBuilderStateStore.setComponents([])
     }
   }
   // Private method to parse HTML components
-  #parseHTMLComponents(htmlData: string): void {
+  async #parseHTMLComponents(htmlData: string): Promise<void> {
+    console.log('Process HTML...:')
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')
@@ -1730,6 +1740,14 @@ export class PageBuilderService {
 
       const extractedSections: ComponentObject[] = []
       sectionElements.forEach((section) => {
+        // Process all elements inside section to add prefix to classes
+        section.querySelectorAll('[class]').forEach((el) => {
+          el.setAttribute(
+            'class',
+            this.#addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
+          )
+        })
+
         const htmlElement = section as HTMLElement
 
         // Ensure data-componentid exists
@@ -1754,6 +1772,13 @@ export class PageBuilderService {
       })
 
       this.pageBuilderStateStore.setComponents(extractedSections)
+
+      // Deselect any selected or hovered elements in the builder UI
+      await this.clearHtmlSelection()
+      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+      await nextTick()
+      // Attach event listeners to all editable elements in the Builder
+      await this.#addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing HTML components:', error)
       this.pageBuilderStateStore.setComponents([])
@@ -1765,9 +1790,10 @@ export class PageBuilderService {
    * @param passedData - HTML/JSON string to inject (optional)
    * @param preferLocalStorage - if true, always try localStorage first
    */
-  mountComponentsToDOM(passedData: string): void {
-    // Save the original content only once, in update mode, and only if passedData is provided
-    // Form type Update
+  async mountComponentsToDOM(passedData: string): Promise<void> {
+    this.pageBuilderStateStore.setComponents([])
+
+    // On from type update Save Original Post
     if (
       this.pageBuilderStateStore.getPageBuilderConfig &&
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
@@ -1779,10 +1805,6 @@ export class PageBuilderService {
       this.originalComponents = passedData
     }
 
-    this.pageBuilderStateStore.setComponents([])
-
-    if (!this.pageBuilderStateStore.getPageBuilderConfig) return
-
     // Form type Update
     if (
       this.pageBuilderStateStore.getPageBuilderConfig &&
@@ -1791,7 +1813,7 @@ export class PageBuilderService {
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
     ) {
       if (passedData) {
-        this.#setComponentsFromData(passedData)
+        await this.#setComponentsFromData(passedData)
         return
       }
     }
@@ -1806,13 +1828,13 @@ export class PageBuilderService {
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'create'
     ) {
       if (localStorageData) {
-        this.#setComponentsFromData(localStorageData)
+        await this.#setComponentsFromData(localStorageData)
         return
       }
 
       // If no localStorage, but passedData exists (for demo), use it
       if (passedData) {
-        this.#setComponentsFromData(passedData)
+        await this.#setComponentsFromData(passedData)
         return
       }
     }
@@ -1821,15 +1843,25 @@ export class PageBuilderService {
   async toggleTipTapModal(status: boolean): Promise<void> {
     this.pageBuilderStateStore.setShowModalTipTap(status)
 
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
+
     if (!status) {
       await this.handleAutoSave()
     }
   }
 
   async initializeElementStyles(): Promise<void> {
-    if (!this.pageBuilderStateStore.getPageBuilderConfig) return
-    await new Promise((resolve) => requestAnimationFrame(resolve))
+    // Deselect any selected or hovered elements in the builder UI
+    await this.clearHtmlSelection()
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
 
+    console.log('come her nu 3:')
     // handle custom URL
     this.handleHyperlink(undefined, null, false)
     // handle opacity

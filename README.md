@@ -712,7 +712,7 @@ const configPageBuilder = {
 
 const pageBuilderService.= new PageBuilderClass(pageBuilderStateStore)
 
-pageBuilderService.startBuilder(configPageBuilder)
+await pageBuilderService.startBuilder(configPageBuilder)
 </script>
 
 <template>
