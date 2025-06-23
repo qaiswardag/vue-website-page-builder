@@ -169,9 +169,6 @@ const getIsSaving = computed(() => {
 })
 
 const getIsLoadingResumeEditing = computed(() => {
-  if (pageBuilderStateStore.getIsLoadingResumeEditing) {
-    handlerRumeEditingForUpdate()
-  }
   return pageBuilderStateStore.getIsLoadingResumeEditing
 })
 const getIsRestoring = computed(() => {

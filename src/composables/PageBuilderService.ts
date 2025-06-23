@@ -209,7 +209,6 @@ export class PageBuilderService {
     // Prevents builder actions to prevent errors caused by missing DOM .
     this.pageBuilderStateStore.setBuilderStarted(true)
 
-    console.log('started page builder:')
     // Show a global loading indicator while initializing
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
 
@@ -231,21 +230,18 @@ export class PageBuilderService {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
-    console.log('completed page builder:')
-
+    // Deselect any selected or hovered elements in the builder UI
+    await this.clearHtmlSelection()
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await this.delay(300)
 
     // Hide the global loading indicator and mark the builder as started
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
 
-    // If there is a local draft for this resource show a Modal
     if (await this.hasLocalDraftForUpdate()) {
       this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
     }
 
-    // Deselect any selected or hovered elements in the builder UI
-    await this.clearHtmlSelection()
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
@@ -434,6 +430,8 @@ export class PageBuilderService {
 
         try {
           this.pageBuilderStateStore.setIsSaving(true)
+          // Deselect any selected or hovered elements in the builder UI
+          //
           await this.saveComponentsLocalStorage()
           await this.delay(500)
         } catch (err) {
@@ -1182,7 +1180,26 @@ export class PageBuilderService {
   }
 
   /**
-   * Components from DOM → JS (not JS → DOM).
+   * Returns a clone of the given element with [hovered] and [selected] attributes
+   * removed from itself and all descendants. Does NOT mutate the live DOM.
+   * @param element The HTMLElement to clone and sanitize
+   */
+  #cloneAndRemoveSelectionAttributes(element: HTMLElement): HTMLElement {
+    // Deep clone the element
+    const clone = element.cloneNode(true) as HTMLElement
+
+    // Remove [hovered] and [selected] from the clone and all descendants
+    clone.querySelectorAll('[hovered]').forEach((el) => el.removeAttribute('hovered'))
+    clone.querySelectorAll('[selected]').forEach((el) => el.removeAttribute('selected'))
+    // Also remove from the root element itself if present
+    clone.removeAttribute('hovered')
+    clone.removeAttribute('selected')
+
+    return clone
+  }
+
+  /**
+   * Components from DOM → JS (not JS → DOM). øøø
    * Saving the current DOM state into JS this.getComponents (for example, before saving to localStorage).
    * This function Only copies the current DOM HTML into JS this.getComponents (component.html_code).
    */
@@ -1198,10 +1215,12 @@ export class PageBuilderService {
     const componentsToSave: { html_code: string; id: string | null; title: string }[] = []
 
     pagebuilder.querySelectorAll('section[data-componentid]').forEach((section) => {
+      const sanitizedSection = this.#cloneAndRemoveSelectionAttributes(section as HTMLElement)
+
       componentsToSave.push({
-        html_code: section.outerHTML,
-        id: section.getAttribute('data-componentid'),
-        title: section.getAttribute('data-component-title') || 'Untitled Component',
+        html_code: sanitizedSection.outerHTML,
+        id: sanitizedSection.getAttribute('data-componentid'),
+        title: sanitizedSection.getAttribute('data-component-title') || 'Untitled Component',
       })
     })
 
@@ -1310,8 +1329,8 @@ export class PageBuilderService {
         const draft = localStorage.getItem(key)
         if (draft) {
           try {
-            await this.delay(1000)
-
+            await this.delay(500)
+            this.pageBuilderStateStore.setHasLocalDraftForUpdate(false)
             return true
           } catch (err) {
             console.error('Unable to mount components to DOM.', err)
