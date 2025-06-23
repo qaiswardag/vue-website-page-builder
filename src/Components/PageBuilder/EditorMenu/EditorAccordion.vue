@@ -17,7 +17,7 @@
     </div>
     <div
       :class="[expanded ? 'pbx-block' : 'pbx-hidden']"
-      class="pbx-px-4 pbx-ease-linear pbx-duration-75"
+      class="pbx-px-4 pbx-ease-linear pbx-duration-75 pbx-pb-8"
     >
       <slot name="content" />
     </div>

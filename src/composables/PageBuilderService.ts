@@ -224,6 +224,11 @@ export class PageBuilderService {
     this.#updateLocalStorageItemName()
 
     this.completeBuilderInitialization()
+
+    const formType = config.updateOrCreate && config.updateOrCreate.formType
+    if (formType === 'create') {
+      await this.mountComponentsToDOM('')
+    }
   }
 
   async completeBuilderInitialization() {
@@ -1836,7 +1841,14 @@ export class PageBuilderService {
 
     // If #pagebuilder is not present, cache the data and exit
     if (!pagebuilder) {
-      this.pendingMountData = passedData
+      // For 'create', set pendingMountData to '' (empty string)
+      const config = this.pageBuilderStateStore.getPageBuilderConfig
+      const formType = config && config.updateOrCreate && config.updateOrCreate.formType
+      if (formType === 'create') {
+        this.pendingMountData = ''
+      } else {
+        this.pendingMountData = passedData
+      }
       return
     }
 
@@ -1892,16 +1904,34 @@ export class PageBuilderService {
     }
   }
 
-  statuspendingMountData(): string | null {
-    return this.pendingMountData
-  }
-
-  // Try re-mounting
   async tryMountPendingData() {
-    if (this.pendingMountData && document.querySelector('#pagebuilder')) {
+    const pagebuilder = document.querySelector('#pagebuilder')
+
+    // Only run if #pagebuilder exists
+    if (!pagebuilder) return
+
+    // If pendingMountData is a non-empty string (update or demo), always mount
+    if (this.pendingMountData && typeof this.pendingMountData === 'string') {
       await this.mountComponentsToDOM(this.pendingMountData)
       this.pendingMountData = null
       this.completeBuilderInitialization()
+      return
+    }
+
+    // If pendingMountData is exactly '', and formType is 'create', and no components are mounted, mount for create
+    const config = this.pageBuilderStateStore.getPageBuilderConfig
+    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
+    const components = this.pageBuilderStateStore.getComponents
+
+    if (
+      this.pendingMountData === '' &&
+      formType === 'create' &&
+      (!components || (Array.isArray(components) && components.length === 0))
+    ) {
+      await this.mountComponentsToDOM('')
+      this.pendingMountData = null
+      this.completeBuilderInitialization()
+      return
     }
   }
 

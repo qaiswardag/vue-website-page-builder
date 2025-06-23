@@ -260,10 +260,7 @@ const ensureBuilderInitialized = function () {
 }
 
 onMounted(async () => {
-  // Try to mount any pending data if #pagebuilder is now present
-  if (pageBuilderService.statuspendingMountData()) {
-    await pageBuilderService.tryMountPendingData()
-  }
+  await pageBuilderService.tryMountPendingData()
 
   // Check if Builder started
   await delay(10000)
