@@ -1880,11 +1880,6 @@ export class PageBuilderService {
     ) {
       if (passedData) {
         await this.#setComponentsFromData(passedData)
-
-        // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-        await nextTick()
-        // Attach event listeners to all editable elements in the Builder
-        await this.#addListenersToEditableElements()
         return
       }
     }
@@ -1900,24 +1895,12 @@ export class PageBuilderService {
     ) {
       if (localStorageData) {
         await this.#setComponentsFromData(localStorageData)
-
-        // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-        await nextTick()
-        // Attach event listeners to all editable elements in the Builder
-        await this.#addListenersToEditableElements()
         return
       }
 
       // If no localStorage, but passedData exists (for demo), use it
       if (passedData) {
         await this.#setComponentsFromData(passedData)
-
-        // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-        await nextTick()
-        // Attach event listeners to all editable elements in the Builder
-        await this.#addListenersToEditableElements()
-
-        console.log('getComponents er nu::', this.getComponents.value)
         return
       }
     }
@@ -1929,9 +1912,15 @@ export class PageBuilderService {
 
     // Only for update/draft/demo: mount if pendingMountData is a non-empty string
     if (this.pendingMountData && typeof this.pendingMountData === 'string') {
+      console.log('1111:')
       await this.mountComponentsToDOM(this.pendingMountData)
       this.pendingMountData = null
       this.completeBuilderInitialization()
+    } else {
+      console.log('2222:')
+      await nextTick()
+      // Attach event listeners to all editable elements in the Builder
+      await this.#addListenersToEditableElements()
     }
   }
 
@@ -1942,27 +1931,35 @@ export class PageBuilderService {
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
-    await nextTick()
-    console.log(
-      'længde after nextTick:',
-      Array.isArray(this.getComponents.value) && this.getComponents.value.length,
-    )
-    if (
-      formType === 'create' &&
-      (!this.getComponents.value ||
-        (Array.isArray(this.getComponents.value) && this.getComponents.value.length === 0))
-    ) {
-      console.log('komme de her:')
-      await this.mountComponentsToDOM('')
-      this.pendingMountData = null
-      this.completeBuilderInitialization()
-    } else {
-      console.log('is it coming here...:')
-      await this.mountComponentsToDOM('')
-      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    if (formType === 'create') {
       await nextTick()
-      // Attach event listeners to all editable elements in the Builder
-      await this.#addListenersToEditableElements()
+
+      // How your mountComponentsToDOM('') works:
+      //
+      // For formType: 'update'
+      // - If passedData is a non-empty string, it parses and mounts that data.
+      // - If passedData is an empty string, it does nothing (unless you change this logic).
+      //
+      // For formType: 'create'
+      // - It first tries to load from localStorage (localStorageData).
+      // - If localStorage has data, it mounts that.
+      // - If not, and passedData is a non-empty string, it mounts that.
+      // - If both are empty, then it sets components to an empty array.
+
+      if (
+        formType === 'create' &&
+        (!this.getComponents.value ||
+          (Array.isArray(this.getComponents.value) && this.getComponents.value.length === 0))
+      ) {
+        await this.mountComponentsToDOM('')
+        this.pendingMountData = null
+        this.completeBuilderInitialization()
+      } else {
+        await this.mountComponentsToDOM('')
+        await nextTick()
+        // Attach event listeners to all editable elements in the Builder
+        await this.#addListenersToEditableElements()
+      }
     }
   }
   async toggleTipTapModal(status: boolean): Promise<void> {
