@@ -11,7 +11,7 @@ export interface PageBuilderState {
 
 // Component and Image interfaces
 export interface ComponentObject {
-  id: number | null
+  id: string | number | null
   html_code: string
   title: string
 }

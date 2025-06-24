@@ -24,7 +24,7 @@ const props = defineProps({
   maxHeight: {
     type: String,
   },
-  backgroundOpacity: {
+  noBackgroundOpacity: {
     type: Boolean,
   },
 })
@@ -67,7 +67,7 @@ const maxWidthClass = computed(() => {
         <!-- Backdrop -->
         <div
           class="pbx-fixed pbx-inset-0 pbx-bg-black/50 pbx-transition-opacity"
-          :class="[backgroundOpacity ? 'pbx-bg-black/90' : '']"
+          :class="[noBackgroundOpacity ? 'pbx-bg-black/100' : '']"
           @click="handleClose"
         ></div>
 

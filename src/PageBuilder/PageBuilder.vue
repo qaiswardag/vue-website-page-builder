@@ -279,7 +279,19 @@ onMounted(async () => {
     class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-scroll"
   >
     <div id="pagebuilder-top-area" class="lg:pbx-px-4 pbx-pt-2 pbx-pb-4 pbx-mx-4 pbx-mb-4 pbx-mt-2">
-      <GlobalLoader v-if="getIsLoadingGlobal"></GlobalLoader>
+      <GlobalLoader v-if="getIsLoadingGlobal & !openAppNotStartedModal"></GlobalLoader>
+      <ModalBuilder
+        title="The builder hasn’t started yet"
+        :showModalBuilder="openAppNotStartedModal"
+        @closeMainModalBuilder="handlAppNotStartedModal"
+        type="delete"
+        maxWidth="2xl"
+        :noBackgroundOpacity="true"
+      >
+        The builder hasn’t started yet. If this screen doesn’t go away soon, it may just need a
+        little setup in the background. You can safely contact support and ask them to initialize
+        the builder by running the startBuilder method for this resource.
+      </ModalBuilder>
       <div
         @click.self="pageBuilderService.clearHtmlSelection()"
         class="pbx-min-h-24 pbx-flex pbx-justify-between pbx-items-center pbx-pb-2 pbx-border-b pbx-border-gray-200"
@@ -367,19 +379,6 @@ onMounted(async () => {
       <header></header>
       <main></main>
     </DynamicModalBuilder>
-
-    <ModalBuilder
-      title="The builder hasn’t started yet"
-      :showModalBuilder="openAppNotStartedModal"
-      @closeMainModalBuilder="handlAppNotStartedModal"
-      type="delete"
-      maxWidth="2xl"
-      :backgroundOpacity="true"
-    >
-      The builder hasn’t started yet. If this screen doesn’t go away soon, it may just need a little
-      setup in the background. You can safely contact support and ask them to initialize the builder
-      by running the startBuilder method for this page.
-    </ModalBuilder>
 
     <div>
       <div class="pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2">
