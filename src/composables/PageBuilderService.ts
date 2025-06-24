@@ -217,15 +217,13 @@ export class PageBuilderService {
     // Update the localStorage key name based on the config/resource
     this.#updateLocalStorageItemName()
 
-    this.completeBuilderInitialization()
-
     const formType = config.updateOrCreate && config.updateOrCreate.formType
     if (formType === 'create') {
       await this.mountComponentsToDOM('')
     }
   }
 
-  async completeBuilderInitialization() {
+  async #completeBuilderInitialization() {
     console.log('complete builder..')
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
@@ -1870,137 +1868,100 @@ export class PageBuilderService {
     }
   }
 
-  /**
-   * Mount Components to DOM
-   * @param passedData - HTML/JSON string to inject (optional)
-   * @param preferLocalStorage - if true, always try localStorage first
-   */
   async mountComponentsToDOM(passedData: string): Promise<void> {
-    const pagebuilder = document.querySelector('#pagebuilder')
+    const config = this.pageBuilderStateStore.getPageBuilderConfig
+    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
-    // Form type Create
-    const localStorageData = this.loadStoredComponentsFromStorage()
+    if (formType) {
+      const pagebuilder = document.querySelector('#pagebuilder')
+      const localStorageData = this.loadStoredComponentsFromStorage()
 
-    // If #pagebuilder is not present, cache the data and exit
-    if (!pagebuilder) {
-      // For 'create', set pendingMountData to '' (empty string)
-      const config = this.pageBuilderStateStore.getPageBuilderConfig
-      const formType = config && config.updateOrCreate && config.updateOrCreate.formType
-      if (formType === 'create') {
-        console.log('mountComponentsToDOM ran: m0')
-        this.pendingMountData = ''
-        return
-      }
-      console.log('mountComponentsToDOM ran: m1:')
-      this.pendingMountData = passedData
-      return
-    }
-
-    // // Clear the cache if we are mounting now
-    // console.log('mountComponentsToDOM ran: m2:')
-    // this.pendingMountData = null
-
-    // this.deleteAllComponentsFromDOM()
-
-    // On form type update Save Original Post
-    if (
-      this.pageBuilderStateStore.getPageBuilderConfig &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update' &&
-      passedData &&
-      !this.originalComponents
-    ) {
-      console.log('mountComponentsToDOM ran: m3')
-      this.originalComponents = passedData
-    }
-
-    // Form type Update
-    if (
-      this.pageBuilderStateStore.getPageBuilderConfig &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
-    ) {
-      if (passedData) {
-        console.log('mountComponentsToDOM ran: m4')
-        await this.#setComponentsFromData(passedData)
-        return
-      }
-      if (localStorageData) {
-        console.log('mountComponentsToDOM ran: m5')
-        await this.#setComponentsFromData(localStorageData)
+      if (!pagebuilder) {
+        await this.#handlePageBuilderNotPresent(passedData, formType)
         return
       }
 
-      // If nothing, clear components
-      console.log('mountComponentsToDOM ran: m6')
-      this.deleteAllComponentsFromDOM()
-      return
-    }
+      this.#handleOriginalComponentsForUpdate(passedData, formType)
 
-    if (
-      this.pageBuilderStateStore.getPageBuilderConfig &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'create'
-    ) {
-      if (localStorageData) {
-        console.log('mountComponentsToDOM ran: m7')
-        await this.#setComponentsFromData(localStorageData)
+      if (this.#isCreateFormType(formType)) {
+        await this.#handleCreateFormType(passedData, localStorageData)
         return
       }
 
-      // If no localStorage, but passedData exists (for demo), use it
-      if (passedData) {
-        console.log('mountComponentsToDOM ran: m8')
-        await this.#setComponentsFromData(passedData)
+      if (this.#isUpdateFormType(formType)) {
+        await this.#handleUpdateFormType(passedData, localStorageData)
         return
       }
     }
   }
 
-  async tryMountPendingComponents() {
-    const pagebuilder = document.querySelector('#pagebuilder')
-    if (!pagebuilder) return
-    // Only for update/draft/demo: mount if pendingMountData is a non-empty string
-    if (this.pendingMountData && typeof this.pendingMountData === 'string') {
-      console.log('tryMountPendingComponents t1:')
-      await this.mountComponentsToDOM(this.pendingMountData)
-      this.pendingMountData = null
-      this.completeBuilderInitialization()
+  // --- Private helpers ---
+
+  async #handlePageBuilderNotPresent(passedData: string, formType: string) {
+    if (formType === 'create') {
+      console.log('mountComponentsToDOM ran: m0')
+      this.pendingMountData = ''
       return
     }
+    console.log('mountComponentsToDOM ran: m1:')
+    this.pendingMountData = passedData
+  }
 
-    console.log('tryMountPendingComponents t2:')
-    await nextTick()
-    // Always try to load latest from localStorage or fallback
-    await this.mountComponentsToDOM('')
-    this.completeBuilderInitialization()
+  #handleOriginalComponentsForUpdate(passedData: string, formType: string) {
+    if (formType === 'update' && passedData && !this.originalComponents) {
+      console.log('mountComponentsToDOM ran: m3')
+      this.originalComponents = passedData
+    }
+  }
+
+  async #handleUpdateFormType(passedData: string, localStorageData: string | false) {
+    if (passedData) {
+      console.log('mountComponentsToDOM ran: m4')
+      await this.#setComponentsFromData(passedData)
+      return
+    }
+    if (localStorageData) {
+      console.log('mountComponentsToDOM ran: m5')
+      await this.#setComponentsFromData(localStorageData)
+      return
+    }
+    // If nothing, clear components
+    console.log('mountComponentsToDOM ran: m6')
+    this.deleteAllComponentsFromDOM()
+  }
+
+  async #handleCreateFormType(passedData: string, localStorageData: string | false) {
+    if (localStorageData) {
+      console.log('mountComponentsToDOM ran: m7')
+      await this.#setComponentsFromData(localStorageData)
+      return
+    }
+    if (passedData) {
+      console.log('mountComponentsToDOM ran: m8')
+      await this.#setComponentsFromData(passedData)
+      return
+    }
+  }
+
+  #isCreateFormType(formType: string): boolean {
+    return formType === 'create'
+  }
+
+  #isUpdateFormType(formType: string): boolean {
+    return formType === 'update'
   }
 
   async ensureBuilderInitializedForCreate() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
-    console.log('ok:', this.pendingMountData)
 
     const config = this.pageBuilderStateStore.getPageBuilderConfig
+    console.log('den er:', config)
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
     if (formType === 'create') {
+      this.#completeBuilderInitialization()
       await nextTick()
-
-      // How your mountComponentsToDOM('') works:
-      //
-      // For formType: 'update'
-      // - If passedData is a non-empty string, it parses and mounts that data.
-      // - If passedData is an empty string, it does nothing (unless you change this logic).
-      //
-      // For formType: 'create'
-      // - It first tries to load from localStorage (localStorageData).
-      // - If localStorage has data, it mounts that.
-      // - If not, and passedData is a non-empty string, it mounts that.
-      // - If both are empty, then it sets components to an empty array.
 
       if (
         formType === 'create' &&
@@ -2010,7 +1971,6 @@ export class PageBuilderService {
         console.log('ensureBuilderInitializedForCreate e1')
         await this.mountComponentsToDOM('')
         this.pendingMountData = null
-        this.completeBuilderInitialization()
         return
       }
 
@@ -2021,6 +1981,32 @@ export class PageBuilderService {
       await this.#addListenersToEditableElements()
     }
   }
+
+  async ensureBuilderInitializedForUpdate(forceDemoComponents) {
+    const pagebuilder = document.querySelector('#pagebuilder')
+    if (!pagebuilder) return
+
+    const config = this.pageBuilderStateStore.getPageBuilderConfig
+    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
+
+    if (formType === 'update') {
+      this.#completeBuilderInitialization()
+
+      // Only for update/draft/demo: mount if pendingMountData is a non-empty string
+      if (this.pendingMountData && typeof this.pendingMountData === 'string') {
+        console.log('ensureBuilderInitializedForUpdate t1:')
+        await this.mountComponentsToDOM(this.pendingMountData)
+        this.pendingMountData = null
+        return
+      }
+
+      console.log('ensureBuilderInitializedForUpdate t2:')
+      await nextTick()
+      // Always try to load latest from localStorage or fallback
+      await this.mountComponentsToDOM('')
+    }
+  }
+
   async toggleTipTapModal(status: boolean): Promise<void> {
     this.pageBuilderStateStore.setShowModalTipTap(status)
 

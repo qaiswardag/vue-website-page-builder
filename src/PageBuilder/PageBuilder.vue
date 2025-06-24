@@ -260,8 +260,8 @@ const ensureBuilderInitialized = function () {
 }
 
 onMounted(async () => {
-  await pageBuilderService.tryMountPendingComponents()
   await pageBuilderService.ensureBuilderInitializedForCreate()
+  await pageBuilderService.ensureBuilderInitializedForUpdate()
 
   // Check if Builder started
   await delay(10000)
