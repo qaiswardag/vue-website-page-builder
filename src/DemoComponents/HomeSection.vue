@@ -82,8 +82,9 @@ const configPageBuilder = {
 } as const
 
 onMounted(async () => {
-  await pageBuilderService.startBuilder(configPageBuilder)
-  await pageBuilderService.mountComponentsToDOM(JSON.stringify(html))
+  const error = await pageBuilderService.startBuilder(configPageBuilder)
+  console.log('show returned page builder error:', error)
+  // await pageBuilderService.mountComponentsToDOM(JSON.stringify(html))
   // await pageBuilderService.mountComponentsToDOM(JSON.stringify(oldhtmlfromdb))
   // await pageBuilderService.mountComponentsToDOM(rawHTML)
 })

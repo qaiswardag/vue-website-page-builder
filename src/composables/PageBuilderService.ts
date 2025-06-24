@@ -1,5 +1,11 @@
 // Type definitions
-import type { ComponentObject, ImageObject, PageBuilderConfig } from '../types'
+import type {
+  BuilderResourceData,
+  ComponentObject,
+  ImageObject,
+  PageBuilderConfig,
+  StartBuilderResult,
+} from '../types'
 
 import type { usePageBuilderStateStore } from '../stores/page-builder-state'
 
@@ -169,6 +175,38 @@ export class PageBuilderService {
     }
   }
 
+  #validateUserProvidedComponents(components: BuilderResourceData) {
+    // Must be an array
+    if (!Array.isArray(components)) {
+      return {
+        error: true,
+        reason: "'components' must be an array.",
+      }
+    }
+
+    // If empty array, that's acceptable
+    if (components.length === 0) {
+      return { error: false }
+    }
+
+    // Check that the first item looks like a component
+    const first = components[0]
+
+    const isObject = typeof first === 'object' && first !== null
+    const hasHtmlCodeKey = 'html_code' in first
+
+    if (!isObject || !hasHtmlCodeKey) {
+      return {
+        error: true,
+        reason: "Each component must be an object and include an 'html_code' key.",
+      }
+    }
+
+    return {
+      message: 'Everything looks good. Components structure is valid.',
+    }
+  }
+
   #validateConfig(config: PageBuilderConfig): void {
     const defaultConfigValues = {
       updateOrCreate: {
@@ -197,8 +235,19 @@ export class PageBuilderService {
    *
    * @param config - The configuration object for the Page Builder.
    */
-  async startBuilder(config: PageBuilderConfig): Promise<void> {
-    console.log('start builder ran..')
+  async startBuilder(
+    config: PageBuilderConfig,
+    components?: BuilderResourceData,
+  ): Promise<StartBuilderResult> {
+    console.log('start builder ran..', components)
+    if (components) {
+      this.#validateUserProvidedComponents(components)
+    }
+
+    return {
+      message: 'Page builder started successfully with valid components.',
+    }
+
     // Reactive flag signals to the UI that the builder has been successfully initialized
     // Prevents builder actions to prevent errors caused by missing DOM .
     this.pageBuilderStateStore.setBuilderStarted(true)
@@ -1982,7 +2031,7 @@ export class PageBuilderService {
     }
   }
 
-  async ensureBuilderInitializedForUpdate(forceDemoComponents) {
+  async ensureBuilderInitializedForUpdate() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 

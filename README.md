@@ -89,7 +89,7 @@ Powerful Page Builder for any growing merchants, brands, & agencies. Empower use
 
 ## Documentation
 
-### Requirements
+## Requirements
 
 Please note that these instructions assume you have Node.js installed.
 
@@ -97,7 +97,7 @@ Please note that these instructions assume you have Node.js installed.
 - Vue.js ≥ 3.0.0
 - Modern browser with ES6+ support
 
-### Getting started & installation
+## Getting started & installation
 
 Make sure to install the dependencies:
 
@@ -115,15 +115,15 @@ yarn install
 bun install
 ```
 
-### Quick Start
+## Quick Start
 
-Grammar: Should be "Get up and running quickly by initializing the builder in your Vue project. The following code example demonstrates the minimal setup required to start building pages.
+### Initializing the Page Builder
 
-- You must explicitly call initPageBuilder() once in your app entry (e.g. main.ts) before using any Page Builder features.
+To get started with the Page Builder, follow these steps:
 
-- Then, use `getPageBuilder()` anywhere to access the shared builder instance.
-
-- Import the CSS file once, ideally in your `main.js`/`main.ts` or root component for proper styling and automatic icon loading.
+- **Call `initPageBuilder()` once** in your application entry point (e.g., `main.ts` or `main.js`). This sets up the shared builder instance for your entire app.
+- **Access the shared builder instance** anywhere in your application using the `getPageBuilder()` composable.
+- **Import the CSS file once** in your `main.js`, `main.ts`, or root component to ensure proper styling and automatic icon loading.
 
 ```typescript
 import { createApp } from 'vue'
@@ -131,26 +131,37 @@ import App from './App.vue'
 import { initPageBuilder } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
 
-// Initialize shared builder instance
-// MUST be called once
+// Initialize the shared Page Builder instance
+// This must be called once in your app entry point
 initPageBuilder()
 
 const app = createApp(App)
 app.mount('#app')
 ```
 
-#### Accessing the Shared Page Builder Service
+> **Note:**  
+> You only need to import the CSS file once. If you have already imported it in your app entry, you do not need to import it again in individual components.
 
-Once you have initialized the Page Builder service in your application (by calling `initPageBuilder()` once in your app entry), you can access the shared instance anywhere by using the `getPageBuilder()` composable. This ensures you are always working with the same underlying builder service and state, keeping your application consistent and synchronized.
+### Accessing the Shared Page Builder Service
 
-**Why Access the Shared Instance?**
-The Page Builder is implemented as a singleton service. This means there is only one instance that manages all page-building logic and state across your app. Using this shared instance avoids creating multiple, isolated copies of the builder, which can lead to data inconsistencies, synchronization issues, and unpredictable behavior.
+After initializing the Page Builder service in your application (by calling `initPageBuilder()` once in your app entry point), you may access the shared instance from anywhere in your application using the `getPageBuilder()` composable.
 
-**There’s only one source of truth:**  
-By accessing the shared instance, your components and modules interact with the same centralized service, allowing smooth and reliable updates and coordination. This guarantees that all builder actions and state changes are reflected everywhere in your app.
+> **Note**  
+> The Page Builder is implemented as a singleton service. This ensures that all page-building logic and state are managed by a single, shared instance throughout your application.
 
-**How to Use the Shared Instance**
-Whenever you need to interact with the Page Builder service, import and call the `getPageBuilder()` function. This will return the existing instance you initialized earlier — no need to create a new one.
+#### Why Use the Shared Instance?
+
+By always accessing the shared instance, you avoid creating multiple, isolated copies of the builder. This prevents data inconsistencies, synchronization issues, and unpredictable behavior. All components and modules interact with the same centralized service, ensuring that updates and state changes are reflected everywhere in your application.
+
+#### Usage
+
+Ensure the following configuration options are set:
+
+- **`formType` (required):**  
+  Indicates whether you are creating or updating a resource. This is used to retrieve the correct content from local storage.
+
+- **`formName` (required):**  
+  Specifies the resource type (for example, `article`, `jobPost`, `store`, etc.). This is essential for platforms supporting multiple resource types, as it enables the builder to manage layouts and local storage for each resource uniquely.
 
 ```vue
 <script setup>
@@ -164,9 +175,11 @@ const configPageBuilder = {
   },
 }
 
-// Retrieve Page Builder service instance
 const pageBuilderService = getPageBuilder()
-await pageBuilderService.startBuilder(configPageBuilder)
+const result = await pageBuilderService.startBuilder(configPageBuilder)
+
+// You may inspect the result for message, status, or error
+console.log('Page Builder status:', result)
 </script>
 
 <template>
@@ -272,7 +285,7 @@ Then use `v-html` to render the HTML.
 Get up and running quickly by importing the PageBuilder component, setting up your configuration, and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages with your own config and logo.
 
 - Provide a `configPageBuilder` object to customize the builder, such as:
-  - `formType` (required): Used to retrieve the correct content from local storage. Specify whether you are creating or updating a resource by setting this to `create` or `update` in the `updateOrCreate` config.
+  - `formType` (required): Used to retrieve the correct content from local storage. Specify whether you are creating or updating a resource.
   - `formName` (required): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
   - `resourceData` (optional): Prefill the builder with initial resource data (e.g., `"title"`, `"id"`).
   - `userForPageBuilder` (optional): Pass an object with user information (e.g., `name` and `image`) in your config to display the logged-in user's details within the builder interface.
@@ -310,7 +323,10 @@ const configPageBuilder = {
 
 // Retrieve Page Builder service instance
 const pageBuilderService = getPageBuilder()
-await pageBuilderService.startBuilder(configPageBuilder)
+const result = await pageBuilderService.startBuilder(configPageBuilder)
+
+// You may inspect the result for message, status, or error
+console.log('Page Builder status:', result)
 </script>
 
 <template>
@@ -395,18 +411,34 @@ await pageBuilderService.removeCurrentComponentsFromLocalStorage()
 
 Always call these methods after a successful post or resource update to ensure users start with a fresh builder the next time they create or edit a resource.
 
-### Loading Published Content from the Backend into the Page Builder
+### Loading existing Content or Components into the Page Builder
 
-You can easily load existing content—created with this Page Builder—from any backend source.
+The Page Builder makes it simple to load previously published content from any backend source, such as your database or API.
 
-- **Set `formType` (required):** This tells the builder to look for the correct content in local storage. Set `formType` to `update`.
-- **Set `formName` (required):** Specify the resource type (for example, `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config.
-- Even when loading an existing resource, these values are important if your platform supports multiple resource types. By providing a unique name, the Page Builder can properly manage layouts and local storage for the resource, allowing users to pick up right where they left off.
+#### Configuration
+
+Before loading existing content, ensure the following configuration options are set:
+
+- **`formType` (required):**  
+  Indicates whether you are creating or updating a resource. This is used to retrieve the correct content from local storage.
+
+- **`formName` (required):**  
+  Specifies the resource type (for example, `article`, `jobPost`, `store`, etc.). This is essential for platforms supporting multiple resource types, as it enables the builder to manage layouts and local storage for each resource uniquely.
+
+#### Usage
+
+The `startBuilder` method accepts two arguments:
+
+1. **Configuration** (required):  
+   The builder configuration object.
+2. **Data** (optional):  
+   An object containing your existing components. This is especially useful when loading previously published or saved content into the builder.
+
+If you provide the second argument, it must be an object with a `components` property, which is an array of objects. Each object must include a `html_code` string and may optionally include a `title` string.
 
 ```vue
 <script setup>
 import { getPageBuilder } from '@myissue/vue-website-page-builder'
-import html from './html.json'
 
 const configPageBuilder = {
   updateOrCreate: {
@@ -415,12 +447,22 @@ const configPageBuilder = {
   },
 }
 
-// Retrieve Page Builder service instance
+// Retrieve the Page Builder service instance
 const pageBuilderService = getPageBuilder()
-await pageBuilderService.startBuilder(configPageBuilder)
 
-// Load content from your backend or a JSON file into the Page Buildder
-await pageBuilderService.mountComponentsToDOM(JSON.stringify(html))
+// Load existing components into the builder (title is optional)
+const myArticle = {
+  components: [
+    { html_code: '<section>...</section>', title: 'Header H2' },
+    { html_code: '<section>...</section>', title: 'Text' },
+    { html_code: '<section>...</section>', title: 'Image' },
+  ],
+}
+
+const result = await pageBuilderService.startBuilder(configPageBuilder, myArticle)
+
+// You may inspect the result for message, status, or error
+console.log('Page Builder status:', result)
 </script>
 
 <template>
@@ -428,26 +470,24 @@ await pageBuilderService.mountComponentsToDOM(JSON.stringify(html))
 </template>
 ```
 
-**Note:**  
-Your `html.json` file should contain an array of component objects, each with a `html_code` and `title` (optional) property, as shown below:
+> **Note:**  
+> Each component’s `html_code` must be wrapped in a `<section>...</section>` tag.  
+> This is how the Page Builder defines and separates individual components.
+>
+> **Example:**
+>
+> ```json
+> {
+>   "components": [
+>     {
+>       "html_code": "<section><div>My content</div></section>",
+>       "title": "Header"
+>     }
+>   ]
+> }
+> ```
 
-```json
-{
-  "components": [
-    {
-      "html_code": "<section><div class=\"relative py-4\"><div class=\"mx-auto max-w-7xl lg:px-4 px-2\"><div class=\"pbx-break-words pbx-text-5xl\"><h2><strong>Demo Content</strong></h2></div></div></div></section>",
-      "title": "Header H2"
-    },
-    {
-      "html_code": "<section>...</section>",
-      "title": "Text"
-    }
-    // ...more components
-  ]
-}
-```
-
-This approach ensures your users can seamlessly load and edit previously published content, providing a smooth and reliable editing experience.
+This approach ensures your users can seamlessly load and edit previously published content, providing a smooth and reliable editing.
 
 ### Automatic Draft Recovery
 

@@ -11,7 +11,7 @@ export interface PageBuilderState {
 
 // Component and Image interfaces
 export interface ComponentObject {
-  id: string | number | null
+  id: number | null
   html_code: string
   title: string
 }
@@ -20,6 +20,18 @@ export interface ImageObject {
   src: string
 }
 
+// For a single component/block passed by the developer
+export interface BuilderResourceComponent {
+  html_code: string
+  title?: string
+}
+
+// For the full resource object passed to your package
+export interface BuilderResourceData {
+  components: BuilderResourceComponent[]
+}
+
+export type StartBuilderResult = { error: true; reason: string } | { message: string }
 // Store interfaces for better type safety
 export interface PageBuilderStateStore {
   getTextAreaVueModel: string | null
