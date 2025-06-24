@@ -41,7 +41,7 @@ export class PageBuilderService {
   // Hold data from Database or Backend for updated post
   private originalComponents: string | null = null
   // Holds data to be mounted when #pagebuilder is not yet present in the DOM
-  private pendingMountData: string | null = null
+  private pendingMountData: BuilderResourceData | null = null
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.hasStartedEditing = false
@@ -175,36 +175,49 @@ export class PageBuilderService {
     }
   }
 
-  #validateUserProvidedComponents(components: BuilderResourceData) {
+  #validateUserProvidedComponents(components: unknown) {
     // Must be an array
     if (!Array.isArray(components)) {
       return {
-        error: true,
-        reason: "'components' must be an array.",
+        error: true as const,
+        reason: 'Components data must be an array.',
       }
     }
 
     // If empty array, that's acceptable
     if (components.length === 0) {
-      return { error: false }
+      return { error: false as const, message: 'No components provided (empty array).' }
     }
 
     // Check that the first item looks like a component
     const first = components[0]
 
-    const isObject = typeof first === 'object' && first !== null
-    const hasHtmlCodeKey = 'html_code' in first
-
-    if (!isObject || !hasHtmlCodeKey) {
+    // Check that the first item is not an empty object
+    if (isEmptyObject(first)) {
       return {
-        error: true,
-        reason: "Each component must be an object and include an 'html_code' key.",
+        error: true as const,
+        reason:
+          "The first object in the array is empty. Each component must be a non-empty object and include an 'html_code' key.",
       }
     }
 
-    return {
-      message: 'Everything looks good. Components structure is valid.',
+    if (first && 'html_code' in first && typeof first.html_code !== 'string') {
+      return {
+        error: true as const,
+        reason: "The 'html_code' property in the first object must be a string.",
+      }
     }
+
+    // Check that the first item has an 'html_code' key
+    if (!first || !('html_code' in first)) {
+      return {
+        error: true as const,
+        reason: "The first object in the array must include an 'html_code' key.",
+      }
+    }
+
+    // No errors found
+    return { error: false as const }
   }
 
   #validateConfig(config: PageBuilderConfig): void {
@@ -225,6 +238,10 @@ export class PageBuilderService {
     }
   }
 
+  #handlePageBuilderNotPresent(passedDataComponents: BuilderResourceData) {
+    this.pendingMountData = passedDataComponents
+  }
+
   /**
    * - Entry point for initializing the Page Builder.
    * - Sets the builder as started in the state store.
@@ -240,20 +257,34 @@ export class PageBuilderService {
     components?: BuilderResourceData,
   ): Promise<StartBuilderResult> {
     console.log('start builder ran..', components)
-    if (components) {
-      this.#validateUserProvidedComponents(components)
+    const pagebuilder = document.querySelector('#pagebuilder')
+
+    let validation
+    try {
+      validation = this.#validateUserProvidedComponents(components)
+      if (validation && validation.error) {
+        return validation
+      }
+
+      // Store the provided config in the builder's state store
+      this.pageBuilderStateStore.setPageBuilderConfig(config)
+
+      // Page Builder is not Present in the DOM but Components have been passed to the Builder
+      if (components && !pagebuilder) {
+        this.#handlePageBuilderNotPresent(components)
+      }
+      // Page Builder is Present in the DOM & Components have been passed to the Builder
+      if (components && pagebuilder) {
+        this.#completeBuilderInitialization()
+      }
+
+      // ... any other logic before success
+      return {
+        message: 'Page builder started successfully.',
+      }
+    } finally {
+      console.log('came to finally...:')
     }
-
-    return {
-      message: 'Page builder started successfully with valid components.',
-    }
-
-    // Reactive flag signals to the UI that the builder has been successfully initialized
-    // Prevents builder actions to prevent errors caused by missing DOM .
-    this.pageBuilderStateStore.setBuilderStarted(true)
-
-    // Show a global loading indicator while initializing
-    this.pageBuilderStateStore.setIsLoadingGlobal(true)
 
     // Wait briefly to ensure UI updates and async processes settle
 
@@ -274,20 +305,37 @@ export class PageBuilderService {
 
   async #completeBuilderInitialization() {
     console.log('complete builder..')
-    const pagebuilder = document.querySelector('#pagebuilder')
-    if (!pagebuilder) return
+
+    await this.delay(500)
 
     // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
-    this.pageBuilderStateStore.setIsLoadingGlobal(true)
-    await this.delay(300)
 
-    // Hide the global loading indicator and mark the builder as started
-    this.pageBuilderStateStore.setIsLoadingGlobal(false)
-
+    //
+    //
+    //
     if (await this.hasLocalDraftForUpdate()) {
       this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
     }
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    //
+    // Show a global loading indicator while initializing
+    this.pageBuilderStateStore.setIsLoadingGlobal(false)
+
+    // Reactive flag signals to the UI that the builder has been successfully initialized
+    // Prevents builder actions to prevent errors caused by missing DOM .
+    this.pageBuilderStateStore.setBuilderStarted(true)
+
+    return
 
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
@@ -1402,11 +1450,6 @@ export class PageBuilderService {
   }
 
   async hasLocalDraftForUpdate(): Promise<boolean> {
-    const pagebuilder = document.querySelector('#pagebuilder')
-    if (!pagebuilder) {
-      return true
-    }
-
     if (this.hasStartedEditing) return false
 
     if (
@@ -1922,13 +1965,7 @@ export class PageBuilderService {
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
     if (formType) {
-      const pagebuilder = document.querySelector('#pagebuilder')
       const localStorageData = this.loadStoredComponentsFromStorage()
-
-      if (!pagebuilder) {
-        await this.#handlePageBuilderNotPresent(passedData, formType)
-        return
-      }
 
       this.#handleOriginalComponentsForUpdate(passedData, formType)
 
@@ -1945,16 +1982,6 @@ export class PageBuilderService {
   }
 
   // --- Private helpers ---
-
-  async #handlePageBuilderNotPresent(passedData: string, formType: string) {
-    if (formType === 'create') {
-      console.log('mountComponentsToDOM ran: m0')
-      this.pendingMountData = ''
-      return
-    }
-    console.log('mountComponentsToDOM ran: m1:')
-    this.pendingMountData = passedData
-  }
 
   #handleOriginalComponentsForUpdate(passedData: string, formType: string) {
     if (formType === 'update' && passedData && !this.originalComponents) {
@@ -2009,7 +2036,6 @@ export class PageBuilderService {
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
     if (formType === 'create') {
-      this.#completeBuilderInitialization()
       await nextTick()
 
       if (
@@ -2039,8 +2065,6 @@ export class PageBuilderService {
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
     if (formType === 'update') {
-      this.#completeBuilderInitialization()
-
       // Only for update/draft/demo: mount if pendingMountData is a non-empty string
       if (this.pendingMountData && typeof this.pendingMountData === 'string') {
         console.log('ensureBuilderInitializedForUpdate t1:')

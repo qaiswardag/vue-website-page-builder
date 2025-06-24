@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import FullWidthElement from '../Components/Layouts/FullWidthElement.vue'
 import PageBuilder from '../PageBuilder/PageBuilder.vue'
 
@@ -61,7 +61,7 @@ const configPageBuilder = {
     image: '/jane_doe.jpg',
   },
   updateOrCreate: {
-    formType: 'create',
+    formType: 'update',
     formName: 'collection',
   },
   pageBuilderLogo: {
@@ -79,11 +79,15 @@ const configPageBuilder = {
   settings: {
     brandColor: '#DB93B0',
   },
-} as const
+}
 
 onMounted(async () => {
-  const error = await pageBuilderService.startBuilder(configPageBuilder)
-  console.log('show returned page builder error:', error)
+  // const result = await pageBuilderService.startBuilder(configPageBuilder, html.components)
+  // console.log('Page Builder result:', result)
+  //
+  //
+  //
+  //
   // await pageBuilderService.mountComponentsToDOM(JSON.stringify(html))
   // await pageBuilderService.mountComponentsToDOM(JSON.stringify(oldhtmlfromdb))
   // await pageBuilderService.mountComponentsToDOM(rawHTML)

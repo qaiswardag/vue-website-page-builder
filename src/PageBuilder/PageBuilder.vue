@@ -260,14 +260,15 @@ const ensureBuilderInitialized = function () {
 }
 
 onMounted(async () => {
-  await pageBuilderService.ensureBuilderInitializedForCreate()
-  await pageBuilderService.ensureBuilderInitializedForUpdate()
-
   // Check if Builder started
   await delay(10000)
   ensureBuilderInitialized()
 
   // Re-check if Builder started
+  await delay(10000)
+  ensureBuilderInitialized()
+
+  // Re-check again if Builder started
   await delay(10000)
   ensureBuilderInitialized()
 })
@@ -377,7 +378,7 @@ onMounted(async () => {
     >
       The builder hasn’t started yet. If this screen doesn’t go away soon, it may just need a little
       setup in the background. You can safely contact support and ask them to initialize the builder
-      by running the start method.
+      by running the startBuilder method for this page.
     </ModalBuilder>
 
     <div>

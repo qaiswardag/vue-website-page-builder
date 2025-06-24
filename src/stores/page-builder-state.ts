@@ -122,7 +122,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
 
     // User State
     builderStarted: false,
-    isLoadingGlobal: false,
+    isLoadingGlobal: true,
     isSaving: false,
     hasLocalDraftForUpdate: false,
     isResumeEditing: false,
