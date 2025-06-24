@@ -18,11 +18,7 @@ import { isEmptyObject } from '../helpers/isEmptyObject'
 
 export class PageBuilderService {
   // Class properties with types
-  private nextTick: Promise<void>
-  private containsPagebuilder: Element | null
-  // private pageBuilder: Element | null
   private pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>
-  private getTextAreaVueModel: ComputedRef<string | null>
   private getLocalStorageItemName: ComputedRef<string | null>
   private getApplyImageToSelection: ComputedRef<ImageObject>
   private getHyberlinkEnable: ComputedRef<boolean>
@@ -42,12 +38,9 @@ export class PageBuilderService {
   private pendingMountData: string | null = null
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
-    this.nextTick = nextTick()
     this.hasStartedEditing = false
-    this.containsPagebuilder = document.querySelector('#contains-pagebuilder')
     this.pageBuilderStateStore = pageBuilderStateStore
 
-    this.getTextAreaVueModel = computed(() => this.pageBuilderStateStore.getTextAreaVueModel)
     this.getLocalStorageItemName = computed(
       () => this.pageBuilderStateStore.getLocalStorageItemName,
     )
@@ -233,7 +226,7 @@ export class PageBuilderService {
   }
 
   async completeBuilderInitialization() {
-    console.log('completed builder..')
+    console.log('complete builder..')
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -439,7 +432,7 @@ export class PageBuilderService {
           this.pageBuilderStateStore.setIsSaving(true)
           // Deselect any selected or hovered elements in the builder UI
           //
-          await this.saveComponentsLocalStorage()
+          this.#saveDomComponentsToLocalStorage()
           await this.delay(500)
         } catch (err) {
           console.error('Error trying auto save.', err)
@@ -451,7 +444,7 @@ export class PageBuilderService {
     if (passedConfig && !passedConfig.userSettings) {
       try {
         this.pageBuilderStateStore.setIsSaving(true)
-        await this.saveComponentsLocalStorage()
+        this.#saveDomComponentsToLocalStorage()
         await this.delay(300)
       } catch (err) {
         console.error('Error trying saving.', err)
@@ -477,7 +470,7 @@ export class PageBuilderService {
           passedConfig.userSettings.autoSave)
       ) {
         this.pageBuilderStateStore.setIsSaving(true)
-        await this.saveComponentsLocalStorage()
+        this.#saveDomComponentsToLocalStorage()
         await this.delay(300)
 
         this.pageBuilderStateStore.setIsSaving(false)
@@ -485,7 +478,7 @@ export class PageBuilderService {
     }
     if (passedConfig && !passedConfig.userSettings) {
       this.pageBuilderStateStore.setIsSaving(true)
-      await this.saveComponentsLocalStorage()
+      this.#saveDomComponentsToLocalStorage()
       await this.delay(300)
 
       this.pageBuilderStateStore.setIsSaving(false)
@@ -496,15 +489,16 @@ export class PageBuilderService {
     // Deep clone clone component
     const clonedComponent = { ...componentObject }
 
+    const pageBuilder = document.querySelector('#contains-pagebuilder')
     //  scoll to top or bottom # end
-    if (this.containsPagebuilder) {
+    if (pageBuilder) {
       if (
         this.getComponentArrayAddMethod.value === 'unshift' ||
         this.getComponentArrayAddMethod.value === 'push'
       ) {
         // push to top
         if (this.getComponentArrayAddMethod.value === 'unshift') {
-          this.containsPagebuilder.scrollTo({
+          pageBuilder.scrollTo({
             top: 0,
             behavior: 'smooth',
           })
@@ -512,9 +506,8 @@ export class PageBuilderService {
 
         // push to bottom
         if (this.getComponentArrayAddMethod.value === 'push') {
-          const maxHeight = this.containsPagebuilder.scrollHeight
-          this.containsPagebuilder.scrollTo({
-            top: maxHeight,
+          pageBuilder.scrollTo({
+            top: 0,
             behavior: 'smooth',
           })
         }
@@ -606,80 +599,6 @@ export class PageBuilderService {
 
       this.pageBuilderStateStore.setClass(userSelectedClass)
     }
-  }
-
-  handleRemoveClasses(userSelectedClass: string): void {
-    // remove selected class from element
-    if (this.getElement.value?.classList.contains(userSelectedClass)) {
-      this.getElement.value?.classList.remove(userSelectedClass)
-
-      this.pageBuilderStateStore.setElement(this.getElement.value)
-      this.pageBuilderStateStore.removeClass(userSelectedClass)
-    }
-  }
-
-  handleDeleteElement() {
-    // Get the element to be deleted
-    const element = this.getElement.value
-
-    if (!element) return
-
-    if (!element?.parentNode) {
-      this.pageBuilderStateStore.setComponent(null)
-      this.pageBuilderStateStore.setElement(null)
-      return
-    }
-
-    // Store the parent of the deleted element
-    // if parent element tag is section remove the hole component
-    if (element.parentElement?.tagName !== 'SECTION') {
-      this.pageBuilderStateStore.setParentElement(element.parentNode as HTMLElement)
-
-      // Store the outerHTML of the deleted element
-      this.pageBuilderStateStore.setRestoredElement(element.outerHTML)
-
-      // Store the next sibling of the deleted element
-      this.pageBuilderStateStore.setNextSibling(element.nextSibling as HTMLElement | null)
-    }
-
-    // if parent element tag is section remove the hole component
-    if (element.parentElement?.tagName === 'SECTION') {
-      this.deleteSelectedComponent()
-    }
-
-    // Remove the element from the DOM
-    element.remove()
-    this.pageBuilderStateStore.setComponent(null)
-    this.pageBuilderStateStore.setElement(null)
-  }
-
-  async handleRestoreElement() {
-    // Get the stored deleted element and its parent
-    if (this.getRestoredElement.value && this.getParentElement.value) {
-      // Create a new element from the stored outerHTML
-      const newElement = document.createElement('div')
-      // Fixed type conversion issue
-      newElement.innerHTML = this.getRestoredElement.value
-
-      // Append the restored element to its parent
-      // Insert the restored element before its next sibling in its parent
-      if (newElement.firstChild && this.getParentElement.value) {
-        // insertBefore can accept null as second parameter (will append to end)
-        this.getParentElement.value.insertBefore(newElement.firstChild, this.getNextSibling.value)
-      }
-    }
-
-    // Clear
-    this.pageBuilderStateStore.setParentElement(null)
-    this.pageBuilderStateStore.setRestoredElement(null)
-    this.pageBuilderStateStore.setNextSibling(null)
-    this.pageBuilderStateStore.setComponent(null)
-    this.pageBuilderStateStore.setElement(null)
-
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-    await nextTick()
-    // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
   }
 
   handleFontWeight(userSelectedFontWeight?: string): void {
@@ -842,15 +761,40 @@ export class PageBuilderService {
     this.#applyElementClassChanges(opacity, tailwindOpacities.opacities, 'setOpacity')
   }
 
-  deleteAllComponents() {
+  /**
+   * Removes all components from both the builder state and the DOM.
+   *
+   * - First clears the components array in the store.
+   * - Then, as a defensive measure, also manually removes all sections elements from the DOM.
+   *
+   * This manual DOM clearing is only optional
+   *
+   */
+
+  deleteAllComponentsFromDOM() {
+    // Clear the store
     this.pageBuilderStateStore.setComponents([])
+
+    // Also clear the DOM
+    const pagebuilder = document.querySelector('#pagebuilder')
+    if (pagebuilder) {
+      // Remove all section elements (assuming each component is a <section>)
+      pagebuilder
+        .querySelectorAll('section[data-componentid]')
+        .forEach((section) => section.remove())
+    }
   }
 
-  async deleteSelectedComponent() {
-    if (!this.getComponents.value || !this.getComponent.value) return
+  async deleteComponentFromDOM() {
+    this.#syncDomToStoreOnly()
+    await nextTick()
+
+    const components = this.getComponents.value
+
+    if (!components) return
 
     // Find the index of the component to delete
-    const indexToDelete = this.getComponents.value.findIndex(
+    const indexToDelete = components.findIndex(
       (component) => component.id === this.getComponent.value?.id,
     )
 
@@ -859,17 +803,99 @@ export class PageBuilderService {
       return
     }
 
-    // Remove the component from the array
-    this.getComponents.value.splice(indexToDelete, 1)
-    this.pageBuilderStateStore.setComponents(this.getComponents.value)
+    // Create a new array without the deleted component (avoid mutating original array)
+    const newComponents = [
+      ...components.slice(0, indexToDelete),
+      ...components.slice(indexToDelete + 1),
+    ]
 
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    this.pageBuilderStateStore.setComponents(newComponents)
+
+    // Remove the section from the DOM as well
+    const pagebuilder = document.querySelector('#pagebuilder')
+    if (pagebuilder && this.getComponent.value?.id) {
+      const section = pagebuilder.querySelector(
+        `section[data-componentid="${this.getComponent.value.id}"]`,
+      )
+      if (section) section.remove()
+    }
+
+    // Wait for Vue to finish DOM updates before attaching event listeners.
     await nextTick()
-    // Attach event listeners to all editable elements in the Builder
     await this.#addListenersToEditableElements()
 
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
+
+    // Optional: auto-save after deletion
+    await this.handleAutoSave()
+  }
+
+  async deleteElementFromDOM() {
+    const element = this.getElement.value
+    if (!element) return
+
+    if (!element.parentNode) {
+      this.pageBuilderStateStore.setComponent(null)
+      this.pageBuilderStateStore.setElement(null)
+      return
+    }
+
+    // If the element is inside a section, but not the section itself, store info for undo/restore
+    if (element.parentElement?.tagName !== 'SECTION') {
+      this.pageBuilderStateStore.setParentElement(element.parentNode as HTMLElement)
+      this.pageBuilderStateStore.setRestoredElement(element.outerHTML)
+      this.pageBuilderStateStore.setNextSibling(element.nextSibling as HTMLElement | null)
+      // Remove only the element itself from the DOM
+      element.remove()
+    } else {
+      // If the element's parent is a section, remove the whole component (section)
+      await this.deleteComponentFromDOM()
+      // No need to call element.remove() here, as the section is already removed
+    }
+
+    // Clear selection state
+    this.pageBuilderStateStore.setComponent(null)
+    this.pageBuilderStateStore.setElement(null)
+  }
+
+  async restoreDeletedElementToDOM() {
+    // Restore the previously deleted element to the DOM
+    const restoredHTML = this.getRestoredElement.value
+    const parent = this.getParentElement.value
+    const nextSibling = this.getNextSibling.value
+
+    if (restoredHTML && parent) {
+      // Create a container and parse the HTML
+      const container = document.createElement('div')
+      container.innerHTML = restoredHTML
+
+      // Insert the restored element before its next sibling (or append if null)
+      if (container.firstChild) {
+        parent.insertBefore(container.firstChild, nextSibling)
+      }
+    }
+
+    // Clear restore-related state
+    this.pageBuilderStateStore.setParentElement(null)
+    this.pageBuilderStateStore.setRestoredElement(null)
+    this.pageBuilderStateStore.setNextSibling(null)
+    this.pageBuilderStateStore.setComponent(null)
+    this.pageBuilderStateStore.setElement(null)
+
+    // Wait for Vue to finish DOM updates before attaching event listeners
+    await nextTick()
+    await this.#addListenersToEditableElements()
+  }
+
+  handleRemoveClasses(userSelectedClass: string): void {
+    // remove selected class from element
+    if (this.getElement.value?.classList.contains(userSelectedClass)) {
+      this.getElement.value?.classList.remove(userSelectedClass)
+
+      this.pageBuilderStateStore.setElement(this.getElement.value)
+      this.pageBuilderStateStore.removeClass(userSelectedClass)
+    }
   }
 
   // move component
@@ -934,7 +960,7 @@ export class PageBuilderService {
     }
 
     if (typeof this.getElement.value.innerHTML === 'string') {
-      await this.nextTick
+      await nextTick()
 
       // Update text content
       this.getElement.value.textContent = textContentVueModel
@@ -1206,11 +1232,31 @@ export class PageBuilderService {
   }
 
   /**
-   * Components from DOM → JS (not JS → DOM). øøø
-   * Saving the current DOM state into JS this.getComponents (for example, before saving to localStorage).
-   * This function Only copies the current DOM HTML into JS this.getComponents (component.html_code).
+   * Syncs the current DOM state into the in-memory store (getComponents),
+   * but does NOT save to localStorage.
    */
-  #domToComponentsSync = async () => {
+  #syncDomToStoreOnly() {
+    const pagebuilder = document.querySelector('#pagebuilder')
+    if (!pagebuilder) return
+
+    const componentsToSave: { html_code: string; id: string | null; title: string }[] = []
+
+    pagebuilder.querySelectorAll('section[data-componentid]').forEach((section) => {
+      const sanitizedSection = this.#cloneAndRemoveSelectionAttributes(section as HTMLElement)
+      componentsToSave.push({
+        html_code: sanitizedSection.outerHTML,
+        id: sanitizedSection.getAttribute('data-componentid'),
+        title: sanitizedSection.getAttribute('data-component-title') || 'Untitled Component',
+      })
+    })
+
+    this.pageBuilderStateStore.setComponents(componentsToSave)
+  }
+
+  /**
+   * Saves the current DOM state (components) to localStorage.
+   */
+  #saveDomComponentsToLocalStorage() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -1242,23 +1288,14 @@ export class PageBuilderService {
     if (keyForSavingFromDomToLocal && typeof keyForSavingFromDomToLocal === 'string') {
       localStorage.setItem(keyForSavingFromDomToLocal, JSON.stringify(dataToSave))
     }
-
-    // No DOM mutation here!
-    await new Promise<void>((resolve) => resolve())
   }
 
-  // save to local storage
-  async saveComponentsLocalStorage() {
-    await this.nextTick
+  async removeCurrentComponentsFromLocalStorage() {
+    await nextTick()
 
-    await this.#domToComponentsSync()
-  }
-
-  async removeItemComponentsLocalStorage() {
-    await this.nextTick
-
-    if (this.getLocalStorageItemName.value) {
-      localStorage.removeItem(this.getLocalStorageItemName.value)
+    const key = this.getLocalStorageItemName.value
+    if (key) {
+      localStorage.removeItem(key)
     }
   }
 
@@ -1443,7 +1480,7 @@ export class PageBuilderService {
 
     // Only apply if an image is staged
     if (this.getApplyImageToSelection.value && this.getApplyImageToSelection.value.src) {
-      await this.nextTick
+      await nextTick()
       this.pageBuilderStateStore.setBasePrimaryImage(`${this.getApplyImageToSelection.value.src}`)
 
       await this.handleAutoSave()
@@ -1774,7 +1811,7 @@ export class PageBuilderService {
       await this.#addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing JSON components:', error)
-      this.pageBuilderStateStore.setComponents([])
+      this.deleteAllComponentsFromDOM()
     }
   }
   // Private method to parse HTML components
@@ -1829,7 +1866,7 @@ export class PageBuilderService {
       await this.#addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing HTML components:', error)
-      this.pageBuilderStateStore.setComponents([])
+      this.deleteAllComponentsFromDOM()
     }
   }
 
@@ -1841,23 +1878,29 @@ export class PageBuilderService {
   async mountComponentsToDOM(passedData: string): Promise<void> {
     const pagebuilder = document.querySelector('#pagebuilder')
 
+    // Form type Create
+    const localStorageData = this.loadStoredComponentsFromStorage()
+
     // If #pagebuilder is not present, cache the data and exit
     if (!pagebuilder) {
       // For 'create', set pendingMountData to '' (empty string)
       const config = this.pageBuilderStateStore.getPageBuilderConfig
       const formType = config && config.updateOrCreate && config.updateOrCreate.formType
       if (formType === 'create') {
+        console.log('mountComponentsToDOM ran: m0')
         this.pendingMountData = ''
-      } else {
-        this.pendingMountData = passedData
+        return
       }
+      console.log('mountComponentsToDOM ran: m1:')
+      this.pendingMountData = passedData
       return
     }
 
-    // Clear the cache if we are mounting now
-    this.pendingMountData = null
+    // // Clear the cache if we are mounting now
+    // console.log('mountComponentsToDOM ran: m2:')
+    // this.pendingMountData = null
 
-    this.pageBuilderStateStore.setComponents([])
+    // this.deleteAllComponentsFromDOM()
 
     // On form type update Save Original Post
     if (
@@ -1868,6 +1911,7 @@ export class PageBuilderService {
       passedData &&
       !this.originalComponents
     ) {
+      console.log('mountComponentsToDOM ran: m3')
       this.originalComponents = passedData
     }
 
@@ -1879,13 +1923,21 @@ export class PageBuilderService {
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
     ) {
       if (passedData) {
+        console.log('mountComponentsToDOM ran: m4')
         await this.#setComponentsFromData(passedData)
         return
       }
-    }
+      if (localStorageData) {
+        console.log('mountComponentsToDOM ran: m5')
+        await this.#setComponentsFromData(localStorageData)
+        return
+      }
 
-    // Form type Create
-    const localStorageData = this.loadStoredComponentsFromStorage()
+      // If nothing, clear components
+      console.log('mountComponentsToDOM ran: m6')
+      this.deleteAllComponentsFromDOM()
+      return
+    }
 
     if (
       this.pageBuilderStateStore.getPageBuilderConfig &&
@@ -1894,39 +1946,43 @@ export class PageBuilderService {
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'create'
     ) {
       if (localStorageData) {
+        console.log('mountComponentsToDOM ran: m7')
         await this.#setComponentsFromData(localStorageData)
         return
       }
 
       // If no localStorage, but passedData exists (for demo), use it
       if (passedData) {
+        console.log('mountComponentsToDOM ran: m8')
         await this.#setComponentsFromData(passedData)
         return
       }
     }
   }
 
-  async tryMountPendingUpdateData() {
+  async tryMountPendingComponents() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
-
     // Only for update/draft/demo: mount if pendingMountData is a non-empty string
     if (this.pendingMountData && typeof this.pendingMountData === 'string') {
-      console.log('1111:')
+      console.log('tryMountPendingComponents t1:')
       await this.mountComponentsToDOM(this.pendingMountData)
       this.pendingMountData = null
       this.completeBuilderInitialization()
-    } else {
-      console.log('2222:')
-      await nextTick()
-      // Attach event listeners to all editable elements in the Builder
-      await this.#addListenersToEditableElements()
+      return
     }
+
+    console.log('tryMountPendingComponents t2:')
+    await nextTick()
+    // Always try to load latest from localStorage or fallback
+    await this.mountComponentsToDOM('')
+    this.completeBuilderInitialization()
   }
 
   async ensureBuilderInitializedForCreate() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
+    console.log('ok:', this.pendingMountData)
 
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
@@ -1951,15 +2007,18 @@ export class PageBuilderService {
         (!this.getComponents.value ||
           (Array.isArray(this.getComponents.value) && this.getComponents.value.length === 0))
       ) {
+        console.log('ensureBuilderInitializedForCreate e1')
         await this.mountComponentsToDOM('')
         this.pendingMountData = null
         this.completeBuilderInitialization()
-      } else {
-        await this.mountComponentsToDOM('')
-        await nextTick()
-        // Attach event listeners to all editable elements in the Builder
-        await this.#addListenersToEditableElements()
+        return
       }
+
+      console.log('ensureBuilderInitializedForCreate e2:')
+      await this.mountComponentsToDOM('')
+      await nextTick()
+      // Attach event listeners to all editable elements in the Builder
+      await this.#addListenersToEditableElements()
     }
   }
   async toggleTipTapModal(status: boolean): Promise<void> {

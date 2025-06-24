@@ -19,7 +19,7 @@ const secondModalButtonFunctionDynamicModalBuilder = ref(null)
 const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 
 // remove component
-const deleteSelectedComponent = function () {
+const handleDelete = function () {
   showModalDeleteComponent.value = true
   typeModal.value = 'delete'
   gridColumnModal.value = 2
@@ -35,8 +35,8 @@ const deleteSelectedComponent = function () {
   }
   //
   // handle click
-  thirdModalButtonFunctionDynamicModalBuilder.value = function () {
-    pageBuilderService.deleteSelectedComponent()
+  thirdModalButtonFunctionDynamicModalBuilder.value = async function () {
+    await pageBuilderService.deleteComponentFromDOM()
 
     showModalDeleteComponent.value = false
   }
@@ -64,7 +64,7 @@ const deleteSelectedComponent = function () {
   <div class="pbx-flex pbx-flex-col pbx-items-center pbx-justify-center pbx-myPrimaryGap">
     <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
       <div
-        @click="deleteSelectedComponent()"
+        @click="handleDelete()"
         class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryErrorColor hover:pbx-text-white pbx-text-myPrimaryErrorColor"
       >
         <span class="material-symbols-outlined"> delete_forever </span>

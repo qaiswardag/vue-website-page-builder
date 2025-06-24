@@ -35,7 +35,7 @@ const firstModalButtonFunctionDynamicModalBuilder = ref(null)
 const secondModalButtonFunctionDynamicModalBuilder = ref(null)
 const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
 
-const deleteAllComponents = function () {
+const deleteAllComponentsFromDOM = function () {
   showModalDeleteAllComponents.value = true
   typeModal.value = 'delete'
   gridColumnModal.value = 2
@@ -53,9 +53,9 @@ const deleteAllComponents = function () {
   // handle click
   thirdModalButtonFunctionDynamicModalBuilder.value = async function () {
     isDeletingLayout.value = true
-    pageBuilderService.deleteAllComponents()
+    pageBuilderService.deleteAllComponentsFromDOM()
     await pageBuilderService.clearHtmlSelection()
-    await pageBuilderService.removeItemComponentsLocalStorage()
+    await pageBuilderService.removeCurrentComponentsFromLocalStorage()
 
     await delay(500)
     showModalDeleteAllComponents.value = false
@@ -188,7 +188,7 @@ const openHTMLSettings = function () {
 
             <!-- Delete Layout Start -->
             <button
-              @click="deleteAllComponents"
+              @click="deleteAllComponentsFromDOM"
               class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-font-normal pbx-w-max pbx-border-none pbx-m-0 pbx-bg-myPrimaryErrorColor pbx-text-white"
               type="button"
             >

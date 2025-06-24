@@ -260,7 +260,7 @@ const ensureBuilderInitialized = function () {
 }
 
 onMounted(async () => {
-  await pageBuilderService.tryMountPendingUpdateData()
+  await pageBuilderService.tryMountPendingComponents()
   await pageBuilderService.ensureBuilderInitializedForCreate()
 
   // Check if Builder started
@@ -275,7 +275,6 @@ onMounted(async () => {
 
 <template>
   <div
-    id="builder-container"
     class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-scroll"
   >
     <div id="pagebuilder-top-area" class="lg:pbx-px-4 pbx-pt-2 pbx-pb-4 pbx-mx-4 pbx-mb-4 pbx-mt-2">
@@ -621,7 +620,7 @@ onMounted(async () => {
                   <button
                     @click="
                       () => {
-                        pageBuilderStateStore.setComponentArrayAddMethod('push')
+                        pageBuilderStateStore.setComponentArrayAddMethod('unshift')
                         handleAddComponent()
                       }
                     "

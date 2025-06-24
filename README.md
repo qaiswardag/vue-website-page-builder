@@ -388,9 +388,9 @@ You can reset the builder state and clear the draft with:
 
 ```js
 // Delete the HTML from the Live DOM
-pageBuilderService.deleteAllComponents()
+pageBuilderService.deleteAllComponentsFromDOM()
 // Clear Local Storage for the created or updated resource
-await pageBuilderService.removeItemComponentsLocalStorage()
+await pageBuilderService.removeCurrentComponentsFromLocalStorage()
 ```
 
 Always call these methods after a successful post or resource update to ensure users start with a fresh builder the next time they create or edit a resource.
