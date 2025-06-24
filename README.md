@@ -178,8 +178,7 @@ const configPageBuilder = {
 const pageBuilderService = getPageBuilder()
 const result = await pageBuilderService.startBuilder(configPageBuilder)
 
-// You may inspect the result for message, status, or error
-console.log('Page Builder status:', result)
+console.log('You may inspect this result for message, status, or error:', result)
 </script>
 
 <template>
@@ -187,76 +186,42 @@ console.log('Page Builder status:', result)
 </template>
 ```
 
-### Important: CSS Import Required
+## Important: CSS Prefixing (`pbx-`)
 
-The Page Builder requires its CSS file to be imported for proper styling and automatic icon loading.
+All CSS classes generated or processed by the Page Builder—including Tailwind utilities and your custom classes—are automatically prefixed with `pbx-`. This ensures the builder’s styles never conflict with your app’s existing CSS or Tailwind setup.
 
-**You only need to import the CSS file once, ideally in your `main.js`/`main.ts` or root component.**  
-If you have already imported it in your app entry, you do not need to import it again in individual components.
+**How does this affect you?**
 
-```vue
-<script setup>
-import '@myissue/vue-website-page-builder/style.css'
-</script>
-```
-
-This import automatically includes:
-
-- ✅ Page Builder styles
-- ✅ Responsive design utilities
-
-### Important: CSS Prefix (`pbx-`) for All Builder Styles
-
-The Page Builder automatically adds a `pbx-` prefix to **all CSS classes** it generates or processes, including Tailwind utility classes and any custom classes you add through the builder interface. This namespacing ensures that the builder’s styles will **not conflict** with your application's existing CSS or Tailwind classes.
-
-**What does this mean for you?**
-
-- If you create your own custom components to use with the Page Builder (instead of the default ones), **remember that the builder will automatically add the `pbx-` prefix to every CSS class** in your component’s markup. This applies to both Tailwind utility classes and any custom classes you define.
-- For example, if you use a custom class called `myCustomCSSClass` in your component, it will be rendered as `pbx-myCustomCSSClass` in the final HTML output.
-- All Tailwind classes are also prefixed, e.g. `bg-red-100` becomes `pbx-bg-red-100`, `md:grid-cols-2` becomes `md:pbx-grid-cols-2`, etc.
-
-**Why is this important?**
-
-- The prefixing is done automatically by the builder to avoid style conflicts between the builder’s output and your own app’s CSS or Tailwind setup.
+- Any class you use in builder components will be output as `pbx-ClassName`.
+- Tailwind classes are also prefixed, e.g. `bg-red-100` becomes `pbx-bg-red-100`, `md:grid-cols-2` becomes `md:pbx-grid-cols-2`.
 
 **Example:**
 
 ```html
-<!-- Builder output -->
 <div class="pbx-myCustomCSSClass pbx-bg-blue-100 md:pbx-grid-cols-2"></div>
 ```
 
 ```css
-/* To style this element, use the pbx- prefix */
 .pbx-myCustomCSSClass {
   margin-bottom: 2rem;
 }
 ```
 
-**When** you import the builder’s CSS file:
+> **Note:**  
+> Simply import the builder’s CSS file once in your project. All builder styles are namespaced, so there is no risk of style conflicts
 
-```vue
-<script setup>
+## Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)
+
+You can use the Page Builder to generate HTML and render it in any frontend framework, such as React, Nuxt, or even server-side apps.
+
+To ensure your content is styled correctly, simply install the Page Builder package in your target project and import its CSS file. All builder and Tailwind-prefixed styles will be applied automatically.
+
+```js
+// Import the builder's CSS file once in your project
 import '@myissue/vue-website-page-builder/style.css'
-</script>
 ```
 
-**What does this mean for you?**
-
-- ✅ **All Tailwind and custom CSS classes in this file prefixed with `pbx-` to prevent style conflicts.**.
-- ✅ **There is no risk of style conflicts between the builder and your app, since all builder-related styles are namespaced.**.
-
-### Rendering Only the HTML Output from the Page Builder in Other Frameworks (React, Nuxt, etc.)
-
-If you use the Page Builder to generate HTML pages and want to render them in another application (such as React, Nuxt, or any server-side app), simply install the Page Builder package in your target project and import its CSS file. This ensures that all prefix Tailwind and builder-specific styles are applied to the rendered HTML.
-
-```vue
-<script setup>
-import '@myissue/vue-website-page-builder/style.css'
-</script>
-```
-
-This will apply all the necessary styles to any HTML output from the builder, even if you render it with `dangerouslySetInnerHTML`, `v-html`, or similar methods.
+This will apply all necessary styles to any HTML output from the builder, even if you render it with `dangerouslySetInnerHTML`, `v-html`, or similar methods.
 
 **Example (React):**
 
@@ -278,20 +243,29 @@ import '@myissue/vue-website-page-builder/style.css'
 
 Then use `v-html` to render the HTML.
 
-> **Note:** You do not need to import any Vue components if you only want to render the HTML. Just import the CSS file.
+> **Note:**  
+> You do not need to import any Vue components if you only want to render the HTML. Just import the CSS file.
 
-### Provide Config to PageBuilder
+## Providing Configuration to the Page Builder
 
-Get up and running quickly by importing the PageBuilder component, setting up your configuration, and initializing the builder in your Vue project. The following example demonstrates the minimal setup required to start building pages with your own config and logo.
+The example below demonstrates the setup to start building pages, with additional options available for customization and branding.
 
-- Provide a `configPageBuilder` object to customize the builder, such as:
-  - `formType` (required): Used to retrieve the correct content from local storage. Specify whether you are creating or updating a resource.
-  - `formName` (required): Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
-  - `resourceData` (optional): Prefill the builder with initial resource data (e.g., `"title"`, `"id"`).
-  - `userForPageBuilder` (optional): Pass an object with user information (e.g., `name` and `image`) in your config to display the logged-in user's details within the builder interface.
-  - `pageBuilderLogo` (optional): Display your company logo in the builder toolbar.
-  - `userSettings` (optional): Set user preferences such as theme, language, or autoSave.
-  - `brandColor` (optional): Set your brand’s primary color for key UI elements in the builder (inside the `settings` config).
+Your `configPageBuilder` object can include:
+
+- **`formType` (required):**  
+  Used to retrieve the correct content from local storage. Specify whether you are creating or updating a resource.
+- **`formName` (required):**  
+  The resource type (e.g., `article`, `jobPost`, `store`, etc.). This is especially useful for platforms supporting multiple resource types, allowing the builder to manage layouts and storage for each resource uniquely.
+- **`resourceData` (optional):**  
+  Prefill the builder with initial resource data (e.g., `title`, `id`).
+- **`userForPageBuilder` (optional):**  
+  Pass user information (such as `name` and `image`) to display the logged-in user’s details in the builder.
+- **`pageBuilderLogo` (optional):**  
+  Display your company logo in the builder toolbar.
+- **`userSettings` (optional):**  
+  Set user preferences such as theme, language, or auto-save.
+- **`brandColor` (optional):**  
+  Set your brand’s primary color for key UI elements (inside the `settings` config).
 
 ```vue
 <script setup>
@@ -325,8 +299,7 @@ const configPageBuilder = {
 const pageBuilderService = getPageBuilder()
 const result = await pageBuilderService.startBuilder(configPageBuilder)
 
-// You may inspect the result for message, status, or error
-console.log('Page Builder status:', result)
+console.log('You may inspect this result for message, status, or error:', result)
 </script>
 
 <template>
@@ -334,23 +307,20 @@ console.log('Page Builder status:', result)
 </template>
 ```
 
-### Local Storage & Auto-Save
+## Local Storage & Auto-Save
 
-The Page Builder automatically manages all changes using the browser's local storage. Every change you make—such as adding, editing, or deleting components—is saved in local storage. This ensures your progress is not lost, even if you accidentally close the browser or navigate away.
+The Page Builder automatically saves all changes to the browser’s local storage. Every time you add, edit, or delete a component, your progress is preserved—even if you close the browser or navigate away.
 
-- **Auto-Save:** The builder periodically auto-saves your changes to local storage, so you don't have to worry about losing your work.
-- **Manual Save:** When the user clicks the Save button, the current state is also saved to local storage.
+- **Auto-Save:** Changes are periodically saved as you work.
+- **Manual Save:** Clicking the Save button also stores the current state.
 
-#### Example: Retrieving the Most Up-to-Date HTML Content for Form Submission
+## Retrieving the Latest HTML Content for Form Submission
 
-The Page Builder uses auto-save, so the data you retrieve from local storage always reflects the latest state of the builder—what the user currently sees in the editor. This means you are getting the most up-to-date content, saved live as the user edits.
+The builder’s auto-save ensures that the data in local storage always reflects the latest state of your page. You can retrieve this data at any time for form submission, publishing, or preview.
 
-To use the builder’s saved data in your form submission, you may want both the combined HTML content and the titles of each component. The `PageBuilderClass` provides a method to access the latest saved state from local storage. The example below demonstrates how to retrieve and parse this data, combining all component HTML into a single string and collecting all titles into an array. This is useful if you want to display or store both the rendered content and the structure or headings of your page.
+To get the most up-to-date content, use the same `resourceData` (such as `formType` and `formName`) that was used when saving. If these values do not match, the builder may not find the expected content.
 
-**Important:**  
-To retrieve the correct content from local storage, you must pass the same `resourceData` (such as `formType` and `formName`) to the Page Builder that was used when the content was originally saved. If the resource data does not match, the Page Builder will look for a different local storage key and may not find the expected content.
-
-Example:
+**Example:**
 
 ```js
 const configPageBuilder = {
@@ -361,7 +331,7 @@ const configPageBuilder = {
 }
 ```
 
-Call this logic when you want to submit or save the builder’s output, for example, when the user clicks a “Save” or “Publish” button. The code safely parses the local storage data, handles errors, and assigns the results to your form fields.
+Call this logic when you need to submit or save the builder’s output—for example, when the user clicks “Save” or “Publish.” The code below safely retrieves and parses the latest data from local storage, handling errors and assigning the results to your form fields.
 
 ```vue
 <script setup>
@@ -396,7 +366,7 @@ try {
 </script>
 ```
 
-#### Resetting the Builder After Successful Resource Creation or Update
+### Resetting the Builder After Successful Resource Creation or Update
 
 After you have successfully created or updated a resource (such as a post, article, or listing) using the Page Builder, it is important to clear the builder’s draft state and remove the corresponding local storage entry. This ensures that old drafts do not appear the next time the builder is opened for a new or existing resource.
 
@@ -411,28 +381,16 @@ await pageBuilderService.removeCurrentComponentsFromLocalStorage()
 
 Always call these methods after a successful post or resource update to ensure users start with a fresh builder the next time they create or edit a resource.
 
-### Loading existing Content or Components into the Page Builder
+## Loading existing Content or Components into the Page Builder
 
 The Page Builder makes it simple to load previously published content from any backend source, such as your database or API.
-
-#### Configuration
-
-Before loading existing content, ensure the following configuration options are set:
-
-- **`formType` (required):**  
-  Indicates whether you are creating or updating a resource. This is used to retrieve the correct content from local storage.
-
-- **`formName` (required):**  
-  Specifies the resource type (for example, `article`, `jobPost`, `store`, etc.). This is essential for platforms supporting multiple resource types, as it enables the builder to manage layouts and local storage for each resource uniquely.
-
-#### Usage
 
 The `startBuilder` method accepts two arguments:
 
 1. **Configuration** (required):  
    The builder configuration object.
-2. **Data** (optional):  
-   An object containing your existing components. This is especially useful when loading previously published or saved content into the builder.
+2. **Components Data** (optional):  
+   An object containing existing components. This is especially useful when loading previously published or saved content into the builder.
 
 If you provide the second argument, it must be an object with a `components` property, which is an array of objects. Each object must include a `html_code` string and may optionally include a `title` string.
 
@@ -461,8 +419,7 @@ const myArticle = {
 
 const result = await pageBuilderService.startBuilder(configPageBuilder, myArticle)
 
-// You may inspect the result for message, status, or error
-console.log('Page Builder status:', result)
+console.log('You may inspect this result for message, status, or error:', result)
 </script>
 
 <template>
@@ -489,13 +446,15 @@ console.log('Page Builder status:', result)
 
 This approach ensures your users can seamlessly load and edit previously published content, providing a smooth and reliable editing.
 
-### Automatic Draft Recovery
+## Automatic Draft Recovery
 
-The Page Builder automatically checks for any unsaved drafts in local storage for the current resource.  
-If a draft is found, users will be prompted to either continue where they left off or use the version currently loaded from your backend.
+The Page Builder automatically checks for unsaved drafts in local storage for the current resource.  
+If a draft is found, users are prompted to either continue where they left off or use the version loaded from your backend.
 
-- **`formType` (required):** Used to retrieve the correct content from local storage. Set this to either `create` or `update` in the `updateOrCreate` config, depending on your use case.
-- **`formName` (required):** Specify the resource type (e.g., `"article"`, `"jobPost"`, `"store"`, etc.) in the `updateOrCreate` config. This is especially useful if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and local storage for each resource type, allowing users to continue where they left off for different resources.
+- **`formType` (required):**  
+  Determines which draft to load from local storage. Set this to either `create` or `update` in the `updateOrCreate` config, depending on your use case.
+- **`formName` (required):**  
+  Specifies the resource type (e.g., `article`, `jobPost`, `store`, etc.) in the `updateOrCreate` config. This is especially important if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and drafts for each resource, allowing users to pick up where they left
 
 ```vue
 <script setup>
@@ -508,9 +467,9 @@ const configPageBuilder = {
   },
 }
 
-// Retrieve Page Builder service instance
-const pageBuilderService = getPageBuilder()
-await pageBuilderService.startBuilder(configPageBuilder)
+const result = await pageBuilderService.startBuilder(configPageBuilder)
+
+console.log('You may inspect this result for message, status, or error:', result)
 </script>
 
 <template>
