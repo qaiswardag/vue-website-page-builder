@@ -27,9 +27,9 @@ export interface BuilderResourceComponent {
 }
 
 // For the full resource object passed to your package
-export interface BuilderResourceData {
-  components: BuilderResourceComponent[]
-}
+export type BuilderResourceData =
+  | { components: BuilderResourceComponent[] }
+  | BuilderResourceComponent[]
 
 export type StartBuilderResult = { error: true; reason: string } | { message: string }
 // Store interfaces for better type safety

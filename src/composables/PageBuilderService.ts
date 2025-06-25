@@ -247,31 +247,28 @@ export class PageBuilderService {
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
     const localStorageData = this.loadStoredComponentsFromStorage()
 
-    if (!this.pendingMountData) {
-      let dataToPass: string
-      if (typeof components === 'string') {
-        dataToPass = components
-      } else if (components !== undefined) {
-        dataToPass = JSON.stringify(components)
-      } else {
-        dataToPass = ''
-      }
-
-      await this.#setComponentsFromData(dataToPass)
+    let dataToPass: string
+    if (typeof components === 'string') {
+      dataToPass = components
+    } else if (components !== undefined) {
+      dataToPass = JSON.stringify(components)
+    } else {
+      dataToPass = ''
     }
 
-    if (this.pendingMountData) {
-      let dataToPass: string
-      if (typeof this.pendingMountData === 'string') {
-        dataToPass = this.pendingMountData
-      } else {
-        dataToPass = JSON.stringify(this.pendingMountData)
-      }
-
-      await this.#setComponentsFromData(dataToPass)
-    }
+    await this.#setComponentsFromData(dataToPass)
   }
 
+  async tryMountPendingComponents() {
+    if (this.pendingMountData) {
+      console.log('111:')
+      this.#completeBuilderInitialization(this.pendingMountData)
+      this.pendingMountData = null
+      return
+    }
+    console.log('222:')
+    this.#completeBuilderInitialization()
+  }
   /**
    * - Entry point for initializing the Page Builder.
    * - Sets the builder as started in the state store.
@@ -312,7 +309,6 @@ export class PageBuilderService {
       // Page Builder is not Present in the DOM but Components have been passed to the Builder
       if (passedComponentsArray && !pagebuilder) {
         this.#handlePageBuilderNotPresent(passedComponentsArray)
-        this.#completeBuilderInitialization(passedComponentsArray)
       }
       // Page Builder is Present in the DOM & Components have been passed to the Builder
       if (passedComponentsArray && pagebuilder) {
@@ -341,6 +337,7 @@ export class PageBuilderService {
     // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
 
+    console.log('er altså:', passedComponentsArray)
     await this.#mountPassedComponentsToDOM(passedComponentsArray)
     //
     //
@@ -362,13 +359,13 @@ export class PageBuilderService {
     // Show a global loading indicator while initializing
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
 
-    // // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-    // await nextTick()
-    // // Attach event listeners to all editable elements in the Builder
-    // await this.#addListenersToEditableElements()
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
 
-    // // Clean up any old localStorage items related to previous builder sessions
-    // this.deleteOldPageBuilderLocalStorage()
+    // Clean up any old localStorage items related to previous builder sessions
+    this.deleteOldPageBuilderLocalStorage()
   }
 
   #applyElementClassChanges(
@@ -1860,12 +1857,15 @@ export class PageBuilderService {
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
       // Looks like JSON - parse as JSON
       await this.#parseJSONComponents(trimmedData)
-    } else if (trimmedData.startsWith('<')) {
+      return
+    }
+    if (trimmedData.startsWith('<')) {
       // Looks like HTML - parse as HTML
       await this.#parseHTMLComponents(trimmedData)
-    } else {
-      await this.#parseJSONComponents(trimmedData)
+      return
     }
+
+    await this.#parseJSONComponents(trimmedData)
   }
 
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
@@ -1985,59 +1985,6 @@ export class PageBuilderService {
       this.deleteAllComponentsFromDOM()
     }
   }
-
-  // async ensureBuilderInitializedForCreate() {
-  //   const pagebuilder = document.querySelector('#pagebuilder')
-  //   if (!pagebuilder) return
-
-  //   const config = this.pageBuilderStateStore.getPageBuilderConfig
-  //   console.log('den er:', config)
-  //   const formType = config && config.updateOrCreate && config.updateOrCreate.formType
-
-  //   if (formType === 'create') {
-  //     await nextTick()
-
-  //     if (
-  //       formType === 'create' &&
-  //       (!this.getComponents.value ||
-  //         (Array.isArray(this.getComponents.value) && this.getComponents.value.length === 0))
-  //     ) {
-  //       console.log('ensureBuilderInitializedForCreate e1')
-  //       await this.mountComponentsToDOM('')
-  //       this.pendingMountData = null
-  //       return
-  //     }
-
-  //     console.log('ensureBuilderInitializedForCreate e2:')
-  //     await this.mountComponentsToDOM('')
-  //     await nextTick()
-  //     // Attach event listeners to all editable elements in the Builder
-  //     await this.#addListenersToEditableElements()
-  //   }
-  // }
-
-  // async ensureBuilderInitializedForUpdate() {
-  //   const pagebuilder = document.querySelector('#pagebuilder')
-  //   if (!pagebuilder) return
-
-  //   const config = this.pageBuilderStateStore.getPageBuilderConfig
-  //   const formType = config && config.updateOrCreate && config.updateOrCreate.formType
-
-  //   if (formType === 'update') {
-  //     // Only for update/draft/demo: mount if pendingMountData is a non-empty string
-  //     if (this.pendingMountData && typeof this.pendingMountData === 'string') {
-  //       console.log('ensureBuilderInitializedForUpdate t1:')
-  //       await this.mountComponentsToDOM(this.pendingMountData)
-  //       this.pendingMountData = null
-  //       return
-  //     }
-
-  //     console.log('ensureBuilderInitializedForUpdate t2:')
-  //     await nextTick()
-  //     // Always try to load latest from localStorage or fallback
-  //     await this.mountComponentsToDOM('')
-  //   }
-  // }
 
   async toggleTipTapModal(status: boolean): Promise<void> {
     this.pageBuilderStateStore.setShowModalTipTap(status)

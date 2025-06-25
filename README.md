@@ -178,7 +178,7 @@ const configPageBuilder = {
 const pageBuilderService = getPageBuilder()
 const result = await pageBuilderService.startBuilder(configPageBuilder)
 
-console.log('You may inspect this result for message, status, or error:', result)
+console.info('You may inspect this result for message, status, or error:', result)
 </script>
 
 <template>
@@ -299,7 +299,7 @@ const configPageBuilder = {
 const pageBuilderService = getPageBuilder()
 const result = await pageBuilderService.startBuilder(configPageBuilder)
 
-console.log('You may inspect this result for message, status, or error:', result)
+console.info('You may inspect this result for message, status, or error:', result)
 </script>
 
 <template>
@@ -419,7 +419,7 @@ const myArticle = {
 
 const result = await pageBuilderService.startBuilder(configPageBuilder, myArticle)
 
-console.log('You may inspect this result for message, status, or error:', result)
+console.info('You may inspect this result for message, status, or error:', result)
 </script>
 
 <template>
@@ -469,7 +469,7 @@ const configPageBuilder = {
 
 const result = await pageBuilderService.startBuilder(configPageBuilder)
 
-console.log('You may inspect this result for message, status, or error:', result)
+console.info('You may inspect this result for message, status, or error:', result)
 </script>
 
 <template>
