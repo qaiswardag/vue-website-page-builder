@@ -181,8 +181,9 @@ export class PageBuilderService {
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType
 
+    const currentConfig = this.pageBuilderStateStore.getPageBuilderConfig
+
     if (formType === 'create' && components) {
-      const currentConfig = this.pageBuilderStateStore.getPageBuilderConfig
       if (currentConfig) {
         const updatedConfig = {
           ...currentConfig,
@@ -193,15 +194,13 @@ export class PageBuilderService {
         } as const
 
         this.pageBuilderStateStore.setPageBuilderConfig(updatedConfig)
-      }
 
-      console.error(
-        'You cannot set formType to "create" in your configuration while also passing a components data array to the Page Builder. Please set formType to "update" if you wish to load existing components.',
-      )
-      return {
-        error: false as const,
-        reason:
-          'You cannot set formType to "create" in your configuration while also passing a components data array to the Page Builder. Please set formType to "update" if you wish to load existing components.',
+        return {
+          error: false as const,
+          warning:
+            'You cannot set formType to create in your configuration while also passing a components data array to the Page Builder. Please set formType to update.',
+          status: 'validation_failed',
+        }
       }
     }
 
@@ -335,22 +334,18 @@ export class PageBuilderService {
     // Reactive flag signals to the UI that the builder has been successfully initialized
     // Prevents builder actions to prevent errors caused by missing DOM .
     this.pageBuilderStateStore.setBuilderStarted(true)
-
     const pagebuilder = document.querySelector('#pagebuilder')
-
     let validation
+
     try {
       this.originalComponents = passedComponentsArray
-
-      // Store the provided config in the builder's state store
       this.pageBuilderStateStore.setPageBuilderConfig(config)
-
       // Validate and normalize the config (ensure required fields are present)
       this.#validateConfig(config)
 
       validation = this.#validateUserProvidedComponents(passedComponentsArray)
       if (validation && validation.error) {
-        return validation
+        this.pageBuilderStateStore.setIsLoadingGlobal(false)
       }
 
       // Update the localStorage key name based on the config/resource
@@ -361,17 +356,19 @@ export class PageBuilderService {
         this.#handlePageBuilderNotPresent(passedComponentsArray)
       }
       // Page Builder is Present in the DOM & Components have been passed to the Builder
-      if (passedComponentsArray && pagebuilder) {
+      if (pagebuilder) {
         this.#completeBuilderInitialization(passedComponentsArray)
       }
 
-      // ... any other logic before success
+      // Return both the success message and validation info if present
       return {
         message: 'Page builder started successfully.',
+        ...(validation || {}),
       }
     } catch (err) {
       console.error('Not able to start the Page Builder', err)
-
+      // Show a global loading indicator while initializing
+      this.pageBuilderStateStore.setIsLoadingGlobal(false)
       return {
         error: true as const,
         reason: 'Failed to start the Page Builder due to an unexpected error.',
@@ -395,6 +392,21 @@ export class PageBuilderService {
       } else {
         // If no local storage is found, use the components array provided by the user
         await this.#mountPassedComponentsToDOM(passedComponentsArray)
+      }
+    }
+
+    //
+    //
+    //
+    if (!passedComponentsArray) {
+      // Prefer components from local storage if available for this resource
+      if (localStorageData && typeof localStorageData === 'string') {
+        console.log('1111111:')
+        await this.#updateComponentsFromString(localStorageData)
+      } else {
+        console.log('eller 2222222:')
+        // If no local storage is found, use the components array provided by the user
+        await this.#mountPassedComponentsToDOM([])
       }
     }
     //
