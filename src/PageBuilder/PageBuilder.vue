@@ -237,7 +237,7 @@ const handleRestoreOriginalContent = async function () {
 
   titleModalRestore.value = 'Do you want to reset this page?'
   descriptionModalRestore.value =
-    'Are you sure you want to reset this page? This will overwrite your current page work.'
+    'Are you sure you want to reset this page? This will overwrite your current changes.'
   firstButtonRestore.value = 'Close'
   secondButtonRestore.value = null
   thirdButtonRestore.value = 'Reset changes'
