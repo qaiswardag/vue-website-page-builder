@@ -390,7 +390,7 @@ onMounted(async () => {
         <div
           @click.self="pageBuilderService.clearHtmlSelection()"
           id="pagebuilder-left-area"
-          class="pbx-min-w-[3.5rem] pbx-pt-6 pbx-pb-2 pbx-ml-2 pbx-bg-myPrimaryLightGrayColor pbx-rounded-full pbx-shadow-sm"
+          class="pbx-min-w-[3.5rem] pbx-pt-7 pbx-pb-2 pbx-ml-2 pbx-bg-myPrimaryLightGrayColor pbx-rounded-full pbx-shadow-sm"
         >
           <div class="pbx-mx-2 pbx-flex pbx-flex-col pbx-myPrimaryGap pbx-items-stretch">
             <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
@@ -418,11 +418,11 @@ onMounted(async () => {
         >
           <div
             id="pagebuilder-toolbar-area"
-            class="pbx-flex pbx-items-center pbx-justify-between pbx-rounded-t-2xl pbx-bg-myPrimaryLightGrayColor pbx-min-w-[30rem]"
+            class="pbx-flex pbx-items-center pbx-justify-between pbx-rounded-t-2xl pbx-min-w-[30rem] pbx-bg-myPrimaryLightGrayColor pbx-border-b pbx-border-gray-200"
           >
             <div
               @click.self="pageBuilderService.clearHtmlSelection()"
-              class="pbx-flex pbx-myPrimaryGap pbx-items-center pbx-pt-4 pbx-pb-2 pbx-pl-2 pbx-h-24 pbx-w-full pbx-min-w-36"
+              class="pbx-min-w-max pbx-pr-2 pbx-flex pbx-myPrimaryGap pbx-items-center pbx-pt-2 pbx-pb-2 pbx-pl-2 pbx-h-24 pbx-w-full"
             >
               <!-- Save Start -->
               <button
@@ -497,8 +497,8 @@ onMounted(async () => {
                       ></span>
                     </span>
                   </div>
-                  <div>
-                    <span class="lg:pbx-block pbx-hidden"> Reset Page </span>
+                  <div class="lg:pbx-block pbx-hidden">
+                    <span> Reset Page </span>
                   </div>
                 </button>
               </template>

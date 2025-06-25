@@ -390,9 +390,12 @@ The `startBuilder` method accepts two arguments:
 1. **Configuration** (required):  
    The builder configuration object.
 2. **Components Data** (optional):  
-   An object containing existing components. This is especially useful when loading previously published or saved content into the builder.
+   An array of component objects. Each object must include a `html_code` string and may optionally include a title string. This is especially useful when loading previously published or saved content into the builder.
 
-If you provide the second argument, it must be an object with a `components` property, which is an array of objects. Each object must include a `html_code` string and may optionally include a `title` string.
+**Important**
+
+To load existing content into the Page Builder, ensure that the formType is set to update in your configuration.
+This tells the builder to expect and load your provided components array as the initial content.
 
 ```vue
 <script setup>
@@ -409,13 +412,11 @@ const configPageBuilder = {
 const pageBuilderService = getPageBuilder()
 
 // Load existing components into the builder (title is optional)
-const myArticle = {
-  components: [
-    { html_code: '<section>...</section>', title: 'Header H2' },
-    { html_code: '<section>...</section>', title: 'Text' },
-    { html_code: '<section>...</section>', title: 'Image' },
-  ],
-}
+const myArticle = [
+  { html_code: '<section>...</section>', title: 'Header H2' },
+  { html_code: '<section>...</section>', title: 'Text' },
+  { html_code: '<section>...</section>', title: 'Image' },
+]
 
 const result = await pageBuilderService.startBuilder(configPageBuilder, myArticle)
 
@@ -430,19 +431,6 @@ console.info('You may inspect this result for message, status, or error:', resul
 > **Note:**  
 > Each component’s `html_code` must be wrapped in a `<section>...</section>` tag.  
 > This is how the Page Builder defines and separates individual components.
->
-> **Example:**
->
-> ```json
-> {
->   "components": [
->     {
->       "html_code": "<section><div>My content</div></section>",
->       "title": "Header"
->     }
->   ]
-> }
-> ```
 
 This approach ensures your users can seamlessly load and edit previously published content, providing a smooth and reliable editing.
 

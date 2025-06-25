@@ -39,7 +39,7 @@ export class PageBuilderService {
   private delay: (ms?: number) => Promise<void>
   private hasStartedEditing: boolean = false
   // Hold data from Database or Backend for updated post
-  private originalComponents: string | null = null
+  private originalComponents: BuilderResourceData | undefined = undefined
   // Holds data to be mounted when #pagebuilder is not yet present in the DOM
   private pendingMountData: BuilderResourceData | null = null
 
@@ -176,6 +176,35 @@ export class PageBuilderService {
   }
 
   #validateUserProvidedComponents(components: unknown) {
+    const formType =
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType
+
+    if (formType === 'create' && components) {
+      const currentConfig = this.pageBuilderStateStore.getPageBuilderConfig
+      if (currentConfig) {
+        const updatedConfig = {
+          ...currentConfig,
+          updateOrCreate: {
+            ...currentConfig.updateOrCreate,
+            formType: 'update',
+          },
+        } as const
+
+        this.pageBuilderStateStore.setPageBuilderConfig(updatedConfig)
+      }
+
+      console.error(
+        'You cannot set formType to "create" in your configuration while also passing a components data array to the Page Builder. Please set formType to "update" if you wish to load existing components.',
+      )
+      return {
+        error: false as const,
+        reason:
+          'You cannot set formType to "create" in your configuration while also passing a components data array to the Page Builder. Please set formType to "update" if you wish to load existing components.',
+      }
+    }
+
     // Must be an array
     if (!Array.isArray(components)) {
       return {
@@ -311,16 +340,18 @@ export class PageBuilderService {
 
     let validation
     try {
-      validation = this.#validateUserProvidedComponents(passedComponentsArray)
-      if (validation && validation.error) {
-        return validation
-      }
+      this.originalComponents = passedComponentsArray
 
       // Store the provided config in the builder's state store
       this.pageBuilderStateStore.setPageBuilderConfig(config)
 
       // Validate and normalize the config (ensure required fields are present)
       this.#validateConfig(config)
+
+      validation = this.#validateUserProvidedComponents(passedComponentsArray)
+      if (validation && validation.error) {
+        return validation
+      }
 
       // Update the localStorage key name based on the config/resource
       this.#updateLocalStorageItemName()
@@ -1442,12 +1473,10 @@ export class PageBuilderService {
 
   //
   deleteOldPageBuilderLocalStorage(): void {
-    if (
-      this.pageBuilderStateStore.getPageBuilderConfig &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
-    ) {
+    const config = this.pageBuilderStateStore.getPageBuilderConfig
+    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
+
+    if (formType === 'update') {
       let oldCountLocalStorages = 0
       const deletedItemsLog: { Number: number; Key: string; SavedAt: string }[] = []
 
@@ -1502,12 +1531,10 @@ export class PageBuilderService {
 
   //
   async resumeEditingForUpdate() {
-    if (
-      this.pageBuilderStateStore.getPageBuilderConfig &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
-    ) {
+    const config = this.pageBuilderStateStore.getPageBuilderConfig
+    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
+
+    if (formType === 'update') {
       const key = this.getLocalStorageItemName.value
 
       if (typeof key === 'string') {
@@ -1531,10 +1558,10 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setIsRestoring(true)
       await this.delay(300)
 
-      console.log('oriiiiiii:', this.originalComponents)
       // Restore the original content if available
-      if (this.originalComponents) {
-        await this.#updateComponentsFromString(this.originalComponents)
+      if (Array.isArray(this.originalComponents)) {
+        await this.#mountPassedComponentsToDOM(this.originalComponents)
+        this.removeCurrentComponentsFromLocalStorage()
       }
 
       // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.

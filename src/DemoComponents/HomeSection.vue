@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import FullWidthElement from '../Components/Layouts/FullWidthElement.vue'
 import PageBuilder from '../PageBuilder/PageBuilder.vue'
 
@@ -79,10 +79,11 @@ const configPageBuilder = {
   settings: {
     brandColor: '#DB93B0',
   },
-}
+} as const
 
 onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder, html.components)
+  const result = await pageBuilderService.startBuilder(configPageBuilder, html)
+  console.log('result fra PB is:', result)
   //
   //
   //
