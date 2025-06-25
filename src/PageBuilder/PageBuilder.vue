@@ -149,7 +149,6 @@ watch(getElementAttributes, async (newAttributes, oldAttributes) => {
     newAttributes?.dataImage !== oldAttributes?.dataImage
   ) {
     debounce(async () => {
-      await pageBuilderService.handleAutoSave()
       await pageBuilderService.initializeElementStyles()
     }, 200)
   }
@@ -296,11 +295,21 @@ onMounted(async () => {
         the builder by running the startBuilder method for this resource.
       </ModalBuilder>
       <div
-        @click.self="pageBuilderService.clearHtmlSelection()"
+        @click.self="
+          async () => {
+            await pageBuilderService.clearHtmlSelection()
+          }
+        "
         class="pbx-min-h-24 pbx-flex pbx-justify-between pbx-items-center pbx-pb-2 pbx-border-b pbx-border-gray-200"
       >
         <!-- Logo # start -->
-        <div @click="pageBuilderService.clearHtmlSelection()">
+        <div
+          @click="
+            async () => {
+              await pageBuilderService.clearHtmlSelection()
+            }
+          "
+        >
           <div
             v-if="
               getPageBuilderConfig &&
@@ -386,7 +395,11 @@ onMounted(async () => {
     <div>
       <div class="pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2">
         <div
-          @click.self="pageBuilderService.clearHtmlSelection()"
+          @click.self="
+            async () => {
+              await pageBuilderService.clearHtmlSelection()
+            }
+          "
           id="pagebuilder-left-area"
           class="pbx-min-w-[3.5rem] pbx-pt-7 pbx-pb-2 pbx-ml-2 pbx-bg-myPrimaryLightGrayColor pbx-rounded-full pbx-shadow-sm"
         >
@@ -405,7 +418,13 @@ onMounted(async () => {
                 <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
               </button>
             </div>
-            <div @click.self="pageBuilderService.clearHtmlSelection()">
+            <div
+              @click.self="
+                async () => {
+                  await pageBuilderService.clearHtmlSelection()
+                }
+              "
+            >
               <ComponentTopMenu v-if="getElement"></ComponentTopMenu>
             </div>
           </div>
@@ -419,7 +438,11 @@ onMounted(async () => {
             class="pbx-flex pbx-items-center pbx-justify-between pbx-rounded-t-2xl pbx-min-w-[30rem] pbx-bg-myPrimaryLightGrayColor pbx-border-b pbx-border-gray-200"
           >
             <div
-              @click.self="pageBuilderService.clearHtmlSelection()"
+              @click.self="
+                async () => {
+                  await pageBuilderService.clearHtmlSelection()
+                }
+              "
               class="pbx-min-w-max pbx-pr-2 pbx-flex pbx-myPrimaryGap pbx-items-center pbx-pt-2 pbx-pb-2 pbx-pl-2 pbx-h-24 pbx-w-full"
             >
               <!-- Save Start -->
@@ -504,11 +527,19 @@ onMounted(async () => {
             </div>
 
             <div
-              @click.self="pageBuilderService.clearHtmlSelection()"
+              @click.self="
+                async () => {
+                  await pageBuilderService.clearHtmlSelection()
+                }
+              "
               class="pbx-flex pbx-justify-end pbx-py-2 pbx-pr-2 pbx-h-24 pbx-w-full"
             >
               <div
-                @click.self="pageBuilderService.clearHtmlSelection()"
+                @click.self="
+                  async () => {
+                    await pageBuilderService.clearHtmlSelection()
+                  }
+                "
                 class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4"
               >
                 <button
@@ -535,10 +566,10 @@ onMounted(async () => {
                   <button
                     type="button"
                     @click="
-                      () => {
+                      async () => {
                         pageBuilderStateStore.setMenuRight(false)
                         pageBuilderStateStore.setElement(null)
-                        pageBuilderService.clearHtmlSelection()
+                        await pageBuilderService.clearHtmlSelection()
                         handlePageBuilderPreview()
                       }
                     "
@@ -558,11 +589,19 @@ onMounted(async () => {
             </div>
 
             <div
-              @click.self="pageBuilderService.clearHtmlSelection()"
+              @click.self="
+                async () => {
+                  await pageBuilderService.clearHtmlSelection()
+                }
+              "
               class="pbx-flex pbx-justify-end pbx-py-2 pbx-pr-2 pbx-w-full pbx-h-24"
             >
               <div
-                @click.self="pageBuilderService.clearHtmlSelection()"
+                @click.self="
+                  async () => {
+                    await pageBuilderService.clearHtmlSelection()
+                  }
+                "
                 class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4"
               >
                 <button
@@ -608,7 +647,11 @@ onMounted(async () => {
               <!-- Add Component # start -->
 
               <div
-                @click="pageBuilderService.clearHtmlSelection()"
+                @click="
+                  async () => {
+                    await pageBuilderService.clearHtmlSelection()
+                  }
+                "
                 id="pagebuilder-bottom-components-area"
                 class="pbx-pt-8 pbx-pb-12 pbx-text-center focus:pbx-outline-none focus:pbx-ring-2 focus:pbx-ring-indigo-500 focus:pbx-ring-offset-2 pbx-my-2 pbx-mx-4"
                 :class="{ 'pbx-border-t pbx-border-gray-200': getComponents.length > 0 }"

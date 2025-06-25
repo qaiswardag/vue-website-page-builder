@@ -291,11 +291,16 @@ export class PageBuilderService {
   }
 
   async tryMountPendingComponents() {
+    // Always clear DOM and store before mounting new resource
+    this.deleteAllComponentsFromDOM()
+
+    const localStorageData = this.loadStoredComponentsFromStorage()
+
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await delay(200)
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
-    const localStorageData = this.loadStoredComponentsFromStorage()
+
     //
     if (!config) return
     //
@@ -548,6 +553,8 @@ export class PageBuilderService {
   #handleElementClick = async (e: Event, element: HTMLElement): Promise<void> => {
     e.preventDefault()
     e.stopPropagation()
+
+    await this.handleAutoSave()
 
     const pagebuilder = document.querySelector('#pagebuilder')
 
@@ -1478,6 +1485,7 @@ export class PageBuilderService {
    * Saves the current DOM state (components) to localStorage.
    */
   #saveDomComponentsToLocalStorage() {
+    this.#updateLocalStorageItemName()
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -1512,6 +1520,7 @@ export class PageBuilderService {
   }
 
   async removeCurrentComponentsFromLocalStorage() {
+    this.#updateLocalStorageItemName()
     await nextTick()
 
     const key = this.getLocalStorageItemName.value
@@ -1580,6 +1589,7 @@ export class PageBuilderService {
 
   //
   async resumeEditingForUpdate() {
+    this.#updateLocalStorageItemName()
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
@@ -1595,7 +1605,6 @@ export class PageBuilderService {
 
       if (typeof updateDraftFromLocalStorage === 'string') {
         this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
-        localStorage.removeItem(key)
         await delay(300)
         await this.#updateComponentsFromString(updateDraftFromLocalStorage)
         this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
@@ -1611,6 +1620,7 @@ export class PageBuilderService {
   }
 
   async restoreOriginalContent() {
+    this.#updateLocalStorageItemName()
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
@@ -1638,6 +1648,7 @@ export class PageBuilderService {
   }
 
   loadStoredComponentsFromStorage() {
+    this.#updateLocalStorageItemName()
     if (!this.getLocalStorageItemName.value) return false
 
     if (

@@ -164,8 +164,8 @@ const openHTMLSettings = function () {
             <!-- Main Settings Start -->
             <button
               @click="
-                () => {
-                  pageBuilderService.clearHtmlSelection()
+                async () => {
+                  await pageBuilderService.clearHtmlSelection()
                   openMainSettings()
                 }
               "
