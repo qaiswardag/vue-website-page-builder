@@ -212,6 +212,8 @@ export class PageBuilderService {
       }
     }
 
+    console.error('No components provided (empty array).')
+
     // If empty array, that's acceptable
     if (components.length === 0) {
       return { error: false as const, message: 'No components provided (empty array).' }
@@ -222,6 +224,9 @@ export class PageBuilderService {
 
     // Check that the first item is not an empty object
     if (isEmptyObject(first)) {
+      console.error(
+        'The first object in the array is empty. Each component must be a non-empty object and include an html_code key.',
+      )
       return {
         error: true as const,
         reason:
@@ -230,6 +235,7 @@ export class PageBuilderService {
     }
 
     if (first && 'html_code' in first && typeof first.html_code !== 'string') {
+      console.error("The 'html_code' property in the first object must be a string.")
       return {
         error: true as const,
         reason: "The 'html_code' property in the first object must be a string.",
@@ -238,6 +244,7 @@ export class PageBuilderService {
 
     // Check that the first item has an 'html_code' key
     if (!first || !('html_code' in first)) {
+      console.error("The first object in the array must include an 'html_code' key.")
       return {
         error: true as const,
         reason: "The first object in the array must include an 'html_code' key.",
@@ -288,6 +295,8 @@ export class PageBuilderService {
   }
 
   async tryMountPendingComponents() {
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
+    await delay(200)
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
     const localStorageData = this.loadStoredComponentsFromStorage()
@@ -303,16 +312,30 @@ export class PageBuilderService {
     //
     if (config && formType === 'update') {
       if (this.pendingMountData) {
+        console.log('1111111:')
         this.#completeBuilderInitialization(this.pendingMountData)
-        this.pendingMountData = null
         return
       }
 
       // Pending data for mount is null at this stage
       if (typeof localStorageData === 'string') {
+        console.log('22222222:')
         await this.#updateComponentsFromString(localStorageData)
         this.#completeBuilderInitialization()
+        return
       }
+
+      //
+      //
+      //
+      //
+      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+      await nextTick()
+      // Attach event listeners to all editable elements in the Builder
+      await this.#addListenersToEditableElements()
+
+      this.pageBuilderStateStore.setIsRestoring(false)
+      this.pageBuilderStateStore.setIsLoadingGlobal(false)
     }
   }
   /**
@@ -344,9 +367,6 @@ export class PageBuilderService {
       this.#validateConfig(config)
 
       validation = this.#validateUserProvidedComponents(passedComponentsArray)
-      if (validation && validation.error) {
-        this.pageBuilderStateStore.setIsLoadingGlobal(false)
-      }
 
       // Update the localStorage key name based on the config/resource
       this.#updateLocalStorageItemName()
@@ -367,7 +387,6 @@ export class PageBuilderService {
       }
     } catch (err) {
       console.error('Not able to start the Page Builder', err)
-      // Show a global loading indicator while initializing
       this.pageBuilderStateStore.setIsLoadingGlobal(false)
       return {
         error: true as const,
@@ -377,6 +396,7 @@ export class PageBuilderService {
   }
 
   async #completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
     const localStorageData = this.loadStoredComponentsFromStorage()
     console.log('completing builder initialization..')
 
@@ -387,11 +407,14 @@ export class PageBuilderService {
 
     if (passedComponentsArray) {
       // Prefer components from local storage if available for this resource
-      if (localStorageData && typeof localStorageData === 'string') {
+      if (!this.pendingMountData && localStorageData && typeof localStorageData === 'string') {
+        console.log('aaaa')
         await this.#updateComponentsFromString(localStorageData)
       } else {
+        console.log('bbbb')
         // If no local storage is found, use the components array provided by the user
         await this.#mountPassedComponentsToDOM(passedComponentsArray)
+        this.pendingMountData = null
       }
     }
 
@@ -422,13 +445,13 @@ export class PageBuilderService {
     //
     //
     //
-    // Show a global loading indicator while initializing
-    this.pageBuilderStateStore.setIsLoadingGlobal(false)
 
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
     await this.#addListenersToEditableElements()
+    // Show a global loading indicator while initializing
+    this.pageBuilderStateStore.setIsLoadingGlobal(false)
 
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
@@ -1546,20 +1569,31 @@ export class PageBuilderService {
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
-    if (formType === 'update') {
-      const key = this.getLocalStorageItemName.value
+    if (formType !== 'update') return
+    //
+    //
+    //
 
-      if (typeof key === 'string') {
-        const updateDraftFromLocalStorage = localStorage.getItem(key)
+    const key = this.getLocalStorageItemName.value
 
-        if (typeof updateDraftFromLocalStorage === 'string') {
-          this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
-          await delay(300)
-          await this.#updateComponentsFromString(updateDraftFromLocalStorage)
-          this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
-        }
+    if (typeof key === 'string') {
+      const updateDraftFromLocalStorage = localStorage.getItem(key)
+
+      if (typeof updateDraftFromLocalStorage === 'string') {
+        this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
+        localStorage.removeItem(key)
+        await delay(300)
+        await this.#updateComponentsFromString(updateDraftFromLocalStorage)
+        this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
       }
     }
+
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
+    // set loading to false
+    this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
   }
 
   async restoreOriginalContent() {
