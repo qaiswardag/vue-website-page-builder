@@ -264,11 +264,8 @@ export class PageBuilderService {
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
     const localStorageData = this.loadStoredComponentsFromStorage()
     //
+    if (!config) return
     //
-    console.log(
-      'BLIVER DEN SAND....:',
-      localStorageData && typeof localStorageData === 'string' && this.pendingMountData,
-    )
     if (localStorageData && typeof localStorageData === 'string' && this.pendingMountData) {
       this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
     }
@@ -276,11 +273,8 @@ export class PageBuilderService {
     //
     //
     //
-    console.log('formType:', formType)
-    console.log('pendingMountData:', this.pendingMountData)
     if (config && formType === 'update') {
       if (this.pendingMountData) {
-        console.log('1111:')
         this.#completeBuilderInitialization(this.pendingMountData)
         this.pendingMountData = null
         return
@@ -288,7 +282,6 @@ export class PageBuilderService {
 
       // Pending data for mount is null at this stage
       if (typeof localStorageData === 'string') {
-        console.log('2222:')
         await this.#updateComponentsFromString(localStorageData)
         this.#completeBuilderInitialization()
       }
@@ -356,8 +349,8 @@ export class PageBuilderService {
   }
 
   async #completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
-    console.log('completing builder initialization.. & render html:', passedComponentsArray)
-    console.log('& getComponents:', this.getComponents.value)
+    const localStorageData = this.loadStoredComponentsFromStorage()
+    console.log('completing builder initialization..')
 
     await this.delay(300)
 
@@ -365,7 +358,13 @@ export class PageBuilderService {
     await this.clearHtmlSelection()
 
     if (passedComponentsArray) {
-      await this.#mountPassedComponentsToDOM(passedComponentsArray)
+      // Prefer components from local storage if available for this resource
+      if (localStorageData && typeof localStorageData === 'string') {
+        await this.#updateComponentsFromString(localStorageData)
+      } else {
+        // If no local storage is found, use the components array provided by the user
+        await this.#mountPassedComponentsToDOM(passedComponentsArray)
+      }
     }
     //
     //
@@ -1525,15 +1524,14 @@ export class PageBuilderService {
   }
 
   async restoreOriginalContent() {
-    if (
-      this.pageBuilderStateStore.getPageBuilderConfig &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
-    ) {
+    const config = this.pageBuilderStateStore.getPageBuilderConfig
+    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
+
+    if (formType === 'update') {
       this.pageBuilderStateStore.setIsRestoring(true)
       await this.delay(300)
 
+      console.log('oriiiiiii:', this.originalComponents)
       // Restore the original content if available
       if (this.originalComponents) {
         await this.#updateComponentsFromString(this.originalComponents)

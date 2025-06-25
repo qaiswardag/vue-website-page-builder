@@ -237,12 +237,12 @@ const handleRestoreOriginalContent = async function () {
   typeModalRestore.value = 'success'
   showModalRestore.value = true
 
-  titleModalRestore.value = 'Do you want to restore the original content from the database?'
+  titleModalRestore.value = 'Do you want to reset this page?'
   descriptionModalRestore.value =
-    'Are you sure you want to restore the original content from the database? This will overwrite your current page layout.'
+    'Are you sure you want to reset this page? This will overwrite your current page work.'
   firstButtonRestore.value = 'Close'
   secondButtonRestore.value = null
-  thirdButtonRestore.value = 'Restore original Content'
+  thirdButtonRestore.value = 'Reset changes'
 
   firstModalButtonRestoreFunction.value = function () {
     showModalRestore.value = false
@@ -498,7 +498,7 @@ onMounted(async () => {
                     </span>
                   </div>
                   <div>
-                    <span class="lg:pbx-block pbx-hidden"> Restore </span>
+                    <span class="lg:pbx-block pbx-hidden"> Reset Page </span>
                   </div>
                 </button>
               </template>
