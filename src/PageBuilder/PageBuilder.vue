@@ -201,12 +201,16 @@ const handlerRumeEditingForUpdate = async function () {
   thirdButtonResumeEditing.value = 'Continue Where I Left Off'
 
   firstModalButtonResumeEditingFunction.value = function () {
+    pageBuilderStateStore.setHasLocalDraftForUpdate(false)
+
     showModalResumeEditing.value = false
   }
 
   secondModalButtonResumeEditingFunction.value = function () {}
 
   thirdModalButtonResumeEditingFunction.value = async function () {
+    pageBuilderStateStore.setHasLocalDraftForUpdate(false)
+
     await pageBuilderService.resumeEditingForUpdate()
 
     showModalResumeEditing.value = false

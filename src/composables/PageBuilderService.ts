@@ -256,18 +256,43 @@ export class PageBuilderService {
       dataToPass = ''
     }
 
-    await this.#setComponentsFromData(dataToPass)
+    await this.#updateComponentsFromString(dataToPass)
   }
 
   async tryMountPendingComponents() {
-    if (this.pendingMountData) {
-      console.log('111:')
-      this.#completeBuilderInitialization(this.pendingMountData)
-      this.pendingMountData = null
-      return
+    const config = this.pageBuilderStateStore.getPageBuilderConfig
+    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
+    const localStorageData = this.loadStoredComponentsFromStorage()
+    //
+    //
+    console.log(
+      'BLIVER DEN SAND....:',
+      localStorageData && typeof localStorageData === 'string' && this.pendingMountData,
+    )
+    if (localStorageData && typeof localStorageData === 'string' && this.pendingMountData) {
+      this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
     }
-    console.log('222:')
-    this.#completeBuilderInitialization()
+    //
+    //
+    //
+    //
+    console.log('formType:', formType)
+    console.log('pendingMountData:', this.pendingMountData)
+    if (config && formType === 'update') {
+      if (this.pendingMountData) {
+        console.log('1111:')
+        this.#completeBuilderInitialization(this.pendingMountData)
+        this.pendingMountData = null
+        return
+      }
+
+      // Pending data for mount is null at this stage
+      if (typeof localStorageData === 'string') {
+        console.log('2222:')
+        await this.#updateComponentsFromString(localStorageData)
+        this.#completeBuilderInitialization()
+      }
+    }
   }
   /**
    * - Entry point for initializing the Page Builder.
@@ -284,6 +309,7 @@ export class PageBuilderService {
     passedComponentsArray?: BuilderResourceData,
   ): Promise<StartBuilderResult> {
     console.log('start builder ran..')
+
     // Reactive flag signals to the UI that the builder has been successfully initialized
     // Prevents builder actions to prevent errors caused by missing DOM .
     this.pageBuilderStateStore.setBuilderStarted(true)
@@ -330,22 +356,20 @@ export class PageBuilderService {
   }
 
   async #completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
-    console.log('completing builder initialization..')
+    console.log('completing builder initialization.. & render html:', passedComponentsArray)
+    console.log('& getComponents:', this.getComponents.value)
 
     await this.delay(300)
 
     // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
 
-    console.log('er altså:', passedComponentsArray)
-    await this.#mountPassedComponentsToDOM(passedComponentsArray)
-    //
-    //
-    //
-
-    if (await this.hasLocalDraftForUpdate()) {
-      this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+    if (passedComponentsArray) {
+      await this.#mountPassedComponentsToDOM(passedComponentsArray)
     }
+    //
+    //
+    //
     //
     //
     //
@@ -1472,33 +1496,6 @@ export class PageBuilderService {
     }
   }
 
-  async hasLocalDraftForUpdate(): Promise<boolean> {
-    if (this.hasStartedEditing) return false
-
-    if (
-      this.pageBuilderStateStore.getPageBuilderConfig &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
-      typeof this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'string' &&
-      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType === 'update'
-    ) {
-      const key = this.getLocalStorageItemName.value
-      if (typeof key === 'string') {
-        const draft = localStorage.getItem(key)
-        if (draft) {
-          try {
-            await this.delay(300)
-            this.pageBuilderStateStore.setHasLocalDraftForUpdate(false)
-            return true
-          } catch (err) {
-            console.error('Unable to mount components to DOM.', err)
-            return false
-          }
-        }
-      }
-    }
-    return false
-  }
-
   // Call this when the user starts editing (e.g., on first change or when resuming a draft)
   startEditing() {
     this.hasStartedEditing = true
@@ -1520,7 +1517,7 @@ export class PageBuilderService {
         if (typeof updateDraftFromLocalStorage === 'string') {
           this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
           await delay(300)
-          await this.#setComponentsFromData(updateDraftFromLocalStorage)
+          await this.#updateComponentsFromString(updateDraftFromLocalStorage)
           this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
         }
       }
@@ -1539,7 +1536,7 @@ export class PageBuilderService {
 
       // Restore the original content if available
       if (this.originalComponents) {
-        await this.#setComponentsFromData(this.originalComponents)
+        await this.#updateComponentsFromString(this.originalComponents)
       }
 
       // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
@@ -1850,7 +1847,7 @@ export class PageBuilderService {
    * @param data - JSON string (e.g., '[{"html_code":"...","id":"123","title":"..."}]')
    *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
    */
-  async #setComponentsFromData(htmlString: string): Promise<void> {
+  async #updateComponentsFromString(htmlString: string): Promise<void> {
     // Auto-detect if input is JSON or HTML
     const trimmedData = htmlString.trim()
 
