@@ -181,26 +181,29 @@ export class PageBuilderService {
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType
 
-    const currentConfig = this.pageBuilderStateStore.getPageBuilderConfig
+    if (Array.isArray(components) && components.length === 0) {
+      return { error: false as const, message: 'No components provided (empty array).' }
+    }
 
+    if (
+      Array.isArray(components) &&
+      components.length >= 1 &&
+      formType === 'create' &&
+      components
+    ) {
+      return {
+        error: true as const,
+        warning:
+          'You cannot set formType to create in your configuration while also passing a components data array to the Page Builder. Please set formType to update.',
+        status: 'validation_failed',
+      }
+    }
     if (formType === 'create' && components) {
-      if (currentConfig) {
-        const updatedConfig = {
-          ...currentConfig,
-          updateOrCreate: {
-            ...currentConfig.updateOrCreate,
-            formType: 'update',
-          },
-        } as const
-
-        this.pageBuilderStateStore.setPageBuilderConfig(updatedConfig)
-
-        return {
-          error: false as const,
-          warning:
-            'You cannot set formType to create in your configuration while also passing a components data array to the Page Builder. Please set formType to update.',
-          status: 'validation_failed',
-        }
+      return {
+        error: true as const,
+        warning:
+          'You cannot set formType to create in your configuration while also passing a components data array to the Page Builder. Please set formType to update.',
+        status: 'validation_failed',
       }
     }
 
@@ -210,13 +213,6 @@ export class PageBuilderService {
         error: true as const,
         reason: 'Components data must be an array.',
       }
-    }
-
-    console.error('No components provided (empty array).')
-
-    // If empty array, that's acceptable
-    if (components.length === 0) {
-      return { error: false as const, message: 'No components provided (empty array).' }
     }
 
     // Check that the first item looks like a component
@@ -303,7 +299,13 @@ export class PageBuilderService {
     //
     if (!config) return
     //
-    if (localStorageData && typeof localStorageData === 'string' && this.pendingMountData) {
+    if (
+      config &&
+      formType === 'update' &&
+      localStorageData &&
+      typeof localStorageData === 'string' &&
+      this.pendingMountData
+    ) {
       this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
     }
     //
@@ -312,14 +314,33 @@ export class PageBuilderService {
     //
     if (config && formType === 'update') {
       if (this.pendingMountData) {
-        console.log('1111111:')
         this.#completeBuilderInitialization(this.pendingMountData)
         return
       }
 
       // Pending data for mount is null at this stage
       if (typeof localStorageData === 'string') {
-        console.log('22222222:')
+        await this.#updateComponentsFromString(localStorageData)
+        this.#completeBuilderInitialization()
+        return
+      }
+
+      //
+      //
+      //
+      //
+      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+      await nextTick()
+      // Attach event listeners to all editable elements in the Builder
+      await this.#addListenersToEditableElements()
+
+      this.pageBuilderStateStore.setIsRestoring(false)
+      this.pageBuilderStateStore.setIsLoadingGlobal(false)
+    }
+
+    if (config && formType === 'create') {
+      // Pending data for mount is null at this stage
+      if (typeof localStorageData === 'string') {
         await this.#updateComponentsFromString(localStorageData)
         this.#completeBuilderInitialization()
         return
@@ -352,8 +373,6 @@ export class PageBuilderService {
     config: PageBuilderConfig,
     passedComponentsArray?: BuilderResourceData,
   ): Promise<StartBuilderResult> {
-    console.log('start builder ran..')
-
     // Reactive flag signals to the UI that the builder has been successfully initialized
     // Prevents builder actions to prevent errors caused by missing DOM .
     this.pageBuilderStateStore.setBuilderStarted(true)
@@ -398,7 +417,6 @@ export class PageBuilderService {
   async #completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     const localStorageData = this.loadStoredComponentsFromStorage()
-    console.log('completing builder initialization..')
 
     await this.delay(300)
 
@@ -408,10 +426,8 @@ export class PageBuilderService {
     if (passedComponentsArray) {
       // Prefer components from local storage if available for this resource
       if (!this.pendingMountData && localStorageData && typeof localStorageData === 'string') {
-        console.log('aaaa')
         await this.#updateComponentsFromString(localStorageData)
       } else {
-        console.log('bbbb')
         // If no local storage is found, use the components array provided by the user
         await this.#mountPassedComponentsToDOM(passedComponentsArray)
         this.pendingMountData = null
@@ -424,10 +440,8 @@ export class PageBuilderService {
     if (!passedComponentsArray) {
       // Prefer components from local storage if available for this resource
       if (localStorageData && typeof localStorageData === 'string') {
-        console.log('1111111:')
         await this.#updateComponentsFromString(localStorageData)
       } else {
-        console.log('eller 2222222:')
         // If no local storage is found, use the components array provided by the user
         await this.#mountPassedComponentsToDOM([])
       }

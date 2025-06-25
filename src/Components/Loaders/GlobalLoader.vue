@@ -1,6 +1,6 @@
 <template>
   <div
-    class="pbx-bg-white pbx-flex pbx-justify-center pbx-items-center pbx-h-screen pbx-w-screen pbx-fixed pbx-inset-0 pbx-z-[10000]"
+    class="pbx-bg-white pbx-flex pbx-justify-center pbx-items-center min-pbx-h-screen pbx-h-screen pbx-w-screen pbx-fixed pbx-inset-0 pbx-z-[10000]"
   >
     <div class="pbx-absolute pbx-top-1/3">
       <div
