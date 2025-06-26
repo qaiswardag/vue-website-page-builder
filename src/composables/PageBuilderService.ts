@@ -1026,6 +1026,9 @@ export class PageBuilderService {
     const element = this.getElement.value
     if (!element) return
 
+    // Remove 'selected' attribute before deletion
+    element.removeAttribute('selected')
+
     if (!element.parentNode) {
       this.pageBuilderStateStore.setComponent(null)
       this.pageBuilderStateStore.setElement(null)
@@ -1039,15 +1042,18 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setNextSibling(element.nextSibling as HTMLElement | null)
       // Remove only the element itself from the DOM
       element.remove()
-    } else {
-      // If the element's parent is a section, remove the whole component (section)
-      await this.deleteComponentFromDOM()
-      // No need to call element.remove() here, as the section is already removed
     }
 
     // Clear selection state
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
+
+    // Deselect any selected or hovered elements in the builder UI
+    await this.clearHtmlSelection()
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
   }
 
   async restoreDeletedElementToDOM() {

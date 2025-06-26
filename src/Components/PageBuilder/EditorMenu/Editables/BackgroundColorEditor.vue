@@ -27,19 +27,22 @@ watch(
 <template>
   <Listbox as="div" v-model="backgroundColor">
     <div class="pbx-relative">
-      <ListboxButton class="pbx-w-max pbx-flex pbx-items-center pbx-myPrimaryTag">
-        <div v-if="getBackgroundColor === 'none'" class="pbx-flex pbx-gap-2 pbx-items-center">
-          <span class="material-symbols-outlined"> colors </span>
-          <span class="pbx-block pbx-truncate pbx-text-[12.5px]">Background color </span>
-        </div>
-        <div v-if="backgroundColor !== 'none'" class="pbx-flex pbx-items-center pbx-gap-2">
-          <div
-            class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border pbx-border-gray-800 pbx-rounded-sm"
-            :class="`pbx-bg-${backgroundColor?.replace('pbx-bg-', '')}`"
-          ></div>
-          <span class="pbx-block pbx-truncate">{{ backgroundColor }}</span>
-        </div>
-      </ListboxButton>
+      <div class="pbx-flex pbx-gap-2 pbx-items-center">
+        <ListboxButton
+          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+        >
+          <div class="pbx-flex pbx-flex-col">
+            <div class="pbx-flex pbx-gap-2 pbx-items-center">
+              <span
+                class="material-symbols-outlined"
+                :class="`pbx-text-${backgroundColor?.replace('pbx-bg-', '')}`"
+              >
+                format_color_fill
+              </span>
+            </div>
+          </div>
+        </ListboxButton>
+      </div>
 
       <transition
         leave-active-class="pbx-transition pbx-ease-in pbx-duration-100"

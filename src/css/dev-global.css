@@ -130,3 +130,29 @@ These styles affect all HTML elements (like input, button, h1, etc.) in the cons
   gap: 6px 0px;
   justify-content: center;
 }
+
+/* Hide the panel by default */
+#settingsPanel {
+  opacity: 0;
+  pointer-events: none;
+  /* matches pbx-translate-y-2 */
+  transform: translateY(1rem);
+  transition: all 0.3s ease-out;
+}
+
+/* Show the panel when the parent with [selected] is hovered */
+[selected]:hover #settingsPanel {
+  opacity: 1;
+  pointer-events: auto;
+  /* visible position */
+  transform: translateY(1);
+}
+
+#contains-pagebuilder {
+  position: relative; /* make this the positioning context for absolute children */
+  overflow-y: auto;
+}
+#settingsPanel {
+  position: absolute;
+  /* top and left will be set dynamically */
+}

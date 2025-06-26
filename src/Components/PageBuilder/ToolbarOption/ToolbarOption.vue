@@ -91,70 +91,70 @@ const openHTMLSettings = function () {
 
 <template>
   <div>
-    <div
-      class="pbx-flex pbx-gap-2 pbx-items-center pbx-myPrimaryParagraph pbx-font-medium pbx-text-xs pbx-py-1 pbx-px-2 pbx-rounded-full lg:pbx-border lg:pbx-border-gray-200 lg:pbx-shadow-sm lg:pbx-mr-10"
-    >
-      <!-- User No image Start-->
-      <div
-        class="pbx-flex pbx-items-center pbx-myPrimaryTag pbx-py-0"
-        v-if="
-          getPageBuilderConfig &&
-          getPageBuilderConfig.userForPageBuilder &&
-          getPageBuilderConfig.userForPageBuilder.name &&
-          (!getPageBuilderConfig.userForPageBuilder.image ||
-            (typeof getPageBuilderConfig.userForPageBuilder.image === 'string' &&
-              getPageBuilderConfig.userForPageBuilder.image?.length < 2))
-        "
-      >
+    <div class="pbx-flex pbx-items-center pbx-justify-center">
+      <div class="pbx-mr-2">
+        <!-- User No image Start-->
         <div
-          class="pbx-text-white pbx-rounded-full pbx-bg-myPrimaryBrandColor pbx-flex pbx-justify-center pbx-items-center pbx-text-xs pbx-h-8 pbx-min-h-8 pbx-max-h-8 pbx-w-8 pbx-min-w-8 pbx-max-w-8 pbx-font-normal"
+          class="pbx-flex pbx-items-center pbx-myPrimaryTag pbx-whitespace-nowrappbx-py-0"
+          v-if="
+            getPageBuilderConfig &&
+            getPageBuilderConfig.userForPageBuilder &&
+            getPageBuilderConfig.userForPageBuilder.name &&
+            (!getPageBuilderConfig.userForPageBuilder.image ||
+              (typeof getPageBuilderConfig.userForPageBuilder.image === 'string' &&
+                getPageBuilderConfig.userForPageBuilder.image?.length < 2))
+          "
         >
-          {{
-            typeof getPageBuilderConfig.userForPageBuilder.name === 'string' &&
-            getPageBuilderConfig.userForPageBuilder.name[0]
-          }}
+          <div
+            class="pbx-text-white pbx-rounded-full pbx-bg-myPrimaryBrandColor pbx-flex pbx-justify-center pbx-items-center pbx-text-xs pbx-h-8 pbx-min-h-8 pbx-max-h-8 pbx-w-8 pbx-min-w-8 pbx-max-w-8 pbx-font-normal"
+          >
+            {{
+              typeof getPageBuilderConfig.userForPageBuilder.name === 'string' &&
+              getPageBuilderConfig.userForPageBuilder.name[0]
+            }}
+          </div>
+          <div class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal">
+            {{ getPageBuilderConfig.userForPageBuilder.name }}
+          </div>
         </div>
-        <div class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal">
-          {{ getPageBuilderConfig.userForPageBuilder.name }}
-        </div>
-      </div>
 
-      <!-- User No image End -->
+        <!-- User No image End -->
 
-      <!-- User With image Start-->
-      <div
-        class="pbx-flex pbx-items-center lg:pbx-myPrimaryTag pbx-py-0 pbx-gap-4 pbx-w-max"
-        v-if="
-          getPageBuilderConfig &&
-          getPageBuilderConfig.userForPageBuilder &&
-          getPageBuilderConfig.userForPageBuilder.name &&
-          getPageBuilderConfig.userForPageBuilder.image &&
-          typeof getPageBuilderConfig.userForPageBuilder.image === 'string' &&
-          getPageBuilderConfig.userForPageBuilder.image.length > 2
-        "
-      >
+        <!-- User With image Start-->
         <div
-          class="pbx-text-white pbx-flex-shrink-0 pbx-h-8 pbx-w-8 pbx-rounded-full pbx-flex pbx-justify-center pbx-items-center pbx-text-xs pbx-rounded-l-full"
+          class="pbx-flex pbx-items-center lg:pbx-myPrimaryTag pbx-whitespace-nowrap pbx-py-0 pbx-gap-4 pbx-w-max"
+          v-if="
+            getPageBuilderConfig &&
+            getPageBuilderConfig.userForPageBuilder &&
+            getPageBuilderConfig.userForPageBuilder.name &&
+            getPageBuilderConfig.userForPageBuilder.image &&
+            typeof getPageBuilderConfig.userForPageBuilder.image === 'string' &&
+            getPageBuilderConfig.userForPageBuilder.image.length > 2
+          "
         >
-          <img
-            alt="avatar"
-            :src="`${getPageBuilderConfig.userForPageBuilder.image}`"
-            class="pbx-block pbx-inset-0 pbx-object-top pbx-h-8 pbx-min-h-8 pbx-max-h-8 pbx-w-8 pbx-min-w-8 pbx-max-w-8 pbx-object-cover pbx-rounded-full"
-          />
-        </div>
-        <div class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal">
-          {{ getPageBuilderConfig.userForPageBuilder.name }}
+          <div
+            class="pbx-text-white pbx-flex-shrink-0 pbx-h-8 pbx-w-8 pbx-rounded-full pbx-flex pbx-justify-center pbx-items-center pbx-text-xs pbx-rounded-l-full"
+          >
+            <img
+              alt="avatar"
+              :src="`${getPageBuilderConfig.userForPageBuilder.image}`"
+              class="pbx-block pbx-inset-0 pbx-object-top pbx-h-8 pbx-min-h-8 pbx-max-h-8 pbx-w-8 pbx-min-w-8 pbx-max-w-8 pbx-object-cover pbx-rounded-full"
+            />
+          </div>
+          <div class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal">
+            {{ getPageBuilderConfig.userForPageBuilder.name }}
+          </div>
         </div>
       </div>
 
       <!-- User With image End -->
 
-      <div>
+      <div class="pbx-hidden lg:pbx-block">
         <!-- Component Start -->
         <div class="pbx-relative pbx-group">
           <button
             type="button"
-            class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-font-normal pbx-w-max pbx-text-xs"
+            class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-whitespace-nowrap pbx-font-normal pbx-w-max pbx-text-xs"
           >
             <span> Options </span>
           </button>
@@ -169,7 +169,7 @@ const openHTMLSettings = function () {
                   openMainSettings()
                 }
               "
-              class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-font-normal pbx-w-max pbx-border-none pbx-m-0"
+              class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-whitespace-nowrappbx-font-normal pbx-w-max pbx-border-none pbx-m-0"
               type="button"
             >
               Config Overview
@@ -179,7 +179,7 @@ const openHTMLSettings = function () {
             <!-- HTML Settings Start -->
             <button
               @click="openHTMLSettings"
-              class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-font-normal pbx-w-max pbx-border-none pbx-m-0"
+              class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-whitespace-nowrap pbx-font-normal pbx-w-max pbx-border-none pbx-m-0"
               type="button"
             >
               HTML Overview
@@ -189,7 +189,7 @@ const openHTMLSettings = function () {
             <!-- Delete Layout Start -->
             <button
               @click="deleteAllComponentsFromDOM"
-              class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-font-normal pbx-w-max pbx-border-none pbx-m-0 pbx-bg-myPrimaryErrorColor pbx-text-white"
+              class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-whitespace-nowrap pbx-font-normal pbx-w-max pbx-border-none pbx-m-0 pbx-bg-myPrimaryErrorColor pbx-text-white"
               type="button"
             >
               Delete Layout

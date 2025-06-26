@@ -464,6 +464,36 @@ console.info('You may inspect this result for message, status, or error:', resul
 </template>
 ```
 
+## Embedding Page Builder in a Modal or Dialog
+
+You can easily use the Page Builder inside a modal or dialog.  
+To allow users to close the modal from inside the builder, use the `showCloseButton` prop and listen for the `@handleClosePageBuilder` event:
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { PageBuilder } from '@myissue/vue-website-page-builder'
+
+const showModal = ref(true)
+function closePageBuilder() {
+  showModal.value = false
+}
+</script>
+
+<template>
+  <Modal v-if="showModal" @close="showModal = false">
+    <PageBuilder :showCloseButton="true" @handleClosePageBuilder="closePageBuilder" />
+  </Modal>
+</template>
+```
+
+- `:showCloseButton="true"` — shows a close button in the Page Builder toolbar.
+- `@handleClosePageBuilder="closePageBuilder"` — emits when the close button is clicked, so you can close your modal.
+
+> **Tip:**  
+> You can name your handler function anything you like.  
+> This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
+
 ### Custom Media Library Component or Custom Layout Builder Component
 
 You may extend the Page Builder by adding your own media library or custom layout builder Component.  

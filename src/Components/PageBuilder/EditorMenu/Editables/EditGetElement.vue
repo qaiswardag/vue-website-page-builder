@@ -17,6 +17,11 @@ const getElement = computed(() => {
   return pageBuilderStateStore.getElement
 })
 
+// Get tagName of element
+const elementTag = computed(() => {
+  return getElement.value?.tagName
+})
+
 const getShowModalTipTap = computed(() => {
   const result = pageBuilderStateStore.getShowModalTipTap
 
@@ -185,13 +190,11 @@ const handleModalIframeSrc = function () {
   }
 }
 
-// const pagebuilder = ref(null)
-// const videoElement = ref(null)
-
-// videoElement.value = pagebuilder.value.querySelector('#youtube-video')
-// pagebuilder.value = document.querySelector('#pagebuilder')
+const getRestoredElement = computed(() => {
+  return pageBuilderStateStore.getRestoredElement
+})
 </script>
-<template>
+<template v-if="getElement">
   <div>
     <DynamicModalBuilder
       :showDynamicModalBuilder="showModalIframeSrc"
@@ -260,67 +263,87 @@ const handleModalIframeSrc = function () {
     >
     </MediaLibraryModal>
 
-    <div
-      class="pbx-z-20 pbx-px-2 pbx-py-1 pbx-h-24 pbx-flex pbx-items-center pbx-justify-center pbx-mt-2 pbx-mx-2 pbx-border-b pbx-border-myPrimaryLightGrayColor"
-    >
-      <div
-        class="pbx-flex pbx-items-center pbx-justify-center"
-        :class="{ 'pbx-rounded-full pbx-border pbx-border-gray-200 pbx-shadow-sm': getElement }"
+    <p v-if="false" class="pbx-font-medium pbx-text-[10px] pbx-w-max lg:pbx-block pbx-hidden">
+      Editing
+      <span class="pbx-lowercase">&lt;{{ elementTag }}&gt;</span>
+    </p>
+    <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2" :class="{ '': getElement }">
+      <template v-if="pageBuilderService.ElOrFirstChildIsIframe()">
+        <div class="pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
+          <button
+            @click="handleModalIframeSrc"
+            type="button"
+            class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+          >
+            <span class="material-symbols-outlined"> play_circle </span>
+          </button>
+        </div>
+      </template>
+
+      <template
+        v-if="
+          pageBuilderService.isSelectedElementValidText() &&
+          !pageBuilderService.ElOrFirstChildIsIframe()
+        "
       >
-        <template v-if="pageBuilderService.ElOrFirstChildIsIframe()">
-          <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
-            <button @click="handleModalIframeSrc" type="button" class="pbx-myPrimaryTag">
-              <span class="material-symbols-outlined"> play_circle </span>
-              <span>Add YouTube</span>
-            </button>
-          </div>
-        </template>
+        <div class="pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
+          <button
+            @click="handleModalPreviewTiptap"
+            type="button"
+            class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+          >
+            <span class="material-symbols-outlined"> edit </span>
+          </button>
+        </div>
+        <TextColorEditor></TextColorEditor>
+      </template>
 
-        <template
-          v-if="
-            pageBuilderService.isSelectedElementValidText() &&
-            !pageBuilderService.ElOrFirstChildIsIframe()
-          "
-        >
-          <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
-            <button @click="handleModalPreviewTiptap" type="button" class="pbx-myPrimaryTag">
-              <span class="material-symbols-outlined"> edit </span>
-              <span>Edit text and links</span>
-            </button>
-          </div>
-          <div class="pbx-px-2">
-            <TextColorEditor></TextColorEditor>
-          </div>
-        </template>
+      <template
+        v-if="
+          getElement &&
+          getComponent &&
+          getBasePrimaryImage !== null &&
+          !pageBuilderService.ElOrFirstChildIsIframe()
+        "
+      >
+        <div class="pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
+          <button
+            @click="handleAddImage"
+            type="button"
+            class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+          >
+            <span class="material-symbols-outlined"> add_photo_alternate </span>
+          </button>
+        </div>
+      </template>
 
-        <template
-          v-if="
-            getElement &&
-            getComponent &&
-            getBasePrimaryImage !== null &&
-            !pageBuilderService.ElOrFirstChildIsIframe()
-          "
-        >
-          <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
-            <button @click="handleAddImage" type="button" class="pbx-myPrimaryTag">
-              <span class="material-symbols-outlined"> add_photo_alternate </span>
-              <span>Update image</span>
-            </button>
-          </div>
-        </template>
+      <template
+        v-if="
+          getElement &&
+          getElement.nodeType === 1 &&
+          !getBasePrimaryImage &&
+          !pageBuilderService.ElOrFirstChildIsIframe()
+        "
+      >
+        <BackgroundColorEditor></BackgroundColorEditor>
+      </template>
 
-        <template
-          v-if="
-            getElement &&
-            getElement.nodeType === 1 &&
-            !getBasePrimaryImage &&
-            !pageBuilderService.ElOrFirstChildIsIframe()
-          "
+      <template v-if="getElement">
+        <button
+          @click="pageBuilderService.deleteElementFromDOM"
+          type="button"
+          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
         >
-          <div class="pbx-px-2">
-            <BackgroundColorEditor></BackgroundColorEditor>
-          </div>
-        </template>
+          <span class="material-symbols-outlined"> delete </span>
+        </button>
+      </template>
+
+      <div
+        v-if="getElement && getComponent"
+        class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+        @click="pageBuilderService.clearHtmlSelection()"
+      >
+        <span class="material-symbols-outlined"> close </span>
       </div>
     </div>
   </div>
