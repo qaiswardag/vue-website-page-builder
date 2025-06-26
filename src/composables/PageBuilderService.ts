@@ -181,24 +181,12 @@ export class PageBuilderService {
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType
 
-    if (Array.isArray(components) && components.length === 0) {
-      return { error: false as const, message: 'No components provided (empty array).' }
-    }
-
     if (
       Array.isArray(components) &&
       components.length >= 1 &&
       formType === 'create' &&
       components
     ) {
-      return {
-        error: true as const,
-        warning:
-          'You cannot set formType to create in your configuration while also passing a components data array to the Page Builder. Please set formType to update.',
-        status: 'validation_failed',
-      }
-    }
-    if (formType === 'create' && components) {
       return {
         error: true as const,
         warning:
@@ -218,20 +206,7 @@ export class PageBuilderService {
     // Check that the first item looks like a component
     const first = components[0]
 
-    // Check that the first item is not an empty object
-    if (isEmptyObject(first)) {
-      console.error(
-        'The first object in the array is empty. Each component must be a non-empty object and include an html_code key.',
-      )
-      return {
-        error: true as const,
-        reason:
-          "The first object in the array is empty. Each component must be a non-empty object and include an 'html_code' key.",
-      }
-    }
-
     if (first && 'html_code' in first && typeof first.html_code !== 'string') {
-      console.error("The 'html_code' property in the first object must be a string.")
       return {
         error: true as const,
         reason: "The 'html_code' property in the first object must be a string.",
@@ -239,16 +214,17 @@ export class PageBuilderService {
     }
 
     // Check that the first item has an 'html_code' key
-    if (!first || !('html_code' in first)) {
-      console.error("The first object in the array must include an 'html_code' key.")
-      return {
-        error: true as const,
-        reason: "The first object in the array must include an 'html_code' key.",
+    if (Array.isArray(components) && components.length >= 1) {
+      if (!first || !('html_code' in first)) {
+        return {
+          error: true as const,
+          reason: "The first object in the array must include an 'html_code' key.",
+        }
       }
     }
 
     // No errors found
-    return { error: false as const }
+    return
   }
 
   #validateConfig(config: PageBuilderConfig): void {
@@ -404,11 +380,24 @@ export class PageBuilderService {
         this.#completeBuilderInitialization(passedComponentsArray)
       }
 
-      // Return both the success message and validation info if present
-      return {
+      // result to end user
+
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const result: any = {
         message: 'Page builder started successfully.',
-        ...(validation || {}),
       }
+
+      if (validation) {
+        result.validation = validation
+      }
+
+      // passedComponentsArray
+      if (Array.isArray(passedComponentsArray) && passedComponentsArray.length >= 0) {
+        result.passedComponentsArray = passedComponentsArray
+      }
+
+      // Return messages, validation info if present etc.
+      return result
     } catch (err) {
       console.error('Not able to start the Page Builder', err)
       this.pageBuilderStateStore.setIsLoadingGlobal(false)
@@ -451,18 +440,6 @@ export class PageBuilderService {
         await this.#mountPassedComponentsToDOM([])
       }
     }
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
-    //
     //
 
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
@@ -719,25 +696,20 @@ export class PageBuilderService {
     const pageBuilder = document.querySelector('#contains-pagebuilder')
     //  scoll to top or bottom # end
     if (pageBuilder) {
-      if (
-        this.getComponentArrayAddMethod.value === 'unshift' ||
-        this.getComponentArrayAddMethod.value === 'push'
-      ) {
-        // push to top
-        if (this.getComponentArrayAddMethod.value === 'unshift') {
-          pageBuilder.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          })
-        }
+      // push to top
+      if (this.getComponentArrayAddMethod.value === 'unshift') {
+        pageBuilder.scrollTo({
+          top: 0,
+          behavior: 'smooth',
+        })
+      }
 
-        // push to bottom
-        if (this.getComponentArrayAddMethod.value === 'push') {
-          pageBuilder.scrollTo({
-            top: 0,
-            behavior: 'smooth',
-          })
-        }
+      // push to bottom
+      if (this.getComponentArrayAddMethod.value === 'push') {
+        pageBuilder.scrollTo({
+          top: pageBuilder.scrollHeight + 400,
+          behavior: 'smooth',
+        })
       }
     }
 

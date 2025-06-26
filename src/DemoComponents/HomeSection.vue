@@ -83,7 +83,7 @@ const configPageBuilder = {
 
 onMounted(async () => {
   const result = await pageBuilderService.startBuilder(configPageBuilder, html)
-  //
+  console.log('Page Builder Result:', result)
   //
   //
   //

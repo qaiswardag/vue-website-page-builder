@@ -278,7 +278,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-scroll"
+    class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto"
   >
     <div id="pagebuilder-top-area" class="lg:pbx-px-4 pbx-pt-2 pbx-pb-4 pbx-mx-4 pbx-mb-4 pbx-mt-2">
       <GlobalLoader v-if="getIsLoadingGlobal & !openAppNotStartedModal"></GlobalLoader>
@@ -643,46 +643,11 @@ onMounted(async () => {
                 </div>
               </div>
               <!-- Added Components to DOM # end -->
-
-              <!-- Add Component # start -->
-
-              <div
-                @click="
-                  async () => {
-                    await pageBuilderService.clearHtmlSelection()
-                  }
-                "
-                id="pagebuilder-bottom-components-area"
-                class="pbx-pt-8 pbx-pb-12 pbx-text-center focus:pbx-outline-none focus:pbx-ring-2 focus:pbx-ring-indigo-500 focus:pbx-ring-offset-2 pbx-my-2 pbx-mx-4"
-                :class="{ 'pbx-border-t pbx-border-gray-200': getComponents.length > 0 }"
-              >
-                <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-font-medium">
-                  <span class="lg:pbx-block pbx-hidden">
-                    <div>Add new components to the bottom of the page</div>
-                  </span>
-                </div>
-
-                <div class="pbx-mt-6 pbx-flex pbx-items-center pbx-gap-2 pbx-justify-center">
-                  <button
-                    @click="
-                      () => {
-                        pageBuilderStateStore.setComponentArrayAddMethod('unshift')
-                        handleAddComponent()
-                      }
-                    "
-                    type="button"
-                    class="pbx-myPrimaryButton pbx-flex pbx-items-center pbx-gap-2 pbx-justify-center"
-                  >
-                    <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
-                    <span class="pbx-font-medium"> Add new Components </span>
-                  </button>
-                </div>
-              </div>
-              <!-- Add Component # end -->
             </div>
           </div>
-          <!-- Add Component # end -->
         </main>
+
+        <!-- Add Component # end -->
 
         <aside
           aria-label="Menu"
@@ -696,6 +661,31 @@ onMounted(async () => {
           <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
           </RightSidebarEditor>
         </aside>
+      </div>
+      <div
+        class="pbx-flex pbx-items-center pbx-justify-center pbx-border-t pbx-border-gray-200 pbx-cursor-pointer pbx-py-4"
+      >
+        <div
+          @click="
+            () => {
+              pageBuilderStateStore.setComponentArrayAddMethod('push')
+              handleAddComponent()
+            }
+          "
+          class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2"
+        >
+          <span class="lg:pbx-block pbx-hidden">
+            <div class="pbx-whitespace-nowrap">Add to the bottom</div>
+          </span>
+          <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
+            <button
+              type="button"
+              class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+            >
+              <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   </div>
