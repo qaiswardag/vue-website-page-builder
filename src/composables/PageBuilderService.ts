@@ -703,14 +703,6 @@ export class PageBuilderService {
           behavior: 'smooth',
         })
       }
-
-      // push to bottom
-      if (this.getComponentArrayAddMethod.value === 'push') {
-        pageBuilder.scrollTo({
-          top: pageBuilder.scrollHeight + 400,
-          behavior: 'smooth',
-        })
-      }
     }
 
     // Create a DOMParser instance
@@ -1870,8 +1862,22 @@ export class PageBuilderService {
 
       this.pageBuilderStateStore.setPushComponents({
         component: clonedComponent,
-        componentArrayAddMethod: this.getComponentArrayAddMethod.value || 'push',
+        componentArrayAddMethod: this.getComponentArrayAddMethod.value
+          ? this.getComponentArrayAddMethod.value
+          : 'push',
       })
+
+      const pageBuilder = document.querySelector('#contains-pagebuilder')
+      //  scoll to top or bottom # end
+      if (pageBuilder) {
+        // push to bottom
+        if (this.getComponentArrayAddMethod.value === 'push') {
+          pageBuilder.scrollTo({
+            top: pageBuilder.scrollHeight + 50,
+            behavior: 'smooth',
+          })
+        }
+      }
 
       // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
       await nextTick()
