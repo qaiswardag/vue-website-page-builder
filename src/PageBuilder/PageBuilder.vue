@@ -720,7 +720,7 @@ onMounted(async () => {
 
           <div
             id="contains-pagebuilder"
-            class="pbx-pl-4 pbx-pr-4 pbx-pb-4 pbx-pt-1 pbx-bg-black pbx-flex pbx-flex-col pbx-h-full pbx-overflow-y-auto"
+            class="pbx-pl-4 pbx-pr-4 pbx-pb-4 pbx-pt-1 pbx-h-full pbx-overflow-y-auto"
           >
             <div id="pagebuilder">
               <div ref="draggableZone">
