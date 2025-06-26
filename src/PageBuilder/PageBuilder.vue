@@ -663,7 +663,7 @@ onMounted(async () => {
         </aside>
       </div>
       <div
-        class="pbx-flex pbx-items-center pbx-justify-center pbx-border-t pbx-border-gray-200 pbx-cursor-pointer pbx-py-4"
+        class="pbx-flex pbx-items-center pbx-justify-center pbx-border-t pbx-border-gray-200 pbx-py-4"
       >
         <div
           @click="
@@ -672,7 +672,7 @@ onMounted(async () => {
               handleAddComponent()
             }
           "
-          class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2"
+          class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-cursor-pointer"
         >
           <span class="lg:pbx-block pbx-hidden">
             <div class="pbx-whitespace-nowrap">Add to the bottom</div>
