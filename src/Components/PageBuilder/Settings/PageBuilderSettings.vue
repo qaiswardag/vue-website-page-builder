@@ -594,9 +594,9 @@ const handleDownloadHTML = function () {
       <div class="pbx-flex pbx-items-left pbx-flex-col pbx-gap-1">
         <h3 class="pbx-myQuaternaryHeader">Complete Configuration Overview</h3>
         <p class="pbx-myPrimaryParagraph pbx-text-xs">
-          omplete configuration object currently used by the Page Builder. It includes information
-          about the user, form behavior, branding settings, and other context-specific data needed
-          for rendering and managing the builder environment.
+          Complete configuration object currently used by the Page Builder. Includes user
+          information, branding settings, and other context-specific data needed for rendering and
+          managing the builder environment.
         </p>
       </div>
 
