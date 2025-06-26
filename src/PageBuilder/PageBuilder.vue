@@ -363,7 +363,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto"
+    class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto pbx-h-full"
   >
     <GlobalLoader v-if="getIsLoadingGlobal & !openAppNotStartedModal"></GlobalLoader>
     <ModalBuilder
@@ -691,7 +691,7 @@ onMounted(async () => {
 
         <main
           ref="pbxToolBar"
-          class="pbx-flex pbx-flex-col pbx-h-full pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border pbx-border-gray-200 pbx-items-stretch"
+          class="pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border pbx-border-gray-200 pbx-items-stretch pbx-h-[90vh]"
           :class="{ 'pbx-mr-2': !getMenuRight, '': getMenuRight }"
         >
           <div
@@ -720,7 +720,7 @@ onMounted(async () => {
 
           <div
             id="contains-pagebuilder"
-            class="pbx-pl-4 pbx-pr-4 pbx-pb-4 pbx-overflow-y-auto pbx-pt-1 pbx-h-[39rem]"
+            class="pbx-pl-4 pbx-pr-4 pbx-pb-4 pbx-pt-1 pbx-bg-black pbx-flex pbx-flex-col pbx-h-full pbx-overflow-y-auto"
           >
             <div id="pagebuilder">
               <div ref="draggableZone">
