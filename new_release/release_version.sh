@@ -43,21 +43,21 @@ echo "\n\n## Latest Commits\n" >> "$TEMP_RELEASE_NOTES"
 git log "$LATEST_TAG"..HEAD --pretty=format:"- %s (%h)" >> "$TEMP_RELEASE_NOTES"
 
 # Create a new tag with the desired version number
-git tag "$VERSION"
+git tag "v$VERSION"
 if [ $? -ne 0 ]; then
   echo "Error: Failed to create git tag."
   exit 1
 fi
 
 # Push the tag to GitHub
-git push origin "$VERSION"
+git push origin "v$VERSION"
 if [ $? -ne 0 ]; then
   echo "Error: Failed to push git tag to GitHub."
   exit 1
 fi
 
 # Create a GitHub release with release notes
-gh release create "$VERSION" --title "$VERSION" --notes-file "$TEMP_RELEASE_NOTES"
+gh release create "v$VERSION" --title "v$VERSION" --notes-file "$TEMP_RELEASE_NOTES"
 if [ $? -eq 0 ]; then
   echo "Release version $VERSION created successfully."
 else

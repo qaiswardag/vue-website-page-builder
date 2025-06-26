@@ -1,0 +1,5 @@
+new_release/
+.DS_Store
+LOCAL_DEVELOPMENT.md
+.env
+node_modules
