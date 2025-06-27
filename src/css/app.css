@@ -366,13 +366,6 @@ a {
   @apply pbx-text-myPrimaryLinkColor;
 }
 
-h2 {
-  @apply pbx-text-3xl pbx-mt-4 pbx-mb-3 pbx-font-medium;
-}
-h3 {
-  @apply pbx-text-2xl pbx-mt-4 pbx-mb-3 pbx-font-medium;
-}
-
 /* CSS for content inside page builder # start */
 #page-builder-editor .tiptap {
   outline: none !important;

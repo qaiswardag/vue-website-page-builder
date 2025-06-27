@@ -103,33 +103,35 @@ watch(
     <template #content>
       <!-- FONT SIZES -->
       <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Font Appearance</p>
+      <template v-if="false">
+        <div class="pbx-my-2 pbx-py-2">
+          <label class="pbx-myPrimaryInputLabel"> Font Size </label>
+          <select
+            v-model="fontBase"
+            class="pbx-myPrimarySelect"
+            @change="pageBuilderService.handleFontSizeBase(fontBase)"
+          >
+            <option disabled value="">Select</option>
+            <option v-for="fontSize in tailwindFontSizes.fontBase" :key="fontSize">
+              {{ fontSize }}
+            </option>
+          </select>
+        </div>
+      </template>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Font Size </label>
+        <label class="pbx-myPrimaryInputLabel"> Font size </label>
         <select
-          v-model="fontBase"
+          v-model="fontDesktop"
           class="pbx-myPrimarySelect"
-          @change="pageBuilderService.handleFontSizeBase(fontBase)"
+          @change="pageBuilderService.handleFontSizeDesktop(fontDesktop)"
         >
           <option disabled value="">Select</option>
-          <option v-for="fontSize in tailwindFontSizes.fontBase" :key="fontSize">
+          <option v-for="fontSize in tailwindFontSizes.fontDesktop" :key="fontSize">
             {{ fontSize }}
           </option>
         </select>
       </div>
       <template v-if="false">
-        <div class="pbx-my-2 pbx-py-2">
-          <label class="pbx-myPrimaryInputLabel"> Font desktop size </label>
-          <select
-            v-model="fontDesktop"
-            class="pbx-myPrimarySelect"
-            @change="pageBuilderService.handleFontSizeDesktop(fontDesktop)"
-          >
-            <option disabled value="">Select</option>
-            <option v-for="fontSize in tailwindFontSizes.fontDesktop" :key="fontSize">
-              {{ fontSize }}
-            </option>
-          </select>
-        </div>
         <div class="pbx-my-2 pbx-py-2">
           <label class="pbx-myPrimaryInputLabel"> Font tablet size </label>
           <select
@@ -158,6 +160,22 @@ watch(
         </div>
       </template>
       <hr />
+
+      <div class="pbx-my-2 pbx-py-2">
+        <label class="pbx-myPrimaryInputLabel"> Font weight </label>
+        <select
+          v-model="fontWeight"
+          class="pbx-myPrimarySelect"
+          @change="pageBuilderService.handleFontWeight(fontWeight)"
+        >
+          <option disabled value="">Select</option>
+          <option v-for="fontWeight in tailwindFontStyles.fontWeight" :key="fontWeight">
+            {{ fontWeight }}
+          </option>
+        </select>
+      </div>
+      <hr />
+
       <!-- FONT FAMILY -->
       <div class="pbx-my-2 pbx-py-2">
         <label class="pbx-myPrimaryInputLabel"> Font family </label>
@@ -174,20 +192,6 @@ watch(
       </div>
       <hr />
 
-      <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Font weight </label>
-        <select
-          v-model="fontWeight"
-          class="pbx-myPrimarySelect"
-          @change="pageBuilderService.handleFontWeight(fontWeight)"
-        >
-          <option disabled value="">Select</option>
-          <option v-for="fontWeight in tailwindFontStyles.fontWeight" :key="fontWeight">
-            {{ fontWeight }}
-          </option>
-        </select>
-      </div>
-      <hr />
       <div class="pbx-my-2 pbx-py-2">
         <label class="pbx-myPrimaryInputLabel"> Font Style </label>
         <select

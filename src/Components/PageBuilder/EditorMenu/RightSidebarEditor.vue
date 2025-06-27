@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref, watch, nextTick } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import ClassEditor from './Editables/ClassEditor.vue'
 import ImageEditor from './Editables/ImageEditor.vue'
@@ -38,6 +38,30 @@ const isHeadingElement = computed(() => {
     getElement.value instanceof HTMLImageElement
   )
 })
+
+const scrollContainer = ref(null)
+let lastScrollTop = 0
+
+// Watch for changes that cause re-render (e.g. dropdown value in store)
+watch(
+  // or the specific value that triggers re-render
+  () => pageBuilderStateStore.getElement,
+  () => {
+    // Restore scroll after DOM updates
+    nextTick(() => {
+      if (scrollContainer.value) {
+        scrollContainer.value.scrollTop = lastScrollTop
+      }
+    })
+  },
+)
+
+// Save scroll position before update
+function onScroll() {
+  if (scrollContainer.value) {
+    lastScrollTop = scrollContainer.value.scrollTop
+  }
+}
 </script>
 
 <template>
@@ -58,7 +82,12 @@ const isHeadingElement = computed(() => {
       </p>
     </div>
 
-    <div class="pbx-pl-3 pbx-pr-3 pbx-mb-4 pbx-overflow-y-scroll">
+    <div
+      v
+      ref="scrollContainer"
+      @scroll="onScroll"
+      class="pbx-pl-3 pbx-pr-3 pbx-mb-4 pbx-overflow-y-scroll"
+    >
       <div v-show="getElement && pageBuilderService.isEditableElement(getElement)">
         <article class="pbx-mb-1">
           <ImageEditor> </ImageEditor>

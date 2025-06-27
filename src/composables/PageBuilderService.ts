@@ -24,6 +24,9 @@ import { isEmptyObject } from '../helpers/isEmptyObject'
 
 export class PageBuilderService {
   // Class properties with types
+  private fontSizeRegex =
+    /^(sm:|md:|lg:|xl:|2xl:)?pbx-text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)$/
+
   private pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>
   private getLocalStorageItemName: ComputedRef<string | null>
   private getApplyImageToSelection: ComputedRef<ImageObject>
@@ -289,10 +292,7 @@ export class PageBuilderService {
     ) {
       this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
     }
-    //
-    //
-    //
-    //
+
     if (config && formType === 'update') {
       if (this.pendingMountData) {
         this.#completeBuilderInitialization(this.pendingMountData)
@@ -306,10 +306,6 @@ export class PageBuilderService {
         return
       }
 
-      //
-      //
-      //
-      //
       // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
       await nextTick()
       // Attach event listeners to all editable elements in the Builder
@@ -327,10 +323,6 @@ export class PageBuilderService {
         return
       }
 
-      //
-      //
-      //
-      //
       // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
       await nextTick()
       // Attach event listeners to all editable elements in the Builder
@@ -454,11 +446,12 @@ export class PageBuilderService {
   }
 
   #applyElementClassChanges(
-    selectedCSS: string | undefined,
+    cssUserSelection: string | undefined,
     CSSArray: string[],
     mutationName: string,
   ): string | undefined {
     const currentHTMLElement = this.getElement.value
+
     if (!currentHTMLElement) return
 
     const currentCSS = CSSArray.find((CSS) => {
@@ -468,31 +461,104 @@ export class PageBuilderService {
     // set to 'none' if undefined
     let elementClass = currentCSS || 'none'
 
-    // If selectedCSS is undefined, just set the current state and return
-    if (selectedCSS === undefined) {
+    // If cssUserSelection is undefined, just set the current state and return
+    if (cssUserSelection === undefined) {
       if (typeof mutationName === 'string' && mutationName.length > 2) {
         ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
       }
       return currentCSS
     }
 
-    // selectedCSS examples: bg-zinc-200, px-10, rounded-full etc.
-    if (typeof selectedCSS === 'string' && selectedCSS !== 'none') {
+    // cssUserSelection examples: bg-zinc-200, px-10, rounded-full etc.
+    if (typeof cssUserSelection === 'string' && cssUserSelection !== 'none') {
       if (elementClass && currentHTMLElement.classList.contains(elementClass)) {
         currentHTMLElement.classList.remove(elementClass)
       }
 
-      currentHTMLElement.classList.add(selectedCSS)
-      elementClass = selectedCSS
-    } else if (typeof selectedCSS === 'string' && selectedCSS === 'none' && elementClass) {
+      currentHTMLElement.classList.add(cssUserSelection)
+      elementClass = cssUserSelection
+    } else if (
+      typeof cssUserSelection === 'string' &&
+      cssUserSelection === 'none' &&
+      elementClass
+    ) {
       currentHTMLElement.classList.remove(elementClass)
-      elementClass = selectedCSS
+      elementClass = cssUserSelection
     }
 
     // Only call store mutations after all DOM manipulation is complete
     if (typeof mutationName === 'string' && mutationName.length > 2) {
       ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
       this.pageBuilderStateStore.setElement(currentHTMLElement)
+    }
+
+    return currentCSS
+  }
+
+  handleFontWeight(userSelectedFontWeight?: string): void {
+    this.#applyElementClassChanges(
+      userSelectedFontWeight,
+      tailwindFontStyles.fontWeight,
+      'setFontWeight',
+    )
+  }
+
+  handleFontSizeBase(userSelectedFontSize?: string): void {
+    this.#applyElementClassChanges(userSelectedFontSize, tailwindFontSizes.fontBase, 'setFontBase')
+  }
+
+  handleFontSizeDesktop(userSelectedFontSize?: string): void {
+    const currentHTMLElement = this.getElement.value
+    if (!currentHTMLElement) return
+
+    // Hardcoded mapping: selected => base
+    const fontSizeBaseMap: Record<string, string> = {
+      'pbx-text-9xl': 'pbx-text-6xl',
+      'pbx-text-8xl': 'pbx-text-6xl',
+      'pbx-text-7xl': 'pbx-text-5xl',
+      'pbx-text-6xl': 'pbx-text-3xl',
+      'pbx-text-5xl': 'pbx-text-3xl',
+      'pbx-text-4xl': 'pbx-text-2xl',
+      'pbx-text-3xl': 'pbx-text-xl',
+      'pbx-text-2xl': 'pbx-text-lg',
+      'pbx-text-xl': 'pbx-text-base',
+      'pbx-text-lg': 'pbx-text-sm',
+      'pbx-text-base': 'pbx-text-xs',
+      'pbx-text-sm': 'pbx-text-xs',
+      'pbx-text-xs': 'pbx-text-xs',
+    }
+
+    if (userSelectedFontSize) {
+      // Remove all existing font size classes first
+      Array.from(currentHTMLElement.classList).forEach((cls) => {
+        if (this.fontSizeRegex.test(cls)) {
+          currentHTMLElement.classList.remove(cls)
+        }
+      })
+
+      // Extract the font size class (remove 'lg:' if present)
+      const fontSizeClass = userSelectedFontSize.replace(/^lg:/, '')
+
+      const baseClass = fontSizeBaseMap[fontSizeClass] || fontSizeClass
+      const lgClass = `lg:${fontSizeClass}`
+
+      if (baseClass !== fontSizeClass) {
+        currentHTMLElement.classList.add(baseClass, lgClass)
+      } else {
+        currentHTMLElement.classList.add(baseClass)
+      }
+    }
+
+    const currentCSS = tailwindFontSizes.fontDesktop.find((CSS) => {
+      return currentHTMLElement.classList.contains(CSS)
+    })
+
+    if (!userSelectedFontSize) {
+      this.pageBuilderStateStore.setFontDesktop('none')
+    }
+
+    if (currentCSS && !userSelectedFontSize) {
+      this.pageBuilderStateStore.setFontDesktop(currentCSS)
     }
 
     return currentCSS
@@ -505,11 +571,40 @@ export class PageBuilderService {
       element.classList.add('smooth-transition')
     }
 
-    // Add padding to DIV
-    if (element.tagName === 'DIV') {
-      if (element.classList.length === 0) {
-        // element.classList.add("p-2");
+    // If this is a DIV and its only/main child is a heading, apply font size classes to the DIV
+    if (
+      element.tagName === 'DIV' &&
+      element.children.length === 1 &&
+      ['H1', 'H2', 'H3', 'H4', 'H5', 'H6'].includes(element.children[0].tagName)
+    ) {
+      const heading = element.children[0] as HTMLElement
+
+      element.classList.forEach((cls) => {
+        if (this.fontSizeRegex.test(cls)) {
+          element.classList.remove(cls)
+        }
+      })
+
+      // Apply responsive font size classes based on heading type
+      if (heading.tagName === 'H2') {
+        element.classList.add('pbx-text-3xl', 'lg:pbx-text-6xl')
       }
+      if (heading.tagName === 'H3') {
+        element.classList.add('pbx-text-2xl', 'lg:pbx-text-4xl')
+      }
+    }
+  }
+
+  async toggleTipTapModal(status: boolean): Promise<void> {
+    this.pageBuilderStateStore.setShowModalTipTap(status)
+
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
+
+    if (!status) {
+      await this.handleAutoSave()
     }
   }
 
@@ -792,13 +887,6 @@ export class PageBuilderService {
     }
   }
 
-  handleFontWeight(userSelectedFontWeight?: string): void {
-    this.#applyElementClassChanges(
-      userSelectedFontWeight,
-      tailwindFontStyles.fontWeight,
-      'setFontWeight',
-    )
-  }
   handleFontFamily(userSelectedFontFamily?: string): void {
     this.#applyElementClassChanges(
       userSelectedFontFamily,
@@ -915,17 +1003,6 @@ export class PageBuilderService {
   }
   // border radius / end
 
-  handleFontSizeBase(userSelectedFontSize?: string): void {
-    this.#applyElementClassChanges(userSelectedFontSize, tailwindFontSizes.fontBase, 'setFontBase')
-  }
-
-  handleFontSizeDesktop(userSelectedFontSize?: string): void {
-    this.#applyElementClassChanges(
-      userSelectedFontSize,
-      tailwindFontSizes.fontDesktop,
-      'setFontDesktop',
-    )
-  }
   handleFontSizeTablet(userSelectedFontSize?: string): void {
     this.#applyElementClassChanges(
       userSelectedFontSize,
@@ -2060,19 +2137,6 @@ export class PageBuilderService {
     } catch (error) {
       console.error('Error parsing HTML components:', error)
       this.deleteAllComponentsFromDOM()
-    }
-  }
-
-  async toggleTipTapModal(status: boolean): Promise<void> {
-    this.pageBuilderStateStore.setShowModalTipTap(status)
-
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-    await nextTick()
-    // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
-
-    if (!status) {
-      await this.handleAutoSave()
     }
   }
 
