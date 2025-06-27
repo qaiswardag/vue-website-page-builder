@@ -812,24 +812,24 @@ onMounted(async () => {
 </template>
 
 <style>
-#pagebuilder a {
-  cursor: default;
-}
-
 #pagebuilder [element] {
-  outline: rgba(255, 255, 255, 0) dashed 3px !important;
-  outline-offset: -3px !important;
+  outline: rgba(255, 255, 255, 0) dashed 4px !important;
+  outline-offset: -2px !important;
 }
 #pagebuilder [hovered] {
-  outline: rgb(0, 140, 14, 1) dashed 3px !important;
-  outline-offset: -3px !important;
+  outline: rgb(0, 140, 14, 1) dashed 4px !important;
+  outline-offset: -2px !important;
 }
 
 #pagebuilder [selected] {
   position: relative;
 
-  outline: rgb(185, 16, 16) dashed 3px !important;
-  outline-offset: -3px !important;
+  outline: rgb(185, 16, 16) dashed 4px !important;
+  outline-offset: -2px !important;
+}
+
+#pagebuilder a {
+  cursor: default;
 }
 
 /* sortable */
