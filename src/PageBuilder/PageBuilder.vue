@@ -774,7 +774,7 @@ onMounted(async () => {
         </aside>
       </div>
       <div
-        class="pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-t pbx-border-t-gray-200 pbx-border-solid lg:pbx-mx-10"
+        class="pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid lg:pbx-mx-10"
       >
         <div
           @click="
