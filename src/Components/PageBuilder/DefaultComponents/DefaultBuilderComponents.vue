@@ -53,7 +53,7 @@ const getSvgPreview = (title: string) => {
         <div
           v-for="helper in componentHelpers"
           :key="helper.title"
-          class="pbx-border pbx-border-gray-200 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer pbx-p-4"
+          class="pbx-border pbx-border-solid pbx-border-gray-400 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer pbx-p-4"
           @click="handleDropComponent(helper)"
         >
           <div class="pbx-max-h-72 pbx-cursor-pointer pbx-object-contain pbx-bg-white pbx-mx-auto">
@@ -74,11 +74,11 @@ const getSvgPreview = (title: string) => {
         <div
           v-for="comp in components[0].components.data"
           :key="comp.title"
-          class="pbx-border pbx-border-gray-200 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer"
+          class="pbx-border pbx-border-solid pbx-border-gray-400 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer"
           @click="handleDropComponent(convertToComponentObject(comp))"
         >
           <div
-            class="pbx-overflow-hidden pbx-whitespace-pre-line pbx-flex-1 pbx-h-auto pbx-border-b pbx-border-gray-200 lg:pbx-py-10 pbx-py-8 pbx-px-2"
+            class="pbx-overflow-hidden pbx-whitespace-pre-line pbx-flex-1 pbx-h-auto pbx-border-b pbx-border-solid pbx-border-gray-200 lg:pbx-py-10 pbx-py-8 pbx-px-2"
           >
             <!-- Use SVG preview instead of external images -->
             <div
