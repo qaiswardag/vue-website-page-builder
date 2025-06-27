@@ -288,7 +288,6 @@ function updatePanelPosition() {
     const selectedRect = selected.getBoundingClientRect()
     const containerRect = container.getBoundingClientRect()
 
-    // Position editToolbar just above selected element, with a gap
     const left =
       selectedRect.left - containerRect.left + selectedRect.width / 2 - editToolbar.offsetWidth / 2
 
@@ -301,25 +300,17 @@ function updatePanelPosition() {
     editToolbar.style.position = 'absolute'
     editToolbar.style.left = `${left}px`
     editToolbar.style.top = `${top}px`
-    editToolbar.style.opacity = '1'
-    editToolbar.style.pointerEvents = 'auto'
-    editToolbar.style.transform = 'translateY(0)'
+    editToolbar.classList.add('is-visible')
 
-    // Store last position
     lastToolbarLeft = left
     lastToolbarTop = top
   } else if (restored && lastToolbarLeft !== null && lastToolbarTop !== null) {
-    // Use last position for restore icon
     editToolbar.style.position = 'absolute'
     editToolbar.style.left = `${lastToolbarLeft}px`
     editToolbar.style.top = `${lastToolbarTop}px`
-    editToolbar.style.opacity = '1'
-    editToolbar.style.pointerEvents = 'auto'
-    editToolbar.style.transform = 'translateY(0)'
+    editToolbar.classList.add('is-visible')
   } else {
-    editToolbar.style.opacity = '0'
-    editToolbar.style.pointerEvents = 'none'
-    editToolbar.style.transform = 'translateY(0.5rem)'
+    editToolbar.classList.remove('is-visible')
   }
 }
 
@@ -691,16 +682,16 @@ onMounted(async () => {
 
         <main
           ref="pbxToolBar"
-          class="pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-h-[90vh]"
+          class="pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-h-[100vh]"
           :class="{ 'pbx-mr-2': !getMenuRight, '': getMenuRight }"
         >
           <div
             id="editToolbar"
             class="pbx-z-30 lg:pbx-mx-20 pbx-flex pbx-gap-2 pbx-justify-center pbx-min-w-48 pbx-items-center pbx-rounded-full pbx-px-4"
             style="
-              outline: 10px solid oklch(86.9% 0.005 56.366);
-              outline-offset: 0px;
+              box-shadow: 0 0 0 10px oklch(86.9% 0.005 56.366);
               background: oklch(86.9% 0.005 56.366);
+              border-radius: 9999px;
             "
           >
             <template v-if="getElement">
@@ -783,7 +774,7 @@ onMounted(async () => {
         </aside>
       </div>
       <div
-        class="pbx-flex pbx-items-center pbx-justify-center pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-py-4"
+        class="pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-t pbx-border-solid pbx-border-t-gray-200 lg:pbx-mx-10"
       >
         <div
           @click="

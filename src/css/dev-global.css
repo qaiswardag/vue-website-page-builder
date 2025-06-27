@@ -125,28 +125,44 @@ These styles affect all HTML elements (like input, button, h1, etc.) in the cons
   justify-content: center;
 }
 
-/* Hide the panel by default */
 #settingsPanel {
+  position: absolute;
   opacity: 0;
   pointer-events: none;
-  /* matches pbx-translate-y-2 */
   transform: translateY(1rem);
-  transition: all 0.3s ease-out;
+  transition:
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 1.5px 4px rgba(0, 0, 0, 0.06);
 }
 
-/* Show the panel when the parent with [selected] is hovered */
-[selected]:hover #settingsPanel {
+[selected]:hover #settingsPanel,
+[selected]:focus-within #settingsPanel {
   opacity: 1;
   pointer-events: auto;
-  /* visible position */
-  transform: translateY(1);
+  transform: translateY(0);
+}
+
+#editToolbar {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.5rem);
+  transition:
+    left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+#editToolbar.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
 #contains-pagebuilder {
   position: relative; /* make this the positioning context for absolute children */
   overflow-y: auto;
-}
-#settingsPanel {
-  position: absolute;
-  /* top and left will be set dynamically */
 }
