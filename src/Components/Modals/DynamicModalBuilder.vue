@@ -104,7 +104,7 @@ const thirdButtonBuilder = function () {
     </div>
 
     <div
-      class="pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
+      class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
     >
       <div
         v-if="simpleModal !== true && !isLoading"
