@@ -358,14 +358,6 @@
   }
 }
 
-/* p {
-  @apply pbx-font-normal lg:pbx-text-base pbx-text-base;
-} */
-
-a {
-  @apply pbx-text-myPrimaryLinkColor;
-}
-
 /* CSS for content inside page builder # start */
 #page-builder-editor .tiptap {
   outline: none !important;
