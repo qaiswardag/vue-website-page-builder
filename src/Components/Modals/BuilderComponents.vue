@@ -50,7 +50,7 @@ const firstButtonBuilder = function () {
       </div>
     </div>
     <div
-      class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center pbx-border-t pbx-border-gray-200 pbx-mt-4"
+      class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center pbx-border-t pbx-border-solid pbx-border-gray-200 pbx-mt-4"
     >
       <div class="sm:pbx-w-3/6 pbx-w-full pbx-px-2 pbx-my-2 pbx-flex pbx-gap-2 pbx-justify-end">
         <button

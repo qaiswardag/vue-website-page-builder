@@ -80,7 +80,7 @@ const maxWidthClass = computed(() => {
           ]"
         >
           <div
-            class="pbx-h-16 pbx-px-4 pbx-border-b pbx-border-gray-200 pbx-mb-2 pbx-flex pbx-items-center pbx-justify-between"
+            class="pbx-h-16 pbx-px-4 pbx-border-b pbx-border-solid pbx-border-gray-200 pbx-mb-2 pbx-flex pbx-items-center pbx-justify-between"
             :class="[
               type === 'success' ? 'pbx-bg-white' : '',
               type === 'warning' ? 'pbx-bg-white' : '',

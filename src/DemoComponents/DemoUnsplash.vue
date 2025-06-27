@@ -169,7 +169,7 @@ onMounted(async () => {
       <div class="pbx-mt-2">
         <div
           v-if="getUnsplashImages && getUnsplashImages.results"
-          class="pbx-flex lg:pbx-justify-between pbx-justify-end pbx-items-center pbx-gap-2 pbx-py-2 pbx-px-2 pbx-mb-1 pbx-rounded-full pbx-border pbx-border-gray-200 pbx-shadow-sm"
+          class="pbx-flex lg:pbx-justify-between pbx-justify-end pbx-items-center pbx-gap-2 pbx-py-2 pbx-px-2 pbx-mb-1 pbx-rounded-full pbx-border pbx-border-solid pbx-border-gray-200 pbx-shadow-sm"
         >
           <div class="lg:pbx-flex pbx-hidden pbx-justify-left pbx-items-center pbx-gap-2">
             <button
@@ -292,7 +292,7 @@ onMounted(async () => {
                   v-for="image in getUnsplashImages.results"
                   :key="image.id"
                   @click="handleImageClick({ url: image.urls.regular, user: image.user.name })"
-                  class="pbx-border pbx-border-gray-200 pbx-my-2 pbx-px-2 pbx-p-2 pbx-cursor-pointer"
+                  class="pbx-border pbx-border-solid pbx-border-gray-200 pbx-my-2 pbx-px-2 pbx-p-2 pbx-cursor-pointer"
                 >
                   <img
                     :alt="image.user.name"
@@ -353,7 +353,7 @@ onMounted(async () => {
                     Information
                   </p>
                   <dl
-                    class="pbx-mt-2 pbx-border-t pbx-border-b pbx-border-gray-200 pbx-divide-y pbx-divide-gray-200"
+                    class="pbx-mt-2 pbx-border-t pbx-border-b pbx-border-solid pbx-border-gray-200 pbx-divide-y pbx-divide-gray-200"
                   >
                     <div
                       class="pbx-py-3 pbx-flex pbx-justify-between pbx-text-sm pbx-font-normal pbx-items-center"
@@ -377,7 +377,7 @@ onMounted(async () => {
 
         <!-- Actions footer # start -->
         <div
-          class="pbx-px-4 pbx-py-3 pbx-flex pbx-gap-2 pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-justify-end"
+          class="pbx-px-4 pbx-py-3 pbx-flex pbx-gap-2 pbx-border-t pbx-border-solid pbx-border-gray-200 pbx-mt-4 pbx-justify-end"
         >
           <button
             @click="

@@ -24,7 +24,7 @@ const getRestoredElement = computed(() => {
       <div class="pbx-flex pbx-flex-row pbx-flex-wrap pbx-gap-2 pbx-mt-2"></div>
       <!-- delete & restore element # start -->
       <template v-if="getRestoredElement">
-        <div class="pbx-border-b pbx-border-gray-200 pbx-mb-4 pbx-pb-8 pbx-pt-4">
+        <div class="pbx-border-b pbx-border-solid pbx-border-gray-200 pbx-mb-4 pbx-pb-8 pbx-pt-4">
           <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0">Restore</p>
           <label class="pbx-myPrimaryInputLabel"> Restore the last deleted HTML element.</label>
           <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">

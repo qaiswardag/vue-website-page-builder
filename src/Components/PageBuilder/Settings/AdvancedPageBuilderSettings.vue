@@ -119,7 +119,9 @@ function prettifyHtml(html) {
                 v-if="getElement"
                 class="pbx-overflow-hidden pbx-border pbx-border-gray-100 pbx-mb-6"
               >
-                <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b pbx-border-gray-200">
+                <div
+                  class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b pbx-border-solid pbx-border-gray-200"
+                >
                   <div class="pbx-overflow-x-auto">
                     <table class="pbx-min-w-full">
                       <thead class="pbx-bg-stone-800">
@@ -204,7 +206,9 @@ function prettifyHtml(html) {
                 v-if="getComponent"
                 class="pbx-overflow-hidden pbx-border pbx-border-gray-100 pbx-mb-6"
               >
-                <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b pbx-border-gray-200">
+                <div
+                  class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b pbx-border-solid pbx-border-gray-200"
+                >
                   <div class="pbx-overflow-x-auto">
                     <table class="pbx-min-w-full">
                       <thead class="pbx-bg-stone-800">
@@ -290,7 +294,9 @@ function prettifyHtml(html) {
                   class="pbx-overflow-hidden pbx-border pbx-border-gray-100 pbx-mb-6"
                 >
                   <!-- Id and Title above the table, styled to look connected -->
-                  <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b pbx-border-gray-200">
+                  <div
+                    class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b pbx-border-solid pbx-border-gray-200"
+                  >
                     <div class="pbx-overflow-x-auto">
                       <table class="pbx-min-w-full">
                         <thead class="pbx-bg-stone-800">

@@ -230,7 +230,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
               @keydown.enter.tab.prevent="handleHyperlink()"
             />
             <div
-              class="pbx-border pbx-border-gray-200 pbx-border-none pbx-rounded pbx-flex pbx-items-center pbx-justify-center pbx-h-full pbx-w-8"
+              class="pbx-border-none pbx-rounded pbx-flex pbx-items-center pbx-justify-center pbx-h-full pbx-w-8"
             >
               <kbd class="pbx-myPrimaryParagraph pbx-text-gray-400 pbx-border-none"> ⏎ </kbd>
             </div>

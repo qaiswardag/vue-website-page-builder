@@ -436,7 +436,7 @@ onMounted(async () => {
       <!-- Top Layout Save And Reset Area - Start -->
       <div
         id="pagebuilder-toolbar-area"
-        class="pbx-flex pbx-items-center pbx-justify-between pbx-bg-myPrimaryLightGrayColor pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans"
+        class="pbx-flex pbx-items-center pbx-justify-between pbx-bg-myPrimaryLightGrayColor pbx-border-b pbx-border-solid pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans"
       >
         <template
           v-if="
@@ -691,7 +691,7 @@ onMounted(async () => {
 
         <main
           ref="pbxToolBar"
-          class="pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border pbx-border-gray-200 pbx-items-stretch pbx-h-[90vh]"
+          class="pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border pbx-border-solid pbx-border-gray-200 pbx-items-stretch pbx-h-[90vh]"
           :class="{ 'pbx-mr-2': !getMenuRight, '': getMenuRight }"
         >
           <div
@@ -748,7 +748,7 @@ onMounted(async () => {
               await pageBuilderService.clearHtmlSelection()
             }
           "
-          class="pbx-min-w-[3.5rem] pbx-pt-7 pbx-pb-2 pbx-ml-2 pbx-border-l pbx-border-gray-200"
+          class="pbx-min-w-[3.5rem] pbx-pt-7 pbx-pb-2 pbx-ml-2 pbx-border-l pbx-border-solid pbx-border-gray-200"
         >
           <div
             @click.self="
@@ -783,7 +783,7 @@ onMounted(async () => {
         </aside>
       </div>
       <div
-        class="pbx-flex pbx-items-center pbx-justify-center pbx-border-t pbx-border-gray-200 pbx-py-4"
+        class="pbx-flex pbx-items-center pbx-justify-center pbx-border-t pbx-border-solid pbx-border-gray-200 pbx-py-4"
       >
         <div
           @click="
