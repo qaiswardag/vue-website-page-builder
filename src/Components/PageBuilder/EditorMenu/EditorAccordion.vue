@@ -1,10 +1,7 @@
 <template>
-  <div
-    class="pbx-flex pbx-flex-col pbx-border pbx-border-solid pbx-border-gray-400"
-    :class="{ '': expanded }"
-  >
+  <div class="pbx-flex pbx-flex-col pbx-border-solid pbx-border-gray-400" :class="{ '': expanded }">
     <div
-      class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor pbx-border-b-solid pbx-border-gray-200"
+      class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor"
       @click="expanded = !expanded"
     >
       <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-my-0 pbx-py-0">

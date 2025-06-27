@@ -65,7 +65,7 @@ function onScroll() {
 </script>
 
 <template>
-  <div class="pbx-flex pbx-max-h-[50rem] pbx-flex-col">
+  <div class="pbx-flex pbx-h-full pbx-flex-col">
     <div
       class="pbx-flex pbx-flex-row pbx-justify-between pbx-pt-7 pbx-pr-4 pbx-pl-4 pbx-items-center pbx-mb-3"
     >
