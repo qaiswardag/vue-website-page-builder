@@ -149,7 +149,7 @@
     @apply pbx-min-h-[3rem] lg:pbx-px-4 lg:pbx-py-3 pbx-px-3 pbx-py-3 pbx-font-sans 
             sm:pbx-text-sm pbx-text-xs pbx-whitespace-nowrap pbx-break-keep pbx-font-medium pbx-inline-flex pbx-gap-1 pbx-items-center pbx-justify-center pbx-rounded-full pbx-border pbx-border-transparent pbx-bg-myPrimaryLinkColor pbx-text-white pbx-shadow-sm hover:pbx-bg-myPrimaryLinkColor sm:pbx-w-auto
             focus:pbx-outline-none focus:pbx-ring-2 focus:pbx-ring-myPrimaryLinkColor focus:pbx-ring-offset-2
-            focus-visible:pbx-ring-2 focus-visible:pbx-ring-myPrimaryLinkColor;
+            focus-visible:pbx-ring-2 focus-visible:pbx-ring-myPrimaryLinkColor pbx-cursor-pointer;
   }
 
   .pbx-mySecondaryButton {
@@ -368,4 +368,18 @@
   padding: 0px 0px 10px 16px;
   margin-bottom: 20px;
   padding-bottom: 100px;
+}
+
+#page-builder-editor ol,
+#page-builder-editor-editable-area ol,
+#page-builder-editor ul,
+#page-builder-editor-editable-area ul {
+  list-style: disc !important;
+  padding: 0 0 0 1rem;
+}
+
+#page-builder-editor li,
+#page-builder-editor-editable-area li {
+  line-height: 1.2;
+  margin-left: 1em; /* Adjust this value as needed */
 }

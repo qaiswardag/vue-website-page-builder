@@ -363,7 +363,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto pbx-h-full"
+    class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-solid pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto pbx-h-full"
   >
     <GlobalLoader v-if="getIsLoadingGlobal & !openAppNotStartedModal"></GlobalLoader>
     <ModalBuilder

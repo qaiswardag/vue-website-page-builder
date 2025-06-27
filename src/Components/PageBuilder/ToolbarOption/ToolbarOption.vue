@@ -166,7 +166,7 @@ const openHTMLSettings = function () {
                   openMainSettings()
                 }
               "
-              class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-whitespace-nowrappbx-font-normal pbx-w-max pbx-border-none pbx-m-0"
+              class="pbx-mySecondaryButton pbx-text-xs pbx-font-normal"
               type="button"
             >
               Config Overview
@@ -176,7 +176,7 @@ const openHTMLSettings = function () {
             <!-- HTML Settings Start -->
             <button
               @click="openHTMLSettings"
-              class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-whitespace-nowrap pbx-font-normal pbx-w-max pbx-border-none pbx-m-0"
+              class="pbx-mySecondaryButton pbx-text-xs pbx-font-normal"
               type="button"
             >
               HTML Overview
@@ -186,7 +186,7 @@ const openHTMLSettings = function () {
             <!-- Delete Layout Start -->
             <button
               @click="deleteAllComponentsFromDOM"
-              class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-whitespace-nowrap pbx-font-normal pbx-w-max pbx-border-none pbx-m-0 pbx-bg-myPrimaryErrorColor pbx-text-white"
+              class="pbx-myPrimaryDeleteButton pbx-text-xs pbx-font-normal"
               type="button"
             >
               Delete Layout
