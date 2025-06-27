@@ -136,7 +136,7 @@ function prettifyHtml(html) {
                       <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
-                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-solid pbx-border-b"
+                            class="pbx-border-0 pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-solid pbx-border-b"
                           >
                             {{ getElement?.outerHTML }}
                           </td>
