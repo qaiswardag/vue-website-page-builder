@@ -514,12 +514,12 @@ export class PageBuilderService {
     // Hardcoded mapping: selected => base
     const fontSizeBaseMap: Record<string, string> = {
       'pbx-text-9xl': 'pbx-text-6xl',
-      'pbx-text-8xl': 'pbx-text-6xl',
-      'pbx-text-7xl': 'pbx-text-5xl',
+      'pbx-text-8xl': 'pbx-text-5xl',
+      'pbx-text-7xl': 'pbx-text-4xl',
       'pbx-text-6xl': 'pbx-text-3xl',
       'pbx-text-5xl': 'pbx-text-3xl',
       'pbx-text-4xl': 'pbx-text-2xl',
-      'pbx-text-3xl': 'pbx-text-xl',
+      'pbx-text-3xl': 'pbx-text-1xl',
       'pbx-text-2xl': 'pbx-text-lg',
       'pbx-text-xl': 'pbx-text-base',
       'pbx-text-lg': 'pbx-text-sm',
@@ -585,10 +585,10 @@ export class PageBuilderService {
 
       // Apply responsive font size classes based on heading type
       if (heading.tagName === 'H2') {
-        element.classList.add('pbx-text-3xl', 'lg:pbx-text-6xl')
+        element.classList.add('pbx-text-2xl', 'lg:pbx-text-4xl')
       }
       if (heading.tagName === 'H3') {
-        element.classList.add('pbx-text-2xl', 'lg:pbx-text-4xl')
+        element.classList.add('pbx-text-1xl', 'lg:pbx-text-3xl')
       }
     }
   }
