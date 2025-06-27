@@ -71,22 +71,37 @@ const getPageBuilderConfig = computed(() => {
 const getMenuRight = computed(() => {
   return pageBuilderStateStore.getMenuRight
 })
-const previewCurrentDesign = function () {
-  pageBuilderService.previewCurrentDesign()
-}
-const openAppNotStartedModal = ref(false)
 const openPageBuilderPreviewModal = ref(false)
 
-const handlAppNotStartedModal = function () {
-  openAppNotStartedModal.value = false
+const previewCurrentDesign = function () {
+  pageBuilderService.previewCurrentDesign()
 }
 const handlePageBuilderPreview = function () {
   previewCurrentDesign()
   openPageBuilderPreviewModal.value = true
 }
 
+const openPageBuilderPreviewMobile = ref(false)
+
+const previewCurrentDesignMobile = function () {
+  pageBuilderService.previewCurrentDesign()
+}
+const handlePageBuilderPreviewMobile = function () {
+  previewCurrentDesignMobile()
+  openPageBuilderPreviewMobile.value = true
+}
+
+const openAppNotStartedModal = ref(false)
+
+const handlAppNotStartedModal = function () {
+  openAppNotStartedModal.value = false
+}
+
 const firstPageBuilderPreviewModalButton = function () {
   openPageBuilderPreviewModal.value = false
+}
+const firstPageBuilderPreviewModalButtonMobile = function () {
+  openPageBuilderPreviewMobile.value = false
 }
 
 const showModalAddComponent = ref(false)
@@ -388,6 +403,15 @@ onMounted(async () => {
       <Preview></Preview>
     </ModalBuilder>
 
+    <ModalBuilder
+      title="Mobile"
+      :showModalBuilder="openPageBuilderPreviewMobile"
+      @closeMainModalBuilder="firstPageBuilderPreviewModalButtonMobile"
+      maxWidth="lg"
+    >
+      <Preview />
+    </ModalBuilder>
+
     <DynamicModalBuilder
       :showDynamicModalBuilder="showModalResumeEditing"
       :isLoading="getIsLoadingResumeEditing"
@@ -577,7 +601,9 @@ onMounted(async () => {
                 }
               "
             >
-              <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2">
+              <div
+                class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-border-0 pbx-border-solid pbx-border-r pbx-border-gray-200 pbx-pr-2"
+              >
                 <span class="lg:pbx-block pbx-hidden">
                   <div class="pbx-whitespace-nowrap pbx-cursor-pointer">Add new Components</div>
                 </span>
@@ -588,7 +614,7 @@ onMounted(async () => {
                 </span>
               </div>
             </div>
-            <div class="pbx-flex pbx-items-center pbx-justify-center">
+            <div class="pbx-flex pbx-items-center pbx-justify-center pbx-mr-2">
               <div
                 @click="
                   async () => {
@@ -600,14 +626,30 @@ onMounted(async () => {
                 "
               >
                 <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2">
-                  <div class="pbx-whitespace-nowrap lg:pbx-block pbx-hidden pbx-cursor-pointer">
-                    Preview
-                  </div>
-
                   <span
                     class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
                   >
                     <span class="pbx-myMediumIcon material-symbols-outlined"> visibility </span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="lg:pbx-flex pbx-hidden pbx-items-center pbx-justify-center">
+              <div
+                @click="
+                  async () => {
+                    pageBuilderStateStore.setMenuRight(false)
+                    pageBuilderStateStore.setElement(null)
+                    await pageBuilderService.clearHtmlSelection()
+                    handlePageBuilderPreviewMobile()
+                  }
+                "
+              >
+                <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2">
+                  <span
+                    class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+                  >
+                    <span class="material-symbols-outlined"> phone_iphone </span>
                   </span>
                 </div>
               </div>

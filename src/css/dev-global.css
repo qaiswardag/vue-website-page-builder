@@ -10,3 +10,7 @@ These styles affect all HTML elements (like input, button, h1, etc.) in the cons
   gap: 6px 0px;
   justify-content: center;
 }
+
+.mobile-preview-frame {
+  container-type: inline-size;
+}
