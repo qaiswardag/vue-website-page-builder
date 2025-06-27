@@ -273,7 +273,7 @@ const getRestoredElement = computed(() => {
           <button
             @click="handleModalIframeSrc"
             type="button"
-            class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+            class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white focus-visible:pbx-ring-0"
           >
             <span class="material-symbols-outlined"> play_circle </span>
           </button>
@@ -290,7 +290,7 @@ const getRestoredElement = computed(() => {
           <button
             @click="handleModalPreviewTiptap"
             type="button"
-            class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+            class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white focus-visible:pbx-ring-0"
           >
             <span class="material-symbols-outlined"> edit </span>
           </button>
@@ -310,7 +310,7 @@ const getRestoredElement = computed(() => {
           <button
             @click="handleAddImage"
             type="button"
-            class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+            class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white focus-visible:pbx-ring-0"
           >
             <span class="material-symbols-outlined"> add_photo_alternate </span>
           </button>
@@ -332,7 +332,7 @@ const getRestoredElement = computed(() => {
         <button
           @click="pageBuilderService.deleteElementFromDOM"
           type="button"
-          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-red-500 hover:pbx-fill-white focus-visible:pbx-ring-0"
         >
           <span class="material-symbols-outlined"> delete </span>
         </button>
@@ -340,7 +340,7 @@ const getRestoredElement = computed(() => {
 
       <div
         v-if="getElement && getComponent"
-        class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+        class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white focus-visible:pbx-ring-0"
         @click="pageBuilderService.clearHtmlSelection()"
       >
         <span class="material-symbols-outlined"> close </span>

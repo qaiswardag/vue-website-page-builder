@@ -687,7 +687,7 @@ onMounted(async () => {
         >
           <div
             id="editToolbar"
-            class="pbx-z-30 lg:pbx-mx-20 pbx-flex pbx-gap-2 pbx-justify-center pbx-min-w-48 pbx-items-center pbx-rounded-full pbx-px-4"
+            class="pbx-z-30 lg:pbx-mx-20 pbx-flex pbx-gap-2 pbx-justify-center pbx-min-w-48 pbx-items-center pbx-rounded-full pbx-px-4 pbx-bg-red-200 pbx-h-0"
             style="
               box-shadow: 0 0 0 10px oklch(86.9% 0.005 56.366);
               background: oklch(86.9% 0.005 56.366);
@@ -774,7 +774,7 @@ onMounted(async () => {
         </aside>
       </div>
       <div
-        class="pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-t pbx-border-solid pbx-border-t-gray-200 lg:pbx-mx-10"
+        class="pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-t pbx-border-t-gray-200 pbx-border-solid lg:pbx-mx-10"
       >
         <div
           @click="

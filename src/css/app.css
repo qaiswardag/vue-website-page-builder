@@ -383,3 +383,171 @@
   line-height: 1.2;
   margin-left: 1em; /* Adjust this value as needed */
 }
+
+#settingsPanel {
+  border-radius: 9999px;
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(1rem);
+  transition:
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 1.5px 4px rgba(0, 0, 0, 0.06);
+}
+
+[selected]:hover #settingsPanel,
+[selected]:focus-within #settingsPanel {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+#editToolbar {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.1rem) scale(0.1);
+
+  border-radius: 9999px;
+  transition:
+    left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    min-width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    height 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    border-radius 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+#editToolbar.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0) scale(1);
+  min-width: 12rem;
+  width: 16rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+}
+
+#contains-pagebuilder {
+  position: relative; /* make this the positioning context for absolute children */
+  overflow-y: auto;
+}
+
+.smooth-transition {
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Manage P, Link, H1, H2 # end */
+
+/* CSS for content inside page builder # start */
+#pagebuilder a {
+  pointer-events: none;
+}
+
+#pagebuilder #youtube-video::before {
+  content: 'Select Video Element';
+  font-family: 'Jost';
+  background: #16a34a !important;
+  color: white;
+  text-decoration: none;
+  margin-right: 8px;
+  vertical-align: middle;
+  min-height: 3rem;
+  padding: 0.75rem 0.75rem;
+  white-space: nowrap;
+  word-break: keep-all;
+  font-weight: 500;
+  display: inline-flex;
+  gap: 0.25rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  margin-bottom: 20px;
+  font-size: 0.8rem !important;
+}
+
+@media (min-width: 640px) {
+  #pagebuilder #youtube-video::before {
+    font-size: 0.9rem !important;
+    width: auto;
+  }
+}
+
+#pagebuilder #youtube-video:hover::before {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#page-builder-editor a,
+#pagebuilder a {
+  text-decoration: underline;
+}
+
+#page-builder-editor #linktree p,
+#pagebuilder #linktree p {
+  width: 100%;
+}
+
+#page-builder-editor #linktree a,
+#pagebuilder #linktree a {
+  @apply pbx-py-4 pbx-px-2 pbx-block pbx-w-full;
+}
+
+#page-builder-editor #linktree a,
+#pagebuilder #linktree a {
+  text-decoration: none;
+  font-weight: 500;
+  color: inherit !important;
+  width: 100%;
+  cursor: pointer;
+}
+#page-builder-editor strong,
+#pagebuilder strong {
+  font-weight: 500;
+}
+
+#page-builder-editor ol,
+#pagebuilder ol,
+#page-builder-editor ul,
+#pagebuilder ul {
+  list-style: disc !important;
+  padding: 0rem;
+}
+
+/* Add overflow-x property to enable horizontal scrollbar */
+.scrollable {
+  overflow-x: auto;
+  overflow-y: auto;
+  /* Add any other desired styles for the scrollable element */
+}
+/* Scrollbar Styles  - end */
+
+/* Scrollbar Styles  - start */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: black transparent;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 25px;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+  height: 6px; /* Add height for horizontal scrollbar */
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 25px;
+  border: none;
+}
