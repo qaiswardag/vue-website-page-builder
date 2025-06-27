@@ -21,7 +21,7 @@ if (previewData) {
 <template>
   <div>
     <div
-      class="pbx-w-full pbx-inset-x-0 pbx-h-[90vh] pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2"
+      class="pbx-text-black pbx-w-full pbx-inset-x-0 pbx-h-[90vh] pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2"
     >
       <div id="page-builder-editor">
         <div class="" v-html="htmlPage"></div>
