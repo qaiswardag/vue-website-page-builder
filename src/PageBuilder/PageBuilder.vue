@@ -363,7 +363,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border pbx-border-solid pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto pbx-h-full"
+    class="pbx-font-sans pbx-max-w-full pbx-m-1 pbx-border-solid pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto pbx-h-full"
   >
     <GlobalLoader v-if="getIsLoadingGlobal & !openAppNotStartedModal"></GlobalLoader>
     <ModalBuilder
@@ -436,7 +436,7 @@ onMounted(async () => {
       <!-- Top Layout Save And Reset Area - Start -->
       <div
         id="pagebuilder-toolbar-area"
-        class="pbx-flex pbx-items-center pbx-justify-between pbx-bg-myPrimaryLightGrayColor pbx-border-b pbx-border-solid pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans"
+        class="pbx-flex pbx-items-center pbx-justify-between pbx-bg-myPrimaryLightGrayColor pbx-border-b-solid pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans"
       >
         <template
           v-if="
@@ -691,7 +691,7 @@ onMounted(async () => {
 
         <main
           ref="pbxToolBar"
-          class="pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border pbx-border-solid pbx-border-gray-200 pbx-items-stretch pbx-h-[90vh]"
+          class="pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border-gray-200 pbx-items-stretch pbx-h-[90vh]"
           :class="{ 'pbx-mr-2': !getMenuRight, '': getMenuRight }"
         >
           <div

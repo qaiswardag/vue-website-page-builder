@@ -219,7 +219,7 @@ const handleToggleOpenHyperlinkInNewTab = async function () {
         <!-- no attached url - end -->
         <div v-if="hyperlinkEnable === true" class="pbx-my-2 pbx-py-2">
           <div
-            class="pbx-relative pbx-flex pbx-items-center pbx-w-full pbx-border pbx-myPrimaryInput pbx-py-0 pbx-p-0"
+            class="pbx-relative pbx-flex pbx-items-center pbx-w-full pbx-border-solid pbx-border-gray-200 pbx-myPrimaryInput pbx-py-0 pbx-p-0"
           >
             <input
               v-model="urlInput"

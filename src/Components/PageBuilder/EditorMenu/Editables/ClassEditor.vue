@@ -59,7 +59,7 @@ const handleAddClasses = async function () {
       <div class="pbx-flex pbx-gap-2 pbx-item-center pbx-flex-col">
         <div class="pbx-flex pbx-gap-2 pbx-item-center">
           <div
-            class="pbx-mt-1 pbx-relative pbx-flex pbx-items-center pbx-w-full pbx-border pbx-myPrimaryInput pbx-py-0 pbx-p-0"
+            class="pbx-mt-1 pbx-relative pbx-flex pbx-items-center pbx-w-full pbx-border-solid pbx-myPrimaryInput pbx-py-0 pbx-p-0"
           >
             <input
               v-model="inputClass"

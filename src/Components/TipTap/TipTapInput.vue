@@ -224,7 +224,7 @@ onMounted(() => {
             <div>
               <div>
                 <div
-                  class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max pbx-p-1 pbx-rounded-full pbx-border pbx-border-solid pbx-border-gray-200 pbx-shadow-sm"
+                  class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max pbx-p-1 pbx-rounded-full pbx-border-solid pbx-border-gray-200 pbx-shadow-sm"
                 >
                   <button
                     @click="pageBuilderService.toggleTipTapModal(false)"
@@ -238,7 +238,7 @@ onMounted(() => {
               </div>
             </div>
             <div
-              class="pbx-flex pbx-items-center pbx-p-1 pbx-rounded-full pbx-border pbx-border-solid pbx-border-gray-200 pbx-shadow-sm"
+              class="pbx-flex pbx-items-center pbx-p-1 pbx-rounded-full pbx-border-solid pbx-border-gray-200 pbx-shadow-sm"
             >
               <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
                 <button

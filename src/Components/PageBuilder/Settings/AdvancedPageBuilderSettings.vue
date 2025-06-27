@@ -117,7 +117,7 @@ function prettifyHtml(html) {
               </div>
               <div
                 v-if="getElement"
-                class="pbx-overflow-hidden pbx-border pbx-border-gray-100 pbx-mb-6"
+                class="pbx-overflow-hidden pbx-border-solid pbx-border-gray-100 pbx-mb-6"
               >
                 <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b-solid pbx-border-gray-200">
                   <div class="pbx-overflow-x-auto">
@@ -202,7 +202,7 @@ function prettifyHtml(html) {
               </div>
               <div
                 v-if="getComponent"
-                class="pbx-overflow-hidden pbx-border pbx-border-gray-100 pbx-mb-6"
+                class="pbx-overflow-hidden pbx-border-solid pbx-border-gray-100 pbx-mb-6"
               >
                 <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b-solid pbx-border-gray-200">
                   <div class="pbx-overflow-x-auto">
@@ -287,7 +287,7 @@ function prettifyHtml(html) {
                 <div
                   v-for="component in getComponents"
                   :key="component.id"
-                  class="pbx-overflow-hidden pbx-border pbx-border-gray-100 pbx-mb-6"
+                  class="pbx-overflow-hidden pbx-border-solid pbx-border-gray-100 pbx-mb-6"
                 >
                   <!-- Id and Title above the table, styled to look connected -->
                   <div
