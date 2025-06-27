@@ -560,8 +560,6 @@ export class PageBuilderService {
     if (currentCSS && !userSelectedFontSize) {
       this.pageBuilderStateStore.setFontDesktop(currentCSS)
     }
-
-    return currentCSS
   }
 
   #applyHelperCSSToElements(element: HTMLElement): void {
