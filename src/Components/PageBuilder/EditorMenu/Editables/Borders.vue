@@ -101,7 +101,7 @@ watch(
               </div>
               <div
                 v-if="borderColor !== 'none'"
-                class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border-solid pbx-border-gray-100 pbx-rounded-sm"
+                class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border-solid pbx-border pbx-border-gray-100 pbx-rounded-sm"
                 :class="`bg-${borderColor?.replace('border-', '')}`"
               ></div>
               <span class="pbx-block pbx-truncate">{{ borderColor }}</span>

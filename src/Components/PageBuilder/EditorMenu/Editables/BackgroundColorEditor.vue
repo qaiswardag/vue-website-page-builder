@@ -74,7 +74,7 @@ watch(
               </div>
               <div v-if="color !== 'none'" class="pbx-flex pbx-items-center">
                 <div
-                  class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border-solid pbx-border-gray-100 pbx-rounded-sm"
+                  class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border-solid pbx-border pbx-border-gray-100 pbx-rounded-sm"
                   :class="`pbx-bg-${color.replace('pbx-bg-', '')}`"
                 ></div>
                 <span class="pbx-ml-3">{{ color }}</span>

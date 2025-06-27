@@ -52,7 +52,9 @@ const handleDownloadHTML = function () {
     <!-- Advanced Settings - start -->
     <div class="pbx-flex pbx-gap-4 pbx-flex-col pbx-divide-y pbx-divide-gray-300">
       <!-- Advanced Settings - start -->
-      <div class="pbx-mb-4 pbx-pb-8 pbx-border-b-solid pbx-border-myPrimbryLightGrayColor">
+      <div
+        class="pbx-mb-4 pbx-pb-8 pbx-border-solid pbx-border-b pbx-border-myPrimbryLightGrayColor"
+      >
         <div class="pbx-flex pbx-items-left pbx-flex-col pbx-gap-1">
           <h3 class="pbx-myQuaternaryHeader">Configuration Overview</h3>
           <p class="pbx-myPrimaryParagraph pbx-text-xs">
@@ -576,7 +578,9 @@ const handleDownloadHTML = function () {
     </div>
     <!-- Advanced Settings - end -->
     <!-- Download Layout HTML - start -->
-    <div class="pbx-mt-4 pbx-mb-4 pbx-py-8 pbx-border-b-solid pbx-border-myPrimbryLightGrayColor">
+    <div
+      class="pbx-mt-4 pbx-mb-4 pbx-py-8 pbx-border-solid pbx-border-b pbx-border-myPrimbryLightGrayColor"
+    >
       <div class="pbx-flex pbx-items-left pbx-flex-col pbx-gap-1">
         <h3 class="pbx-myQuaternaryHeader">Download Page as HTML</h3>
         <p class="pbx-myPrimaryParagraph pbx-text-xs">Download current page layout.</p>
@@ -590,7 +594,9 @@ const handleDownloadHTML = function () {
     <!-- Download Layout HTML - end -->
 
     <!-- Congig - start -->
-    <div class="pbx-mt-4 pbx-mb-4 pbx-py-8 pbx-border-b-solid pbx-border-myPrimbryLightGrayColor">
+    <div
+      class="pbx-mt-4 pbx-mb-4 pbx-py-8 pbx-border-solid pbx-border-b pbx-border-myPrimbryLightGrayColor"
+    >
       <div class="pbx-flex pbx-items-left pbx-flex-col pbx-gap-1">
         <h3 class="pbx-myQuaternaryHeader">Complete Configuration Overview</h3>
         <p class="pbx-myPrimaryParagraph pbx-text-xs">

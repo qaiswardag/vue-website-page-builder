@@ -169,7 +169,7 @@ onMounted(async () => {
       <div class="pbx-mt-2">
         <div
           v-if="getUnsplashImages && getUnsplashImages.results"
-          class="pbx-flex lg:pbx-justify-between pbx-justify-end pbx-items-center pbx-gap-2 pbx-py-2 pbx-px-2 pbx-mb-1 pbx-rounded-full pbx-border-solid pbx-border-gray-200 pbx-shadow-sm"
+          class="pbx-flex lg:pbx-justify-between pbx-justify-end pbx-items-center pbx-gap-2 pbx-py-2 pbx-px-2 pbx-mb-1 pbx-rounded-full pbx-border-solid pbx-border pbx-border-gray-200 pbx-shadow-sm"
         >
           <div class="lg:pbx-flex pbx-hidden pbx-justify-left pbx-items-center pbx-gap-2">
             <button
@@ -274,7 +274,7 @@ onMounted(async () => {
             <div v-if="getIsLoading">
               <div class="pbx-flex pbx-items-center pbx-justify-center pbx-mt-4">
                 <div
-                  class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
+                  class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
                 >
                   <span
                     class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
@@ -292,7 +292,7 @@ onMounted(async () => {
                   v-for="image in getUnsplashImages.results"
                   :key="image.id"
                   @click="handleImageClick({ url: image.urls.regular, user: image.user.name })"
-                  class="pbx-border-solid pbx-border-gray-200 pbx-my-2 pbx-px-2 pbx-p-2 pbx-cursor-pointer"
+                  class="pbx-border-solid pbx-border pbx-border-gray-200 pbx-my-2 pbx-px-2 pbx-p-2 pbx-cursor-pointer"
                 >
                   <img
                     :alt="image.user.name"
@@ -332,7 +332,7 @@ onMounted(async () => {
             <template v-if="getIsLoadingImage">
               <div class="pbx-flex pbx-items-center pbx-justify-center pbx-mt-4">
                 <div
-                  class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
+                  class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
                 >
                   <span
                     class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
@@ -353,7 +353,7 @@ onMounted(async () => {
                     Information
                   </p>
                   <dl
-                    class="pbx-mt-2 pbx-border-t-solid pbx-border-b-solid pbx-border-gray-200 pbx-divide-y pbx-divide-gray-200"
+                    class="pbx-mt-2 pbx-border-solid pbx-border-t pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-divide-y pbx-divide-gray-200"
                   >
                     <div
                       class="pbx-py-3 pbx-flex pbx-justify-between pbx-text-sm pbx-font-normal pbx-items-center"
@@ -377,7 +377,7 @@ onMounted(async () => {
 
         <!-- Actions footer # start -->
         <div
-          class="pbx-px-4 pbx-py-3 pbx-flex pbx-gap-2 pbx-border-t-solid pbx-border-gray-200 pbx-mt-4 pbx-justify-end"
+          class="pbx-px-4 pbx-py-3 pbx-flex pbx-gap-2 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-justify-end"
         >
           <button
             @click="

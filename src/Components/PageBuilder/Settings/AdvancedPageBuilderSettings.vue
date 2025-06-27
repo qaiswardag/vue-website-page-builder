@@ -117,9 +117,11 @@ function prettifyHtml(html) {
               </div>
               <div
                 v-if="getElement"
-                class="pbx-overflow-hidden pbx-border-solid pbx-border-gray-100 pbx-mb-6"
+                class="pbx-overflow-hidden pbx-border-solid pbx-border pbx-border-gray-100 pbx-mb-6"
               >
-                <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b-solid pbx-border-gray-200">
+                <div
+                  class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-solid pbx-border-b pbx-border-gray-200"
+                >
                   <div class="pbx-overflow-x-auto">
                     <table class="pbx-min-w-full">
                       <thead class="pbx-bg-stone-800">
@@ -134,7 +136,7 @@ function prettifyHtml(html) {
                       <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
-                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-b-solid"
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-solid pbx-border-b"
                           >
                             {{ getElement?.outerHTML }}
                           </td>
@@ -202,9 +204,11 @@ function prettifyHtml(html) {
               </div>
               <div
                 v-if="getComponent"
-                class="pbx-overflow-hidden pbx-border-solid pbx-border-gray-100 pbx-mb-6"
+                class="pbx-overflow-hidden pbx-border-solid pbx-border pbx-border-gray-100 pbx-mb-6"
               >
-                <div class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b-solid pbx-border-gray-200">
+                <div
+                  class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-solid pbx-border-b pbx-border-gray-200"
+                >
                   <div class="pbx-overflow-x-auto">
                     <table class="pbx-min-w-full">
                       <thead class="pbx-bg-stone-800">
@@ -232,7 +236,7 @@ function prettifyHtml(html) {
                       <thead class="pbx-bg-stone-800">
                         <tr>
                           <th
-                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-t-solid pbx-border-gray-200"
+                            class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-solid pbx-border-t pbx-border-gray-200"
                           >
                             Title:
                           </th>
@@ -287,11 +291,11 @@ function prettifyHtml(html) {
                 <div
                   v-for="component in getComponents"
                   :key="component.id"
-                  class="pbx-overflow-hidden pbx-border-solid pbx-border-gray-100 pbx-mb-6"
+                  class="pbx-overflow-hidden pbx-border-solid pbx-border pbx-border-gray-100 pbx-mb-6"
                 >
                   <!-- Id and Title above the table, styled to look connected -->
                   <div
-                    class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-b-solid pbx-border-gray-200"
+                    class="pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-solid pbx-border-b pbx-border-gray-200"
                   >
                     <div class="pbx-overflow-x-auto">
                       <table class="pbx-min-w-full">
@@ -320,7 +324,7 @@ function prettifyHtml(html) {
                         <thead class="pbx-bg-stone-800">
                           <tr>
                             <th
-                              class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-t-solid pbx-border-gray-200"
+                              class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-solid pbx-border-t pbx-border-gray-200"
                             >
                               Title:
                             </th>

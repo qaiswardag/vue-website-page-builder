@@ -219,12 +219,12 @@ onMounted(() => {
       <div v-if="pageBuilderService.isSelectedElementValidText() && editor">
         <div class="pbx-relative pbx-rounded-lg">
           <div
-            class="pbx-flex pbx-justify-between pbx-myPrimaryGap pbx-items-center pbx-py-4 pbx-px-4 pbx-overflow-x-auto pbx-border-b-solid pbx-border-gray-200"
+            class="pbx-flex pbx-justify-between pbx-myPrimaryGap pbx-items-center pbx-py-4 pbx-px-4 pbx-overflow-x-auto pbx-border-solid pbx-border-b pbx-border-gray-200"
           >
             <div>
               <div>
                 <div
-                  class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max pbx-p-1 pbx-rounded-full pbx-border-solid pbx-border-gray-200 pbx-shadow-sm"
+                  class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max pbx-p-1 pbx-rounded-full pbx-border-solid pbx-border pbx-border-gray-200 pbx-shadow-sm"
                 >
                   <button
                     @click="pageBuilderService.toggleTipTapModal(false)"
@@ -238,7 +238,7 @@ onMounted(() => {
               </div>
             </div>
             <div
-              class="pbx-flex pbx-items-center pbx-p-1 pbx-rounded-full pbx-border-solid pbx-border-gray-200 pbx-shadow-sm"
+              class="pbx-flex pbx-items-center pbx-p-1 pbx-rounded-full pbx-border-solid pbx-border pbx-border-gray-200 pbx-shadow-sm"
             >
               <div class="pbx-px-2 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max">
                 <button

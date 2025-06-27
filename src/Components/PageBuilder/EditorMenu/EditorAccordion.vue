@@ -1,5 +1,8 @@
 <template>
-  <div class="pbx-flex pbx-flex-col pbx-border-solid pbx-border-gray-400" :class="{ '': expanded }">
+  <div
+    class="pbx-flex pbx-flex-col pbx-border-solid pbx-border pbx-border-gray-400"
+    :class="{ '': expanded }"
+  >
     <div
       class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor"
       @click="expanded = !expanded"
