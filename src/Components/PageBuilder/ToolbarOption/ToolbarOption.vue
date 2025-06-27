@@ -152,10 +152,7 @@ const openHTMLSettings = function () {
       <div class="pbx-hidden lg:pbx-block">
         <!-- Component Start -->
         <div class="pbx-relative pbx-group">
-          <button
-            type="button"
-            class="pbx-cursor-pointer lg:pbx-flex pbx-myPrimaryTag pbx-whitespace-nowrap pbx-font-normal pbx-w-max pbx-text-xs"
-          >
+          <button type="button" class="pbx-mySecondaryButton pbx-font-normal pbx-text-xs">
             <span> Options </span>
           </button>
           <div

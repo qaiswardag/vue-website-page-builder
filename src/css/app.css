@@ -146,7 +146,7 @@
   }
 
   .pbx-myPrimaryButton {
-    @apply pbx-min-h-[3rem] lg:pbx-px-4 lg:pbx-py-3 pbx-px-3 pbx-py-3
+    @apply pbx-min-h-[3rem] lg:pbx-px-4 lg:pbx-py-3 pbx-px-3 pbx-py-3 pbx-font-sans 
             sm:pbx-text-sm pbx-text-xs pbx-whitespace-nowrap pbx-break-keep pbx-font-medium pbx-inline-flex pbx-gap-1 pbx-items-center pbx-justify-center pbx-rounded-full pbx-border pbx-border-transparent pbx-bg-myPrimaryLinkColor pbx-text-white pbx-shadow-sm hover:pbx-bg-myPrimaryLinkColor sm:pbx-w-auto
             focus:pbx-outline-none focus:pbx-ring-2 focus:pbx-ring-myPrimaryLinkColor focus:pbx-ring-offset-2
             focus-visible:pbx-ring-2 focus-visible:pbx-ring-myPrimaryLinkColor;
@@ -169,7 +169,7 @@
     |--------------------------------------------------------------------------
     */
   .pbx-myPrimaryButtonNoBackground {
-    @apply pbx-myPrimaryParagraph pbx-font-medium pbx-text-myPrimaryBrandColor 
+    @apply pbx-myPrimaryParagraph pbx-font-medium pbx-text-myPrimaryBrandColor pbx-font-sans
             focus:pbx-outline-none pbx-cursor-pointer;
   }
   /*

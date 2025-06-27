@@ -436,7 +436,7 @@ onMounted(async () => {
       <!-- Top Layout Save And Reset Area - Start -->
       <div
         id="pagebuilder-toolbar-area"
-        class="pbx-flex pbx-items-center pbx-justify-between pbx-bg-myPrimaryLightGrayColor pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4"
+        class="pbx-flex pbx-items-center pbx-justify-between pbx-bg-myPrimaryLightGrayColor pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans"
       >
         <template
           v-if="
@@ -577,8 +577,7 @@ onMounted(async () => {
             "
             class="pbx-flex pbx-items-center pbx-justify-center"
           >
-            <button
-              type="button"
+            <div
               class="pbx-mr-2"
               @click="
                 () => {
@@ -597,10 +596,9 @@ onMounted(async () => {
                   <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
                 </span>
               </div>
-            </button>
+            </div>
             <div class="pbx-flex pbx-items-center pbx-justify-center">
-              <button
-                type="button"
+              <div
                 @click="
                   async () => {
                     pageBuilderStateStore.setMenuRight(false)
@@ -621,7 +619,7 @@ onMounted(async () => {
                     <span class="pbx-myMediumIcon material-symbols-outlined"> visibility </span>
                   </span>
                 </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
