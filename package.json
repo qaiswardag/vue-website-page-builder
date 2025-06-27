@@ -1,6 +1,6 @@
 {
   "name": "@myissue/vue-website-page-builder",
-  "version": "3.3.31",
+  "version": "3.3.32",
   "description": "Vue 3 page builder component with drag & drop functionality.",
   "type": "module",
   "main": "./dist/vue-website-page-builder.umd.cjs",
@@ -59,7 +59,6 @@
     "dev": "vite",
     "build": "run-p type-check \"build-only {@}\" --",
     "build:lib": "vue-tsc --declaration --emitDeclarationOnly --outDir dist && vite build --mode lib",
-    "type:build": "vue-tsc --declaration --emitDeclarationOnly --outDir dist",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
