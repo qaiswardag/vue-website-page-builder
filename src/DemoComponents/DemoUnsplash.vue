@@ -353,7 +353,7 @@ onMounted(async () => {
                     Information
                   </p>
                   <dl
-                    class="pbx-mt-2 pbx-border-t pbx-border-b pbx-border-solid pbx-border-gray-200 pbx-divide-y pbx-divide-gray-200"
+                    class="pbx-mt-2 pbx-border-t-solid pbx-border-b-solid pbx-border-gray-200 pbx-divide-y pbx-divide-gray-200"
                   >
                     <div
                       class="pbx-py-3 pbx-flex pbx-justify-between pbx-text-sm pbx-font-normal pbx-items-center"
@@ -377,7 +377,7 @@ onMounted(async () => {
 
         <!-- Actions footer # start -->
         <div
-          class="pbx-px-4 pbx-py-3 pbx-flex pbx-gap-2 pbx-border-t pbx-border-solid pbx-border-gray-200 pbx-mt-4 pbx-justify-end"
+          class="pbx-px-4 pbx-py-3 pbx-flex pbx-gap-2 pbx-border-t-solid pbx-border-gray-200 pbx-mt-4 pbx-justify-end"
         >
           <button
             @click="

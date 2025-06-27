@@ -748,7 +748,7 @@ onMounted(async () => {
               await pageBuilderService.clearHtmlSelection()
             }
           "
-          class="pbx-min-w-[3.5rem] pbx-pt-7 pbx-pb-2 pbx-ml-2 pbx-border-l pbx-border-solid pbx-border-gray-200"
+          class="pbx-min-w-[3.5rem] pbx-pt-7 pbx-pb-2 pbx-ml-2 pbx-border-l-solid pbx-border-gray-200"
         >
           <div
             @click.self="
@@ -783,7 +783,7 @@ onMounted(async () => {
         </aside>
       </div>
       <div
-        class="pbx-flex pbx-items-center pbx-justify-center pbx-border-t pbx-border-solid pbx-border-gray-200 pbx-py-4"
+        class="pbx-flex pbx-items-center pbx-justify-center pbx-border-t-solid pbx-border-gray-200 pbx-py-4"
       >
         <div
           @click="

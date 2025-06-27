@@ -219,7 +219,7 @@ onMounted(() => {
       <div v-if="pageBuilderService.isSelectedElementValidText() && editor">
         <div class="pbx-relative pbx-rounded-lg">
           <div
-            class="pbx-flex pbx-justify-between pbx-myPrimaryGap pbx-items-center pbx-py-4 pbx-px-4 pbx-overflow-x-auto pbx-border-b pbx-border-solid pbx-border-gray-200"
+            class="pbx-flex pbx-justify-between pbx-myPrimaryGap pbx-items-center pbx-py-4 pbx-px-4 pbx-overflow-x-auto pbx-border-b-solid pbx-border-gray-200"
           >
             <div>
               <div>
