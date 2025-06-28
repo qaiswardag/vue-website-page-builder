@@ -1,39 +1,16 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
-import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
+
 import { isEmptyObject } from '../../../helpers/isEmptyObject.ts'
 const version = __APP_VERSION__
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-const downloadedComponents = ref(null)
-
 const getPageBuilderConfig = computed(() => {
   return pageBuilderStateStore.getPageBuilderConfig
 })
-
-const getComponents = computed(() => {
-  return pageBuilderStateStore.getComponents
-})
-
-// generate HTML
-const generateHTML = function (filename, HTML) {
-  const element = document.createElement('a')
-  element.setAttribute(
-    'href',
-    'data:text/html;charset=utf-8,' + encodeURIComponent(fullHTMLContent(HTML)),
-  )
-  element.setAttribute('download', filename)
-
-  element.style.display = 'none'
-  document.body.appendChild(element)
-
-  element.click()
-
-  document.body.removeChild(element)
-}
 </script>
 
 <template>

@@ -16,6 +16,7 @@ import EditGetElement from './Editables/EditGetElement.vue'
 import ElementEditor from './Editables/ElementEditor.vue'
 import { getPageBuilder } from '../../../composables/builderInstance'
 import EditorAccordion from '../EditorMenu/EditorAccordion.vue'
+import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
 const pageBuilderService = getPageBuilder()
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -64,6 +65,28 @@ function onScroll() {
   }
 }
 
+// generate HTML
+const generateHTML = function (filename, HTML) {
+  const element = document.createElement('a')
+  element.setAttribute(
+    'href',
+    'data:text/html;charset=utf-8,' + encodeURIComponent(fullHTMLContent(HTML)),
+  )
+  element.setAttribute('download', filename)
+
+  element.style.display = 'none'
+  document.body.appendChild(element)
+
+  element.click()
+
+  document.body.removeChild(element)
+}
+
+const getComponents = computed(() => {
+  return pageBuilderStateStore.getComponents
+})
+
+const downloadedComponents = ref(null)
 // handle download HTML
 const handleDownloadHTML = function () {
   downloadedComponents.value = getComponents.value.map((component) => {
