@@ -514,6 +514,33 @@ If fonts or Material Icons are not displaying correctly, verify that:
 import '@myissue/vue-website-page-builder/style.css'
 ```
 
+## Page Builder Architecture
+
+The Page Builder is designed as a modular, state-driven editor for dynamic page content. Its architecture separates configuration, state management, and DOM interaction, ensuring flexibility and maintainability.
+
+**How the Page Builder Works**
+The Page Builder is designed to be easy to use and flexible for any web project. Here’s how it works behind the scenes:
+
+The Page Builder is designed to be easy to use and flexible for any web project. Here’s how it works behind the scenes:
+
+- **Configuration First:**  
+  When you start the builder, you pass in your configuration (such as what type of page you’re building, user info, branding, and any existing content).  
+  The builder saves this configuration immediately—even if the editing interface (DOM) isn’t loaded yet. This means you can safely set up the builder in advance, and it will be ready as soon as the editor appears on the page.
+
+- **Loading Content:**  
+  If you have existing content (like a saved draft or a published page), the builder loads it so you can keep editing. If not, you start with a blank page.
+
+- **Editing Experience:**  
+  As you add, move, or edit components (like text, images, or sections), the builder keeps everything in sync—both in the app’s memory and in your browser’s local storage. This means your work is always saved, even if you close the browser.
+
+> **Note:**  
+> The builder’s configuration is set as soon as you call the `startBuilder` method, even if the editor is not yet visible on the page. This allows for flexible integration in any app flow.
+
+**In short:**  
+The Page Builder handles all the technical details of editing, saving, and loading pages, so your users can focus on creating great content—without worrying about losing their work or dealing with complicated setup.
+
+<img style="max-width: 100%;" src="./public/home/page_builder_architecture.png" alt="Vue Website Page Builder - the editor" />
+
 ## Contributing
 
 1. Fork the repository
