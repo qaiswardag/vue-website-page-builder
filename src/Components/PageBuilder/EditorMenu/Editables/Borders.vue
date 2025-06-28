@@ -102,7 +102,7 @@ watch(
               <div
                 v-if="borderColor !== 'none'"
                 class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border-solid pbx-border pbx-border-gray-100 pbx-rounded-sm"
-                :class="`bg-${borderColor?.replace('border-', '')}`"
+                :class="`pbx-bg-${borderColor?.replace('pbx-border-', '')}`"
               ></div>
               <span class="pbx-block pbx-truncate">{{ borderColor }}</span>
             </span>
@@ -147,7 +147,7 @@ watch(
                     <div
                       v-if="color !== 'none'"
                       class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-bg-gray-950"
-                      :class="`bg-${color.replace('border-', '')}`"
+                      :class="`pbx-bg-${color.replace('pbx-border-', '')}`"
                     ></div>
                     <span v-if="color === 'none'" class="pbx-ml-3">Transparent</span>
                     <span v-if="color !== 'none'" class="pbx-ml-3">{{ color }}</span>
