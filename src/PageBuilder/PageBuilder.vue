@@ -809,7 +809,7 @@ onMounted(async () => {
             'pbx-w-0': !getMenuRight,
             'pbx-w-80 pbx-mr-2 pbx-bg-myPrimaryLightGrayColor pbx-items-stretch': getMenuRight,
           }"
-          class="pbx-duration-300 pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-shadow-sm pbx-rounded-l-2xl"
+          class="pbx-duration-300 pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-shadow-sm pbx-rounded-l-2xl pbx-h-[100vh]"
         >
           <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
           </RightSidebarEditor>
