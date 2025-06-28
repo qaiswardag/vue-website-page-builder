@@ -9,6 +9,7 @@ import Padding from './Editables/Padding.vue'
 import Margin from './Editables/Margin.vue'
 import BorderRadius from './Editables/BorderRadius.vue'
 import BackgroundColorEditor from './Editables/BackgroundColorEditor.vue'
+import TextColorEditor from './Editables/TextColorEditor.vue'
 import Borders from './Editables/Borders.vue'
 import LinkEditor from './Editables/LinkEditor.vue'
 import TipTap from '../../TipTap/TipTap.vue'
@@ -17,6 +18,9 @@ import ElementEditor from './Editables/ElementEditor.vue'
 import { getPageBuilder } from '../../../composables/builderInstance'
 import EditorAccordion from '../EditorMenu/EditorAccordion.vue'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
+import ModalBuilder from '../../../Components/Modals/ModalBuilder.vue'
+import { extractCleanHTMLFromPageBuilder } from '../../../composables/extractCleanHTMLFromPageBuilder'
+
 const pageBuilderService = getPageBuilder()
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -24,7 +28,9 @@ const pageBuilderStateStore = sharedPageBuilderStore
 // emit
 const emit = defineEmits(['closeEditor'])
 
-// get current element tag
+const getComponents = computed(() => {
+  return pageBuilderStateStore.getComponents
+})
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement
 })
@@ -82,18 +88,30 @@ const generateHTML = function (filename, HTML) {
   document.body.removeChild(element)
 }
 
-const getComponents = computed(() => {
-  return pageBuilderStateStore.getComponents
-})
-
-const downloadedComponents = ref(null)
-// handle download HTML
 const handleDownloadHTML = function () {
-  downloadedComponents.value = getComponents.value.map((component) => {
-    return component.html_code
-  })
+  const pagebuilder = document.getElementById('pagebuilder')
+  if (!pagebuilder) {
+    return
+  }
 
-  generateHTML('downloaded_html.html', downloadedComponents.value.join(''))
+  const html = extractCleanHTMLFromPageBuilder(pagebuilder)
+
+  generateHTML('downloaded_html.html', html)
+}
+const showModalGlobalPageStyles = ref(null)
+
+const handleUpdatePageStyles = async function () {
+  showModalGlobalPageStyles.value = true
+
+  await pageBuilderService.globalPageStyles()
+}
+const handleCloseGlobalPageStyles = async function () {
+  // Remove global highlight if present
+  const pagebuilder = document.querySelector('#pagebuilder')
+  if (pagebuilder) {
+    pagebuilder.removeAttribute('data-global-selected')
+  }
+  showModalGlobalPageStyles.value = false
 }
 </script>
 
@@ -152,26 +170,89 @@ const handleDownloadHTML = function () {
         </article>
       </div>
 
-      <article class="pbx-my-1 pbx-bg-white">
+      <!-- Global Page Styles -->
+      <article
+        v-if="Array.isArray(getComponents) && getComponents.length >= 1"
+        class="pbx-my-1 pbx-bg-white"
+      >
+        <EditorAccordion>
+          <template #title>Global Page Styles</template>
+          <template #content>
+            <label class="pbx-myPrimaryInputLabel pbx-my-4">
+              Apply styles that affect the entire page. These settings include global font family,
+              text color, background color, and other universal styles that apply to all sections.
+            </label>
+
+            <div class="pbx-mt-4">
+              <button @click="handleUpdatePageStyles" type="button" class="pbx-myPrimaryButton">
+                Update Page Styles
+              </button>
+            </div>
+          </template>
+        </EditorAccordion>
+      </article>
+      <!-- Global Page Styles -->
+
+      <!-- Download Layout HTML -->
+      <article
+        v-if="Array.isArray(getComponents) && getComponents.length >= 1"
+        class="pbx-my-1 pbx-bg-white"
+      >
         <EditorAccordion>
           <template #title>Download HTML</template>
           <template #content>
-            <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">
-              Download Page as HTML
-            </p>
-
+            <label class="pbx-myPrimaryInputLabel pbx-my-4">
+              Export the entire page as a standalone HTML file. This includes all sections, content,
+              and applied styles, making it ready for use or integration elsewhere.
+            </label>
             <div class="pbx-mt-4">
               <button @click="handleDownloadHTML" type="button" class="pbx-myPrimaryButton">
                 Download HTML file
               </button>
             </div>
           </template>
-
-          <!-- Download Layout HTML - end -->
         </EditorAccordion>
+        <!-- Download Layout HTML -->
       </article>
-
-      <article class="pbx-mt-1 pbx-bg-white"></article>
     </div>
+
+    <ModalBuilder
+      maxWidth="md"
+      minHeight="pbx-h-[90vh]"
+      :showModalBuilder="showModalGlobalPageStyles"
+      title="Global Page Styles"
+      @closeMainModalBuilder="handleCloseGlobalPageStyles"
+    >
+      <div class="pbx-min-h-[90vh] pbx-flex pbx-flex-col pbx-gap-2 pbx-pt-4 pbx-pb-2">
+        <p class="pbx-myPrimaryParagraph">
+          Apply styles that affect the entire page. These settings include global font family, text
+          color, background color, and other universal styles that apply to all sections.
+        </p>
+        <article class="pbx-my-1 pbx-bg-gray-100">
+          <Typography></Typography>
+        </article>
+        <article class="pbx-my-1 pbx-bg-gray-100">
+          <TextColorEditor :globalPageLayout="true"></TextColorEditor>
+        </article>
+        <article class="pbx-my-1 pbx-bg-gray-100">
+          <BackgroundColorEditor :globalPageLayout="true"></BackgroundColorEditor>
+        </article>
+        <article class="pbx-my-1 pbx-bg-gray-100">
+          <Padding> </Padding>
+        </article>
+        <article class="pbx-my-1 pbx-bg-gray-100">
+          <Margin> </Margin>
+        </article>
+        <article class="pbx-my-1 pbx-bg-gray-100">
+          <BorderRadius></BorderRadius>
+        </article>
+        <article class="pbx-my-1 pbx-bg-gray-100">
+          <Borders></Borders>
+        </article>
+        <article class="pbx-my-1 pbx-bg-gray-100">
+          <ClassEditor></ClassEditor>
+        </article>
+      </div>
+    </ModalBuilder>
   </div>
 </template>

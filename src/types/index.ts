@@ -201,6 +201,12 @@ export interface PageBuilderUser {
   image: string
 }
 
+export interface PageSettings {
+  classes: string
+  style?: Record<string, string>
+  imageUrlPrefix?: string
+}
+
 // Page Builder Configuration interface
 export interface PageBuilderConfig {
   updateOrCreate: {
@@ -209,7 +215,7 @@ export interface PageBuilderConfig {
   }
   pageBuilderLogo?: { src: string } | null
   resourceData?: { title: string; id?: number } | null
-  userForPageBuilder?: { name: string } | null
+  userForPageBuilder?: PageBuilderUser
   [key: string]: unknown
   userSettings?: {
     theme?: 'light' | 'dark' | 'auto'
@@ -221,6 +227,7 @@ export interface PageBuilderConfig {
     brandColor?: string
     [key: string]: unknown
   } | null
+  pageSettings?: PageSettings
 }
 // Tailwind utility interfaces
 export interface TailwindColors {

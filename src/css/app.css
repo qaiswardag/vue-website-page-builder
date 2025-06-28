@@ -550,3 +550,10 @@
   border-radius: 25px;
   border: none;
 }
+
+#pagebuilder[data-global-selected] {
+  outline: 3px dashed #b91010 !important;
+  outline-offset: -2px !important;
+  box-shadow: 0 0 0 2px #fbbf24;
+  /* Or any style you want */
+}

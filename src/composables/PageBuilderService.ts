@@ -21,6 +21,7 @@ import type { ComputedRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { delay } from './delay'
 import { isEmptyObject } from '../helpers/isEmptyObject'
+import { extractCleanHTMLFromPageBuilder } from './extractCleanHTMLFromPageBuilder'
 
 export class PageBuilderService {
   // Class properties with types
@@ -266,6 +267,68 @@ export class PageBuilderService {
     await this.#updateComponentsFromString(dataToPass)
   }
 
+  // async tryMountPendingComponents() {
+  //   // Always clear DOM and store before mounting new resource
+  //   this.deleteAllComponentsFromDOM()
+
+  //   const localStorageData = this.loadStoredComponentsFromStorage()
+
+  //   this.pageBuilderStateStore.setIsLoadingGlobal(true)
+  //   await delay(200)
+  //   const config = this.pageBuilderStateStore.getPageBuilderConfig
+  //   const formType = config && config.updateOrCreate && config.updateOrCreate.formType
+
+  //   //
+  //   if (!config) return
+  //   //
+  //   if (
+  //     config &&
+  //     formType === 'update' &&
+  //     localStorageData &&
+  //     typeof localStorageData === 'string' &&
+  //     this.pendingMountData
+  //   ) {
+  //     this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+  //   }
+  //   //
+  //   //
+  //   //
+  //   //
+  //   if (config && formType === 'update') {
+  //     if (this.pendingMountData) {
+  //       this.#completeBuilderInitialization(this.pendingMountData)
+  //       return
+  //     }
+
+  //     // Pending data for mount is null at this stage
+  //     if (typeof localStorageData === 'string') {
+  //       await this.#updateComponentsFromString(localStorageData)
+  //       this.#completeBuilderInitialization()
+  //       return
+  //     }
+
+  //     //
+  //     //
+  //     //
+  //     //
+  //     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+  //     await nextTick()
+  //     // Attach event listeners to all editable elements in the Builder
+  //     await this.#addListenersToEditableElements()
+
+  //     this.pageBuilderStateStore.setIsRestoring(false)
+  //     this.pageBuilderStateStore.setIsLoadingGlobal(false)
+  //   }
+
+  //   if (config && formType === 'create') {
+  //     // Pending data for mount is null at this stage
+  //     if (typeof localStorageData === 'string') {
+  //       await this.#updateComponentsFromString(localStorageData)
+  //       this.#completeBuilderInitialization()
+  //       return
+  //     }
+  // }
+
   async tryMountPendingComponents() {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await delay(400)
@@ -394,6 +457,7 @@ export class PageBuilderService {
     if (passedComponentsArray) {
       // Prefer components from local storage if available for this resource
       if (!this.pendingMountData && localStorageData && typeof localStorageData === 'string') {
+        console.log('11111:')
         await this.#updateComponentsFromString(localStorageData)
       } else {
         // If no local storage is found, use the components array provided by the user
@@ -474,6 +538,22 @@ export class PageBuilderService {
     }
 
     return currentCSS
+  }
+
+  async globalPageStyles() {
+    const pagebuilder = document.querySelector('#pagebuilder')
+    if (!pagebuilder) return
+
+    // Deselect any selected or hovered elements in the builder UI
+    await this.clearHtmlSelection()
+    //
+    // Set the element in the store
+    this.pageBuilderStateStore.setElement(pagebuilder as HTMLElement)
+
+    // Add the data attribute for styling
+    pagebuilder.setAttribute('data-global-selected', 'true')
+
+    await nextTick()
   }
 
   handleFontWeight(userSelectedFontWeight?: string): void {
@@ -859,8 +939,6 @@ export class PageBuilderService {
 
       // Add prefix if missing
       const prefixedClass = cleanedClass.startsWith('pbx-') ? cleanedClass : 'pbx-' + cleanedClass
-
-      console.log('Adding class:', prefixedClass)
 
       this.getElement.value?.classList.add(prefixedClass)
 
@@ -1275,40 +1353,21 @@ export class PageBuilderService {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
-    const addedHtmlComponents = ref<string[]>([])
-    // preview current design in external browser tab
-    // iterate over each top-level section component within pagebuilder only
-    pagebuilder.querySelectorAll('section:not(section section)').forEach((section) => {
-      // remove hovered and selected
+    if (pagebuilder) {
+      // Get cleaned HTML from entire builder
+      const cleanedHTML = extractCleanHTMLFromPageBuilder(
+        pagebuilder as HTMLElement,
+        this.pageBuilderStateStore.getPageBuilderConfig
+          ? this.pageBuilderStateStore.getPageBuilderConfig
+          : undefined,
+      )
 
-      // remove hovered
-      const hoveredElement = section.querySelector('[hovered]')
-      if (hoveredElement) {
-        hoveredElement.removeAttribute('hovered')
-      }
+      // Store as array with one string (as your preview expects an array)
+      const previewData = JSON.stringify([cleanedHTML])
 
-      // remove selected
-      const selectedElement = section.querySelector('[selected]')
-      if (selectedElement) {
-        selectedElement.removeAttribute('selected')
-      }
-
-      // push outer html into the array
-      addedHtmlComponents.value.push(section.outerHTML)
-    })
-
-    // stringify added html components
-    const stringifiedComponents = JSON.stringify(addedHtmlComponents.value)
-
-    // commit
-    this.pageBuilderStateStore.setCurrentLayoutPreview(stringifiedComponents)
-
-    // set added html components back to empty array
-    addedHtmlComponents.value = []
-
-    //
+      this.pageBuilderStateStore.setCurrentLayoutPreview(previewData)
+    }
   }
-
   // Helper function to sanitize title for localStorage key
   private sanitizeForLocalStorage(input: string): string {
     return input
@@ -1534,10 +1593,15 @@ export class PageBuilderService {
       })
     })
 
-    // Save to localStorage with pageBuilderContentSavedAt using the correct key
+    const pageSettings = {
+      classes: pagebuilder.className || '',
+      style: pagebuilder.getAttribute('style') || '',
+    }
+
     const dataToSave = {
       components: componentsToSave,
       pageBuilderContentSavedAt: new Date().toISOString(),
+      pageSettings,
     }
 
     const keyForSavingFromDomToLocal = this.getLocalStorageItemName.value
@@ -1546,7 +1610,6 @@ export class PageBuilderService {
       localStorage.setItem(keyForSavingFromDomToLocal, JSON.stringify(dataToSave))
     }
   }
-
   async removeCurrentComponentsFromLocalStorage() {
     this.#updateLocalStorageItemName()
     await nextTick()
@@ -1973,6 +2036,20 @@ export class PageBuilderService {
       .join(' ')
   }
 
+  #convertStyleObjectToString(
+    styleObj: string | Record<string, string> | null | undefined,
+  ): string {
+    if (!styleObj) return ''
+    if (typeof styleObj === 'string') return styleObj
+
+    return Object.entries(styleObj)
+      .map(([key, value]) => {
+        const kebabKey = key.replace(/([A-Z])/g, '-$1').toLowerCase()
+        return `${kebabKey}: ${value};`
+      })
+      .join(' ')
+  }
+
   /**
    * Parse and set components from JSON or HTML data
    *
@@ -2004,10 +2081,27 @@ export class PageBuilderService {
   }
 
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
+  // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
   async #parseJSONComponents(jsonData: string): Promise<void> {
+    console.log('parseJSONComponents ran..:', jsonData)
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
+
+      // Fallback to store-based config if not provided in imported JSON
+      const pageSettings =
+        this.pageBuilderStateStore.getPageBuilderConfig &&
+        this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
+
+      // Restore page-level settings like class and style
+      if (pageSettings) {
+        const pagebuilder = document.querySelector('#pagebuilder') as HTMLElement
+        if (pagebuilder) {
+          pagebuilder.className = pageSettings.classes || ''
+          pagebuilder.setAttribute('style', this.#convertStyleObjectToString(pageSettings.style))
+        }
+      }
+
       // Support both old and new structure
       if (Array.isArray(parsedData)) {
         componentsArray = parsedData
@@ -2024,7 +2118,7 @@ export class PageBuilderService {
           const section = doc.querySelector('section')
 
           if (section) {
-            // Process all elements inside section to add prefix to classes
+            // Prefix Tailwind classes
             section.querySelectorAll('[class]').forEach((el) => {
               el.setAttribute(
                 'class',
@@ -2032,7 +2126,7 @@ export class PageBuilderService {
               )
             })
 
-            // Ensure data-componentid exists
+            // Ensure IDs & titles
             if (!section.hasAttribute('data-componentid')) {
               const newId = uuidv4()
               section.setAttribute('data-componentid', newId)
@@ -2041,12 +2135,11 @@ export class PageBuilderService {
               component.id = section.getAttribute('data-componentid')!
             }
 
-            // Ensure data-component-title exists
             const title = component.title || 'Untitled Component'
             section.setAttribute('data-component-title', title)
             component.title = title
 
-            // Update html_code with modified section
+            // Update html_code
             component.html_code = section.outerHTML
           }
 
@@ -2054,11 +2147,10 @@ export class PageBuilderService {
         })
       }
 
+      console.log('hvad er denne....:', savedCurrentDesign)
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
 
-      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
       await nextTick()
-      // Attach event listeners to all editable elements in the Builder
       await this.#addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing JSON components:', error)
@@ -2067,16 +2159,42 @@ export class PageBuilderService {
   }
   // Private method to parse HTML components
   async #parseHTMLComponents(htmlData: string): Promise<void> {
+    console.log('parseHTMLComponents ran..:')
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')
 
-      // Select all <section> elements (with or without data-componentid)
+      const importedPageBuilder = doc.querySelector('#pagebuilder') as HTMLElement | null
+      const livePageBuilder = document.querySelector('#pagebuilder') as HTMLElement | null
+
+      if (livePageBuilder) {
+        if (importedPageBuilder) {
+          livePageBuilder.className = importedPageBuilder.className || ''
+          const style = importedPageBuilder.getAttribute('style')
+          if (style !== null) {
+            livePageBuilder.setAttribute('style', style)
+          } else {
+            livePageBuilder.removeAttribute('style')
+          }
+        } else {
+          // Fallback: inject settings from store if not present in HTML
+          const fallbackSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings
+          if (fallbackSettings) {
+            livePageBuilder.className = fallbackSettings.classes || ''
+            livePageBuilder.setAttribute(
+              'style',
+              this.#convertStyleObjectToString(pageSettings.style),
+            )
+          }
+        }
+      }
+
+      // Select all <section> elements
       const sectionElements = doc.querySelectorAll('section')
 
       const extractedSections: ComponentObject[] = []
       sectionElements.forEach((section) => {
-        // Process all elements inside section to add prefix to classes
+        // Prefix all classes inside section
         section.querySelectorAll('[class]').forEach((el) => {
           el.setAttribute(
             'class',
@@ -2109,11 +2227,9 @@ export class PageBuilderService {
 
       this.pageBuilderStateStore.setComponents(extractedSections)
 
-      // Deselect any selected or hovered elements in the builder UI
+      // Clear selections and re-bind events
       await this.clearHtmlSelection()
-      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
       await nextTick()
-      // Attach event listeners to all editable elements in the Builder
       await this.#addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing HTML components:', error)

@@ -9,7 +9,7 @@ import { preloadImage } from '../../../composables/preloadImage'
 import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
 
 import { getPageBuilder } from '../../../composables/builderInstance'
-import { delay } from '@/composables/delay'
+import { delay } from '../../../composables/delay'
 const pageBuilderService = getPageBuilder()
 
 // Use shared store instance

@@ -482,12 +482,48 @@ function closePageBuilder() {
 > You can name your handler function anything you like.  
 > This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
 
+### Config Option: `pageSettings`
+
+The Page Builder renders all components wrapped inside a single parent container `<div id="pagebuilder">`.  
+You can pass global CSS ``classes` and `style` to this wrapper by adding a `pageSettings` object in your config:
+
+```ts
+const configPageBuilder = {
+  // other config options...
+
+  pageSettings: {
+    classes: 'max-w-screen-lg mx-auto px-4 bg-white',
+    style: {
+      backgroundColor: 'red',
+      border: '6px solid yellow',
+    },
+  },
+} as const
+```
+
+### Download HTML file
+
+Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making the file ready for use or integration elsewhere.
+
+- Images may not display correctly in the exported HTML unless their URLs are properly prefixed or fully qualified.
+
+To ensure images render properly after export, you must specify a URL prefix in your Page Builder configuration. This prefix will be prepended to all relative image URLs during the export process.
+
+```ts
+const configPageBuilder = {
+  pageSettings: {
+    imageUrlPrefix: 'https://your-domain.com/uploads/',
+  },
+  // other config options...
+} as const
+```
+
 ### Custom Media Library Component or Custom Layout Builder Component
 
-You may extend the Page Builder by adding your own media library or custom layout builder Component.  
+You may extend the Page Builder by adding your own media library or custom layout builder Component.
 Inject your components easily to tailor the builder to your application's needs.
 
-📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)**  
+📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)**
 Learn how to create and integrate your own components step by step.
 
 ## Troubleshooting

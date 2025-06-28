@@ -52,9 +52,7 @@ const handleAddClasses = async () => {
   <EditorAccordion>
     <template #title>Generated CSS</template>
     <template #content>
-      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">CSS applied</p>
-
-      <label class="pbx-myPrimaryInputLabel">
+      <label class="pbx-myPrimaryInputLabel pbx-my-4">
         This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the
         selected element.
       </label>

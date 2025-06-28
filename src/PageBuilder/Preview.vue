@@ -13,14 +13,12 @@ const previewData = localStorage.getItem('preview')
 
 if (previewData) {
   try {
-    const parsedData = JSON.parse(previewData)
-    htmlPage.value = Array.isArray(parsedData) ? parsedData.join('') : ''
-  } catch (error) {
-    console.error('Error parsing preview data:', error)
+    const parsed = JSON.parse(previewData)
+    htmlPage.value = Array.isArray(parsed) ? parsed.join('') : ''
+  } catch (err) {
+    console.error('Invalid preview data:', err)
     htmlPage.value = ''
   }
-} else {
-  htmlPage.value = ''
 }
 </script>
 

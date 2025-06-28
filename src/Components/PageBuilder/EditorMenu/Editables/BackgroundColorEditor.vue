@@ -9,6 +9,12 @@ const pageBuilderService = getPageBuilder()
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
+defineProps({
+  globalPageLayout: {
+    Type: Boolean,
+  },
+})
+
 const backgroundColor = ref(null)
 const getBackgroundColor = computed(() => {
   return pageBuilderStateStore.getBackgroundColor
@@ -27,8 +33,23 @@ watch(
 <template>
   <Listbox as="div" v-model="backgroundColor">
     <div class="pbx-relative">
-      <div class="pbx-flex pbx-gap-2 pbx-items-center">
+      <div
+        :class="[
+          globalPageLayout
+            ? 'pbx-flex pbx-flex-col pbx-border-solid pbx-border pbx-border-gray-400'
+            : 'pbx-flex pbx-gap-2 pbx-items-center',
+        ]"
+      >
         <ListboxButton
+          v-if="globalPageLayout"
+          class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor"
+        >
+          <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-my-0 pbx-py-0">Background Color</p>
+          <span v-if="globalPageLayout" class="material-symbols-outlined"> chevron_right </span>
+        </ListboxButton>
+
+        <ListboxButton
+          v-if="!globalPageLayout"
           class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
         >
           <div class="pbx-flex pbx-flex-col">
