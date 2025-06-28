@@ -91,8 +91,6 @@ export class PageBuilderService {
       'BLOCKQUOTE',
       'BR',
     ]
-
-    this.delay = delay
   }
 
   // Deselect any selected or hovered elements in the builder UI
@@ -276,7 +274,7 @@ export class PageBuilderService {
     const localStorageData = this.loadStoredComponentsFromStorage()
 
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
-    await delay(200)
+    await delay(300)
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
@@ -404,7 +402,7 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     const localStorageData = this.loadStoredComponentsFromStorage()
 
-    await this.delay(300)
+    await delay(300)
 
     // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
@@ -730,7 +728,7 @@ export class PageBuilderService {
           // Deselect any selected or hovered elements in the builder UI
           //
           this.#saveDomComponentsToLocalStorage()
-          await this.delay(300)
+          await delay(400)
         } catch (err) {
           console.error('Error trying auto save.', err)
         } finally {
@@ -742,7 +740,7 @@ export class PageBuilderService {
       try {
         this.pageBuilderStateStore.setIsSaving(true)
         this.#saveDomComponentsToLocalStorage()
-        await this.delay(300)
+        await delay(400)
       } catch (err) {
         console.error('Error trying saving.', err)
       } finally {
@@ -768,7 +766,7 @@ export class PageBuilderService {
       ) {
         this.pageBuilderStateStore.setIsSaving(true)
         this.#saveDomComponentsToLocalStorage()
-        await this.delay(300)
+        await delay(400)
 
         this.pageBuilderStateStore.setIsSaving(false)
       }
@@ -776,7 +774,7 @@ export class PageBuilderService {
     if (passedConfig && !passedConfig.userSettings) {
       this.pageBuilderStateStore.setIsSaving(true)
       this.#saveDomComponentsToLocalStorage()
-      await this.delay(300)
+      await delay(400)
 
       this.pageBuilderStateStore.setIsSaving(false)
     }
@@ -1650,7 +1648,7 @@ export class PageBuilderService {
 
       if (typeof updateDraftFromLocalStorage === 'string') {
         this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
-        await delay(300)
+        await delay(400)
         await this.#updateComponentsFromString(updateDraftFromLocalStorage)
         this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
       }
@@ -1671,7 +1669,7 @@ export class PageBuilderService {
 
     if (formType === 'update') {
       this.pageBuilderStateStore.setIsRestoring(true)
-      await this.delay(300)
+      await delay(400)
 
       // Restore the original content if available
       if (Array.isArray(this.originalComponents)) {
