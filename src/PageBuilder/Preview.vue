@@ -1,6 +1,12 @@
 <script setup>
 import { ref } from 'vue'
 
+defineProps({
+  mobile: {
+    type: Boolean,
+  },
+})
+
 const htmlPage = ref('')
 
 const previewData = localStorage.getItem('preview')
@@ -19,13 +25,26 @@ if (previewData) {
 </script>
 
 <template>
-  <div>
-    <div
-      class="pbx-text-black pbx-w-full pbx-inset-x-0 pbx-h-[90vh] pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2"
-    >
-      <div id="page-builder-editor">
-        <div class="" v-html="htmlPage"></div>
+  <template v-if="!mobile">
+    <div>
+      <div
+        class="pbx-text-black pbx-w-full pbx-inset-x-0 pbx-h-[90vh] pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2"
+      >
+        <div id="page-builder-editor">
+          <div class="" v-html="htmlPage"></div>
+        </div>
       </div>
     </div>
-  </div>
+  </template>
+  <template v-if="mobile">
+    <div>
+      <div
+        class="pbx-text-black pbx-w-full pbx-inset-x-0 pbx-h-[90vh] pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2"
+      >
+        <div id="page-builder-editor">
+          <div class="" v-html="htmlPage"></div>
+        </div>
+      </div>
+    </div>
+  </template>
 </template>

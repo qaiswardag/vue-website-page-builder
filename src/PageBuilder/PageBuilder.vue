@@ -409,7 +409,7 @@ onMounted(async () => {
       @closeMainModalBuilder="firstPageBuilderPreviewModalButtonMobile"
       maxWidth="lg"
     >
-      <Preview />
+      <Preview :mobile="true" />
     </ModalBuilder>
 
     <DynamicModalBuilder
@@ -538,7 +538,7 @@ onMounted(async () => {
               "
             >
               <button
-                class="pbx-mySecondaryButton pbx-h-6 pbx-flex pbx-gap-2"
+                class="pbx-mySecondaryButton pbx-h-6 pbx-flex pbx-gap-2 lg:mr-2"
                 @click.stop="
                   async () => {
                     await pageBuilderService.clearHtmlSelection()
@@ -602,7 +602,7 @@ onMounted(async () => {
               "
             >
               <div
-                class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-border-0 pbx-border-solid pbx-border-r pbx-border-gray-200 pbx-pr-2"
+                class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-border-0 pbx-border-solid pbx-border-r pbx-border-gray-200 lg:pbx-pr-6"
               >
                 <span class="lg:pbx-block pbx-hidden">
                   <div class="pbx-whitespace-nowrap pbx-cursor-pointer">Add new Components</div>
