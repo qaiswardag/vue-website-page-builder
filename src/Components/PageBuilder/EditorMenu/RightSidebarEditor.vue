@@ -15,6 +15,7 @@ import TipTap from '../../TipTap/TipTap.vue'
 import EditGetElement from './Editables/EditGetElement.vue'
 import ElementEditor from './Editables/ElementEditor.vue'
 import { getPageBuilder } from '../../../composables/builderInstance'
+import EditorAccordion from '../EditorMenu/EditorAccordion.vue'
 const pageBuilderService = getPageBuilder()
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -61,6 +62,15 @@ function onScroll() {
   if (scrollContainer.value) {
     lastScrollTop = scrollContainer.value.scrollTop
   }
+}
+
+// handle download HTML
+const handleDownloadHTML = function () {
+  downloadedComponents.value = getComponents.value.map((component) => {
+    return component.html_code
+  })
+
+  generateHTML('downloaded_html.html', downloadedComponents.value.join(''))
 }
 </script>
 
@@ -119,11 +129,25 @@ function onScroll() {
         </article>
       </div>
 
-      <div>
-        <article class="pbx-my-1 pbx-bg-white">
-          <ElementEditor></ElementEditor>
-        </article>
-      </div>
+      <article class="pbx-my-1 pbx-bg-white">
+        <EditorAccordion>
+          <template #title>Download HTML</template>
+          <template #content>
+            <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">
+              Download Page as HTML
+            </p>
+
+            <div class="pbx-mt-4">
+              <button @click="handleDownloadHTML" type="button" class="pbx-myPrimaryButton">
+                Download HTML file
+              </button>
+            </div>
+          </template>
+
+          <!-- Download Layout HTML - end -->
+        </EditorAccordion>
+      </article>
+
       <article class="pbx-mt-1 pbx-bg-white"></article>
     </div>
   </div>

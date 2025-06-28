@@ -6,13 +6,10 @@ import { getPageBuilder } from '../../../../composables/builderInstance'
 
 const pageBuilderService = getPageBuilder()
 
-// Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
 const currentClasses = ref(null)
-const getCurrentClasses = computed(() => {
-  return pageBuilderStateStore.getCurrentClasses
-})
+const getCurrentClasses = computed(() => pageBuilderStateStore.getCurrentClasses)
 
 watch(
   getCurrentClasses,
@@ -23,9 +20,28 @@ watch(
 )
 
 const inputClass = ref('')
+const errorMessage = ref('') // <-- error message reactive ref
 
-const handleAddClasses = async function () {
-  pageBuilderService.handleAddClasses(inputClass.value)
+const handleAddClasses = async () => {
+  const classToAdd = inputClass.value.trim()
+
+  if (!classToAdd) {
+    errorMessage.value = 'Please enter a class name.'
+    return
+  }
+
+  // Add prefix if missing
+  const prefixedClass = classToAdd.startsWith('pbx-') ? classToAdd : 'pbx-' + classToAdd
+
+  // Check if class already exists
+  if (currentClasses.value?.includes(prefixedClass)) {
+    errorMessage.value = `Class "${prefixedClass}" is already added.`
+    return
+  }
+
+  errorMessage.value = '' // Clear error
+
+  pageBuilderService.handleAddClasses(classToAdd)
   await pageBuilderService.initializeElementStyles()
 
   inputClass.value = ''
@@ -36,6 +52,13 @@ const handleAddClasses = async function () {
   <EditorAccordion>
     <template #title>Generated CSS</template>
     <template #content>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">CSS applied</p>
+
+      <label class="pbx-myPrimaryInputLabel">
+        This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the
+        selected element.
+      </label>
+
       <div class="pbx-flex pbx-flex-row pbx-flex-wrap pbx-gap-2 pbx-mt-2 pbx-mb-4">
         <div
           v-for="className in currentClasses"
@@ -56,28 +79,26 @@ const handleAddClasses = async function () {
         </div>
       </div>
 
-      <div class="pbx-flex pbx-gap-2 pbx-item-center pbx-flex-col">
+      <div>
+        <label class="pbx-myPrimaryInputLabel">
+          Add your CSS.
+          <br />
+          The pbx- prefix is added automatically.
+        </label>
         <div class="pbx-flex pbx-gap-2 pbx-item-center">
-          <div
-            class="pbx-mt-1 pbx-relative pbx-flex pbx-items-center pbx-w-full pbx-border-solid pbx-border pbx-myPrimaryInput pbx-py-0 pbx-p-0"
-          >
-            <input
-              v-model="inputClass"
-              type="text"
-              placeholder="Type class"
-              @keydown.enter="handleAddClasses()"
-              autocomplete="off"
-              class="pbx-myPrimaryInput pbx-border-none pbx-rounded-r-none pbx-ml-0 pbx-w-full"
-            />
-            <div
-              class="pbx-border-none pbx-rounded pbx-flex pbx-items-center pbx-justify-center pbx-h-full pbx-w-8"
-            >
-              <kbd class="pbx-myPrimaryParagraph pbx-text-gray-400 pbx-border-none"> ⏎ </kbd>
-            </div>
-          </div>
+          <input
+            v-model="inputClass"
+            type="text"
+            placeholder="Type class"
+            @keydown.enter="handleAddClasses()"
+            autocomplete="off"
+            class="pbx-myPrimaryInput"
+          />
+
+          <button @click="handleAddClasses" type="button" class="pbx-myPrimaryButton">Add</button>
         </div>
-        <p class="pbx-myPrimaryInputError"></p>
       </div>
+      <p v-if="errorMessage" class="pbx-myPrimaryInputError">{{ errorMessage }}</p>
     </template>
   </EditorAccordion>
 </template>

@@ -75,7 +75,7 @@ The Page Builder is packed with features:
 - **Global Styles**: Global Styles for fonts, designs, & colors.
 - **YouTube Videos**: Integrate video content smoothly.
 - **Tailwind Support**: Fully compatible with Tailwind CSS (with automatic class prefixing to avoid conflicts).
-- **Styles Prefixed**: No risk of style conflicts between the builder and your app.
+- **Styles Prefixed**: To ensure clean and predictable styling, the builder uses Scoped Style Isolation. No risk of style conflicts between the builder and your app.
 
 Powerful Page Builder for any growing merchants, brands, & agencies. Empower users to create the perfect content with the Page Builder.
 
@@ -188,23 +188,11 @@ console.info('You may inspect this result for message, status, or error:', resul
 ## Important: CSS Prefixing (`pbx-`)
 
 All CSS classes generated or processed by the Page Builder—including Tailwind utilities and your custom classes—are automatically prefixed with `pbx-`. This ensures the builder’s styles never conflict with your app’s existing CSS or Tailwind setup.
+This prevents global styles from leaking into the builder and vice versa, which is crucial for embedding the builder into larger apps or white-label environments.
 
 **How does this affect you?**
 
-- Any class you use in builder components will be output as `pbx-ClassName`.
-- Tailwind classes are also prefixed, e.g. `bg-red-100` becomes `pbx-bg-red-100`, `md:grid-cols-2` becomes `md:pbx-grid-cols-2`.
-
-**Example:**
-
-```html
-<div class="pbx-myCustomCSSClass pbx-bg-blue-100 md:pbx-grid-cols-2"></div>
-```
-
-```css
-.pbx-myCustomCSSClass {
-  margin-bottom: 2rem;
-}
-```
+When a user adds a component into the page builder, all classes from that component are automatically prefixed with pbx- (e.g., pbx-button, pbx-container) to ensure style isolation and avoid conflicts.
 
 > **Note:**  
 > Simply import the builder’s CSS file once in your project. All builder styles are namespaced, so there is no risk of style conflicts

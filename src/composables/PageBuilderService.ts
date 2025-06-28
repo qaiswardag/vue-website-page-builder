@@ -850,22 +850,24 @@ export class PageBuilderService {
   handleAddClasses(userSelectedClass: string): void {
     if (
       typeof userSelectedClass === 'string' &&
-      userSelectedClass !== '' &&
+      userSelectedClass.trim() !== '' &&
       !userSelectedClass.includes(' ') &&
-      // Check if class already exists
-      !this.getElement.value?.classList.contains(userSelectedClass)
+      // Check if class (with prefix) already exists
+      !this.getElement.value?.classList.contains('pbx-' + userSelectedClass.trim())
     ) {
-      // Remove any leading/trailing spaces
       const cleanedClass = userSelectedClass.trim()
 
-      this.getElement.value?.classList.add(cleanedClass)
+      // Add prefix if missing
+      const prefixedClass = cleanedClass.startsWith('pbx-') ? cleanedClass : 'pbx-' + cleanedClass
+
+      console.log('Adding class:', prefixedClass)
+
+      this.getElement.value?.classList.add(prefixedClass)
 
       this.pageBuilderStateStore.setElement(this.getElement.value)
-
-      this.pageBuilderStateStore.setClass(userSelectedClass)
+      this.pageBuilderStateStore.setClass(prefixedClass)
     }
   }
-
   handleFontFamily(userSelectedFontFamily?: string): void {
     this.#applyElementClassChanges(
       userSelectedFontFamily,

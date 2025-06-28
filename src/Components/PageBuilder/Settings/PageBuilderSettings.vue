@@ -34,15 +34,6 @@ const generateHTML = function (filename, HTML) {
 
   document.body.removeChild(element)
 }
-
-// handle download HTML
-const handleDownloadHTML = function () {
-  downloadedComponents.value = getComponents.value.map((component) => {
-    return component.html_code
-  })
-
-  generateHTML('downloaded_html.html', downloadedComponents.value.join(''))
-}
 </script>
 
 <template>
@@ -577,21 +568,6 @@ const handleDownloadHTML = function () {
       </div>
     </div>
     <!-- Advanced Settings - end -->
-    <!-- Download Layout HTML - start -->
-    <div
-      class="pbx-mt-4 pbx-mb-4 pbx-py-8 pbx-px-2 pbx-border pbx-border-solid pbx-border-gray-600 pbx-rounded-xl"
-    >
-      <div class="pbx-flex pbx-items-left pbx-flex-col pbx-gap-1">
-        <h3 class="pbx-myQuaternaryHeader">Download Page as HTML</h3>
-        <p class="pbx-myPrimaryParagraph pbx-text-xs">Download current page layout.</p>
-      </div>
-      <div class="pbx-mt-4">
-        <button @click="handleDownloadHTML" type="button" class="pbx-myPrimaryButton">
-          Download HTML file
-        </button>
-      </div>
-    </div>
-    <!-- Download Layout HTML - end -->
 
     <!-- Congig - start -->
     <div
