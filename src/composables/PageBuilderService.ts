@@ -39,7 +39,6 @@ export class PageBuilderService {
   private getRestoredElement: ComputedRef<string | null>
   private getComponentArrayAddMethod: ComputedRef<string | null>
   private NoneListernesTags: string[]
-  private delay: (ms?: number) => Promise<void>
   private hasStartedEditing: boolean = false
   // Hold data from Database or Backend for updated post
   private originalComponents: BuilderResourceData | undefined = undefined
