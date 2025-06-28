@@ -267,59 +267,48 @@ export class PageBuilderService {
   }
 
   async tryMountPendingComponents() {
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
+    await delay(400)
+
     // Always clear DOM and store before mounting new resource
     this.deleteAllComponentsFromDOM()
-
     const localStorageData = this.loadStoredComponentsFromStorage()
 
-    this.pageBuilderStateStore.setIsLoadingGlobal(true)
-    await delay(300)
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
     //
-    if (!config) return
-    //
-    if (
-      config &&
-      formType === 'update' &&
-      localStorageData &&
-      typeof localStorageData === 'string' &&
-      this.pendingMountData
-    ) {
-      this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-    }
+    if (config) {
+      if (formType === 'update') {
+        //
+        if (localStorageData && typeof localStorageData === 'string') {
+          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+        }
 
-    if (config && formType === 'update') {
-      if (this.pendingMountData) {
-        this.#completeBuilderInitialization(this.pendingMountData)
-        return
+        if (this.pendingMountData) {
+          this.#completeBuilderInitialization(this.pendingMountData)
+        }
+
+        // Pending data for mount is null at this stage
+        if (typeof localStorageData === 'string' && !this.pendingMountData) {
+          await this.#updateComponentsFromString(localStorageData)
+          this.#completeBuilderInitialization()
+        }
       }
 
-      // Pending data for mount is null at this stage
-      if (typeof localStorageData === 'string') {
-        await this.#updateComponentsFromString(localStorageData)
-        this.#completeBuilderInitialization()
-        return
+      if (formType === 'create') {
+        // Pending data for mount is null at this stage
+        if (typeof localStorageData === 'string') {
+          await this.#updateComponentsFromString(localStorageData)
+          this.#completeBuilderInitialization()
+        }
       }
 
-      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-      await nextTick()
-      // Attach event listeners to all editable elements in the Builder
-      await this.#addListenersToEditableElements()
-
-      this.pageBuilderStateStore.setIsRestoring(false)
-      this.pageBuilderStateStore.setIsLoadingGlobal(false)
-    }
-
-    if (config && formType === 'create') {
-      // Pending data for mount is null at this stage
-      if (typeof localStorageData === 'string') {
-        await this.#updateComponentsFromString(localStorageData)
-        this.#completeBuilderInitialization()
-        return
-      }
-
+      //
+      //
+      //
+      //
+      //
       // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
       await nextTick()
       // Attach event listeners to all editable elements in the Builder
@@ -389,7 +378,6 @@ export class PageBuilderService {
       return result
     } catch (err) {
       console.error('Not able to start the Page Builder', err)
-      this.pageBuilderStateStore.setIsLoadingGlobal(false)
       return {
         error: true as const,
         reason: 'Failed to start the Page Builder due to an unexpected error.',
@@ -398,10 +386,9 @@ export class PageBuilderService {
   }
 
   async #completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
-    this.pageBuilderStateStore.setIsLoadingGlobal(true)
     const localStorageData = this.loadStoredComponentsFromStorage()
 
-    await delay(300)
+    console.log('comlete ran..:')
 
     // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
@@ -436,7 +423,6 @@ export class PageBuilderService {
     // Attach event listeners to all editable elements in the Builder
     await this.#addListenersToEditableElements()
     // Show a global loading indicator while initializing
-    this.pageBuilderStateStore.setIsLoadingGlobal(false)
 
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
