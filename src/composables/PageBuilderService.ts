@@ -388,8 +388,6 @@ export class PageBuilderService {
   async #completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
     const localStorageData = this.loadStoredComponentsFromStorage()
 
-    console.log('comlete ran..:')
-
     // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
 
