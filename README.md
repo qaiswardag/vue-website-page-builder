@@ -125,6 +125,9 @@ Powerful Page Builder for any growing merchants, brands, & agencies. Empower use
 
 ## Documentation
 
+Find everything you need to get started, configure, and master the Vue Website Page Builder.
+This section covers installation, requirements, quick start, advanced usage, and integration tips—so you can build and launch pages with confidence.
+
 ## Requirements
 
 Please note that these instructions assume you have Node.js installed.
@@ -152,6 +155,9 @@ bun install
 ```
 
 ## Quick Start
+
+Get up and running with the Vue Website Page Builder in just a few minutes.
+This section walks you through the essential steps—from installation to rendering your first page—so you can start building beautiful, dynamic content right away.
 
 ### Initializing the Page Builder
 
