@@ -482,8 +482,9 @@ function closePageBuilder() {
 > You can name your handler function anything you like.  
 > This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
 
-### Config Option: `pageSettings`
+### Page Wrapper Styles
 
+Use the `pageSettings` config to apply custom CSS classes and inline styles to the Page Builder’s main wrapper.
 The Page Builder renders all components wrapped inside a single parent container `<div id="pagebuilder">`.  
 You can pass global CSS ``classes` and `style` to this wrapper by adding a `pageSettings` object in your config:
 

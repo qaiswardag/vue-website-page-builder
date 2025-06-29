@@ -246,10 +246,6 @@ export class PageBuilderService {
     }
   }
 
-  #handlePageBuilderNotPresent(passedDataComponents: BuilderResourceData) {
-    this.pendingMountData = passedDataComponents
-  }
-
   /**
    * - Entry point for initializing the Page Builder.
    * - Sets the builder as started in the state store.
@@ -283,7 +279,7 @@ export class PageBuilderService {
 
       // Page Builder is not Present in the DOM but Components have been passed to the Builder
       if (passedComponentsArray && !pagebuilder) {
-        this.#handlePageBuilderNotPresent(passedComponentsArray)
+        this.pendingMountData = passedComponentsArray
       }
       // Page Builder is Present in the DOM & Components have been passed to the Builder
       if (pagebuilder) {
@@ -336,61 +332,61 @@ export class PageBuilderService {
     //
     //
     if (formType === 'update' || formType === 'create') {
-      // FOCUS ON: passedComponentsArray
-      // Prefer components from local storage if available for this resource
-      if (passedComponentsArray && !this.pendingMountData && !localStorageData) {
-        console.log('1111:')
-        await this.#mountComponentsToDOM(JSON.stringify(passedComponentsArray))
-      }
-      if (passedComponentsArray && !this.pendingMountData && localStorageData) {
-        this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-        console.log('2222:')
-        await this.#mountComponentsToDOM(localStorageData)
-      }
-      if (passedComponentsArray && this.pendingMountData && !localStorageData) {
-        console.log('3333:')
-        await this.#mountComponentsToDOM(JSON.stringify(passedComponentsArray))
-      }
-      if (passedComponentsArray && this.pendingMountData && localStorageData) {
-        this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-        console.log('4444:')
-        await this.#mountComponentsToDOM(JSON.stringify(passedComponentsArray))
+      if (!this.pendingMountData) {
+        // FOCUS ON: passedComponentsArray
+        if (passedComponentsArray && !localStorageData) {
+          await this.#completeMountProcess(JSON.stringify(passedComponentsArray))
+          return
+        }
+        if (passedComponentsArray && localStorageData) {
+          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+
+          await this.#completeMountProcess(JSON.stringify(passedComponentsArray))
+          return
+        }
+
+        if (passedComponentsArray && localStorageData) {
+          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+
+          await this.#completeMountProcess(JSON.stringify(passedComponentsArray))
+          return
+        }
+
+        if (localStorageData && !passedComponentsArray) {
+          await this.#completeMountProcess(localStorageData)
+          return
+        }
+        if (!passedComponentsArray && !localStorageData) {
+          await this.#completeMountProcess(JSON.stringify([]))
+          return
+        }
       }
 
       // FOCUS ON: pendingMountData
-      if (this.pendingMountData && !localStorageData && !passedComponentsArray) {
-        console.log('5555:')
-        await this.#mountComponentsToDOM(JSON.stringify(this.pendingMountData))
-        this.pendingMountData = null
-      }
-      if (this.pendingMountData && !localStorageData && passedComponentsArray) {
-        console.log('6666:')
-        await this.#mountComponentsToDOM(JSON.stringify(this.pendingMountData))
-        this.pendingMountData = null
-      }
-      if (this.pendingMountData && localStorageData && !passedComponentsArray) {
-        this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-        console.log('7777:')
-        await this.#mountComponentsToDOM(JSON.stringify(this.pendingMountData))
-        this.pendingMountData = null
-      }
+      if (this.pendingMountData) {
+        if (localStorageData) {
+          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+          await this.#completeMountProcess(JSON.stringify(this.pendingMountData))
+          this.pendingMountData = null
+          return
+        }
+        if (!localStorageData && passedComponentsArray) {
+          await this.#completeMountProcess(JSON.stringify(this.pendingMountData))
+          this.pendingMountData = null
+          return
+        }
 
-      // FOCUS ON: localStorageData
-      if (localStorageData && !this.pendingMountData && !passedComponentsArray) {
-        console.log('9999:')
-        await this.#mountComponentsToDOM(localStorageData)
-      }
-      if (localStorageData && this.pendingMountData && !passedComponentsArray) {
-        console.log('XXXX:')
-        await this.#mountComponentsToDOM(localStorageData)
-      }
-      if (localStorageData && !this.pendingMountData && passedComponentsArray) {
-        console.log('YYYY:')
-        await this.#mountComponentsToDOM(localStorageData)
+        if (!passedComponentsArray && !localStorageData) {
+          await this.#completeMountProcess(JSON.stringify([]))
+          return
+        }
       }
     }
     //
+  }
 
+  async #completeMountProcess(html: string) {
+    await this.#mountComponentsToDOM(html)
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
@@ -2068,7 +2064,6 @@ export class PageBuilderService {
   }
   // Private method to parse HTML components
   async #parseHTMLComponents(htmlData: string): Promise<void> {
-    console.log('parseHTMLComponents ran..:')
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')
