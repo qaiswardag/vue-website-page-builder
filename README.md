@@ -74,6 +74,7 @@ The Page Builder is packed with features:
 - **Undo & Redo**: Experiment confidently with the ability to revert changes.
 - **Global Styles**: Global Styles for fonts, designs, & colors.
 - **YouTube Videos**: Integrate video content smoothly.
+- **Download HTML**: Export the entire page as a standalone HTML file.
 - **Tailwind Support**: Fully compatible with Tailwind CSS (with automatic class prefixing to avoid conflicts).
 - **Styles Prefixed**: To ensure clean and predictable styling, the builder uses Scoped Style Isolation. No risk of style conflicts between the builder and your app.
 

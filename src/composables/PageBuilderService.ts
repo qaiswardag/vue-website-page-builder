@@ -45,6 +45,7 @@ export class PageBuilderService {
   private originalComponents: BuilderResourceData | undefined = undefined
   // Holds data to be mounted when #pagebuilder is not yet present in the DOM
   private pendingMountData: BuilderResourceData | null = null
+  private isPageBuilderMissingOnStart: boolean = false
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.hasStartedEditing = false
@@ -278,6 +279,9 @@ export class PageBuilderService {
       this.#updateLocalStorageItemName()
 
       // Page Builder is not Present in the DOM but Components have been passed to the Builder
+      if (!pagebuilder) {
+        this.isPageBuilderMissingOnStart = true
+      }
       if (passedComponentsArray && !pagebuilder) {
         this.pendingMountData = passedComponentsArray
       }
@@ -335,28 +339,23 @@ export class PageBuilderService {
       if (!this.pendingMountData) {
         // FOCUS ON: passedComponentsArray
         if (passedComponentsArray && !localStorageData) {
-          await this.#completeMountProcess(JSON.stringify(passedComponentsArray))
-          return
-        }
-        if (passedComponentsArray && localStorageData) {
-          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-
-          await this.#completeMountProcess(JSON.stringify(passedComponentsArray))
+          await this.#completeMountProcess(JSON.stringify(passedComponentsArray), true)
           return
         }
 
         if (passedComponentsArray && localStorageData) {
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
 
-          await this.#completeMountProcess(JSON.stringify(passedComponentsArray))
+          await this.#completeMountProcess(JSON.stringify(passedComponentsArray), true)
           return
         }
 
-        if (localStorageData && !passedComponentsArray) {
+        if (!passedComponentsArray && localStorageData && this.isPageBuilderMissingOnStart) {
           await this.#completeMountProcess(localStorageData)
           return
         }
-        if (!passedComponentsArray && !localStorageData) {
+
+        if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
           await this.#completeMountProcess(JSON.stringify([]))
           return
         }
@@ -364,20 +363,19 @@ export class PageBuilderService {
 
       // FOCUS ON: pendingMountData
       if (this.pendingMountData) {
-        if (localStorageData) {
+        if (localStorageData && this.isPageBuilderMissingOnStart) {
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-          await this.#completeMountProcess(JSON.stringify(this.pendingMountData))
+          await this.#completeMountProcess(JSON.stringify(this.pendingMountData), true)
           this.pendingMountData = null
           return
         }
-        if (!localStorageData && passedComponentsArray) {
-          await this.#completeMountProcess(JSON.stringify(this.pendingMountData))
-          this.pendingMountData = null
+        if (!localStorageData && passedComponentsArray && this.isPageBuilderMissingOnStart) {
+          await this.#completeMountProcess(JSON.stringify(this.pendingMountData), true)
           return
         }
 
-        if (!passedComponentsArray && !localStorageData) {
-          await this.#completeMountProcess(JSON.stringify([]))
+        if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
+          await this.#completeMountProcess(JSON.stringify(this.pendingMountData), true)
           return
         }
       }
@@ -385,8 +383,8 @@ export class PageBuilderService {
     //
   }
 
-  async #completeMountProcess(html: string) {
-    await this.#mountComponentsToDOM(html)
+  async #completeMountProcess(html: string, usePassedPageSettings?: boolean) {
+    await this.#mountComponentsToDOM(html, usePassedPageSettings)
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
@@ -447,6 +445,25 @@ export class PageBuilderService {
     }
 
     return currentCSS
+  }
+
+  async clearClassesFromPage() {
+    const pagebuilder = document.querySelector('#pagebuilder')
+    if (!pagebuilder) return
+
+    pagebuilder.removeAttribute('class')
+
+    this.initializeElementStyles()
+    await nextTick()
+  }
+  async clearInlineStylesFromPagee() {
+    const pagebuilder = document.querySelector('#pagebuilder')
+    if (!pagebuilder) return
+
+    pagebuilder.removeAttribute('style')
+
+    this.initializeElementStyles()
+    await nextTick()
   }
 
   async globalPageStyles() {
@@ -1504,7 +1521,7 @@ export class PageBuilderService {
 
     const pageSettings = {
       classes: pagebuilder.className || '',
-      style: pagebuilder.getAttribute('style') || '',
+      style: pagebuilder.getAttribute('style') || (pagebuilder as HTMLElement).style.cssText || '',
     }
 
     const dataToSave = {
@@ -1590,24 +1607,14 @@ export class PageBuilderService {
   //
   async resumeEditingFromDraft() {
     this.#updateLocalStorageItemName()
-    const config = this.pageBuilderStateStore.getPageBuilderConfig
-    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
-    //
-    //
-    //
+    const localStorageData = this.loadStoredComponentsFromStorage()
 
-    const key = this.getLocalStorageItemName.value
-
-    if (typeof key === 'string') {
-      const updateDraftFromLocalStorage = localStorage.getItem(key)
-
-      if (typeof updateDraftFromLocalStorage === 'string') {
-        this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
-        await delay(400)
-        await this.#mountComponentsToDOM(updateDraftFromLocalStorage)
-        this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
-      }
+    if (localStorageData) {
+      this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
+      await delay(400)
+      await this.#mountComponentsToDOM(localStorageData)
+      this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
     }
 
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
@@ -1620,26 +1627,22 @@ export class PageBuilderService {
 
   async restoreOriginalContent() {
     this.#updateLocalStorageItemName()
-    const config = this.pageBuilderStateStore.getPageBuilderConfig
-    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
-    if (formType === 'update') {
-      this.pageBuilderStateStore.setIsRestoring(true)
-      await delay(400)
+    this.pageBuilderStateStore.setIsRestoring(true)
+    await delay(400)
 
-      // Restore the original content if available
-      if (Array.isArray(this.originalComponents)) {
-        await this.#mountComponentsToDOM(JSON.stringify(this.originalComponents))
-        this.removeCurrentComponentsFromLocalStorage()
-      }
-
-      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-      await nextTick()
-      // Attach event listeners to all editable elements in the Builder
-      await this.#addListenersToEditableElements()
-
-      this.pageBuilderStateStore.setIsRestoring(false)
+    // Restore the original content if available
+    if (Array.isArray(this.originalComponents)) {
+      await this.#mountComponentsToDOM(JSON.stringify(this.originalComponents), true)
+      this.removeCurrentComponentsFromLocalStorage()
     }
+
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
+
+    this.pageBuilderStateStore.setIsRestoring(false)
   }
 
   getStorageItemNameForResource(): string | null {
@@ -1652,7 +1655,6 @@ export class PageBuilderService {
 
     if (
       this.getLocalStorageItemName.value &&
-      typeof this.getLocalStorageItemName.value === 'string' &&
       localStorage.getItem(this.getLocalStorageItemName.value)
     ) {
       const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)
@@ -1970,40 +1972,47 @@ export class PageBuilderService {
    * @param data - JSON string (e.g., '[{"html_code":"...","id":"123","title":"..."}]')
    *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
    */
-  async #mountComponentsToDOM(htmlString: string): Promise<void> {
+  async #mountComponentsToDOM(htmlString: string, usePassedPageSettings?: boolean): Promise<void> {
     // Auto-detect if input is JSON or HTML
     const trimmedData = htmlString.trim()
 
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
       // Looks like JSON - parse as JSON
-      await this.#parseJSONComponents(trimmedData)
+      await this.#parseJSONComponents(trimmedData, usePassedPageSettings)
       return
     }
     if (trimmedData.startsWith('<')) {
       // Looks like HTML - parse as HTML
-      await this.#parseHTMLComponents(trimmedData)
+      await this.#parseHTMLComponents(trimmedData, usePassedPageSettings)
       return
     }
 
-    await this.#parseJSONComponents(trimmedData)
+    await this.#parseJSONComponents(trimmedData, usePassedPageSettings)
   }
 
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
-  // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
-  async #parseJSONComponents(jsonData: string): Promise<void> {
+  async #parseJSONComponents(jsonData: string, usePassedPageSettings?: boolean): Promise<void> {
+    const storedPageSettings =
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
+
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
 
-      // Fallback to store-based config if not provided in imported JSON
-      const pageSettings =
-        this.pageBuilderStateStore.getPageBuilderConfig &&
-        this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
+      // Decide which pageSettings to use
+      const pageSettings = usePassedPageSettings
+        ? storedPageSettings
+        : parsedData && parsedData.pageSettings
+          ? parsedData.pageSettings
+          : null
 
       // Restore page-level settings like class and style
       if (pageSettings) {
         const pagebuilder = document.querySelector('#pagebuilder') as HTMLElement
         if (pagebuilder) {
+          pagebuilder.removeAttribute('class')
+          pagebuilder.removeAttribute('style')
           pagebuilder.className = pageSettings.classes || ''
           pagebuilder.setAttribute('style', this.#convertStyleObjectToString(pageSettings.style))
         }
@@ -2063,7 +2072,7 @@ export class PageBuilderService {
     }
   }
   // Private method to parse HTML components
-  async #parseHTMLComponents(htmlData: string): Promise<void> {
+  async #parseHTMLComponents(htmlData: string, usePassedPageSettings?: boolean): Promise<void> {
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')
@@ -2072,24 +2081,32 @@ export class PageBuilderService {
       const livePageBuilder = document.querySelector('#pagebuilder') as HTMLElement | null
 
       if (livePageBuilder) {
-        if (importedPageBuilder) {
-          livePageBuilder.className = importedPageBuilder.className || ''
-          const style = importedPageBuilder.getAttribute('style')
-          if (style !== null) {
-            livePageBuilder.setAttribute('style', style)
-          } else {
-            livePageBuilder.removeAttribute('style')
+        const storedPageSettings =
+          this.pageBuilderStateStore.getPageBuilderConfig &&
+          this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
+
+        // Decide which pageSettings to use
+        let pageSettings = null
+        if (usePassedPageSettings) {
+          pageSettings = storedPageSettings
+        } else if (importedPageBuilder) {
+          pageSettings = {
+            classes: importedPageBuilder.className || '',
+            style: importedPageBuilder.getAttribute('style') || '',
           }
         } else {
-          // Fallback: inject settings from store if not present in HTML
-          const fallbackSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings
-          if (fallbackSettings) {
-            livePageBuilder.className = fallbackSettings.classes || ''
-            livePageBuilder.setAttribute(
-              'style',
-              this.#convertStyleObjectToString(fallbackSettings.style),
-            )
-          }
+          pageSettings = storedPageSettings
+        }
+
+        // Restore page-level settings like class and style
+        if (pageSettings) {
+          livePageBuilder.removeAttribute('class')
+          livePageBuilder.removeAttribute('style')
+          livePageBuilder.className = pageSettings.classes || ''
+          livePageBuilder.setAttribute(
+            'style',
+            this.#convertStyleObjectToString(pageSettings.style),
+          )
         }
       }
 
@@ -2178,6 +2195,7 @@ export class PageBuilderService {
     // handle font weight
     this.handleFontWeight(undefined)
     // handle font family
+
     this.handleFontFamily(undefined)
     // handle font style
     this.handleFontStyle(undefined)

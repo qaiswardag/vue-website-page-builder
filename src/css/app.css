@@ -426,8 +426,8 @@
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0) scale(1);
-  min-width: 12rem;
-  width: 16rem;
+  min-width: 20rem;
+  width: 20rem;
   height: 2.5rem;
   border-radius: 9999px;
 }
@@ -552,8 +552,6 @@
 }
 
 #pagebuilder[data-global-selected] {
-  outline: 3px dashed #b91010 !important;
+  outline: 4px dashed #b91010 !important;
   outline-offset: -2px !important;
-  box-shadow: 0 0 0 2px #fbbf24;
-  /* Or any style you want */
 }

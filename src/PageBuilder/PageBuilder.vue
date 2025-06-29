@@ -729,7 +729,7 @@ onMounted(async () => {
         >
           <div
             id="editToolbar"
-            class="pbx-z-30 lg:pbx-mx-20 pbx-flex pbx-gap-2 pbx-justify-center pbx-min-w-48 pbx-items-center pbx-rounded-full pbx-px-4 pbx-bg-red-200 pbx-h-0"
+            class="pbx-z-30 lg:pbx-mx-20 pbx-flex pbx-gap-2 pbx-justify-center pbx-min-w-72 pbx-items-center pbx-rounded-full pbx-px-4 pbx-bg-red-200 pbx-h-0"
             style="
               box-shadow: 0 0 0 10px oklch(86.9% 0.005 56.366);
               background: oklch(86.9% 0.005 56.366);

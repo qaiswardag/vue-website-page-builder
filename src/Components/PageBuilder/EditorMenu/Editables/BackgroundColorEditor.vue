@@ -44,13 +44,20 @@ watch(
           v-if="globalPageLayout"
           class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor"
         >
-          <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-my-0 pbx-py-0">Background Color</p>
+          <div class="pbx-flex pbx-justify-start pbx-items-center pbx-gap-2">
+            <div
+              class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border pbx-border-gray-800 pbx-rounded-sm"
+              :class="`pbx-bg-${backgroundColor?.replace('pbx-bg-', '')}`"
+            ></div>
+            <div>Background Color</div>
+          </div>
+
           <span v-if="globalPageLayout" class="material-symbols-outlined"> chevron_right </span>
         </ListboxButton>
 
         <ListboxButton
           v-if="!globalPageLayout"
-          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
+          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-300 focus-visible:pbx-ring-0"
         >
           <div class="pbx-flex pbx-flex-col">
             <div class="pbx-flex pbx-gap-2 pbx-items-center">

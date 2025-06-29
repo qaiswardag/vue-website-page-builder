@@ -105,12 +105,24 @@ const handleUpdatePageStyles = async function () {
 
   await pageBuilderService.globalPageStyles()
 }
+
+const clearClassesFromPage = async function () {
+  await pageBuilderService.clearClassesFromPage()
+}
+
+const clearInlineStylesFromPagee = async function () {
+  await pageBuilderService.clearInlineStylesFromPagee()
+}
+
 const handleCloseGlobalPageStyles = async function () {
+  await pageBuilderService.handleManualSave()
+
   // Remove global highlight if present
   const pagebuilder = document.querySelector('#pagebuilder')
   if (pagebuilder) {
     pagebuilder.removeAttribute('data-global-selected')
   }
+
   showModalGlobalPageStyles.value = false
 }
 </script>
@@ -171,10 +183,7 @@ const handleCloseGlobalPageStyles = async function () {
       </div>
 
       <!-- Global Page Styles -->
-      <article
-        v-if="Array.isArray(getComponents) && getComponents.length >= 1"
-        class="pbx-my-1 pbx-bg-white"
-      >
+      <article class="pbx-my-1 pbx-bg-white">
         <EditorAccordion>
           <template #title>Global Page Styles</template>
           <template #content>
@@ -252,6 +261,29 @@ const handleCloseGlobalPageStyles = async function () {
         <article class="pbx-my-1 pbx-bg-gray-100">
           <ClassEditor></ClassEditor>
         </article>
+      </div>
+      <label class="pbx-myPrimaryInputLabel pbx-my-4">
+        Choose an action to clean up your page:
+      </label>
+      <div
+        class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
+      >
+        <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
+          <div
+            class="sm:pbx-grid-cols-1 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full pbx-mt-4"
+          >
+            <!-- Button: Clear all CSS classes -->
+            <button @click="clearClassesFromPage" class="pbx-myPrimaryButton" type="button">
+              Clear All CSS Classes
+            </button>
+
+            <!-- Button: Clear all inline styles -->
+            <button @click="clearInlineStylesFromPagee" class="pbx-myPrimaryButton" type="button">
+              Clear All Inline Styles
+            </button>
+          </div>
+        </div>
+        <!--v-if-->
       </div>
     </ModalBuilder>
   </div>
