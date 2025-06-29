@@ -250,137 +250,6 @@ export class PageBuilderService {
     this.pendingMountData = passedDataComponents
   }
 
-  async #mountPassedComponentsToDOM(components?: BuilderResourceData): Promise<void> {
-    const config = this.pageBuilderStateStore.getPageBuilderConfig
-    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
-    const localStorageData = this.loadStoredComponentsFromStorage()
-
-    let dataToPass: string
-    if (typeof components === 'string') {
-      dataToPass = components
-    } else if (components !== undefined) {
-      dataToPass = JSON.stringify(components)
-    } else {
-      dataToPass = ''
-    }
-
-    await this.#updateComponentsFromString(dataToPass)
-  }
-
-  // async tryMountPendingComponents() {
-  //   // Always clear DOM and store before mounting new resource
-  //   this.deleteAllComponentsFromDOM()
-
-  //   const localStorageData = this.loadStoredComponentsFromStorage()
-
-  //   this.pageBuilderStateStore.setIsLoadingGlobal(true)
-  //   await delay(200)
-  //   const config = this.pageBuilderStateStore.getPageBuilderConfig
-  //   const formType = config && config.updateOrCreate && config.updateOrCreate.formType
-
-  //   //
-  //   if (!config) return
-  //   //
-  //   if (
-  //     config &&
-  //     formType === 'update' &&
-  //     localStorageData &&
-  //     typeof localStorageData === 'string' &&
-  //     this.pendingMountData
-  //   ) {
-  //     this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-  //   }
-  //   //
-  //   //
-  //   //
-  //   //
-  //   if (config && formType === 'update') {
-  //     if (this.pendingMountData) {
-  //       this.#completeBuilderInitialization(this.pendingMountData)
-  //       return
-  //     }
-
-  //     // Pending data for mount is null at this stage
-  //     if (typeof localStorageData === 'string') {
-  //       await this.#updateComponentsFromString(localStorageData)
-  //       this.#completeBuilderInitialization()
-  //       return
-  //     }
-
-  //     //
-  //     //
-  //     //
-  //     //
-  //     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-  //     await nextTick()
-  //     // Attach event listeners to all editable elements in the Builder
-  //     await this.#addListenersToEditableElements()
-
-  //     this.pageBuilderStateStore.setIsRestoring(false)
-  //     this.pageBuilderStateStore.setIsLoadingGlobal(false)
-  //   }
-
-  //   if (config && formType === 'create') {
-  //     // Pending data for mount is null at this stage
-  //     if (typeof localStorageData === 'string') {
-  //       await this.#updateComponentsFromString(localStorageData)
-  //       this.#completeBuilderInitialization()
-  //       return
-  //     }
-  // }
-
-  async tryMountPendingComponents() {
-    this.pageBuilderStateStore.setIsLoadingGlobal(true)
-    await delay(400)
-
-    // Always clear DOM and store before mounting new resource
-    this.deleteAllComponentsFromDOM()
-    const localStorageData = this.loadStoredComponentsFromStorage()
-
-    const config = this.pageBuilderStateStore.getPageBuilderConfig
-    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
-
-    //
-    if (config) {
-      if (formType === 'update') {
-        //
-        if (localStorageData && typeof localStorageData === 'string') {
-          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-        }
-
-        if (this.pendingMountData) {
-          this.#completeBuilderInitialization(this.pendingMountData)
-        }
-
-        // Pending data for mount is null at this stage
-        if (typeof localStorageData === 'string' && !this.pendingMountData) {
-          await this.#updateComponentsFromString(localStorageData)
-          this.#completeBuilderInitialization()
-        }
-      }
-
-      if (formType === 'create') {
-        // Pending data for mount is null at this stage
-        if (typeof localStorageData === 'string') {
-          await this.#updateComponentsFromString(localStorageData)
-          this.#completeBuilderInitialization()
-        }
-      }
-
-      //
-      //
-      //
-      //
-      //
-      // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-      await nextTick()
-      // Attach event listeners to all editable elements in the Builder
-      await this.#addListenersToEditableElements()
-
-      this.pageBuilderStateStore.setIsRestoring(false)
-      this.pageBuilderStateStore.setIsLoadingGlobal(false)
-    }
-  }
   /**
    * - Entry point for initializing the Page Builder.
    * - Sets the builder as started in the state store.
@@ -418,7 +287,7 @@ export class PageBuilderService {
       }
       // Page Builder is Present in the DOM & Components have been passed to the Builder
       if (pagebuilder) {
-        this.#completeBuilderInitialization(passedComponentsArray)
+        this.completeBuilderInitialization(passedComponentsArray)
       }
 
       // result to end user
@@ -448,34 +317,76 @@ export class PageBuilderService {
     }
   }
 
-  async #completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
+  async completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
+    await delay(400)
+
+    // Always clear DOM and store before mounting new resource
+    this.deleteAllComponentsFromDOM()
+
+    const config = this.pageBuilderStateStore.getPageBuilderConfig
+    const formType = config && config.updateOrCreate && config.updateOrCreate.formType
+
     const localStorageData = this.loadStoredComponentsFromStorage()
 
     // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
 
-    if (passedComponentsArray) {
+    //
+    //
+    //
+    if (formType === 'update' || formType === 'create') {
+      // FOCUS ON: passedComponentsArray
       // Prefer components from local storage if available for this resource
-      if (!this.pendingMountData && localStorageData && typeof localStorageData === 'string') {
-        console.log('11111:')
-        await this.#updateComponentsFromString(localStorageData)
-      } else {
-        // If no local storage is found, use the components array provided by the user
-        await this.#mountPassedComponentsToDOM(passedComponentsArray)
+      if (passedComponentsArray && !this.pendingMountData && !localStorageData) {
+        console.log('1111:')
+        await this.#mountComponentsToDOM(JSON.stringify(passedComponentsArray))
+      }
+      if (passedComponentsArray && !this.pendingMountData && localStorageData) {
+        this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+        console.log('2222:')
+        await this.#mountComponentsToDOM(localStorageData)
+      }
+      if (passedComponentsArray && this.pendingMountData && !localStorageData) {
+        console.log('3333:')
+        await this.#mountComponentsToDOM(JSON.stringify(passedComponentsArray))
+      }
+      if (passedComponentsArray && this.pendingMountData && localStorageData) {
+        this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+        console.log('4444:')
+        await this.#mountComponentsToDOM(JSON.stringify(passedComponentsArray))
+      }
+
+      // FOCUS ON: pendingMountData
+      if (this.pendingMountData && !localStorageData && !passedComponentsArray) {
+        console.log('5555:')
+        await this.#mountComponentsToDOM(JSON.stringify(this.pendingMountData))
         this.pendingMountData = null
       }
-    }
+      if (this.pendingMountData && !localStorageData && passedComponentsArray) {
+        console.log('6666:')
+        await this.#mountComponentsToDOM(JSON.stringify(this.pendingMountData))
+        this.pendingMountData = null
+      }
+      if (this.pendingMountData && localStorageData && !passedComponentsArray) {
+        this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
+        console.log('7777:')
+        await this.#mountComponentsToDOM(JSON.stringify(this.pendingMountData))
+        this.pendingMountData = null
+      }
 
-    //
-    //
-    //
-    if (!passedComponentsArray) {
-      // Prefer components from local storage if available for this resource
-      if (localStorageData && typeof localStorageData === 'string') {
-        await this.#updateComponentsFromString(localStorageData)
-      } else {
-        // If no local storage is found, use the components array provided by the user
-        await this.#mountPassedComponentsToDOM([])
+      // FOCUS ON: localStorageData
+      if (localStorageData && !this.pendingMountData && !passedComponentsArray) {
+        console.log('9999:')
+        await this.#mountComponentsToDOM(localStorageData)
+      }
+      if (localStorageData && this.pendingMountData && !passedComponentsArray) {
+        console.log('XXXX:')
+        await this.#mountComponentsToDOM(localStorageData)
+      }
+      if (localStorageData && !this.pendingMountData && passedComponentsArray) {
+        console.log('YYYY:')
+        await this.#mountComponentsToDOM(localStorageData)
       }
     }
     //
@@ -484,10 +395,12 @@ export class PageBuilderService {
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
     await this.#addListenersToEditableElements()
-    // Show a global loading indicator while initializing
 
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
+
+    this.pageBuilderStateStore.setIsRestoring(false)
+    this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
 
   #applyElementClassChanges(
@@ -1679,12 +1592,11 @@ export class PageBuilderService {
   }
 
   //
-  async resumeEditingForUpdate() {
+  async resumeEditingFromDraft() {
     this.#updateLocalStorageItemName()
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
-    if (formType !== 'update') return
     //
     //
     //
@@ -1697,7 +1609,7 @@ export class PageBuilderService {
       if (typeof updateDraftFromLocalStorage === 'string') {
         this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
         await delay(400)
-        await this.#updateComponentsFromString(updateDraftFromLocalStorage)
+        await this.#mountComponentsToDOM(updateDraftFromLocalStorage)
         this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
       }
     }
@@ -1721,7 +1633,7 @@ export class PageBuilderService {
 
       // Restore the original content if available
       if (Array.isArray(this.originalComponents)) {
-        await this.#mountPassedComponentsToDOM(this.originalComponents)
+        await this.#mountComponentsToDOM(JSON.stringify(this.originalComponents))
         this.removeCurrentComponentsFromLocalStorage()
       }
 
@@ -2062,7 +1974,7 @@ export class PageBuilderService {
    * @param data - JSON string (e.g., '[{"html_code":"...","id":"123","title":"..."}]')
    *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
    */
-  async #updateComponentsFromString(htmlString: string): Promise<void> {
+  async #mountComponentsToDOM(htmlString: string): Promise<void> {
     // Auto-detect if input is JSON or HTML
     const trimmedData = htmlString.trim()
 
@@ -2083,7 +1995,6 @@ export class PageBuilderService {
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
   async #parseJSONComponents(jsonData: string): Promise<void> {
-    console.log('parseJSONComponents ran..:', jsonData)
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
@@ -2142,12 +2053,10 @@ export class PageBuilderService {
             // Update html_code
             component.html_code = section.outerHTML
           }
-
           return component
         })
       }
 
-      console.log('hvad er denne....:', savedCurrentDesign)
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
 
       await nextTick()

@@ -232,7 +232,7 @@ const handlerRumeEditingForUpdate = async function () {
   secondModalButtonResumeEditingFunction.value = function () {}
 
   thirdModalButtonResumeEditingFunction.value = async function () {
-    await pageBuilderService.resumeEditingForUpdate()
+    await pageBuilderService.resumeEditingFromDraft()
     pageBuilderStateStore.setHasLocalDraftForUpdate(false)
 
     showModalResumeEditing.value = false
@@ -330,7 +330,7 @@ function updatePanelPosition() {
 }
 
 onMounted(async () => {
-  await pageBuilderService.tryMountPendingComponents()
+  await pageBuilderService.completeBuilderInitialization()
 
   updatePanelPosition()
 
