@@ -12,7 +12,7 @@ const pageBuilderService = getPageBuilder()
             <button
               @click="pageBuilderService.toggleTipTapModal(true)"
               type="button"
-              class="pbx-myPrimaryTag"
+              class="pbx-myPrimaryButton"
             >
               <span class="material-symbols-outlined"> edit </span>
               <span>Edit text and links</span>
