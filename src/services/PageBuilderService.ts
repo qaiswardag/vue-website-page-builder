@@ -341,7 +341,12 @@ export class PageBuilderService {
     //
     if (formType === 'update' || formType === 'create') {
       if (!this.pendingMountData) {
-        // FOCUS ON: passedComponentsArray
+        //
+        //
+        if (!passedComponentsArray && !this.isPageBuilderMissingOnStart && localStorageData) {
+          await this.#completeMountProcess(localStorageData)
+          return
+        }
         if (passedComponentsArray && !localStorageData) {
           await this.#completeMountProcess(JSON.stringify(passedComponentsArray), true)
           return
