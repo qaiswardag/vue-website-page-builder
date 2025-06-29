@@ -1,13 +1,10 @@
 <script setup lang="ts">
 import FullWidthElement from '../Components/Layouts/FullWidthElement.vue'
 import PageBuilder from '../PageBuilder/PageBuilder.vue'
-
-import DemoMediaLibraryComponent from './DemoMediaLibraryComponent.vue'
-import DemoBuilderComponents from './DemoBuilderComponents.vue'
+import DemoMediaLibraryComponentTest from '../tests/TestComponents/DemoMediaLibraryComponentTest.vue'
+import DemoBuilderComponentsTest from '../tests/TestComponents/DemoBuilderComponentsTest.vue'
 import { onMounted } from 'vue'
-import oldhtmlfromdb from './oldhtmlfromdb.json'
-import html from './html.json'
-import { rawHTML } from './rawHTML'
+import componentsArray from '../tests/componentsArray.test.json'
 
 import { getPageBuilder } from '../composables/builderInstance'
 const pageBuilderService = getPageBuilder()
@@ -61,7 +58,7 @@ const configPageBuilder = {
     image: '/jane_doe.jpg',
   },
   updateOrCreate: {
-    formType: 'create',
+    formType: 'update',
     formName: 'collection',
   },
   pageBuilderLogo: {
@@ -90,7 +87,7 @@ const configPageBuilder = {
 } as const
 
 onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder)
+  const result = await pageBuilderService.startBuilder(configPageBuilder, componentsArray)
   console.log('Page Builder Result:', result)
   //
   //
@@ -132,8 +129,8 @@ onMounted(async () => {
         </div>
       </div>
       <div class="pbx-m-4">
-        <!--   :CustomBuilderComponents="DemoBuilderComponents" -->
-        <PageBuilder :CustomMediaLibraryComponent="DemoMediaLibraryComponent"></PageBuilder>
+        <!--   :CustomBuilderComponents="DemoBuilderComponentsTest" -->
+        <PageBuilder :CustomMediaLibraryComponent="DemoMediaLibraryComponentTest"></PageBuilder>
       </div>
     </div>
 

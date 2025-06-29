@@ -1,5 +1,5 @@
 <script setup>
-import Unsplash from './DemoUnsplash.vue'
+import Unsplash from '../../Components/DemoUnsplash.vue'
 </script>
 <template>
   <div>
