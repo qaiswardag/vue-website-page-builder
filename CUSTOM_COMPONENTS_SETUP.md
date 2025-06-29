@@ -1,4 +1,12 @@
-# Custom Components Setup Guide
+# Custom Components Setup Guide- [Custom Components Setup Guide](#custom-components-setup-guide)
+
+- [Custom Components Setup Guide- Custom Components Setup Guide](#custom-components-setup-guide--custom-components-setup-guide)
+  - [Quick Setup](#quick-setup)
+  - [Custom Media Library Component](#custom-media-library-component)
+    - [You have full control over your media library UI](#you-have-full-control-over-your-media-library-ui)
+  - [Custom Layout Builder Component](#custom-layout-builder-component)
+    - [How Should the Components Array Look?](#how-should-the-components-array-look)
+  - [Benefits of this Approach](#benefits-of-this-approach)
 
 This guide will walk you through creating custom components that can be injected into the Vue Website Page Builder.
 
@@ -26,7 +34,7 @@ To enable image-related components in the builder, you must inject your own medi
 - Create a `ComponentsPageBuilder` folder in your project for your media library component.
 - Pass your custom component to the builder using the `:CustomMediaLibraryComponent` prop.
 
-#### 🟢 **You have full control over your media library UI**
+### You have full control over your media library UI
 
 You are free to design your media library however you wish.  
 Use any UI, API, or logic for browsing, searching, and selecting images.
@@ -66,8 +74,6 @@ const applySelectedImage = async function (imageURL) {
 
 ## Custom Layout Builder Component
 
-The Page Builder comes with a growing collection of built-in components, including both layout and helper components. These defaults are continuously improved and expanded.
-
 If you want to use your own components—whether custom-designed or tailored to your application's needs—you can inject them directly into the builder.
 
 - Create a `ComponentsPageBuilder` folder in your project for your custom components.
@@ -104,7 +110,7 @@ const injectComponentToBuilder = async function (componentObject) {
 </template>
 ```
 
-#### How Should the Components Array Look?
+### How Should the Components Array Look?
 
 Each custom component you inject must be represented as an object with the following structure.  
 The Page Builder relies on a `<section></section>` wrapper to correctly render each component and attach event listeners.
@@ -145,7 +151,7 @@ const components: Component[] = [
 ]
 ```
 
-## Benefits of This Approach
+## Benefits of this Approach
 
 ✅ **Full Control:** Decide exactly where and when to create components within your application.  
 ✅ **Flexible:** Easily adapt to any project structure or workflow.  

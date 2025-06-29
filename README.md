@@ -20,9 +20,8 @@
   - [Getting started \& installation](#getting-started--installation)
   - [Quick Start](#quick-start)
     - [Initializing the Page Builder](#initializing-the-page-builder)
-    - [Accessing the Shared Page Builder Service](#accessing-the-shared-page-builder-service)
-      - [Why Use the Shared Instance?](#why-use-the-shared-instance)
-      - [Usage](#usage)
+    - [Why Use the Shared Instance?](#why-use-the-shared-instance)
+    - [Using the Page Builder Component](#using-the-page-builder-component)
   - [Important: CSS Prefixing (`pbx-`)](#important-css-prefixing-pbx-)
   - [Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)](#rendering-html-output-in-other-frameworks-react-nuxt-etc)
   - [Providing Configuration to the Page Builder](#providing-configuration-to-the-page-builder)
@@ -34,7 +33,9 @@
   - [Embedding Page Builder in a Modal or Dialog](#embedding-page-builder-in-a-modal-or-dialog)
   - [Styling the Main Page Builder Container](#styling-the-main-page-builder-container)
   - [Download HTML file](#download-html-file)
-    - [Custom Media Library Component or Custom Layout Builder Component](#custom-media-library-component-or-custom-layout-builder-component)
+- [Custom Components](#custom-components)
+  - [Custom Media Library Component](#custom-media-library-component)
+  - [Custom Layout Builder Component](#custom-layout-builder-component)
   - [Troubleshooting](#troubleshooting)
     - [Fonts or Icons Not Displaying](#fonts-or-icons-not-displaying)
   - [Page Builder Architecture](#page-builder-architecture)
@@ -183,18 +184,14 @@ app.mount('#app')
 > **Note:**  
 > You only need to import the CSS file once. If you have already imported it in your app entry, you do not need to import it again in individual components.
 
-### Accessing the Shared Page Builder Service
-
-After initializing the Page Builder service in your application (by calling `initPageBuilder()` once in your app entry point), you may access the shared instance from anywhere in your application using the `getPageBuilder()` composable.
-
 > **Note**  
 > The Page Builder is implemented as a singleton service. This ensures that all page-building logic and state are managed by a single, shared instance throughout your application.
 
-#### Why Use the Shared Instance?
+### Why Use the Shared Instance?
 
 By always accessing the shared instance, you avoid creating multiple, isolated copies of the builder. This prevents data inconsistencies, synchronization issues, and unpredictable behavior. All components and modules interact with the same centralized service, ensuring that updates and state changes are reflected everywhere in your application.
 
-#### Usage
+### Using the Page Builder Component
 
 Ensure the following configuration options are set:
 
@@ -202,7 +199,7 @@ Ensure the following configuration options are set:
   Indicates whether you are creating or updating a resource. This is used to retrieve the correct content from local storage.
 
 - **`formName` (required):**  
-  Specifies the resource type (for example, `article`, `jobPost`, `store`, etc.). This is essential for platforms supporting multiple resource types, as it enables the builder to manage layouts and local storage for each resource uniquely.
+  Specifies the resource type (for example, `article`, `jobPost`, `store`, etc.).
 
 ```vue
 <script setup>
@@ -565,10 +562,25 @@ const configPageBuilder = {
 } as const
 ```
 
-### Custom Media Library Component or Custom Layout Builder Component
+# Custom Components
 
-You may extend the Page Builder by adding your own media library or custom layout builder Component.
-Inject your components easily to tailor the builder to your application's needs.
+If you want to use your own components—whether custom-designed or tailored to your application's needs—you can inject them directly into the builder.
+
+### Custom Media Library Component
+
+By default, the Page Builder does not include a built-in media library.
+
+This is intentional—without a custom media library, layout components that rely on images (such as Image Blocks, Hero Sections, and similar) are disabled by default. Only helper components like containers, headings, text, and buttons are available in this state.
+
+You may extend the Page Builder by adding your own media library.
+Inject your media library component easily to tailor the builder to your application's needs.
+
+📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)**
+Learn how to create and integrate your own components step by step.
+
+### Custom Layout Builder Component
+
+The Page Builder comes with a growing collection of built-in components, including both layout and helper components. These defaults are continuously improved and expanded.
 
 📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)**
 Learn how to create and integrate your own components step by step.
