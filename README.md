@@ -75,6 +75,7 @@ The Page Builder is packed with features:
 - **Global Styles**: Global Styles for fonts, designs, & colors.
 - **YouTube Videos**: Integrate video content smoothly.
 - **Download HTML**: Export the entire page as a standalone HTML file.
+- **Global Page Styling:**: Instantly define, update, or clear global styles for the main page wrapper at initialization or dynamically at runtime. Gain full control over fonts, colors, backgrounds, and more for a dynamic user experience.
 - **Tailwind Support**: Fully compatible with Tailwind CSS (with automatic class prefixing to avoid conflicts).
 - **Styles Prefixed**: To ensure clean and predictable styling, the builder uses Scoped Style Isolation. No risk of style conflicts between the builder and your app.
 
@@ -483,7 +484,9 @@ function closePageBuilder() {
 > You can name your handler function anything you like.  
 > This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
 
-### Page Wrapper Styles
+## Styling the Main Page Builder Container
+
+The Page Builder allows you to define and update global styles for the main wrapper (#pagebuilder) at any time. These settings control the overall appearance, including font family, text color, background color, and more. Whether you set them initially in your config or update them dynamically at runtime, your changes are instantly reflected across all sections.
 
 Use the `pageSettings` config to apply custom CSS classes and inline styles to the Page Builder’s main wrapper.
 The Page Builder renders all components wrapped inside a single parent container `<div id="pagebuilder">`.  
@@ -503,7 +506,9 @@ const configPageBuilder = {
 } as const
 ```
 
-### Download HTML file
+You have full control over the page’s appearance at any time — instantly override or clear global styles for the entire page, ensuring a seamless and dynamic user experience.
+
+## Download HTML file
 
 Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making the file ready for use or integration elsewhere.
 
