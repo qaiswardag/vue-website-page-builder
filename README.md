@@ -4,14 +4,11 @@
 
 # Free Click & Drop Page Builder
 
-## Overview
-
 - [Free Click \& Drop Page Builder](#free-click--drop-page-builder)
+  - [Demo](#demo)
   - [Overview](#overview)
   - [Get Started in Minutes](#get-started-in-minutes)
   - [Installation](#installation)
-  - [Click \& Drop Page Builder](#click--drop-page-builder)
-  - [Demo](#demo)
   - [About](#about)
   - [Features](#features)
   - [Technical details](#technical-details)
@@ -47,14 +44,26 @@
   - [Support the Project](#support-the-project)
   - [License](#license)
 
+## Demo
+
 A Vue 3 page builder component with drag & drop functionality for creating dynamic web pages.
 
-Tailored for Vue Developers
-If you're a Vue 3 developer, this builder feels right at home. It installs quickly via npm and supports full customization through props and configuration objects. You can even set specific user settings like image, name, theme, language, and autosave preferences, making it a personalized experience for every user.
+Create and enhance digital experiences with Vue on any backend.
 
-Integration is easy, and content is safely auto stored in the browser's local storage. You can retrieve HTML content when you're ready to publish, giving you total control over content output.
+Experience the power and simplicity of the Vue Website Page Builder in action.
+Try the live demo to explore real-time visual updates, and smooth content management
 
-Want to include your company logo in the editor toolbar or reflect your brand's color scheme throughout the builder interface? Done. With robust configuration options, branding the builder to match your product or client identity is quick and effortless.
+[Play around with the Page Builder](https://www.builder-demo.myissue.dk)
+
+## Overview
+
+If you're a Vue 3 developer, this builder feels right at home. It installs quickly via npm and supports full customization through props and configuration objects. You can even set specific user settings like image, name, theme, language, company logo and autosave preferences, making it a personalized experience for every user.
+
+Lightweight & Minimalist Page Builder with an elegant and intuitive design, focused on simplicity and speed.
+
+Build responsive pages like listings, jobs or blog posts and manage content easily.
+
+<img style="max-width: 100%;" src="./public/home/editor.jpg" alt="Vue Website Page Builder - the editor" />
 
 ## Get Started in Minutes
 
@@ -71,22 +80,7 @@ The web builder for stunning pages. Enable users to design and publish modern pa
 npm install @myissue/vue-website-page-builder
 ```
 
-## Click & Drop Page Builder
-
-[Play around with the Page Builder](https://www.builder-demo.myissue.dk)
-
-Lightweight & Minimalist Page Builder with an elegant and intuitive design, focused on simplicity and speed.
-
-Build responsive pages like listings, jobs or blog posts and manage content easily using the free Click & Drop Page Builder.
-
-<img style="max-width: 100%;" src="./public/home/editor.jpg" alt="Vue Website Page Builder - the editor" />
-
-## Demo
-
-Introducing **The Lightweight Free Vue Click & Drop Page Builder**
-create and enhance digital experiences with Vue on any backend.
-
-[Play around with the Page Builder](https://www.builder-demo.myissue.dk)
+---
 
 ## About
 
@@ -110,13 +104,13 @@ The Page Builder is packed with features:
 - **Local Storage & Auto-Save**: Never lose your work - changes are saved as you go.
 - **Unsplash**: Unsplash Integration.
 - **Responsive Editing**: Ensure your site looks great on all devices.
-- **Text Editing:** Edit text content live and in real-time.
+- **Text Editing**: Edit text content live and in real-time.
 - **Font Customization**: Choose the perfect fonts to match your style.
 - **Undo & Redo**: Experiment confidently with the ability to revert changes.
 - **Global Styles**: Global Styles for fonts, designs, & colors.
 - **YouTube Videos**: Integrate video content smoothly.
 - **Download HTML**: Export the entire page as a standalone HTML file.
-- **Global Page Styling:**: Instantly define, update, or clear global styles for the main page wrapper at initialization or dynamically at runtime. Gain full control over fonts, colors, backgrounds, and more for a dynamic user experience.
+- **Global Page Styling**: Instantly define, update, or clear global styles for the main page wrapper at initialization or dynamically at runtime. Gain full control over fonts, colors, backgrounds, and more for a dynamic user experience.
 - **Tailwind Support**: Fully compatible with Tailwind CSS (with automatic class prefixing to avoid conflicts).
 - **Styles Prefixed**: To ensure clean and predictable styling, the builder uses Scoped Style Isolation. No risk of style conflicts between the builder and your app.
 
@@ -601,7 +595,7 @@ import '@myissue/vue-website-page-builder/style.css'
 
 The Page Builder is designed as a modular, state-driven editor for dynamic page content. Its architecture separates configuration, state management, and DOM interaction, ensuring flexibility and maintainability.
 
-#### How the Page Builder Works
+### How the Page Builder Works
 
 The Page Builder is designed to be easy to use and flexible for any web project. Here’s how it works behind the scenes:
 
