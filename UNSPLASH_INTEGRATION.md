@@ -26,6 +26,12 @@ Learn how to create and integrate your own media library component step by step.
 You can copy following this code into your own media library modal and customize the UI as needed.  
 For a full working example, see the demo project or reach out for support!
 
+> **Security Note:**  
+> For production use, it is recommended to fetch Unsplash images from your own backend server, not directly from the frontend.  
+> If you use the Unsplash API key in frontend code, it will be visible in browser devtools and can be misused.  
+> Instead, create a backend endpoint that proxies Unsplash requests and keeps your API key secure.  
+> Your frontend can then fetch images from your backend and render them as shown in the example below.
+
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue'
