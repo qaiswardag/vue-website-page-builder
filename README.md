@@ -30,9 +30,10 @@
   - [Embedding Page Builder in a Modal or Dialog](#embedding-page-builder-in-a-modal-or-dialog)
   - [Styling the Main Page Builder Container](#styling-the-main-page-builder-container)
   - [Download HTML file](#download-html-file)
-- [Custom Components](#custom-components)
-  - [Custom Media Library Component](#custom-media-library-component)
-  - [Custom Layout Builder Component](#custom-layout-builder-component)
+  - [Custom Components](#custom-components)
+    - [Custom Media Library Component](#custom-media-library-component)
+    - [Integrate Unsplash Library](#integrate-unsplash-library)
+    - [Custom Layout Builder Component](#custom-layout-builder-component)
   - [Troubleshooting](#troubleshooting)
     - [Fonts or Icons Not Displaying](#fonts-or-icons-not-displaying)
   - [Page Builder Architecture](#page-builder-architecture)
@@ -562,7 +563,7 @@ const configPageBuilder = {
 } as const
 ```
 
-# Custom Components
+## Custom Components
 
 If you want to use your own components—whether custom-designed or tailored to your application's needs—you can inject them directly into the builder.
 
@@ -577,6 +578,14 @@ Inject your media library component easily to tailor the builder to your applica
 
 📚 **[Custom Components Setup Guide](./CUSTOM_COMPONENTS_SETUP.md)**
 Learn how to create and integrate your own components step by step.
+
+### Integrate Unsplash Library
+
+Easily add Unsplash image search to your media library modal—just like in the demo!
+Code example — You can copy-paste the provided example to get started.
+
+See the full step-by-step guide and working demo code here:
+📚 **[Unsplash Integration Guide](./UNSPLASH_INTEGRATION.md)**
 
 ### Custom Layout Builder Component
 
