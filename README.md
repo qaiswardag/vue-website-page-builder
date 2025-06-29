@@ -6,6 +6,46 @@
 
 ## Overview
 
+- [Free Click \& Drop Page Builder](#free-click--drop-page-builder)
+  - [Overview](#overview)
+  - [Get Started in Minutes](#get-started-in-minutes)
+  - [Installation](#installation)
+  - [Click \& Drop Page Builder](#click--drop-page-builder)
+  - [Demo](#demo)
+  - [About](#about)
+  - [Features](#features)
+  - [Technical details](#technical-details)
+  - [Documentation](#documentation)
+  - [Requirements](#requirements)
+  - [Getting started \& installation](#getting-started--installation)
+  - [Quick Start](#quick-start)
+    - [Initializing the Page Builder](#initializing-the-page-builder)
+    - [Accessing the Shared Page Builder Service](#accessing-the-shared-page-builder-service)
+      - [Why Use the Shared Instance?](#why-use-the-shared-instance)
+      - [Usage](#usage)
+  - [Important: CSS Prefixing (`pbx-`)](#important-css-prefixing-pbx-)
+  - [Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)](#rendering-html-output-in-other-frameworks-react-nuxt-etc)
+  - [Providing Configuration to the Page Builder](#providing-configuration-to-the-page-builder)
+  - [Local Storage \& Auto-Save](#local-storage--auto-save)
+  - [Retrieving the Latest HTML Content for Form Submission](#retrieving-the-latest-html-content-for-form-submission)
+    - [Resetting the Builder After Successful Resource Creation or Update](#resetting-the-builder-after-successful-resource-creation-or-update)
+  - [Loading existing Content or Components into the Page Builder](#loading-existing-content-or-components-into-the-page-builder)
+  - [Automatic Draft Recovery](#automatic-draft-recovery)
+  - [Embedding Page Builder in a Modal or Dialog](#embedding-page-builder-in-a-modal-or-dialog)
+  - [Styling the Main Page Builder Container](#styling-the-main-page-builder-container)
+  - [Download HTML file](#download-html-file)
+    - [Custom Media Library Component or Custom Layout Builder Component](#custom-media-library-component-or-custom-layout-builder-component)
+  - [Troubleshooting](#troubleshooting)
+    - [Fonts or Icons Not Displaying](#fonts-or-icons-not-displaying)
+  - [Page Builder Architecture](#page-builder-architecture)
+    - [How the Page Builder Works](#how-the-page-builder-works)
+  - [Contributing](#contributing)
+  - [Security Vulnerabilities](#security-vulnerabilities)
+  - [Get in touch for customization or any questions](#get-in-touch-for-customization-or-any-questions)
+  - [Feedback](#feedback)
+  - [Support the Project](#support-the-project)
+  - [License](#license)
+
 A Vue 3 page builder component with drag & drop functionality for creating dynamic web pages.
 
 Tailored for Vue Developers
@@ -15,7 +55,7 @@ Integration is easy, and content is safely auto stored in the browser's local st
 
 Want to include your company logo in the editor toolbar or reflect your brand's color scheme throughout the builder interface? Done. With robust configuration options, branding the builder to match your product or client identity is quick and effortless.
 
-## 🚀 Get Started in Minutes
+## Get Started in Minutes
 
 Easy setup and instant productivity.  
 Follow the [Quick Start](#quick-start) guide to begin building with just a few simple steps.
