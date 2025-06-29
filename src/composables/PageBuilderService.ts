@@ -333,8 +333,6 @@ export class PageBuilderService {
     await this.clearHtmlSelection()
 
     //
-    //
-    //
     if (formType === 'update' || formType === 'create') {
       if (!this.pendingMountData) {
         // FOCUS ON: passedComponentsArray
@@ -356,6 +354,11 @@ export class PageBuilderService {
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
+          await this.#completeMountProcess(JSON.stringify([]))
+          return
+        }
+
+        if (!this.isPageBuilderMissingOnStart && !localStorageData && !passedComponentsArray) {
           await this.#completeMountProcess(JSON.stringify([]))
           return
         }

@@ -61,7 +61,7 @@ const configPageBuilder = {
     image: '/jane_doe.jpg',
   },
   updateOrCreate: {
-    formType: 'update',
+    formType: 'create',
     formName: 'collection',
   },
   pageBuilderLogo: {
@@ -90,7 +90,7 @@ const configPageBuilder = {
 } as const
 
 onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder, html)
+  const result = await pageBuilderService.startBuilder(configPageBuilder)
   console.log('Page Builder Result:', result)
   //
   //
