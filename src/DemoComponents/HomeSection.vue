@@ -80,12 +80,12 @@ const configPageBuilder = {
     brandColor: '#DB93B0',
   },
   pageSettings: {
-    classes:
-      'pbx-font-didot pbx-italic pbx-px-20 pbx-rounded-full pbx-rounded-tr-full pbx-border-8 pbx-border-green-800 pbx-border-solid pbx-text-neutral-300 pbx-bg-stone-700',
-    style: {
-      backgroundColor: 'red',
-      border: '6px solid yellow',
-    },
+    // classes:
+    //   'pbx-font-didot pbx-italic pbx-px-20 pbx-rounded-full pbx-rounded-tr-full pbx-border-8 pbx-border-green-800 pbx-border-solid pbx-text-neutral-300 pbx-bg-stone-700',
+    // style: {
+    //   backgroundColor: 'red',
+    //   border: '6px solid yellow',
+    // },
   },
 } as const
 
