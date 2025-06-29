@@ -1,10 +1,11 @@
 // @vitest-environment jsdom
 import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest'
-import { PageBuilderService } from '../composables/PageBuilderService'
+import { PageBuilderService } from '../services/PageBuilderService'
+import { usePageBuilderStateStore } from '../stores/page-builder-state'
 import componentsArray from './componentsArray.test.json'
 
 // Mock store (replace with your actual store or a better mock if needed)
-const mockStore = {
+const mockStore: ReturnType<typeof usePageBuilderStateStore> = {
   setBuilderStarted: vi.fn(),
   setPageBuilderConfig: vi.fn(),
   getPageBuilderConfig: {},
@@ -18,7 +19,7 @@ const mockStore = {
   getLocalStorageItemName: 'test-key',
   setLocalStorageItemName: vi.fn(),
   // ...add more as needed for your test
-}
+} as unknown as ReturnType<typeof usePageBuilderStateStore>
 
 const configPageBuilder = {
   updateOrCreate: {
@@ -40,8 +41,13 @@ describe('PageBuilderService', () => {
 
   beforeEach(() => {
     // Reset mocks before each test
-    Object.values(mockStore).forEach((fn) => typeof fn === 'function' && fn.mockClear())
-    service = new PageBuilderService(mockStore as any)
+    Object.values(mockStore).forEach(
+      (fn) =>
+        typeof fn === 'function' &&
+        typeof (fn as { mockClear?: () => void }).mockClear === 'function' &&
+        (fn as { mockClear: () => void }).mockClear(),
+    )
+    service = new PageBuilderService(mockStore)
   })
 
   it('should start builder and return a success message', async () => {
