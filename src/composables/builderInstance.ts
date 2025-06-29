@@ -1,5 +1,5 @@
 // builderInstance.ts
-import { PageBuilderService } from '../composables/PageBuilderService'
+import { PageBuilderService } from '../services/PageBuilderService'
 import { sharedPageBuilderStore } from '../stores/shared-store'
 
 // Singleton instance

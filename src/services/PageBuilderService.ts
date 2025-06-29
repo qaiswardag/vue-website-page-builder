@@ -19,9 +19,9 @@ import tailwindBorderStyleWidthPlusColor from '../utils/builder/tailwind-border-
 import { computed, ref, nextTick } from 'vue'
 import type { ComputedRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
-import { delay } from './delay'
+import { delay } from '../composables/delay'
 import { isEmptyObject } from '../helpers/isEmptyObject'
-import { extractCleanHTMLFromPageBuilder } from './extractCleanHTMLFromPageBuilder'
+import { extractCleanHTMLFromPageBuilder } from '../composables/extractCleanHTMLFromPageBuilder'
 
 export class PageBuilderService {
   // Class properties with types

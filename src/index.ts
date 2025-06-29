@@ -20,6 +20,6 @@ import './css/app.css'
 // Export shared store instances for external access
 export { sharedPageBuilderPinia, sharedPageBuilderStore } from './stores/shared-store'
 
-// export { PageBuilderService } from './composables/PageBuilderService.ts'
+// export { PageBuilderService } from './src/services/PageBuilderService.ts'
 
 export { initPageBuilder, getPageBuilder } from './composables/builderInstance'

@@ -1,4 +1,4 @@
-import type { PageBuilderService } from '../composables/PageBuilderService.ts'
+import type { PageBuilderService } from '../services/PageBuilderService.ts'
 
 export interface PageBuilderState {
   // ...other state properties...
