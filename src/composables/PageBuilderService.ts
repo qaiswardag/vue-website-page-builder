@@ -2087,7 +2087,7 @@ export class PageBuilderService {
             livePageBuilder.className = fallbackSettings.classes || ''
             livePageBuilder.setAttribute(
               'style',
-              this.#convertStyleObjectToString(pageSettings.style),
+              this.#convertStyleObjectToString(fallbackSettings.style),
             )
           }
         }
