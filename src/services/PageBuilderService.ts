@@ -1499,6 +1499,8 @@ export class PageBuilderService {
 
     // Restore the original content if available
     if (Array.isArray(this.originalComponents)) {
+      await this.clearClassesFromPage()
+      await this.clearInlineStylesFromPagee()
       await this.#mountComponentsToDOM(JSON.stringify(this.originalComponents), true)
       this.removeCurrentComponentsFromLocalStorage()
     }
