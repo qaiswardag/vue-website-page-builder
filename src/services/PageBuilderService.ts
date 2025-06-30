@@ -1,5 +1,3 @@
-import { LocalStorageManager } from './LocalStorageManager'
-
 // Type definitions
 import type {
   BuilderResourceData,
@@ -47,13 +45,8 @@ export class PageBuilderService {
   // Holds data to be mounted when #pagebuilder is not yet present in the DOM
   private pendingMountData: BuilderResourceData | null = null
   private isPageBuilderMissingOnStart: boolean = false
-  private localStorageManager: LocalStorageManager
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
-    this.localStorageManager = new LocalStorageManager(
-      pageBuilderStateStore,
-      this.sanitizeForLocalStorage,
-    )
     this.hasStartedEditing = false
     this.pageBuilderStateStore = pageBuilderStateStore
 
@@ -282,7 +275,7 @@ export class PageBuilderService {
       validation = this.#validateUserProvidedComponents(passedComponentsArray)
 
       // Update the localStorage key name based on the config/resource
-      this.localStorageManager.updateLocalStorageItemName()
+      this.updateLocalStorageItemName()
 
       // Page Builder is not Present in the DOM but Components have been passed to the Builder
       if (!pagebuilder) {
@@ -1364,7 +1357,7 @@ export class PageBuilderService {
    * Saves the current DOM state (components) to localStorage.
    */
   #saveDomComponentsToLocalStorage() {
-    this.localStorageManager.updateLocalStorageItemName()
+    this.updateLocalStorageItemName()
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -1403,7 +1396,7 @@ export class PageBuilderService {
     }
   }
   async removeCurrentComponentsFromLocalStorage() {
-    this.localStorageManager.updateLocalStorageItemName()
+    this.updateLocalStorageItemName()
     await nextTick()
 
     const key = this.getLocalStorageItemName.value
@@ -1472,7 +1465,7 @@ export class PageBuilderService {
 
   //
   async resumeEditingFromDraft() {
-    this.localStorageManager.updateLocalStorageItemName()
+    this.updateLocalStorageItemName()
 
     const localStorageData = this.loadStoredComponentsFromStorage()
 
@@ -1492,7 +1485,7 @@ export class PageBuilderService {
   }
 
   async restoreOriginalContent() {
-    this.localStorageManager.updateLocalStorageItemName()
+    this.updateLocalStorageItemName()
 
     this.pageBuilderStateStore.setIsRestoring(true)
     await delay(400)
@@ -1518,7 +1511,7 @@ export class PageBuilderService {
   }
 
   loadStoredComponentsFromStorage() {
-    this.localStorageManager.updateLocalStorageItemName()
+    this.updateLocalStorageItemName()
     if (!this.getLocalStorageItemName.value) return false
 
     if (
@@ -2023,6 +2016,154 @@ export class PageBuilderService {
     } catch (error) {
       console.error('Error parsing HTML components:', error)
       this.deleteAllComponentsFromDOM()
+    }
+  }
+
+  public updateLocalStorageItemName(): void {
+    const formtype =
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formType
+
+    const formname =
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
+      this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate.formName
+
+    const resourceData =
+      this.pageBuilderStateStore.getPageBuilderConfig &&
+      this.pageBuilderStateStore.getPageBuilderConfig.resourceData
+
+    // Logic for create resource
+    if (formtype === 'create') {
+      if (formname && formname.length > 0) {
+        this.pageBuilderStateStore.setLocalStorageItemName(
+          `page-builder-create-resource-${this.sanitizeForLocalStorage(formname)}`,
+        )
+        return
+      }
+
+      this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-create-resource`)
+      return
+    }
+
+    // Logic for create
+    // Logic for update and with resource form name
+    if (formtype === 'update') {
+      if (typeof formname === 'string' && formname.length > 0) {
+        //
+        //
+        if (resourceData && resourceData != null && !resourceData.title) {
+          // Check if id is missing, null, undefined, or an empty string (after trimming)
+          if (!resourceData.id || typeof resourceData.id === 'string') {
+            this.pageBuilderStateStore.setLocalStorageItemName(
+              `page-builder-update-resource-${this.sanitizeForLocalStorage(formname)}`,
+            )
+            return
+          }
+        }
+
+        // Runs when resourceData has title but no ID
+        if (resourceData && resourceData != null) {
+          if (
+            resourceData.title &&
+            typeof resourceData.title === 'string' &&
+            resourceData.title.length > 0
+          ) {
+            if (!resourceData.id || typeof resourceData.id === 'string') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(formname)}-${this.sanitizeForLocalStorage(resourceData.title)}`,
+              )
+              return
+            }
+          }
+        }
+
+        // Runs when resourceData has ID but no title
+        if (resourceData && resourceData != null) {
+          if (!resourceData.title && typeof resourceData.title !== 'string') {
+            if (resourceData.id || typeof resourceData.id === 'number') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(formname)}-${this.sanitizeForLocalStorage(String(resourceData.id))}`,
+              )
+              return
+            }
+          }
+        }
+
+        // Runs when resourceData has both title and ID
+        if (resourceData && resourceData != null) {
+          if (
+            resourceData.title &&
+            typeof resourceData.title === 'string' &&
+            resourceData.title.length > 0
+          ) {
+            if (resourceData.id || typeof resourceData.id === 'number') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(formname)}-${this.sanitizeForLocalStorage(resourceData.title)}-${this.sanitizeForLocalStorage(String(resourceData.id))}`,
+              )
+              return
+            }
+          }
+        }
+      }
+
+      // Logic for update without without formname
+      if (!formname || (typeof formname === 'string' && formname.length === 0)) {
+        //
+        //
+        if (resourceData && resourceData != null && !resourceData.title) {
+          // Check if id is missing, null, undefined, or an empty string (after trimming)
+          if (!resourceData.id || typeof resourceData.id === 'string') {
+            this.pageBuilderStateStore.setLocalStorageItemName(`page-builder-update-resource`)
+            return
+          }
+        }
+
+        // Runs when resourceData has title but no ID
+        if (resourceData && resourceData != null) {
+          if (
+            resourceData.title &&
+            typeof resourceData.title === 'string' &&
+            resourceData.title.length > 0
+          ) {
+            if (!resourceData.id || typeof resourceData.id === 'string') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(resourceData.title)}`,
+              )
+              return
+            }
+          }
+        }
+
+        // Runs when resourceData has ID but no title
+        if (resourceData && resourceData != null) {
+          if (!resourceData.title && typeof resourceData.title !== 'string') {
+            if (resourceData.id || typeof resourceData.id === 'number') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(String(resourceData.id))}`,
+              )
+              return
+            }
+          }
+        }
+
+        // Runs when resourceData has both title and ID
+        if (resourceData && resourceData != null) {
+          if (
+            resourceData.title &&
+            typeof resourceData.title === 'string' &&
+            resourceData.title.length > 0
+          ) {
+            if (resourceData.id || typeof resourceData.id === 'number') {
+              this.pageBuilderStateStore.setLocalStorageItemName(
+                `page-builder-update-resource-${this.sanitizeForLocalStorage(resourceData.title)}-${this.sanitizeForLocalStorage(String(resourceData.id))}`,
+              )
+              return
+            }
+          }
+        }
+      }
     }
   }
 
