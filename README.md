@@ -94,7 +94,7 @@ A Page Builder designed for growth. Build your website pages with ready-made com
 Includes:
 
 - **Page Builder**: Click & Drop Page Builder.
-- **Customizable Design**: Tailor the look to match your brand.
+- **Customizable Design**: Customize the look to match your brand.
 
 The Page Builder is packed with features:
 
