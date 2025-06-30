@@ -292,10 +292,10 @@ let lastToolbarTop = null
 
 function updatePanelPosition() {
   const container = pbxToolBar.value
-  const editToolbar = container && container.querySelector('#editToolbar')
+  const editToolbarElement = container && container.querySelector('#editToolbarElement')
   const restored = getRestoredElement.value
 
-  if (!container || !editToolbar) return
+  if (!container || !editToolbarElement) return
 
   const selected = container.querySelector('[selected]')
 
@@ -304,28 +304,35 @@ function updatePanelPosition() {
     const containerRect = container.getBoundingClientRect()
 
     const left =
-      selectedRect.left - containerRect.left + selectedRect.width / 2 - editToolbar.offsetWidth / 2
+      selectedRect.left -
+      containerRect.left +
+      selectedRect.width / 2 -
+      editToolbarElement.offsetWidth / 2
 
     const GAP = 20 // px
     const proposedTop =
-      selectedRect.top - containerRect.top + container.scrollTop - editToolbar.offsetHeight - GAP
+      selectedRect.top -
+      containerRect.top +
+      container.scrollTop -
+      editToolbarElement.offsetHeight -
+      GAP
 
     const top = Math.max(0, proposedTop)
 
-    editToolbar.style.position = 'absolute'
-    editToolbar.style.left = `${left}px`
-    editToolbar.style.top = `${top}px`
-    editToolbar.classList.add('is-visible')
+    editToolbarElement.style.position = 'absolute'
+    editToolbarElement.style.left = `${left}px`
+    editToolbarElement.style.top = `${top}px`
+    editToolbarElement.classList.add('is-visible')
 
     lastToolbarLeft = left
     lastToolbarTop = top
   } else if (restored && lastToolbarLeft !== null && lastToolbarTop !== null) {
-    editToolbar.style.position = 'absolute'
-    editToolbar.style.left = `${lastToolbarLeft}px`
-    editToolbar.style.top = `${lastToolbarTop}px`
-    editToolbar.classList.add('is-visible')
+    editToolbarElement.style.position = 'absolute'
+    editToolbarElement.style.left = `${lastToolbarLeft}px`
+    editToolbarElement.style.top = `${lastToolbarTop}px`
+    editToolbarElement.classList.add('is-visible')
   } else {
-    editToolbar.classList.remove('is-visible')
+    editToolbarElement.classList.remove('is-visible')
   }
 }
 
@@ -728,12 +735,11 @@ onMounted(async () => {
           :class="{ 'pbx-mr-2': !getMenuRight, '': getMenuRight }"
         >
           <div
-            id="editToolbar"
-            class="pbx-z-30 lg:pbx-mx-20 pbx-flex pbx-gap-2 pbx-justify-center pbx-min-w-72 pbx-items-center pbx-rounded-full pbx-px-4 pbx-bg-red-200 pbx-h-0"
+            id="pbxEditToolbar"
+            class="pbx-z-30 lg:pbx-mx-20 pbx-flex pbx-gap-2 pbx-justify-center pbx-items-center pbx-rounded pbx-px-4 pbx-bg-red-200 pbx-h-0"
             style="
               box-shadow: 0 0 0 10px oklch(86.9% 0.005 56.366);
               background: oklch(86.9% 0.005 56.366);
-              border-radius: 9999px;
             "
           >
             <template v-if="getElement">
@@ -752,7 +758,7 @@ onMounted(async () => {
           <!-- Element Popover toolbar end -->
 
           <div
-            id="contains-pagebuilder"
+            id="pbxContainsPagebuilder"
             class="pbx-pl-4 pbx-pr-4 pbx-pb-4 pbx-pt-1 pbx-h-full pbx-overflow-y-auto"
           >
             <div id="pagebuilder" class="pbx-text-black pbx-font-sans">

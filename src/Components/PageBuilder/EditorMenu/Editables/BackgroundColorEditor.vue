@@ -57,12 +57,13 @@ watch(
 
         <ListboxButton
           v-if="!globalPageLayout"
-          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white focus-visible:pbx-ring-0"
+          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-200 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white focus-visible:pbx-ring-0"
         >
           <div class="pbx-flex pbx-flex-col">
             <div class="pbx-flex pbx-gap-2 pbx-items-center">
               <span
                 class="material-symbols-outlined"
+                style="text-shadow: rgb(0 0 0 / 10%) 1.5px 1.5px 0px"
                 :class="`pbx-text-${backgroundColor?.replace('pbx-bg-', '')}`"
               >
                 format_color_fill

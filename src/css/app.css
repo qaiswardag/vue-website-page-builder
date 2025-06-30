@@ -384,33 +384,10 @@
   margin-left: 1em; /* Adjust this value as needed */
 }
 
-#settingsPanel {
-  border-radius: 9999px;
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(1rem);
-  transition:
-    opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.08),
-    0 1.5px 4px rgba(0, 0, 0, 0.06);
-}
-
-[selected]:hover #settingsPanel,
-[selected]:focus-within #settingsPanel {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-#editToolbar {
+#pbxEditToolbar {
   opacity: 0;
   pointer-events: none;
   transform: translateY(0.1rem) scale(0.1);
-
-  border-radius: 9999px;
   transition:
     left 0.3s cubic-bezier(0.4, 0, 0.2, 1),
     top 0.3s cubic-bezier(0.4, 0, 0.2, 1),
@@ -422,23 +399,18 @@
     border-radius 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-#editToolbar.is-visible {
+#pbxEditToolbar.is-visible {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0) scale(1);
-  min-width: 20rem;
-  width: 20rem;
-  height: 2.5rem;
-  border-radius: 9999px;
+  min-width: 18rem;
+  width: 18rem;
+  height: 2.2rem;
 }
 
-#contains-pagebuilder {
+#pbxContainsPagebuilder {
   position: relative; /* make this the positioning context for absolute children */
   overflow-y: auto;
-}
-
-.smooth-transition {
-  transition: opacity 0.3s ease-in-out;
 }
 
 /* Manage P, Link, H1, H2 # end */
@@ -517,38 +489,6 @@
 #pagebuilder ul {
   list-style: disc !important;
   padding: 0rem;
-}
-
-/* Add overflow-x property to enable horizontal scrollbar */
-.scrollable {
-  overflow-x: auto;
-  overflow-y: auto;
-  /* Add any other desired styles for the scrollable element */
-}
-/* Scrollbar Styles  - end */
-
-/* Scrollbar Styles  - start */
-/* Firefox */
-* {
-  scrollbar-width: thin;
-  scrollbar-color: black transparent;
-}
-
-*::-webkit-scrollbar-track {
-  background: transparent;
-  border-radius: 25px;
-}
-
-/* Chrome, Edge, and Safari */
-*::-webkit-scrollbar {
-  width: 6px;
-  height: 6px; /* Add height for horizontal scrollbar */
-}
-
-*::-webkit-scrollbar-thumb {
-  background-color: black;
-  border-radius: 25px;
-  border: none;
 }
 
 #pagebuilder[data-global-selected] {
