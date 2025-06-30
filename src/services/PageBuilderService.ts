@@ -43,7 +43,8 @@ export class PageBuilderService {
   // Hold data from Database or Backend for updated post
   private originalComponents: BuilderResourceData | undefined = undefined
   // Holds data to be mounted when #pagebuilder is not yet present in the DOM
-  private pendingMountData: BuilderResourceData | null = null
+  private savedMountComponents: BuilderResourceData | null = null
+  private pendingMountComponents: BuilderResourceData | null = null
   private isPageBuilderMissingOnStart: boolean = false
 
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
@@ -266,6 +267,7 @@ export class PageBuilderService {
     const pagebuilder = document.querySelector('#pagebuilder')
     let validation
 
+    console.log('den er:', passedComponentsArray)
     try {
       this.originalComponents = passedComponentsArray
       this.pageBuilderStateStore.setPageBuilderConfig(config)
@@ -277,12 +279,15 @@ export class PageBuilderService {
       // Update the localStorage key name based on the config/resource
       this.updateLocalStorageItemName()
 
+      if (passedComponentsArray) {
+        this.savedMountComponents = passedComponentsArray
+      }
       // Page Builder is not Present in the DOM but Components have been passed to the Builder
       if (!pagebuilder) {
         this.isPageBuilderMissingOnStart = true
       }
       if (passedComponentsArray && !pagebuilder) {
-        this.pendingMountData = passedComponentsArray
+        this.pendingMountComponents = passedComponentsArray
       }
       // Page Builder is Present in the DOM & Components have been passed to the Builder
       if (pagebuilder) {
@@ -290,8 +295,6 @@ export class PageBuilderService {
       }
 
       // result to end user
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const result: any = {
         message: 'Page builder started successfully.',
       }
@@ -316,12 +319,15 @@ export class PageBuilderService {
     }
   }
 
-  async completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
+  async completeBuilderInitialization(
+    passedComponentsArray?: BuilderResourceData,
+    internalPageBuilderCall?: boolean,
+  ): Promise<void> {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await delay(400)
 
     // Always clear DOM and store before mounting new resource
-    this.deleteAllComponentsFromDOM()
+    this.#deleteAllComponentsFromDOM()
 
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
@@ -331,58 +337,72 @@ export class PageBuilderService {
     // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
 
-    //
     if (formType === 'update' || formType === 'create') {
-      if (!this.pendingMountData) {
-        //
-        //
+      if (!this.pendingMountComponents) {
+        // Page Builder Is initially present in DOM
         if (!passedComponentsArray && this.isPageBuilderMissingOnStart && localStorageData) {
+          console.log('1111:', internalPageBuilderCall)
           await this.#completeMountProcess(localStorageData)
           return
         }
         if (passedComponentsArray && !localStorageData) {
+          console.log('2222:', internalPageBuilderCall)
           await this.#completeMountProcess(JSON.stringify(passedComponentsArray), true)
+          this.#saveDomComponentsToLocalStorage()
           return
         }
 
         if (passedComponentsArray && localStorageData) {
+          console.log('3333:', internalPageBuilderCall)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-
           await this.#completeMountProcess(JSON.stringify(passedComponentsArray), true)
           return
         }
-
-        if (!passedComponentsArray && localStorageData && this.isPageBuilderMissingOnStart) {
+        if (!passedComponentsArray && localStorageData && !this.savedMountComponents) {
+          console.log('4444:', internalPageBuilderCall)
           await this.#completeMountProcess(localStorageData)
+          return
+        }
+        if (!passedComponentsArray && this.savedMountComponents && localStorageData) {
+          console.log('CCCC:', internalPageBuilderCall)
+          await this.#completeMountProcess(JSON.stringify(this.savedMountComponents))
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
+          console.log('5555:', internalPageBuilderCall)
           await this.#completeMountProcess(JSON.stringify([]))
           return
         }
 
         if (!this.isPageBuilderMissingOnStart && !localStorageData && !passedComponentsArray) {
+          console.log('6666:', internalPageBuilderCall)
           await this.#completeMountProcess(JSON.stringify([]))
           return
         }
       }
 
-      // FOCUS ON: pendingMountData
-      if (this.pendingMountData) {
+      // FOCUS ON: pendingMountComponents
+      if (this.pendingMountComponents) {
+        // No Page Builder Is  present in DOM initially
         if (localStorageData && this.isPageBuilderMissingOnStart) {
+          console.log('7777:', internalPageBuilderCall)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-          await this.#completeMountProcess(JSON.stringify(this.pendingMountData), true)
-          this.pendingMountData = null
+          await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          this.pendingMountComponents = null
           return
         }
         if (!localStorageData && passedComponentsArray && this.isPageBuilderMissingOnStart) {
-          await this.#completeMountProcess(JSON.stringify(this.pendingMountData), true)
+          console.log('8888:', internalPageBuilderCall)
+          await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          this.#saveDomComponentsToLocalStorage()
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
-          await this.#completeMountProcess(JSON.stringify(this.pendingMountData), true)
+          console.log('9999:', internalPageBuilderCall)
+          await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          this.#saveDomComponentsToLocalStorage()
           return
         }
       }
@@ -558,10 +578,6 @@ export class PageBuilderService {
 
   #applyHelperCSSToElements(element: HTMLElement): void {
     this.#wrapElementInDivIfExcluded(element)
-
-    if (element.tagName === 'IMG') {
-      element.classList.add('smooth-transition')
-    }
 
     // If this is a DIV and its only/main child is a heading, apply font size classes to the DIV
     if (
@@ -780,7 +796,7 @@ export class PageBuilderService {
     // Deep clone clone component
     const clonedComponent = { ...componentObject }
 
-    const pageBuilder = document.querySelector('#contains-pagebuilder')
+    const pageBuilder = document.querySelector('#pbxContainsPagebuilder')
     //  scoll to top or bottom # end
     if (pageBuilder) {
       // push to top
@@ -1031,7 +1047,7 @@ export class PageBuilderService {
    *
    */
 
-  deleteAllComponentsFromDOM() {
+  #deleteAllComponentsFromDOM() {
     // Clear the store
     this.pageBuilderStateStore.setComponents([])
 
@@ -1395,7 +1411,7 @@ export class PageBuilderService {
       localStorage.setItem(keyForSavingFromDomToLocal, JSON.stringify(dataToSave))
     }
   }
-  async removeCurrentComponentsFromLocalStorage() {
+  async #removeCurrentComponentsFromLocalStorage() {
     this.updateLocalStorageItemName()
     await nextTick()
 
@@ -1403,6 +1419,11 @@ export class PageBuilderService {
     if (key) {
       localStorage.removeItem(key)
     }
+  }
+
+  public async handleFormSubmission() {
+    await this.#removeCurrentComponentsFromLocalStorage()
+    this.#deleteAllComponentsFromDOM()
   }
 
   //
@@ -1495,7 +1516,7 @@ export class PageBuilderService {
       await this.clearClassesFromPage()
       await this.clearInlineStylesFromPagee()
       await this.#mountComponentsToDOM(JSON.stringify(this.originalComponents), true)
-      this.removeCurrentComponentsFromLocalStorage()
+      this.#removeCurrentComponentsFromLocalStorage()
     }
 
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
@@ -1510,7 +1531,7 @@ export class PageBuilderService {
     return this.getLocalStorageItemName.value
   }
 
-  loadStoredComponentsFromStorage() {
+  loadStoredComponentsFromStorageOld() {
     this.updateLocalStorageItemName()
     if (!this.getLocalStorageItemName.value) return false
 
@@ -1525,6 +1546,26 @@ export class PageBuilderService {
       }
     }
 
+    return false
+  }
+
+  loadStoredComponentsFromStorage() {
+    this.updateLocalStorageItemName()
+    const key = this.getLocalStorageItemName.value
+    if (!key) return false
+
+    const raw = localStorage.getItem(key)
+    if (!raw) return false
+
+    const parsed = JSON.parse(raw)
+
+    // Object with components and pageSettings
+    if (parsed && Array.isArray(parsed.components)) {
+      const classes = parsed.pageSettings?.classes || ''
+      const style = parsed.pageSettings?.style || ''
+      const sectionsHtml = parsed.components.map((c: any) => c.html_code).join('\n')
+      return `<div id="pagebuilder" class="${classes}" style="${style}">\n${sectionsHtml}\n</div>`
+    }
     return false
   }
 
@@ -1765,7 +1806,7 @@ export class PageBuilderService {
           : 'push',
       })
 
-      const pageBuilder = document.querySelector('#contains-pagebuilder')
+      const pageBuilder = document.querySelector('#pbxContainsPagebuilder')
       //  scoll to top or bottom # end
       if (pageBuilder) {
         // push to bottom
@@ -1929,7 +1970,7 @@ export class PageBuilderService {
       await this.#addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing JSON components:', error)
-      this.deleteAllComponentsFromDOM()
+      this.#deleteAllComponentsFromDOM()
     }
   }
   // Private method to parse HTML components
@@ -2015,7 +2056,7 @@ export class PageBuilderService {
       await this.#addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing HTML components:', error)
-      this.deleteAllComponentsFromDOM()
+      this.#deleteAllComponentsFromDOM()
     }
   }
 

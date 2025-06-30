@@ -395,7 +395,7 @@ try {
 
 ### Resetting the Builder After Successful Resource Creation or Update
 
-Builder, it is important to clear the DOM and the builder’s draft state, as well as remove the corresponding local storage entry. This ensures that old drafts do not appear the next time the builder is opened for a new or existing resource.
+After successfully creating or updating a resource (such as a post, article, or listing) using the Page Builder, it is important to clear the DOM and the builder’s draft state, as well as remove the corresponding local storage entry. This ensures that old drafts do not appear the next time the builder is opened for a new or existing resource.
 
 You can reset the Page Builder’s live DOM, builder state, and clear the draft with:
 

@@ -292,7 +292,7 @@ let lastToolbarTop = null
 
 function updatePanelPosition() {
   const container = pbxToolBar.value
-  const editToolbarElement = container && container.querySelector('#editToolbarElement')
+  const editToolbarElement = container && container.querySelector('#pbxEditToolbar')
   const restored = getRestoredElement.value
 
   if (!container || !editToolbarElement) return
@@ -337,7 +337,8 @@ function updatePanelPosition() {
 }
 
 onMounted(async () => {
-  await pageBuilderService.completeBuilderInitialization()
+  await delay(2000)
+  await pageBuilderService.completeBuilderInitialization(undefined, true)
 
   updatePanelPosition()
 

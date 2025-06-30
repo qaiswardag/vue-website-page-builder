@@ -28,6 +28,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 // emit
 const emit = defineEmits(['closeEditor'])
 
+const isLoadingPageStyles = ref(null)
 const getComponents = computed(() => {
   return pageBuilderStateStore.getComponents
 })
@@ -115,6 +116,7 @@ const clearInlineStylesFromPagee = async function () {
 }
 
 const handleCloseGlobalPageStyles = async function () {
+  isLoadingPageStyles.value = true
   await pageBuilderService.handleManualSave()
 
   // Remove global highlight if present
@@ -124,6 +126,7 @@ const handleCloseGlobalPageStyles = async function () {
   }
 
   showModalGlobalPageStyles.value = false
+  isLoadingPageStyles.value = false
 }
 </script>
 
@@ -227,63 +230,82 @@ const handleCloseGlobalPageStyles = async function () {
 
     <ModalBuilder
       maxWidth="md"
-      minHeight="pbx-h-[90vh]"
+      minHeight="pbx-min-h-[60vh]"
       :showModalBuilder="showModalGlobalPageStyles"
       title="Global Page Styles"
       @closeMainModalBuilder="handleCloseGlobalPageStyles"
     >
-      <div class="pbx-min-h-[90vh] pbx-flex pbx-flex-col pbx-gap-2 pbx-pt-4 pbx-pb-2">
-        <p class="pbx-myPrimaryParagraph">
-          Apply styles that affect the entire page. These settings include global font family, text
-          color, background color, and other universal styles that apply to all sections.
-        </p>
-        <article class="pbx-my-1 pbx-bg-gray-100">
-          <Typography></Typography>
-        </article>
-        <article class="pbx-my-1 pbx-bg-gray-100">
-          <TextColorEditor :globalPageLayout="true"></TextColorEditor>
-        </article>
-        <article class="pbx-my-1 pbx-bg-gray-100">
-          <BackgroundColorEditor :globalPageLayout="true"></BackgroundColorEditor>
-        </article>
-        <article class="pbx-my-1 pbx-bg-gray-100">
-          <Padding> </Padding>
-        </article>
-        <article class="pbx-my-1 pbx-bg-gray-100">
-          <Margin> </Margin>
-        </article>
-        <article class="pbx-my-1 pbx-bg-gray-100">
-          <BorderRadius></BorderRadius>
-        </article>
-        <article class="pbx-my-1 pbx-bg-gray-100">
-          <Borders></Borders>
-        </article>
-        <article class="pbx-my-1 pbx-bg-gray-100">
-          <ClassEditor></ClassEditor>
-        </article>
-      </div>
-      <label class="pbx-myPrimaryInputLabel pbx-my-4">
-        Choose an action to clean up your page:
-      </label>
-      <div
-        class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
-      >
-        <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
-          <div
-            class="sm:pbx-grid-cols-1 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full pbx-mt-4"
-          >
-            <!-- Button: Clear all CSS classes -->
-            <button @click="clearClassesFromPage" class="pbx-myPrimaryButton" type="button">
-              Clear All CSS Classes
-            </button>
-
-            <!-- Button: Clear all inline styles -->
-            <button @click="clearInlineStylesFromPagee" class="pbx-myPrimaryButton" type="button">
-              Clear All Inline Styles
-            </button>
+      <div class="pbx-flex pbx-flex-col pbx-gap-2 pbx-pt-4 pbx-pb-2">
+        <div v-if="isLoadingPageStyles">
+          <div class="pbx-flex pbx-items-center pbx-my-2 pbx-py-4 pbx-px-2 pbx-justify-center">
+            <div
+              class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
+            >
+              <span
+                class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
+                >Loading...</span
+              >
+            </div>
           </div>
         </div>
-        <!--v-if-->
+        <div v-if="!isLoadingPageStyles">
+          <div>
+            <p class="pbx-myPrimaryParagraph">
+              Apply styles that affect the entire page. These settings include global font family,
+              text color, background color, and other universal styles that apply to all sections.
+            </p>
+            <article class="pbx-my-1 pbx-bg-gray-100">
+              <Typography></Typography>
+            </article>
+            <article class="pbx-my-1 pbx-bg-gray-100">
+              <TextColorEditor :globalPageLayout="true"></TextColorEditor>
+            </article>
+            <article class="pbx-my-1 pbx-bg-gray-100">
+              <BackgroundColorEditor :globalPageLayout="true"></BackgroundColorEditor>
+            </article>
+            <article class="pbx-my-1 pbx-bg-gray-100">
+              <Padding> </Padding>
+            </article>
+            <article class="pbx-my-1 pbx-bg-gray-100">
+              <Margin> </Margin>
+            </article>
+            <article class="pbx-my-1 pbx-bg-gray-100">
+              <BorderRadius></BorderRadius>
+            </article>
+            <article class="pbx-my-1 pbx-bg-gray-100">
+              <Borders></Borders>
+            </article>
+            <article class="pbx-my-1 pbx-bg-gray-100">
+              <ClassEditor></ClassEditor>
+            </article>
+          </div>
+          <label class="pbx-myPrimaryInputLabel pbx-my-4">
+            Choose an action to clean up your page:
+          </label>
+          <div
+            class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
+          >
+            <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
+              <div
+                class="sm:pbx-grid-cols-1 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full pbx-mt-4"
+              >
+                <!-- Button: Clear all CSS classes -->
+                <button @click="clearClassesFromPage" class="pbx-myPrimaryButton" type="button">
+                  Clear All CSS Classes
+                </button>
+
+                <!-- Button: Clear all inline styles -->
+                <button
+                  @click="clearInlineStylesFromPagee"
+                  class="pbx-myPrimaryButton"
+                  type="button"
+                >
+                  Clear All Inline Styles
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </ModalBuilder>
   </div>
