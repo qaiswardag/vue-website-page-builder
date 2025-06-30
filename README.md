@@ -395,18 +395,15 @@ try {
 
 ### Resetting the Builder After Successful Resource Creation or Update
 
-After you have successfully created or updated a resource (such as a post, article, or listing) using the Page Builder, it is important to clear the builder’s draft state and remove the corresponding local storage entry. This ensures that old drafts do not appear the next time the builder is opened for a new or existing resource.
+Builder, it is important to clear the DOM and the builder’s draft state, as well as remove the corresponding local storage entry. This ensures that old drafts do not appear the next time the builder is opened for a new or existing resource.
 
-You can reset the builder state and clear the draft with:
+You can reset the Page Builder’s live DOM, builder state, and clear the draft with:
 
 ```js
-// Delete the HTML from the Live DOM
-pageBuilderService.deleteAllComponentsFromDOM()
-// Clear Local Storage for the created or updated resource
-await pageBuilderService.removeCurrentComponentsFromLocalStorage()
+await pageBuilderService.handleFormSubmission()
 ```
 
-Always call these methods after a successful post or resource update to ensure users start with a fresh builder the next time they create or edit a resource.
+Always call this method after a successful post or resource update to ensure users start with a fresh builder the next time they create or edit a resource.
 
 ## Loading existing Content or Components into the Page Builder
 
