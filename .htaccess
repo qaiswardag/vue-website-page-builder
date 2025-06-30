@@ -1,0 +1,5 @@
+RewriteEngine On
+
+# Redirect non-www to www (also handle https)
+RewriteCond %{HTTP_HOST} ^mybuilder\.dev$ [NC]
+RewriteRule ^(.*)$ https://www.mybuilder.dev/$1 [R=301,L]
