@@ -336,7 +336,7 @@ export class PageBuilderService {
       if (!this.pendingMountData) {
         //
         //
-        if (!passedComponentsArray && !this.isPageBuilderMissingOnStart && localStorageData) {
+        if (!passedComponentsArray && this.isPageBuilderMissingOnStart && localStorageData) {
           await this.#completeMountProcess(localStorageData)
           return
         }
