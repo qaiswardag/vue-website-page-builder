@@ -50,7 +50,7 @@
   "bugs": {
     "url": "https://github.com/qaiswardag/vue-website-page-builder/issues"
   },
-  "homepage": "https://www.builder-demo.myissue.dk/",
+  "homepage": "https://mybuilder.dev",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
