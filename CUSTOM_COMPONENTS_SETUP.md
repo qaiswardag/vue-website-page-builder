@@ -53,7 +53,7 @@ const { closeMediaLibraryModal } = usePageBuilderModal()
 
 const applySelectedImage = async function (imageURL) {
   // Update the builder's HTML image block with the new image
-  await pageBuilderService.applyPendingImageToSelectedElement({
+  await pageBuilderService.applySelectedImage({
     src: imageURL,
   })
 

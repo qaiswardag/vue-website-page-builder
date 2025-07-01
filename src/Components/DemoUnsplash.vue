@@ -96,7 +96,7 @@ const nextPage = async function () {
 }
 
 const applySelectedImage = async function (imageURL) {
-  await pageBuilderService.applyPendingImageToSelectedElement({
+  await pageBuilderService.applySelectedImage({
     src: `${imageURL}`,
   })
 

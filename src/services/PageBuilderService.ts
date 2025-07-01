@@ -1609,7 +1609,7 @@ export class PageBuilderService {
    * This updates the builder state and triggers an auto-save.
    * If no element is selected or no image is staged, nothing happens.
    */
-  async applyPendingImageToSelectedElement(image: ImageObject): Promise<void> {
+  async applySelectedImage(image: ImageObject): Promise<void> {
     this.pageBuilderStateStore.setApplyImageToSelection(image)
 
     if (!this.getElement.value) return

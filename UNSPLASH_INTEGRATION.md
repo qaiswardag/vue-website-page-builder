@@ -120,8 +120,8 @@ const nextPage = async function () {
   fetchUnsplash()
 }
 
-const applySelectedImage = async function (imageURL) {
-  await pageBuilderService.applyPendingImageToSelectedElement({
+const useImage = async function (imageURL) {
+  await pageBuilderService.applySelectedImage({
     src: `${imageURL}`,
   })
 
@@ -391,7 +391,7 @@ onMounted(async () => {
           </button>
           <button
             v-if="getCurrentImage && typeof getCurrentImage === 'string'"
-            @click="applySelectedImage(getCurrentImage)"
+            @click="useImage(getCurrentImage)"
             class="myPrimaryButton focus:ring-2 focus:ring-blue-500"
             type="button"
           >
