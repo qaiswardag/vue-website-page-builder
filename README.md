@@ -4,17 +4,17 @@
 
 # Free Click & Drop Page Builder
 
-- [Free Click \& Drop Page Builder](#free-click--drop-page-builder)
+- [Free Click & Drop Page Builder](#free-click--drop-page-builder)
   - [Demo](#demo)
   - [Overview](#overview)
   - [Get Started in Minutes](#get-started-in-minutes)
   - [Installation](#installation)
   - [About](#about)
   - [Features](#features)
-  - [Technical details](#technical-details)
+  - [Technical Details](#technical-details)
   - [Documentation](#documentation)
   - [Requirements](#requirements)
-  - [Getting started \& installation](#getting-started--installation)
+  - [Getting Started & Installation](#getting-started--installation)
   - [Quick Start](#quick-start)
     - [Initializing the Page Builder](#initializing-the-page-builder)
     - [Why Use the Shared Instance?](#why-use-the-shared-instance)
@@ -22,15 +22,15 @@
   - [Important: CSS Prefixing (`pbx-`)](#important-css-prefixing-pbx-)
   - [Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)](#rendering-html-output-in-other-frameworks-react-nuxt-etc)
   - [Providing Configuration to the Page Builder](#providing-configuration-to-the-page-builder)
-  - [Local Storage \& Auto-Save](#local-storage--auto-save)
+  - [Local Storage & Auto-Save](#local-storage--auto-save)
   - [Retrieving the Latest HTML Content for Form Submission](#retrieving-the-latest-html-content-for-form-submission)
     - [Resetting the Builder After Successful Resource Creation or Update](#resetting-the-builder-after-successful-resource-creation-or-update)
-  - [Loading existing Content or Components into the Page Builder](#loading-existing-content-or-components-into-the-page-builder)
-    - [Restoring Full Page Content (Global Styles \& Components)](#restoring-full-page-content-global-styles--components)
+  - [Loading Existing Content or Components into the Page Builder](#loading-existing-content-or-components-into-the-page-builder)
+    - [Restoring Full Page Content (Global Styles & Components)](#restoring-full-page-content-global-styles--components)
   - [Automatic Draft Recovery](#automatic-draft-recovery)
   - [Embedding Page Builder in a Modal or Dialog](#embedding-page-builder-in-a-modal-or-dialog)
   - [Styling the Main Page Builder Container](#styling-the-main-page-builder-container)
-  - [Download HTML file](#download-html-file)
+  - [Download HTML File](#download-html-file)
   - [Custom Components](#custom-components)
     - [Custom Media Library Component](#custom-media-library-component)
     - [Integrate Unsplash Library](#integrate-unsplash-library)
@@ -41,35 +41,35 @@
     - [How the Page Builder Works](#how-the-page-builder-works)
   - [Contributing](#contributing)
   - [Security Vulnerabilities](#security-vulnerabilities)
-  - [Get in touch for customization or any questions](#get-in-touch-for-customization-or-any-questions)
+  - [Get in Touch for Customization or Any Questions](#get-in-touch-for-customization-or-any-questions)
   - [Feedback](#feedback)
   - [Support the Project](#support-the-project)
   - [License](#license)
 
 ## Demo
 
-A Vue 3 page builder component with drag & drop functionality for creating dynamic web pages.
+A Vue 3 page builder component with drag-and-drop functionality for creating dynamic web pages.
 
 Create and enhance digital experiences with Vue on any backend.
 
 Experience the power and simplicity of the Vue Website Page Builder in action.
-Try the live demo to explore real-time visual updates, and smooth content management
+Try the live demo to explore real-time visual updates and smooth content management.
 
 [Play around with the Page Builder](https://mybuilder.dev)
 
 ## Overview
 
-If you're a Vue 3 developer, this builder feels right at home. It installs quickly via npm and supports full customization through props and configuration objects. You can even set specific user settings like image, name, theme, language, company logo and autosave preferences, making it a personalized experience for every user.
+If you're a Vue 3 developer, this builder feels right at home. It installs quickly via npm and supports full customization through props and configuration objects. You can even set specific user settings like image, name, theme, language, company logo, and autosave preferences, making it a personalized experience for every user.
 
-Lightweight & Minimalist Page Builder with an elegant and intuitive design, focused on simplicity and speed.
+A lightweight and minimalist Page Builder with an elegant and intuitive design, focused on simplicity and speed.
 
-Build responsive pages like listings, jobs or blog posts and manage content easily.
+Build responsive pages like listings, jobs, or blog posts and manage content easily.
 
 <img style="max-width: 100%;" src="./public/home/editor.jpg" alt="Vue Website Page Builder - the editor" />
 
 ## Get Started in Minutes
 
-Easy setup and instant productivity.  
+Easy setup and instant productivity.
 Follow the [Quick Start](#quick-start) guide to begin building with just a few simple steps.
 
 ---
@@ -94,7 +94,7 @@ A Page Builder designed for growth. Build your website pages with ready-made com
 
 Includes:
 
-- **Page Builder**: Click & Drop Page Builder.
+- **Page Builder**: A Click & Drop Page Builder.
 - **Customizable Design**: Customize the look to match your brand.
 
 The Page Builder is packed with features:
@@ -103,24 +103,24 @@ The Page Builder is packed with features:
 - **Reordering**: Change the order of your content without hassle.
 - **True Visual Editing**: See your changes in real-time as you make them.
 - **Media Library**: Easily inject your own custom media library component.
-- **Local Storage & Auto-Save**: Never lose your work - changes are saved as you go.
-- **Unsplash**: Unsplash Integration.
+- **Local Storage & Auto-Save**: Never lose your work—changes are saved as you go.
+- **Unsplash**: Unsplash integration.
 - **Responsive Editing**: Ensure your site looks great on all devices.
 - **Text Editing**: Edit text content live and in real-time.
 - **Font Customization**: Choose the perfect fonts to match your style.
 - **Undo & Redo**: Experiment confidently with the ability to revert changes.
-- **Global Styles**: Global Styles for fonts, designs, & colors.
+- **Global Styles**: Global styles for fonts, designs, and colors.
 - **YouTube Videos**: Integrate video content smoothly.
 - **Download HTML**: Export the entire page as a standalone HTML file.
 - **Global Page Styling**: Instantly define, update, or clear global styles for the main page wrapper at initialization or dynamically at runtime. Gain full control over fonts, colors, backgrounds, and more for a dynamic user experience.
 - **Tailwind Support**: Fully compatible with Tailwind CSS (with automatic class prefixing to avoid conflicts).
-- **Styles Prefixed**: To ensure clean and predictable styling, the builder uses Scoped Style Isolation. No risk of style conflicts between the builder and your app.
+- **Scoped Styles**: To ensure clean and predictable styling, the builder uses scoped style isolation. There is no risk of style conflicts between the builder and your app.
 
-Powerful Page Builder for any growing merchants, brands, & agencies. Empower users to create the perfect content with the Page Builder.
+A powerful Page Builder for any growing merchants, brands, and agencies. Empower users to create the perfect content with the Page Builder.
 
 <img style="max-width: 100%;" src="./public/home/text_editor.jpg" alt="Vue Website Page Builder - the media library" />
 
-## Technical details
+## Technical Details
 
 - **Technologies**: This Page Builder is developed using TypeScript, Vue 3, the Composition API, Pinia, CSS, Tailwind CSS, and HTML.
 - **Features**: Click & Drop Page Builder.
@@ -138,7 +138,7 @@ Please note that these instructions assume you have Node.js installed.
 - Vue.js ≥ 3.0.0
 - Modern browser with ES6+ support
 
-## Getting started & installation
+## Getting Started & Installation
 
 Make sure to install the dependencies:
 
@@ -183,10 +183,10 @@ const app = createApp(App)
 app.mount('#app')
 ```
 
-> **Note:**  
+> **Note:**
 > You only need to import the CSS file once. If you have already imported it in your app entry, you do not need to import it again in individual components.
 
-> **Note**  
+> **Note**
 > The Page Builder is implemented as a singleton service. This ensures that all page-building logic and state are managed by a single, shared instance throughout your application.
 
 ### Why Use the Shared Instance?
@@ -197,10 +197,10 @@ By always accessing the shared instance, you avoid creating multiple, isolated c
 
 Ensure the following configuration options are set:
 
-- **`formType` (required):**  
+- **`formType` (required):**
   Indicates whether you are creating or updating a resource. This is used to retrieve the correct content from local storage.
 
-- **`formName` (required):**  
+- **`formName` (required):**
   Specifies the resource type (for example, `article`, `jobPost`, `store`, etc.).
 
 ```vue
@@ -233,10 +233,10 @@ This prevents global styles from leaking into the builder and vice versa, which 
 
 **How does this affect you?**
 
-When a user adds a component into the page builder, all classes from that component are automatically prefixed with pbx- (e.g., pbx-button, pbx-container) to ensure style isolation and avoid conflicts.
+When a user adds a component into the page builder, all classes from that component are automatically prefixed with `pbx-` (e.g., `pbx-button`, `pbx-container`) to ensure style isolation and avoid conflicts.
 
-> **Note:**  
-> Simply import the builder’s CSS file once in your project. All builder styles are namespaced, so there is no risk of style conflicts
+> **Note:**
+> Simply import the builder’s CSS file once in your project. All builder styles are namespaced, so there is no risk of style conflicts.
 
 ## Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)
 
@@ -271,7 +271,7 @@ import '@myissue/vue-website-page-builder/style.css'
 
 Then use `v-html` to render the HTML.
 
-> **Note:**  
+> **Note:**
 > You do not need to import any Vue components if you only want to render the HTML. Just import the CSS file.
 
 ## Providing Configuration to the Page Builder
@@ -280,19 +280,19 @@ The example below demonstrates the setup to start building pages, with additiona
 
 Your `configPageBuilder` object can include:
 
-- **`formType` (required):**  
+- **`formType` (required):**
   Used to retrieve the correct content from local storage. Specify whether you are creating or updating a resource.
-- **`formName` (required):**  
+- **`formName` (required):**
   The resource type (e.g., `article`, `jobPost`, `store`, etc.). This is especially useful for platforms supporting multiple resource types, allowing the builder to manage layouts and storage for each resource uniquely.
-- **`resourceData` (optional):**  
+- **`resourceData` (optional):**
   Prefill the builder with initial resource data (e.g., `title`, `id`).
-- **`userForPageBuilder` (optional):**  
+- **`userForPageBuilder` (optional):**
   Pass user information (such as `name` and `image`) to display the logged-in user’s details in the builder.
-- **`pageBuilderLogo` (optional):**  
+- **`pageBuilderLogo` (optional):**
   Display your company logo in the builder toolbar.
-- **`userSettings` (optional):**  
+- **`userSettings` (optional):**
   Set user preferences such as theme, language, or auto-save.
-- **`brandColor` (optional):**  
+- **`brandColor` (optional):**
   Set your brand’s primary color for key UI elements (inside the `settings` config).
 
 ```vue
@@ -393,7 +393,7 @@ await pageBuilderService.handleFormSubmission()
 
 Always call this method after a successful post or resource update to ensure users start with a fresh builder the next time they create or edit a resource.
 
-## Loading existing Content or Components into the Page Builder
+## Loading Existing Content or Components into the Page Builder
 
 The Page Builder makes it simple to load previously published content—including both your page’s global styles and all components—from any backend source, such as your database or API.
 
@@ -453,13 +453,13 @@ This approach ensures your users can seamlessly restore and edit previously publ
 
 ## Automatic Draft Recovery
 
-The Page Builder automatically checks for unsaved drafts in local storage for the current resource.  
+The Page Builder automatically checks for unsaved drafts in local storage for the current resource.
 If a draft is found, users are prompted to either continue where they left off or use the version loaded from your backend.
 
-- **`formType` (required):**  
+- **`formType` (required):**
   Determines which draft to load from local storage. Set this to either `create` or `update` in the `updateOrCreate` config, depending on your use case.
-- **`formName` (required):**  
-  Specifies the resource type (e.g., `article`, `jobPost`, `store`, etc.) in the `updateOrCreate` config. This is especially important if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and drafts for each resource, allowing users to pick up where they left
+- **`formName` (required):**
+  Specifies the resource type (e.g., `article`, `jobPost`, `store`, etc.) in the `updateOrCreate` config. This is especially important if your platform supports multiple resource types. By providing a unique name, the Page Builder can correctly manage layouts and drafts for each resource, allowing users to pick up where they left off.
 
 ```vue
 <script setup>
@@ -484,7 +484,7 @@ console.info('You may inspect this result for message, status, or error:', resul
 
 ## Embedding Page Builder in a Modal or Dialog
 
-You can easily use the Page Builder inside a modal or dialog.  
+You can easily use the Page Builder inside a modal or dialog.
 To allow users to close the modal from inside the builder, use the `showCloseButton` prop and listen for the `@handleClosePageBuilder` event:
 
 ```vue
@@ -508,17 +508,17 @@ function closePageBuilder() {
 - `:showCloseButton="true"` — shows a close button in the Page Builder toolbar.
 - `@handleClosePageBuilder="closePageBuilder"` — emits when the close button is clicked, so you can close your modal.
 
-> **Tip:**  
-> You can name your handler function anything you like.  
+> **Tip:**
+> You can name your handler function anything you like.
 > This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
 
 ## Styling the Main Page Builder Container
 
-The Page Builder allows you to define and update global styles for the main wrapper (#pagebuilder) at any time. These settings control the overall appearance, including font family, text color, background color, and more. Whether you set them initially in your config or update them dynamically at runtime, your changes are instantly reflected across all sections.
+The Page Builder allows you to define and update global styles for the main wrapper (`#pagebuilder`) at any time. These settings control the overall appearance, including font family, text color, background color, and more. Whether you set them initially in your config or update them dynamically at runtime, your changes are instantly reflected across all sections.
 
 Use the `pageSettings` config to apply custom CSS classes and inline styles to the Page Builder’s main wrapper.
-The Page Builder renders all components wrapped inside a single parent container `<div id="pagebuilder">`.  
-You can pass global CSS ``classes` and `style` to this wrapper by adding a `pageSettings` object in your config:
+The Page Builder renders all components wrapped inside a single parent container, `<div id="pagebuilder">`.
+You can pass global CSS `classes` and `style` to this wrapper by adding a `pageSettings` object in your config:
 
 ```ts
 const configPageBuilder = {
@@ -534,9 +534,9 @@ const configPageBuilder = {
 } as const
 ```
 
-You have full control over the page’s appearance at any time — instantly override or clear global styles for the entire page, ensuring a seamless and dynamic user experience.
+You have full control over the page’s appearance at any time—instantly override or clear global styles for the entire page, ensuring a seamless and dynamic user experience.
 
-## Download HTML file
+## Download HTML File
 
 Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making the file ready for use or integration elsewhere.
 
@@ -570,7 +570,7 @@ Learn how to create and integrate your own components step by step.
 ### Integrate Unsplash Library
 
 Easily add Unsplash image search to your media library modal—just like in the demo!
-Code example — You can copy-paste the provided example to get started.
+A code example is provided so you can copy-paste to get started.
 
 See the full step-by-step guide and working demo code here:
 📚 **[Unsplash Integration Guide](./UNSPLASH_INTEGRATION.md)**
@@ -588,7 +588,7 @@ Learn how to create and integrate your own components step by step.
 
 If fonts or Material Icons are not displaying correctly, verify that:
 
-**CSS Import**: Ensure you're importing the CSS file:
+**CSS Import**: You are importing the CSS file:
 
 ```js
 import '@myissue/vue-website-page-builder/style.css'
@@ -602,34 +602,34 @@ The Page Builder is designed as a modular, state-driven editor for dynamic page 
 
 The Page Builder is designed to be easy to use and flexible for any web project. Here’s how it works behind the scenes:
 
-- **Configuration First:**  
-  When you start the builder, you pass in your configuration (such as what type of page you’re building, user info, branding, and any existing content).  
+- **Configuration First:**
+  When you start the builder, you pass in your configuration (such as what type of page you’re building, user info, branding, and any existing content).
   The builder saves this configuration immediately—even if the editing interface (DOM) isn’t loaded yet. This means you can safely set up the builder in advance, and it will be ready as soon as the editor appears on the page.
 
-- **Loading Content:**  
+- **Loading Content:**
   If you have existing content (like a published page), the builder loads it so you can keep editing. If not, you start with a blank page.
 
-- **Editing Experience:**  
+- **Editing Experience:**
   As you add, move, or edit components (like text, images, or sections), the builder keeps everything in sync—both in the app’s memory and in your browser’s local storage. This means your work is always saved, even if you close the browser.
 
-**In short:**  
+**In short:**
 The Page Builder handles all the technical details of editing, saving, and loading pages, so your users can focus on creating great content—without worrying about losing their work or dealing with complicated setup.
 
 <img style="max-width: 100%;" src="./public/home/page_builder_architecture.png" alt="Vue Website Page Builder - the editor" />
 
 ## Contributing
 
-1. Fork the repository
-2. Create your feature branch
-3. Make your changes
-4. Build and test locally
-5. Submit a pull request
+1. Fork the repository.
+2. Create your feature branch.
+3. Make your changes.
+4. Build and test locally.
+5. Submit a pull request.
 
 ## Security Vulnerabilities
 
 If you discover a security vulnerability, please send us a message.
 
-## Get in touch for customization or any questions
+## Get in Touch for Customization or Any Questions
 
 If you have any questions or if you're looking for customization, feel free to connect with our developer.
 
@@ -638,7 +638,7 @@ If you have any questions or if you're looking for customization, feel free to c
 
 ## Feedback
 
-Suggestions, or any issues you encounter while using this app. Feel free to reach out.
+Suggestions or any issues you encounter while using this app. Feel free to reach out.
 
 ## Support the Project
 
