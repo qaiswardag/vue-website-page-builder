@@ -769,7 +769,7 @@ onMounted(async () => {
                   v-for="component in getComponents"
                   :key="component.id"
                   id="page-builder-editor-editable-area"
-                  class="pbx-bg-white pbx-grow"
+                  class="pbx-grow"
                 >
                   <div @mouseup="handleSelectComponent(component)" class="pbx-relative group">
                     <div v-html="component.html_code"></div>
