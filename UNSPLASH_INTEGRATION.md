@@ -121,12 +121,9 @@ const nextPage = async function () {
 }
 
 const applySelectedImage = async function (imageURL) {
-  // Set image for pending
-  pageBuilderService.stageImageForSelectedElement({
+  await pageBuilderService.applyPendingImageToSelectedElement({
     src: `${imageURL}`,
   })
-
-  await pageBuilderService.applyPendingImageToSelectedElement()
 
   closeMediaLibraryModal()
 }

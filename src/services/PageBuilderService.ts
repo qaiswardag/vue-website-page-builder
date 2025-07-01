@@ -4,6 +4,7 @@ import type {
   ComponentObject,
   ImageObject,
   PageBuilderConfig,
+  PageSettings,
   StartBuilderResult,
 } from '../types'
 import type { usePageBuilderStateStore } from '../stores/page-builder-state'
@@ -50,13 +51,11 @@ export class PageBuilderService {
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.hasStartedEditing = false
     this.pageBuilderStateStore = pageBuilderStateStore
-
-    this.getLocalStorageItemName = computed(
-      () => this.pageBuilderStateStore.getLocalStorageItemName,
-    )
-
     this.getApplyImageToSelection = computed(
       () => this.pageBuilderStateStore.getApplyImageToSelection,
+    )
+    this.getLocalStorageItemName = computed(
+      () => this.pageBuilderStateStore.getLocalStorageItemName,
     )
     this.getHyberlinkEnable = computed(() => this.pageBuilderStateStore.getHyberlinkEnable)
     this.getComponents = computed(() => this.pageBuilderStateStore.getComponents)
@@ -266,8 +265,6 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setBuilderStarted(true)
     const pagebuilder = document.querySelector('#pagebuilder')
     let validation
-
-    console.log('den er:', passedComponentsArray)
     try {
       this.originalComponents = passedComponentsArray
       this.pageBuilderStateStore.setPageBuilderConfig(config)
@@ -364,19 +361,19 @@ export class PageBuilderService {
           return
         }
         if (!passedComponentsArray && this.savedMountComponents && localStorageData) {
-          console.log('CCCC:', internalPageBuilderCall)
+          console.log('5555:', internalPageBuilderCall)
           await this.#completeMountProcess(JSON.stringify(this.savedMountComponents))
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
-          console.log('5555:', internalPageBuilderCall)
+          console.log('6666:', internalPageBuilderCall)
           await this.#completeMountProcess(JSON.stringify([]))
           return
         }
 
         if (!this.isPageBuilderMissingOnStart && !localStorageData && !passedComponentsArray) {
-          console.log('6666:', internalPageBuilderCall)
+          console.log('7777:', internalPageBuilderCall)
           await this.#completeMountProcess(JSON.stringify([]))
           return
         }
@@ -386,21 +383,21 @@ export class PageBuilderService {
       if (this.pendingMountComponents) {
         // No Page Builder Is  present in DOM initially
         if (localStorageData && this.isPageBuilderMissingOnStart) {
-          console.log('7777:', internalPageBuilderCall)
+          console.log('8888:', internalPageBuilderCall)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
           this.pendingMountComponents = null
           return
         }
         if (!localStorageData && passedComponentsArray && this.isPageBuilderMissingOnStart) {
-          console.log('8888:', internalPageBuilderCall)
+          console.log('9999:', internalPageBuilderCall)
           await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
           this.#saveDomComponentsToLocalStorage()
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
-          console.log('9999:', internalPageBuilderCall)
+          console.log('10000:', internalPageBuilderCall)
           await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
           this.#saveDomComponentsToLocalStorage()
           return
@@ -1382,14 +1379,13 @@ export class PageBuilderService {
       hoveredElement.removeAttribute('hovered')
     }
 
-    const componentsToSave: { html_code: string; id: string | null; title: string }[] = []
+    const componentsToSave: { html_code: string; title: string }[] = []
 
     pagebuilder.querySelectorAll('section[data-componentid]').forEach((section) => {
       const sanitizedSection = this.#cloneAndRemoveSelectionAttributes(section as HTMLElement)
 
       componentsToSave.push({
         html_code: sanitizedSection.outerHTML,
-        id: sanitizedSection.getAttribute('data-componentid'),
         title: sanitizedSection.getAttribute('data-component-title') || 'Untitled Component',
       })
     })
@@ -1426,7 +1422,62 @@ export class PageBuilderService {
     this.#deleteAllComponentsFromDOM()
   }
 
-  //
+  #parseStyleString(style: string): Record<string, string> {
+    return style
+      .split(';')
+      .map((s) => s.trim())
+      .filter(Boolean)
+      .reduce(
+        (acc, rule) => {
+          const [key, value] = rule.split(':').map((str) => str.trim())
+          if (key && value) acc[key] = value
+          return acc
+        },
+        {} as Record<string, string>,
+      )
+  }
+
+  parsePageBuilderHTML(htmlString: string): {
+    components: ComponentObject[]
+    pageSettings: PageSettings
+  } {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(htmlString, 'text/html')
+
+    const pagebuilderDiv = doc.querySelector('#pagebuilder')
+    let pageSettings: PageSettings = {
+      classes: '',
+      style: {},
+    }
+
+    if (pagebuilderDiv) {
+      const rawStyle = pagebuilderDiv.getAttribute('style') || ''
+      pageSettings = {
+        classes: pagebuilderDiv.className || '',
+        style: this.#parseStyleString(rawStyle),
+      }
+    }
+
+    let sectionNodes: NodeListOf<HTMLElement>
+
+    if (pagebuilderDiv) {
+      sectionNodes = pagebuilderDiv.querySelectorAll('section')
+    } else {
+      sectionNodes = doc.querySelectorAll('section')
+    }
+
+    const components: ComponentObject[] = Array.from(sectionNodes).map((section) => ({
+      id: null,
+      html_code: section.innerHTML.trim(),
+      title: section.getAttribute('data-titlets') || '',
+    }))
+
+    return {
+      components,
+      pageSettings,
+    }
+  }
+
   deleteOldPageBuilderLocalStorage(): void {
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
@@ -1550,7 +1601,8 @@ export class PageBuilderService {
   }
 
   loadStoredComponentsFromStorage() {
-    this.updateLocalStorageItemName()
+    if (!this.getLocalStorageItemName.value) return false
+
     const key = this.getLocalStorageItemName.value
     if (!key) return false
 
@@ -1561,30 +1613,23 @@ export class PageBuilderService {
 
     // Object with components and pageSettings
     if (parsed && Array.isArray(parsed.components)) {
-      const classes = parsed.pageSettings?.classes || ''
-      const style = parsed.pageSettings?.style || ''
-      const sectionsHtml = parsed.components.map((c: any) => c.html_code).join('\n')
+      const classes = (parsed.pageSettings && parsed.pageSettings.classes) || ''
+      const style = (parsed.pageSettings && parsed.pageSettings.style) || ''
+
+      const sectionsHtml = parsed.components.map((c: ComponentObject) => c.html_code).join('\n')
       return `<div id="pagebuilder" class="${classes}" style="${style}">\n${sectionsHtml}\n</div>`
     }
     return false
   }
 
   /**
-   * Sets the image selected from the media library as the "pending" image
-   * to be applied to the currently selected element in the builder.
-   * This does not update the DOM immediately—call `applyPendingImageToSelectedElement` to commit.
-   * @param image - The image object to be staged for application
-   */
-  stageImageForSelectedElement(image: ImageObject) {
-    this.pageBuilderStateStore.setApplyImageToSelection(image)
-  }
-
-  /**
-   * Applies the staged image (set by `stageImageForSelectedElement`) to the currently selected element.
+   * Applies the staged image to the currently selected element.
    * This updates the builder state and triggers an auto-save.
    * If no element is selected or no image is staged, nothing happens.
    */
-  async applyPendingImageToSelectedElement(): Promise<void> {
+  async applyPendingImageToSelectedElement(image: ImageObject): Promise<void> {
+    this.pageBuilderStateStore.setApplyImageToSelection(image)
+
     if (!this.getElement.value) return
 
     // Only apply if an image is staged
@@ -1894,6 +1939,8 @@ export class PageBuilderService {
 
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
   async #parseJSONComponents(jsonData: string, usePassedPageSettings?: boolean): Promise<void> {
+    console.log('json ran..:')
+    console.log('& usePassedPageSettings:', usePassedPageSettings)
     const storedPageSettings =
       this.pageBuilderStateStore.getPageBuilderConfig &&
       this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
@@ -1909,6 +1956,7 @@ export class PageBuilderService {
           ? parsedData.pageSettings
           : null
 
+      console.log('oki:', pageSettings)
       // Restore page-level settings like class and style
       if (pageSettings) {
         const pagebuilder = document.querySelector('#pagebuilder') as HTMLElement
@@ -1973,8 +2021,11 @@ export class PageBuilderService {
       this.#deleteAllComponentsFromDOM()
     }
   }
+
   // Private method to parse HTML components
   async #parseHTMLComponents(htmlData: string, usePassedPageSettings?: boolean): Promise<void> {
+    console.log('html ran..:')
+    console.log('& usePassedPageSettings:', usePassedPageSettings)
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')

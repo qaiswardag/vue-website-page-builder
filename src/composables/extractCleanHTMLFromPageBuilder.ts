@@ -25,14 +25,15 @@ export function extractCleanHTMLFromPageBuilder(
     }
   })
 
-  if (config && config.pageSettings && typeof config.pageSettings.imageUrlPrefix === 'string') {
-    const imageUrlPrefix = config.pageSettings.imageUrlPrefix
+  if (config && config && typeof config.imageUrlPrefix === 'string') {
+    const imageUrlPrefix = config.imageUrlPrefix
     const imgs = clone.querySelectorAll<HTMLImageElement>('img')
     imgs.forEach((img) => {
       const src = img.getAttribute('src') || ''
       if (
         !src.startsWith('http') &&
-        imageUrlPrefix && // extra safety
+        // extra safety
+        imageUrlPrefix &&
         !src.startsWith(imageUrlPrefix)
       ) {
         img.setAttribute('src', imageUrlPrefix + src.replace(/^\/+/, ''))

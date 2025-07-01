@@ -89,12 +89,6 @@ const configPageBuilder = {
 onMounted(async () => {
   const result = await pageBuilderService.startBuilder(configPageBuilder, componentsArray)
   console.log('Page Builder Result:', result)
-  //
-  //
-  //
-  // await pageBuilderService.mountComponentsToDOM(JSON.stringify(html))
-  // await pageBuilderService.mountComponentsToDOM(JSON.stringify(oldhtmlfromdb))
-  // await pageBuilderService.mountComponentsToDOM(rawHTML)
 })
 </script>
 

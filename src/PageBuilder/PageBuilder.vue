@@ -337,7 +337,7 @@ function updatePanelPosition() {
 }
 
 onMounted(async () => {
-  await delay(2000)
+  // await delay(2000)
   await pageBuilderService.completeBuilderInitialization(undefined, true)
 
   updatePanelPosition()

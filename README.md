@@ -553,9 +553,7 @@ To ensure images render properly after export, you must specify a URL prefix in 
 
 ```ts
 const configPageBuilder = {
-  pageSettings: {
-    imageUrlPrefix: 'https://your-domain.com/uploads/',
-  },
+  imageUrlPrefix: 'https://your-domain.com/uploads/',
   // other config options...
 } as const
 ```

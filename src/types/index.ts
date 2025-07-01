@@ -204,7 +204,6 @@ export interface PageBuilderUser {
 export interface PageSettings {
   classes: string
   style?: Record<string, string>
-  imageUrlPrefix?: string
 }
 
 // Page Builder Configuration interface
