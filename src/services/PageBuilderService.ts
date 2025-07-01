@@ -90,6 +90,14 @@ export class PageBuilderService {
       'SPAN',
       'BLOCKQUOTE',
       'BR',
+      'PRE',
+      'CODE',
+      'MARK',
+      'DEL',
+      'INS',
+      'U',
+      'FIGURE',
+      'FIGCAPTION',
     ]
   }
 
@@ -384,8 +392,9 @@ export class PageBuilderService {
         // No Page Builder Is  present in DOM initially
         if (localStorageData && this.isPageBuilderMissingOnStart) {
           console.log('8888:', internalPageBuilderCall)
-          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          await delay(3000)
+          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           this.pendingMountComponents = null
           return
         }
@@ -409,16 +418,17 @@ export class PageBuilderService {
 
   async #completeMountProcess(html: string, usePassedPageSettings?: boolean) {
     await this.#mountComponentsToDOM(html, usePassedPageSettings)
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-    await nextTick()
-    // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
 
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
 
     this.pageBuilderStateStore.setIsRestoring(false)
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
+
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.#addListenersToEditableElements()
   }
 
   #applyElementClassChanges(
@@ -1542,8 +1552,8 @@ export class PageBuilderService {
     const localStorageData = this.getSavedPageHtml()
 
     if (localStorageData) {
-      this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
       await delay(400)
+      this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
       await this.#mountComponentsToDOM(localStorageData)
       this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
     }
