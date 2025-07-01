@@ -290,14 +290,18 @@ const handleCloseGlobalPageStyles = async function () {
                 class="sm:pbx-grid-cols-1 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full pbx-mt-4"
               >
                 <!-- Button: Clear all CSS classes -->
-                <button @click="clearClassesFromPage" class="pbx-myPrimaryButton" type="button">
+                <button
+                  @click="clearClassesFromPage"
+                  class="pbx-myPrimaryDeleteButton"
+                  type="button"
+                >
                   Clear All CSS Classes
                 </button>
 
                 <!-- Button: Clear all inline styles -->
                 <button
                   @click="clearInlineStylesFromPagee"
-                  class="pbx-myPrimaryButton"
+                  class="pbx-myPrimaryDeleteButton"
                   type="button"
                 >
                   Clear All Inline Styles
