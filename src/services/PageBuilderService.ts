@@ -1990,9 +1990,6 @@ export class PageBuilderService {
 
       if (userPageSettings && pageSettings) {
         const pagebuilder = document.querySelector('#pagebuilder') as HTMLElement
-        console.log('deeee er:', pageSettings)
-        console.log('classes:', pageSettings.classes)
-        console.log('deeee style eeeeeer:', this.#convertStyleObjectToString(pageSettings.style))
         if (pagebuilder) {
           pagebuilder.removeAttribute('class')
           pagebuilder.removeAttribute('style')
@@ -2008,8 +2005,6 @@ export class PageBuilderService {
 
   // Private method to parse HTML components
   async #parseHTMLComponents(htmlData: string, usePassedPageSettings?: boolean): Promise<void> {
-    console.log('html ran..:')
-    console.log('& usePassedPageSettings:', usePassedPageSettings)
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')
