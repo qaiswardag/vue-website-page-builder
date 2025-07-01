@@ -62,7 +62,7 @@ const configPageBuilder = {
     formName: 'collection',
   },
   pageBuilderLogo: {
-    src: '/logo/logo.svg',
+    src: '/logo/mybuilder_new_lowercase.svg',
   },
   resourceData: {
     title: 'Demo Article',
@@ -76,14 +76,14 @@ const configPageBuilder = {
   settings: {
     brandColor: '#DB93B0',
   },
-  // pageSettings: {
-  //   classes:
-  //     'pbx-font-didot pbx-italic pbx-px-20 pbx-rounded-full pbx-rounded-tr-full pbx-border-8 pbx-border-green-800 pbx-border-solid pbx-text-neutral-300 pbx-bg-stone-700',
-  //   style: {
-  //     backgroundColor: 'red',
-  //     border: '6px solid yellow',
-  //   },
-  // },
+  pageSettings: {
+    classes:
+      'pbx-text-black pbx-font-sans pbx-rounded-tl-full pbx-bg-amber-200 pbx-px-20 pbx-border-solid pbx-border-8 pbx-border-indigo-400',
+    style: {
+      backgroundColor: 'red',
+      border: '6px solid yellow',
+    },
+  },
 } as const
 
 onMounted(async () => {
