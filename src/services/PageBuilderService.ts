@@ -329,7 +329,7 @@ export class PageBuilderService {
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
 
-    const localStorageData = this.loadStoredComponentsFromStorage()
+    const localStorageData = this.getSavedPageHtml()
 
     // Deselect any selected or hovered elements in the builder UI
     await this.clearHtmlSelection()
@@ -1539,7 +1539,7 @@ export class PageBuilderService {
   async resumeEditingFromDraft() {
     this.updateLocalStorageItemName()
 
-    const localStorageData = this.loadStoredComponentsFromStorage()
+    const localStorageData = this.getSavedPageHtml()
 
     if (localStorageData) {
       this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
@@ -1582,25 +1582,7 @@ export class PageBuilderService {
     return this.getLocalStorageItemName.value
   }
 
-  loadStoredComponentsFromStorageOld() {
-    this.updateLocalStorageItemName()
-    if (!this.getLocalStorageItemName.value) return false
-
-    if (
-      this.getLocalStorageItemName.value &&
-      localStorage.getItem(this.getLocalStorageItemName.value)
-    ) {
-      const savedCurrentDesign = localStorage.getItem(this.getLocalStorageItemName.value)
-
-      if (savedCurrentDesign) {
-        return savedCurrentDesign
-      }
-    }
-
-    return false
-  }
-
-  loadStoredComponentsFromStorage() {
+  getSavedPageHtml() {
     if (!this.getLocalStorageItemName.value) return false
 
     const key = this.getLocalStorageItemName.value
@@ -1939,39 +1921,28 @@ export class PageBuilderService {
 
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
   async #parseJSONComponents(jsonData: string, usePassedPageSettings?: boolean): Promise<void> {
-    console.log('json ran..:')
-    console.log('& usePassedPageSettings:', usePassedPageSettings)
-    const storedPageSettings =
+    const pageSettings =
       this.pageBuilderStateStore.getPageBuilderConfig &&
       this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
 
+    const userPageSettings = usePassedPageSettings ? pageSettings : null
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
 
-      // Decide which pageSettings to use
-      const pageSettings = usePassedPageSettings
-        ? storedPageSettings
-        : parsedData && parsedData.pageSettings
-          ? parsedData.pageSettings
-          : null
-
-      console.log('oki:', pageSettings)
-      // Restore page-level settings like class and style
-      if (pageSettings) {
-        const pagebuilder = document.querySelector('#pagebuilder') as HTMLElement
-        if (pagebuilder) {
-          pagebuilder.removeAttribute('class')
-          pagebuilder.removeAttribute('style')
-          pagebuilder.className = pageSettings.classes || ''
-          pagebuilder.setAttribute('style', this.#convertStyleObjectToString(pageSettings.style))
-        }
-      }
+      //   classes:
+      //     'pbx-font-didot pbx-italic pbx-px-20 pbx-rounded-full pbx-rounded-tr-full pbx-border-8 pbx-border-green-800 pbx-border-solid pbx-text-neutral-300 pbx-bg-stone-700',
+      //   style: {
+      //     backgroundColor: 'red',
+      //     border: '6px solid yellow',
+      //   },
+      // },
 
       // Support both old and new structure
       if (Array.isArray(parsedData)) {
         componentsArray = parsedData
-      } else if (parsedData && Array.isArray(parsedData.components)) {
+      }
+      if (parsedData && Array.isArray(parsedData.components)) {
         componentsArray = parsedData.components
       }
 
@@ -2016,6 +1987,19 @@ export class PageBuilderService {
 
       await nextTick()
       await this.#addListenersToEditableElements()
+
+      if (userPageSettings && pageSettings) {
+        const pagebuilder = document.querySelector('#pagebuilder') as HTMLElement
+        console.log('deeee er:', pageSettings)
+        console.log('classes:', pageSettings.classes)
+        console.log('deeee style eeeeeer:', this.#convertStyleObjectToString(pageSettings.style))
+        if (pagebuilder) {
+          pagebuilder.removeAttribute('class')
+          pagebuilder.removeAttribute('style')
+          pagebuilder.className = pageSettings.classes || ''
+          pagebuilder.setAttribute('style', this.#convertStyleObjectToString(pageSettings.style))
+        }
+      }
     } catch (error) {
       console.error('Error parsing JSON components:', error)
       this.#deleteAllComponentsFromDOM()

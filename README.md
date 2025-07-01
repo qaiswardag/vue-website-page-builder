@@ -26,6 +26,7 @@
   - [Retrieving the Latest HTML Content for Form Submission](#retrieving-the-latest-html-content-for-form-submission)
     - [Resetting the Builder After Successful Resource Creation or Update](#resetting-the-builder-after-successful-resource-creation-or-update)
   - [Loading existing Content or Components into the Page Builder](#loading-existing-content-or-components-into-the-page-builder)
+    - [Restoring Full Page Content (Global Styles \& Components)](#restoring-full-page-content-global-styles--components)
   - [Automatic Draft Recovery](#automatic-draft-recovery)
   - [Embedding Page Builder in a Modal or Dialog](#embedding-page-builder-in-a-modal-or-dialog)
   - [Styling the Main Page Builder Container](#styling-the-main-page-builder-container)
@@ -375,21 +376,8 @@ const configPageBuilder = {
 const pageBuilderService = getPageBuilder()
 await pageBuilderService.startBuilder(configPageBuilder)
 
-let storedComponents = pageBuilderService.loadStoredComponentsFromStorage()
-let contentFromPageBuilder = ''
-
-try {
-  storedComponents = JSON.parse(storedComponents)
-  contentFromPageBuilder =
-    storedComponents && Array.isArray(storedComponents.components)
-      ? storedComponents.components.map((component) => component.html_code).join('')
-      : ''
-} catch (e) {
-  console.error('Unable to parse storedComponents from localStorage:', e)
-  contentFromPageBuilder = ''
-} finally {
-  yourForm.content = contentFromPageBuilder
-}
+const storedComponents = pageBuilderService.getSavedPageHtml()
+yourForm.content = storedComponents
 </script>
 ```
 
@@ -407,56 +395,61 @@ Always call this method after a successful post or resource update to ensure use
 
 ## Loading existing Content or Components into the Page Builder
 
-The Page Builder makes it simple to load previously published content from any backend source, such as your database or API.
+The Page Builder makes it simple to load previously published content—including both your page’s global styles and all components—from any backend source, such as your database or API.
 
-The `startBuilder` method accepts two arguments:
+### Restoring Full Page Content (Global Styles & Components)
 
-1. **Configuration** (required):  
-   The builder configuration object.
-2. **Components Data** (optional):  
-   An array of component objects. Each object must include a `html_code` string and may optionally include a title string. This is especially useful when loading previously published or saved content into the builder.
+If you have previously saved or published HTML content (for example, from your database), you can easily restore both the global page styles (classes, inline styles) and all builder components for seamless editing.
 
-**Important**
+**Recommended Workflow:**
 
-To load existing content into the Page Builder, ensure that the formType is set to update in your configuration.
-This tells the builder to expect and load your provided components array as the initial content.
+1. **Parse your saved HTML** using the builder’s helper method to extract both the components and the global page settings:
 
-```vue
-<script setup>
-import { getPageBuilder } from '@myissue/vue-website-page-builder'
+   ```js
+   // yourPageHTML: the full HTML string previously saved from the builder
+   const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(yourPageHTML)
+   ```
 
-const configPageBuilder = {
-  updateOrCreate: {
-    formType: 'update',
-    formName: 'article',
-  },
-}
+2. **Pass `pageSettings` directly** in your config object, and pass the `components` array as the second argument to `startBuilder`:
 
-// Retrieve the Page Builder service instance
-const pageBuilderService = getPageBuilder()
+   ```vue
+   <script setup>
+   import { getPageBuilder } from '@myissue/vue-website-page-builder'
 
-// Load existing components into the builder (title is optional)
-const myArticle = [
-  { html_code: '<section>...</section>', title: 'Header H2' },
-  { html_code: '<section>...</section>', title: 'Text' },
-  { html_code: '<section>...</section>', title: 'Image' },
-]
+   // Retrieve the Page Builder service instance
+   const pageBuilderService = getPageBuilder()
 
-const result = await pageBuilderService.startBuilder(configPageBuilder, myArticle)
+   // Parse your saved HTML to extract both components and global page settings
+   const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(yourPageHTML)
 
-console.info('You may inspect this result for message, status, or error:', result)
-</script>
+   // Prepare the config, passing pageSettings directly
+   const configPageBuilder = {
+     updateOrCreate: {
+       formType: 'update', // important: set to update
+       formName: 'article',
+     },
+     // pass directly, not nested
+     pageSettings: pageSettings,
+   }
 
-<template>
-  <PageBuilder />
-</template>
-```
+   // Start the builder with both config and components
+   const result = await pageBuilderService.startBuilder(configPageBuilder, components)
 
-> **Note:**  
-> Each component’s `html_code` must be wrapped in a `<section>...</section>` tag.  
-> This is how the Page Builder defines and separates individual components.
+   console.info('You may inspect this result for message, status, or error:', result)
+   </script>
 
-This approach ensures your users can seamlessly load and edit previously published content, providing a smooth and reliable editing.
+   <template>
+     <PageBuilder />
+   </template>
+   ```
+
+> **Note:**
+>
+> - Each component’s `html_code` must be wrapped in a `<section>...</section>` tag. This is how the Page Builder defines and separates individual components.
+> - Always pass `pageSettings` directly in the config object (not as `{ pageSettings: { pageSettings } }`).
+> - Set `formType: 'update'` to ensure the builder loads your provided content for editing.
+
+This approach ensures your users can seamlessly restore and edit previously published content—including all global styles and layout—providing a smooth and reliable editing experience for existing pages.
 
 ## Automatic Draft Recovery
 
