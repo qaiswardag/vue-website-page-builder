@@ -520,7 +520,7 @@ import { getPageBuilder, PageBuilder } from '@myissue/vue-website-page-builder'
 const pageBuilderService = getPageBuilder()
 
 const handlePublish = () => {
-  // Retrieve the latest HTML content (auto-saved by the builder)
+  // Retrieve the latest HTML content (saved by the builder)
   const latestHtml = pageBuilderService.getSavedPageHtml()
   // Submit, publish, or process the content as needed
   // e.g., send to your API or update your form
