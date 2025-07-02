@@ -87,8 +87,12 @@ const configPageBuilder = {
   },
 } as const
 
-const stringHTML = JSON.stringify(componentsArray)
-const compos = pageBuilderService.parsePageBuilderHTML(stringHTML)
+// Convert componentsArray to HTML string
+const htmlString =
+  '<div id="pagebuilder">' + componentsArray.map((c) => c.html_code).join('\n') + '</div>'
+
+// Now parse as HTML (not JSON)
+const compos = pageBuilderService.parsePageBuilderHTML(htmlString)
 
 onMounted(async () => {
   const result = await pageBuilderService.startBuilder(configPageBuilder, compos.components)

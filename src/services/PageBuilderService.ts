@@ -1866,6 +1866,11 @@ export class PageBuilderService {
    * - **Do NOT pass a JSON string** (such as the result of `JSON.stringify(componentsArray)`) to this method. Passing a JSON string to `DOMParser.parseFromString(..., 'text/html')` will not produce valid DOM nodes. Instead, it will treat the JSON as plain text, resulting in a `<html><head></head><body>{...json...}</body></html>` structure, not real HTML elements.
    * - If you pass a JSON string, you will see lots of `\n` and strange HTML, because the parser is just wrapping your JSON in a `<body>` tag as text.
    *
+   * Why only HTML?
+   * - It enforces a single source of truth for builder state (HTML).
+   * - It prevents misuse (e.g., passing JSON to a DOM parser, which is always a bug).
+   * - It makes your documentation and support much simpler.
+   *
    * @param htmlString - The HTML string to parse (must contain `<section>...</section>` elements, not JSON).
    * @returns An object with `components` (array of builder components) and `pageSettings` (global styles for the page).
    */
@@ -1891,10 +1896,10 @@ export class PageBuilderService {
     }
 
     let sectionNodes: NodeListOf<HTMLElement>
-
     if (pagebuilderDiv) {
       sectionNodes = pagebuilderDiv.querySelectorAll('section')
-    } else {
+    }
+    if (!pagebuilderDiv) {
       sectionNodes = doc.querySelectorAll('section')
     }
 
@@ -1915,7 +1920,8 @@ export class PageBuilderService {
           section.getAttribute('title') ||
           'Untitled Component',
       }))
-    } else {
+    }
+    if (topLevelSections.length === 0) {
       // No <section> found: treat each first-level child as a component, wrapped in a section
       const parent = pagebuilderDiv || doc.body
       const children = Array.from(parent.children)
@@ -1933,7 +1939,8 @@ export class PageBuilderService {
             title: 'Untitled Component',
           }
         })
-      } else {
+      }
+      if (children.length === 0) {
         // No children: wrap the entire content in a <section> as a single component
         const section = doc.createElement('section')
         section.setAttribute('data-component-title', 'Untitled Component')
