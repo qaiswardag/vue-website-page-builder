@@ -523,8 +523,7 @@ const handlePublish = () => {
   // Retrieve the latest HTML content (saved by the builder)
   const latestHtml = pageBuilderService.getSavedPageHtml()
   // Submit, publish, or process the content as needed
-  // e.g., send to your API or update your form
-  console.log('Publishing content:', latestHtml)
+  // e.g., send latestHtml to your API or update your form
 }
 </script>
 
