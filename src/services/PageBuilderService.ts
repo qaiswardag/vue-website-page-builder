@@ -1,4 +1,3 @@
-// Type definitions
 import type {
   BuilderResourceData,
   ComponentObject,
@@ -2029,15 +2028,6 @@ export class PageBuilderService {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
 
-      //   classes:
-      //     'pbx-font-didot pbx-italic pbx-px-20 pbx-rounded-full pbx-rounded-tr-full pbx-border-8 pbx-border-green-800 pbx-border-solid pbx-text-neutral-300 pbx-bg-stone-700',
-      //   style: {
-      //     backgroundColor: 'red',
-      //     border: '6px solid yellow',
-      //   },
-      // },
-
-      // Support both old and new structure
       if (Array.isArray(parsedData)) {
         componentsArray = parsedData
       }
