@@ -921,7 +921,6 @@ export class PageBuilderService {
   }
 
   public handleRemoveStyle(property: string): void {
-    console.log('come her:', property)
     const element = this.getElement.value
     if (!element || !property) return
 
