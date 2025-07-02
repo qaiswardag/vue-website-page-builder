@@ -53,6 +53,17 @@ const features = [
 
 const publishPageBuilder = function () {}
 
+// Convert componentsArray to HTML string
+const htmlString =
+  '<div id="copenhagen" class="pbx-break-words pbx-text-6xl lg:pbx-text-8xl" style=" font-family: fantasy; font-weight: 800; font-style: oblique; line-height: 40px;"' +
+  componentsArray.map((c) => c.html_code).join('\n') +
+  '</div>'
+
+// Parse as HTML (not JSON)
+const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(htmlString)
+console.log('components eeer nu:', components)
+console.log('pageSettings:', pageSettings.classes)
+
 const configPageBuilder = {
   userForPageBuilder: {
     name: 'Jane Doe',
@@ -77,17 +88,11 @@ const configPageBuilder = {
   settings: {
     brandColor: '#DB93B0',
   },
+  pageSettings,
 } as const
 
-// Convert componentsArray to HTML string
-const htmlString =
-  '<div id="pagebuilder">' + componentsArray.map((c) => c.html_code).join('\n') + '</div>'
-
-// Parse as HTML (not JSON)
-const compos = pageBuilderService.parsePageBuilderHTML(htmlString)
-
 onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder, compos.components)
+  const result = await pageBuilderService.startBuilder(configPageBuilder, components)
   console.log('Page Builder inspect the result for message, status, or error::', result)
 })
 </script>
