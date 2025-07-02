@@ -77,14 +77,6 @@ const configPageBuilder = {
   settings: {
     brandColor: '#DB93B0',
   },
-  pageSettings: {
-    classes:
-      'pbx-text-black pbx-font-sans pbx-rounded-tl-full pbx-bg-amber-200 pbx-px-20 pbx-border-solid pbx-border-8 pbx-border-indigo-400',
-    style: {
-      backgroundColor: 'red',
-      border: '6px solid yellow',
-    },
-  },
 } as const
 
 // Convert componentsArray to HTML string

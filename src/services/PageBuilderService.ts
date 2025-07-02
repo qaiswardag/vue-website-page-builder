@@ -2332,55 +2332,31 @@ export class PageBuilderService {
     // This ensure elements exist in the DOM.
     await nextTick()
 
-    // handle custom URL
     this.handleHyperlink(undefined, null, false)
-    // handle opacity
     this.handleOpacity(undefined)
-    // handle BG opacity
     this.handleBackgroundOpacity(undefined)
-    // displayed image
     this.setBasePrimaryImageFromSelectedElement()
-    // border style
     this.handleBorderStyle(undefined)
-    // border width
     this.handleBorderWidth(undefined)
-    // border color
     this.handleBorderColor(undefined)
-    // border radius
     this.handleBorderRadiusGlobal(undefined)
-    // border radius
     this.handleBorderRadiusTopLeft(undefined)
-    // border radius
     this.handleBorderRadiusTopRight(undefined)
-    // border radius
     this.handleBorderRadiusBottomleft(undefined)
-    // border radius
     this.handleBorderRadiusBottomRight(undefined)
-    // handle font size
     this.handleFontSizeBase(undefined)
     this.handleFontSizeDesktop(undefined)
     this.handleFontSizeTablet(undefined)
     this.handleFontSizeMobile(undefined)
-    // handle font weight
     this.handleFontWeight(undefined)
-    // handle font family
-
     this.handleFontFamily(undefined)
-    // handle font style
     this.handleFontStyle(undefined)
-    // handle vertical padding
     this.handleVerticalPadding(undefined)
-    // handle horizontal padding
     this.handleHorizontalPadding(undefined)
-    // handle vertical margin
     this.handleVerticalMargin(undefined)
-    // handle horizontal margin
     this.handleHorizontalMargin(undefined)
-    // handle color
     this.handleBackgroundColor(undefined)
-    // handle text color
     this.handleTextColor(undefined)
-    // handle classes
     await this.#syncCurrentClasses()
   }
 }
