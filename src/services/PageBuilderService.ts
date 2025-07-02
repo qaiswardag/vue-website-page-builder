@@ -480,7 +480,7 @@ export class PageBuilderService {
     return currentCSS
   }
 
-  async clearClassesFromPage() {
+  public async clearClassesFromPage() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -489,7 +489,7 @@ export class PageBuilderService {
     this.initializeElementStyles()
     await nextTick()
   }
-  async clearInlineStylesFromPagee() {
+  public async clearInlineStylesFromPagee() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -499,7 +499,7 @@ export class PageBuilderService {
     await nextTick()
   }
 
-  async globalPageStyles() {
+  public async globalPageStyles() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -515,7 +515,7 @@ export class PageBuilderService {
     await nextTick()
   }
 
-  handleFontWeight(userSelectedFontWeight?: string): void {
+  public handleFontWeight(userSelectedFontWeight?: string): void {
     this.applyElementClassChanges(
       userSelectedFontWeight,
       tailwindFontStyles.fontWeight,
@@ -523,11 +523,11 @@ export class PageBuilderService {
     )
   }
 
-  handleFontSizeBase(userSelectedFontSize?: string): void {
+  public handleFontSizeBase(userSelectedFontSize?: string): void {
     this.applyElementClassChanges(userSelectedFontSize, tailwindFontSizes.fontBase, 'setFontBase')
   }
 
-  handleFontSizeDesktop(userSelectedFontSize?: string): void {
+  public handleFontSizeDesktop(userSelectedFontSize?: string): void {
     const currentHTMLElement = this.getElement.value
     if (!currentHTMLElement) return
 
@@ -609,7 +609,7 @@ export class PageBuilderService {
     }
   }
 
-  async toggleTipTapModal(status: boolean): Promise<void> {
+  public async toggleTipTapModal(status: boolean): Promise<void> {
     this.pageBuilderStateStore.setShowModalTipTap(status)
 
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
@@ -691,7 +691,7 @@ export class PageBuilderService {
     }
   }
 
-  isEditableElement(el: Element | null): boolean {
+  public isEditableElement(el: Element | null): boolean {
     if (!el) return false
     return !this.NoneListernesTags.includes(el.tagName)
   }
@@ -727,7 +727,7 @@ export class PageBuilderService {
     })
   }
 
-  handleAutoSave = async () => {
+  public handleAutoSave = async () => {
     this.startEditing()
     const passedConfig = this.pageBuilderStateStore.getPageBuilderConfig
 
@@ -767,7 +767,7 @@ export class PageBuilderService {
     }
   }
 
-  handleManualSave = async () => {
+  public handleManualSave = async () => {
     this.startEditing()
     const passedConfig = this.pageBuilderStateStore.getPageBuilderConfig
 
@@ -798,7 +798,7 @@ export class PageBuilderService {
     }
   }
 
-  cloneCompObjForDOMInsertion(componentObject: ComponentObject): ComponentObject {
+  public cloneCompObjForDOMInsertion(componentObject: ComponentObject): ComponentObject {
     // Deep clone clone component
     const clonedComponent = { ...componentObject }
 
@@ -882,7 +882,7 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setCurrentClasses(classListArray)
   }
 
-  handleAddClasses(userSelectedClass: string): void {
+  public handleAddClasses(userSelectedClass: string): void {
     if (
       typeof userSelectedClass === 'string' &&
       userSelectedClass.trim() !== '' &&
@@ -901,28 +901,28 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setClass(prefixedClass)
     }
   }
-  handleFontFamily(userSelectedFontFamily?: string): void {
+  public handleFontFamily(userSelectedFontFamily?: string): void {
     this.applyElementClassChanges(
       userSelectedFontFamily,
       tailwindFontStyles.fontFamily,
       'setFontFamily',
     )
   }
-  handleFontStyle(userSelectedFontStyle?: string): void {
+  public handleFontStyle(userSelectedFontStyle?: string): void {
     this.applyElementClassChanges(
       userSelectedFontStyle,
       tailwindFontStyles.fontStyle,
       'setFontStyle',
     )
   }
-  handleVerticalPadding(userSelectedVerticalPadding?: string): void {
+  public handleVerticalPadding(userSelectedVerticalPadding?: string): void {
     this.applyElementClassChanges(
       userSelectedVerticalPadding,
       tailwindPaddingAndMargin.verticalPadding,
       'setFontVerticalPadding',
     )
   }
-  handleHorizontalPadding(userSelectedHorizontalPadding?: string): void {
+  public handleHorizontalPadding(userSelectedHorizontalPadding?: string): void {
     this.applyElementClassChanges(
       userSelectedHorizontalPadding,
       tailwindPaddingAndMargin.horizontalPadding,
@@ -930,14 +930,14 @@ export class PageBuilderService {
     )
   }
 
-  handleVerticalMargin(userSelectedVerticalMargin?: string): void {
+  public handleVerticalMargin(userSelectedVerticalMargin?: string): void {
     this.applyElementClassChanges(
       userSelectedVerticalMargin,
       tailwindPaddingAndMargin.verticalMargin,
       'setFontVerticalMargin',
     )
   }
-  handleHorizontalMargin(userSelectedHorizontalMargin?: string): void {
+  public handleHorizontalMargin(userSelectedHorizontalMargin?: string): void {
     this.applyElementClassChanges(
       userSelectedHorizontalMargin,
       tailwindPaddingAndMargin.horizontalMargin,
@@ -945,21 +945,21 @@ export class PageBuilderService {
     )
   }
 
-  handleBorderStyle(borderStyle?: string): void {
+  public handleBorderStyle(borderStyle?: string): void {
     this.applyElementClassChanges(
       borderStyle,
       tailwindBorderStyleWidthPlusColor.borderStyle,
       'setBorderStyle',
     )
   }
-  handleBorderWidth(borderWidth?: string): void {
+  public handleBorderWidth(borderWidth?: string): void {
     this.applyElementClassChanges(
       borderWidth,
       tailwindBorderStyleWidthPlusColor.borderWidth,
       'setBorderWidth',
     )
   }
-  handleBorderColor(borderColor?: string): void {
+  public handleBorderColor(borderColor?: string): void {
     this.applyElementClassChanges(
       borderColor,
       tailwindBorderStyleWidthPlusColor.borderColor,
@@ -968,7 +968,7 @@ export class PageBuilderService {
   }
   // border color, style & width / end
 
-  handleBackgroundColor(color?: string): void {
+  public handleBackgroundColor(color?: string): void {
     this.applyElementClassChanges(
       color,
       tailwindColors.backgroundColorVariables,
@@ -976,7 +976,7 @@ export class PageBuilderService {
     )
   }
 
-  handleTextColor(color?: string): void {
+  public handleTextColor(color?: string): void {
     this.applyElementClassChanges(color, tailwindColors.textColorVariables, 'setTextColor')
   }
 
@@ -1067,7 +1067,7 @@ export class PageBuilderService {
     }
   }
 
-  async deleteComponentFromDOM() {
+  public async deleteComponentFromDOM() {
     this.syncDomToStoreOnly()
     await nextTick()
 
@@ -1113,7 +1113,7 @@ export class PageBuilderService {
     await this.handleAutoSave()
   }
 
-  async deleteElementFromDOM() {
+  public async deleteElementFromDOM() {
     const element = this.getElement.value
     if (!element) return
 
@@ -1147,7 +1147,7 @@ export class PageBuilderService {
     await this.addListenersToEditableElements()
   }
 
-  async restoreDeletedElementToDOM() {
+  public async restoreDeletedElementToDOM() {
     // Restore the previously deleted element to the DOM
     const restoredHTML = this.getRestoredElement.value
     const parent = this.getParentElement.value
@@ -1176,7 +1176,7 @@ export class PageBuilderService {
     await this.addListenersToEditableElements()
   }
 
-  handleRemoveClasses(userSelectedClass: string): void {
+  public handleRemoveClasses(userSelectedClass: string): void {
     // remove selected class from element
     if (this.getElement.value?.classList.contains(userSelectedClass)) {
       this.getElement.value?.classList.remove(userSelectedClass)
@@ -1188,7 +1188,7 @@ export class PageBuilderService {
 
   // move component
   // runs when html components are rearranged
-  reorderComponent(direction: number): void {
+  public reorderComponent(direction: number): void {
     if (!this.getComponents.value || !this.getComponent.value) return
 
     if (this.getComponents.value.length <= 1) return
@@ -1218,7 +1218,7 @@ export class PageBuilderService {
     this.getComponents.value.splice(newIndex, 0, componentToMove)
   }
 
-  ensureTextAreaHasContent = () => {
+  public ensureTextAreaHasContent = () => {
     if (!this.getElement.value) return
 
     // text content
@@ -1242,7 +1242,7 @@ export class PageBuilderService {
     }
   }
 
-  handleTextInput = async (textContentVueModel: string): Promise<void> => {
+  public handleTextInput = async (textContentVueModel: string): Promise<void> => {
     if (typeof this.getElement.value?.innerHTML !== 'string') {
       return
     }
@@ -1263,7 +1263,7 @@ export class PageBuilderService {
 
   //
   //
-  ElOrFirstChildIsIframe() {
+  public ElOrFirstChildIsIframe() {
     if (
       this.getElement.value?.tagName === 'IFRAME' ||
       this.getElement.value?.firstElementChild?.tagName === 'IFRAME'
@@ -1276,7 +1276,7 @@ export class PageBuilderService {
   //
   //
   //
-  isSelectedElementValidText() {
+  public isSelectedElementValidText() {
     let reachedElseStatement = false
 
     // Get all child elements of the parentDiv
@@ -1302,7 +1302,7 @@ export class PageBuilderService {
     return reachedElseStatement
   }
 
-  previewCurrentDesign() {
+  public previewCurrentDesign() {
     this.pageBuilderStateStore.setElement(null)
 
     const pagebuilder = document.querySelector('#pagebuilder')
@@ -1499,12 +1499,12 @@ export class PageBuilderService {
   }
 
   // Call this when the user starts editing (e.g., on first change or when resuming a draft)
-  startEditing() {
+  public startEditing() {
     this.hasStartedEditing = true
   }
 
   //
-  async resumeEditingFromDraft() {
+  public async resumeEditingFromDraft() {
     this.updateLocalStorageItemName()
 
     const localStorageData = this.getSavedPageHtml()
@@ -1524,7 +1524,7 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
   }
 
-  async restoreOriginalContent() {
+  public async restoreOriginalContent() {
     this.updateLocalStorageItemName()
 
     this.pageBuilderStateStore.setIsRestoring(true)
