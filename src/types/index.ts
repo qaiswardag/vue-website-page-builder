@@ -29,7 +29,16 @@ export interface BuilderResourceComponent {
 // For the full resource object passed to your package
 export type BuilderResourceData = BuilderResourceComponent[]
 
-export type StartBuilderResult = { error: true; reason: string } | { message: string }
+export type StartBuilderResult =
+  | { error: true; reason: string }
+  | {
+      message: string
+      validation?:
+        | { error: true; warning: string; status: string }
+        | { error: true; reason: string }
+      passedComponentsArray?: BuilderResourceData
+    }
+
 // Store interfaces for better type safety
 export interface PageBuilderStateStore {
   getTextAreaVueModel: string | null

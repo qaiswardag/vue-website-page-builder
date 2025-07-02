@@ -300,7 +300,7 @@ export class PageBuilderService {
       }
 
       // result to end user
-      const result: any = {
+      const result: StartBuilderResult = {
         message: 'Page builder started successfully.',
       }
 
@@ -308,7 +308,7 @@ export class PageBuilderService {
         result.validation = validation
       }
 
-      // passedComponentsArray
+      // PassedComponentsArray
       if (Array.isArray(passedComponentsArray) && passedComponentsArray.length >= 0) {
         result.passedComponentsArray = passedComponentsArray
       }
