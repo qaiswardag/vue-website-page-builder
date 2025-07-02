@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import EditorAccordion from '../EditorAccordion.vue'
 import { getPageBuilder } from '../../../../composables/builderInstance'
@@ -22,6 +22,13 @@ watch(
 const inputProperty = ref('')
 const inputValue = ref('')
 const errorMessage = ref('')
+const valueInputRef = ref(null)
+
+const handleEnterOnProperty = () => {
+  if (valueInputRef.value) {
+    valueInputRef.value.focus()
+  }
+}
 
 const handleAddStyle = async () => {
   const property = inputProperty.value.trim()
@@ -82,16 +89,17 @@ const handleAddStyle = async () => {
             v-model="inputProperty"
             type="text"
             placeholder="property"
-            @keydown.enter="handleAddStyle()"
+            @keydown.enter.prevent="handleEnterOnProperty"
             autocomplete="off"
             class="pbx-myPrimaryInput"
           />
           <input
             id="custom-style-value"
+            ref="valueInputRef"
             v-model="inputValue"
             type="text"
             placeholder="value"
-            @keydown.enter="handleAddStyle()"
+            @keydown.enter="handleAddStyle"
             autocomplete="off"
             class="pbx-myPrimaryInput"
           />

@@ -36,7 +36,7 @@ interface PageBuilderState {
   parentElement: HTMLElement | null
   restoredElement: string | null
   currentClasses: string[]
-  currentStyles: string[]
+  currentStyles: Record<string, string>
   fontVerticalPadding: string | null
   fontHorizontalPadding: string | null
   fontVerticalMargin: string | null
@@ -98,7 +98,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     parentElement: null,
     restoredElement: null,
     currentClasses: [],
-    currentStyles: [],
+    currentStyles: {},
     fontVerticalPadding: null,
     fontHorizontalPadding: null,
     fontVerticalMargin: null,
@@ -210,7 +210,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getCurrentClasses(state: PageBuilderState): string[] {
       return state.currentClasses
     },
-    getCurrentStyles(state: PageBuilderState): string[] {
+    getCurrentStyles(state: PageBuilderState): Record<string, string> {
       return state.currentStyles
     },
     getFontStyle(state: PageBuilderState): string | null {
@@ -370,8 +370,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     setCurrentClasses(payload: string[] | ArrayLike<string>): void {
       this.currentClasses = Array.from(payload)
     },
-    setCurrentStyles(payload: string[] | ArrayLike<string>): void {
-      this.currentStyles = Array.from(payload)
+    setCurrentStyles(payload: Record<string, string>): void {
+      this.currentStyles = payload
     },
     setFontVerticalPadding(payload: string | null): void {
       this.fontVerticalPadding = payload
