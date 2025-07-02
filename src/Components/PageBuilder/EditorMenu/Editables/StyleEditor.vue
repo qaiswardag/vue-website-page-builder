@@ -82,8 +82,10 @@ const handleAddStyle = async () => {
       </div>
 
       <div>
-        <label for="custom-style" class="pbx-myPrimaryInputLabel"> Add your own style. </label>
-        <div class="pbx-flex pbx-gap-2 pbx-item-center">
+        <label for="custom-style-property" class="pbx-myPrimaryInputLabel">
+          Add your own style.
+        </label>
+        <div class="pbx-flex pbx-gap-2 pbx-flex-col pbx-item-center">
           <input
             id="custom-style-property"
             v-model="inputProperty"

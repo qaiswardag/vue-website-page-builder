@@ -813,7 +813,7 @@ onMounted(async () => {
                 await pageBuilderService.clearHtmlSelection()
               }
             "
-            class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4"
+            class="pbx-flex pbx-flex-col pbx-items-center pbx-justify-center pbx-gap-2"
           >
             <button
               v-if="!getMenuRight"

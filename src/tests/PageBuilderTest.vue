@@ -55,7 +55,7 @@ const publishPageBuilder = function () {}
 
 // Convert componentsArray to HTML string
 const htmlString =
-  '<div id="pagebuilder" class="pbx-break-words pbx-text-6xl lg:pbx-text-8xl" style=" font-family: fantasy; font-weight: 800; font-style: oblique; line-height: 40px;"' +
+  '<div id="pagebuilder" class="bg-yellow-200 border-radius-full pb-6" style="font-family: "Century Gothic"' +
   componentsArray.map((c) => c.html_code).join('\n') +
   '</div>'
 
