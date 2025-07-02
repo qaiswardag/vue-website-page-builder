@@ -105,8 +105,9 @@ watch(
       <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Font Appearance</p>
       <template v-if="false">
         <div class="pbx-my-2 pbx-py-2">
-          <label class="pbx-myPrimaryInputLabel"> Font Size </label>
+          <label for="font-base" class="pbx-myPrimaryInputLabel"> Font Size </label>
           <select
+            id="font-base"
             v-model="fontBase"
             class="pbx-myPrimarySelect"
             @change="pageBuilderService.handleFontSizeBase(fontBase)"
@@ -119,8 +120,9 @@ watch(
         </div>
       </template>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Font size </label>
+        <label for="font-desktop" class="pbx-myPrimaryInputLabel"> Font size </label>
         <select
+          id="font-desktop"
           v-model="fontDesktop"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleFontSizeDesktop(fontDesktop)"
@@ -133,8 +135,9 @@ watch(
       </div>
       <template v-if="false">
         <div class="pbx-my-2 pbx-py-2">
-          <label class="pbx-myPrimaryInputLabel"> Font tablet size </label>
+          <label for="font-tablet" class="pbx-myPrimaryInputLabel"> Font tablet size </label>
           <select
+            id="font-tablet"
             v-model="fontTablet"
             class="pbx-myPrimarySelect"
             @change="pageBuilderService.handleFontSizeTablet(fontTablet)"
@@ -146,8 +149,9 @@ watch(
           </select>
         </div>
         <div class="pbx-my-2 pbx-py-2">
-          <label class="pbx-myPrimaryInputLabel"> Font small screens </label>
+          <label for="font-mobile" class="pbx-myPrimaryInputLabel"> Font small screens </label>
           <select
+            id="font-mobile"
             v-model="fontMobile"
             class="pbx-myPrimarySelect"
             @change="pageBuilderService.handleFontSizeMobile(fontMobile)"
@@ -162,8 +166,9 @@ watch(
       <hr />
 
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Font weight </label>
+        <label for="font-weight" class="pbx-myPrimaryInputLabel"> Font weight </label>
         <select
+          id="font-weight"
           v-model="fontWeight"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleFontWeight(fontWeight)"
@@ -178,8 +183,9 @@ watch(
 
       <!-- FONT FAMILY -->
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Font family </label>
+        <label for="font-family" class="pbx-myPrimaryInputLabel"> Font family </label>
         <select
+          id="font-family"
           v-model="fontFamily"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleFontFamily(fontFamily)"
@@ -193,8 +199,9 @@ watch(
       <hr />
 
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Font Style </label>
+        <label for="font-style" class="pbx-myPrimaryInputLabel"> Font Style </label>
         <select
+          id="font-style"
           v-model="fontStyle"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleFontStyle(fontStyle)"

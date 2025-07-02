@@ -97,7 +97,7 @@ const compos = pageBuilderService.parsePageBuilderHTML(htmlString)
 
 onMounted(async () => {
   const result = await pageBuilderService.startBuilder(configPageBuilder, compos.components)
-  console.log('Page Builder Result:', result)
+  console.log('Page Builder inspect the result for message, status, or error::', result)
 })
 </script>
 

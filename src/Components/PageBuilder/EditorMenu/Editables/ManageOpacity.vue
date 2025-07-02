@@ -31,11 +31,11 @@ watch(
 
 <template>
   <div class="pbx-my-2 pbx-py-2">
-    <label class="pbx-myPrimaryInputLabel"> Opacity</label>
+    <label for="default-opacity" class="pbx-myPrimaryInputLabel"> Opacity</label>
 
     <Listbox as="div" v-model="opacityVueModel">
       <div class="pbx-relative">
-        <ListboxButton class="pbx-myPrimarySelect">
+        <ListboxButton class="pbx-myPrimarySelect" id="default-opacity">
           <span class="pbx-flex pbx-items-center pbx-gap-2">
             <div v-if="opacityVueModel === 'none'">
               <div class="pbx-myPrimaryColorPreview pbx-border-none">

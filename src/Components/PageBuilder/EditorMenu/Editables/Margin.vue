@@ -64,8 +64,9 @@ watch(
     <template #title>Margin</template>
     <template #content>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Vertical Margin </label>
+        <label for="vertical-margin" class="pbx-myPrimaryInputLabel"> Vertical Margin </label>
         <select
+          id="vertical-margin"
           v-model="fontVerticalMargin"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleVerticalMargin(fontVerticalMargin)"
@@ -81,8 +82,9 @@ watch(
       </div>
       <hr />
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Horizontal Margin </label>
+        <label for="horizontal-margin" class="pbx-myPrimaryInputLabel"> Horizontal Margin </label>
         <select
+          id="horizontal-margin"
           v-model="fontHorizontalMargin"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleHorizontalMargin(fontHorizontalMargin)"

@@ -64,8 +64,9 @@ watch(
     <template #title>Padding</template>
     <template #content>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Vertical Padding </label>
+        <label for="vertical-padding" class="pbx-myPrimaryInputLabel"> Vertical Padding </label>
         <select
+          id="vertical-padding"
           v-model="fontVerticalPadding"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleVerticalPadding(fontVerticalPadding)"
@@ -81,8 +82,9 @@ watch(
       </div>
       <hr />
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Horizontal Padding </label>
+        <label for="horizontal-padding" class="pbx-myPrimaryInputLabel"> Horizontal Padding </label>
         <select
+          id="horizontal-padding"
           v-model="fontHorizontalPadding"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleHorizontalPadding(fontHorizontalPadding)"

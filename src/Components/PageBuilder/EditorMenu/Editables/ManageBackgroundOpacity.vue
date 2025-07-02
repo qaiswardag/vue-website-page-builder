@@ -32,11 +32,11 @@ watch(
 
 <template>
   <div class="pbx-my-2 pbx-py-2">
-    <label class="pbx-myPrimaryInputLabel"> Background opacity</label>
+    <label for="bg-opacity" class="pbx-myPrimaryInputLabel"> Background Opacity</label>
 
     <Listbox as="div" v-model="opacityVueModel">
       <div class="pbx-relative">
-        <ListboxButton class="pbx-myPrimarySelect">
+        <ListboxButton class="pbx-myPrimarySelect" id="bg-opacity">
           <span class="pbx-flex pbx-items-center pbx-gap-2">
             <div v-if="opacityVueModel === 'none'">
               <div class="pbx-myPrimaryColorPreview pbx-border-none">
@@ -79,15 +79,14 @@ watch(
             >
               <li
                 :class="[
-                  active ? 'bg-myPrimaryLinkColor text-white' : 'pbx-text-myPrimaryDarkGrayColor',
+                  active
+                    ? 'pbx-bg-myPrimaryLinkColor text-white'
+                    : 'pbx-text-myPrimaryDarkGrayColor',
                   'pbx-relative pbx-cursor-default pbx-select-none pbx-py-2 pbx-pl-3 pbx-pr-9',
                 ]"
               >
                 <div class="pbx-flex pbx-items-center">
-                  <div
-                    v-if="backgroundOpacity === 'none'"
-                    class="pbx-aspect-square pbx-w-6 pbx-h-6"
-                  >
+                  <div v-if="backgroundOpacity === 'none'">
                     <div class="pbx-myPrimaryColorPreview pbx-border-none">
                       <span class="material-symbols-outlined"> ev_shadow </span>
                     </div>
@@ -98,10 +97,10 @@ watch(
                     class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-bg-gray-950"
                     :class="`${backgroundOpacity}`"
                   ></div>
+                  <span v-if="backgroundOpacity === 'none'" class="pbx-ml-3">Transparent</span>
                   <span v-if="backgroundOpacity !== 'none'" class="pbx-ml-3">{{
                     backgroundOpacity
                   }}</span>
-                  <span v-if="backgroundOpacity === 'none'" class="pbx-ml-3">Transparent</span>
                 </div>
               </li>
             </ListboxOption>

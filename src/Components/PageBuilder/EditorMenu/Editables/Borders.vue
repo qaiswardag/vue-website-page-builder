@@ -57,8 +57,9 @@ watch(
       <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Border</p>
 
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Border Style </label>
+        <label for="border-style" class="pbx-myPrimaryInputLabel"> Border Style </label>
         <select
+          id="border-style"
           v-model="borderStyle"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderStyle(borderStyle)"
@@ -73,8 +74,9 @@ watch(
         </select>
       </div>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Border Width </label>
+        <label for="border-width" class="pbx-myPrimaryInputLabel"> Border Width </label>
         <select
+          id="border-width"
           v-model="borderWidth"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderWidth(borderWidth)"
@@ -89,10 +91,10 @@ watch(
         </select>
       </div>
 
-      <label class="pbx-myPrimaryInputLabel"> Border Color </label>
+      <label for="border-color" class="pbx-myPrimaryInputLabel"> Border Color </label>
       <Listbox as="div" v-model="borderColor">
         <div class="pbx-relative pbx-mt-2">
-          <ListboxButton class="pbx-myPrimarySelect">
+          <ListboxButton class="pbx-myPrimarySelect" id="border-color">
             <span class="pbx-flex pbx-items-center pbx-gap-2">
               <div v-if="getBorderColor === 'none'">
                 <div class="pbx-myPrimaryColorPreview pbx-border-none">

@@ -77,8 +77,9 @@ watch(
     <template #content>
       <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Global</p>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Border Radius </label>
+        <label for="global-border-radius" class="pbx-myPrimaryInputLabel"> Border Radius </label>
         <select
+          id="global-border-radius"
           v-model="borderRadiusGlobal"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusGlobal(borderRadiusGlobal)"
@@ -94,8 +95,11 @@ watch(
       </div>
       <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Specific</p>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Border Radius top left </label>
+        <label for="border-radius-top-left" class="pbx-myPrimaryInputLabel">
+          Border Radius top left
+        </label>
         <select
+          id="border-radius-top-left"
           v-model="borderRadiusTopLeft"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusTopLeft(borderRadiusTopLeft)"
@@ -110,8 +114,11 @@ watch(
         </select>
       </div>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Border Radius top right </label>
+        <label for="border-radius-top-right" class="pbx-myPrimaryInputLabel">
+          Border Radius top right
+        </label>
         <select
+          id="border-radius-top-right"
           v-model="borderRadiusTopRight"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusTopRight(borderRadiusTopRight)"
@@ -126,8 +133,11 @@ watch(
         </select>
       </div>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Border Radius bottom left </label>
+        <label for="border-radius-bottom-left" class="pbx-myPrimaryInputLabel">
+          Border Radius bottom left
+        </label>
         <select
+          id="border-radius-bottom-left"
           v-model="borderRadiusBottomleft"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusBottomleft(borderRadiusBottomleft)"
@@ -142,8 +152,11 @@ watch(
         </select>
       </div>
       <div class="pbx-my-2 pbx-py-2">
-        <label class="pbx-myPrimaryInputLabel"> Border Radius bottom right </label>
+        <label for="border-radius-bottom-right" class="pbx-myPrimaryInputLabel">
+          Border Radius bottom right
+        </label>
         <select
+          id="border-radius-bottom-right"
           v-model="borderRadiusBottomRight"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusBottomRight(borderRadiusBottomRight)"

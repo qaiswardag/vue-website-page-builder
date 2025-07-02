@@ -78,13 +78,14 @@ const handleAddClasses = async () => {
       </div>
 
       <div>
-        <label class="pbx-myPrimaryInputLabel">
+        <label for="custom-css" class="pbx-myPrimaryInputLabel">
           Add your CSS.
           <br />
           The pbx- prefix is added automatically.
         </label>
         <div class="pbx-flex pbx-gap-2 pbx-item-center">
           <input
+            id="custom-css"
             v-model="inputClass"
             type="text"
             placeholder="Type class"

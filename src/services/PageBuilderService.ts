@@ -1895,12 +1895,10 @@ export class PageBuilderService {
       }
     }
 
-    let sectionNodes: NodeListOf<HTMLElement>
+    // Always assign sectionNodes before use
+    let sectionNodes: NodeListOf<HTMLElement> = doc.querySelectorAll('section')
     if (pagebuilderDiv) {
       sectionNodes = pagebuilderDiv.querySelectorAll('section')
-    }
-    if (!pagebuilderDiv) {
-      sectionNodes = doc.querySelectorAll('section')
     }
 
     // Only use top-level (non-nested) sections as components
@@ -1974,20 +1972,49 @@ export class PageBuilderService {
    *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
    */
   async #mountComponentsToDOM(htmlString: string, usePassedPageSettings?: boolean): Promise<void> {
-    // Auto-detect if input is JSON or HTML
+    /**
+     * Mounts builder components to the DOM from either JSON or HTML input.
+     *
+     * Input format detection:
+     * - If the input starts with `[` or `{`, it is treated as JSON (array or object).
+     * - If the input starts with `<`, it is treated as HTML.
+     *
+     * When to use which format:
+     *
+     * 1. JSON input (from localStorage, API, or internal state like pina):
+     *    - Use when restoring builder state from localStorage, an API, or a previously saved draft.
+     *    - Example: `localStorage.getItem(...)` or API returns a JSON stringified array/object of components.
+     *    - This is the most common format for drafts, autosave, and programmatic state management.
+     *    - Example usage:
+     *      await this.#mountComponentsToDOM(JSON.stringify(getComponents))
+     *
+     * 2. HTML input (from HTML snapshot, import, or published output):
+     *    - Use when restoring from a published HTML snapshot, importing a static HTML export, or loading the builder from a previously published HTML string.
+     *    - Example: output from `getSavedPageHtml()` or a static HTML export.
+     *    - This is used for restoring the builder from a published state, importing, or previewing published content.
+     *    - Example usage:
+     *      await this.#mountComponentsToDOM(savedHtmlString)
+     *
+     * Best practice:
+     * - Use JSON for local storage drafts, autosave, and API-driven workflows.
+     * - Use HTML for published/imported content from DB or when restoring from a static HTML snapshot.
+     *
+     * The method auto-detects the format and calls the appropriate parser.
+     */
     const trimmedData = htmlString.trim()
 
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
-      // Looks like JSON - parse as JSON
+      // JSON input: Use this when restoring from localStorage, API, or internal builder state (drafts, autosave, etc.)
       await this.#parseJSONComponents(trimmedData, usePassedPageSettings)
       return
     }
     if (trimmedData.startsWith('<')) {
-      // Looks like HTML - parse as HTML
+      // HTML input: Use this when restoring from a published HTML snapshot, import, or static HTML export
       await this.#parseHTMLComponents(trimmedData, usePassedPageSettings)
       return
     }
 
+    // Fallback: If format is unknown, default to JSON parser (defensive)
     await this.#parseJSONComponents(trimmedData, usePassedPageSettings)
   }
 
