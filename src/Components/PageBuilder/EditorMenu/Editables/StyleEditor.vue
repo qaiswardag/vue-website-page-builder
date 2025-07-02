@@ -8,93 +8,95 @@ const pageBuilderService = getPageBuilder()
 
 const pageBuilderStateStore = sharedPageBuilderStore
 
-const currentClasses = ref(null)
-const getCurrentClasses = computed(() => pageBuilderStateStore.getCurrentClasses)
+const currentStyles = ref(null)
+const getCurrentStyles = computed(() => pageBuilderStateStore.getCurrentStyles)
 
 watch(
-  getCurrentClasses,
+  getCurrentStyles,
   (newValue) => {
-    currentClasses.value = newValue
+    currentStyles.value = newValue
   },
   { immediate: true },
 )
 
-const inputClass = ref('')
-const errorMessage = ref('') // <-- error message reactive ref
+const inputProperty = ref('')
+const inputValue = ref('')
+const errorMessage = ref('')
 
-const handleAddClasses = async () => {
-  const classToAdd = inputClass.value.trim()
+const handleAddStyle = async () => {
+  const property = inputProperty.value.trim()
+  const value = inputValue.value.trim()
 
-  if (!classToAdd) {
-    errorMessage.value = 'Please enter a class name.'
+  if (!property || !value) {
+    errorMessage.value = 'Please enter a property and a value.'
     return
   }
 
-  // Add prefix if missing
-  const prefixedClass = classToAdd.startsWith('pbx-') ? classToAdd : 'pbx-' + classToAdd
-
-  // Check if class already exists
-  if (currentClasses.value?.includes(prefixedClass)) {
-    errorMessage.value = `Class "${prefixedClass}" is already added.`
+  if (currentStyles.value && currentStyles.value[property]) {
+    errorMessage.value = `Property "${property}" already exists. Remove it first to add a new one.`
     return
   }
 
   errorMessage.value = '' // Clear error
 
-  pageBuilderService.handleAddClasses(classToAdd)
+  pageBuilderService.handleAddStyle(property, value)
   await pageBuilderService.initializeElementStyles()
 
-  inputClass.value = ''
+  inputProperty.value = ''
+  inputValue.value = ''
 }
 </script>
 
 <template>
   <EditorAccordion>
-    <template #title>Generated CSS</template>
+    <template #title>Inline Styles</template>
     <template #content>
       <label class="pbx-myPrimaryInputLabel pbx-my-4">
-        This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the
-        selected element.
+        These are the inline styles applied by the builder. Add your own styles and press Enter to
+        apply them to the selected element.
       </label>
 
       <div class="pbx-flex pbx-flex-row pbx-flex-wrap pbx-gap-2 pbx-mt-2 pbx-mb-4">
         <div
-          v-for="className in currentClasses"
-          :key="className"
+          v-for="(value, key) in currentStyles"
+          :key="key"
           class="pbx-myPrimaryTag pbx-cursor-pointer hover:pbx-bg-myPrimaryErrorColor hover:pbx-text-white pbx-text-xs pbx-py-2 pbx-font-medium"
           @click="
             async () => {
-              pageBuilderService.handleRemoveClasses(className)
+              pageBuilderService.handleRemoveStyle(key)
               await pageBuilderService.initializeElementStyles()
             }
           "
         >
           <div class="pbx-flex pbx-items-center pbx-gap-1">
-            <span class="pbx-mr-1">
-              {{ className }}
-            </span>
+            <span class="pbx-mr-1"> {{ key }}: {{ value }}; </span>
           </div>
         </div>
       </div>
 
       <div>
-        <label for="custom-css" class="pbx-myPrimaryInputLabel">
-          Add your CSS.
-          <br />
-          The pbx- prefix is added automatically.
-        </label>
+        <label for="custom-style" class="pbx-myPrimaryInputLabel"> Add your own style. </label>
         <div class="pbx-flex pbx-gap-2 pbx-item-center">
           <input
-            id="custom-css"
-            v-model="inputClass"
+            id="custom-style-property"
+            v-model="inputProperty"
             type="text"
-            placeholder="Type class"
-            @keydown.enter="handleAddClasses()"
+            placeholder="property"
+            @keydown.enter="handleAddStyle()"
+            autocomplete="off"
+            class="pbx-myPrimaryInput"
+          />
+          <input
+            id="custom-style-value"
+            v-model="inputValue"
+            type="text"
+            placeholder="value"
+            @keydown.enter="handleAddStyle()"
             autocomplete="off"
             class="pbx-myPrimaryInput"
           />
 
-          <button @click="handleAddClasses" type="button" class="pbx-myPrimaryButton">Add</button>
+          <button @click="handleAddStyle" type="button" class="pbx-myPrimaryButton">Add</button>
         </div>
       </div>
       <p v-if="errorMessage" class="pbx-myPrimaryInputError">{{ errorMessage }}</p>

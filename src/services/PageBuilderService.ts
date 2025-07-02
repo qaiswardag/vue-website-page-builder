@@ -882,6 +882,16 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setCurrentClasses(classListArray)
   }
 
+  private async syncCurrentStyles() {
+    const style = this.getElement.value?.getAttribute('style')
+    if (style) {
+      const stylesObject = this.parseStyleString(style)
+      this.pageBuilderStateStore.setCurrentStyles(stylesObject)
+    } else {
+      this.pageBuilderStateStore.setCurrentStyles({})
+    }
+  }
+
   public handleAddClasses(userSelectedClass: string): void {
     if (
       typeof userSelectedClass === 'string' &&
@@ -901,6 +911,23 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setClass(prefixedClass)
     }
   }
+
+  public handleAddStyle(property: string, value: string): void {
+    const element = this.getElement.value
+    if (!element || !property || !value) return
+
+    element.style.setProperty(property, value)
+    this.pageBuilderStateStore.setElement(element)
+  }
+
+  public handleRemoveStyle(property: string): void {
+    const element = this.getElement.value
+    if (!element || !property) return
+
+    element.style.removeProperty(property)
+    this.pageBuilderStateStore.setElement(element)
+  }
+
   public handleFontFamily(userSelectedFontFamily?: string): void {
     this.applyElementClassChanges(
       userSelectedFontFamily,
@@ -2364,5 +2391,6 @@ export class PageBuilderService {
     this.handleBackgroundColor(undefined)
     this.handleTextColor(undefined)
     await this.syncCurrentClasses()
+    await this.syncCurrentStyles()
   }
 }
