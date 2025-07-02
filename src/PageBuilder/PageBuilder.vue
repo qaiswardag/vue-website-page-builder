@@ -618,7 +618,7 @@ onMounted(async () => {
               "
             >
               <div
-                class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-border-0 pbx-border-solid pbx-border-r pbx-border-gray-200 lg:pbx-pr-6"
+                class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-border-gray-200"
               >
                 <span class="lg:pbx-block pbx-hidden">
                   <div class="pbx-whitespace-nowrap pbx-cursor-pointer">Add new Components</div>

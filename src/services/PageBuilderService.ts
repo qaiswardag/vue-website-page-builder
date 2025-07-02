@@ -1447,91 +1447,6 @@ export class PageBuilderService {
       )
   }
 
-  parsePageBuilderHTML(htmlString: string): {
-    components: ComponentObject[]
-    pageSettings: PageSettings
-  } {
-    const parser = new DOMParser()
-    const doc = parser.parseFromString(htmlString, 'text/html')
-
-    const pagebuilderDiv = doc.querySelector('#pagebuilder')
-    let pageSettings: PageSettings = {
-      classes: '',
-      style: {},
-    }
-
-    if (pagebuilderDiv) {
-      const rawStyle = pagebuilderDiv.getAttribute('style') || ''
-      pageSettings = {
-        classes: pagebuilderDiv.className || '',
-        style: this.#parseStyleString(rawStyle),
-      }
-    }
-
-    let sectionNodes: NodeListOf<HTMLElement>
-
-    if (pagebuilderDiv) {
-      sectionNodes = pagebuilderDiv.querySelectorAll('section')
-    } else {
-      sectionNodes = doc.querySelectorAll('section')
-    }
-
-    // Only use top-level (non-nested) sections as components
-    const topLevelSections = Array.from(sectionNodes).filter(
-      (section) =>
-        !section.parentElement || section.parentElement.tagName.toLowerCase() !== 'section',
-    )
-
-    let components: ComponentObject[] = []
-
-    if (topLevelSections.length > 0) {
-      components = topLevelSections.map((section) => ({
-        id: null,
-        html_code: section.outerHTML.trim(),
-        title:
-          section.getAttribute('data-component-title') ||
-          section.getAttribute('title') ||
-          'Untitled Component',
-      }))
-    } else {
-      // No <section> found: treat each first-level child as a component, wrapped in a section
-      const parent = pagebuilderDiv || doc.body
-      const children = Array.from(parent.children)
-      if (children.length > 0) {
-        components = children.map((child) => {
-          // Wrap in a section with data-componentid and data-component-title
-          const section = doc.createElement('section')
-          section.setAttribute('data-component-title', 'Untitled Component')
-          // Optionally: generate a uuid for data-componentid if needed
-          // section.setAttribute('data-componentid', uuidv4())
-          section.innerHTML = child.outerHTML.trim()
-          return {
-            id: null,
-            html_code: section.outerHTML.trim(),
-            title: 'Untitled Component',
-          }
-        })
-      } else {
-        // No children: wrap the entire content in a <section> as a single component
-        const section = doc.createElement('section')
-        section.setAttribute('data-component-title', 'Untitled Component')
-        section.innerHTML = parent.innerHTML.trim()
-        components = [
-          {
-            id: null,
-            html_code: section.outerHTML.trim(),
-            title: 'Untitled Component',
-          },
-        ]
-      }
-    }
-
-    return {
-      components,
-      pageSettings,
-    }
-  }
-
   deleteOldPageBuilderLocalStorage(): void {
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
@@ -1941,6 +1856,102 @@ export class PageBuilderService {
         return `${kebabKey}: ${value};`
       })
       .join(' ')
+  }
+
+  /**
+   * Parses a string of HTML and extracts builder components and global page settings.
+   *
+   * ⚠️ **Important:**
+   * - This method expects an **HTML string** containing one or more `<section>...</section>` elements (such as the output from `getSavedPageHtml()` or a previously saved builder HTML string).
+   * - **Do NOT pass a JSON string** (such as the result of `JSON.stringify(componentsArray)`) to this method. Passing a JSON string to `DOMParser.parseFromString(..., 'text/html')` will not produce valid DOM nodes. Instead, it will treat the JSON as plain text, resulting in a `<html><head></head><body>{...json...}</body></html>` structure, not real HTML elements.
+   * - If you pass a JSON string, you will see lots of `\n` and strange HTML, because the parser is just wrapping your JSON in a `<body>` tag as text.
+   *
+   * @param htmlString - The HTML string to parse (must contain `<section>...</section>` elements, not JSON).
+   * @returns An object with `components` (array of builder components) and `pageSettings` (global styles for the page).
+   */
+  public parsePageBuilderHTML(htmlString: string): {
+    components: ComponentObject[]
+    pageSettings: PageSettings
+  } {
+    const parser = new DOMParser()
+    const doc = parser.parseFromString(htmlString, 'text/html')
+
+    const pagebuilderDiv = doc.querySelector('#pagebuilder')
+    let pageSettings: PageSettings = {
+      classes: '',
+      style: {},
+    }
+
+    if (pagebuilderDiv) {
+      const rawStyle = pagebuilderDiv.getAttribute('style') || ''
+      pageSettings = {
+        classes: pagebuilderDiv.className || '',
+        style: this.#parseStyleString(rawStyle),
+      }
+    }
+
+    let sectionNodes: NodeListOf<HTMLElement>
+
+    if (pagebuilderDiv) {
+      sectionNodes = pagebuilderDiv.querySelectorAll('section')
+    } else {
+      sectionNodes = doc.querySelectorAll('section')
+    }
+
+    // Only use top-level (non-nested) sections as components
+    const topLevelSections = Array.from(sectionNodes).filter(
+      (section) =>
+        !section.parentElement || section.parentElement.tagName.toLowerCase() !== 'section',
+    )
+
+    let components: ComponentObject[] = []
+
+    if (topLevelSections.length > 0) {
+      components = topLevelSections.map((section) => ({
+        id: null,
+        html_code: section.outerHTML.trim(),
+        title:
+          section.getAttribute('data-component-title') ||
+          section.getAttribute('title') ||
+          'Untitled Component',
+      }))
+    } else {
+      // No <section> found: treat each first-level child as a component, wrapped in a section
+      const parent = pagebuilderDiv || doc.body
+      const children = Array.from(parent.children)
+      if (children.length > 0) {
+        components = children.map((child) => {
+          // Wrap in a section with data-componentid and data-component-title
+          const section = doc.createElement('section')
+          section.setAttribute('data-component-title', 'Untitled Component')
+          // Optionally: generate a uuid for data-componentid if needed
+          // section.setAttribute('data-componentid', uuidv4())
+          section.innerHTML = child.outerHTML.trim()
+          return {
+            id: null,
+            html_code: section.outerHTML.trim(),
+            title: 'Untitled Component',
+          }
+        })
+      } else {
+        // No children: wrap the entire content in a <section> as a single component
+        const section = doc.createElement('section')
+        section.setAttribute('data-component-title', 'Untitled Component')
+        section.innerHTML = parent.innerHTML.trim()
+        components = [
+          {
+            id: null,
+            html_code: section.outerHTML.trim(),
+            title: 'Untitled Component',
+          },
+        ]
+      }
+    }
+
+    return {
+      components,
+      pageSettings,
+    }
   }
 
   /**
