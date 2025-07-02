@@ -230,7 +230,7 @@ const handleCloseGlobalPageStyles = async function () {
 
     <ModalBuilder
       maxWidth="md"
-      minHeight="pbx-min-h-[60vh]"
+      minHeight="pbx-min-h-[65vh] pbx-max-h-[65vh]"
       :showModalBuilder="showModalGlobalPageStyles"
       title="Global Page Styles"
       @closeMainModalBuilder="handleCloseGlobalPageStyles"
@@ -279,12 +279,14 @@ const handleCloseGlobalPageStyles = async function () {
               <ClassEditor></ClassEditor>
             </article>
           </div>
-          <label class="pbx-myPrimaryInputLabel pbx-my-4">
-            Choose an action to clean up your page:
-          </label>
-          <div
-            class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
+          <label
+            class="pbx-myPrimaryInputLabel pbx-mt-12 pbx-mb-2 pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-pt-4"
           >
+            Choose an action to clean up your page. This may include clearing all custom CSS and
+            styles applied to individual elements or the entire page. Please note: this action
+            cannot be undone.
+          </label>
+          <div class="pbx-mt-1 pbx-flex pbx-items-center pbx-justify-start">
             <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
               <div
                 class="sm:pbx-grid-cols-1 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full pbx-mt-4"

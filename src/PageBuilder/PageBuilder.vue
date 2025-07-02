@@ -819,7 +819,7 @@ onMounted(async () => {
               await pageBuilderService.clearHtmlSelection()
             }
           "
-          class="pbx-min-w-[3rem] pbx-pt-7 pbx-pb-2 pbx-px-4"
+          class="pbx-min-w-[3rem] pbx-pt-6 pbx-pb-2"
         >
           <div
             @click.self="
@@ -829,21 +829,15 @@ onMounted(async () => {
             "
             class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4"
           >
-            <div
+            <button
               v-if="!getMenuRight"
               @click="pageBuilderStateStore.setMenuRight(true)"
-              class="pbx-flex pbx-flex-col pbx-justify-center pbx-items-center"
+              type="button"
+              class="pbx-mySecondaryButton"
             >
-              <button
-                type="button"
-                class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
-              >
-                <span class="material-symbols-outlined"> widgets </span>
-              </button>
-              <span class="pbx-myPrimaryParagraph pbx-text-xs pbx-cursor-pointer pbx-pt-2">
-                Tools
-              </span>
-            </div>
+              <span class="material-symbols-outlined"> view_sidebar </span>
+              <span> Tools </span>
+            </button>
           </div>
         </div>
 
@@ -851,15 +845,16 @@ onMounted(async () => {
           aria-label="Menu"
           id="pagebuilder-right-area"
           :class="{
-            'pbx-w-0': !getMenuRight,
+            'pbx-w-0 pbx-mr-0': !getMenuRight,
             'pbx-w-80 pbx-mr-2 pbx-bg-myPrimaryLightGrayColor pbx-items-stretch': getMenuRight,
           }"
-          class="pbx-duration-300 pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-shadow-sm pbx-rounded-l-2xl pbx-h-[100vh]"
+          class="pbx-duration-100 pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-shadow-sm pbx-rounded-l-2xl pbx-h-[100vh]"
         >
           <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
           </RightSidebarEditor>
         </aside>
       </div>
+
       <div
         class="pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid lg:pbx-mx-10"
       >
