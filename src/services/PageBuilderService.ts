@@ -1908,6 +1908,13 @@ export class PageBuilderService {
     const parser = new DOMParser()
     const doc = parser.parseFromString(htmlString, 'text/html')
 
+    // Prefix all classes in the document
+    doc.querySelectorAll('[class]').forEach((element) => {
+      const currentClasses = element.getAttribute('class') || ''
+      const prefixedClasses = this.addTailwindPrefixToClasses(currentClasses)
+      element.setAttribute('class', prefixedClasses)
+    })
+
     const pagebuilderDiv = doc.querySelector('#pagebuilder')
     let pageSettings: PageSettings = {
       classes: '',
