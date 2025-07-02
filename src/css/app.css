@@ -409,14 +409,13 @@
   height: 2.2rem;
 }
 
-#pbxContainsPagebuilder {
-  position: relative; /* make this the positioning context for absolute children */
-  overflow-y: auto;
-}
-
 /* Manage P, Link, H1, H2 # end */
 
 /* CSS for content inside page builder # start */
+#pagebuilder {
+  position: relative;
+  overflow-y: auto;
+}
 #pagebuilder a {
   pointer-events: none;
 }

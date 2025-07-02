@@ -55,14 +55,14 @@ const publishPageBuilder = function () {}
 
 // Convert componentsArray to HTML string
 const htmlString =
-  '<div id="copenhagen" class="pbx-break-words pbx-text-6xl lg:pbx-text-8xl" style=" font-family: fantasy; font-weight: 800; font-style: oblique; line-height: 40px;"' +
+  '<div id="pagebuilder" class="pbx-break-words pbx-text-6xl lg:pbx-text-8xl" style=" font-family: fantasy; font-weight: 800; font-style: oblique; line-height: 40px;"' +
   componentsArray.map((c) => c.html_code).join('\n') +
   '</div>'
 
 // Parse as HTML (not JSON)
 const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(htmlString)
 console.log('components eeer nu:', components)
-console.log('pageSettings:', pageSettings.classes)
+console.log('pageSettings:', pageSettings)
 
 const configPageBuilder = {
   userForPageBuilder: {

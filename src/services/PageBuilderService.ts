@@ -802,7 +802,7 @@ export class PageBuilderService {
     // Deep clone clone component
     const clonedComponent = { ...componentObject }
 
-    const pageBuilder = document.querySelector('#pbxContainsPagebuilder')
+    const pageBuilder = document.querySelector('#pagebuilder')
     //  scoll to top or bottom
     if (pageBuilder) {
       // push to top
@@ -1828,7 +1828,7 @@ export class PageBuilderService {
           : 'push',
       })
 
-      const pageBuilder = document.querySelector('#pbxContainsPagebuilder')
+      const pageBuilder = document.querySelector('#pagebuilder')
       //  scoll to top or bottom
       if (pageBuilder) {
         // push to bottom

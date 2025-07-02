@@ -193,8 +193,6 @@ const handleSelectComponent = function (componentObject) {
   pageBuilderStateStore.setComponent(componentObject)
 }
 
-const draggableZone = ref(null)
-
 const getIsLoadingGlobal = computed(() => {
   return pageBuilderStateStore.getIsLoadingGlobal
 })
@@ -789,26 +787,14 @@ onMounted(async () => {
           </div>
           <!-- Element Popover toolbar end -->
 
-          <div
-            id="pbxContainsPagebuilder"
-            class="pbx-pl-4 pbx-pr-4 pbx-pb-4 pbx-pt-1 pbx-h-full pbx-overflow-y-auto"
-          >
-            <div id="pagebuilder" class="pbx-text-black pbx-font-sans">
-              <div ref="draggableZone">
-                <!-- Added Components to DOM # start -->
-                <div
-                  v-for="component in getComponents"
-                  :key="component.id"
-                  id="page-builder-editor-editable-area"
-                  class="pbx-grow"
-                >
-                  <div @mouseup="handleSelectComponent(component)" class="pbx-relative group">
-                    <div v-html="component.html_code"></div>
-                  </div>
-                </div>
-                <!-- Added Components to DOM # end -->
-              </div>
-            </div>
+          <div id="pagebuilder" class="pbx-text-black pbx-font-sans">
+            <template v-for="component in getComponents" :key="component.id">
+              <section
+                v-if="component.html_code"
+                v-html="component.html_code"
+                @mouseup="handleSelectComponent(component)"
+              ></section>
+            </template>
           </div>
         </main>
 

@@ -23,11 +23,9 @@ import ModalBuilder from '../../../Components/Modals/ModalBuilder.vue'
 import { extractCleanHTMLFromPageBuilder } from '../../../composables/extractCleanHTMLFromPageBuilder'
 
 const pageBuilderService = getPageBuilder()
-// Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
-// emit
-const emit = defineEmits(['closeEditor'])
+defineEmits(['closeEditor'])
 
 const isLoadingPageStyles = ref(null)
 const getComponents = computed(() => {
@@ -37,7 +35,6 @@ const getElement = computed(() => {
   return pageBuilderStateStore.getElement
 })
 
-// Get tagName of element
 const elementTag = computed(() => {
   return getElement.value?.tagName
 })
@@ -108,14 +105,6 @@ const handleUpdatePageStyles = async function () {
   await pageBuilderService.globalPageStyles()
 }
 
-const clearClassesFromPage = async function () {
-  await pageBuilderService.clearClassesFromPage()
-}
-
-const clearInlineStylesFromPagee = async function () {
-  await pageBuilderService.clearInlineStylesFromPagee()
-}
-
 const handleCloseGlobalPageStyles = async function () {
   isLoadingPageStyles.value = true
   await pageBuilderService.handleManualSave()
@@ -150,7 +139,7 @@ const handleCloseGlobalPageStyles = async function () {
     </div>
 
     <div
-      v
+      v-if="!showModalGlobalPageStyles"
       ref="scrollContainer"
       @scroll="onScroll"
       class="pbx-pl-3 pbx-pr-3 pbx-mb-4 pbx-overflow-y-scroll"
@@ -252,7 +241,7 @@ const handleCloseGlobalPageStyles = async function () {
             </div>
           </div>
         </div>
-        <div v-if="!isLoadingPageStyles">
+        <div v-if="!isLoadingPageStyles && showModalGlobalPageStyles" class="pbx-pb-12">
           <div>
             <p class="pbx-myPrimaryParagraph">
               Apply styles that affect the entire page. These settings include global font family,
@@ -285,38 +274,6 @@ const handleCloseGlobalPageStyles = async function () {
             <article class="pbx-my-1 pbx-bg-gray-100">
               <StyleEditor></StyleEditor>
             </article>
-          </div>
-          <label
-            class="pbx-myPrimaryInputLabel pbx-mt-12 pbx-mb-2 pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-pt-4"
-          >
-            Choose an action to clean up your page. This may include clearing all custom CSS and
-            styles applied to individual elements or the entire page. Please note: this action
-            cannot be undone.
-          </label>
-          <div class="pbx-mt-1 pbx-flex pbx-items-center pbx-justify-start">
-            <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
-              <div
-                class="sm:pbx-grid-cols-1 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full pbx-mt-4"
-              >
-                <!-- Button: Clear all CSS classes -->
-                <button
-                  @click="clearClassesFromPage"
-                  class="pbx-myPrimaryDeleteButton"
-                  type="button"
-                >
-                  Clear All CSS Classes
-                </button>
-
-                <!-- Button: Clear all inline styles -->
-                <button
-                  @click="clearInlineStylesFromPagee"
-                  class="pbx-myPrimaryDeleteButton"
-                  type="button"
-                >
-                  Clear All Inline Styles
-                </button>
-              </div>
-            </div>
           </div>
         </div>
       </div>
