@@ -55,7 +55,7 @@ const publishPageBuilder = function () {}
 
 // Convert componentsArray to HTML string
 const htmlString =
-  '<div id="pagebuilder" class="bg-yellow-200 border-radius-full pb-6" style=""' +
+  '<div id="pagebuilder" class="bg-yellow-200 border-radius-full pb-6" style="">' +
   componentsArray.map((c) => c.html_code).join('\n') +
   '</div>'
 
