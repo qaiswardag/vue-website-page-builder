@@ -34,6 +34,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  showPublishButton: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 // Use shared Pinia instance for PageBuilder package
@@ -49,10 +53,14 @@ provide('internalPinia', internalPinia)
 provide('CustomMediaComponent', props.CustomMediaLibraryComponent)
 provide('CustomBuilderComponents', props.CustomBuilderComponents)
 
-const emit = defineEmits(['handleClosePageBuilder'])
+const emit = defineEmits(['handleClosePageBuilder', 'handlePublishPageBuilder'])
 
 const closePageBuilder = function () {
   emit('handleClosePageBuilder')
+}
+const closePublish = function () {
+  pageBuilderService.handleManualSave()
+  emit('handlePublishPageBuilder')
 }
 
 // Provide modal close function for custom components
@@ -664,18 +672,40 @@ onMounted(async () => {
             </div>
           </div>
         </div>
-        <!-- Options # Start -->
-        <div
-          @click.self="
-            async () => {
-              await pageBuilderService.clearHtmlSelection()
-            }
-          "
-          class="pbx-flex pbx-items-center pbx-py-2 pbx-min-h-20 pbx-max-h-20 pbx-w-full"
-          :class="[showCloseButton ? 'pbx-justify-between' : 'pbx-justify-end']"
-        >
-          <ToolbarOption></ToolbarOption>
-          <template v-if="showCloseButton">
+
+        <div class="pbx-flex gap-2 pbx-items-center">
+          <!-- Options # Start -->
+          <div
+            @click.self="
+              async () => {
+                await pageBuilderService.clearHtmlSelection()
+              }
+            "
+            class="pbx-flex pbx-items-center pbx-py-2 pbx-min-h-20 pbx-max-h-20 pbx-w-full"
+            :class="[showCloseButton ? 'pbx-justify-between' : 'pbx-justify-end']"
+          >
+            <ToolbarOption></ToolbarOption>
+          </div>
+          <!-- Options # Start -->
+        </div>
+        <!-- Close & Publish buttons start -->
+        <template v-if="showPublishButton">
+          <div class="pbx-ml-2">
+            <button
+              class="pbx-myPrimaryButton"
+              @click="
+                async () => {
+                  closePublish()
+                  await pageBuilderService.clearHtmlSelection()
+                }
+              "
+            >
+              Publish
+            </button>
+          </div>
+        </template>
+        <template v-if="showCloseButton">
+          <div class="pbx-ml-2">
             <button
               class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
               @click="
@@ -687,9 +717,10 @@ onMounted(async () => {
             >
               <span class="material-symbols-outlined"> close </span>
             </button>
-          </template>
-        </div>
-        <!-- Options # Start -->
+          </div>
+        </template>
+
+        <!-- Close & Publish buttons end -->
       </div>
 
       <!-- Top Layout Save And Reset Area - End -->
@@ -788,7 +819,7 @@ onMounted(async () => {
               await pageBuilderService.clearHtmlSelection()
             }
           "
-          class="pbx-min-w-[3.5rem] pbx-pt-7 pbx-pb-2 pbx-ml-2 pbx-border-l-solid pbx-border-gray-200"
+          class="pbx-min-w-[3rem] pbx-pt-7 pbx-pb-2 pbx-px-4"
         >
           <div
             @click.self="
@@ -798,14 +829,21 @@ onMounted(async () => {
             "
             class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-4"
           >
-            <button
-              type="button"
+            <div
               v-if="!getMenuRight"
               @click="pageBuilderStateStore.setMenuRight(true)"
-              class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+              class="pbx-flex pbx-flex-col pbx-justify-center pbx-items-center"
             >
-              <span class="material-symbols-outlined"> palette </span>
-            </button>
+              <button
+                type="button"
+                class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+              >
+                <span class="material-symbols-outlined"> widgets </span>
+              </button>
+              <span class="pbx-myPrimaryParagraph pbx-text-xs pbx-cursor-pointer pbx-pt-2">
+                Tools
+              </span>
+            </div>
           </div>
         </div>
 

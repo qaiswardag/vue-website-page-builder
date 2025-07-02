@@ -5,7 +5,6 @@ import DemoMediaLibraryComponentTest from '../tests/TestComponents/DemoMediaLibr
 import DemoBuilderComponentsTest from '../tests/TestComponents/DemoBuilderComponentsTest.vue'
 import { onMounted } from 'vue'
 import componentsArray from '../tests/componentsArray.test.json'
-
 import { getPageBuilder } from '../composables/builderInstance'
 const pageBuilderService = getPageBuilder()
 
@@ -52,6 +51,8 @@ const features = [
   },
 ]
 
+const publishPageBuilder = function () {}
+
 const configPageBuilder = {
   userForPageBuilder: {
     name: 'Jane Doe',
@@ -86,8 +87,11 @@ const configPageBuilder = {
   },
 } as const
 
+const stringHTML = JSON.stringify(componentsArray)
+const compos = pageBuilderService.parsePageBuilderHTML(stringHTML)
+
 onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder, componentsArray)
+  const result = await pageBuilderService.startBuilder(configPageBuilder, compos.components)
   console.log('Page Builder Result:', result)
 })
 </script>
@@ -124,7 +128,11 @@ onMounted(async () => {
       </div>
       <div class="pbx-m-4">
         <!--   :CustomBuilderComponents="DemoBuilderComponentsTest" -->
-        <PageBuilder :CustomMediaLibraryComponent="DemoMediaLibraryComponentTest"></PageBuilder>
+        <PageBuilder
+          :CustomMediaLibraryComponent="DemoMediaLibraryComponentTest"
+          :showPublishButton="true"
+          @handlePublishPageBuilder="publishPageBuilder"
+        ></PageBuilder>
       </div>
     </div>
 

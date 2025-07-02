@@ -1476,11 +1476,55 @@ export class PageBuilderService {
       sectionNodes = doc.querySelectorAll('section')
     }
 
-    const components: ComponentObject[] = Array.from(sectionNodes).map((section) => ({
-      id: null,
-      html_code: section.innerHTML.trim(),
-      title: section.getAttribute('data-titlets') || '',
-    }))
+    // Only use top-level (non-nested) sections as components
+    const topLevelSections = Array.from(sectionNodes).filter(
+      (section) =>
+        !section.parentElement || section.parentElement.tagName.toLowerCase() !== 'section',
+    )
+
+    let components: ComponentObject[] = []
+
+    if (topLevelSections.length > 0) {
+      components = topLevelSections.map((section) => ({
+        id: null,
+        html_code: section.outerHTML.trim(),
+        title:
+          section.getAttribute('data-component-title') ||
+          section.getAttribute('title') ||
+          'Untitled Component',
+      }))
+    } else {
+      // No <section> found: treat each first-level child as a component, wrapped in a section
+      const parent = pagebuilderDiv || doc.body
+      const children = Array.from(parent.children)
+      if (children.length > 0) {
+        components = children.map((child) => {
+          // Wrap in a section with data-componentid and data-component-title
+          const section = doc.createElement('section')
+          section.setAttribute('data-component-title', 'Untitled Component')
+          // Optionally: generate a uuid for data-componentid if needed
+          // section.setAttribute('data-componentid', uuidv4())
+          section.innerHTML = child.outerHTML.trim()
+          return {
+            id: null,
+            html_code: section.outerHTML.trim(),
+            title: 'Untitled Component',
+          }
+        })
+      } else {
+        // No children: wrap the entire content in a <section> as a single component
+        const section = doc.createElement('section')
+        section.setAttribute('data-component-title', 'Untitled Component')
+        section.innerHTML = parent.innerHTML.trim()
+        components = [
+          {
+            id: null,
+            html_code: section.outerHTML.trim(),
+            title: 'Untitled Component',
+          },
+        ]
+      }
+    }
 
     return {
       components,

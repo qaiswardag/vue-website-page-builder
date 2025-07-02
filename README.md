@@ -4,7 +4,7 @@
 
 # Free Click & Drop Page Builder
 
-- [Free Click & Drop Page Builder](#free-click--drop-page-builder)
+- [Free Click \& Drop Page Builder](#free-click--drop-page-builder)
   - [Demo](#demo)
   - [Overview](#overview)
   - [Get Started in Minutes](#get-started-in-minutes)
@@ -14,7 +14,7 @@
   - [Technical Details](#technical-details)
   - [Documentation](#documentation)
   - [Requirements](#requirements)
-  - [Getting Started & Installation](#getting-started--installation)
+  - [Getting Started \& Installation](#getting-started--installation)
   - [Quick Start](#quick-start)
     - [Initializing the Page Builder](#initializing-the-page-builder)
     - [Why Use the Shared Instance?](#why-use-the-shared-instance)
@@ -22,13 +22,14 @@
   - [Important: CSS Prefixing (`pbx-`)](#important-css-prefixing-pbx-)
   - [Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)](#rendering-html-output-in-other-frameworks-react-nuxt-etc)
   - [Providing Configuration to the Page Builder](#providing-configuration-to-the-page-builder)
-  - [Local Storage & Auto-Save](#local-storage--auto-save)
+  - [Local Storage \& Auto-Save](#local-storage--auto-save)
   - [Retrieving the Latest HTML Content for Form Submission](#retrieving-the-latest-html-content-for-form-submission)
     - [Resetting the Builder After Successful Resource Creation or Update](#resetting-the-builder-after-successful-resource-creation-or-update)
   - [Loading Existing Content or Components into the Page Builder](#loading-existing-content-or-components-into-the-page-builder)
-    - [Restoring Full Page Content (Global Styles & Components)](#restoring-full-page-content-global-styles--components)
+    - [Restoring Full Page Content (Global Styles \& Components)](#restoring-full-page-content-global-styles--components)
   - [Automatic Draft Recovery](#automatic-draft-recovery)
   - [Embedding Page Builder in a Modal or Dialog](#embedding-page-builder-in-a-modal-or-dialog)
+  - [Publish Button](#publish-button)
   - [Styling the Main Page Builder Container](#styling-the-main-page-builder-container)
   - [Download HTML File](#download-html-file)
   - [Custom Components](#custom-components)
@@ -505,8 +506,41 @@ function closePageBuilder() {
 </template>
 ```
 
-- `:showCloseButton="true"` — shows a close button in the Page Builder toolbar.
-- `@handleClosePageBuilder="closePageBuilder"` — emits when the close button is clicked, so you can close your modal.
+## Publish Button
+
+To allow users to use the Publish button from inside the builder, use the `showPublishButton` prop and listen for the `@handlePublishPageBuilder` event.
+
+> **Note:**  
+> When the Publish button is clicked, the Page Builder will automatically save the latest changes to local storage before emitting the `@handlePublishPageBuilder` event. This ensures you always receive the most up-to-date content.
+
+```vue
+<script setup>
+import { getPageBuilder, PageBuilder } from '@myissue/vue-website-page-builder'
+
+const pageBuilderService = getPageBuilder()
+
+const handlePublish = () => {
+  // Retrieve the latest HTML content (auto-saved by the builder)
+  const latestHtml = pageBuilderService.getSavedPageHtml()
+  // Submit, publish, or process the content as needed
+  // e.g., send to your API or update your form
+  console.log('Publishing content:', latestHtml)
+}
+</script>
+
+<template>
+  <PageBuilder :showPublishButton="true" @handlePublishPageBuilder="handlePublish" />
+</template>
+```
+
+- `:showPublishButton="true"` — shows a publish button in the Page Builder toolbar.
+- `@handlePublishPageBuilder="handlePublish"` — emits after the builder auto-saves, so you always get the latest content.
+
+> **Tip:**  
+> You can name your handler function anything you like. This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
+
+- `:showPublishButton="true"` — shows a publish button in the Page Builder toolbar.
+- `@handlePublishPageBuilder="yourMethod"` — emits when the close button is clicked, so you can close your modal.
 
 > **Tip:**
 > You can name your handler function anything you like.
