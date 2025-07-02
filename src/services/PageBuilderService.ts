@@ -42,7 +42,7 @@ export class PageBuilderService {
   private hasStartedEditing: boolean = false
   // Hold data from Database or Backend for updated post
   private originalComponents: BuilderResourceData | undefined = undefined
-  // Holds data to be mounted when #pagebuilder is not yet present in the DOM
+  // Holds data to be mounted when pagebuilder is not yet present in the DOM
   private savedMountComponents: BuilderResourceData | null = null
   private pendingMountComponents: BuilderResourceData | null = null
   private isPageBuilderMissingOnStart: boolean = false
@@ -104,10 +104,10 @@ export class PageBuilderService {
   async clearHtmlSelection(): Promise<void> {
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
-    await this.#removeHoveredAndSelected()
+    await this.removeHoveredAndSelected()
   }
 
-  #ensureUpdateOrCreateConfig(config: PageBuilderConfig): void {
+  private ensureUpdateOrCreateConfig(config: PageBuilderConfig): void {
     // Case A: updateOrCreate is missing or an empty object
     if (!config.updateOrCreate || (config.updateOrCreate && isEmptyObject(config.updateOrCreate))) {
       const updatedConfig = {
@@ -183,7 +183,7 @@ export class PageBuilderService {
     }
   }
 
-  #validateUserProvidedComponents(components: unknown) {
+  private validateUserProvidedComponents(components: unknown) {
     const formType =
       this.pageBuilderStateStore.getPageBuilderConfig &&
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
@@ -235,7 +235,7 @@ export class PageBuilderService {
     return
   }
 
-  #validateConfig(config: PageBuilderConfig): void {
+  private validateConfig(config: PageBuilderConfig): void {
     const defaultConfigValues = {
       updateOrCreate: {
         formType: 'create',
@@ -249,7 +249,7 @@ export class PageBuilderService {
     }
 
     if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
-      this.#ensureUpdateOrCreateConfig(config)
+      this.ensureUpdateOrCreateConfig(config)
     }
   }
 
@@ -276,9 +276,9 @@ export class PageBuilderService {
       this.originalComponents = passedComponentsArray
       this.pageBuilderStateStore.setPageBuilderConfig(config)
       // Validate and normalize the config (ensure required fields are present)
-      this.#validateConfig(config)
+      this.validateConfig(config)
 
-      validation = this.#validateUserProvidedComponents(passedComponentsArray)
+      validation = this.validateUserProvidedComponents(passedComponentsArray)
 
       // Update the localStorage key name based on the config/resource
       this.updateLocalStorageItemName()
@@ -331,7 +331,7 @@ export class PageBuilderService {
     await delay(400)
 
     // Always clear DOM and store before mounting new resource
-    this.#deleteAllComponentsFromDOM()
+    this.deleteAllComponentsFromDOM()
 
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
@@ -346,42 +346,42 @@ export class PageBuilderService {
         // Page Builder Is initially present in DOM
         if (!passedComponentsArray && this.isPageBuilderMissingOnStart && localStorageData) {
           console.log('1111:', internalPageBuilderCall)
-          await this.#completeMountProcess(localStorageData)
+          await this.completeMountProcess(localStorageData)
           return
         }
         if (passedComponentsArray && !localStorageData) {
           console.log('2222:', internalPageBuilderCall)
-          await this.#completeMountProcess(JSON.stringify(passedComponentsArray), true)
-          this.#saveDomComponentsToLocalStorage()
+          await this.completeMountProcess(JSON.stringify(passedComponentsArray), true)
+          this.saveDomComponentsToLocalStorage()
           return
         }
 
         if (passedComponentsArray && localStorageData) {
           console.log('3333:', internalPageBuilderCall)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
-          await this.#completeMountProcess(JSON.stringify(passedComponentsArray), true)
+          await this.completeMountProcess(JSON.stringify(passedComponentsArray), true)
           return
         }
         if (!passedComponentsArray && localStorageData && !this.savedMountComponents) {
           console.log('4444:', internalPageBuilderCall)
-          await this.#completeMountProcess(localStorageData)
+          await this.completeMountProcess(localStorageData)
           return
         }
         if (!passedComponentsArray && this.savedMountComponents && localStorageData) {
           console.log('5555:', internalPageBuilderCall)
-          await this.#completeMountProcess(JSON.stringify(this.savedMountComponents))
+          await this.completeMountProcess(JSON.stringify(this.savedMountComponents))
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
           console.log('6666:', internalPageBuilderCall)
-          await this.#completeMountProcess(JSON.stringify([]))
+          await this.completeMountProcess(JSON.stringify([]))
           return
         }
 
         if (!this.isPageBuilderMissingOnStart && !localStorageData && !passedComponentsArray) {
           console.log('7777:', internalPageBuilderCall)
-          await this.#completeMountProcess(JSON.stringify([]))
+          await this.completeMountProcess(JSON.stringify([]))
           return
         }
       }
@@ -391,7 +391,7 @@ export class PageBuilderService {
         // No Page Builder Is  present in DOM initially
         if (localStorageData && this.isPageBuilderMissingOnStart) {
           console.log('8888:', internalPageBuilderCall)
-          await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
           await delay(3000)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           this.pendingMountComponents = null
@@ -399,15 +399,15 @@ export class PageBuilderService {
         }
         if (!localStorageData && passedComponentsArray && this.isPageBuilderMissingOnStart) {
           console.log('9999:', internalPageBuilderCall)
-          await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
-          this.#saveDomComponentsToLocalStorage()
+          await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          this.saveDomComponentsToLocalStorage()
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
           console.log('10000:', internalPageBuilderCall)
-          await this.#completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
-          this.#saveDomComponentsToLocalStorage()
+          await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          this.saveDomComponentsToLocalStorage()
           return
         }
       }
@@ -415,8 +415,8 @@ export class PageBuilderService {
     //
   }
 
-  async #completeMountProcess(html: string, usePassedPageSettings?: boolean) {
-    await this.#mountComponentsToDOM(html, usePassedPageSettings)
+  private async completeMountProcess(html: string, usePassedPageSettings?: boolean) {
+    await this.mountComponentsToDOM(html, usePassedPageSettings)
 
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
@@ -427,10 +427,10 @@ export class PageBuilderService {
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
+    await this.addListenersToEditableElements()
   }
 
-  #applyElementClassChanges(
+  private applyElementClassChanges(
     cssUserSelection: string | undefined,
     CSSArray: string[],
     mutationName: string,
@@ -516,7 +516,7 @@ export class PageBuilderService {
   }
 
   handleFontWeight(userSelectedFontWeight?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       userSelectedFontWeight,
       tailwindFontStyles.fontWeight,
       'setFontWeight',
@@ -524,7 +524,7 @@ export class PageBuilderService {
   }
 
   handleFontSizeBase(userSelectedFontSize?: string): void {
-    this.#applyElementClassChanges(userSelectedFontSize, tailwindFontSizes.fontBase, 'setFontBase')
+    this.applyElementClassChanges(userSelectedFontSize, tailwindFontSizes.fontBase, 'setFontBase')
   }
 
   handleFontSizeDesktop(userSelectedFontSize?: string): void {
@@ -582,8 +582,8 @@ export class PageBuilderService {
     }
   }
 
-  #applyHelperCSSToElements(element: HTMLElement): void {
-    this.#wrapElementInDivIfExcluded(element)
+  private applyHelperCSSToElements(element: HTMLElement): void {
+    this.wrapElementInDivIfExcluded(element)
 
     // If this is a DIV and its only/main child is a heading, apply font size classes to the DIV
     if (
@@ -615,14 +615,14 @@ export class PageBuilderService {
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
+    await this.addListenersToEditableElements()
 
     if (!status) {
       await this.handleAutoSave()
     }
   }
 
-  #wrapElementInDivIfExcluded(element: HTMLElement): void {
+  private wrapElementInDivIfExcluded(element: HTMLElement): void {
     if (!element) return
 
     if (
@@ -636,7 +636,7 @@ export class PageBuilderService {
     }
   }
 
-  #handleElementClick = async (e: Event, element: HTMLElement): Promise<void> => {
+  private handleElementClick = async (e: Event, element: HTMLElement): Promise<void> => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -660,7 +660,7 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setElement(element)
   }
 
-  #handleMouseOver = (e: Event, element: HTMLElement): void => {
+  private handleMouseOver = (e: Event, element: HTMLElement): void => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -678,7 +678,7 @@ export class PageBuilderService {
     }
   }
 
-  #handleMouseLeave = (e: Event): void => {
+  private handleMouseLeave = (e: Event): void => {
     e.preventDefault()
     e.stopPropagation()
 
@@ -700,7 +700,7 @@ export class PageBuilderService {
    * The function is used to
    * attach event listeners to each element within a 'section'
    */
-  #addListenersToEditableElements = async () => {
+  private addListenersToEditableElements = async () => {
     const elementsWithListeners = new WeakSet<Element>()
 
     const pagebuilder = document.querySelector('#pagebuilder')
@@ -717,9 +717,9 @@ export class PageBuilderService {
           // Type assertion to HTMLElement since we know these are DOM elements
           const htmlElement = element as HTMLElement
           // Attach event listeners directly to individual elements
-          htmlElement.addEventListener('click', (e) => this.#handleElementClick(e, htmlElement))
-          htmlElement.addEventListener('mouseover', (e) => this.#handleMouseOver(e, htmlElement))
-          htmlElement.addEventListener('mouseleave', (e) => this.#handleMouseLeave(e))
+          htmlElement.addEventListener('click', (e) => this.handleElementClick(e, htmlElement))
+          htmlElement.addEventListener('mouseover', (e) => this.handleMouseOver(e, htmlElement))
+          htmlElement.addEventListener('mouseleave', (e) => this.handleMouseLeave(e))
         }
       }
 
@@ -745,7 +745,7 @@ export class PageBuilderService {
           this.pageBuilderStateStore.setIsSaving(true)
           // Deselect any selected or hovered elements in the builder UI
           //
-          this.#saveDomComponentsToLocalStorage()
+          this.saveDomComponentsToLocalStorage()
           await delay(400)
         } catch (err) {
           console.error('Error trying auto save.', err)
@@ -757,7 +757,7 @@ export class PageBuilderService {
     if (passedConfig && !passedConfig.userSettings) {
       try {
         this.pageBuilderStateStore.setIsSaving(true)
-        this.#saveDomComponentsToLocalStorage()
+        this.saveDomComponentsToLocalStorage()
         await delay(400)
       } catch (err) {
         console.error('Error trying saving.', err)
@@ -783,7 +783,7 @@ export class PageBuilderService {
           passedConfig.userSettings.autoSave)
       ) {
         this.pageBuilderStateStore.setIsSaving(true)
-        this.#saveDomComponentsToLocalStorage()
+        this.saveDomComponentsToLocalStorage()
         await delay(400)
 
         this.pageBuilderStateStore.setIsSaving(false)
@@ -791,7 +791,7 @@ export class PageBuilderService {
     }
     if (passedConfig && !passedConfig.userSettings) {
       this.pageBuilderStateStore.setIsSaving(true)
-      this.#saveDomComponentsToLocalStorage()
+      this.saveDomComponentsToLocalStorage()
       await delay(400)
 
       this.pageBuilderStateStore.setIsSaving(false)
@@ -803,7 +803,7 @@ export class PageBuilderService {
     const clonedComponent = { ...componentObject }
 
     const pageBuilder = document.querySelector('#pbxContainsPagebuilder')
-    //  scoll to top or bottom # end
+    //  scoll to top or bottom
     if (pageBuilder) {
       // push to top
       if (this.getComponentArrayAddMethod.value === 'unshift') {
@@ -824,7 +824,7 @@ export class PageBuilderService {
     const elements = doc.querySelectorAll('*')
 
     elements.forEach((element) => {
-      this.#applyHelperCSSToElements(element as HTMLElement)
+      this.applyHelperCSSToElements(element as HTMLElement)
     })
 
     // Add the component id to the section element
@@ -834,7 +834,7 @@ export class PageBuilderService {
       section.querySelectorAll('[class]').forEach((el) => {
         el.setAttribute(
           'class',
-          this.#addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
+          this.addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
         )
       })
 
@@ -858,7 +858,7 @@ export class PageBuilderService {
     return clonedComponent
   }
 
-  async #removeHoveredAndSelected() {
+  private async removeHoveredAndSelected() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -874,7 +874,7 @@ export class PageBuilderService {
     }
   }
 
-  async #syncCurrentClasses() {
+  private async syncCurrentClasses() {
     // convert classList to array
     const classListArray = Array.from(this.getElement.value?.classList || [])
 
@@ -902,28 +902,28 @@ export class PageBuilderService {
     }
   }
   handleFontFamily(userSelectedFontFamily?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       userSelectedFontFamily,
       tailwindFontStyles.fontFamily,
       'setFontFamily',
     )
   }
   handleFontStyle(userSelectedFontStyle?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       userSelectedFontStyle,
       tailwindFontStyles.fontStyle,
       'setFontStyle',
     )
   }
   handleVerticalPadding(userSelectedVerticalPadding?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       userSelectedVerticalPadding,
       tailwindPaddingAndMargin.verticalPadding,
       'setFontVerticalPadding',
     )
   }
   handleHorizontalPadding(userSelectedHorizontalPadding?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       userSelectedHorizontalPadding,
       tailwindPaddingAndMargin.horizontalPadding,
       'setFontHorizontalPadding',
@@ -931,14 +931,14 @@ export class PageBuilderService {
   }
 
   handleVerticalMargin(userSelectedVerticalMargin?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       userSelectedVerticalMargin,
       tailwindPaddingAndMargin.verticalMargin,
       'setFontVerticalMargin',
     )
   }
   handleHorizontalMargin(userSelectedHorizontalMargin?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       userSelectedHorizontalMargin,
       tailwindPaddingAndMargin.horizontalMargin,
       'setFontHorizontalMargin',
@@ -946,21 +946,21 @@ export class PageBuilderService {
   }
 
   handleBorderStyle(borderStyle?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       borderStyle,
       tailwindBorderStyleWidthPlusColor.borderStyle,
       'setBorderStyle',
     )
   }
   handleBorderWidth(borderWidth?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       borderWidth,
       tailwindBorderStyleWidthPlusColor.borderWidth,
       'setBorderWidth',
     )
   }
   handleBorderColor(borderColor?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       borderColor,
       tailwindBorderStyleWidthPlusColor.borderColor,
       'setBorderColor',
@@ -969,7 +969,7 @@ export class PageBuilderService {
   // border color, style & width / end
 
   handleBackgroundColor(color?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       color,
       tailwindColors.backgroundColorVariables,
       'setBackgroundColor',
@@ -977,39 +977,39 @@ export class PageBuilderService {
   }
 
   handleTextColor(color?: string): void {
-    this.#applyElementClassChanges(color, tailwindColors.textColorVariables, 'setTextColor')
+    this.applyElementClassChanges(color, tailwindColors.textColorVariables, 'setTextColor')
   }
 
   handleBorderRadiusGlobal(borderRadiusGlobal?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       borderRadiusGlobal,
       tailwindBorderRadius.roundedGlobal,
       'setBorderRadiusGlobal',
     )
   }
   handleBorderRadiusTopLeft(borderRadiusTopLeft?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       borderRadiusTopLeft,
       tailwindBorderRadius.roundedTopLeft,
       'setBorderRadiusTopLeft',
     )
   }
   handleBorderRadiusTopRight(borderRadiusTopRight?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       borderRadiusTopRight,
       tailwindBorderRadius.roundedTopRight,
       'setBorderRadiusTopRight',
     )
   }
   handleBorderRadiusBottomleft(borderRadiusBottomleft?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       borderRadiusBottomleft,
       tailwindBorderRadius.roundedBottomLeft,
       'setBorderRadiusBottomleft',
     )
   }
   handleBorderRadiusBottomRight(borderRadiusBottomRight?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       borderRadiusBottomRight,
       tailwindBorderRadius.roundedBottomRight,
       'setBorderRadiusBottomRight',
@@ -1018,14 +1018,14 @@ export class PageBuilderService {
   // border radius / end
 
   handleFontSizeTablet(userSelectedFontSize?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       userSelectedFontSize,
       tailwindFontSizes.fontTablet,
       'setFontTablet',
     )
   }
   handleFontSizeMobile(userSelectedFontSize?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       userSelectedFontSize,
       tailwindFontSizes.fontMobile,
       'setFontMobile',
@@ -1033,14 +1033,14 @@ export class PageBuilderService {
   }
 
   handleBackgroundOpacity(opacity?: string): void {
-    this.#applyElementClassChanges(
+    this.applyElementClassChanges(
       opacity,
       tailwindOpacities.backgroundOpacities,
       'setBackgroundOpacity',
     )
   }
   handleOpacity(opacity?: string): void {
-    this.#applyElementClassChanges(opacity, tailwindOpacities.opacities, 'setOpacity')
+    this.applyElementClassChanges(opacity, tailwindOpacities.opacities, 'setOpacity')
   }
 
   /**
@@ -1053,7 +1053,7 @@ export class PageBuilderService {
    *
    */
 
-  #deleteAllComponentsFromDOM() {
+  private deleteAllComponentsFromDOM() {
     // Clear the store
     this.pageBuilderStateStore.setComponents([])
 
@@ -1068,7 +1068,7 @@ export class PageBuilderService {
   }
 
   async deleteComponentFromDOM() {
-    this.#syncDomToStoreOnly()
+    this.syncDomToStoreOnly()
     await nextTick()
 
     const components = this.getComponents.value
@@ -1104,7 +1104,7 @@ export class PageBuilderService {
 
     // Wait for Vue to finish DOM updates before attaching event listeners.
     await nextTick()
-    await this.#addListenersToEditableElements()
+    await this.addListenersToEditableElements()
 
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
@@ -1144,7 +1144,7 @@ export class PageBuilderService {
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
+    await this.addListenersToEditableElements()
   }
 
   async restoreDeletedElementToDOM() {
@@ -1173,7 +1173,7 @@ export class PageBuilderService {
 
     // Wait for Vue to finish DOM updates before attaching event listeners
     await nextTick()
-    await this.#addListenersToEditableElements()
+    await this.addListenersToEditableElements()
   }
 
   handleRemoveClasses(userSelectedClass: string): void {
@@ -1339,7 +1339,7 @@ export class PageBuilderService {
    * removed from itself and all descendants. Does NOT mutate the live DOM.
    * @param element The HTMLElement to clone and sanitize
    */
-  #cloneAndRemoveSelectionAttributes(element: HTMLElement): HTMLElement {
+  private cloneAndRemoveSelectionAttributes(element: HTMLElement): HTMLElement {
     // Deep clone the element
     const clone = element.cloneNode(true) as HTMLElement
 
@@ -1357,14 +1357,14 @@ export class PageBuilderService {
    * Syncs the current DOM state into the in-memory store (getComponents),
    * but does NOT save to localStorage.
    */
-  #syncDomToStoreOnly() {
+  private syncDomToStoreOnly() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
     const componentsToSave: { html_code: string; id: string | null; title: string }[] = []
 
     pagebuilder.querySelectorAll('section[data-componentid]').forEach((section) => {
-      const sanitizedSection = this.#cloneAndRemoveSelectionAttributes(section as HTMLElement)
+      const sanitizedSection = this.cloneAndRemoveSelectionAttributes(section as HTMLElement)
       componentsToSave.push({
         html_code: sanitizedSection.outerHTML,
         id: sanitizedSection.getAttribute('data-componentid'),
@@ -1378,7 +1378,7 @@ export class PageBuilderService {
   /**
    * Saves the current DOM state (components) to localStorage.
    */
-  #saveDomComponentsToLocalStorage() {
+  private saveDomComponentsToLocalStorage() {
     this.updateLocalStorageItemName()
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
@@ -1391,7 +1391,7 @@ export class PageBuilderService {
     const componentsToSave: { html_code: string; title: string }[] = []
 
     pagebuilder.querySelectorAll('section[data-componentid]').forEach((section) => {
-      const sanitizedSection = this.#cloneAndRemoveSelectionAttributes(section as HTMLElement)
+      const sanitizedSection = this.cloneAndRemoveSelectionAttributes(section as HTMLElement)
 
       componentsToSave.push({
         html_code: sanitizedSection.outerHTML,
@@ -1416,7 +1416,7 @@ export class PageBuilderService {
       localStorage.setItem(keyForSavingFromDomToLocal, JSON.stringify(dataToSave))
     }
   }
-  async #removeCurrentComponentsFromLocalStorage() {
+  private async removeCurrentComponentsFromLocalStorage() {
     this.updateLocalStorageItemName()
     await nextTick()
 
@@ -1427,11 +1427,11 @@ export class PageBuilderService {
   }
 
   public async handleFormSubmission() {
-    await this.#removeCurrentComponentsFromLocalStorage()
-    this.#deleteAllComponentsFromDOM()
+    await this.removeCurrentComponentsFromLocalStorage()
+    this.deleteAllComponentsFromDOM()
   }
 
-  #parseStyleString(style: string): Record<string, string> {
+  private parseStyleString(style: string): Record<string, string> {
     return style
       .split(';')
       .map((s) => s.trim())
@@ -1512,14 +1512,14 @@ export class PageBuilderService {
     if (localStorageData) {
       await delay(400)
       this.pageBuilderStateStore.setIsLoadingResumeEditing(true)
-      await this.#mountComponentsToDOM(localStorageData)
+      await this.mountComponentsToDOM(localStorageData)
       this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
     }
 
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
+    await this.addListenersToEditableElements()
     // set loading to false
     this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
   }
@@ -1534,23 +1534,23 @@ export class PageBuilderService {
     if (Array.isArray(this.originalComponents)) {
       await this.clearClassesFromPage()
       await this.clearInlineStylesFromPagee()
-      await this.#mountComponentsToDOM(JSON.stringify(this.originalComponents), true)
-      this.#removeCurrentComponentsFromLocalStorage()
+      await this.mountComponentsToDOM(JSON.stringify(this.originalComponents), true)
+      this.removeCurrentComponentsFromLocalStorage()
     }
 
     // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
     await nextTick()
     // Attach event listeners to all editable elements in the Builder
-    await this.#addListenersToEditableElements()
+    await this.addListenersToEditableElements()
 
     this.pageBuilderStateStore.setIsRestoring(false)
   }
 
-  getStorageItemNameForResource(): string | null {
+  public getStorageItemNameForResource(): string | null {
     return this.getLocalStorageItemName.value
   }
 
-  getSavedPageHtml() {
+  public getSavedPageHtml() {
     if (!this.getLocalStorageItemName.value) return false
 
     const key = this.getLocalStorageItemName.value
@@ -1577,7 +1577,7 @@ export class PageBuilderService {
    * This updates the builder state and triggers an auto-save.
    * If no element is selected or no image is staged, nothing happens.
    */
-  async applySelectedImage(image: ImageObject): Promise<void> {
+  public async applySelectedImage(image: ImageObject): Promise<void> {
     this.pageBuilderStateStore.setApplyImageToSelection(image)
 
     if (!this.getElement.value) return
@@ -1596,7 +1596,7 @@ export class PageBuilderService {
    * sets that image's src as the base primary image in the builder state.
    * If the element does not meet these criteria, clears the base primary image.
    */
-  setBasePrimaryImageFromSelectedElement() {
+  private setBasePrimaryImageFromSelectedElement() {
     if (!this.getElement.value) return
 
     const currentImageContainer = document.createElement('div')
@@ -1616,7 +1616,7 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setBasePrimaryImage(null)
   }
 
-  #addHyperlinkToElement(
+  private addHyperlinkToElement(
     hyperlinkEnable: boolean,
     urlInput: string | null,
     openHyperlinkInNewTab: boolean,
@@ -1712,7 +1712,7 @@ export class PageBuilderService {
     }
   }
 
-  #checkForHyperlink() {
+  private checkForHyperlink() {
     if (!this.getElement.value) return
 
     const hyperlink = this.getElement.value.querySelector('a')
@@ -1740,7 +1740,7 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setHyberlinkEnable(false)
   }
 
-  handleHyperlink(
+  public handleHyperlink(
     hyperlinkEnable?: boolean,
     urlInput?: string | null,
     openHyperlinkInNewTab?: boolean,
@@ -1778,15 +1778,15 @@ export class PageBuilderService {
     }
 
     if (hyperlinkEnable === undefined) {
-      this.#checkForHyperlink()
+      this.checkForHyperlink()
       return
     }
 
-    this.#addHyperlinkToElement(hyperlinkEnable, urlInput || null, openHyperlinkInNewTab || false)
+    this.addHyperlinkToElement(hyperlinkEnable, urlInput || null, openHyperlinkInNewTab || false)
   }
 
   // Helper method for custom components to easily add components
-  async addComponent(componentObject: ComponentObject): Promise<void> {
+  public async addComponent(componentObject: ComponentObject): Promise<void> {
     try {
       const clonedComponent = this.cloneCompObjForDOMInsertion({
         html_code: componentObject.html_code,
@@ -1802,7 +1802,7 @@ export class PageBuilderService {
       })
 
       const pageBuilder = document.querySelector('#pbxContainsPagebuilder')
-      //  scoll to top or bottom # end
+      //  scoll to top or bottom
       if (pageBuilder) {
         // push to bottom
         if (this.getComponentArrayAddMethod.value === 'push') {
@@ -1816,7 +1816,7 @@ export class PageBuilderService {
       // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
       await nextTick()
       // Attach event listeners to all editable elements in the Builder
-      await this.#addListenersToEditableElements()
+      await this.addListenersToEditableElements()
 
       await this.handleAutoSave()
     } catch (error) {
@@ -1829,7 +1829,7 @@ export class PageBuilderService {
    * process each element’s class attribute and update the classes accordingly.
    */
 
-  #addTailwindPrefixToClasses(classList: string, prefix = 'pbx-'): string {
+  private addTailwindPrefixToClasses(classList: string, prefix = 'pbx-'): string {
     return classList
       .split(/\s+/)
       .map((cls) => {
@@ -1843,7 +1843,7 @@ export class PageBuilderService {
       .join(' ')
   }
 
-  #convertStyleObjectToString(
+  private convertStyleObjectToString(
     styleObj: string | Record<string, string> | null | undefined,
   ): string {
     if (!styleObj) return ''
@@ -1890,7 +1890,7 @@ export class PageBuilderService {
       const rawStyle = pagebuilderDiv.getAttribute('style') || ''
       pageSettings = {
         classes: pagebuilderDiv.className || '',
-        style: this.#parseStyleString(rawStyle),
+        style: this.parseStyleString(rawStyle),
       }
     }
 
@@ -1970,7 +1970,10 @@ export class PageBuilderService {
    * @param data - JSON string (e.g., '[{"html_code":"...","id":"123","title":"..."}]')
    *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
    */
-  async #mountComponentsToDOM(htmlString: string, usePassedPageSettings?: boolean): Promise<void> {
+  private async mountComponentsToDOM(
+    htmlString: string,
+    usePassedPageSettings?: boolean,
+  ): Promise<void> {
     /**
      * Mounts builder components to the DOM from either JSON or HTML input.
      *
@@ -1985,14 +1988,14 @@ export class PageBuilderService {
      *    - Example: `localStorage.getItem(...)` or API returns a JSON stringified array/object of components.
      *    - This is the most common format for drafts, autosave, and programmatic state management.
      *    - Example usage:
-     *      await this.#mountComponentsToDOM(JSON.stringify(getComponents))
+     *      await this.mountComponentsToDOM(JSON.stringify(getComponents))
      *
      * 2. HTML input (from HTML snapshot, import, or published output):
      *    - Use when restoring from a published HTML snapshot, importing a static HTML export, or loading the builder from a previously published HTML string.
      *    - Example: output from `getSavedPageHtml()` or a static HTML export.
      *    - This is used for restoring the builder from a published state, importing, or previewing published content.
      *    - Example usage:
-     *      await this.#mountComponentsToDOM(savedHtmlString)
+     *      await this.mountComponentsToDOM(savedHtmlString)
      *
      * Best practice:
      * - Use JSON for local storage drafts, autosave, and API-driven workflows.
@@ -2004,21 +2007,24 @@ export class PageBuilderService {
 
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
       // JSON input: Use this when restoring from localStorage, API, or internal builder state (drafts, autosave, etc.)
-      await this.#parseJSONComponents(trimmedData, usePassedPageSettings)
+      await this.parseJSONComponents(trimmedData, usePassedPageSettings)
       return
     }
     if (trimmedData.startsWith('<')) {
       // HTML input: Use this when restoring from a published HTML snapshot, import, or static HTML export
-      await this.#parseHTMLComponents(trimmedData, usePassedPageSettings)
+      await this.parseHTMLComponents(trimmedData, usePassedPageSettings)
       return
     }
 
     // Fallback: If format is unknown, default to JSON parser (defensive)
-    await this.#parseJSONComponents(trimmedData, usePassedPageSettings)
+    await this.parseJSONComponents(trimmedData, usePassedPageSettings)
   }
 
   // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
-  async #parseJSONComponents(jsonData: string, usePassedPageSettings?: boolean): Promise<void> {
+  private async parseJSONComponents(
+    jsonData: string,
+    usePassedPageSettings?: boolean,
+  ): Promise<void> {
     const pageSettings =
       this.pageBuilderStateStore.getPageBuilderConfig &&
       this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
@@ -2048,7 +2054,7 @@ export class PageBuilderService {
             section.querySelectorAll('[class]').forEach((el) => {
               el.setAttribute(
                 'class',
-                this.#addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
+                this.addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
               )
             })
 
@@ -2075,7 +2081,7 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setComponents(savedCurrentDesign)
 
       await nextTick()
-      await this.#addListenersToEditableElements()
+      await this.addListenersToEditableElements()
 
       if (userPageSettings && pageSettings) {
         const pagebuilder = document.querySelector('#pagebuilder') as HTMLElement
@@ -2083,17 +2089,20 @@ export class PageBuilderService {
           pagebuilder.removeAttribute('class')
           pagebuilder.removeAttribute('style')
           pagebuilder.className = pageSettings.classes || ''
-          pagebuilder.setAttribute('style', this.#convertStyleObjectToString(pageSettings.style))
+          pagebuilder.setAttribute('style', this.convertStyleObjectToString(pageSettings.style))
         }
       }
     } catch (error) {
       console.error('Error parsing JSON components:', error)
-      this.#deleteAllComponentsFromDOM()
+      this.deleteAllComponentsFromDOM()
     }
   }
 
   // Private method to parse HTML components
-  async #parseHTMLComponents(htmlData: string, usePassedPageSettings?: boolean): Promise<void> {
+  private async parseHTMLComponents(
+    htmlData: string,
+    usePassedPageSettings?: boolean,
+  ): Promise<void> {
     try {
       const parser = new DOMParser()
       const doc = parser.parseFromString(htmlData, 'text/html')
@@ -2124,10 +2133,7 @@ export class PageBuilderService {
           livePageBuilder.removeAttribute('class')
           livePageBuilder.removeAttribute('style')
           livePageBuilder.className = pageSettings.classes || ''
-          livePageBuilder.setAttribute(
-            'style',
-            this.#convertStyleObjectToString(pageSettings.style),
-          )
+          livePageBuilder.setAttribute('style', this.convertStyleObjectToString(pageSettings.style))
         }
       }
 
@@ -2140,7 +2146,7 @@ export class PageBuilderService {
         section.querySelectorAll('[class]').forEach((el) => {
           el.setAttribute(
             'class',
-            this.#addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
+            this.addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
           )
         })
 
@@ -2172,14 +2178,14 @@ export class PageBuilderService {
       // Clear selections and re-bind events
       await this.clearHtmlSelection()
       await nextTick()
-      await this.#addListenersToEditableElements()
+      await this.addListenersToEditableElements()
     } catch (error) {
       console.error('Error parsing HTML components:', error)
-      this.#deleteAllComponentsFromDOM()
+      this.deleteAllComponentsFromDOM()
     }
   }
 
-  public updateLocalStorageItemName(): void {
+  private updateLocalStorageItemName(): void {
     const formtype =
       this.pageBuilderStateStore.getPageBuilderConfig &&
       this.pageBuilderStateStore.getPageBuilderConfig.updateOrCreate &&
@@ -2327,7 +2333,7 @@ export class PageBuilderService {
     }
   }
 
-  async initializeElementStyles(): Promise<void> {
+  public async initializeElementStyles(): Promise<void> {
     // Wait for Vue to finish DOM updates before attaching event listeners.
     // This ensure elements exist in the DOM.
     await nextTick()
@@ -2357,6 +2363,6 @@ export class PageBuilderService {
     this.handleHorizontalMargin(undefined)
     this.handleBackgroundColor(undefined)
     this.handleTextColor(undefined)
-    await this.#syncCurrentClasses()
+    await this.syncCurrentClasses()
   }
 }
