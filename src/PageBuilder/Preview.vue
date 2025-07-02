@@ -53,7 +53,7 @@ watchEffect(() => {
     </div>
   </template>
   <template v-if="mobile">
-    <div class="pbx-bg-gray-200 pbx-p-4">
+    <div>
       <iframe
         ref="iframeRef"
         class="pbx-mx-auto pbx-w-full pbx-bg-white pbx-shadow-lg pbx-h-[80vh] pbx-border-0"

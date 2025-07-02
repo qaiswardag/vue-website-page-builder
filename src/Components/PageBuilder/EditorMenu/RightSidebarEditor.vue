@@ -2,6 +2,7 @@
 import { computed, ref, watch, nextTick } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import ClassEditor from './Editables/ClassEditor.vue'
+import StyleEditor from './Editables/StyleEditor.vue'
 import ImageEditor from './Editables/ImageEditor.vue'
 import OpacityEditor from './Editables/OpacityEditor.vue'
 import Typography from './Editables/Typography.vue'
@@ -183,6 +184,9 @@ const handleCloseGlobalPageStyles = async function () {
         <article class="pbx-my-1 pbx-bg-white">
           <ClassEditor></ClassEditor>
         </article>
+        <article class="pbx-my-1 pbx-bg-white">
+          <StyleEditor></StyleEditor>
+        </article>
       </div>
 
       <!-- Global Page Styles -->
@@ -277,6 +281,9 @@ const handleCloseGlobalPageStyles = async function () {
             </article>
             <article class="pbx-my-1 pbx-bg-gray-100">
               <ClassEditor></ClassEditor>
+            </article>
+            <article class="pbx-my-1 pbx-bg-gray-100">
+              <StyleEditor></StyleEditor>
             </article>
           </div>
           <label
