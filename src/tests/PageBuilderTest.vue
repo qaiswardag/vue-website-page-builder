@@ -83,7 +83,7 @@ const configPageBuilder = {
     language: {
       // ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi']
       default: 'en',
-      disable: ['en', 'zh-Hans', 'fr'],
+      enable: ['en', 'zh-Hans', 'fr'],
     },
   },
   settings: {

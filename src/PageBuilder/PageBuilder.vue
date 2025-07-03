@@ -720,48 +720,49 @@ onMounted(async () => {
               Default: {{ getPageBuilderConfig.userSettings.language.default }}
             </p>
             <p class="pbx-myPrimaryParagraph py-2">
-              Disabled languages: {{ getPageBuilderConfig.userSettings.language.disable }}
+              Disabled languages: {{ getPageBuilderConfig.userSettings.language.enable }}
             </p>
             <p class="pbx-myPrimaryParagraph py-2">
               Available languages: {{ JSON.stringify(pageBuilderService.availableLanguage()) }}
             </p>
           </div>
-        </template>
-        <template v-if="showCloseButton">
-          <div class="pbx-ml-2">
-            <button
-              class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
-              @click="
-                async () => {
-                  closePageBuilder()
-                  await pageBuilderService.clearHtmlSelection()
-                }
-              "
+
+          <template v-if="showCloseButton">
+            <div class="pbx-ml-2">
+              <button
+                class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
+                @click="
+                  async () => {
+                    closePageBuilder()
+                    await pageBuilderService.clearHtmlSelection()
+                  }
+                "
+              >
+                <span class="material-symbols-outlined"> close </span>
+              </button>
+            </div>
+          </template>
+          <div>
+            <p class="pbx-myPrimaryParagraph py-2">Current language: {{ getCurrentLanguage }}</p>
+          </div>
+          <div>
+            <p class="pbx-myPrimaryParagraph py-2">my dropdown select a laungage</p>
+            <select
+              class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
+              v-model="$i18n.locale"
             >
-              <span class="material-symbols-outlined"> close </span>
-            </button>
+              <template
+                v-for="lang in pageBuilderService
+                  .availableLanguage()
+                  .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
+                :key="lang"
+              >
+                <option :value="lang">{{ lang }}</option>
+              </template>
+            </select>
+            <span>{{ $t('message.hello') }}</span>
           </div>
         </template>
-        <div>
-          <p class="pbx-myPrimaryParagraph py-2">Current language: {{ getCurrentLanguage }}</p>
-        </div>
-        <div>
-          <p class="pbx-myPrimaryParagraph py-2">my dropdown select a laungage</p>
-          <select
-            class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
-            v-model="$i18n.locale"
-          >
-            <template
-              v-for="lang in pageBuilderService
-                .availableLanguage()
-                .filter((l) => !getPageBuilderConfig.userSettings.language.disable.includes(l))"
-              :key="lang"
-            >
-              <option :value="lang">{{ lang }}</option>
-            </template>
-          </select>
-          <span>{{ $t('message.hello') }}</span>
-        </div>
 
         <!-- Close & Publish buttons end -->
       </div>
