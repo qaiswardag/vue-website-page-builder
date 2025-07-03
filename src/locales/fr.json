@@ -108,5 +108,22 @@
     "prefix": "Le préfixe pbx- est ajouté automatiquement.",
     "placeholder": "Tapez la classe",
     "addButton": "Ajouter"
+  },
+  "styleEditor": {
+    "title": "Styles en ligne",
+    "info": "Voici les styles en ligne appliqués par le builder. Ajoutez vos propres styles et appuyez sur Entrée pour les appliquer à l'élément sélectionné.",
+    "add": "Ajoutez votre propre style.",
+    "propertyPlaceholder": "propriété",
+    "valuePlaceholder": "valeur",
+    "addButton": "Ajouter"
+  },
+  "rightSidebar": {
+    "editing": "Édition",
+    "globalPageStylesTitle": "Styles de page globaux",
+    "globalPageStylesDescription": "Appliquez des styles qui affectent toute la page. Ces paramètres incluent la famille de polices globale, la couleur du texte, la couleur de fond et d'autres styles universels qui s'appliquent à toutes les sections.",
+    "updatePageStyles": "Mettre à jour les styles de page",
+    "downloadHtmlTitle": "Télécharger le HTML",
+    "downloadHtmlDescription": "Exportez toute la page en tant que fichier HTML autonome. Cela inclut toutes les sections, le contenu et les styles appliqués, prêt à être utilisé ou intégré ailleurs.",
+    "downloadHtmlButton": "Télécharger le fichier HTML"
   }
 }

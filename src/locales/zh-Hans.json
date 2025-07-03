@@ -108,5 +108,22 @@
     "prefix": "pbx- 前缀会自动添加。",
     "placeholder": "输入类名",
     "addButton": "添加"
+  },
+  "styleEditor": {
+    "title": "内联样式",
+    "info": "这些是由构建器应用的内联样式。添加您自己的样式并按回车键将其应用到所选元素。",
+    "add": "添加您自己的样式。",
+    "propertyPlaceholder": "属性",
+    "valuePlaceholder": "值",
+    "addButton": "添加"
+  },
+  "rightSidebar": {
+    "editing": "编辑",
+    "globalPageStylesTitle": "全局页面样式",
+    "globalPageStylesDescription": "应用影响整个页面的样式。这些设置包括全局字体、文本颜色、背景颜色和适用于所有部分的其他通用样式。",
+    "updatePageStyles": "更新页面样式",
+    "downloadHtmlTitle": "下载 HTML",
+    "downloadHtmlDescription": "将整个页面导出为独立的 HTML 文件。这包括所有部分、内容和应用的样式，可随时使用或集成到其他地方。",
+    "downloadHtmlButton": "下载 HTML 文件"
   }
 }

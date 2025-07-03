@@ -133,7 +133,7 @@ const handleCloseGlobalPageStyles = async function () {
         <span class="material-symbols-outlined"> close </span>
       </button>
       <p class="pbx-font-medium pbx-text-sm">
-        Editing
+        {{ $t('rightSidebar.editing') }}
         <span class="pbx-lowercase">&lt;{{ elementTag }}&gt;</span>
       </p>
     </div>
@@ -181,16 +181,15 @@ const handleCloseGlobalPageStyles = async function () {
       <!-- Global Page Styles -->
       <article class="pbx-my-1 pbx-bg-white">
         <EditorAccordion>
-          <template #title>Global Page Styles</template>
+          <template #title>{{ $t('rightSidebar.globalPageStylesTitle') }}</template>
           <template #content>
             <label class="pbx-myPrimaryInputLabel pbx-my-4">
-              Apply styles that affect the entire page. These settings include global font family,
-              text color, background color, and other universal styles that apply to all sections.
+              {{ $t('rightSidebar.globalPageStylesDescription') }}
             </label>
 
             <div class="pbx-mt-4">
               <button @click="handleUpdatePageStyles" type="button" class="pbx-myPrimaryButton">
-                Update Page Styles
+                {{ $t('rightSidebar.updatePageStyles') }}
               </button>
             </div>
           </template>
@@ -204,15 +203,14 @@ const handleCloseGlobalPageStyles = async function () {
         class="pbx-my-1 pbx-bg-white"
       >
         <EditorAccordion>
-          <template #title>Download HTML</template>
+          <template #title>{{ $t('rightSidebar.downloadHtmlTitle') }}</template>
           <template #content>
             <label class="pbx-myPrimaryInputLabel pbx-my-4">
-              Export the entire page as a standalone HTML file. This includes all sections, content,
-              and applied styles, making it ready for use or integration elsewhere.
+              {{ $t('rightSidebar.downloadHtmlDescription') }}
             </label>
             <div class="pbx-mt-4">
               <button @click="handleDownloadHTML" type="button" class="pbx-myPrimaryButton">
-                Download HTML file
+                {{ $t('rightSidebar.downloadHtmlButton') }}
               </button>
             </div>
           </template>
@@ -225,7 +223,7 @@ const handleCloseGlobalPageStyles = async function () {
       maxWidth="md"
       minHeight="pbx-min-h-[65vh] pbx-max-h-[65vh]"
       :showModalBuilder="showModalGlobalPageStyles"
-      title="Global Page Styles"
+      :title="$t('rightSidebar.globalPageStylesTitle')"
       @closeMainModalBuilder="handleCloseGlobalPageStyles"
     >
       <div class="pbx-flex pbx-flex-col pbx-gap-2 pbx-pt-4 pbx-pb-2">
@@ -244,8 +242,7 @@ const handleCloseGlobalPageStyles = async function () {
         <div v-if="!isLoadingPageStyles && showModalGlobalPageStyles" class="pbx-pb-12">
           <div>
             <p class="pbx-myPrimaryParagraph">
-              Apply styles that affect the entire page. These settings include global font family,
-              text color, background color, and other universal styles that apply to all sections.
+              {{ $t('rightSidebar.globalPageStylesDescription') }}
             </p>
             <article class="pbx-my-1 pbx-bg-gray-100">
               <Typography></Typography>

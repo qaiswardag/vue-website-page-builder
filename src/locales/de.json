@@ -108,5 +108,22 @@
     "prefix": "Das pbx- Präfix wird automatisch hinzugefügt.",
     "placeholder": "Klasse eingeben",
     "addButton": "Hinzufügen"
+  },
+  "styleEditor": {
+    "title": "Inline-Stile",
+    "info": "Dies sind die vom Builder angewendeten Inline-Stile. Fügen Sie Ihre eigenen Stile hinzu und drücken Sie die Eingabetaste, um sie auf das ausgewählte Element anzuwenden.",
+    "add": "Fügen Sie Ihren eigenen Stil hinzu.",
+    "propertyPlaceholder": "Eigenschaft",
+    "valuePlaceholder": "Wert",
+    "addButton": "Hinzufügen"
+  },
+  "rightSidebar": {
+    "editing": "Bearbeiten",
+    "globalPageStylesTitle": "Globale Seitenstile",
+    "globalPageStylesDescription": "Wenden Sie Stile an, die die gesamte Seite betreffen. Diese Einstellungen umfassen globale Schriftfamilie, Textfarbe, Hintergrundfarbe und andere universelle Stile, die für alle Abschnitte gelten.",
+    "updatePageStyles": "Seitenstile aktualisieren",
+    "downloadHtmlTitle": "HTML herunterladen",
+    "downloadHtmlDescription": "Exportieren Sie die gesamte Seite als eigenständige HTML-Datei. Dies umfasst alle Abschnitte, Inhalte und angewendeten Stile und ist bereit zur Verwendung oder Integration an anderer Stelle.",
+    "downloadHtmlButton": "HTML-Datei herunterladen"
   }
 }

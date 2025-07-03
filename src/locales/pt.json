@@ -108,5 +108,22 @@
     "prefix": "O prefixo pbx- é adicionado automaticamente.",
     "placeholder": "Digite a classe",
     "addButton": "Adicionar"
+  },
+  "styleEditor": {
+    "title": "Estilos Inline",
+    "info": "Estes são os estilos inline aplicados pelo construtor. Adicione seus próprios estilos e pressione Enter para aplicá-los ao elemento selecionado.",
+    "add": "Adicione seu próprio estilo.",
+    "propertyPlaceholder": "propriedade",
+    "valuePlaceholder": "valor",
+    "addButton": "Adicionar"
+  },
+  "rightSidebar": {
+    "editing": "Editando",
+    "globalPageStylesTitle": "Estilos Globais da Página",
+    "globalPageStylesDescription": "Aplique estilos que afetam toda a página. Essas configurações incluem família de fontes global, cor do texto, cor de fundo e outros estilos universais que se aplicam a todas as seções.",
+    "updatePageStyles": "Atualizar estilos da página",
+    "downloadHtmlTitle": "Baixar HTML",
+    "downloadHtmlDescription": "Exporte toda a página como um arquivo HTML independente. Isso inclui todas as seções, conteúdo e estilos aplicados, pronto para uso ou integração em outro lugar.",
+    "downloadHtmlButton": "Baixar arquivo HTML"
   }
 }

@@ -56,11 +56,10 @@ const handleAddStyle = async () => {
 
 <template>
   <EditorAccordion>
-    <template #title>Inline Styles</template>
+    <template #title>{{ $t('styleEditor.title') }}</template>
     <template #content>
       <label class="pbx-myPrimaryInputLabel pbx-my-4">
-        These are the inline styles applied by the builder. Add your own styles and press Enter to
-        apply them to the selected element.
+        {{ $t('styleEditor.info') }}
       </label>
 
       <div class="pbx-flex pbx-flex-row pbx-flex-wrap pbx-gap-2 pbx-mt-2 pbx-mb-4">
@@ -83,14 +82,14 @@ const handleAddStyle = async () => {
 
       <div>
         <label for="custom-style-property" class="pbx-myPrimaryInputLabel">
-          Add your own style.
+          {{ $t('styleEditor.add') }}
         </label>
         <div class="pbx-flex pbx-gap-2 pbx-flex-col pbx-item-center">
           <input
             id="custom-style-property"
             v-model="inputProperty"
             type="text"
-            placeholder="property"
+            :placeholder="$t('styleEditor.propertyPlaceholder')"
             @keydown.enter.prevent="handleEnterOnProperty"
             autocomplete="off"
             class="pbx-myPrimaryInput"
@@ -100,13 +99,15 @@ const handleAddStyle = async () => {
             ref="valueInputRef"
             v-model="inputValue"
             type="text"
-            placeholder="value"
+            :placeholder="$t('styleEditor.valuePlaceholder')"
             @keydown.enter="handleAddStyle"
             autocomplete="off"
             class="pbx-myPrimaryInput"
           />
 
-          <button @click="handleAddStyle" type="button" class="pbx-myPrimaryButton">Add</button>
+          <button @click="handleAddStyle" type="button" class="pbx-myPrimaryButton">
+            {{ $t('styleEditor.addButton') }}
+          </button>
         </div>
       </div>
       <p v-if="errorMessage" class="pbx-myPrimaryInputError">{{ errorMessage }}</p>
