@@ -131,6 +131,9 @@
     "updatePageStyles": "Update Page Styles",
     "downloadHtmlTitle": "Download HTML",
     "downloadHtmlDescription": "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.",
-    "downloadHtmlButton": "Download HTML file"
+    "downloadHtmlButton": "Download HTML file",
+    "backgroundColorEditor": {
+      "transparent": "Transparent"
+    }
   }
 }

@@ -99,7 +99,9 @@ watch(
             >
               <div v-if="color === 'none'" class="pbx-flex pbx-items-center">
                 <span class="material-symbols-outlined"> ev_shadow </span>
-                <span class="pbx-ml-3">{{ $t('rightSidebar.backgroundColorEditor.transparent') }}</span>
+                <span class="pbx-ml-3">{{
+                  $t('rightSidebar.backgroundColorEditor.transparent')
+                }}</span>
               </div>
               <div v-if="color !== 'none'" class="pbx-flex pbx-items-center">
                 <div
