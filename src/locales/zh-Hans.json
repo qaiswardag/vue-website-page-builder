@@ -2,5 +2,6 @@
   "language": "语言",
   "button": {
     "publish": "发布"
-  }
+  },
+  "addComponents": "添加新组件"
 }

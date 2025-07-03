@@ -2,5 +2,6 @@
   "language": "Langue",
   "button": {
     "publish": "Publier"
-  }
+  },
+  "addComponents": "Ajouter de nouveaux composants"
 }
