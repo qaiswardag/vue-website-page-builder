@@ -331,7 +331,7 @@ export class PageBuilderService {
       this.ensureUpdateOrCreateConfig(config)
     }
 
-    this.ensureLanguage(config)
+    // this.ensureLanguage(config)
   }
 
   /**
@@ -359,11 +359,6 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setPageBuilderConfig(config)
       // Validate and normalize the config (ensure required fields are present)
       this.validateConfig(config)
-
-      console.log(
-        'this.pageBuilderStateStore.getPageBuilderConfig:',
-        this.pageBuilderStateStore.getPageBuilderConfig,
-      )
 
       if (
         this.pageBuilderStateStore.getPageBuilderConfig &&
@@ -866,33 +861,11 @@ export class PageBuilderService {
 
   public handleManualSave = async () => {
     this.startEditing()
-    const passedConfig = this.pageBuilderStateStore.getPageBuilderConfig
 
-    // Check if config is set
-    if (passedConfig && passedConfig.userSettings) {
-      //
-      //
-      // Enabled auto save
-      if (
-        (typeof passedConfig.userSettings.autoSave === 'boolean' &&
-          !passedConfig.userSettings.autoSave) ||
-        (typeof passedConfig.userSettings.autoSave === 'boolean' &&
-          passedConfig.userSettings.autoSave)
-      ) {
-        this.pageBuilderStateStore.setIsSaving(true)
-        this.saveDomComponentsToLocalStorage()
-        await delay(400)
-
-        this.pageBuilderStateStore.setIsSaving(false)
-      }
-    }
-    if (passedConfig && !passedConfig.userSettings) {
-      this.pageBuilderStateStore.setIsSaving(true)
-      this.saveDomComponentsToLocalStorage()
-      await delay(400)
-
-      this.pageBuilderStateStore.setIsSaving(false)
-    }
+    this.pageBuilderStateStore.setIsSaving(true)
+    this.saveDomComponentsToLocalStorage()
+    await delay(400)
+    this.pageBuilderStateStore.setIsSaving(false)
   }
 
   public cloneCompObjForDOMInsertion(componentObject: ComponentObject): ComponentObject {

@@ -86,6 +86,7 @@ const configPageBuilder = {
       enable: ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'],
       disableLanguageDropDown: false,
     },
+    autoSave: true,
   },
   settings: {
     brandColor: '#DB93B0',
