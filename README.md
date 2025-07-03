@@ -11,7 +11,7 @@
   - [Installation](#installation)
   - [About](#about)
   - [Features](#features)
-    - [Loved by Teams Everywhere](#loved-by-teams-everywhere)
+    - [Trusted by Freelancers and Leading Brands](#trusted-by-freelancers-and-leading-brands)
   - [Technical Details](#technical-details)
   - [Documentation](#documentation)
   - [Requirements](#requirements)
@@ -118,22 +118,9 @@ The Page Builder is packed with features:
 - **Tailwind Support**: Fully compatible with Tailwind CSS (with automatic class prefixing to avoid conflicts).
 - **Scoped Styles**: To ensure clean and predictable styling, the builder uses scoped style isolation. There is no risk of style conflicts between the builder and your app.
 
-### Loved by Teams Everywhere
+### Trusted by Freelancers and Leading Brands
 
-Ready to ship beautiful pages, faster? Our Page Builder was designed to feel like a natural extension of your team. Marketing and content creators can finally build stunning, on-brand experiences without bugging a developer. The intuitive click-and-drop editor, real-time visual feedback, and a library of reusable components mean you can go from idea to live in minutes, not weeks.
-
-Stop waiting and start creating. Launch marketing campaigns, A/B test new ideas, and keep your brand looking sharp across the board. We handle the heavy lifting—generating clean, responsive code that search engines and users will love—so you can focus on what matters most: growing your business.
-
-You're in good company. Here's who's building with us:
-
-<div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 24px;">
-  <img src="./public/logo/logo.svg" alt="Logo" style="width: 50px; max-width: 100%; flex: 1 1 50px;">
-  <img src="./public/logo/lacoste_logo.png" alt="Logo" style="width: 50px; max-width: 100%; flex: 1 1 50px;">
-  <img src="./public/logo/emaar_logo.png" alt="Logo" style="width: 50px; max-width: 100%; flex: 1 1 50px;">
-  <img src="./public/logo/jm_logo.png" alt="Logo" style="width: 50px; max-width: 100%; flex: 1 1 50px;">
-</div>
-
-A powerful Page Builder for any growing merchants, brands, and agencies. Empower users to create the perfect content with the Page Builder. And it is totally free.
+From solo freelancers to fast-growing startups and established enterprises, the Page Builder is trusted by teams everywhere. With its intuitive click-and-drop editor, real-time visual editing, and a rich library of reusable components, you can turn ideas into polished pages in minutes. Built for merchants, brands, and agencies, it empowers anyone to create high-impact content.
 
 ## Technical Details
 
