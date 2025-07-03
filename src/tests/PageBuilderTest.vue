@@ -11,38 +11,14 @@ const pageBuilderService = getPageBuilder()
 const { t } = useI18n()
 
 const features = [
-  {
-    name: t('features.liveDragDropBuilder.name'),
-    description: t('features.liveDragDropBuilder.description'),
-  },
-  {
-    name: t('features.trueVisualEditing.name'),
-    description: t('features.trueVisualEditing.description'),
-  },
-  {
-    name: t('features.features.name'),
-    description: t('features.features.description'),
-  },
-  {
-    name: t('features.technologies.name'),
-    description: t('features.technologies.description'),
-  },
-  {
-    name: t('features.setBrandAndLinkColors.name'),
-    description: t('features.setBrandAndLinkColors.description'),
-  },
-  {
-    name: t('features.mobileFirstApproach.name'),
-    description: t('features.mobileFirstApproach.description'),
-  },
-  {
-    name: t('features.mediaLibrary.name'),
-    description: t('features.mediaLibrary.description'),
-  },
-  {
-    name: t('features.minimalIntuitiveDesign.name'),
-    description: t('features.minimalIntuitiveDesign.description'),
-  },
+  { key: 'liveDragDropBuilder' },
+  { key: 'trueVisualEditing' },
+  { key: 'features' },
+  { key: 'technologies' },
+  { key: 'setBrandAndLinkColors' },
+  { key: 'mobileFirstApproach' },
+  { key: 'mediaLibrary' },
+  { key: 'minimalIntuitiveDesign' },
 ]
 
 const publishPageBuilder = function () {}
@@ -144,16 +120,16 @@ onMounted(async () => {
         >
           <div
             v-for="feature in features"
-            :key="feature.name"
+            :key="feature.key"
             class="pbx-bg-red-200 pbx-bg-opacity-20 hover:pbx-bg-opacity-10 pbx-w-full lg:pbx-min-h-[20rem] pbx-min-h-[12rem] pbx-relative pbx-col-span-1 pbx-flex pbx-flex-col pbx-text-center pbx-rounded-lg pbx-shadow-sm pbx-outline pbx-outline-2 pbx-outline-offset-8 pbx-outline-yellow-400"
           >
             <div
               class="pbx-bg-black/0 pbx-absolute pbx-top-0 pbx-left-0 pbx-w-full pbx-h-full pbx-rounded-lg"
             ></div>
             <div class="pbx-px-2 pbx-pt-8 pbx-absolute pbx-top-0 pbx-w-full">
-              <p class="pbx-myTertiaryHeader">{{ feature.name }}</p>
+              <p class="pbx-myTertiaryHeader">{{ t(`features.${feature.key}.name`) }}</p>
               <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-drop-shadow-sm">
-                {{ feature.description }}
+                {{ t(`features.${feature.key}.description`) }}
               </p>
             </div>
           </div>
