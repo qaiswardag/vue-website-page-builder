@@ -94,7 +94,7 @@ const configPageBuilder = {
 } as const
 
 onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder)
+  const result = await pageBuilderService.startBuilder(configPageBuilder, components)
   console.log('Page Builder inspect the result for message, status, or error::', result)
 })
 </script>

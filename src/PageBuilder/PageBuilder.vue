@@ -13,6 +13,8 @@ import { useDebounce } from '../composables/useDebounce.ts'
 import DynamicModalBuilder from '../Components/Modals/DynamicModalBuilder.vue'
 import GlobalLoader from '../Components/Loaders/GlobalLoader.vue'
 import { getPageBuilder } from '../composables/builderInstance'
+import { useI18n } from 'vue-i18n'
+
 const pageBuilderService = getPageBuilder()
 /**
  * Props for PageBuilder component
@@ -147,6 +149,28 @@ const getComponents = computed(() => {
 
 const getHasLocalDraftForUpdate = computed(() => {
   return pageBuilderStateStore.getHasLocalDraftForUpdate
+})
+
+const { locale } = useI18n()
+
+watch(locale, (newLocale) => {
+  const config = pageBuilderStateStore.getPageBuilderConfig
+  if (config && config.userSettings && config.userSettings.language) {
+    // Update the store with a full config (if you want to update the store)
+    const updatedConfig = {
+      ...config,
+      userSettings: {
+        ...config.userSettings,
+        language: {
+          ...config.userSettings.language,
+          default: newLocale,
+        },
+      },
+    }
+
+    pageBuilderStateStore.setPageBuilderConfig(updatedConfig)
+    pageBuilderService.saveBuilderConfigToLocalStorage(updatedConfig)
+  }
 })
 
 watch(getHasLocalDraftForUpdate, (newVal) => {
@@ -725,13 +749,6 @@ onMounted(async () => {
                 class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
                 v-model="$i18n.locale"
               >
-                <p>
-                  oooki:{{
-                    getPageBuilderConfig.userSettings.language &&
-                    getPageBuilderConfig.userSettings.language.enable
-                  }}
-                </p>
-
                 <template
                   v-if="
                     Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&

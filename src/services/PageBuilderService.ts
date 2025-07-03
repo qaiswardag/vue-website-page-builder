@@ -334,9 +334,48 @@ export class PageBuilderService {
     this.ensureLanguage(config)
   }
 
-  private saveBuilderConfigToLocalStorage(specificConfig: PageBuilderConfig) {
-    console.log('Saving builder settings...')
-    localStorage.setItem('pageBuilderConfig', JSON.stringify(specificConfig))
+  public saveBuilderConfigToLocalStorage(specificConfig: PageBuilderConfig) {
+    // Only save userSettings to localStorage
+    if (specificConfig && specificConfig.userSettings) {
+      localStorage.setItem(
+        'pageBuilderConfig',
+        JSON.stringify({ userSettings: specificConfig.userSettings }),
+      )
+    }
+  }
+
+  private checkBuilderConfigToLocalStorage(currentConfig: PageBuilderConfig) {
+    const savedConfigRaw = localStorage.getItem('pageBuilderConfig')
+
+    if (savedConfigRaw) {
+      try {
+        const savedConfig = JSON.parse(savedConfigRaw)
+        // Deep merge: prefer all keys from savedConfig, fallback to currentConfig
+        const mergedConfig = {
+          ...currentConfig,
+          ...savedConfig,
+          userSettings: {
+            ...currentConfig.userSettings,
+            ...savedConfig.userSettings,
+          },
+        }
+
+        this.pageBuilderStateStore.setPageBuilderConfig(mergedConfig)
+
+        const saveLang =
+          this.pageBuilderStateStore.getPageBuilderConfig &&
+          this.pageBuilderStateStore.getPageBuilderConfig.userSettings &&
+          this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language &&
+          this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
+
+        if (saveLang) {
+          i18n.global.locale.value = saveLang
+        }
+        return
+      } catch (e) {
+        console.warn('Failed to parse saved pageBuilderConfig from localStorage:', e)
+      }
+    }
   }
 
   /**
@@ -367,24 +406,16 @@ export class PageBuilderService {
 
       if (
         this.pageBuilderStateStore.getPageBuilderConfig &&
-        this.pageBuilderStateStore.getPageBuilderConfig.userSettings
-      ) {
-        const specificConfig: PageBuilderConfig = {}
-
-        configPageBuilder.userSettings =
-          this.pageBuilderStateStore.getPageBuilderConfig.userSettings
-
-        this.saveBuilderConfigToLocalStorage()
-      }
-
-      if (
-        this.pageBuilderStateStore.getPageBuilderConfig &&
         this.pageBuilderStateStore.getPageBuilderConfig.userSettings &&
         this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language &&
         this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
       ) {
         i18n.global.locale.value =
           this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
+      }
+
+      if (this.pageBuilderStateStore.getPageBuilderConfig) {
+        this.checkBuilderConfigToLocalStorage(this.pageBuilderStateStore.getPageBuilderConfig)
       }
 
       validation = this.validateUserProvidedComponents(passedComponentsArray)
@@ -514,7 +545,7 @@ export class PageBuilderService {
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
-          console.log('10000:', internalPageBuilderCall)
+          console.log('XXXX:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
           this.saveDomComponentsToLocalStorage()
           return

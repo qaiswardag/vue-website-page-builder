@@ -3,5 +3,8 @@
   "button": {
     "publish": "Publish",
     "addComponents": "Add new Components"
+  },
+  "branding": {
+    "mainHeader": "Bring your vision to life and create impressive pages using a click & drop Page Builder"
   }
 }

@@ -299,7 +299,7 @@ const getPageBuilderConfig = computed(() => {
                         class="pbx-px-6 pbx-py-4 pbx-whitespace-nowrap pbx-text-sm pbx-text-gray-500"
                       >
                         <div class="pbx-min-w-[30rem] pbx-w-max">
-                          {{ getPageBuilderConfig.userSettings.language }}
+                          {{ getPageBuilderConfig.userSettings.language?.default }}
                         </div>
                       </td>
                     </tr>
@@ -317,8 +317,8 @@ const getPageBuilderConfig = computed(() => {
                             class="pbx-inline-flex pbx-items-center pbx-px-2.5 pbx-py-0.5 pbx-rounded-full pbx-text-xs pbx-font-medium"
                             :class="
                               getPageBuilderConfig.userSettings.autoSave
-                                ? 'bg-green-100 text-green-800'
-                                : 'bg-red-100 text-red-800'
+                                ? 'pbx-bg-green-100 pbx-text-green-800'
+                                : 'pbx-bg-red-100 pbx-text-red-800'
                             "
                           >
                             {{
