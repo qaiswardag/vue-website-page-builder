@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { ref, computed, watch } from 'vue'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import tailwindColors from '../../../../utils/builder/tailwaind-colors'
@@ -11,7 +11,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 
 defineProps({
   globalPageLayout: {
-    Type: Boolean,
+    type: Boolean,
   },
 })
 
@@ -99,7 +99,7 @@ watch(
             >
               <div v-if="color === 'none'" class="pbx-flex pbx-items-center">
                 <span class="material-symbols-outlined"> ev_shadow </span>
-                <span class="pbx-ml-3">{{ $t('backgroundColorEditor.transparent') }}</span>
+                <span class="pbx-ml-3">{{ $t('rightSidebar.backgroundColorEditor.transparent') }}</span>
               </div>
               <div v-if="color !== 'none'" class="pbx-flex pbx-items-center">
                 <div
