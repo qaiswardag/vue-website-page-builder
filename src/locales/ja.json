@@ -48,5 +48,15 @@
     "mainHeader": "あなたのビジョンを形にし、ドラッグ＆ドロップページビルダーで印象的なページを作成しましょう",
     "description": "素晴らしいページのためのウェブビルダー。ユーザーがあらゆる規模でモダンなページをデザインし公開できるようにします。リスト、求人、ブログ記事などのレスポンシブページを作成し、無料のドラッグ＆ドロップページビルダーでコンテンツを簡単に管理できます。TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS、HTMLで開発。パワフルで柔軟、使いやすい無料のVue 3ページビルダーをダウンロードまたはインストールしてください。",
     "downloadDescription": "パワフルで柔軟、使いやすい無料のVue 3ページビルダーをダウンロードまたはインストールしてください via"
+  },
+  "typography": {
+    "title": "タイポグラフィ",
+    "appearance": "フォントの外観",
+    "fontSize": "フォントサイズ",
+    "fontTabletSize": "タブレット用フォントサイズ",
+    "fontMobileSize": "小さい画面",
+    "fontWeight": "フォントの太さ",
+    "fontFamily": "フォントファミリー",
+    "fontStyle": "フォントスタイル"
   }
 }

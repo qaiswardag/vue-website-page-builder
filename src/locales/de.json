@@ -48,5 +48,15 @@
     "mainHeader": "Erwecken Sie Ihre Vision zum Leben und erstellen Sie beeindruckende Seiten mit einem Drag & Drop Page Builder",
     "description": "Der Web-Builder für beeindruckende Seiten. Ermöglichen Sie es Nutzern, moderne Seiten in jeder Größenordnung zu entwerfen und zu veröffentlichen. Erstellen Sie responsive Seiten wie Listen, Jobs oder Blogbeiträge und verwalten Sie Inhalte einfach mit dem kostenlosen Drag & Drop Page Builder. Entwickelt mit TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS und HTML. Laden Sie unseren leistungsstarken, flexiblen und einfach zu bedienenden kostenlosen Vue 3 Page Builder herunter oder installieren Sie ihn.",
     "downloadDescription": "Laden Sie unseren leistungsstarken, flexiblen und einfach zu bedienenden kostenlosen Vue 3 Page Builder herunter oder installieren Sie ihn über"
+  },
+  "typography": {
+    "title": "Typografie",
+    "appearance": "Schriftbild",
+    "fontSize": "Schriftgröße",
+    "fontTabletSize": "Schriftgröße für Tablet",
+    "fontMobileSize": "Kleine Bildschirme",
+    "fontWeight": "Schriftstärke",
+    "fontFamily": "Schriftfamilie",
+    "fontStyle": "Schriftstil"
   }
 }

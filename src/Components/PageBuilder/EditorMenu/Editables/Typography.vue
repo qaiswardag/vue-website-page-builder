@@ -99,13 +99,17 @@ watch(
 
 <template>
   <EditorAccordion>
-    <template #title> Typographies </template>
+    <template #title>{{ $t('typography.title') }}</template>
     <template #content>
       <!-- FONT SIZES -->
-      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Font Appearance</p>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">
+        {{ $t('typography.appearance') }}
+      </p>
       <template v-if="false">
         <div class="pbx-my-2 pbx-py-2">
-          <label for="font-base" class="pbx-myPrimaryInputLabel"> Font Size </label>
+          <label for="font-base" class="pbx-myPrimaryInputLabel">{{
+            $t('typography.fontSize')
+          }}</label>
           <select
             id="font-base"
             v-model="fontBase"
@@ -120,7 +124,9 @@ watch(
         </div>
       </template>
       <div class="pbx-my-2 pbx-py-2">
-        <label for="font-desktop" class="pbx-myPrimaryInputLabel"> Font size </label>
+        <label for="font-desktop" class="pbx-myPrimaryInputLabel">{{
+          $t('typography.fontSize')
+        }}</label>
         <select
           id="font-desktop"
           v-model="fontDesktop"
@@ -135,7 +141,9 @@ watch(
       </div>
       <template v-if="false">
         <div class="pbx-my-2 pbx-py-2">
-          <label for="font-tablet" class="pbx-myPrimaryInputLabel"> Font tablet size </label>
+          <label for="font-tablet" class="pbx-myPrimaryInputLabel">{{
+            $t('typography.fontTabletSize')
+          }}</label>
           <select
             id="font-tablet"
             v-model="fontTablet"
@@ -149,7 +157,9 @@ watch(
           </select>
         </div>
         <div class="pbx-my-2 pbx-py-2">
-          <label for="font-mobile" class="pbx-myPrimaryInputLabel"> Font small screens </label>
+          <label for="font-mobile" class="pbx-myPrimaryInputLabel">{{
+            $t('typography.fontMobileSize')
+          }}</label>
           <select
             id="font-mobile"
             v-model="fontMobile"
@@ -166,7 +176,9 @@ watch(
       <hr />
 
       <div class="pbx-my-2 pbx-py-2">
-        <label for="font-weight" class="pbx-myPrimaryInputLabel"> Font weight </label>
+        <label for="font-weight" class="pbx-myPrimaryInputLabel">{{
+          $t('typography.fontWeight')
+        }}</label>
         <select
           id="font-weight"
           v-model="fontWeight"
@@ -183,7 +195,9 @@ watch(
 
       <!-- FONT FAMILY -->
       <div class="pbx-my-2 pbx-py-2">
-        <label for="font-family" class="pbx-myPrimaryInputLabel"> Font family </label>
+        <label for="font-family" class="pbx-myPrimaryInputLabel">{{
+          $t('typography.fontFamily')
+        }}</label>
         <select
           id="font-family"
           v-model="fontFamily"
@@ -199,7 +213,9 @@ watch(
       <hr />
 
       <div class="pbx-my-2 pbx-py-2">
-        <label for="font-style" class="pbx-myPrimaryInputLabel"> Font Style </label>
+        <label for="font-style" class="pbx-myPrimaryInputLabel">{{
+          $t('typography.fontStyle')
+        }}</label>
         <select
           id="font-style"
           v-model="fontStyle"
