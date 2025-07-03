@@ -118,6 +118,10 @@
     "addButton": "追加"
   },
   "rightSidebar": {
+    "backgroundColorEditor": {
+      "label": "背景色",
+      "transparent": "透明"
+    },
     "editing": "編集",
     "globalPageStylesTitle": "グローバルページスタイル",
     "globalPageStylesDescription": "ページ全体に影響するスタイルを適用します。これらの設定には、グローバルフォントファミリー、テキストカラー、背景色、すべてのセクションに適用されるその他の共通スタイルが含まれます。",

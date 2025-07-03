@@ -118,6 +118,10 @@
     "addButton": "Ajouter"
   },
   "rightSidebar": {
+    "backgroundColorEditor": {
+      "label": "Couleur de fond",
+      "transparent": "Transparent"
+    },
     "editing": "Édition",
     "globalPageStylesTitle": "Styles de page globaux",
     "globalPageStylesDescription": "Appliquez des styles qui affectent toute la page. Ces paramètres incluent la famille de polices globale, la couleur du texte, la couleur de fond et d'autres styles universels qui s'appliquent à toutes les sections.",

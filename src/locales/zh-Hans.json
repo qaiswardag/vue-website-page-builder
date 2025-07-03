@@ -118,6 +118,10 @@
     "addButton": "添加"
   },
   "rightSidebar": {
+    "backgroundColorEditor": {
+      "label": "背景颜色",
+      "transparent": "透明"
+    },
     "editing": "编辑",
     "globalPageStylesTitle": "全局页面样式",
     "globalPageStylesDescription": "应用影响整个页面的样式。这些设置包括全局字体、文本颜色、背景颜色和适用于所有部分的其他通用样式。",

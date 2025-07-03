@@ -118,6 +118,10 @@
     "addButton": "إضافة"
   },
   "rightSidebar": {
+    "backgroundColorEditor": {
+      "label": "لون الخلفية",
+      "transparent": "شفاف"
+    },
     "editing": "تحرير",
     "globalPageStylesTitle": "أنماط الصفحة العامة",
     "globalPageStylesDescription": "قم بتطبيق الأنماط التي تؤثر على الصفحة بأكملها. تتضمن هذه الإعدادات عائلة الخط العالمية، ولون النص، ولون الخلفية، والأنماط العامة الأخرى التي تنطبق على جميع الأقسام.",

@@ -118,6 +118,10 @@
     "addButton": "Hinzufügen"
   },
   "rightSidebar": {
+    "backgroundColorEditor": {
+      "label": "Hintergrundfarbe",
+      "transparent": "Transparent"
+    },
     "editing": "Bearbeiten",
     "globalPageStylesTitle": "Globale Seitenstile",
     "globalPageStylesDescription": "Wenden Sie Stile an, die die gesamte Seite betreffen. Diese Einstellungen umfassen globale Schriftfamilie, Textfarbe, Hintergrundfarbe und andere universelle Stile, die für alle Abschnitte gelten.",
