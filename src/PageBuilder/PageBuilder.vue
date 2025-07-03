@@ -698,8 +698,7 @@ onMounted(async () => {
                 }
               "
             >
-              Publish
-              <span>{{ $t('message.hello') }}</span>
+              {{ $t('button.publish') }}
             </button>
           </div>
         </template>
