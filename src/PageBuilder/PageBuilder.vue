@@ -619,7 +619,9 @@ onMounted(async () => {
                 class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-border-gray-200"
               >
                 <span class="lg:pbx-block pbx-hidden">
-                  <div class="pbx-whitespace-nowrap pbx-cursor-pointer">Add new Components</div>
+                  <div class="pbx-whitespace-nowrap pbx-cursor-pointer">
+                    {{ $t('button.addComponent') }}
+                  </div>
                 </span>
                 <span
                   class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
