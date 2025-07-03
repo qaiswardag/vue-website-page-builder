@@ -23,6 +23,7 @@
   - [Important: CSS Prefixing (`pbx-`)](#important-css-prefixing-pbx-)
   - [Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)](#rendering-html-output-in-other-frameworks-react-nuxt-etc)
   - [Providing Configuration to the Page Builder](#providing-configuration-to-the-page-builder)
+  - [Comprehensive Language Support in the Page Builder](#comprehensive-language-support-in-the-page-builder)
   - [Local Storage \& Auto-Save](#local-storage--auto-save)
   - [Retrieving the Latest HTML Content for Form Submission](#retrieving-the-latest-html-content-for-form-submission)
     - [Resetting the Builder After Successful Resource Creation or Update](#resetting-the-builder-after-successful-resource-creation-or-update)
@@ -317,7 +318,10 @@ const configPageBuilder = {
   },
   userSettings: {
     theme: 'light',
-    language: 'en',
+    language: {
+      default: 'en',
+      enable: ['en', 'zh-Hans', 'fr'],
+    },
     autoSave: true,
   },
   settings: {
@@ -336,6 +340,47 @@ console.info('You may inspect this result for message, status, or error:', resul
   <PageBuilder />
 </template>
 ```
+
+## Comprehensive Language Support in the Page Builder
+
+The Page Builder offers robust multilingual support, enabling you to reach a global audience with ease. By default, it supports the following languages, chosen for their widespread use and strong developer communities:
+
+| Language             | Code    |
+| -------------------- | ------- |
+| English              | en      |
+| Chinese (Simplified) | zh-Hans |
+| French               | fr      |
+| Japanese             | ja      |
+| Russian              | ru      |
+| Spanish              | es      |
+| Portuguese (Brazil)  | pt      |
+| German               | de      |
+| Arabic               | ar      |
+| Hindi                | hi      |
+
+You can set a default language for your project:
+
+```js
+userSettings: {
+  language: {
+    default: 'en',
+    enable: ['en', 'zh-Hans', 'fr'],
+  },
+},
+```
+
+If you prefer to offer only a subset of these languages for users to switch between, specify them using the `enable` option:
+
+```js
+userSettings: {
+  language: {
+    default: 'en',
+    enable: ['en', 'zh-Hans', 'fr'],
+  },
+},
+```
+
+This flexibility allows you to tailor the language experience to your audience’s needs.
 
 ## Local Storage & Auto-Save
 
