@@ -1,8 +1,11 @@
 {
   "language": "语言",
   "button": {
+    "addComponentsToBottom": "添加组件到底部",
     "publish": "发布",
-    "addComponents": "添加新组件"
+    "addComponents": "添加新组件",
+    "save": "保存",
+    "resetPage": "重置页面"
   },
   "options": {
     "button": "选项",

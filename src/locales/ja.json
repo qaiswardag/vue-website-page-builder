@@ -1,8 +1,11 @@
 {
   "language": "言語",
   "button": {
+    "addComponentsToBottom": "下部にコンポーネントを追加",
     "publish": "公開",
-    "addComponents": "新しいコンポーネントを追加"
+    "addComponents": "新しいコンポーネントを追加",
+    "save": "保存",
+    "resetPage": "ページをリセット"
   },
   "options": {
     "button": "オプション",

@@ -1,8 +1,11 @@
 {
   "language": "Linguagem",
   "button": {
+    "addComponentsToBottom": "Adicionar componentes ao final",
     "publish": "Publicar",
-    "addComponents": "Adicionar novos componentes"
+    "addComponents": "Adicionar novos componentes",
+    "save": "Salvar",
+    "resetPage": "Redefinir página"
   },
   "options": {
     "button": "Opções",

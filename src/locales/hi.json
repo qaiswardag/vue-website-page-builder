@@ -1,8 +1,11 @@
 {
   "language": "भाषा",
   "button": {
+    "addComponentsToBottom": "नीचे घटक जोड़ें",
     "publish": "प्रकाशित करना",
-    "addComponents": "नए घटक जोड़ें"
+    "addComponents": "नए घटक जोड़ें",
+    "save": "सहेजें",
+    "resetPage": "पृष्ठ रीसेट करें"
   },
   "options": {
     "button": "विकल्प",

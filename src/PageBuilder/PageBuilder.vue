@@ -563,7 +563,7 @@ onMounted(async () => {
                   ></span>
                 </span>
               </div>
-              <div>Save</div>
+              <div>{{ $t('button.save') }}</div>
             </button>
             <!-- Save End -->
 
@@ -606,7 +606,7 @@ onMounted(async () => {
                   </span>
                 </div>
                 <div class="lg:pbx-block pbx-hidden">
-                  <span> Reset Page </span>
+                  <span>{{ $t('button.resetPage') }}</span>
                 </div>
               </button>
             </template>
@@ -932,7 +932,7 @@ onMounted(async () => {
           class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-cursor-pointer"
         >
           <span class="lg:pbx-block pbx-hidden">
-            <div class="pbx-whitespace-nowrap">Add to the bottom</div>
+            <div class="pbx-whitespace-nowrap">{{ $t('button.addComponentsToBottom') }}</div>
           </span>
           <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
             <button

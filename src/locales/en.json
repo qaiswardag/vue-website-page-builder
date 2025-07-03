@@ -1,8 +1,11 @@
 {
   "language": "Language",
   "button": {
+    "addComponentsToBottom": "Add Components to the bottom",
     "publish": "Publish",
-    "addComponents": "Add new Components"
+    "addComponents": "Add new Components",
+    "save": "Save",
+    "resetPage": "Reset Page"
   },
   "options": {
     "button": "Options",
