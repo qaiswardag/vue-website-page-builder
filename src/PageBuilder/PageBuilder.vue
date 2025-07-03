@@ -745,6 +745,9 @@ onMounted(async () => {
         <div>
           <p class="pbx-myPrimaryParagraph py-2">Current language: {{ getCurrentLanguage }}</p>
         </div>
+        <div>
+          <p class="pbx-myPrimaryParagraph py-2">my dropdown select a laungage</p>
+        </div>
 
         <!-- Close & Publish buttons end -->
       </div>
