@@ -746,14 +746,16 @@ onMounted(async () => {
           <p class="pbx-myPrimaryParagraph py-2">Current language: {{ getCurrentLanguage }}</p>
         </div>
         <div>
-          <p class="pbx-myPrimaryParagraph py-2 pbx-min-w-4 pbx-max-w-4 pbx-w-max">
-            my dropdown select a laungage
-          </p>
-          <select class="pbx-myPrimarySelect" v-model="$i18n.locale">
+          <p class="pbx-myPrimaryParagraph py-2">my dropdown select a laungage</p>
+          <select
+            class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
+            v-model="$i18n.locale"
+          >
             <template
               v-for="lang in pageBuilderService
                 .availableLanguage()
                 .filter((l) => !getPageBuilderConfig.userSettings.language.disable.includes(l))"
+              :key="lang"
             >
               <option :value="lang">{{ lang }}</option>
             </template>

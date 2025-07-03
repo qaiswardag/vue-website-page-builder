@@ -81,8 +81,9 @@ const configPageBuilder = {
   userSettings: {
     theme: 'light',
     language: {
+      // ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi']
       default: 'en',
-      disable: ['fr', 'es'],
+      disable: ['en', 'zh-Hans', 'fr'],
     },
   },
   settings: {
