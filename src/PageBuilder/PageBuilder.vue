@@ -69,10 +69,6 @@ const closeAddComponentModal = () => {
 }
 provide('closeAddComponentModal', closeAddComponentModal)
 
-const getCurrentLanguage = computed(() => {
-  return pageBuilderStateStore.getCurrentLanguage
-})
-
 const getBuilderStarted = computed(() => {
   return pageBuilderStateStore.getBuilderStarted
 })
@@ -714,53 +710,75 @@ onMounted(async () => {
           "
         >
           <div
-            class="pbx-py-4 pbx-px4 pbx-rounded-xl pbx-border pbx-border-gray-400 pbx-bg-red-100 pbx-m-4 pbx-min-w-72 pbx-max-w-4pbx-min-w-72 pbx-w-max"
+            class="pbx-py-12 pbx-px-4 pbx-rounded-xl pbx-border pbx-border-gray-400 pbx-bg-red-100 pbx-m-4 pbx-min-w-72 pbx-max-w-4pbx-min-w-72 pbx-w-max"
           >
-            <p class="pbx-myPrimaryParagraph py-2">
+            <p class="pbx-myPrimaryParagraph pbx-py-4">
               Default: {{ getPageBuilderConfig.userSettings.language.default }}
             </p>
-            <p class="pbx-myPrimaryParagraph py-2">
+            <p class="pbx-myPrimaryParagraph pbx-py-4">
               Disabled languages: {{ getPageBuilderConfig.userSettings.language.enable }}
             </p>
-            <p class="pbx-myPrimaryParagraph py-2">
+            <p class="pbx-myPrimaryParagraph pbx-py-4">
               Available languages: {{ JSON.stringify(pageBuilderService.availableLanguage()) }}
             </p>
-          </div>
+            <p class="pbx-myPrimaryParagraph pbx-py-4">Valgt sprog: {{ $i18n.locale }}</p>
+            <!-- Select language -->
 
-          <template v-if="showCloseButton">
-            <div class="pbx-ml-2">
-              <button
-                class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
-                @click="
-                  async () => {
-                    closePageBuilder()
-                    await pageBuilderService.clearHtmlSelection()
-                  }
-                "
-              >
-                <span class="material-symbols-outlined"> close </span>
-              </button>
-            </div>
-          </template>
-          <div>
-            <p class="pbx-myPrimaryParagraph py-2">Current language: {{ getCurrentLanguage }}</p>
-          </div>
-          <div>
-            <p class="pbx-myPrimaryParagraph py-2">my dropdown select a laungage</p>
             <select
               class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
               v-model="$i18n.locale"
             >
+              <p>
+                oooki:{{
+                  getPageBuilderConfig.userSettings.language &&
+                  getPageBuilderConfig.userSettings.language.enable
+                }}
+              </p>
+
               <template
-                v-for="lang in pageBuilderService
-                  .availableLanguage()
-                  .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
-                :key="lang"
+                v-if="
+                  Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
+                  getPageBuilderConfig.userSettings.language.enable.length >= 1
+                "
               >
-                <option :value="lang">{{ lang }}</option>
+                <template
+                  v-for="lang in pageBuilderService
+                    .availableLanguage()
+                    .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
+                  :key="lang"
+                >
+                  <option :value="lang">{{ lang }}</option>
+                </template>
+              </template>
+              <template
+                v-if="
+                  !getPageBuilderConfig.userSettings.language.enable ||
+                  (Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
+                    getPageBuilderConfig.userSettings.language.enable.length === 0)
+                "
+              >
+                <template v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
+                  <option :value="lang">{{ lang }}</option>
+                </template>
               </template>
             </select>
             <span>{{ $t('message.hello') }}</span>
+          </div>
+        </template>
+
+        <template v-if="showCloseButton">
+          <div class="pbx-ml-2">
+            <button
+              class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
+              @click="
+                async () => {
+                  closePageBuilder()
+                  await pageBuilderService.clearHtmlSelection()
+                }
+              "
+            >
+              <span class="material-symbols-outlined"> close </span>
+            </button>
           </div>
         </template>
 
