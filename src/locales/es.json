@@ -1,7 +1,7 @@
 {
   "language": "Idioma",
   "button": {
-    "publish": "Publicar"
-  },
-  "addComponents": "Agregar nuevos componentes"
+    "publish": "Publicar",
+    "addComponents": "Agregar nuevos componentes"
+  }
 }

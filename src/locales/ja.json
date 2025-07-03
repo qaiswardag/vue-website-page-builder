@@ -1,7 +1,7 @@
 {
   "language": "言語",
   "button": {
-    "publish": "公開"
-  },
-  "addComponents": "新しいコンポーネントを追加"
+    "publish": "公開",
+    "addComponents": "新しいコンポーネントを追加"
+  }
 }
