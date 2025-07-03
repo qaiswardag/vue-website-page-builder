@@ -7,6 +7,7 @@ import type {
   StartBuilderResult,
 } from '../types'
 import type { usePageBuilderStateStore } from '../stores/page-builder-state'
+import { i18n } from '../i18n'
 
 import tailwindFontSizes from '../utils/builder/tailwind-font-sizes'
 import tailwindColors from '../utils/builder/tailwaind-colors'
@@ -264,6 +265,55 @@ export class PageBuilderService {
     return
   }
 
+  private ensureLanguage(config: PageBuilderConfig): void {
+    // Set default language config if missing, empty, or language missing/empty
+    const defaultLang = 'en'
+    const defaultEnable = ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'] as const
+
+    let needsDefault = false
+    const userSettings = config.userSettings
+    const language = userSettings && userSettings.language
+
+    if (!userSettings || isEmptyObject(userSettings)) {
+      needsDefault = true
+    } else if (!language || isEmptyObject(language)) {
+      needsDefault = true
+    }
+
+    if (needsDefault) {
+      const updatedLanguage = {
+        ...config,
+        userSettings: {
+          ...userSettings,
+          language: {
+            default: defaultLang,
+            enable: defaultEnable as typeof defaultEnable,
+          },
+        },
+      } as const
+      this.pageBuilderStateStore.setPageBuilderConfig(updatedLanguage)
+      return
+    }
+
+    // Ensure default is in enable array
+    if (language && Array.isArray(language.enable) && language.default) {
+      if (!language.enable.includes(language.default)) {
+        const updatedEnable = [...language.enable, language.default]
+        const updatedLanguage = {
+          ...config,
+          userSettings: {
+            ...userSettings,
+            language: {
+              ...language,
+              enable: updatedEnable,
+            },
+          },
+        } as const
+        this.pageBuilderStateStore.setPageBuilderConfig(updatedLanguage)
+      }
+    }
+  }
+
   private validateConfig(config: PageBuilderConfig): void {
     const defaultConfigValues = {
       updateOrCreate: {
@@ -280,6 +330,8 @@ export class PageBuilderService {
     if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
       this.ensureUpdateOrCreateConfig(config)
     }
+
+    this.ensureLanguage(config)
   }
 
   /**
@@ -307,6 +359,21 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setPageBuilderConfig(config)
       // Validate and normalize the config (ensure required fields are present)
       this.validateConfig(config)
+
+      console.log(
+        'this.pageBuilderStateStore.getPageBuilderConfig:',
+        this.pageBuilderStateStore.getPageBuilderConfig,
+      )
+
+      if (
+        this.pageBuilderStateStore.getPageBuilderConfig &&
+        this.pageBuilderStateStore.getPageBuilderConfig.userSettings &&
+        this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language &&
+        this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
+      ) {
+        i18n.global.locale.value =
+          this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
+      }
 
       validation = this.validateUserProvidedComponents(passedComponentsArray)
 

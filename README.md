@@ -24,6 +24,7 @@
   - [Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)](#rendering-html-output-in-other-frameworks-react-nuxt-etc)
   - [Providing Configuration to the Page Builder](#providing-configuration-to-the-page-builder)
   - [Comprehensive Language Support in the Page Builder](#comprehensive-language-support-in-the-page-builder)
+      - [Disabling the Language Dropdown](#disabling-the-language-dropdown)
   - [Local Storage \& Auto-Save](#local-storage--auto-save)
   - [Retrieving the Latest HTML Content for Form Submission](#retrieving-the-latest-html-content-for-form-submission)
     - [Resetting the Builder After Successful Resource Creation or Update](#resetting-the-builder-after-successful-resource-creation-or-update)
@@ -370,13 +371,31 @@ userSettings: {
 },
 ```
 
-If you prefer to offer only a subset of these languages for users to switch between, specify them using the `enable` option:
+If you prefer to offer only a subset of these languages for users to switch between, specify them using the `enable` option.
+
+If you do not provide the `enable` array, the Page Builder will default to showing all supported languages by default.
 
 ```js
 userSettings: {
   language: {
     default: 'en',
     enable: ['en', 'zh-Hans', 'fr'],
+  },
+},
+```
+
+#### Disabling the Language Dropdown
+
+If you want to completely hide the language selector from the UI (e.g., when only one language is available or you want a fixed language), simply set `disableLanguageDropdown` to `true`.
+
+Even when the dropdown is disabled, the default language will still be applied automatically. This gives you full control over localization while keeping the interface simple for your users.
+
+```js
+userSettings: {
+  theme: 'light',
+  language: {
+    default: 'en',
+    disableLanguageDropdown: true,
   },
 },
 ```

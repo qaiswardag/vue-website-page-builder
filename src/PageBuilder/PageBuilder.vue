@@ -699,71 +699,67 @@ onMounted(async () => {
               "
             >
               Publish
+              <span>{{ $t('message.hello') }}</span>
             </button>
           </div>
         </template>
+        <!-- Select language -->
         <template
           v-if="
             getPageBuilderConfig &&
             getPageBuilderConfig.userSettings &&
-            getPageBuilderConfig.userSettings.language
+            getPageBuilderConfig.userSettings.language &&
+            !getPageBuilderConfig.userSettings.language.disableLanguageDropDown
           "
         >
-          <div
-            class="pbx-py-12 pbx-px-4 pbx-rounded-xl pbx-border pbx-border-gray-400 pbx-bg-red-100 pbx-m-4 pbx-min-w-72 pbx-max-w-4pbx-min-w-72 pbx-w-max"
+          <template
+            v-if="
+              getPageBuilderConfig &&
+              getPageBuilderConfig.userSettings &&
+              getPageBuilderConfig.userSettings.language
+            "
           >
-            <p class="pbx-myPrimaryParagraph pbx-py-4">
-              Default: {{ getPageBuilderConfig.userSettings.language.default }}
-            </p>
-            <p class="pbx-myPrimaryParagraph pbx-py-4">
-              Disabled languages: {{ getPageBuilderConfig.userSettings.language.enable }}
-            </p>
-            <p class="pbx-myPrimaryParagraph pbx-py-4">
-              Available languages: {{ JSON.stringify(pageBuilderService.availableLanguage()) }}
-            </p>
-            <p class="pbx-myPrimaryParagraph pbx-py-4">Valgt sprog: {{ $i18n.locale }}</p>
-            <!-- Select language -->
-
-            <select
-              class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
-              v-model="$i18n.locale"
-            >
-              <p>
-                oooki:{{
-                  getPageBuilderConfig.userSettings.language &&
-                  getPageBuilderConfig.userSettings.language.enable
-                }}
-              </p>
-
-              <template
-                v-if="
-                  Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
-                  getPageBuilderConfig.userSettings.language.enable.length >= 1
-                "
+            <div class="pbx-flex pbx-justify-center pbx-items-center pbx-ml-2">
+              <select
+                class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
+                v-model="$i18n.locale"
               >
+                <p>
+                  oooki:{{
+                    getPageBuilderConfig.userSettings.language &&
+                    getPageBuilderConfig.userSettings.language.enable
+                  }}
+                </p>
+
                 <template
-                  v-for="lang in pageBuilderService
-                    .availableLanguage()
-                    .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
-                  :key="lang"
+                  v-if="
+                    Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
+                    getPageBuilderConfig.userSettings.language.enable.length >= 1
+                  "
                 >
-                  <option :value="lang">{{ lang }}</option>
+                  <template
+                    v-for="lang in pageBuilderService
+                      .availableLanguage()
+                      .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
+                    :key="lang"
+                  >
+                    <option :value="lang">{{ lang }}</option>
+                  </template>
                 </template>
-              </template>
-              <template
-                v-if="
-                  !getPageBuilderConfig.userSettings.language.enable ||
-                  (Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
-                    getPageBuilderConfig.userSettings.language.enable.length === 0)
-                "
-              >
-                <template v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
-                  <option :value="lang">{{ lang }}</option>
+                <template
+                  v-if="
+                    !getPageBuilderConfig.userSettings.language.enable ||
+                    (Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
+                      getPageBuilderConfig.userSettings.language.enable.length === 0)
+                  "
+                >
+                  <template v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
+                    <option :value="lang">{{ lang }}</option>
+                  </template>
                 </template>
-              </template>
-            </select>
-            <span>{{ $t('message.hello') }}</span>
-          </div>
+              </select>
+            </div>
+          </template>
         </template>
 
         <template v-if="showCloseButton">
