@@ -10,6 +10,40 @@
     "htmlOverview": "Visão geral do HTML",
     "deleteLayout": "Excluir layout"
   },
+  "features": {
+    "liveDragDropBuilder": {
+      "name": "Construtor de arrastar e soltar ao vivo",
+      "description": "Clique e solte conteúdo em uma página e veja sua página ganhar vida. Dê vida à sua visão e crie páginas impressionantes usando um Page Builder de arrastar e soltar."
+    },
+    "trueVisualEditing": {
+      "name": "Edição visual real",
+      "description": "Veja suas alterações em tempo real. Eleve sua visão criativa e crie páginas usando um page builder intuitivo. Liberte-se das limitações de design e realize suas ideias."
+    },
+    "features": {
+      "name": "Recursos",
+      "description": "Arrastar e soltar, reordenar, edição visual real, edição responsiva, personalização de fontes, desfazer e refazer, edição de texto, biblioteca de mídia, integração com Unsplash, vídeos do YouTube."
+    },
+    "technologies": {
+      "name": "Tecnologias",
+      "description": "Desenvolvido com TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS e HTML."
+    },
+    "setBrandAndLinkColors": {
+      "name": "Defina as cores da marca e do link em um só lugar",
+      "description": "Estilos globais para fontes, designs e cores. Defina as cores da marca e do link uma vez e aplique-as em toda a plataforma com facilidade."
+    },
+    "mobileFirstApproach": {
+      "name": "Abordagem Mobile-First",
+      "description": "Desenvolvido com abordagem Mobile-First. O Page Builder funciona até mesmo em celulares."
+    },
+    "mediaLibrary": {
+      "name": "Biblioteca de mídia",
+      "description": "Uma biblioteca de mídia bonita e fácil de usar que permite alterar e atualizar imagens. Integração com Unsplash incluída."
+    },
+    "minimalIntuitiveDesign": {
+      "name": "Design minimalista e intuitivo",
+      "description": "Design bonito, elegante e intuitivo. Melhore o engajamento do usuário com uma experiência visual incrível."
+    }
+  },
   "branding": {
     "mainHeader": "Dê vida à sua visão e crie páginas impressionantes usando um Page Builder de arrastar e soltar",
     "description": "O construtor de páginas web para páginas impressionantes. Permita que os usuários projetem e publiquem páginas modernas em qualquer escala. Crie páginas responsivas como listagens, empregos ou blogs e gerencie o conteúdo facilmente usando o Page Builder gratuito de arrastar e soltar. Desenvolvido com TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS e HTML. Baixe ou instale gratuitamente nosso poderoso, flexível e fácil de usar Page Builder para Vue 3.",

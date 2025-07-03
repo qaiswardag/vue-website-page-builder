@@ -10,6 +10,40 @@
     "htmlOverview": "HTML概要",
     "deleteLayout": "レイアウトを削除"
   },
+  "features": {
+    "liveDragDropBuilder": {
+      "name": "ライブドラッグ＆ドロップビルダー",
+      "description": "ページ上にコンテンツをクリック＆ドロップして、ページが生き生きとする様子をご覧ください。あなたのビジョンを形にし、ドラッグ＆ドロップページビルダーで印象的なページを作成しましょう。"
+    },
+    "trueVisualEditing": {
+      "name": "本当のビジュアル編集",
+      "description": "変更をリアルタイムで確認。直感的なページビルダーでページを作成し、創造的なビジョンを高めましょう。デザインの制限を打ち破り、アイデアを現実に。"
+    },
+    "features": {
+      "name": "機能",
+      "description": "ドラッグ＆ドロップ、並べ替え、本当のビジュアル編集、レスポンシブ編集、フォントカスタマイズ、元に戻す＆やり直し、テキスト編集、メディアライブラリ、Unsplash連携、YouTube動画。"
+    },
+    "technologies": {
+      "name": "技術",
+      "description": "TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS、HTMLで開発。"
+    },
+    "setBrandAndLinkColors": {
+      "name": "ブランドとリンクカラーを一括設定",
+      "description": "フォント、デザイン、カラーのグローバルスタイル。ブランドとリンクカラーを一度設定し、全プラットフォームに簡単適用。"
+    },
+    "mobileFirstApproach": {
+      "name": "モバイルファーストアプローチ",
+      "description": "モバイルファーストアプローチで開発。ページビルダーはスマホでも動作します。"
+    },
+    "mediaLibrary": {
+      "name": "メディアライブラリ",
+      "description": "画像の変更や更新ができる美しく使いやすいメディアライブラリ。Unsplash連携付き。"
+    },
+    "minimalIntuitiveDesign": {
+      "name": "ミニマルで直感的なデザイン",
+      "description": "美しくエレガントで直感的なデザイン。素晴らしいビジュアル体験でユーザーのエンゲージメントを高めます。"
+    }
+  },
   "branding": {
     "mainHeader": "あなたのビジョンを形にし、ドラッグ＆ドロップページビルダーで印象的なページを作成しましょう",
     "description": "素晴らしいページのためのウェブビルダー。ユーザーがあらゆる規模でモダンなページをデザインし公開できるようにします。リスト、求人、ブログ記事などのレスポンシブページを作成し、無料のドラッグ＆ドロップページビルダーでコンテンツを簡単に管理できます。TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS、HTMLで開発。パワフルで柔軟、使いやすい無料のVue 3ページビルダーをダウンロードまたはインストールしてください。",

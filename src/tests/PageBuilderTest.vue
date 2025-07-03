@@ -6,48 +6,42 @@ import DemoBuilderComponentsTest from '../tests/TestComponents/DemoBuilderCompon
 import { onMounted } from 'vue'
 import componentsArray from '../tests/componentsArray.test.json'
 import { getPageBuilder } from '../composables/builderInstance'
+import { useI18n } from 'vue-i18n'
 const pageBuilderService = getPageBuilder()
+const { t } = useI18n()
 
 const features = [
   {
-    name: 'Live Drag & Drop Builder',
-    description:
-      'Click & Drop content on a page and watch your pages come to life. Bring your vision to life and create impressive pages using a click & drop Page Builder',
+    name: t('features.liveDragDropBuilder.name'),
+    description: t('features.liveDragDropBuilder.description'),
   },
   {
-    name: 'True Visual Editing',
-    description:
-      'See your changes in real-time as you make them. Elevate your creative vision and create pages using an intuitive click & drop page builder. Break free from design limitations and turn your visions into reality.',
+    name: t('features.trueVisualEditing.name'),
+    description: t('features.trueVisualEditing.description'),
   },
   {
-    name: 'Features',
-    description:
-      'Click & Drop, Reordering, True Visual Editing, Responsive Editing, Font Customization, Undo & Redo, Text Editing, Media Library, Unsplash Integration, YouTube Videos.',
+    name: t('features.features.name'),
+    description: t('features.features.description'),
   },
   {
-    name: 'Technologies',
-    description:
-      'Developed with TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.',
+    name: t('features.technologies.name'),
+    description: t('features.technologies.description'),
   },
   {
-    name: 'Set Brand and Link Colors one place',
-    description:
-      'Global Styles for fonts, designs, & colors. Set Brand and Link Colors once and apply them across the entire Platform with ease.',
+    name: t('features.setBrandAndLinkColors.name'),
+    description: t('features.setBrandAndLinkColors.description'),
   },
   {
-    name: 'Mobile-First Approach',
-    description:
-      'Developed with Mobile-First approach. The Page Builder even works on mobile phones.',
+    name: t('features.mobileFirstApproach.name'),
+    description: t('features.mobileFirstApproach.description'),
   },
   {
-    name: 'Media Library',
-    description:
-      'A beautiful and user-friendly media library that allows you to change and update images. Unsplash Integration is included.',
+    name: t('features.mediaLibrary.name'),
+    description: t('features.mediaLibrary.description'),
   },
   {
-    name: 'Minimal and Intuitive Design',
-    description:
-      'Beautiful, elegant and intuitive design. Enhance user engagement with amazing visual experience.',
+    name: t('features.minimalIntuitiveDesign.name'),
+    description: t('features.minimalIntuitiveDesign.description'),
   },
 ]
 
@@ -60,7 +54,7 @@ const htmlString =
   '</div>'
 
 // Parse as HTML (not JSON)
-const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(htmlString)
+const { /* components, */ pageSettings } = pageBuilderService.parsePageBuilderHTML(htmlString)
 
 const configPageBuilder = {
   userForPageBuilder: {

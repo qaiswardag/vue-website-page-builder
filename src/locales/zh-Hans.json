@@ -10,6 +10,40 @@
     "htmlOverview": "HTML 概览",
     "deleteLayout": "删除布局"
   },
+  "features": {
+    "liveDragDropBuilder": {
+      "name": "实时拖放构建器",
+      "description": "在页面上点击并拖放内容，见证页面焕发生机。让您的愿景成真，使用拖放页面生成器创建令人印象深刻的页面。"
+    },
+    "trueVisualEditing": {
+      "name": "真正的可视化编辑",
+      "description": "实时查看您的更改。提升您的创意愿景，使用直观的页面生成器创建页面。打破设计限制，将您的想法变为现实。"
+    },
+    "features": {
+      "name": "功能",
+      "description": "拖放、重新排序、真正的可视化编辑、响应式编辑、字体自定义、撤销与重做、文本编辑、媒体库、Unsplash 集成、YouTube 视频。"
+    },
+    "technologies": {
+      "name": "技术",
+      "description": "由 TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS 和 HTML 开发。"
+    },
+    "setBrandAndLinkColors": {
+      "name": "一处设置品牌和链接颜色",
+      "description": "字体、设计和颜色的全局样式。只需设置一次品牌和链接颜色，即可轻松应用到整个平台。"
+    },
+    "mobileFirstApproach": {
+      "name": "移动优先策略",
+      "description": "采用移动优先策略开发。页面生成器甚至可以在手机上使用。"
+    },
+    "mediaLibrary": {
+      "name": "媒体库",
+      "description": "美观且用户友好的媒体库，允许您更改和更新图片。包含 Unsplash 集成。"
+    },
+    "minimalIntuitiveDesign": {
+      "name": "极简直观设计",
+      "description": "美观、优雅且直观的设计。通过出色的视觉体验提升用户参与度。"
+    }
+  },
   "branding": {
     "mainHeader": "让您的愿景成真，使用拖放页面生成器创建令人印象深刻的页面",
     "description": "令人惊叹的网页构建器。让用户能够在任何规模下设计和发布现代网页。使用免费的拖放页面生成器，轻松构建响应式页面，如列表、职位或博客文章，并轻松管理内容。由 TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS 和 HTML 开发。免费下载或安装我们强大、灵活且易于使用的 Vue 3 页面生成器。",

@@ -10,6 +10,40 @@
     "htmlOverview": "HTML-Übersicht",
     "deleteLayout": "Layout löschen"
   },
+  "features": {
+    "liveDragDropBuilder": {
+      "name": "Live Drag & Drop Builder",
+      "description": "Klicken und ziehen Sie Inhalte auf eine Seite und sehen Sie, wie Ihre Seiten zum Leben erwachen. Erwecken Sie Ihre Vision zum Leben und erstellen Sie beeindruckende Seiten mit einem Drag & Drop Page Builder."
+    },
+    "trueVisualEditing": {
+      "name": "Echtes visuelles Bearbeiten",
+      "description": "Sehen Sie Ihre Änderungen in Echtzeit. Erhöhen Sie Ihre kreative Vision und erstellen Sie Seiten mit einem intuitiven Page Builder. Brechen Sie Designgrenzen und setzen Sie Ihre Ideen um."
+    },
+    "features": {
+      "name": "Funktionen",
+      "description": "Drag & Drop, Umordnen, echtes visuelles Bearbeiten, responsives Bearbeiten, Schriftanpassung, Rückgängig & Wiederholen, Textbearbeitung, Medienbibliothek, Unsplash-Integration, YouTube-Videos."
+    },
+    "technologies": {
+      "name": "Technologien",
+      "description": "Entwickelt mit TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS und HTML."
+    },
+    "setBrandAndLinkColors": {
+      "name": "Marken- und Linkfarben an einem Ort festlegen",
+      "description": "Globale Stile für Schriftarten, Designs und Farben. Legen Sie Marken- und Linkfarben einmal fest und wenden Sie sie einfach auf der gesamten Plattform an."
+    },
+    "mobileFirstApproach": {
+      "name": "Mobile-First-Ansatz",
+      "description": "Entwickelt mit Mobile-First-Ansatz. Der Page Builder funktioniert sogar auf Mobiltelefonen."
+    },
+    "mediaLibrary": {
+      "name": "Medienbibliothek",
+      "description": "Eine schöne und benutzerfreundliche Medienbibliothek, mit der Sie Bilder ändern und aktualisieren können. Unsplash-Integration ist enthalten."
+    },
+    "minimalIntuitiveDesign": {
+      "name": "Minimales und intuitives Design",
+      "description": "Schönes, elegantes und intuitives Design. Steigern Sie das Nutzerengagement mit einer großartigen visuellen Erfahrung."
+    }
+  },
   "branding": {
     "mainHeader": "Erwecken Sie Ihre Vision zum Leben und erstellen Sie beeindruckende Seiten mit einem Drag & Drop Page Builder",
     "description": "Der Web-Builder für beeindruckende Seiten. Ermöglichen Sie es Nutzern, moderne Seiten in jeder Größenordnung zu entwerfen und zu veröffentlichen. Erstellen Sie responsive Seiten wie Listen, Jobs oder Blogbeiträge und verwalten Sie Inhalte einfach mit dem kostenlosen Drag & Drop Page Builder. Entwickelt mit TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS und HTML. Laden Sie unseren leistungsstarken, flexiblen und einfach zu bedienenden kostenlosen Vue 3 Page Builder herunter oder installieren Sie ihn.",
