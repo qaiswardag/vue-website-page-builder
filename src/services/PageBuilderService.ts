@@ -334,6 +334,11 @@ export class PageBuilderService {
     this.ensureLanguage(config)
   }
 
+  private saveBuilderConfigToLocalStorage(specificConfig: PageBuilderConfig) {
+    console.log('Saving builder settings...')
+    localStorage.setItem('pageBuilderConfig', JSON.stringify(specificConfig))
+  }
+
   /**
    * - Entry point for initializing the Page Builder.
    * - Sets the builder as started in the state store.
@@ -359,6 +364,18 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setPageBuilderConfig(config)
       // Validate and normalize the config (ensure required fields are present)
       this.validateConfig(config)
+
+      if (
+        this.pageBuilderStateStore.getPageBuilderConfig &&
+        this.pageBuilderStateStore.getPageBuilderConfig.userSettings
+      ) {
+        const specificConfig: PageBuilderConfig = {}
+
+        configPageBuilder.userSettings =
+          this.pageBuilderStateStore.getPageBuilderConfig.userSettings
+
+        this.saveBuilderConfigToLocalStorage()
+      }
 
       if (
         this.pageBuilderStateStore.getPageBuilderConfig &&
