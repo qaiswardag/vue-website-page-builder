@@ -103,6 +103,7 @@ Includes:
 The Page Builder is packed with features:
 
 - **Click & Drop**: Easily rearrange elements on your page.
+- **Multilingual Page Builder**: : The Page Builder now offers comprehensive language support, empowering users around the world to build pages in their native language. Supported languages include English, Simplified Chinese, French, Japanese, Russian, Spanish, Portuguese, German, Arabic, and Hindi — making content creation truly global.
 - **Reordering**: Change the order of your content without hassle.
 - **True Visual Editing**: See your changes in real-time as you make them.
 - **Media Library**: Easily inject your own custom media library component.
