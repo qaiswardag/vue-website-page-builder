@@ -7,7 +7,7 @@ import type {
   StartBuilderResult,
 } from '../types'
 import type { usePageBuilderStateStore } from '../stores/page-builder-state'
-import { i18n } from '../i18n'
+// import { i18n } from '../i18n' // i18n is now async and must be passed in, not imported
 
 import tailwindFontSizes from '../utils/builder/tailwind-font-sizes'
 import tailwindColors from '../utils/builder/tailwaind-colors'
@@ -49,7 +49,10 @@ export const AVAILABLE_LANGUAGES: AvailableLanguage[] = [
   'hi',
 ]
 
+import type { I18n } from 'vue-i18n'
+
 export class PageBuilderService {
+  private i18n: I18n
   // Class properties with types
   private fontSizeRegex =
     /^(sm:|md:|lg:|xl:|2xl:)?pbx-text-(xs|sm|base|lg|xl|2xl|3xl|4xl|5xl|6xl|7xl|8xl|9xl)$/
@@ -74,7 +77,8 @@ export class PageBuilderService {
   private pendingMountComponents: BuilderResourceData | null = null
   private isPageBuilderMissingOnStart: boolean = false
 
-  constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
+  constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>, i18n: I18n) {
+    this.i18n = i18n
     this.hasStartedEditing = false
     this.pageBuilderStateStore = pageBuilderStateStore
     this.getApplyImageToSelection = computed(
@@ -369,7 +373,7 @@ export class PageBuilderService {
           this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
 
         if (saveLang) {
-          i18n.global.locale.value = saveLang
+          this.i18n.global.locale = saveLang
         }
         return
       } catch (e) {
@@ -410,7 +414,7 @@ export class PageBuilderService {
         this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language &&
         this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
       ) {
-        i18n.global.locale.value =
+        this.i18n.global.locale =
           this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
       }
 

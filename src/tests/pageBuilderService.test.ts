@@ -47,7 +47,13 @@ describe('PageBuilderService', () => {
         typeof (fn as { mockClear?: () => void }).mockClear === 'function' &&
         (fn as { mockClear: () => void }).mockClear(),
     )
-    service = new PageBuilderService(mockStore)
+    // Provide a minimal i18n mock for tests
+    const mockI18n = {
+      global: {
+        locale: 'en',
+      },
+    } as any
+    service = new PageBuilderService(mockStore, mockI18n)
   })
 
   it('should start builder and return a success message', async () => {
