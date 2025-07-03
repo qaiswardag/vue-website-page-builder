@@ -620,7 +620,7 @@ onMounted(async () => {
               >
                 <span class="lg:pbx-block pbx-hidden">
                   <div class="pbx-whitespace-nowrap pbx-cursor-pointer">
-                    {{ $t('button.addComponent') }}
+                    {{ $t('button.addComponents') }}
                   </div>
                 </span>
                 <span

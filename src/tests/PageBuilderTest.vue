@@ -78,7 +78,6 @@ const configPageBuilder = {
     title: 'Demo Article',
     id: 1,
   },
-  // ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi']
   userSettings: {
     theme: 'light',
     language: {

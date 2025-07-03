@@ -331,7 +331,7 @@ export class PageBuilderService {
       this.ensureUpdateOrCreateConfig(config)
     }
 
-    // this.ensureLanguage(config)
+    this.ensureLanguage(config)
   }
 
   /**
