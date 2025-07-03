@@ -1,6 +1,6 @@
 {
-  "message": {
-    "hello": "привет мир"
-  },
-  "language": "Язык"
+  "language": "Язык",
+  "button": {
+    "publish": "Опубликовать"
+  }
 }

@@ -1,6 +1,6 @@
 {
-  "message": {
-    "hello": "hola mundo"
-  },
-  "language": "Idioma"
+  "language": "Idioma",
+  "button": {
+    "publish": "Publicar"
+  }
 }

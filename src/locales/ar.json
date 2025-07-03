@@ -1,6 +1,6 @@
 {
-  "message": {
-    "hello": "مرحبا بالعالم"
-  },
-  "language": "لغة"
+  "language": "لغة",
+  "button": {
+    "publish": "نشر"
+  }
 }
