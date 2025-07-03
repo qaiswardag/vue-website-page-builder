@@ -73,18 +73,22 @@ watch(
 
 <template>
   <EditorAccordion>
-    <template #title>Border Radius</template>
+    <template #title>{{ $t('borderRadius.title') }}</template>
     <template #content>
-      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Global</p>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">
+        {{ $t('borderRadius.global') }}
+      </p>
       <div class="pbx-my-2 pbx-py-2">
-        <label for="global-border-radius" class="pbx-myPrimaryInputLabel"> Border Radius </label>
+        <label for="global-border-radius" class="pbx-myPrimaryInputLabel">{{
+          $t('borderRadius.label')
+        }}</label>
         <select
           id="global-border-radius"
           v-model="borderRadiusGlobal"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusGlobal(borderRadiusGlobal)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ $t('borderRadius.select') }}</option>
           <option
             v-for="borderRadiusGlobal in tailwindBorderRadius.roundedGlobal"
             :key="borderRadiusGlobal"
@@ -93,10 +97,12 @@ watch(
           </option>
         </select>
       </div>
-      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Specific</p>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">
+        {{ $t('borderRadius.specific') }}
+      </p>
       <div class="pbx-my-2 pbx-py-2">
         <label for="border-radius-top-left" class="pbx-myPrimaryInputLabel">
-          Border Radius top left
+          {{ $t('borderRadius.topLeft') }}
         </label>
         <select
           id="border-radius-top-left"
@@ -104,7 +110,7 @@ watch(
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusTopLeft(borderRadiusTopLeft)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ $t('borderRadius.select') }}</option>
           <option
             v-for="borderRadiusTopLeft in tailwindBorderRadius.roundedTopLeft"
             :key="borderRadiusTopLeft"
@@ -115,7 +121,7 @@ watch(
       </div>
       <div class="pbx-my-2 pbx-py-2">
         <label for="border-radius-top-right" class="pbx-myPrimaryInputLabel">
-          Border Radius top right
+          {{ $t('borderRadius.topRight') }}
         </label>
         <select
           id="border-radius-top-right"
@@ -123,7 +129,7 @@ watch(
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusTopRight(borderRadiusTopRight)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ $t('borderRadius.select') }}</option>
           <option
             v-for="borderRadiusTopRight in tailwindBorderRadius.roundedTopRight"
             :key="borderRadiusTopRight"
@@ -134,7 +140,7 @@ watch(
       </div>
       <div class="pbx-my-2 pbx-py-2">
         <label for="border-radius-bottom-left" class="pbx-myPrimaryInputLabel">
-          Border Radius bottom left
+          {{ $t('borderRadius.bottomLeft') }}
         </label>
         <select
           id="border-radius-bottom-left"
@@ -142,7 +148,7 @@ watch(
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusBottomleft(borderRadiusBottomleft)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ $t('borderRadius.select') }}</option>
           <option
             v-for="borderRadiusBottomleft in tailwindBorderRadius.roundedBottomLeft"
             :key="borderRadiusBottomleft"
@@ -153,7 +159,7 @@ watch(
       </div>
       <div class="pbx-my-2 pbx-py-2">
         <label for="border-radius-bottom-right" class="pbx-myPrimaryInputLabel">
-          Border Radius bottom right
+          {{ $t('borderRadius.bottomRight') }}
         </label>
         <select
           id="border-radius-bottom-right"
@@ -161,7 +167,7 @@ watch(
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderRadiusBottomRight(borderRadiusBottomRight)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ $t('borderRadius.select') }}</option>
           <option
             v-for="borderRadiusBottomRight in tailwindBorderRadius.roundedBottomRight"
             :key="borderRadiusBottomRight"

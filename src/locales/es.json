@@ -81,5 +81,32 @@
   },
   "opacityEditor": {
     "title": "Opacidad y transparencia"
+  },
+  "borderRadius": {
+    "title": "Radio de borde",
+    "global": "Global",
+    "specific": "Específico",
+    "label": "Radio de borde",
+    "topLeft": "Radio de borde superior izquierdo",
+    "topRight": "Radio de borde superior derecho",
+    "bottomLeft": "Radio de borde inferior izquierdo",
+    "bottomRight": "Radio de borde inferior derecho",
+    "select": "Seleccionar"
+  },
+  "borders": {
+    "title": "Estilo, ancho y color de borde",
+    "border": "Borde",
+    "style": "Estilo de borde",
+    "width": "Ancho de borde",
+    "color": "Color de borde",
+    "select": "Seleccionar"
+  },
+  "classEditor": {
+    "title": "CSS generado",
+    "info": "Este es el CSS aplicado por el constructor. Agregue su propio CSS y presione Enter para aplicarlo al elemento seleccionado.",
+    "add": "Agregue su CSS.",
+    "prefix": "El prefijo pbx- se agrega automáticamente.",
+    "placeholder": "Escriba la clase",
+    "addButton": "Agregar"
   }
 }

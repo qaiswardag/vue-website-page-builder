@@ -81,5 +81,32 @@
   },
   "opacityEditor": {
     "title": "不透明度と透明度"
+  },
+  "borderRadius": {
+    "title": "ボーダー半径",
+    "global": "グローバル",
+    "specific": "個別",
+    "label": "ボーダー半径",
+    "topLeft": "左上のボーダー半径",
+    "topRight": "右上のボーダー半径",
+    "bottomLeft": "左下のボーダー半径",
+    "bottomRight": "右下のボーダー半径",
+    "select": "選択"
+  },
+  "borders": {
+    "title": "ボーダースタイル、幅、色",
+    "border": "ボーダー",
+    "style": "ボーダースタイル",
+    "width": "ボーダー幅",
+    "color": "ボーダー色",
+    "select": "選択"
+  },
+  "classEditor": {
+    "title": "生成されたCSS",
+    "info": "これはビルダーによって適用されたCSSです。独自のCSSを追加し、Enterキーを押して選択した要素に適用します。",
+    "add": "CSSを追加してください。",
+    "prefix": "pbx-プレフィックスは自動的に追加されます。",
+    "placeholder": "クラスを入力",
+    "addButton": "追加"
   }
 }

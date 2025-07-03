@@ -81,5 +81,32 @@
   },
   "opacityEditor": {
     "title": "不透明度与透明度"
+  },
+  "borderRadius": {
+    "title": "圆角",
+    "global": "全局",
+    "specific": "特定",
+    "label": "圆角",
+    "topLeft": "左上圆角",
+    "topRight": "右上圆角",
+    "bottomLeft": "左下圆角",
+    "bottomRight": "右下圆角",
+    "select": "选择"
+  },
+  "borders": {
+    "title": "边框样式、宽度和颜色",
+    "border": "边框",
+    "style": "边框样式",
+    "width": "边框宽度",
+    "color": "边框颜色",
+    "select": "选择"
+  },
+  "classEditor": {
+    "title": "生成的 CSS",
+    "info": "这是由构建器应用的 CSS。添加您自己的 CSS 并按回车键将其应用到所选元素。",
+    "add": "添加您的 CSS。",
+    "prefix": "pbx- 前缀会自动添加。",
+    "placeholder": "输入类名",
+    "addButton": "添加"
   }
 }

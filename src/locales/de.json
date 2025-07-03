@@ -81,5 +81,32 @@
   },
   "opacityEditor": {
     "title": "Deckkraft & Transparenz"
+  },
+  "borderRadius": {
+    "title": "Rahmenradius",
+    "global": "Global",
+    "specific": "Spezifisch",
+    "label": "Rahmenradius",
+    "topLeft": "Rahmenradius oben links",
+    "topRight": "Rahmenradius oben rechts",
+    "bottomLeft": "Rahmenradius unten links",
+    "bottomRight": "Rahmenradius unten rechts",
+    "select": "Auswählen"
+  },
+  "borders": {
+    "title": "Rahmenstil, -breite & -farbe",
+    "border": "Rahmen",
+    "style": "Rahmenstil",
+    "width": "Rahmenbreite",
+    "color": "Rahmenfarbe",
+    "select": "Auswählen"
+  },
+  "classEditor": {
+    "title": "Generiertes CSS",
+    "info": "Dies ist das vom Builder angewendete CSS. Fügen Sie Ihr eigenes CSS hinzu und drücken Sie die Eingabetaste, um es auf das ausgewählte Element anzuwenden.",
+    "add": "Fügen Sie Ihr CSS hinzu.",
+    "prefix": "Das pbx- Präfix wird automatisch hinzugefügt.",
+    "placeholder": "Klasse eingeben",
+    "addButton": "Hinzufügen"
   }
 }

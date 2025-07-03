@@ -50,11 +50,10 @@ const handleAddClasses = async () => {
 
 <template>
   <EditorAccordion>
-    <template #title>Generated CSS</template>
+    <template #title>{{ $t('classEditor.title') }}</template>
     <template #content>
       <label class="pbx-myPrimaryInputLabel pbx-my-4">
-        This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the
-        selected element.
+        {{ $t('classEditor.info') }}
       </label>
 
       <div class="pbx-flex pbx-flex-row pbx-flex-wrap pbx-gap-2 pbx-mt-2 pbx-mb-4">
@@ -79,22 +78,24 @@ const handleAddClasses = async () => {
 
       <div>
         <label for="custom-css" class="pbx-myPrimaryInputLabel">
-          Add your CSS.
+          {{ $t('classEditor.add') }}
           <br />
-          The pbx- prefix is added automatically.
+          {{ $t('classEditor.prefix') }}
         </label>
         <div class="pbx-flex pbx-gap-2 pbx-item-center">
           <input
             id="custom-css"
             v-model="inputClass"
             type="text"
-            placeholder="Type class"
+            :placeholder="$t('classEditor.placeholder')"
             @keydown.enter="handleAddClasses()"
             autocomplete="off"
             class="pbx-myPrimaryInput"
           />
 
-          <button @click="handleAddClasses" type="button" class="pbx-myPrimaryButton">Add</button>
+          <button @click="handleAddClasses" type="button" class="pbx-myPrimaryButton">
+            {{ $t('classEditor.addButton') }}
+          </button>
         </div>
       </div>
       <p v-if="errorMessage" class="pbx-myPrimaryInputError">{{ errorMessage }}</p>

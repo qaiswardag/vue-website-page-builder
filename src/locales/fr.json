@@ -81,5 +81,32 @@
   },
   "opacityEditor": {
     "title": "Opacité et transparence"
+  },
+  "borderRadius": {
+    "title": "Rayon de bordure",
+    "global": "Global",
+    "specific": "Spécifique",
+    "label": "Rayon de bordure",
+    "topLeft": "Rayon de bordure en haut à gauche",
+    "topRight": "Rayon de bordure en haut à droite",
+    "bottomLeft": "Rayon de bordure en bas à gauche",
+    "bottomRight": "Rayon de bordure en bas à droite",
+    "select": "Sélectionner"
+  },
+  "borders": {
+    "title": "Style, largeur et couleur de bordure",
+    "border": "Bordure",
+    "style": "Style de bordure",
+    "width": "Largeur de bordure",
+    "color": "Couleur de bordure",
+    "select": "Sélectionner"
+  },
+  "classEditor": {
+    "title": "CSS généré",
+    "info": "Voici le CSS appliqué par le builder. Ajoutez votre propre CSS et appuyez sur Entrée pour l'appliquer à l'élément sélectionné.",
+    "add": "Ajoutez votre CSS.",
+    "prefix": "Le préfixe pbx- est ajouté automatiquement.",
+    "placeholder": "Tapez la classe",
+    "addButton": "Ajouter"
   }
 }

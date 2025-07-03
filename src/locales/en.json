@@ -81,5 +81,32 @@
   },
   "opacityEditor": {
     "title": "Opacity & Transparency"
+  },
+  "borderRadius": {
+    "title": "Border Radius",
+    "global": "Global",
+    "specific": "Specific",
+    "label": "Border Radius",
+    "topLeft": "Border Radius top left",
+    "topRight": "Border Radius top right",
+    "bottomLeft": "Border Radius bottom left",
+    "bottomRight": "Border Radius bottom right",
+    "select": "Select"
+  },
+  "borders": {
+    "title": "Border Style, Width & Color",
+    "border": "Border",
+    "style": "Border Style",
+    "width": "Border Width",
+    "color": "Border Color",
+    "select": "Select"
+  },
+  "classEditor": {
+    "title": "Generated CSS",
+    "info": "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.",
+    "add": "Add your CSS.",
+    "prefix": "The pbx- prefix is added automatically.",
+    "placeholder": "Type class",
+    "addButton": "Add"
   }
 }

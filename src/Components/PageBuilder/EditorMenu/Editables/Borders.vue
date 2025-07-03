@@ -52,19 +52,21 @@ watch(
 
 <template>
   <EditorAccordion>
-    <template #title>Border Style, Width & Color</template>
+    <template #title>{{ $t('borders.title') }}</template>
     <template #content>
-      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Border</p>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">
+        {{ $t('borders.border') }}
+      </p>
 
       <div class="pbx-my-2 pbx-py-2">
-        <label for="border-style" class="pbx-myPrimaryInputLabel"> Border Style </label>
+        <label for="border-style" class="pbx-myPrimaryInputLabel">{{ $t('borders.style') }}</label>
         <select
           id="border-style"
           v-model="borderStyle"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderStyle(borderStyle)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ $t('borders.select') }}</option>
           <option
             v-for="borderStyle in tailwindBorderStyleWidthPlusColor.borderStyle"
             :key="borderStyle"
@@ -74,14 +76,14 @@ watch(
         </select>
       </div>
       <div class="pbx-my-2 pbx-py-2">
-        <label for="border-width" class="pbx-myPrimaryInputLabel"> Border Width </label>
+        <label for="border-width" class="pbx-myPrimaryInputLabel">{{ $t('borders.width') }}</label>
         <select
           id="border-width"
           v-model="borderWidth"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderWidth(borderWidth)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ $t('borders.select') }}</option>
           <option
             v-for="borderWidth in tailwindBorderStyleWidthPlusColor.borderWidth"
             :key="borderWidth"
@@ -91,7 +93,7 @@ watch(
         </select>
       </div>
 
-      <label for="border-color" class="pbx-myPrimaryInputLabel"> Border Color </label>
+      <label for="border-color" class="pbx-myPrimaryInputLabel">{{ $t('borders.color') }}</label>
       <Listbox as="div" v-model="borderColor">
         <div class="pbx-relative pbx-mt-2">
           <ListboxButton class="pbx-myPrimarySelect" id="border-color">

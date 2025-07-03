@@ -81,5 +81,32 @@
     "vertical": "Margem vertical",
     "horizontal": "Margem horizontal",
     "select": "Selecionar"
+  },
+  "borderRadius": {
+    "title": "Raio da borda",
+    "global": "Global",
+    "specific": "Específico",
+    "label": "Raio da borda",
+    "topLeft": "Raio da borda superior esquerda",
+    "topRight": "Raio da borda superior direita",
+    "bottomLeft": "Raio da borda inferior esquerda",
+    "bottomRight": "Raio da borda inferior direita",
+    "select": "Selecionar"
+  },
+  "borders": {
+    "title": "Estilo, largura e cor da borda",
+    "border": "Borda",
+    "style": "Estilo da borda",
+    "width": "Largura da borda",
+    "color": "Cor da borda",
+    "select": "Selecionar"
+  },
+  "classEditor": {
+    "title": "CSS Gerado",
+    "info": "Este é o CSS aplicado pelo construtor. Adicione seu próprio CSS e pressione Enter para aplicá-lo ao elemento selecionado.",
+    "add": "Adicione seu CSS.",
+    "prefix": "O prefixo pbx- é adicionado automaticamente.",
+    "placeholder": "Digite a classe",
+    "addButton": "Adicionar"
   }
 }
