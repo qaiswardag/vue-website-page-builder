@@ -3,5 +3,16 @@
   "button": {
     "publish": "Publier",
     "addComponents": "Ajouter de nouveaux composants"
+  },
+  "options": {
+    "button": "Options",
+    "configOverview": "Aperçu de la configuration",
+    "htmlOverview": "Aperçu HTML",
+    "deleteLayout": "Supprimer la mise en page"
+  },
+  "branding": {
+    "mainHeader": "Donnez vie à votre vision et créez des pages impressionnantes avec un Page Builder glisser-déposer",
+    "description": "Le créateur de pages web pour des pages époustouflantes. Permettez aux utilisateurs de concevoir et publier des pages modernes à n'importe quelle échelle. Créez des pages réactives comme des listes, des offres d'emploi ou des articles de blog et gérez facilement le contenu grâce au Page Builder gratuit par glisser-déposer. Développé avec TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS et HTML. Téléchargez ou installez gratuitement notre puissant, flexible et facile à utiliser Page Builder Vue 3.",
+    "downloadDescription": "Téléchargez ou installez gratuitement notre puissant, flexible et facile à utiliser Page Builder Vue 3 via"
   }
 }

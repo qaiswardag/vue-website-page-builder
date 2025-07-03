@@ -81,7 +81,7 @@ const configPageBuilder = {
   userSettings: {
     theme: 'light',
     language: {
-      default: 'es',
+      default: 'en',
       enable: ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'],
       disableLanguageDropDown: false,
     },
@@ -94,7 +94,7 @@ const configPageBuilder = {
 } as const
 
 onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder, components)
+  const result = await pageBuilderService.startBuilder(configPageBuilder)
   console.log('Page Builder inspect the result for message, status, or error::', result)
 })
 </script>
@@ -104,19 +104,15 @@ onMounted(async () => {
     <div class="pbx-myPrimaryWidthScreenModule pbx-bg-red-50 lg:pbx-block">
       <div class="pbx-myPrimaryContentSection">
         <h2 class="pbx-mySecondaryHeader">
-          Bring your vision to life and create impressive pages using a click & drop Page Builder
+          {{ $t('branding.mainHeader') }}
         </h2>
         <p class="pbx-myPrimaryParagraph pbx-font-normal">
-          The web builder for stunning pages. Enable users to design and publish modern pages at any
-          scale. Build responsive pages like listings, jobs or blog posts and manage content easily
-          using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition
-          API, Pinia, CSS, Tailwind CSS and HTML.
-
+          {{ $t('branding.description') }}
           <br />
         </p>
         <div class="pbx-mt-4">
           <p class="pbx-myPrimaryParagraph pbx-font-normal">
-            Download or install our powerful, flexible, and easy-to-use free Vue 3 Page Builder via
+            {{ $t('branding.downloadDescription') }}
             <br />
             <strong> npm:</strong>
             <a

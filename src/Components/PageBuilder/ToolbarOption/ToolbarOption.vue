@@ -156,7 +156,7 @@ const openHTMLSettings = function () {
         <!-- Component Start -->
         <div class="pbx-relative pbx-group">
           <button type="button" class="pbx-mySecondaryButton pbx-font-normal pbx-text-xs">
-            <span> Options </span>
+            <span> {{ $t('options.button') }} </span>
           </button>
           <div
             class="pbx-absolute pbx-left-0 -pbx-ml-16 -pbx-mt-2 pbx-flex pbx-flex-col pbx-gap-3 pbx-shadow-lg pbx-bg-white pbx-w-max pbx-border-solid pbx-border pbx-border-gray-100 pbx-rounded-2xl pbx-transition-all pbx-duration-200 pbx-ease-out pbx-pt-4 pbx-pr-4 pbx-pb-4 pbx-pl-2 pbx-z-30 pbx-opacity-0 pbx-pointer-events-none pbx-translate-y-2 group-hover:pbx-opacity-100 group-hover:pbx-pointer-events-auto group-hover:pbx-translate-y-0"
@@ -172,7 +172,7 @@ const openHTMLSettings = function () {
               class="pbx-mySecondaryButton pbx-text-xs pbx-font-normal"
               type="button"
             >
-              Config Overview
+              <span> {{ $t('options.configOverview') }} </span>
             </button>
             <!-- Main Settings End -->
 
@@ -182,7 +182,7 @@ const openHTMLSettings = function () {
               class="pbx-mySecondaryButton pbx-text-xs pbx-font-normal"
               type="button"
             >
-              HTML Overview
+              <span> {{ $t('options.htmlOverview') }} </span>
             </button>
             <!-- HTML Settings End -->
 
@@ -192,7 +192,7 @@ const openHTMLSettings = function () {
               class="pbx-myPrimaryDeleteButton pbx-text-xs pbx-font-normal"
               type="button"
             >
-              Delete Layout
+              <span> {{ $t('options.deleteLayout') }} </span>
             </button>
             <!-- Delete Layout End -->
           </div>

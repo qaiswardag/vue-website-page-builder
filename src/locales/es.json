@@ -3,5 +3,16 @@
   "button": {
     "publish": "Publicar",
     "addComponents": "Agregar nuevos componentes"
+  },
+  "options": {
+    "button": "Opciones",
+    "configOverview": "Resumen de configuración",
+    "htmlOverview": "Resumen HTML",
+    "deleteLayout": "Eliminar diseño"
+  },
+  "branding": {
+    "mainHeader": "Da vida a tu visión y crea páginas impresionantes usando un Page Builder de arrastrar y soltar",
+    "description": "El creador web para páginas impresionantes. Permite a los usuarios diseñar y publicar páginas modernas a cualquier escala. Crea páginas responsivas como listados, empleos o blogs y gestiona el contenido fácilmente usando el Page Builder gratuito de arrastrar y soltar. Desarrollado con TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS y HTML. Descarga o instala nuestro potente, flexible y fácil de usar Page Builder gratuito para Vue 3.",
+    "downloadDescription": "Descarga o instala nuestro potente, flexible y fácil de usar Page Builder gratuito para Vue 3 vía"
   }
 }

@@ -3,5 +3,16 @@
   "button": {
     "publish": "公開",
     "addComponents": "新しいコンポーネントを追加"
+  },
+  "options": {
+    "button": "オプション",
+    "configOverview": "設定概要",
+    "htmlOverview": "HTML概要",
+    "deleteLayout": "レイアウトを削除"
+  },
+  "branding": {
+    "mainHeader": "あなたのビジョンを形にし、ドラッグ＆ドロップページビルダーで印象的なページを作成しましょう",
+    "description": "素晴らしいページのためのウェブビルダー。ユーザーがあらゆる規模でモダンなページをデザインし公開できるようにします。リスト、求人、ブログ記事などのレスポンシブページを作成し、無料のドラッグ＆ドロップページビルダーでコンテンツを簡単に管理できます。TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS、HTMLで開発。パワフルで柔軟、使いやすい無料のVue 3ページビルダーをダウンロードまたはインストールしてください。",
+    "downloadDescription": "パワフルで柔軟、使いやすい無料のVue 3ページビルダーをダウンロードまたはインストールしてください via"
   }
 }

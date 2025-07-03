@@ -3,5 +3,16 @@
   "button": {
     "publish": "发布",
     "addComponents": "添加新组件"
+  },
+  "options": {
+    "button": "选项",
+    "configOverview": "配置概览",
+    "htmlOverview": "HTML 概览",
+    "deleteLayout": "删除布局"
+  },
+  "branding": {
+    "mainHeader": "让您的愿景成真，使用拖放页面生成器创建令人印象深刻的页面",
+    "description": "令人惊叹的网页构建器。让用户能够在任何规模下设计和发布现代网页。使用免费的拖放页面生成器，轻松构建响应式页面，如列表、职位或博客文章，并轻松管理内容。由 TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS 和 HTML 开发。免费下载或安装我们强大、灵活且易于使用的 Vue 3 页面生成器。",
+    "downloadDescription": "免费下载或安装我们强大、灵活且易于使用的 Vue 3 页面生成器，通过"
   }
 }
