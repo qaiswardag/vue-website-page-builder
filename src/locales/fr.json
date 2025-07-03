@@ -58,5 +58,28 @@
     "fontWeight": "Graisse de la police",
     "fontFamily": "Famille de polices",
     "fontStyle": "Style de police"
+  },
+  "opacity": {
+    "label": "Opacité",
+    "transparent": "Transparent"
+  },
+  "backgroundOpacity": {
+    "label": "Opacité de fond",
+    "transparent": "Transparent"
+  },
+  "padding": {
+    "title": "Marge intérieure",
+    "vertical": "Marge intérieure verticale",
+    "horizontal": "Marge intérieure horizontale",
+    "select": "Sélectionner"
+  },
+  "margin": {
+    "title": "Marge extérieure",
+    "vertical": "Marge extérieure verticale",
+    "horizontal": "Marge extérieure horizontale",
+    "select": "Sélectionner"
+  },
+  "opacityEditor": {
+    "title": "Opacité et transparence"
   }
 }

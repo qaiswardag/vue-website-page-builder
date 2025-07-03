@@ -32,7 +32,9 @@ watch(
 
 <template>
   <div class="pbx-my-2 pbx-py-2">
-    <label for="bg-opacity" class="pbx-myPrimaryInputLabel"> Background Opacity</label>
+    <label for="bg-opacity" class="pbx-myPrimaryInputLabel">{{
+      $t('backgroundOpacity.label')
+    }}</label>
 
     <Listbox as="div" v-model="opacityVueModel">
       <div class="pbx-relative">
@@ -51,7 +53,7 @@ watch(
             ></div>
 
             <span class="pbx-block pbx-truncate" :class="[opacityVueModel !== 'none' ? '' : '']">{{
-              opacityVueModel === 'none' ? 'Transparent' : opacityVueModel
+              opacityVueModel === 'none' ? $t('backgroundOpacity.transparent') : opacityVueModel
             }}</span>
           </span>
           <span
@@ -97,7 +99,9 @@ watch(
                     class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-bg-gray-950"
                     :class="`${backgroundOpacity}`"
                   ></div>
-                  <span v-if="backgroundOpacity === 'none'" class="pbx-ml-3">Transparent</span>
+                  <span v-if="backgroundOpacity === 'none'" class="pbx-ml-3">{{
+                    $t('backgroundOpacity.transparent')
+                  }}</span>
                   <span v-if="backgroundOpacity !== 'none'" class="pbx-ml-3">{{
                     backgroundOpacity
                   }}</span>

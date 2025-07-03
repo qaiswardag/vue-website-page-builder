@@ -58,5 +58,28 @@
     "fontWeight": "Schriftstärke",
     "fontFamily": "Schriftfamilie",
     "fontStyle": "Schriftstil"
+  },
+  "opacity": {
+    "label": "Transparenz",
+    "transparent": "Transparent"
+  },
+  "backgroundOpacity": {
+    "label": "Hintergrundtransparenz",
+    "transparent": "Transparent"
+  },
+  "padding": {
+    "title": "Abstand innen",
+    "vertical": "Vertikaler Abstand innen",
+    "horizontal": "Horizontaler Abstand innen",
+    "select": "Auswählen"
+  },
+  "margin": {
+    "title": "Außenabstand",
+    "vertical": "Vertikaler Außenabstand",
+    "horizontal": "Horizontaler Außenabstand",
+    "select": "Auswählen"
+  },
+  "opacityEditor": {
+    "title": "Deckkraft & Transparenz"
   }
 }

@@ -6,7 +6,7 @@ import ManageOpacity from './ManageOpacity.vue'
 
 <template>
   <EditorAccordion>
-    <template #title>Opacity & Transparency </template>
+    <template #title>{{ $t('opacityEditor.title') }}</template>
     <template #content>
       <ManageOpacity></ManageOpacity>
       <hr />

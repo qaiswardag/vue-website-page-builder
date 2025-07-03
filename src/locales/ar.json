@@ -58,5 +58,28 @@
     "fontWeight": "سُمك الخط",
     "fontFamily": "عائلة الخط",
     "fontStyle": "نمط الخط"
+  },
+  "opacity": {
+    "label": "الشفافية",
+    "transparent": "شفاف"
+  },
+  "backgroundOpacity": {
+    "label": "شفافية الخلفية",
+    "transparent": "شفاف"
+  },
+  "padding": {
+    "title": "الحشو",
+    "vertical": "الحشو العمودي",
+    "horizontal": "الحشو الأفقي",
+    "select": "اختر"
+  },
+  "margin": {
+    "title": "الهامش",
+    "vertical": "الهامش العمودي",
+    "horizontal": "الهامش الأفقي",
+    "select": "اختر"
+  },
+  "opacityEditor": {
+    "title": "الشفافية وعدم الشفافية"
   }
 }

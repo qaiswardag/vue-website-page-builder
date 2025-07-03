@@ -58,5 +58,28 @@
     "fontWeight": "फ़ॉन्ट वज़न",
     "fontFamily": "फ़ॉन्ट परिवार",
     "fontStyle": "फ़ॉन्ट शैली"
+  },
+  "opacity": {
+    "label": "अपारदर्शिता",
+    "transparent": "पारदर्शी"
+  },
+  "backgroundOpacity": {
+    "label": "पृष्ठभूमि अपारदर्शिता",
+    "transparent": "पारदर्शी"
+  },
+  "padding": {
+    "title": "पैडिंग",
+    "vertical": "लंबवत पैडिंग",
+    "horizontal": "क्षैतिज पैडिंग",
+    "select": "चुनें"
+  },
+  "margin": {
+    "title": "मार्जिन",
+    "vertical": "लंबवत मार्जिन",
+    "horizontal": "क्षैतिज मार्जिन",
+    "select": "चुनें"
+  },
+  "opacityEditor": {
+    "title": "अपारदर्शिता और पारदर्शिता"
   }
 }

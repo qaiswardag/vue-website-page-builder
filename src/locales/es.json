@@ -58,5 +58,28 @@
     "fontWeight": "Peso de la fuente",
     "fontFamily": "Familia tipográfica",
     "fontStyle": "Estilo de fuente"
+  },
+  "opacity": {
+    "label": "Opacidad",
+    "transparent": "Transparente"
+  },
+  "backgroundOpacity": {
+    "label": "Opacidad de fondo",
+    "transparent": "Transparente"
+  },
+  "padding": {
+    "title": "Relleno",
+    "vertical": "Relleno vertical",
+    "horizontal": "Relleno horizontal",
+    "select": "Seleccionar"
+  },
+  "margin": {
+    "title": "Margen",
+    "vertical": "Margen vertical",
+    "horizontal": "Margen horizontal",
+    "select": "Seleccionar"
+  },
+  "opacityEditor": {
+    "title": "Opacidad y transparencia"
   }
 }

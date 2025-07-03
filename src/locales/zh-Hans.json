@@ -58,5 +58,28 @@
     "fontWeight": "字体粗细",
     "fontFamily": "字体族",
     "fontStyle": "字体样式"
+  },
+  "opacity": {
+    "label": "不透明度",
+    "transparent": "透明"
+  },
+  "backgroundOpacity": {
+    "label": "背景不透明度",
+    "transparent": "透明"
+  },
+  "padding": {
+    "title": "内边距",
+    "vertical": "垂直内边距",
+    "horizontal": "水平内边距",
+    "select": "选择"
+  },
+  "margin": {
+    "title": "外边距",
+    "vertical": "垂直外边距",
+    "horizontal": "水平外边距",
+    "select": "选择"
+  },
+  "opacityEditor": {
+    "title": "不透明度与透明度"
   }
 }

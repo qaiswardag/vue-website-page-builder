@@ -61,17 +61,19 @@ watch(
 </script>
 <template>
   <EditorAccordion>
-    <template #title>Padding</template>
+    <template #title>{{ $t('padding.title') }}</template>
     <template #content>
       <div class="pbx-my-2 pbx-py-2">
-        <label for="vertical-padding" class="pbx-myPrimaryInputLabel"> Vertical Padding </label>
+        <label for="vertical-padding" class="pbx-myPrimaryInputLabel">{{
+          $t('padding.vertical')
+        }}</label>
         <select
           id="vertical-padding"
           v-model="fontVerticalPadding"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleVerticalPadding(fontVerticalPadding)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ $t('padding.select') }}</option>
           <option
             v-for="verticalPadding in tailwindPaddingPlusMargin.verticalPadding"
             :key="verticalPadding"
@@ -82,14 +84,16 @@ watch(
       </div>
       <hr />
       <div class="pbx-my-2 pbx-py-2">
-        <label for="horizontal-padding" class="pbx-myPrimaryInputLabel"> Horizontal Padding </label>
+        <label for="horizontal-padding" class="pbx-myPrimaryInputLabel">{{
+          $t('padding.horizontal')
+        }}</label>
         <select
           id="horizontal-padding"
           v-model="fontHorizontalPadding"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleHorizontalPadding(fontHorizontalPadding)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ $t('padding.select') }}</option>
           <option
             v-for="horizontalPadding in tailwindPaddingPlusMargin.horizontalPadding"
             :key="horizontalPadding"
