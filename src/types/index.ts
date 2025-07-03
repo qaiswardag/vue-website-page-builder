@@ -227,7 +227,13 @@ export interface PageBuilderConfig {
   [key: string]: unknown
   userSettings?: {
     theme?: 'light' | 'dark' | 'auto'
-    language?: string
+    language?: {
+      default: 'en' | 'zh-Hans' | 'fr' | 'ja' | 'ru' | 'es' | 'pt' | 'de' | 'ar' | 'hi'
+      disable?: ReadonlyArray<
+        'en' | 'zh-Hans' | 'fr' | 'ja' | 'ru' | 'es' | 'pt' | 'de' | 'ar' | 'hi'
+      >
+    }
+
     autoSave?: boolean
     [key: string]: unknown
   } | null

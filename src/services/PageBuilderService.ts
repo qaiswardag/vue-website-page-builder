@@ -22,6 +22,32 @@ import { delay } from '../composables/delay'
 import { isEmptyObject } from '../helpers/isEmptyObject'
 import { extractCleanHTMLFromPageBuilder } from '../composables/extractCleanHTMLFromPageBuilder'
 
+// Define available languages as a type and an array for easy iteration and type safety
+export type AvailableLanguage =
+  | 'en'
+  | 'zh-Hans'
+  | 'fr'
+  | 'ja'
+  | 'ru'
+  | 'es'
+  | 'pt'
+  | 'de'
+  | 'ar'
+  | 'hi'
+
+export const AVAILABLE_LANGUAGES: AvailableLanguage[] = [
+  'en',
+  'zh-Hans',
+  'fr',
+  'ja',
+  'ru',
+  'es',
+  'pt',
+  'de',
+  'ar',
+  'hi',
+]
+
 export class PageBuilderService {
   // Class properties with types
   private fontSizeRegex =
@@ -100,6 +126,9 @@ export class PageBuilderService {
     ]
   }
 
+  public availableLanguage(): AvailableLanguage[] {
+    return AVAILABLE_LANGUAGES
+  }
   // Deselect any selected or hovered elements in the builder UI
   async clearHtmlSelection(): Promise<void> {
     this.pageBuilderStateStore.setComponent(null)
@@ -271,6 +300,7 @@ export class PageBuilderService {
     // Prevents builder actions to prevent errors caused by missing DOM .
     this.pageBuilderStateStore.setBuilderStarted(true)
     const pagebuilder = document.querySelector('#pagebuilder')
+
     let validation
     try {
       this.originalComponents = passedComponentsArray

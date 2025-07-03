@@ -67,6 +67,7 @@ interface PageBuilderState {
   hasLocalDraftForUpdate: boolean
   isResumeEditing: boolean
   isRestoring: boolean
+  currentLanguage: string
 }
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
@@ -129,6 +130,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     hasLocalDraftForUpdate: false,
     isResumeEditing: false,
     isRestoring: false,
+    currentLanguage: 'en',
   }),
   getters: {
     // Core Page Builder Getters
@@ -284,6 +286,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getHasLocalDraftForUpdate: (state: PageBuilderState): boolean => state.hasLocalDraftForUpdate,
     getIsLoadingResumeEditing: (state: PageBuilderState): boolean => state.isResumeEditing,
     getIsRestoring: (state: PageBuilderState): boolean => state.isRestoring,
+    getCurrentLanguage: (state: PageBuilderState): string => state.currentLanguage,
   },
   actions: {
     setComponentArrayAddMethod(payload: string | null): void {
@@ -488,6 +491,9 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
     setIsRestoring(payload: boolean): void {
       this.isRestoring = payload
+    },
+    setCurrentLanguage(payload: string): void {
+      this.currentLanguage = payload
     },
   },
 })

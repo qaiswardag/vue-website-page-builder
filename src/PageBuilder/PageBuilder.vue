@@ -69,6 +69,10 @@ const closeAddComponentModal = () => {
 }
 provide('closeAddComponentModal', closeAddComponentModal)
 
+const getCurrentLanguage = computed(() => {
+  return pageBuilderStateStore.getCurrentLanguage
+})
+
 const getBuilderStarted = computed(() => {
   return pageBuilderStateStore.getBuilderStarted
 })
@@ -702,6 +706,27 @@ onMounted(async () => {
             </button>
           </div>
         </template>
+        <template
+          v-if="
+            getPageBuilderConfig &&
+            getPageBuilderConfig.userSettings &&
+            getPageBuilderConfig.userSettings.language
+          "
+        >
+          <div
+            class="pbx-py-4 pbx-px4 pbx-rounded-xl pbx-border pbx-border-gray-400 pbx-bg-red-100 pbx-m-4 pbx-min-w-72 pbx-max-w-4pbx-min-w-72 pbx-w-max"
+          >
+            <p class="pbx-myPrimaryParagraph py-2">
+              Default: {{ getPageBuilderConfig.userSettings.language.default }}
+            </p>
+            <p class="pbx-myPrimaryParagraph py-2">
+              Disabled languages: {{ getPageBuilderConfig.userSettings.language.disable }}
+            </p>
+            <p class="pbx-myPrimaryParagraph py-2">
+              Available languages: {{ JSON.stringify(pageBuilderService.availableLanguage()) }}
+            </p>
+          </div>
+        </template>
         <template v-if="showCloseButton">
           <div class="pbx-ml-2">
             <button
@@ -717,6 +742,9 @@ onMounted(async () => {
             </button>
           </div>
         </template>
+        <div>
+          <p class="pbx-myPrimaryParagraph py-2">Current language: {{ getCurrentLanguage }}</p>
+        </div>
 
         <!-- Close & Publish buttons end -->
       </div>
