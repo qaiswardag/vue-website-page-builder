@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { ref, computed, watch } from 'vue'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import tailwindColors from '../../../../utils/builder/tailwaind-colors'
@@ -11,7 +11,7 @@ const pageBuilderStateStore = sharedPageBuilderStore
 
 defineProps({
   globalPageLayout: {
-    type: Boolean,
+    Type: Boolean,
   },
 })
 
@@ -49,7 +49,7 @@ watch(
               class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border pbx-border-gray-800 pbx-rounded-sm"
               :class="`pbx-bg-${backgroundColor?.replace('pbx-bg-', '')}`"
             ></div>
-            <div>{{ $t('backgroundColorEditor.label') }}</div>
+            <div>Background Color</div>
           </div>
 
           <span v-if="globalPageLayout" class="material-symbols-outlined"> chevron_right </span>
@@ -99,9 +99,7 @@ watch(
             >
               <div v-if="color === 'none'" class="pbx-flex pbx-items-center">
                 <span class="material-symbols-outlined"> ev_shadow </span>
-                <span class="pbx-ml-3">{{
-                  $t('rightSidebar.backgroundColorEditor.transparent')
-                }}</span>
+                <span class="pbx-ml-3">Transparent</span>
               </div>
               <div v-if="color !== 'none'" class="pbx-flex pbx-items-center">
                 <div
