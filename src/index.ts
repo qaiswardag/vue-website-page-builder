@@ -22,4 +22,7 @@ export { sharedPageBuilderPinia, sharedPageBuilderStore } from './stores/shared-
 
 // export { PageBuilderService } from './src/services/PageBuilderService.ts'
 
-export { initPageBuilder, getPageBuilder } from './composables/builderInstance'
+export { getPageBuilder } from './composables/builderInstance'
+
+// Export the plugin for app.use()
+export { pageBuilder } from './plugin'
