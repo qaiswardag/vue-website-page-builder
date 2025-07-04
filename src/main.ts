@@ -33,16 +33,13 @@ async function initApp() {
     messages, // set locale messages
   })
 
-  // Set the i18n instance in the i18n.ts module for global access
   setI18nInstance(i18n)
-
   initPageBuilder()
 
   const app = createApp(App)
 
   app.use(createPinia())
   app.use(i18n)
-
   app.mount('#app')
 }
 
