@@ -7,7 +7,7 @@ import type {
   StartBuilderResult,
 } from '../types'
 import type { usePageBuilderStateStore } from '../stores/page-builder-state'
-import { i18n } from '../i18n'
+import { getI18nInstance } from '../i18n'
 
 import tailwindFontSizes from '../utils/builder/tailwind-font-sizes'
 import tailwindColors from '../utils/builder/tailwaind-colors'
@@ -17,7 +17,7 @@ import tailwindPaddingAndMargin from '../utils/builder/tailwind-padding-margin'
 import tailwindBorderRadius from '../utils/builder/tailwind-border-radius'
 import tailwindBorderStyleWidthPlusColor from '../utils/builder/tailwind-border-style-width-color'
 import { computed, ref, nextTick } from 'vue'
-import type { ComputedRef } from 'vue'
+import type { ComputedRef, WritableComputedRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { delay } from '../composables/delay'
 import { isEmptyObject } from '../helpers/isEmptyObject'
@@ -369,7 +369,7 @@ export class PageBuilderService {
           this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
 
         if (saveLang) {
-          i18n.global.locale.value = saveLang
+          (getI18nInstance().global.locale as WritableComputedRef<string>).value = saveLang
         }
         return
       } catch (e) {
@@ -410,7 +410,7 @@ export class PageBuilderService {
         this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language &&
         this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
       ) {
-        i18n.global.locale.value =
+        (getI18nInstance().global.locale as WritableComputedRef<string>).value =
           this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
       }
 

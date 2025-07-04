@@ -839,7 +839,7 @@ onMounted(async () => {
 
         <main
           ref="pbxToolBar"
-          class="pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-h-[100vh]"
+          class="pbx-flex pbx-flex-col pbx-grow pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-h-[100vh]"
           :class="{ 'pbx-mr-2': !getMenuRight, '': getMenuRight }"
         >
           <div

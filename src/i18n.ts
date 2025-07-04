@@ -1,27 +1,14 @@
-import { createI18n } from 'vue-i18n'
+import type { I18n } from 'vue-i18n'
 
-// Function to load all locale messages from JSON files
-async function loadLocaleMessages() {
-  const locales = import.meta.glob('./locales/*.json')
-  const messages = {}
-  for (const path in locales) {
-    const matched = path.match(/([A-Za-z0-9-_]+)\.json$/i)
-    if (matched && matched.length > 1) {
-      const locale = matched[1]
-      const module = await locales[path]()
-      messages[locale] = module.default
-    }
-  }
-  return messages
+let i18nInstance: I18n | null = null
+
+export function setI18nInstance(instance: I18n) {
+  i18nInstance = instance
 }
 
-const messages = await loadLocaleMessages()
-
-export const i18n = createI18n({
-  legacy: false, // you must set `false`, to use Composition API
-  locale: 'en', // set locale
-  fallbackLocale: 'en', // set fallback locale
-  messages, // set locale messages
-})
-
-export default i18n
+export function getI18nInstance(): I18n {
+  if (!i18nInstance) {
+    throw new Error('i18n instance not set. Ensure initApp() in main.ts has been called.')
+  }
+  return i18nInstance
+}
