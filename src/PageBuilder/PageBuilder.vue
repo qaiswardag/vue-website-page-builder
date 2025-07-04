@@ -390,9 +390,9 @@ function checkBuilderConfigToLocalStorage() {
         getPageBuilderConfig.value.userSettings.language &&
         getPageBuilderConfig.value.userSettings.language.default
 
-      console.log('locale.value eeer:', locale.value)
+      console.log('locale eeer:', locale)
       if (saveLang) {
-        locale.value = saveLang
+        locale = saveLang
       }
       return
     } catch (e) {
@@ -784,7 +784,7 @@ onMounted(async () => {
             <div class="pbx-flex pbx-justify-center pbx-items-center pbx-ml-2">
               <select
                 class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
-                v-model="locale.value"
+                v-model="locale"
               >
                 <template
                   v-if="
