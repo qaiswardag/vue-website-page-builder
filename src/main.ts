@@ -34,12 +34,12 @@ async function initApp() {
   })
 
   setI18nInstance(i18n)
-  initPageBuilder()
 
   const app = createApp(App)
 
   app.use(createPinia())
   app.use(i18n)
+  initPageBuilder()
   app.mount('#app')
 }
 
