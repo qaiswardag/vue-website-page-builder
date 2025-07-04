@@ -366,19 +366,19 @@ function updatePanelPosition() {
   }
 }
 
-function checkBuilderConfigToLocalStorage(currentConfig) {
+function checkBuilderConfigToLocalStorage() {
   const savedConfigRaw = localStorage.getItem('pageBuilderConfig')
 
+  if (!getPageBuilderConfig.value) return
   if (savedConfigRaw) {
-    console.log('deeen er:', savedConfigRaw)
     try {
       const savedConfig = JSON.parse(savedConfigRaw)
-      // Deep merge: prefer all keys from savedConfig, fallback to currentConfig
+      // Deep merge: prefer all keys from savedConfig, fallback to getPageBuilderConfig.value
       const mergedConfig = {
-        ...currentConfig,
+        ...getPageBuilderConfig.value,
         ...savedConfig,
         userSettings: {
-          ...currentConfig.userSettings,
+          ...getPageBuilderConfig.value.userSettings,
           ...savedConfig.userSettings,
         },
       }
@@ -405,9 +405,8 @@ function checkBuilderConfigToLocalStorage(currentConfig) {
 onMounted(async () => {
   // await delay(2000)
 
-  checkBuilderConfigToLocalStorage(getPageBuilderConfig.value)
-
   await pageBuilderService.completeBuilderInitialization(undefined, true)
+  checkBuilderConfigToLocalStorage()
 
   updatePanelPosition()
 

@@ -1,7 +1,6 @@
 import './css/dev-global.css'
 import './css/app.css'
 import { initPageBuilder } from './composables/builderInstance'
-import { markInitAppComplete } from './composables/initAppTracker'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -47,9 +46,6 @@ async function initApp() {
   app.use(i18n)
 
   app.mount('#app')
-
-  // Mark initApp as completed
-  markInitAppComplete()
 }
 
 initApp()

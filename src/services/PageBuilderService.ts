@@ -7,7 +7,6 @@ import type {
   StartBuilderResult,
 } from '../types'
 import type { usePageBuilderStateStore } from '../stores/page-builder-state'
-import { initAppPromise } from '@/composables/initAppTracker'
 
 import tailwindFontSizes from '../utils/builder/tailwind-font-sizes'
 import tailwindColors from '../utils/builder/tailwaind-colors'
@@ -17,7 +16,7 @@ import tailwindPaddingAndMargin from '../utils/builder/tailwind-padding-margin'
 import tailwindBorderRadius from '../utils/builder/tailwind-border-radius'
 import tailwindBorderStyleWidthPlusColor from '../utils/builder/tailwind-border-style-width-color'
 import { computed, ref, nextTick } from 'vue'
-import type { ComputedRef, WritableComputedRef } from 'vue'
+import type { ComputedRef } from 'vue'
 import { v4 as uuidv4 } from 'uuid'
 import { delay } from '../composables/delay'
 import { isEmptyObject } from '../helpers/isEmptyObject'
@@ -359,7 +358,6 @@ export class PageBuilderService {
     passedComponentsArray?: BuilderResourceData,
   ): Promise<StartBuilderResult> {
     console.log('SERVICE RUNNING...:')
-    await initAppPromise
     // Reactive flag signals to the UI that the builder has been successfully initialized
     // Prevents builder actions to prevent errors caused by missing DOM .
     this.pageBuilderStateStore.setBuilderStarted(true)
