@@ -366,8 +366,47 @@ function updatePanelPosition() {
   }
 }
 
+function checkBuilderConfigToLocalStorage(currentConfig) {
+  const savedConfigRaw = localStorage.getItem('pageBuilderConfig')
+
+  if (savedConfigRaw) {
+    console.log('deeen er:', savedConfigRaw)
+    try {
+      const savedConfig = JSON.parse(savedConfigRaw)
+      // Deep merge: prefer all keys from savedConfig, fallback to currentConfig
+      const mergedConfig = {
+        ...currentConfig,
+        ...savedConfig,
+        userSettings: {
+          ...currentConfig.userSettings,
+          ...savedConfig.userSettings,
+        },
+      }
+
+      pageBuilderStateStore.setPageBuilderConfig(mergedConfig)
+
+      const saveLang =
+        getPageBuilderConfig.value &&
+        getPageBuilderConfig.value.userSettings &&
+        getPageBuilderConfig.value.userSettings.language &&
+        getPageBuilderConfig.value.userSettings.language.default
+
+      console.log('locale.value eeer:', locale.value)
+      if (saveLang) {
+        locale.value = saveLang
+      }
+      return
+    } catch (e) {
+      console.warn('Failed to parse saved pageBuilderConfig from localStorage:', e)
+    }
+  }
+}
+
 onMounted(async () => {
   // await delay(2000)
+
+  checkBuilderConfigToLocalStorage(getPageBuilderConfig.value)
+
   await pageBuilderService.completeBuilderInitialization(undefined, true)
 
   updatePanelPosition()
@@ -747,7 +786,7 @@ onMounted(async () => {
             <div class="pbx-flex pbx-justify-center pbx-items-center pbx-ml-2">
               <select
                 class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
-                v-model="$i18n.locale"
+                v-model="locale.value"
               >
                 <template
                   v-if="

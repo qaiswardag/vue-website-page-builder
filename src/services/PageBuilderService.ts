@@ -7,7 +7,7 @@ import type {
   StartBuilderResult,
 } from '../types'
 import type { usePageBuilderStateStore } from '../stores/page-builder-state'
-import { getI18nInstance } from '../i18n'
+import { initAppPromise } from '@/composables/initAppTracker'
 
 import tailwindFontSizes from '../utils/builder/tailwind-font-sizes'
 import tailwindColors from '../utils/builder/tailwaind-colors'
@@ -344,40 +344,6 @@ export class PageBuilderService {
     }
   }
 
-  private checkBuilderConfigToLocalStorage(currentConfig: PageBuilderConfig) {
-    const savedConfigRaw = localStorage.getItem('pageBuilderConfig')
-
-    if (savedConfigRaw) {
-      try {
-        const savedConfig = JSON.parse(savedConfigRaw)
-        // Deep merge: prefer all keys from savedConfig, fallback to currentConfig
-        const mergedConfig = {
-          ...currentConfig,
-          ...savedConfig,
-          userSettings: {
-            ...currentConfig.userSettings,
-            ...savedConfig.userSettings,
-          },
-        }
-
-        this.pageBuilderStateStore.setPageBuilderConfig(mergedConfig)
-
-        const saveLang =
-          this.pageBuilderStateStore.getPageBuilderConfig &&
-          this.pageBuilderStateStore.getPageBuilderConfig.userSettings &&
-          this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language &&
-          this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
-
-        if (saveLang) {
-          (getI18nInstance().global.locale as WritableComputedRef<string>).value = saveLang
-        }
-        return
-      } catch (e) {
-        console.warn('Failed to parse saved pageBuilderConfig from localStorage:', e)
-      }
-    }
-  }
-
   /**
    * - Entry point for initializing the Page Builder.
    * - Sets the builder as started in the state store.
@@ -392,6 +358,8 @@ export class PageBuilderService {
     config: PageBuilderConfig,
     passedComponentsArray?: BuilderResourceData,
   ): Promise<StartBuilderResult> {
+    console.log('SERVICE RUNNING...:')
+    await initAppPromise
     // Reactive flag signals to the UI that the builder has been successfully initialized
     // Prevents builder actions to prevent errors caused by missing DOM .
     this.pageBuilderStateStore.setBuilderStarted(true)
@@ -403,20 +371,6 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setPageBuilderConfig(config)
       // Validate and normalize the config (ensure required fields are present)
       this.validateConfig(config)
-
-      if (
-        this.pageBuilderStateStore.getPageBuilderConfig &&
-        this.pageBuilderStateStore.getPageBuilderConfig.userSettings &&
-        this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language &&
-        this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
-      ) {
-        (getI18nInstance().global.locale as WritableComputedRef<string>).value =
-          this.pageBuilderStateStore.getPageBuilderConfig.userSettings.language.default
-      }
-
-      if (this.pageBuilderStateStore.getPageBuilderConfig) {
-        this.checkBuilderConfigToLocalStorage(this.pageBuilderStateStore.getPageBuilderConfig)
-      }
 
       validation = this.validateUserProvidedComponents(passedComponentsArray)
 

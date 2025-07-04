@@ -1,6 +1,7 @@
 import './css/dev-global.css'
 import './css/app.css'
 import { initPageBuilder } from './composables/builderInstance'
+import { markInitAppComplete } from './composables/initAppTracker'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -38,12 +39,17 @@ async function initApp() {
 
   initPageBuilder()
 
+  console.log('MAIN JS STARTING..')
   const app = createApp(App)
+  console.log('MAIN JS FINISHING..')
 
   app.use(createPinia())
-  app.use(i18n) // Use the i18n instance with the app
+  app.use(i18n)
 
   app.mount('#app')
+
+  // Mark initApp as completed
+  markInitAppComplete()
 }
 
 initApp()
