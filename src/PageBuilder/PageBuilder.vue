@@ -368,7 +368,6 @@ function updatePanelPosition() {
 
 function checkBuilderConfigToLocalStorage() {
   const savedConfigRaw = localStorage.getItem('pageBuilderConfig')
-
   if (!getPageBuilderConfig.value) return
   if (savedConfigRaw) {
     try {

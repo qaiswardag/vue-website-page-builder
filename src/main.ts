@@ -38,9 +38,7 @@ async function initApp() {
 
   initPageBuilder()
 
-  console.log('MAIN JS STARTING..')
   const app = createApp(App)
-  console.log('MAIN JS FINISHING..')
 
   app.use(createPinia())
   app.use(i18n)
