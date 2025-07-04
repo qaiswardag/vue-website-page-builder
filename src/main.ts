@@ -6,7 +6,7 @@ import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import { createI18n } from 'vue-i18n'
 import App from './App.vue'
-import { setI18nInstance } from './i18n' // Import the setter for i18n instance
+import { setI18nInstance } from './i18n'
 
 // Function to load all locale messages from JSON files
 async function loadLocaleMessages() {
@@ -27,7 +27,7 @@ async function initApp() {
   const messages = await loadLocaleMessages()
 
   const i18n = createI18n({
-    legacy: false, // you must set `false`, to use Composition API
+    legacy: false, // set `false`, to use Composition API
     locale: 'en', // set locale
     fallbackLocale: 'en', // set fallback locale
     messages, // set locale messages
