@@ -390,9 +390,10 @@ function checkBuilderConfigToLocalStorage() {
         getPageBuilderConfig.value.userSettings.language &&
         getPageBuilderConfig.value.userSettings.language.default
 
-      console.log('locale eeer:', locale)
+      console.log('locale before assignment:', locale.value, 'saveLang:', saveLang)
+
       if (saveLang) {
-        locale = saveLang
+        locale.value = saveLang // Correctly update the value of the ref
       }
       return
     } catch (e) {
