@@ -89,7 +89,7 @@ const configPageBuilder = {
   settings: {
     brandColor: '#DB93B0',
   },
-  pageSettings,
+  pageSettings: pageSettings,
 } as const
 
 onMounted(async () => {

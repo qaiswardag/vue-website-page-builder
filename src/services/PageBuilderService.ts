@@ -422,7 +422,7 @@ export class PageBuilderService {
         if (localStorageData && this.isPageBuilderMissingOnStart) {
           console.log('8888:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
-          await delay(3000)
+          await delay(400)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           this.pendingMountComponents = null
           return
