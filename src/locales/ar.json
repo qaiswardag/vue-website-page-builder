@@ -16,5 +16,10 @@
   "avatar": "الصورة الرمزية",
   "Publish": "نشر",
   "Add Components to Page": "إضافة مكونات إلى الصفحة",
-  "Close": "إغلاق"
+  "Close": "إغلاق",
+  "Helper Components": "مكونات المساعدة",
+  "Click to add": "انقر للإضافة",
+  "component": "مكون",
+  "Layout Components": "مكونات التخطيط",
+  "Click to add component": "انقر لإضافة مكون"
 }

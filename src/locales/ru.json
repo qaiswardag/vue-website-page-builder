@@ -16,5 +16,10 @@
   "avatar": "аватар",
   "Publish": "Опубликовать",
   "Add Components to Page": "Добавить компоненты на страницу",
-  "Close": "Закрыть"
+  "Close": "Закрыть",
+  "Helper Components": "Вспомогательные компоненты",
+  "Click to add": "Нажмите, чтобы добавить",
+  "component": "компонент",
+  "Layout Components": "Компоненты макета",
+  "Click to add component": "Нажмите, чтобы добавить компонент"
 }

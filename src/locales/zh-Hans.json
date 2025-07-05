@@ -16,5 +16,10 @@
   "avatar": "头像",
   "Publish": "发布",
   "Add Components to Page": "将组件添加到页面",
-  "Close": "关闭"
+  "Close": "关闭",
+  "Helper Components": "辅助组件",
+  "Click to add": "点击添加",
+  "component": "组件",
+  "Layout Components": "布局组件",
+  "Click to add component": "点击添加组件"
 }

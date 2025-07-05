@@ -16,5 +16,10 @@
   "avatar": "अवतार",
   "Publish": "प्रकाशित करें",
   "Add Components to Page": "पृष्ठ में घटक जोड़ें",
-  "Close": "बंद करें"
+  "Close": "बंद करें",
+  "Helper Components": "सहायक घटक",
+  "Click to add": "जोड़ने के लिए क्लिक करें",
+  "component": "घटक",
+  "Layout Components": "लेआउट घटक",
+  "Click to add component": "घटक जोड़ने के लिए क्लिक करें"
 }

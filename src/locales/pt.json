@@ -16,5 +16,10 @@
   "avatar": "avatar",
   "Publish": "Publicar",
   "Add Components to Page": "Adicionar componentes à página",
-  "Close": "Fechar"
+  "Close": "Fechar",
+  "Helper Components": "Componentes de ajuda",
+  "Click to add": "Clique para adicionar",
+  "component": "componente",
+  "Layout Components": "Componentes de layout",
+  "Click to add component": "Clique para adicionar componente"
 }
