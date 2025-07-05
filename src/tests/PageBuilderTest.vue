@@ -82,10 +82,12 @@ const configPageBuilder = {
     theme: 'light',
     language: {
       default: 'en',
-      disable: ['fr', 'es'],
+      enable: ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'],
+      disableLanguageDropDown: false,
     },
     autoSave: true,
   },
+
   settings: {
     brandColor: '#DB93B0',
   },

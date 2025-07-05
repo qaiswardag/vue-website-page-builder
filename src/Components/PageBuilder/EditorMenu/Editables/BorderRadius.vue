@@ -93,6 +93,7 @@ watch(
           </option>
         </select>
       </div>
+      <hr />
       <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Specific</p>
       <div class="pbx-my-2 pbx-py-2">
         <label for="border-radius-top-left" class="pbx-myPrimaryInputLabel">

@@ -229,7 +229,7 @@ export interface PageBuilderConfig {
     theme?: 'light' | 'dark' | 'auto'
     language?: {
       default: 'en' | 'zh-Hans' | 'fr' | 'ja' | 'ru' | 'es' | 'pt' | 'de' | 'ar' | 'hi'
-      disable?: ReadonlyArray<
+      enable?: ReadonlyArray<
         'en' | 'zh-Hans' | 'fr' | 'ja' | 'ru' | 'es' | 'pt' | 'de' | 'ar' | 'hi'
       >
     }
