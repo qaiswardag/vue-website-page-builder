@@ -742,7 +742,7 @@ onMounted(async () => {
                 }
               "
             >
-              Publish
+              {{ translate('Publish') }}
             </button>
           </div>
         </template>
