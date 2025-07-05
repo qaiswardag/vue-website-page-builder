@@ -129,6 +129,10 @@ export class PageBuilderService {
   public availableLanguage(): AvailableLanguage[] {
     return AVAILABLE_LANGUAGES
   }
+
+  public changeLanguage(lang: string) {
+    this.pageBuilderStateStore.setCurrentLanguage(lang)
+  }
   // Deselect any selected or hovered elements in the builder UI
   async clearHtmlSelection(): Promise<void> {
     this.pageBuilderStateStore.setComponent(null)
@@ -264,6 +268,55 @@ export class PageBuilderService {
     return
   }
 
+  private ensureLanguage(config: PageBuilderConfig): void {
+    // Set default language config if missing, empty, or language missing/empty
+    const defaultLang = 'en'
+    const defaultEnable = ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'] as const
+
+    let needsDefault = false
+    const userSettings = config.userSettings
+    const language = userSettings && userSettings.language
+
+    if (!userSettings || isEmptyObject(userSettings)) {
+      needsDefault = true
+    } else if (!language || isEmptyObject(language)) {
+      needsDefault = true
+    }
+
+    if (needsDefault) {
+      const updatedLanguage = {
+        ...config,
+        userSettings: {
+          ...userSettings,
+          language: {
+            default: defaultLang,
+            enable: defaultEnable as typeof defaultEnable,
+          },
+        },
+      } as const
+      this.pageBuilderStateStore.setPageBuilderConfig(updatedLanguage)
+      return
+    }
+
+    // Ensure default is in enable array
+    if (language && Array.isArray(language.enable) && language.default) {
+      if (!language.enable.includes(language.default)) {
+        const updatedEnable = [...language.enable, language.default]
+        const updatedLanguage = {
+          ...config,
+          userSettings: {
+            ...userSettings,
+            language: {
+              ...language,
+              enable: updatedEnable,
+            },
+          },
+        } as const
+        this.pageBuilderStateStore.setPageBuilderConfig(updatedLanguage)
+      }
+    }
+  }
+
   private validateConfig(config: PageBuilderConfig): void {
     const defaultConfigValues = {
       updateOrCreate: {
@@ -280,6 +333,15 @@ export class PageBuilderService {
     if (config && Object.keys(config).length !== 0 && config.constructor === Object) {
       this.ensureUpdateOrCreateConfig(config)
     }
+
+    this.ensureLanguage(config)
+  }
+
+  public saveUserSettingsStorage(newLang: string) {
+    localStorage.setItem(
+      'userSettingsPageBuilder',
+      JSON.stringify({ userSettings: { lang: newLang } }),
+    )
   }
 
   /**
@@ -422,7 +484,7 @@ export class PageBuilderService {
         if (localStorageData && this.isPageBuilderMissingOnStart) {
           console.log('8888:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
-          await delay(3000)
+          await delay(400)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           this.pendingMountComponents = null
           return

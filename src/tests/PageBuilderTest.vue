@@ -6,50 +6,10 @@ import DemoBuilderComponentsTest from '../tests/TestComponents/DemoBuilderCompon
 import { onMounted } from 'vue'
 import componentsArray from '../tests/componentsArray.test.json'
 import { getPageBuilder } from '../composables/builderInstance'
-const pageBuilderService = getPageBuilder()
+import { useTranslations } from '../composables/useTranslations'
 
-const features = [
-  {
-    name: 'Live Drag & Drop Builder',
-    description:
-      'Click & Drop content on a page and watch your pages come to life. Bring your vision to life and create impressive pages using a click & drop Page Builder',
-  },
-  {
-    name: 'True Visual Editing',
-    description:
-      'See your changes in real-time as you make them. Elevate your creative vision and create pages using an intuitive click & drop page builder. Break free from design limitations and turn your visions into reality.',
-  },
-  {
-    name: 'Features',
-    description:
-      'Click & Drop, Reordering, True Visual Editing, Responsive Editing, Font Customization, Undo & Redo, Text Editing, Media Library, Unsplash Integration, YouTube Videos.',
-  },
-  {
-    name: 'Technologies',
-    description:
-      'Developed with TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.',
-  },
-  {
-    name: 'Set Brand and Link Colors one place',
-    description:
-      'Global Styles for fonts, designs, & colors. Set Brand and Link Colors once and apply them across the entire Platform with ease.',
-  },
-  {
-    name: 'Mobile-First Approach',
-    description:
-      'Developed with Mobile-First approach. The Page Builder even works on mobile phones.',
-  },
-  {
-    name: 'Media Library',
-    description:
-      'A beautiful and user-friendly media library that allows you to change and update images. Unsplash Integration is included.',
-  },
-  {
-    name: 'Minimal and Intuitive Design',
-    description:
-      'Beautiful, elegant and intuitive design. Enhance user engagement with amazing visual experience.',
-  },
-]
+const pageBuilderService = getPageBuilder()
+const { translate } = useTranslations()
 
 const publishPageBuilder = function () {}
 
@@ -81,19 +41,22 @@ const configPageBuilder = {
   userSettings: {
     theme: 'light',
     language: {
-      default: 'en',
-      disable: ['fr', 'es'],
+      default: 'zh-Hans',
+      enable: ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'],
+      disableLanguageDropDown: false,
     },
     autoSave: true,
   },
+
   settings: {
     brandColor: '#DB93B0',
   },
-  pageSettings,
+  pageSettings: pageSettings,
 } as const
 
 onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder, components)
+  // const result = await pageBuilderService.startBuilder(configPageBuilder, components)
+  const result = await pageBuilderService.startBuilder(configPageBuilder)
   console.log('Page Builder inspect the result for message, status, or error::', result)
 })
 </script>
@@ -103,19 +66,27 @@ onMounted(async () => {
     <div class="pbx-myPrimaryWidthScreenModule pbx-bg-red-50 lg:pbx-block">
       <div class="pbx-myPrimaryContentSection">
         <h2 class="pbx-mySecondaryHeader">
-          Bring your vision to life and create impressive pages using a click & drop Page Builder
+          {{
+            translate(
+              'Bring your vision to life and create impressive pages using a click & drop Page Builder',
+            )
+          }}
         </h2>
         <p class="pbx-myPrimaryParagraph pbx-font-normal">
-          The web builder for stunning pages. Enable users to design and publish modern pages at any
-          scale. Build responsive pages like listings, jobs or blog posts and manage content easily
-          using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition
-          API, Pinia, CSS, Tailwind CSS and HTML.
-
+          {{
+            translate(
+              'The web builder for stunning pages. Enable users to design and publish modern pages at any scale. Build responsive pages like listings, jobs or blog posts and manage content easily using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.',
+            )
+          }}
           <br />
         </p>
         <div class="pbx-mt-4">
           <p class="pbx-myPrimaryParagraph pbx-font-normal">
-            Download or install our powerful, flexible, and easy-to-use free Vue 3 Page Builder via
+            {{
+              translate(
+                'Download or install our powerful, flexible, and easy-to-use free Vue 3 Page Builder via',
+              )
+            }}
             <br />
             <strong> npm:</strong>
             <a
@@ -139,34 +110,26 @@ onMounted(async () => {
     </div>
 
     <FullWidthElement :descriptionArea="true" class="pbx-bg-gray-50">
-      <template #title>Everything you need. Break free from design limitations </template>
+      <template #title>
+        {{ translate('Everything you need. Break free from design limitations') }}
+      </template>
       <template #description>
         <p class="pbx-myPrimaryParagraph pbx-font-normal">
-          A Page Builder designed for growth. Build your website pages with ready-made components
-          that are fully customizable and always responsive, designed to fit every need. A powerful
-          Page Builder for growing merchants, brands, and agencies.
+          {{
+            translate(
+              'A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.',
+            )
+          }}
         </p>
       </template>
       <template #content>
-        <div
-          class="pbx-grid pbx-grid-cols-1 pbx-gap-8 sm:pbx-grid-cols-2 md:pbx-grid-cols-2 lg:pbx-grid-cols-4 pbx-mt-8"
-        >
-          <div
-            v-for="feature in features"
-            :key="feature.name"
-            class="pbx-bg-red-200 pbx-bg-opacity-20 hover:pbx-bg-opacity-10 pbx-w-full lg:pbx-min-h-[20rem] pbx-min-h-[12rem] pbx-relative pbx-col-span-1 pbx-flex pbx-flex-col pbx-text-center pbx-rounded-lg pbx-shadow-sm pbx-outline pbx-outline-2 pbx-outline-offset-8 pbx-outline-yellow-400"
-          >
-            <div
-              class="pbx-bg-black/0 pbx-absolute pbx-top-0 pbx-left-0 pbx-w-full pbx-h-full pbx-rounded-lg"
-            ></div>
-            <div class="pbx-px-2 pbx-pt-8 pbx-absolute pbx-top-0 pbx-w-full">
-              <p class="pbx-myTertiaryHeader">{{ feature.name }}</p>
-              <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-drop-shadow-sm">
-                {{ feature.description }}
-              </p>
-            </div>
-          </div>
-        </div>
+        <p class="pbx-myPrimaryParagraph pbx-font-normal">
+          {{
+            translate(
+              "Try the powerful Click & Drop Page Builder—designed for developers and creators who want full control without the hassle. Customize layouts, fonts, and colors. Edit content visually in real time. Add media, embed YouTube videos, or export everything as clean HTML. With responsive editing, local auto-save, Tailwind support, and even Unsplash integration, it's everything you need—wrapped in one seamless builder. Build Stunning Pages in Minutes.",
+            )
+          }}
+        </p>
       </template>
     </FullWidthElement>
   </div>

@@ -231,7 +231,7 @@ onMounted(() => {
                     type="button"
                     class="pbx-myPrimaryTag"
                   >
-                    <span class="material-symbols-outlined"> Save </span>
+                    <span class="material-symbols-outlined"> save </span>
                     <span>Save</span>
                   </button>
                 </div>

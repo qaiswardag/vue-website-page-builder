@@ -21,6 +21,9 @@ import EditorAccordion from '../EditorMenu/EditorAccordion.vue'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
 import ModalBuilder from '../../../Components/Modals/ModalBuilder.vue'
 import { extractCleanHTMLFromPageBuilder } from '../../../composables/extractCleanHTMLFromPageBuilder'
+import { useTranslations } from '../../../composables/useTranslations'
+
+const { translate } = useTranslations()
 
 const pageBuilderService = getPageBuilder()
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -128,12 +131,12 @@ const handleCloseGlobalPageStyles = async function () {
       <button
         type="button"
         @click="$emit('closeEditor')"
-        class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+        class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
       >
         <span class="material-symbols-outlined"> close </span>
       </button>
       <p class="pbx-font-medium pbx-text-sm">
-        Editing
+        {{ translate('Editing') }}
         <span class="pbx-lowercase">&lt;{{ elementTag }}&gt;</span>
       </p>
     </div>
@@ -181,16 +184,19 @@ const handleCloseGlobalPageStyles = async function () {
       <!-- Global Page Styles -->
       <article class="pbx-my-1 pbx-bg-white">
         <EditorAccordion>
-          <template #title>Global Page Styles</template>
+          <template #title>{{ translate('Global Page Styles') }}</template>
           <template #content>
             <label class="pbx-myPrimaryInputLabel pbx-my-4">
-              Apply styles that affect the entire page. These settings include global font family,
-              text color, background color, and other universal styles that apply to all sections.
+              {{
+                translate(
+                  'Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.',
+                )
+              }}
             </label>
 
             <div class="pbx-mt-4">
               <button @click="handleUpdatePageStyles" type="button" class="pbx-myPrimaryButton">
-                Update Page Styles
+                {{ translate('Update Page Styles') }}
               </button>
             </div>
           </template>
@@ -204,15 +210,18 @@ const handleCloseGlobalPageStyles = async function () {
         class="pbx-my-1 pbx-bg-white"
       >
         <EditorAccordion>
-          <template #title>Download HTML</template>
+          <template #title>{{ translate('Download HTML') }}</template>
           <template #content>
             <label class="pbx-myPrimaryInputLabel pbx-my-4">
-              Export the entire page as a standalone HTML file. This includes all sections, content,
-              and applied styles, making it ready for use or integration elsewhere.
+              {{
+                translate(
+                  'Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.',
+                )
+              }}
             </label>
             <div class="pbx-mt-4">
               <button @click="handleDownloadHTML" type="button" class="pbx-myPrimaryButton">
-                Download HTML file
+                {{ translate('Download HTML file') }}
               </button>
             </div>
           </template>
@@ -225,7 +234,7 @@ const handleCloseGlobalPageStyles = async function () {
       maxWidth="md"
       minHeight="pbx-min-h-[65vh] pbx-max-h-[65vh]"
       :showModalBuilder="showModalGlobalPageStyles"
-      title="Global Page Styles"
+      :title="translate('Global Page Styles')"
       @closeMainModalBuilder="handleCloseGlobalPageStyles"
     >
       <div class="pbx-flex pbx-flex-col pbx-gap-2 pbx-pt-4 pbx-pb-2">
@@ -236,7 +245,7 @@ const handleCloseGlobalPageStyles = async function () {
             >
               <span
                 class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
-                >Loading...</span
+                >{{ translate('Loading...') }}</span
               >
             </div>
           </div>
@@ -244,8 +253,11 @@ const handleCloseGlobalPageStyles = async function () {
         <div v-if="!isLoadingPageStyles && showModalGlobalPageStyles" class="pbx-pb-12">
           <div>
             <p class="pbx-myPrimaryParagraph">
-              Apply styles that affect the entire page. These settings include global font family,
-              text color, background color, and other universal styles that apply to all sections.
+              {{
+                translate(
+                  'Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.',
+                )
+              }}
             </p>
             <article class="pbx-my-1 pbx-bg-gray-100">
               <Typography></Typography>

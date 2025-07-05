@@ -4,6 +4,9 @@ import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import EditorAccordion from '../EditorAccordion.vue'
 import tailwindPaddingPlusMargin from '../../../../utils/builder/tailwind-padding-margin'
 import { getPageBuilder } from '../../../../composables/builderInstance'
+import { useTranslations } from '../../../../composables/useTranslations'
+
+const { translate } = useTranslations()
 const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
@@ -61,17 +64,19 @@ watch(
 </script>
 <template>
   <EditorAccordion>
-    <template #title>Margin</template>
+    <template #title>{{ translate('Margin') }}</template>
     <template #content>
       <div class="pbx-my-2 pbx-py-2">
-        <label for="vertical-margin" class="pbx-myPrimaryInputLabel"> Vertical Margin </label>
+        <label for="vertical-margin" class="pbx-myPrimaryInputLabel">{{
+          translate('Vertical Margin')
+        }}</label>
         <select
           id="vertical-margin"
           v-model="fontVerticalMargin"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleVerticalMargin(fontVerticalMargin)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ translate('Select') }}</option>
           <option
             v-for="verticalMargin in tailwindPaddingPlusMargin.verticalMargin"
             :key="verticalMargin"
@@ -82,14 +87,16 @@ watch(
       </div>
       <hr />
       <div class="pbx-my-2 pbx-py-2">
-        <label for="horizontal-margin" class="pbx-myPrimaryInputLabel"> Horizontal Margin </label>
+        <label for="horizontal-margin" class="pbx-myPrimaryInputLabel">{{
+          translate('Horizontal Margin')
+        }}</label>
         <select
           id="horizontal-margin"
           v-model="fontHorizontalMargin"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleHorizontalMargin(fontHorizontalMargin)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ translate('Select') }}</option>
           <option
             v-for="horizontalMargin in tailwindPaddingPlusMargin.horizontalMargin"
             :key="horizontalMargin"

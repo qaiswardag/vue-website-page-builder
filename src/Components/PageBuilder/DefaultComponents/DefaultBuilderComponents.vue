@@ -5,6 +5,11 @@ import { usePageBuilderModal } from '../../../composables/usePageBuilderModal'
 import { generateComponentPreview } from '../../../utils/componentPreviews'
 import type { ComponentObject } from '../../../types'
 import { getPageBuilder } from '../../../composables/builderInstance'
+
+import { useTranslations } from '../../../composables/useTranslations'
+
+const { translate } = useTranslations()
+
 const pageBuilderService = getPageBuilder()
 
 defineProps({
@@ -46,7 +51,7 @@ const getSvgPreview = (title: string) => {
   <div>
     <!-- Helper Components Section -->
     <div class="pbx-mb-8">
-      <h3 class="pbx-myQuaternaryHeader pbx-mb-4">Helper Components</h3>
+      <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Helper Components') }}</h3>
       <div
         class="pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 lg:pbx-grid-cols-4 pbx-gap-4"
       >
@@ -61,7 +66,8 @@ const getSvgPreview = (title: string) => {
             <h4 class="pbx-myPrimaryParagraph pbx-text-base pbx-font-medium">{{ helper.title }}</h4>
           </div>
           <div class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-pt-2">
-            Click to add {{ helper.title.toLowerCase() }} component
+            {{ translate('Click to add') }} {{ helper.title.toLowerCase() }}
+            {{ translate('component') }}
           </div>
         </div>
       </div>
@@ -69,7 +75,7 @@ const getSvgPreview = (title: string) => {
 
     <!-- Regular Components Section -->
     <div v-if="customMediaComponent">
-      <h3 class="pbx-myQuaternaryHeader pbx-mb-4">Layout Components</h3>
+      <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Layout Components') }}</h3>
       <div class="pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 pbx-gap-4">
         <div
           v-for="comp in components[0].components.data"
@@ -89,7 +95,7 @@ const getSvgPreview = (title: string) => {
           <div class="pbx-p-3">
             <h4 class="pbx-myPrimaryParagraph pbx-text-sm pbx-font-normal">{{ comp.title }}</h4>
             <div class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-pt-2">
-              Click to add component
+              {{ translate('Click to add component') }}
             </div>
           </div>
         </div>

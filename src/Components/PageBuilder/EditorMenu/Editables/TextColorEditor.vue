@@ -4,6 +4,10 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 import tailwindColors from '../../../../utils/builder/tailwaind-colors'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import { getPageBuilder } from '../../../../composables/builderInstance'
+import { useTranslations } from '../../../../composables/useTranslations'
+
+const { translate } = useTranslations()
+
 const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
@@ -49,7 +53,9 @@ watch(
               class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border pbx-border-gray-800 pbx-rounded-sm"
               :class="`pbx-bg-${textColor?.replace('pbx-text-', '')}`"
             ></div>
-            <div>Text Color</div>
+            <div>
+              <div>{{ translate('Text Color') }}</div>
+            </div>
           </div>
 
           <span v-if="globalPageLayout" class="material-symbols-outlined"> chevron_right </span>

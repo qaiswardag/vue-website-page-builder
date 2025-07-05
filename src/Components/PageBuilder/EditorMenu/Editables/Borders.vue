@@ -6,6 +6,9 @@ import tailwindColors from '../../../../utils/builder/tailwaind-colors'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import { getPageBuilder } from '../../../../composables/builderInstance'
+import { useTranslations } from '../../../../composables/useTranslations'
+
+const { translate } = useTranslations()
 const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
@@ -52,19 +55,23 @@ watch(
 
 <template>
   <EditorAccordion>
-    <template #title>Border Style, Width & Color</template>
+    <template #title>{{ translate('Border Style, Width & Color') }}</template>
     <template #content>
-      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">Border</p>
+      <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-py-0 pbx-my-4">
+        {{ translate('Border') }}
+      </p>
 
       <div class="pbx-my-2 pbx-py-2">
-        <label for="border-style" class="pbx-myPrimaryInputLabel"> Border Style </label>
+        <label for="border-style" class="pbx-myPrimaryInputLabel">{{
+          translate('Border Style')
+        }}</label>
         <select
           id="border-style"
           v-model="borderStyle"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderStyle(borderStyle)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ translate('Select') }}</option>
           <option
             v-for="borderStyle in tailwindBorderStyleWidthPlusColor.borderStyle"
             :key="borderStyle"
@@ -74,14 +81,16 @@ watch(
         </select>
       </div>
       <div class="pbx-my-2 pbx-py-2">
-        <label for="border-width" class="pbx-myPrimaryInputLabel"> Border Width </label>
+        <label for="border-width" class="pbx-myPrimaryInputLabel">{{
+          translate('Border Width')
+        }}</label>
         <select
           id="border-width"
           v-model="borderWidth"
           class="pbx-myPrimarySelect"
           @change="pageBuilderService.handleBorderWidth(borderWidth)"
         >
-          <option disabled value="">Select</option>
+          <option disabled value="">{{ translate('Select') }}</option>
           <option
             v-for="borderWidth in tailwindBorderStyleWidthPlusColor.borderWidth"
             :key="borderWidth"
@@ -91,7 +100,9 @@ watch(
         </select>
       </div>
 
-      <label for="border-color" class="pbx-myPrimaryInputLabel"> Border Color </label>
+      <label for="border-color" class="pbx-myPrimaryInputLabel">{{
+        translate('Border Color')
+      }}</label>
       <Listbox as="div" v-model="borderColor">
         <div class="pbx-relative pbx-mt-2">
           <ListboxButton class="pbx-myPrimarySelect" id="border-color">
@@ -121,7 +132,7 @@ watch(
             leave-to-class="pbx-opacity-0"
           >
             <ListboxOptions
-              class="pbx-absolute pbx-z-10 pbx-mt-1 pbx-max-h-56 pbx-w-full pbx-overflow-auto pbx-rounded-md pbx-bg-white pbx-py-1 pbx-text-base pbx-shadow-lg pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 focus:pbx-outline-none sm:pbx-text-sm list-none p-0 m-0"
+              class="pbx-absolute pbx-z-10 pbx-mt-1 pbx-max-h-56 pbx-w-full pbx-overflow-auto pbx-rounded-md pbx-bg-white pbx-text-base pbx-shadow-lg pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 focus:pbx-outline-none sm:pbx-text-sm pbx-list-none pbx-p-0 pbx-m-0"
             >
               <ListboxOption
                 as="template"
@@ -151,7 +162,9 @@ watch(
                       class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-bg-gray-950"
                       :class="`pbx-bg-${color.replace('pbx-border-', '')}`"
                     ></div>
-                    <span v-if="color === 'none'" class="pbx-ml-3">Transparent</span>
+                    <span v-if="color === 'none'" class="pbx-ml-3">{{
+                      translate('Transparent')
+                    }}</span>
                     <span v-if="color !== 'none'" class="pbx-ml-3">{{ color }}</span>
                   </div>
                 </li>

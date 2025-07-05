@@ -415,6 +415,7 @@
 #pagebuilder {
   position: relative;
   overflow-y: auto;
+  padding: 4px;
 }
 #pagebuilder a {
   pointer-events: none;
@@ -496,7 +497,7 @@
   outline-offset: -2px !important;
 }
 
-.pbx-myPrimarySelect {
+.pbx-myPrimarySelec select {
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;

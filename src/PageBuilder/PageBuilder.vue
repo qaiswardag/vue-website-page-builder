@@ -12,6 +12,7 @@ import { delay } from '../composables/delay'
 import { useDebounce } from '../composables/useDebounce.ts'
 import DynamicModalBuilder from '../Components/Modals/DynamicModalBuilder.vue'
 import GlobalLoader from '../Components/Loaders/GlobalLoader.vue'
+import { useTranslations } from '../composables/useTranslations'
 import { getPageBuilder } from '../composables/builderInstance'
 const pageBuilderService = getPageBuilder()
 /**
@@ -39,6 +40,8 @@ const props = defineProps({
     default: false,
   },
 })
+
+const { translate, loadTranslations } = useTranslations()
 
 // Use shared Pinia instance for PageBuilder package
 const internalPinia = sharedPageBuilderPinia
@@ -68,6 +71,27 @@ const closeAddComponentModal = () => {
   showModalAddComponent.value = false
 }
 provide('closeAddComponentModal', closeAddComponentModal)
+
+const languageSelction = ref('en')
+
+let isInitializingLang = true
+const isLoadingLang = ref(false)
+
+// Watch for changes in languageSelction
+watch(languageSelction, async (newVal) => {
+  if (newVal && !isInitializingLang) {
+    isLoadingLang.value = true
+    await delay(200)
+    await loadTranslations(newVal)
+    pageBuilderService.changeLanguage(newVal)
+
+    // Ensure lang is updated within userSettings
+    const userSettings = JSON.parse(localStorage.getItem('userSettingsPageBuilder')) || {}
+    userSettings.lang = newVal
+    localStorage.setItem('userSettingsPageBuilder', JSON.stringify(userSettings))
+    isLoadingLang.value = false
+  }
+})
 
 const getCurrentLanguage = computed(() => {
   return pageBuilderStateStore.getCurrentLanguage
@@ -125,8 +149,8 @@ const handleAddComponent = async function () {
   await pageBuilderService.clearHtmlSelection()
 
   //
-  titleModalAddComponent.value = 'Add Components to Page'
-  firstButtonTextSearchComponents.value = 'Close'
+  titleModalAddComponent.value = translate('Add Components to Page')
+  firstButtonTextSearchComponents.value = translate('Close')
   showModalAddComponent.value = true
 
   firstModalButtonSearchComponentsFunction.value = function () {
@@ -346,9 +370,27 @@ function updatePanelPosition() {
   }
 }
 
+const userSettings = JSON.parse(localStorage.getItem('userSettingsPageBuilder'))
+
 onMounted(async () => {
   // await delay(2000)
   await pageBuilderService.completeBuilderInitialization(undefined, true)
+
+  if (userSettings && userSettings.lang) {
+    languageSelction.value = userSettings.lang
+  }
+  if (
+    getPageBuilderConfig.value &&
+    getPageBuilderConfig.value.userSettings &&
+    getPageBuilderConfig.value.userSettings.language &&
+    getPageBuilderConfig.value.userSettings.language.default &&
+    (!userSettings || !userSettings.lang)
+  ) {
+    languageSelction.value = getPageBuilderConfig.value.userSettings.language.default
+  }
+
+  await loadTranslations(languageSelction.value)
+  isInitializingLang = false
 
   updatePanelPosition()
 
@@ -389,7 +431,9 @@ onMounted(async () => {
   <div
     class="pbx-font-sans pbx-max-w-full pbx-border-solid pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto pbx-h-full"
   >
-    <GlobalLoader v-if="getIsLoadingGlobal && !openAppNotStartedModal"></GlobalLoader>
+    <GlobalLoader
+      v-if="(getIsLoadingGlobal && !openAppNotStartedModal) || isLoadingLang"
+    ></GlobalLoader>
     <ModalBuilder
       title="The builder hasn’t started yet"
       :showModalBuilder="openAppNotStartedModal"
@@ -413,7 +457,7 @@ onMounted(async () => {
     ></BuilderComponents>
 
     <ModalBuilder
-      title="Preview"
+      title="{{ translate('Preview') }}"
       :showModalBuilder="openPageBuilderPreviewModal"
       @closeMainModalBuilder="firstPageBuilderPreviewModalButton"
       maxWidth="screen"
@@ -422,7 +466,7 @@ onMounted(async () => {
     </ModalBuilder>
 
     <ModalBuilder
-      title="Mobile"
+      title="{{ translate('Mobile') }}"
       :showModalBuilder="openPageBuilderPreviewMobile"
       @closeMainModalBuilder="firstPageBuilderPreviewModalButtonMobile"
       maxWidth="lg"
@@ -543,7 +587,7 @@ onMounted(async () => {
                   ></span>
                 </span>
               </div>
-              <div>Save</div>
+              <div>{{ translate('Save') }}</div>
             </button>
             <!-- Save End -->
 
@@ -586,7 +630,7 @@ onMounted(async () => {
                   </span>
                 </div>
                 <div class="lg:pbx-block pbx-hidden">
-                  <span> Reset Page </span>
+                  <span> {{ translate('Reset Page') }} </span>
                 </div>
               </button>
             </template>
@@ -623,10 +667,12 @@ onMounted(async () => {
                 class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-border-gray-200"
               >
                 <span class="lg:pbx-block pbx-hidden">
-                  <div class="pbx-whitespace-nowrap pbx-cursor-pointer">Add new Components</div>
+                  <div class="pbx-whitespace-nowrap pbx-cursor-pointer">
+                    {{ translate('Add new Components') }}
+                  </div>
                 </span>
                 <span
-                  class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+                  class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
                 >
                   <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
                 </span>
@@ -645,7 +691,7 @@ onMounted(async () => {
               >
                 <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2">
                   <span
-                    class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+                    class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
                   >
                     <span class="pbx-myMediumIcon material-symbols-outlined"> visibility </span>
                   </span>
@@ -665,7 +711,7 @@ onMounted(async () => {
               >
                 <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2">
                   <span
-                    class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+                    class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
                   >
                     <span class="material-symbols-outlined"> phone_iphone </span>
                   </span>
@@ -702,7 +748,7 @@ onMounted(async () => {
                 }
               "
             >
-              Publish
+              {{ translate('Publish') }}
             </button>
           </div>
         </template>
@@ -731,6 +777,57 @@ onMounted(async () => {
         </template>
 
         <!-- Close & Publish buttons end -->
+
+        <template
+          v-if="
+            getPageBuilderConfig &&
+            getPageBuilderConfig.userSettings &&
+            getPageBuilderConfig.userSettings.language &&
+            !getPageBuilderConfig.userSettings.language.disableLanguageDropDown
+          "
+        >
+          <template
+            v-if="
+              getPageBuilderConfig &&
+              getPageBuilderConfig.userSettings &&
+              getPageBuilderConfig.userSettings.language
+            "
+          >
+            <div class="pbx-flex pbx-justify-center pbx-items-center pbx-ml-2">
+              <select
+                class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
+                v-model="languageSelction"
+              >
+                <template
+                  v-if="
+                    Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
+                    getPageBuilderConfig.userSettings.language.enable.length >= 1
+                  "
+                >
+                  <template
+                    v-for="lang in pageBuilderService
+                      .availableLanguage()
+                      .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
+                    :key="lang"
+                  >
+                    <option :value="lang">{{ lang }}</option>
+                  </template>
+                </template>
+                <template
+                  v-if="
+                    !getPageBuilderConfig.userSettings.language.enable ||
+                    (Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
+                      getPageBuilderConfig.userSettings.language.enable.length === 0)
+                  "
+                >
+                  <template v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
+                    <option :value="lang">{{ lang }}</option>
+                  </template>
+                </template>
+              </select>
+            </div>
+          </template>
+        </template>
       </div>
 
       <!-- Top Layout Save And Reset Area - End -->
@@ -754,7 +851,7 @@ onMounted(async () => {
                     handleAddComponent()
                   }
                 "
-                class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+                class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
               >
                 <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
               </button>
@@ -773,7 +870,7 @@ onMounted(async () => {
 
         <main
           ref="pbxToolBar"
-          class="pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-h-[100vh] pbx-text-black"
+          class="pbx-font-sans pbx-p-1 pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-h-[100vh] pbx-text-black"
           :class="{ 'pbx-mr-2': !getMenuRight, '': getMenuRight }"
         >
           <div
@@ -831,10 +928,9 @@ onMounted(async () => {
               v-if="!getMenuRight"
               @click="pageBuilderStateStore.setMenuRight(true)"
               type="button"
-              class="pbx-mySecondaryButton"
+              class="pbx-mySecondaryButton pbx-px-2 pbx-text-xs"
             >
-              <span class="material-symbols-outlined"> view_sidebar </span>
-              <span> Tools </span>
+              <span> {{ translate('Styles') }} </span>
             </button>
           </div>
         </div>
@@ -866,12 +962,12 @@ onMounted(async () => {
           class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-cursor-pointer"
         >
           <span class="lg:pbx-block pbx-hidden">
-            <div class="pbx-whitespace-nowrap">Add to the bottom</div>
+            <div class="pbx-whitespace-nowrap">{{ translate('Add to the bottom') }}</div>
           </span>
           <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
             <button
               type="button"
-              class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0"
+              class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
             >
               <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
             </button>
