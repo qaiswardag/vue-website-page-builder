@@ -21,5 +21,8 @@
   "Click to add": "Нажмите, чтобы добавить",
   "component": "компонент",
   "Layout Components": "Компоненты макета",
-  "Click to add component": "Нажмите, чтобы добавить компонент"
+  "Click to add component": "Нажмите, чтобы добавить компонент",
+  "Remove all Components": "Удалить все компоненты",
+  "Are you sure you want to remove all Components?": "Вы уверены, что хотите удалить все компоненты?",
+  "Styles": "Стили"
 }

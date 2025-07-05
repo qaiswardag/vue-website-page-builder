@@ -21,5 +21,8 @@
   "Click to add": "Haga clic para agregar",
   "component": "componente",
   "Layout Components": "Componentes de diseño",
-  "Click to add component": "Haga clic para agregar componente"
+  "Click to add component": "Haga clic para agregar componente",
+  "Remove all Components": "Eliminar todos los componentes",
+  "Are you sure you want to remove all Components?": "¿Está seguro de que desea eliminar todos los componentes?",
+  "Styles": "Estilos"
 }

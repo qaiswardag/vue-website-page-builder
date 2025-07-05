@@ -21,5 +21,8 @@
   "Click to add": "انقر للإضافة",
   "component": "مكون",
   "Layout Components": "مكونات التخطيط",
-  "Click to add component": "انقر لإضافة مكون"
+  "Click to add component": "انقر لإضافة مكون",
+  "Remove all Components": "إزالة جميع المكونات",
+  "Are you sure you want to remove all Components?": "هل أنت متأكد أنك تريد إزالة جميع المكونات؟",
+  "Styles": "أنماط"
 }

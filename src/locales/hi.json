@@ -21,5 +21,8 @@
   "Click to add": "जोड़ने के लिए क्लिक करें",
   "component": "घटक",
   "Layout Components": "लेआउट घटक",
-  "Click to add component": "घटक जोड़ने के लिए क्लिक करें"
+  "Click to add component": "घटक जोड़ने के लिए क्लिक करें",
+  "Remove all Components": "सभी घटकों को हटाएं",
+  "Are you sure you want to remove all Components?": "क्या आप वाकई सभी घटकों को हटाना चाहते हैं?",
+  "Styles": "शैलियाँ"
 }

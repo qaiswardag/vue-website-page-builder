@@ -21,5 +21,8 @@
   "Click to add": "Click to add",
   "component": "component",
   "Layout Components": "Layout Components",
-  "Click to add component": "Click to add component"
+  "Click to add component": "Click to add component",
+  "Remove all Components": "Remove all Components",
+  "Are you sure you want to remove all Components?": "Are you sure you want to remove all Components?",
+  "Styles": "Styles"
 }

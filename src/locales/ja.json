@@ -21,5 +21,8 @@
   "Click to add": "追加するにはクリック",
   "component": "コンポーネント",
   "Layout Components": "レイアウトコンポーネント",
-  "Click to add component": "コンポーネントを追加するにはクリック"
+  "Click to add component": "コンポーネントを追加するにはクリック",
+  "Remove all Components": "すべてのコンポーネントを削除",
+  "Are you sure you want to remove all Components?": "すべてのコンポーネントを削除してもよろしいですか？",
+  "Styles": "スタイル"
 }

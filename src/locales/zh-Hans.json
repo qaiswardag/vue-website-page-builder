@@ -21,5 +21,8 @@
   "Click to add": "点击添加",
   "component": "组件",
   "Layout Components": "布局组件",
-  "Click to add component": "点击添加组件"
+  "Click to add component": "点击添加组件",
+  "Remove all Components": "删除所有组件",
+  "Are you sure you want to remove all Components?": "您确定要删除所有组件吗？",
+  "Styles": "样式"
 }

@@ -932,10 +932,9 @@ onMounted(async () => {
               v-if="!getMenuRight"
               @click="pageBuilderStateStore.setMenuRight(true)"
               type="button"
-              class="pbx-mySecondaryButton"
+              class="pbx-mySecondaryButton pbx-px-2 pbx-text-xs"
             >
-              <span class="material-symbols-outlined"> view_sidebar </span>
-              <span> Tools </span>
+              <span> {{ translate('Styles') }} </span>
             </button>
           </div>
         </div>
