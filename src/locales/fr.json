@@ -1,0 +1,136 @@
+{
+  "language": "Langue",
+  "button": {
+    "addComponentsToBottom": "Ajouter des composants en bas",
+    "publish": "Publier",
+    "addComponents": "Ajouter de nouveaux composants",
+    "save": "Enregistrer",
+    "resetPage": "Réinitialiser la page"
+  },
+  "options": {
+    "button": "Options",
+    "configOverview": "Aperçu de la configuration",
+    "htmlOverview": "Aperçu HTML",
+    "deleteLayout": "Supprimer la mise en page"
+  },
+  "features": {
+    "liveDragDropBuilder": {
+      "name": "Glisser-déposer en direct",
+      "description": "Cliquez et déposez du contenu sur une page et voyez votre page prendre vie. Donnez vie à votre vision et créez des pages impressionnantes avec un Page Builder glisser-déposer."
+    },
+    "trueVisualEditing": {
+      "name": "Édition visuelle réelle",
+      "description": "Voyez vos modifications en temps réel. Élevez votre vision créative et créez des pages avec un page builder intuitif. Libérez-vous des limites de conception et concrétisez vos idées."
+    },
+    "features": {
+      "name": "Fonctionnalités",
+      "description": "Glisser-déposer, réorganisation, édition visuelle réelle, édition responsive, personnalisation des polices, annuler & rétablir, édition de texte, médiathèque, intégration Unsplash, vidéos YouTube."
+    },
+    "technologies": {
+      "name": "Technologies",
+      "description": "Développé avec TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS et HTML."
+    },
+    "setBrandAndLinkColors": {
+      "name": "Définir les couleurs de marque et de lien à un seul endroit",
+      "description": "Styles globaux pour les polices, designs et couleurs. Définissez les couleurs de marque et de lien une fois et appliquez-les sur toute la plateforme facilement."
+    },
+    "mobileFirstApproach": {
+      "name": "Approche Mobile-First",
+      "description": "Développé avec une approche Mobile-First. Le Page Builder fonctionne même sur mobile."
+    },
+    "mediaLibrary": {
+      "name": "Médiathèque",
+      "description": "Une médiathèque belle et conviviale qui permet de changer et mettre à jour les images. Intégration Unsplash incluse."
+    },
+    "minimalIntuitiveDesign": {
+      "name": "Design minimal et intuitif",
+      "description": "Un design beau, élégant et intuitif. Améliorez l'engagement utilisateur avec une expérience visuelle incroyable."
+    }
+  },
+  "branding": {
+    "mainHeader": "Donnez vie à votre vision et créez des pages impressionnantes avec un Page Builder glisser-déposer",
+    "description": "Le créateur de pages web pour des pages époustouflantes. Permettez aux utilisateurs de concevoir et publier des pages modernes à n'importe quelle échelle. Créez des pages réactives comme des listes, des offres d'emploi ou des articles de blog et gérez facilement le contenu grâce au Page Builder gratuit par glisser-déposer. Développé avec TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS et HTML. Téléchargez ou installez gratuitement notre puissant, flexible et facile à utiliser Page Builder Vue 3.",
+    "downloadDescription": "Téléchargez ou installez gratuitement notre puissant, flexible et facile à utiliser Page Builder Vue 3 via"
+  },
+  "typography": {
+    "title": "Typographie",
+    "appearance": "Apparence de la police",
+    "fontSize": "Taille de la police",
+    "fontTabletSize": "Taille de la police pour tablette",
+    "fontMobileSize": "Petits écrans",
+    "fontWeight": "Graisse de la police",
+    "fontFamily": "Famille de polices",
+    "fontStyle": "Style de police"
+  },
+  "opacity": {
+    "label": "Opacité",
+    "transparent": "Transparent"
+  },
+  "backgroundOpacity": {
+    "label": "Opacité de fond",
+    "transparent": "Transparent"
+  },
+  "padding": {
+    "title": "Marge intérieure",
+    "vertical": "Marge intérieure verticale",
+    "horizontal": "Marge intérieure horizontale",
+    "select": "Sélectionner"
+  },
+  "margin": {
+    "title": "Marge extérieure",
+    "vertical": "Marge extérieure verticale",
+    "horizontal": "Marge extérieure horizontale",
+    "select": "Sélectionner"
+  },
+  "opacityEditor": {
+    "title": "Opacité et transparence"
+  },
+  "borderRadius": {
+    "title": "Rayon de bordure",
+    "global": "Global",
+    "specific": "Spécifique",
+    "label": "Rayon de bordure",
+    "topLeft": "Rayon de bordure en haut à gauche",
+    "topRight": "Rayon de bordure en haut à droite",
+    "bottomLeft": "Rayon de bordure en bas à gauche",
+    "bottomRight": "Rayon de bordure en bas à droite",
+    "select": "Sélectionner"
+  },
+  "borders": {
+    "title": "Style, largeur et couleur de bordure",
+    "border": "Bordure",
+    "style": "Style de bordure",
+    "width": "Largeur de bordure",
+    "color": "Couleur de bordure",
+    "select": "Sélectionner"
+  },
+  "classEditor": {
+    "title": "CSS généré",
+    "info": "Voici le CSS appliqué par le builder. Ajoutez votre propre CSS et appuyez sur Entrée pour l'appliquer à l'élément sélectionné.",
+    "add": "Ajoutez votre CSS.",
+    "prefix": "Le préfixe pbx- est ajouté automatiquement.",
+    "placeholder": "Tapez la classe",
+    "addButton": "Ajouter"
+  },
+  "styleEditor": {
+    "title": "Styles en ligne",
+    "info": "Voici les styles en ligne appliqués par le builder. Ajoutez vos propres styles et appuyez sur Entrée pour les appliquer à l'élément sélectionné.",
+    "add": "Ajoutez votre propre style.",
+    "propertyPlaceholder": "propriété",
+    "valuePlaceholder": "valeur",
+    "addButton": "Ajouter"
+  },
+  "rightSidebar": {
+    "backgroundColorEditor": {
+      "label": "Couleur de fond",
+      "transparent": "Transparent"
+    },
+    "editing": "Édition",
+    "globalPageStylesTitle": "Styles de page globaux",
+    "globalPageStylesDescription": "Appliquez des styles qui affectent toute la page. Ces paramètres incluent la famille de polices globale, la couleur du texte, la couleur de fond et d'autres styles universels qui s'appliquent à toutes les sections.",
+    "updatePageStyles": "Mettre à jour les styles de page",
+    "downloadHtmlTitle": "Télécharger le HTML",
+    "downloadHtmlDescription": "Exportez toute la page en tant que fichier HTML autonome. Cela inclut toutes les sections, le contenu et les styles appliqués, prêt à être utilisé ou intégré ailleurs.",
+    "downloadHtmlButton": "Télécharger le fichier HTML"
+  }
+}

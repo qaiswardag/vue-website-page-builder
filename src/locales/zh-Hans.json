@@ -1,0 +1,136 @@
+{
+  "language": "语言",
+  "button": {
+    "addComponentsToBottom": "添加组件到底部",
+    "publish": "发布",
+    "addComponents": "添加新组件",
+    "save": "保存",
+    "resetPage": "重置页面"
+  },
+  "options": {
+    "button": "选项",
+    "configOverview": "配置概览",
+    "htmlOverview": "HTML 概览",
+    "deleteLayout": "删除布局"
+  },
+  "features": {
+    "liveDragDropBuilder": {
+      "name": "实时拖放构建器",
+      "description": "在页面上点击并拖放内容，见证页面焕发生机。让您的愿景成真，使用拖放页面生成器创建令人印象深刻的页面。"
+    },
+    "trueVisualEditing": {
+      "name": "真正的可视化编辑",
+      "description": "实时查看您的更改。提升您的创意愿景，使用直观的页面生成器创建页面。打破设计限制，将您的想法变为现实。"
+    },
+    "features": {
+      "name": "功能",
+      "description": "拖放、重新排序、真正的可视化编辑、响应式编辑、字体自定义、撤销与重做、文本编辑、媒体库、Unsplash 集成、YouTube 视频。"
+    },
+    "technologies": {
+      "name": "技术",
+      "description": "由 TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS 和 HTML 开发。"
+    },
+    "setBrandAndLinkColors": {
+      "name": "一处设置品牌和链接颜色",
+      "description": "字体、设计和颜色的全局样式。只需设置一次品牌和链接颜色，即可轻松应用到整个平台。"
+    },
+    "mobileFirstApproach": {
+      "name": "移动优先策略",
+      "description": "采用移动优先策略开发。页面生成器甚至可以在手机上使用。"
+    },
+    "mediaLibrary": {
+      "name": "媒体库",
+      "description": "美观且用户友好的媒体库，允许您更改和更新图片。包含 Unsplash 集成。"
+    },
+    "minimalIntuitiveDesign": {
+      "name": "极简直观设计",
+      "description": "美观、优雅且直观的设计。通过出色的视觉体验提升用户参与度。"
+    }
+  },
+  "branding": {
+    "mainHeader": "让您的愿景成真，使用拖放页面生成器创建令人印象深刻的页面",
+    "description": "令人惊叹的网页构建器。让用户能够在任何规模下设计和发布现代网页。使用免费的拖放页面生成器，轻松构建响应式页面，如列表、职位或博客文章，并轻松管理内容。由 TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS 和 HTML 开发。免费下载或安装我们强大、灵活且易于使用的 Vue 3 页面生成器。",
+    "downloadDescription": "免费下载或安装我们强大、灵活且易于使用的 Vue 3 页面生成器，通过"
+  },
+  "typography": {
+    "title": "排版",
+    "appearance": "字体外观",
+    "fontSize": "字体大小",
+    "fontTabletSize": "平板字体大小",
+    "fontMobileSize": "小屏幕",
+    "fontWeight": "字体粗细",
+    "fontFamily": "字体族",
+    "fontStyle": "字体样式"
+  },
+  "opacity": {
+    "label": "不透明度",
+    "transparent": "透明"
+  },
+  "backgroundOpacity": {
+    "label": "背景不透明度",
+    "transparent": "透明"
+  },
+  "padding": {
+    "title": "内边距",
+    "vertical": "垂直内边距",
+    "horizontal": "水平内边距",
+    "select": "选择"
+  },
+  "margin": {
+    "title": "外边距",
+    "vertical": "垂直外边距",
+    "horizontal": "水平外边距",
+    "select": "选择"
+  },
+  "opacityEditor": {
+    "title": "不透明度与透明度"
+  },
+  "borderRadius": {
+    "title": "圆角",
+    "global": "全局",
+    "specific": "特定",
+    "label": "圆角",
+    "topLeft": "左上圆角",
+    "topRight": "右上圆角",
+    "bottomLeft": "左下圆角",
+    "bottomRight": "右下圆角",
+    "select": "选择"
+  },
+  "borders": {
+    "title": "边框样式、宽度和颜色",
+    "border": "边框",
+    "style": "边框样式",
+    "width": "边框宽度",
+    "color": "边框颜色",
+    "select": "选择"
+  },
+  "classEditor": {
+    "title": "生成的 CSS",
+    "info": "这是由构建器应用的 CSS。添加您自己的 CSS 并按回车键将其应用到所选元素。",
+    "add": "添加您的 CSS。",
+    "prefix": "pbx- 前缀会自动添加。",
+    "placeholder": "输入类名",
+    "addButton": "添加"
+  },
+  "styleEditor": {
+    "title": "内联样式",
+    "info": "这些是由构建器应用的内联样式。添加您自己的样式并按回车键将其应用到所选元素。",
+    "add": "添加您自己的样式。",
+    "propertyPlaceholder": "属性",
+    "valuePlaceholder": "值",
+    "addButton": "添加"
+  },
+  "rightSidebar": {
+    "backgroundColorEditor": {
+      "label": "背景颜色",
+      "transparent": "透明"
+    },
+    "editing": "编辑",
+    "globalPageStylesTitle": "全局页面样式",
+    "globalPageStylesDescription": "应用影响整个页面的样式。这些设置包括全局字体、文本颜色、背景颜色和适用于所有部分的其他通用样式。",
+    "updatePageStyles": "更新页面样式",
+    "downloadHtmlTitle": "下载 HTML",
+    "downloadHtmlDescription": "将整个页面导出为独立的 HTML 文件。这包括所有部分、内容和应用的样式，可随时使用或集成到其他地方。",
+    "downloadHtmlButton": "下载 HTML 文件"
+  }
+}

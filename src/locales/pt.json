@@ -1,0 +1,136 @@
+{
+  "language": "Linguagem",
+  "button": {
+    "addComponentsToBottom": "Adicionar componentes ao final",
+    "publish": "Publicar",
+    "addComponents": "Adicionar novos componentes",
+    "save": "Salvar",
+    "resetPage": "Redefinir página"
+  },
+  "options": {
+    "button": "Opções",
+    "configOverview": "Visão geral da configuração",
+    "htmlOverview": "Visão geral do HTML",
+    "deleteLayout": "Excluir layout"
+  },
+  "features": {
+    "liveDragDropBuilder": {
+      "name": "Construtor de arrastar e soltar ao vivo",
+      "description": "Clique e solte conteúdo em uma página e veja sua página ganhar vida. Dê vida à sua visão e crie páginas impressionantes usando um Page Builder de arrastar e soltar."
+    },
+    "trueVisualEditing": {
+      "name": "Edição visual real",
+      "description": "Veja suas alterações em tempo real. Eleve sua visão criativa e crie páginas usando um page builder intuitivo. Liberte-se das limitações de design e realize suas ideias."
+    },
+    "features": {
+      "name": "Recursos",
+      "description": "Arrastar e soltar, reordenar, edição visual real, edição responsiva, personalização de fontes, desfazer e refazer, edição de texto, biblioteca de mídia, integração com Unsplash, vídeos do YouTube."
+    },
+    "technologies": {
+      "name": "Tecnologias",
+      "description": "Desenvolvido com TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS e HTML."
+    },
+    "setBrandAndLinkColors": {
+      "name": "Defina as cores da marca e do link em um só lugar",
+      "description": "Estilos globais para fontes, designs e cores. Defina as cores da marca e do link uma vez e aplique-as em toda a plataforma com facilidade."
+    },
+    "mobileFirstApproach": {
+      "name": "Abordagem Mobile-First",
+      "description": "Desenvolvido com abordagem Mobile-First. O Page Builder funciona até mesmo em celulares."
+    },
+    "mediaLibrary": {
+      "name": "Biblioteca de mídia",
+      "description": "Uma biblioteca de mídia bonita e fácil de usar que permite alterar e atualizar imagens. Integração com Unsplash incluída."
+    },
+    "minimalIntuitiveDesign": {
+      "name": "Design minimalista e intuitivo",
+      "description": "Design bonito, elegante e intuitivo. Melhore o engajamento do usuário com uma experiência visual incrível."
+    }
+  },
+  "branding": {
+    "mainHeader": "Dê vida à sua visão e crie páginas impressionantes usando um Page Builder de arrastar e soltar",
+    "description": "O construtor de páginas web para páginas impressionantes. Permita que os usuários projetem e publiquem páginas modernas em qualquer escala. Crie páginas responsivas como listagens, empregos ou blogs e gerencie o conteúdo facilmente usando o Page Builder gratuito de arrastar e soltar. Desenvolvido com TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS e HTML. Baixe ou instale gratuitamente nosso poderoso, flexível e fácil de usar Page Builder para Vue 3.",
+    "downloadDescription": "Baixe ou instale gratuitamente nosso poderoso, flexível e fácil de usar Page Builder para Vue 3 via"
+  },
+  "typography": {
+    "title": "Tipografia",
+    "appearance": "Aparência da fonte",
+    "fontSize": "Tamanho da fonte",
+    "fontTabletSize": "Tamanho da fonte para tablet",
+    "fontMobileSize": "Telas pequenas",
+    "fontWeight": "Peso da fonte",
+    "fontFamily": "Família da fonte",
+    "fontStyle": "Estilo da fonte"
+  },
+  "opacity": {
+    "label": "Opacidade",
+    "transparent": "Transparente"
+  },
+  "backgroundOpacity": {
+    "label": "Opacidade do fundo",
+    "transparent": "Transparente"
+  },
+  "padding": {
+    "title": "Preenchimento",
+    "vertical": "Preenchimento vertical",
+    "horizontal": "Preenchimento horizontal",
+    "select": "Selecionar"
+  },
+  "opacityEditor": {
+    "title": "Opacidade e transparência"
+  },
+  "margin": {
+    "title": "Margem",
+    "vertical": "Margem vertical",
+    "horizontal": "Margem horizontal",
+    "select": "Selecionar"
+  },
+  "borderRadius": {
+    "title": "Raio da borda",
+    "global": "Global",
+    "specific": "Específico",
+    "label": "Raio da borda",
+    "topLeft": "Raio da borda superior esquerda",
+    "topRight": "Raio da borda superior direita",
+    "bottomLeft": "Raio da borda inferior esquerda",
+    "bottomRight": "Raio da borda inferior direita",
+    "select": "Selecionar"
+  },
+  "borders": {
+    "title": "Estilo, largura e cor da borda",
+    "border": "Borda",
+    "style": "Estilo da borda",
+    "width": "Largura da borda",
+    "color": "Cor da borda",
+    "select": "Selecionar"
+  },
+  "classEditor": {
+    "title": "CSS Gerado",
+    "info": "Este é o CSS aplicado pelo construtor. Adicione seu próprio CSS e pressione Enter para aplicá-lo ao elemento selecionado.",
+    "add": "Adicione seu CSS.",
+    "prefix": "O prefixo pbx- é adicionado automaticamente.",
+    "placeholder": "Digite a classe",
+    "addButton": "Adicionar"
+  },
+  "styleEditor": {
+    "title": "Estilos Inline",
+    "info": "Estes são os estilos inline aplicados pelo construtor. Adicione seus próprios estilos e pressione Enter para aplicá-los ao elemento selecionado.",
+    "add": "Adicione seu próprio estilo.",
+    "propertyPlaceholder": "propriedade",
+    "valuePlaceholder": "valor",
+    "addButton": "Adicionar"
+  },
+  "rightSidebar": {
+    "backgroundColorEditor": {
+      "label": "Cor de fundo",
+      "transparent": "Transparente"
+    },
+    "editing": "Editando",
+    "globalPageStylesTitle": "Estilos Globais da Página",
+    "globalPageStylesDescription": "Aplique estilos que afetam toda a página. Essas configurações incluem família de fontes global, cor do texto, cor de fundo e outros estilos universais que se aplicam a todas as seções.",
+    "updatePageStyles": "Atualizar estilos da página",
+    "downloadHtmlTitle": "Baixar HTML",
+    "downloadHtmlDescription": "Exporte toda a página como um arquivo HTML independente. Isso inclui todas as seções, conteúdo e estilos aplicados, pronto para uso ou integração em outro lugar.",
+    "downloadHtmlButton": "Baixar arquivo HTML"
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "language": "Idioma",
+  "button": {
+    "addComponentsToBottom": "Agregar componentes al final",
+    "publish": "Publicar",
+    "addComponents": "Agregar nuevos componentes",
+    "save": "Guardar",
+    "resetPage": "Restablecer página"
+  },
+  "options": {
+    "button": "Opciones",
+    "configOverview": "Resumen de configuración",
+    "htmlOverview": "Resumen HTML",
+    "deleteLayout": "Eliminar diseño"
+  },
+  "features": {
+    "liveDragDropBuilder": {
+      "name": "Constructor de arrastrar y soltar en vivo",
+      "description": "Haz clic y suelta contenido en una página y observa cómo cobra vida. Da vida a tu visión y crea páginas impresionantes usando un Page Builder de arrastrar y soltar."
+    },
+    "trueVisualEditing": {
+      "name": "Edición visual real",
+      "description": "Ve tus cambios en tiempo real. Eleva tu visión creativa y crea páginas usando un page builder intuitivo. Libérate de las limitaciones de diseño y haz realidad tus ideas."
+    },
+    "features": {
+      "name": "Características",
+      "description": "Arrastrar y soltar, reordenar, edición visual real, edición responsiva, personalización de fuentes, deshacer y rehacer, edición de texto, biblioteca multimedia, integración con Unsplash, videos de YouTube."
+    },
+    "technologies": {
+      "name": "Tecnologías",
+      "description": "Desarrollado con TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS y HTML."
+    },
+    "setBrandAndLinkColors": {
+      "name": "Configura los colores de marca y enlace en un solo lugar",
+      "description": "Estilos globales para fuentes, diseños y colores. Configura los colores de marca y enlace una vez y aplícalos en toda la plataforma fácilmente."
+    },
+    "mobileFirstApproach": {
+      "name": "Enfoque Mobile-First",
+      "description": "Desarrollado con enfoque Mobile-First. El Page Builder incluso funciona en teléfonos móviles."
+    },
+    "mediaLibrary": {
+      "name": "Biblioteca multimedia",
+      "description": "Una biblioteca multimedia hermosa y fácil de usar que permite cambiar y actualizar imágenes. Integración con Unsplash incluida."
+    },
+    "minimalIntuitiveDesign": {
+      "name": "Diseño minimalista e intuitivo",
+      "description": "Diseño hermoso, elegante e intuitivo. Mejora la participación del usuario con una experiencia visual increíble."
+    }
+  },
+  "branding": {
+    "mainHeader": "Da vida a tu visión y crea páginas impresionantes usando un Page Builder de arrastrar y soltar",
+    "description": "El creador web para páginas impresionantes. Permite a los usuarios diseñar y publicar páginas modernas a cualquier escala. Crea páginas responsivas como listados, empleos o blogs y gestiona el contenido fácilmente usando el Page Builder gratuito de arrastrar y soltar. Desarrollado con TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS y HTML. Descarga o instala nuestro potente, flexible y fácil de usar Page Builder gratuito para Vue 3.",
+    "downloadDescription": "Descarga o instala nuestro potente, flexible y fácil de usar Page Builder gratuito para Vue 3 vía"
+  },
+  "typography": {
+    "title": "Tipografía",
+    "appearance": "Apariencia de la fuente",
+    "fontSize": "Tamaño de fuente",
+    "fontTabletSize": "Tamaño de fuente para tablet",
+    "fontMobileSize": "Pantallas pequeñas",
+    "fontWeight": "Peso de la fuente",
+    "fontFamily": "Familia tipográfica",
+    "fontStyle": "Estilo de fuente"
+  },
+  "opacity": {
+    "label": "Opacidad",
+    "transparent": "Transparente"
+  },
+  "backgroundOpacity": {
+    "label": "Opacidad de fondo",
+    "transparent": "Transparente"
+  },
+  "padding": {
+    "title": "Relleno",
+    "vertical": "Relleno vertical",
+    "horizontal": "Relleno horizontal",
+    "select": "Seleccionar"
+  },
+  "margin": {
+    "title": "Margen",
+    "vertical": "Margen vertical",
+    "horizontal": "Margen horizontal",
+    "select": "Seleccionar"
+  },
+  "opacityEditor": {
+    "title": "Opacidad y transparencia"
+  },
+  "borderRadius": {
+    "title": "Radio de borde",
+    "global": "Global",
+    "specific": "Específico",
+    "label": "Radio de borde",
+    "topLeft": "Radio de borde superior izquierdo",
+    "topRight": "Radio de borde superior derecho",
+    "bottomLeft": "Radio de borde inferior izquierdo",
+    "bottomRight": "Radio de borde inferior derecho",
+    "select": "Seleccionar"
+  },
+  "borders": {
+    "title": "Estilo, ancho y color de borde",
+    "border": "Borde",
+    "style": "Estilo de borde",
+    "width": "Ancho de borde",
+    "color": "Color de borde",
+    "select": "Seleccionar"
+  },
+  "classEditor": {
+    "title": "CSS generado",
+    "info": "Este es el CSS aplicado por el constructor. Agregue su propio CSS y presione Enter para aplicarlo al elemento seleccionado.",
+    "add": "Agregue su CSS.",
+    "prefix": "El prefijo pbx- se agrega automáticamente.",
+    "placeholder": "Escriba la clase",
+    "addButton": "Agregar"
+  },
+  "styleEditor": {
+    "title": "Estilos en línea",
+    "info": "Estos son los estilos en línea aplicados por el constructor. Agregue sus propios estilos y presione Enter para aplicarlos al elemento seleccionado.",
+    "add": "Agregue su propio estilo.",
+    "propertyPlaceholder": "propiedad",
+    "valuePlaceholder": "valor",
+    "addButton": "Agregar"
+  },
+  "rightSidebar": {
+    "backgroundColorEditor": {
+      "label": "Color de fondo",
+      "transparent": "Transparente"
+    },
+    "editing": "Editando",
+    "globalPageStylesTitle": "Estilos globales de página",
+    "globalPageStylesDescription": "Aplica estilos que afectan a toda la página. Estos ajustes incluyen la familia de fuentes global, el color del texto, el color de fondo y otros estilos universales que se aplican a todas las secciones.",
+    "updatePageStyles": "Actualizar estilos de página",
+    "downloadHtmlTitle": "Descargar HTML",
+    "downloadHtmlDescription": "Exporte toda la página como un archivo HTML independiente. Esto incluye todas las secciones, el contenido y los estilos aplicados, listo para usar o integrar en otro lugar.",
+    "downloadHtmlButton": "Descargar archivo HTML"
+  }
+}
