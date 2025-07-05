@@ -29,5 +29,15 @@
   "Update Page Styles": "Seitenstile aktualisieren",
   "Download HTML": "HTML herunterladen",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Exportieren Sie die gesamte Seite als eigenständige HTML-Datei. Dies umfasst alle Abschnitte, Inhalte und angewendeten Stile, sodass sie bereit für die Verwendung oder Integration an anderer Stelle ist.",
-  "Download HTML file": "HTML-Datei herunterladen"
+  "Download HTML file": "HTML-Datei herunterladen",
+  "Typographies": "Typografien",
+  "Font Appearance": "Schriftbild",
+  "Font Size": "Schriftgröße",
+  "Select": "Auswählen",
+  "Font size": "Schriftgröße",
+  "Font tablet size": "Schriftgröße für Tablets",
+  "Font small screens": "Schriftgröße für kleine Bildschirme",
+  "Font weight": "Schriftgewicht",
+  "Font family": "Schriftfamilie",
+  "Font Style": "Schriftstil"
 }

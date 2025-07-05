@@ -29,5 +29,15 @@
   "Update Page Styles": "تحديث أنماط الصفحة",
   "Download HTML": "تنزيل HTML",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "تصدير الصفحة بأكملها كملف HTML مستقل. يتضمن ذلك جميع الأقسام والمحتوى والأنماط المطبقة، مما يجعله جاهزًا للاستخدام أو التكامل في مكان آخر.",
-  "Download HTML file": "تنزيل ملف HTML"
+  "Download HTML file": "تنزيل ملف HTML",
+  "Typographies": "الطباعة",
+  "Font Appearance": "مظهر الخط",
+  "Font Size": "حجم الخط",
+  "Select": "اختر",
+  "Font size": "حجم الخط",
+  "Font tablet size": "حجم الخط للجهاز اللوحي",
+  "Font small screens": "حجم الخط للشاشات الصغيرة",
+  "Font weight": "وزن الخط",
+  "Font family": "عائلة الخط",
+  "Font Style": "نمط الخط"
 }

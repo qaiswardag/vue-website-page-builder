@@ -29,5 +29,15 @@
   "Update Page Styles": "Mettre à jour les styles de page",
   "Download HTML": "Télécharger HTML",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Exporter toute la page en tant que fichier HTML autonome. Cela inclut toutes les sections, le contenu et les styles appliqués, ce qui le rend prêt à être utilisé ou intégré ailleurs.",
-  "Download HTML file": "Télécharger le fichier HTML"
+  "Download HTML file": "Télécharger le fichier HTML",
+  "Typographies": "Typographies",
+  "Font Appearance": "Apparence de la police",
+  "Font Size": "Taille de la police",
+  "Select": "Sélectionner",
+  "Font size": "Taille de la police",
+  "Font tablet size": "Taille de la police pour tablette",
+  "Font small screens": "Taille de la police pour petits écrans",
+  "Font weight": "Poids de la police",
+  "Font family": "Famille de police",
+  "Font Style": "Style de police"
 }

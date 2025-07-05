@@ -29,5 +29,15 @@
   "Update Page Styles": "Обновить стили страницы",
   "Download HTML": "Скачать HTML",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Экспортируйте всю страницу как автономный HTML-файл. Это включает все разделы, содержимое и примененные стили, делая его готовым к использованию или интеграции в другом месте.",
-  "Download HTML file": "Скачать HTML-файл"
+  "Download HTML file": "Скачать HTML-файл",
+  "Typographies": "Типографии",
+  "Font Appearance": "Внешний вид шрифта",
+  "Font Size": "Размер шрифта",
+  "Select": "Выбрать",
+  "Font size": "Размер шрифта",
+  "Font tablet size": "Размер шрифта для планшетов",
+  "Font small screens": "Размер шрифта для маленьких экранов",
+  "Font weight": "Толщина шрифта",
+  "Font family": "Семейство шрифтов",
+  "Font Style": "Стиль шрифта"
 }

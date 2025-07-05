@@ -29,5 +29,15 @@
   "Update Page Styles": "更新页面样式",
   "Download HTML": "下载HTML",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "将整个页面导出为独立的HTML文件。这包括所有部分、内容和应用的样式，使其可以随时使用或集成到其他地方。",
-  "Download HTML file": "下载HTML文件"
+  "Download HTML file": "下载HTML文件",
+  "Typographies": "排版",
+  "Font Appearance": "字体外观",
+  "Font Size": "字体大小",
+  "Select": "选择",
+  "Font size": "字体大小",
+  "Font tablet size": "平板字体大小",
+  "Font small screens": "小屏幕字体大小",
+  "Font weight": "字体粗细",
+  "Font family": "字体家族",
+  "Font Style": "字体样式"
 }

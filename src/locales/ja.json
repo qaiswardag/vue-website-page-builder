@@ -29,5 +29,15 @@
   "Update Page Styles": "ページスタイルを更新",
   "Download HTML": "HTMLをダウンロード",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "ページ全体をスタンドアロンのHTMLファイルとしてエクスポートします。これには、すべてのセクション、コンテンツ、および適用されたスタイルが含まれ、他の場所での使用または統合の準備が整います。",
-  "Download HTML file": "HTMLファイルをダウンロード"
+  "Download HTML file": "HTMLファイルをダウンロード",
+  "Typographies": "タイポグラフィ",
+  "Font Appearance": "フォントの外観",
+  "Font Size": "フォントサイズ",
+  "Select": "選択",
+  "Font size": "フォントサイズ",
+  "Font tablet size": "タブレット用フォントサイズ",
+  "Font small screens": "小さい画面用フォントサイズ",
+  "Font weight": "フォントの太さ",
+  "Font family": "フォントファミリー",
+  "Font Style": "フォントスタイル"
 }

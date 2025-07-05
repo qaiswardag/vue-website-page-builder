@@ -29,5 +29,15 @@
   "Update Page Styles": "पृष्ठ शैलियाँ अपडेट करें",
   "Download HTML": "HTML डाउनलोड करें",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "पूरे पृष्ठ को एक स्टैंडअलोन HTML फ़ाइल के रूप में निर्यात करें। इसमें सभी अनुभाग, सामग्री और लागू शैलियाँ शामिल हैं, जिससे यह उपयोग या अन्यत्र एकीकरण के लिए तैयार हो जाता है।",
-  "Download HTML file": "HTML फ़ाइल डाउनलोड करें"
+  "Download HTML file": "HTML फ़ाइल डाउनलोड करें",
+  "Typographies": "टाइपोग्राफ़ी",
+  "Font Appearance": "फ़ॉन्ट उपस्थिति",
+  "Font Size": "फ़ॉन्ट आकार",
+  "Select": "चुनें",
+  "Font size": "फ़ॉन्ट आकार",
+  "Font tablet size": "टैबलेट के लिए फ़ॉन्ट आकार",
+  "Font small screens": "छोटी स्क्रीन के लिए फ़ॉन्ट आकार",
+  "Font weight": "फ़ॉन्ट वजन",
+  "Font family": "फ़ॉन्ट परिवार",
+  "Font Style": "फ़ॉन्ट शैली"
 }
