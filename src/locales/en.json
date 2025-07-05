@@ -83,5 +83,8 @@
   "Background Color": "Background Color",
   "Transparent": "Transparent",
   "Text Color": "Text Color",
-  "Default black": "Default black"
+  "Default black": "Default black",
+  "Remove Component?": "Remove Component?",
+  "Are you sure you want to remove this Component?": "Are you sure you want to remove this Component?",
+  "Delete": "Delete"
 }

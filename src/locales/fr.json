@@ -76,5 +76,8 @@
   "Loading...": "Chargement...",
   "Background Color": "Couleur de fond",
   "Text Color": "Couleur du texte",
-  "Default black": "Noir par défaut"
+  "Default black": "Noir par défaut",
+  "Remove Component?": "Supprimer le composant ?",
+  "Are you sure you want to remove this Component?": "Êtes-vous sûr de vouloir supprimer ce composant ?",
+  "Delete": "Supprimer"
 }

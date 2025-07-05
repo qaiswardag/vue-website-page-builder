@@ -76,5 +76,8 @@
   "Loading...": "लोड हो रहा है...",
   "Background Color": "पृष्ठभूमि का रंग",
   "Text Color": "पाठ का रंग",
-  "Default black": "डिफ़ॉल्ट काला"
+  "Default black": "डिफ़ॉल्ट काला",
+  "Remove Component?": "घटक हटाएं?",
+  "Are you sure you want to remove this Component?": "क्या आप वाकई इस घटक को हटाना चाहते हैं?",
+  "Delete": "हटाएं"
 }

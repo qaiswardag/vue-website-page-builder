@@ -76,5 +76,8 @@
   "Loading...": "Wird geladen...",
   "Background Color": "Hintergrundfarbe",
   "Text Color": "Textfarbe",
-  "Default black": "Standard Schwarz"
+  "Default black": "Standard Schwarz",
+  "Remove Component?": "Komponente entfernen?",
+  "Are you sure you want to remove this Component?": "Sind Sie sicher, dass Sie diese Komponente entfernen möchten?",
+  "Delete": "Löschen"
 }

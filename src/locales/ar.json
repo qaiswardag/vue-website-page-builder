@@ -75,5 +75,8 @@
   "Loading...": "جار التحميل...",
   "Background Color": "لون الخلفية",
   "Text Color": "لون النص",
-  "Default black": "أسود افتراضي"
+  "Default black": "أسود افتراضي",
+  "Remove Component?": "إزالة المكون؟",
+  "Are you sure you want to remove this Component?": "هل أنت متأكد أنك تريد إزالة هذا المكون؟",
+  "Delete": "حذف"
 }

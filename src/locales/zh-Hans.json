@@ -76,5 +76,8 @@
   "Loading...": "加载中...",
   "Background Color": "背景颜色",
   "Text Color": "文字颜色",
-  "Default black": "默认黑色"
+  "Default black": "默认黑色",
+  "Remove Component?": "删除组件？",
+  "Are you sure you want to remove this Component?": "您确定要删除此组件吗？",
+  "Delete": "删除"
 }

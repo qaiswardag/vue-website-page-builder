@@ -82,5 +82,8 @@
   "Loading...": "Carregando...",
   "Background Color": "Cor de fundo",
   "Text Color": "Cor do texto",
-  "Default black": "Preto padrão"
+  "Default black": "Preto padrão",
+  "Remove Component?": "Remover componente?",
+  "Are you sure you want to remove this Component?": "Tem certeza de que deseja remover este componente?",
+  "Delete": "Excluir"
 }

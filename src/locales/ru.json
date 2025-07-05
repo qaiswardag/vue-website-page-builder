@@ -76,5 +76,8 @@
   "Loading...": "Загрузка...",
   "Background Color": "Цвет фона",
   "Text Color": "Цвет текста",
-  "Default black": "Черный по умолчанию"
+  "Default black": "Черный по умолчанию",
+  "Remove Component?": "Удалить компонент?",
+  "Are you sure you want to remove this Component?": "Вы уверены, что хотите удалить этот компонент?",
+  "Delete": "Удалить"
 }
