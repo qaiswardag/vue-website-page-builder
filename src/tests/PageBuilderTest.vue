@@ -102,12 +102,16 @@ onMounted(async () => {
     </div>
 
     <FullWidthElement :descriptionArea="true" class="pbx-bg-gray-50">
-      <template #title>Everything you need. Break free from design limitations </template>
+      <template #title>
+        {{ translate('Everything you need. Break free from design limitations') }}
+      </template>
       <template #description>
         <p class="pbx-myPrimaryParagraph pbx-font-normal">
-          A Page Builder designed for growth. Build your website pages with ready-made components
-          that are fully customizable and always responsive, designed to fit every need. A powerful
-          Page Builder for growing merchants, brands, and agencies.
+          {{
+            translate(
+              'A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.',
+            )
+          }}
         </p>
       </template>
       <template #content>
