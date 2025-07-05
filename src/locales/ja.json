@@ -79,5 +79,6 @@
   "Default black": "デフォルトの黒",
   "Remove Component?": "コンポーネントを削除しますか？",
   "Are you sure you want to remove this Component?": "このコンポーネントを削除してもよろしいですか？",
-  "Delete": "削除"
+  "Delete": "削除",
+  "Add to the bottom": "一番下に追加"
 }

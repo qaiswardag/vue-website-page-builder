@@ -962,7 +962,7 @@ onMounted(async () => {
           class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-cursor-pointer"
         >
           <span class="lg:pbx-block pbx-hidden">
-            <div class="pbx-whitespace-nowrap">Add to the bottom</div>
+            <div class="pbx-whitespace-nowrap">{{ translate('Add to the bottom') }}</div>
           </span>
           <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
             <button
