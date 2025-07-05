@@ -59,5 +59,16 @@
   "Border Style": "बॉर्डर शैली",
   "Border Width": "बॉर्डर चौड़ाई",
   "Border Color": "बॉर्डर रंग",
-  "Transparent": "पारदर्शी"
+  "Transparent": "पारदर्शी",
+  "Generated CSS": "जनरेट किया गया CSS",
+  "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.": "यह वह CSS है जिसे बिल्डर द्वारा लागू किया गया है। अपना CSS जोड़ें और इसे चयनित तत्व पर लागू करने के लिए Enter दबाएं।",
+  "Add your CSS.": "अपना CSS जोड़ें।",
+  "The pbx- prefix is added automatically.": "pbx- उपसर्ग स्वचालित रूप से जोड़ा जाता है।",
+  "Type class": "क्लास टाइप करें",
+  "Add": "जोड़ें",
+  "Inline Styles": "इनलाइन शैलियाँ",
+  "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "ये बिल्डर द्वारा लागू की गई इनलाइन शैलियाँ हैं। अपनी खुद की शैलियाँ जोड़ें और चयनित तत्व पर लागू करने के लिए Enter दबाएं।",
+  "Add your own style.": "अपनी खुद की शैली जोड़ें।",
+  "property": "गुण",
+  "value": "मूल्य"
 }

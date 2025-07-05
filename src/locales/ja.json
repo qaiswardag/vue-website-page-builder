@@ -59,5 +59,16 @@
   "Border Style": "ボーダースタイル",
   "Border Width": "ボーダー幅",
   "Border Color": "ボーダー色",
-  "Transparent": "透明"
+  "Transparent": "透明",
+  "Generated CSS": "生成されたCSS",
+  "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.": "これはビルダーによって適用されたCSSです。独自のCSSを追加し、Enterキーを押して選択した要素に適用します。",
+  "Add your CSS.": "CSSを追加してください。",
+  "The pbx- prefix is added automatically.": "pbx-プレフィックスは自動的に追加されます。",
+  "Type class": "クラスを入力",
+  "Add": "追加",
+  "Inline Styles": "インラインスタイル",
+  "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "これらはビルダーによって適用されるインラインスタイルです。独自のスタイルを追加し、Enterキーを押して選択した要素に適用します。",
+  "Add your own style.": "独自のスタイルを追加します。",
+  "property": "プロパティ",
+  "value": "値"
 }

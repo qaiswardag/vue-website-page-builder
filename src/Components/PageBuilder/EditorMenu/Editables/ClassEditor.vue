@@ -3,6 +3,9 @@ import { ref, computed, watch } from 'vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import EditorAccordion from '../EditorAccordion.vue'
 import { getPageBuilder } from '../../../../composables/builderInstance'
+import { useTranslations } from '../../../../composables/useTranslations'
+
+const { translate } = useTranslations()
 
 const pageBuilderService = getPageBuilder()
 
@@ -50,11 +53,14 @@ const handleAddClasses = async () => {
 
 <template>
   <EditorAccordion>
-    <template #title>Generated CSS</template>
+    <template #title>{{ translate('Generated CSS') }}</template>
     <template #content>
       <label class="pbx-myPrimaryInputLabel pbx-my-4">
-        This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the
-        selected element.
+        {{
+          translate(
+            'This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.',
+          )
+        }}
       </label>
 
       <div class="pbx-flex pbx-flex-row pbx-flex-wrap pbx-gap-2 pbx-mt-2 pbx-mb-4">
@@ -79,22 +85,24 @@ const handleAddClasses = async () => {
 
       <div>
         <label for="custom-css" class="pbx-myPrimaryInputLabel">
-          Add your CSS.
+          {{ translate('Add your CSS.') }}
           <br />
-          The pbx- prefix is added automatically.
+          {{ translate('The pbx- prefix is added automatically.') }}
         </label>
         <div class="pbx-flex pbx-gap-2 pbx-item-center">
           <input
             id="custom-css"
             v-model="inputClass"
             type="text"
-            placeholder="Type class"
+            :placeholder="translate('Type class')"
             @keydown.enter="handleAddClasses()"
             autocomplete="off"
             class="pbx-myPrimaryInput"
           />
 
-          <button @click="handleAddClasses" type="button" class="pbx-myPrimaryButton">Add</button>
+          <button @click="handleAddClasses" type="button" class="pbx-myPrimaryButton">
+            {{ translate('Add') }}
+          </button>
         </div>
       </div>
       <p v-if="errorMessage" class="pbx-myPrimaryInputError">{{ errorMessage }}</p>

@@ -59,5 +59,16 @@
   "Border Style": "Стиль границы",
   "Border Width": "Ширина границы",
   "Border Color": "Цвет границы",
-  "Transparent": "Прозрачный"
+  "Transparent": "Прозрачный",
+  "Generated CSS": "Сгенерированный CSS",
+  "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.": "Это CSS, применяемый конструктором. Добавьте свой CSS и нажмите Enter, чтобы применить его к выбранному элементу.",
+  "Add your CSS.": "Добавьте свой CSS.",
+  "The pbx- prefix is added automatically.": "Префикс pbx- добавляется автоматически.",
+  "Type class": "Введите класс",
+  "Add": "Добавить",
+  "Inline Styles": "Встроенные стили",
+  "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "Это встроенные стили, применяемые конструктором. Добавьте свои стили и нажмите Enter, чтобы применить их к выбранному элементу.",
+  "Add your own style.": "Добавьте свой стиль.",
+  "property": "свойство",
+  "value": "значение"
 }

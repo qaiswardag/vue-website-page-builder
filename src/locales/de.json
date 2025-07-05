@@ -59,5 +59,16 @@
   "Border Style": "Randstil",
   "Border Width": "Randbreite",
   "Border Color": "Randfarbe",
-  "Transparent": "Transparent"
+  "Transparent": "Transparent",
+  "Generated CSS": "Generiertes CSS",
+  "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.": "Dies ist das vom Builder angewendete CSS. Fügen Sie Ihr eigenes CSS hinzu und drücken Sie Enter, um es auf das ausgewählte Element anzuwenden.",
+  "Add your CSS.": "Fügen Sie Ihr CSS hinzu.",
+  "The pbx- prefix is added automatically.": "Das pbx- Präfix wird automatisch hinzugefügt.",
+  "Type class": "Klasse eingeben",
+  "Add": "Hinzufügen",
+  "Inline Styles": "Inline-Stile",
+  "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "Dies sind die vom Builder angewendeten Inline-Stile. Fügen Sie Ihre eigenen Stile hinzu und drücken Sie die Eingabetaste, um sie auf das ausgewählte Element anzuwenden.",
+  "Add your own style.": "Fügen Sie Ihren eigenen Stil hinzu.",
+  "property": "Eigenschaft",
+  "value": "Wert"
 }

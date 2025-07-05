@@ -59,5 +59,16 @@
   "Border Style": "Border Style",
   "Border Width": "Border Width",
   "Border Color": "Border Color",
-  "Transparent": "Transparent"
+  "Transparent": "Transparent",
+  "Generated CSS": "Generated CSS",
+  "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.": "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.",
+  "Add your CSS.": "Add your CSS.",
+  "The pbx- prefix is added automatically.": "The pbx- prefix is added automatically.",
+  "Type class": "Type class",
+  "Add": "Add",
+  "Inline Styles": "Inline Styles",
+  "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.",
+  "Add your own style.": "Add your own style.",
+  "property": "property",
+  "value": "value"
 }

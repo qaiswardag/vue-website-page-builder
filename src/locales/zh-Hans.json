@@ -59,5 +59,16 @@
   "Border Style": "边框样式",
   "Border Width": "边框宽度",
   "Border Color": "边框颜色",
-  "Transparent": "透明"
+  "Transparent": "透明",
+  "Generated CSS": "生成的CSS",
+  "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.": "这是构建器应用的CSS。添加您自己的CSS并按Enter将其应用于选定的元素。",
+  "Add your CSS.": "添加您的CSS。",
+  "The pbx- prefix is added automatically.": "pbx-前缀会自动添加。",
+  "Type class": "输入类",
+  "Add": "添加",
+  "Inline Styles": "内联样式",
+  "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "这些是构建器应用的内联样式。添加您自己的样式，然后按 Enter 将其应用于选定的元素。",
+  "Add your own style.": "添加您自己的样式。",
+  "property": "属性",
+  "value": "值"
 }

@@ -6,6 +6,9 @@ import tailwindColors from '../../../../utils/builder/tailwaind-colors'
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import { getPageBuilder } from '../../../../composables/builderInstance'
+import { useTranslations } from '../../../../composables/useTranslations'
+
+const { translate } = useTranslations()
 const pageBuilderService = getPageBuilder()
 
 // Use shared store instance

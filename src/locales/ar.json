@@ -59,5 +59,16 @@
   "Border Style": "نمط الحدود",
   "Border Width": "عرض الحدود",
   "Border Color": "لون الحدود",
-  "Transparent": "شفاف"
+  "Transparent": "شفاف",
+  "Generated CSS": "CSS المُنشأ",
+  "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.": "هذا هو CSS الذي يطبقه المنشئ. أضف CSS الخاص بك واضغط Enter لتطبيقه على العنصر المحدد.",
+  "Add your CSS.": "أضف CSS الخاص بك.",
+  "The pbx- prefix is added automatically.": "يتم إضافة البادئة pbx- تلقائيًا.",
+  "Type class": "اكتب الفئة",
+  "Add": "إضافة",
+  "Inline Styles": "أنماط مضمنة",
+  "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "هذه هي الأنماط المضمنة التي يطبقها المنشئ. أضف أنماطك الخاصة واضغط على Enter لتطبيقها على العنصر المحدد.",
+  "Add your own style.": "أضف نمطك الخاص.",
+  "property": "خاصية",
+  "value": "قيمة"
 }

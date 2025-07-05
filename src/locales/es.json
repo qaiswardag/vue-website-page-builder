@@ -59,5 +59,16 @@
   "Border Style": "Estilo del borde",
   "Border Width": "Ancho del borde",
   "Border Color": "Color del borde",
-  "Transparent": "Transparente"
+  "Transparent": "Transparente",
+  "Generated CSS": "CSS Generado",
+  "This is the CSS applied by the builder. Add your own CSS and press Enter to apply it to the selected element.": "Este es el CSS aplicado por el constructor. Agregue su propio CSS y presione Enter para aplicarlo al elemento seleccionado.",
+  "Add your CSS.": "Agregue su CSS.",
+  "The pbx- prefix is added automatically.": "El prefijo pbx- se agrega automáticamente.",
+  "Type class": "Escriba clase",
+  "Add": "Agregar",
+  "Inline Styles": "Estilos en línea",
+  "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "Estos son los estilos en línea aplicados por el constructor. Agregue sus propios estilos y presione Enter para aplicarlos al elemento seleccionado.",
+  "Add your own style.": "Agregue su propio estilo.",
+  "property": "propiedad",
+  "value": "valor"
 }
