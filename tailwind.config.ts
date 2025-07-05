@@ -1,10 +1,12 @@
-/** @type {import('tailwindcss').Config} */
-const defaultTheme = require('tailwindcss/defaultTheme')
+import defaultTheme from 'tailwindcss/defaultTheme'
+import forms from '@tailwindcss/forms'
+import typography from '@tailwindcss/typography'
 
+/** @type {import('tailwindcss').Config} */
 export default {
   prefix: 'pbx-',
   content: [
-    './css/app.css',
+    './css/style.css',
     './src/**/*.{vue,js,ts,jsx,tsx,json,html}',
     './public/json/**/*.json',
     './public/**/*.html',
@@ -63,5 +65,5 @@ export default {
       },
     },
   },
-  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/typography')],
+  plugins: [forms, typography],
 }

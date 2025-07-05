@@ -84,6 +84,7 @@ const configPageBuilder = {
       default: 'en',
       disable: ['fr', 'es'],
     },
+    autoSave: true,
   },
   settings: {
     brandColor: '#DB93B0',

@@ -167,21 +167,19 @@ This section walks you through the essential steps—from installation to render
 
 To get started with the Page Builder, follow these steps:
 
-- **Call `initPageBuilder()` once** in your application entry point (e.g., `main.ts` or `main.js`). This sets up the shared builder instance for your entire app.
+- **Use the Page Builder plugin** in your application entry point (e.g., `main.ts` or `main.js`). This sets up the shared builder instance for your entire app.
 - **Access the shared builder instance** anywhere in your application using the `getPageBuilder()` composable.
 - **Import the CSS file once** in your `main.js`, `main.ts`, or root component to ensure proper styling and automatic icon loading.
 
 ```typescript
 import { createApp } from 'vue'
 import App from './App.vue'
-import { initPageBuilder } from '@myissue/vue-website-page-builder'
+import { pageBuilder } from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
 
-// Initialize the shared Page Builder instance
-// This must be called once in your app entry point
-initPageBuilder()
-
+// Use the Page Builder plugin
 const app = createApp(App)
+app.use(pageBuilder)
 app.mount('#app')
 ```
 

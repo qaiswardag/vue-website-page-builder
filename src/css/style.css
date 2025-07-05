@@ -495,3 +495,18 @@
   outline: 4px dashed #b91010 !important;
   outline-offset: -2px !important;
 }
+
+.pbx-myPrimarySelect {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: #fff;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+  padding: 10px 40px 10px 15px;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.3s ease;
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}

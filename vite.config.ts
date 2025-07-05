@@ -3,7 +3,6 @@ import { fileURLToPath, URL } from 'node:url'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
-// https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const isLibMode = mode === 'lib'
 
@@ -29,9 +28,11 @@ export default defineConfig(({ mode }) => {
             globals: {
               vue: 'Vue',
             },
+            assetFileNames: 'style.css',
           },
         },
         emptyOutDir: true,
+        cssCodeSplit: true,
       },
       esbuild: {
         target: 'esnext',

@@ -1,5 +1,5 @@
 import './css/dev-global.css'
-import './css/app.css'
+import './css/style.css'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

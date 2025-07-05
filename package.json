@@ -18,7 +18,7 @@
       "import": "./dist/vue-website-page-builder.js",
       "require": "./dist/vue-website-page-builder.umd.cjs"
     },
-    "./style.css": "./dist/vue-website-page-builder.css"
+    "./style.css": "./dist/style.css"
   },
   "keywords": [
     "vue",

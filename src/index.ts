@@ -15,7 +15,7 @@ export type { PageBuilderUser, ComponentObject, ImageObject, PageBuilderConfig }
 export { createPinia } from 'pinia'
 
 // Export CSS (users will need to import this separately)
-import './css/app.css'
+import './css/style.css'
 
 // Export shared store instances for external access
 export { sharedPageBuilderPinia, sharedPageBuilderStore } from './stores/shared-store'
