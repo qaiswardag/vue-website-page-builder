@@ -74,5 +74,7 @@
   "close": "बंद करें",
   "Editing": "संपादन",
   "Loading...": "लोड हो रहा है...",
-  "Background Color": "पृष्ठभूमि का रंग"
+  "Background Color": "पृष्ठभूमि का रंग",
+  "Text Color": "पाठ का रंग",
+  "Default black": "डिफ़ॉल्ट काला"
 }

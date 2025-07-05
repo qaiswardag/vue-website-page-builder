@@ -74,5 +74,7 @@
   "close": "schließen",
   "Editing": "Bearbeiten",
   "Loading...": "Wird geladen...",
-  "Background Color": "Hintergrundfarbe"
+  "Background Color": "Hintergrundfarbe",
+  "Text Color": "Textfarbe",
+  "Default black": "Standard Schwarz"
 }

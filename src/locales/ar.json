@@ -73,5 +73,7 @@
   "value": "قيمة",
   "Editing": "تحرير",
   "Loading...": "جار التحميل...",
-  "Background Color": "لون الخلفية"
+  "Background Color": "لون الخلفية",
+  "Text Color": "لون النص",
+  "Default black": "أسود افتراضي"
 }

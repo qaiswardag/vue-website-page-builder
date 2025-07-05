@@ -53,7 +53,9 @@ watch(
               class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border pbx-border-gray-800 pbx-rounded-sm"
               :class="`pbx-bg-${textColor?.replace('pbx-text-', '')}`"
             ></div>
-            <div>Text Color</div>
+            <div>
+              <div>{{ translate('Text Color') }}</div>
+            </div>
           </div>
 
           <span v-if="globalPageLayout" class="material-symbols-outlined"> chevron_right </span>

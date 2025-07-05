@@ -74,5 +74,7 @@
   "close": "关闭",
   "Editing": "编辑",
   "Loading...": "加载中...",
-  "Background Color": "背景颜色"
+  "Background Color": "背景颜色",
+  "Text Color": "文字颜色",
+  "Default black": "默认黑色"
 }

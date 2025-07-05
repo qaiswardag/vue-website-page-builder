@@ -80,5 +80,7 @@
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Exporte toda a página como um arquivo HTML independente. Isso inclui todas as seções, conteúdo e estilos aplicados, tornando-o pronto para uso ou integração em outro lugar.",
   "Download HTML file": "Baixar arquivo HTML",
   "Loading...": "Carregando...",
-  "Background Color": "Cor de fundo"
+  "Background Color": "Cor de fundo",
+  "Text Color": "Cor do texto",
+  "Default black": "Preto padrão"
 }

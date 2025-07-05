@@ -74,5 +74,7 @@
   "close": "fermer",
   "Editing": "Édition",
   "Loading...": "Chargement...",
-  "Background Color": "Couleur de fond"
+  "Background Color": "Couleur de fond",
+  "Text Color": "Couleur du texte",
+  "Default black": "Noir par défaut"
 }
