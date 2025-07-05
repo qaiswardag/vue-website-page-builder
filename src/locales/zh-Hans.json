@@ -53,5 +53,11 @@
   "Border Radius top left": "边框半径 左上",
   "Border Radius top right": "边框半径 右上",
   "Border Radius bottom left": "边框半径 左下",
-  "Border Radius bottom right": "边框半径 右下"
+  "Border Radius bottom right": "边框半径 右下",
+  "Border Style, Width & Color": "边框样式、宽度和颜色",
+  "Border": "边框",
+  "Border Style": "边框样式",
+  "Border Width": "边框宽度",
+  "Border Color": "边框颜色",
+  "Transparent": "透明"
 }

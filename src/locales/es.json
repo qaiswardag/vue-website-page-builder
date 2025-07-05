@@ -53,5 +53,11 @@
   "Border Radius top left": "Radio del borde superior izquierdo",
   "Border Radius top right": "Radio del borde superior derecho",
   "Border Radius bottom left": "Radio del borde inferior izquierdo",
-  "Border Radius bottom right": "Radio del borde inferior derecho"
+  "Border Radius bottom right": "Radio del borde inferior derecho",
+  "Border Style, Width & Color": "Estilo, ancho y color del borde",
+  "Border": "Borde",
+  "Border Style": "Estilo del borde",
+  "Border Width": "Ancho del borde",
+  "Border Color": "Color del borde",
+  "Transparent": "Transparente"
 }

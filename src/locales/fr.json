@@ -53,5 +53,11 @@
   "Border Radius top left": "Rayon de bordure en haut à gauche",
   "Border Radius top right": "Rayon de bordure en haut à droite",
   "Border Radius bottom left": "Rayon de bordure en bas à gauche",
-  "Border Radius bottom right": "Rayon de bordure en bas à droite"
+  "Border Radius bottom right": "Rayon de bordure en bas à droite",
+  "Border Style, Width & Color": "Style, largeur et couleur de la bordure",
+  "Border": "Bordure",
+  "Border Style": "Style de bordure",
+  "Border Width": "Largeur de bordure",
+  "Border Color": "Couleur de bordure",
+  "Transparent": "Transparent"
 }

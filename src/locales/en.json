@@ -53,5 +53,11 @@
   "Border Radius top left": "Border Radius top left",
   "Border Radius top right": "Border Radius top right",
   "Border Radius bottom left": "Border Radius bottom left",
-  "Border Radius bottom right": "Border Radius bottom right"
+  "Border Radius bottom right": "Border Radius bottom right",
+  "Border Style, Width & Color": "Border Style, Width & Color",
+  "Border": "Border",
+  "Border Style": "Border Style",
+  "Border Width": "Border Width",
+  "Border Color": "Border Color",
+  "Transparent": "Transparent"
 }

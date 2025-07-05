@@ -68,7 +68,9 @@ watch(
     <template #title>{{ translate('Padding') }}</template>
     <template #content>
       <div class="pbx-my-2 pbx-py-2">
-        <label for="vertical-padding" class="pbx-myPrimaryInputLabel">{{ translate('Vertical Padding') }}</label>
+        <label for="vertical-padding" class="pbx-myPrimaryInputLabel">{{
+          translate('Vertical Padding')
+        }}</label>
         <select
           id="vertical-padding"
           v-model="fontVerticalPadding"
@@ -86,7 +88,9 @@ watch(
       </div>
       <hr />
       <div class="pbx-my-2 pbx-py-2">
-        <label for="horizontal-padding" class="pbx-myPrimaryInputLabel">{{ translate('Horizontal Padding') }}</label>
+        <label for="horizontal-padding" class="pbx-myPrimaryInputLabel">{{
+          translate('Horizontal Padding')
+        }}</label>
         <select
           id="horizontal-padding"
           v-model="fontHorizontalPadding"

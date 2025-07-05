@@ -53,5 +53,11 @@
   "Border Radius top left": "Randradius oben links",
   "Border Radius top right": "Randradius oben rechts",
   "Border Radius bottom left": "Randradius unten links",
-  "Border Radius bottom right": "Randradius unten rechts"
+  "Border Radius bottom right": "Randradius unten rechts",
+  "Border Style, Width & Color": "Randstil, Breite & Farbe",
+  "Border": "Rand",
+  "Border Style": "Randstil",
+  "Border Width": "Randbreite",
+  "Border Color": "Randfarbe",
+  "Transparent": "Transparent"
 }

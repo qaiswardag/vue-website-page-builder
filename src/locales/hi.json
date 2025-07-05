@@ -53,5 +53,11 @@
   "Border Radius top left": "बॉर्डर रेडियस ऊपर बायां",
   "Border Radius top right": "बॉर्डर रेडियस ऊपर दायां",
   "Border Radius bottom left": "बॉर्डर रेडियस नीचे बायां",
-  "Border Radius bottom right": "बॉर्डर रेडियस नीचे दायां"
+  "Border Radius bottom right": "बॉर्डर रेडियस नीचे दायां",
+  "Border Style, Width & Color": "बॉर्डर शैली, चौड़ाई और रंग",
+  "Border": "बॉर्डर",
+  "Border Style": "बॉर्डर शैली",
+  "Border Width": "बॉर्डर चौड़ाई",
+  "Border Color": "बॉर्डर रंग",
+  "Transparent": "पारदर्शी"
 }

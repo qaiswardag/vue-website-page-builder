@@ -53,5 +53,11 @@
   "Border Radius top left": "ボーダー半径 左上",
   "Border Radius top right": "ボーダー半径 右上",
   "Border Radius bottom left": "ボーダー半径 左下",
-  "Border Radius bottom right": "ボーダー半径 右下"
+  "Border Radius bottom right": "ボーダー半径 右下",
+  "Border Style, Width & Color": "ボーダースタイル、幅、色",
+  "Border": "ボーダー",
+  "Border Style": "ボーダースタイル",
+  "Border Width": "ボーダー幅",
+  "Border Color": "ボーダー色",
+  "Transparent": "透明"
 }

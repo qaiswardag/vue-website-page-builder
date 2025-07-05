@@ -53,5 +53,11 @@
   "Border Radius top left": "Радиус границы сверху слева",
   "Border Radius top right": "Радиус границы сверху справа",
   "Border Radius bottom left": "Радиус границы снизу слева",
-  "Border Radius bottom right": "Радиус границы снизу справа"
+  "Border Radius bottom right": "Радиус границы снизу справа",
+  "Border Style, Width & Color": "Стиль, ширина и цвет границы",
+  "Border": "Граница",
+  "Border Style": "Стиль границы",
+  "Border Width": "Ширина границы",
+  "Border Color": "Цвет границы",
+  "Transparent": "Прозрачный"
 }

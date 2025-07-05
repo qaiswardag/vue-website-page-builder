@@ -53,5 +53,11 @@
   "Border Radius top left": "نصف القطر الحدودي العلوي الأيسر",
   "Border Radius top right": "نصف القطر الحدودي العلوي الأيمن",
   "Border Radius bottom left": "نصف القطر الحدودي السفلي الأيسر",
-  "Border Radius bottom right": "نصف القطر الحدودي السفلي الأيمن"
+  "Border Radius bottom right": "نصف القطر الحدودي السفلي الأيمن",
+  "Border Style, Width & Color": "نمط الحدود والعرض واللون",
+  "Border": "الحدود",
+  "Border Style": "نمط الحدود",
+  "Border Width": "عرض الحدود",
+  "Border Color": "لون الحدود",
+  "Transparent": "شفاف"
 }
