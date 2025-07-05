@@ -187,13 +187,16 @@ const handleCloseGlobalPageStyles = async function () {
           <template #title>{{ translate('Global Page Styles') }}</template>
           <template #content>
             <label class="pbx-myPrimaryInputLabel pbx-my-4">
-              Apply styles that affect the entire page. These settings include global font family,
-              text color, background color, and other universal styles that apply to all sections.
+              {{
+                translate(
+                  'Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.',
+                )
+              }}
             </label>
 
             <div class="pbx-mt-4">
               <button @click="handleUpdatePageStyles" type="button" class="pbx-myPrimaryButton">
-                Update Page Styles
+                {{ translate('Update Page Styles') }}
               </button>
             </div>
           </template>
@@ -207,15 +210,18 @@ const handleCloseGlobalPageStyles = async function () {
         class="pbx-my-1 pbx-bg-white"
       >
         <EditorAccordion>
-          <template #title>Download HTML</template>
+          <template #title>{{ translate('Download HTML') }}</template>
           <template #content>
             <label class="pbx-myPrimaryInputLabel pbx-my-4">
-              Export the entire page as a standalone HTML file. This includes all sections, content,
-              and applied styles, making it ready for use or integration elsewhere.
+              {{
+                translate(
+                  'Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.',
+                )
+              }}
             </label>
             <div class="pbx-mt-4">
               <button @click="handleDownloadHTML" type="button" class="pbx-myPrimaryButton">
-                Download HTML file
+                {{ translate('Download HTML file') }}
               </button>
             </div>
           </template>

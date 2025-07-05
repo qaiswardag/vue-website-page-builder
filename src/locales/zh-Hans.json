@@ -24,5 +24,10 @@
   "Click to add component": "点击添加组件",
   "Remove all Components": "删除所有组件",
   "Are you sure you want to remove all Components?": "您确定要删除所有组件吗？",
-  "Styles": "样式"
+  "Styles": "样式",
+  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "应用影响整个页面的样式。这些设置包括全局字体系列、文本颜色、背景颜色和适用于所有部分的其他通用样式。",
+  "Update Page Styles": "更新页面样式",
+  "Download HTML": "下载HTML",
+  "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "将整个页面导出为独立的HTML文件。这包括所有部分、内容和应用的样式，使其可以随时使用或集成到其他地方。",
+  "Download HTML file": "下载HTML文件"
 }

@@ -24,5 +24,10 @@
   "Click to add component": "Klicken, um Komponente hinzuzufügen",
   "Remove all Components": "Alle Komponenten entfernen",
   "Are you sure you want to remove all Components?": "Sind Sie sicher, dass Sie alle Komponenten entfernen möchten?",
-  "Styles": "Stile"
+  "Styles": "Stile",
+  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "Stile anwenden, die die gesamte Seite betreffen. Diese Einstellungen umfassen globale Schriftfamilie, Textfarbe, Hintergrundfarbe und andere universelle Stile, die für alle Abschnitte gelten.",
+  "Update Page Styles": "Seitenstile aktualisieren",
+  "Download HTML": "HTML herunterladen",
+  "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Exportieren Sie die gesamte Seite als eigenständige HTML-Datei. Dies umfasst alle Abschnitte, Inhalte und angewendeten Stile, sodass sie bereit für die Verwendung oder Integration an anderer Stelle ist.",
+  "Download HTML file": "HTML-Datei herunterladen"
 }

@@ -24,5 +24,10 @@
   "Click to add component": "घटक जोड़ने के लिए क्लिक करें",
   "Remove all Components": "सभी घटकों को हटाएं",
   "Are you sure you want to remove all Components?": "क्या आप वाकई सभी घटकों को हटाना चाहते हैं?",
-  "Styles": "शैलियाँ"
+  "Styles": "शैलियाँ",
+  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "पूरे पृष्ठ को प्रभावित करने वाले शैलियों को लागू करें। इन सेटिंग्स में वैश्विक फ़ॉन्ट परिवार, पाठ का रंग, पृष्ठभूमि का रंग और अन्य सार्वभौमिक शैलियाँ शामिल हैं जो सभी अनुभागों पर लागू होती हैं।",
+  "Update Page Styles": "पृष्ठ शैलियाँ अपडेट करें",
+  "Download HTML": "HTML डाउनलोड करें",
+  "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "पूरे पृष्ठ को एक स्टैंडअलोन HTML फ़ाइल के रूप में निर्यात करें। इसमें सभी अनुभाग, सामग्री और लागू शैलियाँ शामिल हैं, जिससे यह उपयोग या अन्यत्र एकीकरण के लिए तैयार हो जाता है।",
+  "Download HTML file": "HTML फ़ाइल डाउनलोड करें"
 }

@@ -24,5 +24,10 @@
   "Click to add component": "Нажмите, чтобы добавить компонент",
   "Remove all Components": "Удалить все компоненты",
   "Are you sure you want to remove all Components?": "Вы уверены, что хотите удалить все компоненты?",
-  "Styles": "Стили"
+  "Styles": "Стили",
+  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "Примените стили, которые влияют на всю страницу. Эти настройки включают глобальный шрифт, цвет текста, цвет фона и другие универсальные стили, которые применяются ко всем разделам.",
+  "Update Page Styles": "Обновить стили страницы",
+  "Download HTML": "Скачать HTML",
+  "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Экспортируйте всю страницу как автономный HTML-файл. Это включает все разделы, содержимое и примененные стили, делая его готовым к использованию или интеграции в другом месте.",
+  "Download HTML file": "Скачать HTML-файл"
 }
