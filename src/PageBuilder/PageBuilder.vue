@@ -145,8 +145,8 @@ const handleAddComponent = async function () {
   await pageBuilderService.clearHtmlSelection()
 
   //
-  titleModalAddComponent.value = 'Add Components to Page'
-  firstButtonTextSearchComponents.value = 'Close'
+  titleModalAddComponent.value = translate('Add Components to Page')
+  firstButtonTextSearchComponents.value = translate('Close')
   showModalAddComponent.value = true
 
   firstModalButtonSearchComponentsFunction.value = function () {
