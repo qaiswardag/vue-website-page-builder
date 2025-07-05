@@ -9,49 +9,6 @@ import { getPageBuilder } from '../composables/builderInstance'
 
 const pageBuilderService = getPageBuilder()
 
-const features = [
-  {
-    name: 'Live Drag & Drop Builder',
-    description:
-      'Click & Drop content on a page and watch your pages come to life. Bring your vision to life and create impressive pages using a click & drop Page Builder',
-  },
-  {
-    name: 'True Visual Editing',
-    description:
-      'See your changes in real-time as you make them. Elevate your creative vision and create pages using an intuitive click & drop page builder. Break free from design limitations and turn your visions into reality.',
-  },
-  {
-    name: 'Features',
-    description:
-      'Click & Drop, Reordering, True Visual Editing, Responsive Editing, Font Customization, Undo & Redo, Text Editing, Media Library, Unsplash Integration, YouTube Videos.',
-  },
-  {
-    name: 'Technologies',
-    description:
-      'Developed with TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.',
-  },
-  {
-    name: 'Set Brand and Link Colors one place',
-    description:
-      'Global Styles for fonts, designs, & colors. Set Brand and Link Colors once and apply them across the entire Platform with ease.',
-  },
-  {
-    name: 'Mobile-First Approach',
-    description:
-      'Developed with Mobile-First approach. The Page Builder even works on mobile phones.',
-  },
-  {
-    name: 'Media Library',
-    description:
-      'A beautiful and user-friendly media library that allows you to change and update images. Unsplash Integration is included.',
-  },
-  {
-    name: 'Minimal and Intuitive Design',
-    description:
-      'Beautiful, elegant and intuitive design. Enhance user engagement with amazing visual experience.',
-  },
-]
-
 const publishPageBuilder = function () {}
 
 // Convert componentsArray to HTML string
@@ -152,25 +109,14 @@ onMounted(async () => {
         </p>
       </template>
       <template #content>
-        <div
-          class="pbx-grid pbx-grid-cols-1 pbx-gap-8 sm:pbx-grid-cols-2 md:pbx-grid-cols-2 lg:pbx-grid-cols-4 pbx-mt-8"
-        >
-          <div
-            v-for="feature in features"
-            :key="feature.name"
-            class="pbx-bg-red-200 pbx-bg-opacity-20 hover:pbx-bg-opacity-10 pbx-w-full lg:pbx-min-h-[20rem] pbx-min-h-[12rem] pbx-relative pbx-col-span-1 pbx-flex pbx-flex-col pbx-text-center pbx-rounded-lg pbx-shadow-sm pbx-outline pbx-outline-2 pbx-outline-offset-8 pbx-outline-yellow-400"
-          >
-            <div
-              class="pbx-bg-black/0 pbx-absolute pbx-top-0 pbx-left-0 pbx-w-full pbx-h-full pbx-rounded-lg"
-            ></div>
-            <div class="pbx-px-2 pbx-pt-8 pbx-absolute pbx-top-0 pbx-w-full">
-              <p class="pbx-myTertiaryHeader">{{ feature.name }}</p>
-              <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-drop-shadow-sm">
-                {{ feature.description }}
-              </p>
-            </div>
-          </div>
-        </div>
+        <p class="pbx-myPrimaryParagraph pbx-font-normal">
+          Try the powerful Click & Drop Page Builder—designed for developers and creators who want
+          full control without the hassle. Customize layouts, fonts, and colors. Edit content
+          visually in real time. Add media, embed YouTube videos, or export everything as clean
+          HTML. With responsive editing, local auto-save, Tailwind support, and even Unsplash
+          integration, it's everything you need—wrapped in one seamless builder. Build Stunning
+          Pages in Minutes.
+        </p>
       </template>
     </FullWidthElement>
   </div>
