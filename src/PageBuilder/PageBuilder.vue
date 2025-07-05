@@ -71,11 +71,17 @@ provide('closeAddComponentModal', closeAddComponentModal)
 
 const languageSelction = ref('en')
 
+let isInitializingLang = true
+
 // Watch for changes in languageSelction
 watch(languageSelction, (newVal) => {
-  if (newVal) {
+  if (newVal && !isInitializingLang) {
     pageBuilderService.changeLanguage(newVal)
-    pageBuilderService.saveUserSettingsStorage(newVal)
+
+    // Ensure lang is updated within userSettings
+    const userSettings = JSON.parse(localStorage.getItem('userSettingsPageBuilder')) || {}
+    userSettings.lang = newVal
+    localStorage.setItem('userSettingsPageBuilder', JSON.stringify(userSettings))
   }
 })
 
@@ -356,18 +362,27 @@ function updatePanelPosition() {
   }
 }
 
+const userSettings = JSON.parse(localStorage.getItem('userSettingsPageBuilder'))
+
 onMounted(async () => {
   // await delay(2000)
   await pageBuilderService.completeBuilderInitialization(undefined, true)
 
+  if (userSettings && userSettings.lang) {
+    languageSelction.value = userSettings.lang
+  }
   if (
     getPageBuilderConfig.value &&
     getPageBuilderConfig.value.userSettings &&
     getPageBuilderConfig.value.userSettings.language &&
-    getPageBuilderConfig.value.userSettings.language.default
+    getPageBuilderConfig.value.userSettings.language.default &&
+    (!userSettings || !userSettings.lang)
   ) {
     languageSelction.value = getPageBuilderConfig.value.userSettings.language.default
   }
+
+  isInitializingLang = false
+
   updatePanelPosition()
 
   // Set up MutationObserver and event listeners

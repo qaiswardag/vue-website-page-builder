@@ -81,7 +81,7 @@ const configPageBuilder = {
   userSettings: {
     theme: 'light',
     language: {
-      default: 'ru',
+      default: 'zh-Hans',
       enable: ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'],
       disableLanguageDropDown: false,
     },
