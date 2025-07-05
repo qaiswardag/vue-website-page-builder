@@ -4,12 +4,15 @@ import { sharedPageBuilderStore } from '../../../stores/shared-store'
 import ModalBuilder from '../../Modals/ModalBuilder.vue'
 import PageBuilderSettings from '../Settings/PageBuilderSettings.vue'
 import AdvancedPageBuilderSettings from '../Settings/AdvancedPageBuilderSettings.vue'
-import { preloadImage } from '../../../composables/preloadImage'
 
 import DynamicModalBuilder from '../../Modals/DynamicModalBuilder.vue'
 
 import { getPageBuilder } from '../../../composables/builderInstance'
 import { delay } from '../../../composables/delay'
+import { useTranslations } from '../../../composables/useTranslations'
+
+const { translate } = useTranslations()
+
 const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
@@ -137,7 +140,7 @@ const openHTMLSettings = function () {
             class="pbx-text-white pbx-flex-shrink-0 pbx-h-8 pbx-w-8 pbx-rounded-full pbx-flex pbx-justify-center pbx-items-center pbx-text-xs pbx-rounded-l-full"
           >
             <img
-              alt="avatar"
+              alt="{{ translate('avatar') }}"
               :src="`${getPageBuilderConfig.userForPageBuilder.image}`"
               class="pbx-block pbx-inset-0 pbx-object-top pbx-h-8 pbx-min-h-8 pbx-max-h-8 pbx-w-8 pbx-min-w-8 pbx-max-w-8 pbx-object-cover pbx-rounded-full"
             />
@@ -156,7 +159,7 @@ const openHTMLSettings = function () {
         <!-- Component Start -->
         <div class="pbx-relative pbx-group">
           <button type="button" class="pbx-mySecondaryButton pbx-font-normal pbx-text-xs">
-            <span> Options </span>
+            <span> {{ translate('Options') }} </span>
           </button>
           <div
             class="pbx-absolute pbx-left-0 -pbx-ml-16 -pbx-mt-2 pbx-flex pbx-flex-col pbx-gap-3 pbx-shadow-lg pbx-bg-white pbx-w-max pbx-border-solid pbx-border pbx-border-gray-100 pbx-rounded-2xl pbx-transition-all pbx-duration-200 pbx-ease-out pbx-pt-4 pbx-pr-4 pbx-pb-4 pbx-pl-2 pbx-z-30 pbx-opacity-0 pbx-pointer-events-none pbx-translate-y-2 group-hover:pbx-opacity-100 group-hover:pbx-pointer-events-auto group-hover:pbx-translate-y-0"
@@ -172,7 +175,7 @@ const openHTMLSettings = function () {
               class="pbx-mySecondaryButton pbx-text-xs pbx-font-normal"
               type="button"
             >
-              Config Overview
+              {{ translate('Config Overview') }}
             </button>
             <!-- Main Settings End -->
 
@@ -182,7 +185,7 @@ const openHTMLSettings = function () {
               class="pbx-mySecondaryButton pbx-text-xs pbx-font-normal"
               type="button"
             >
-              HTML Overview
+              {{ translate('HTML Overview') }}
             </button>
             <!-- HTML Settings End -->
 
@@ -192,7 +195,7 @@ const openHTMLSettings = function () {
               class="pbx-myPrimaryDeleteButton pbx-text-xs pbx-font-normal"
               type="button"
             >
-              Delete Layout
+              {{ translate('Delete Layout') }}
             </button>
             <!-- Delete Layout End -->
           </div>

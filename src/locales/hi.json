@@ -8,5 +8,10 @@
   "The web builder for stunning pages. Enable users to design and publish modern pages at any scale. Build responsive pages like listings, jobs or blog posts and manage content easily using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.": "शानदार पृष्ठों के लिए वेब बिल्डर। उपयोगकर्ताओं को किसी भी पैमाने पर आधुनिक पृष्ठों को डिज़ाइन और प्रकाशित करने में सक्षम बनाएं। लिस्टिंग, नौकरियों या ब्लॉग पोस्ट जैसे उत्तरदायी पृष्ठ बनाएं और मुफ्त क्लिक और ड्रॉप पेज बिल्डर का उपयोग करके सामग्री को आसानी से प्रबंधित करें। TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS और HTML के साथ विकसित।",
   "Download or install our powerful, flexible, and easy-to-use free Vue 3 Page Builder via": "हमारे शक्तिशाली, लचीले और उपयोग में आसान मुफ्त Vue 3 पेज बिल्डर को डाउनलोड या इंस्टॉल करें",
   "Save": "सहेजें",
-  "Add new Components": "नए घटक जोड़ें"
+  "Add new Components": "नए घटक जोड़ें",
+  "Options": "विकल्प",
+  "Config Overview": "कॉन्फ़िगरेशन अवलोकन",
+  "HTML Overview": "HTML अवलोकन",
+  "Delete Layout": "लेआउट हटाएं",
+  "avatar": "अवतार"
 }
