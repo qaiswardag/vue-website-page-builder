@@ -40,5 +40,8 @@
   "Font weight": "Толщина шрифта",
   "Font family": "Семейство шрифтов",
   "Font Style": "Стиль шрифта",
-  "Opacity & Transparency": "Непрозрачность и Прозрачность"
+  "Opacity & Transparency": "Непрозрачность и Прозрачность",
+  "Padding": "Отступ",
+  "Vertical Padding": "Вертикальный отступ",
+  "Horizontal Padding": "Горизонтальный отступ"
 }

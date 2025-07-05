@@ -40,5 +40,8 @@
   "Font weight": "Poids de la police",
   "Font family": "Famille de police",
   "Font Style": "Style de police",
-  "Opacity & Transparency": "Opacité et Transparence"
+  "Opacity & Transparency": "Opacité et Transparence",
+  "Padding": "Marge intérieure",
+  "Vertical Padding": "Marge intérieure verticale",
+  "Horizontal Padding": "Marge intérieure horizontale"
 }

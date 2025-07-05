@@ -40,5 +40,8 @@
   "Font weight": "Schriftgewicht",
   "Font family": "Schriftfamilie",
   "Font Style": "Schriftstil",
-  "Opacity & Transparency": "Deckkraft & Transparenz"
+  "Opacity & Transparency": "Deckkraft & Transparenz",
+  "Padding": "Abstand",
+  "Vertical Padding": "Vertikaler Abstand",
+  "Horizontal Padding": "Horizontaler Abstand"
 }

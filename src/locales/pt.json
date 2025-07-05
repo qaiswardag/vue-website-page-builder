@@ -40,5 +40,8 @@
   "Font weight": "Peso da fonte",
   "Font family": "Família da fonte",
   "Font Style": "Estilo da fonte",
-  "Opacity & Transparency": "Opacidade e Transparência"
+  "Opacity & Transparency": "Opacidade e Transparência",
+  "Padding": "Preenchimento",
+  "Vertical Padding": "Preenchimento Vertical",
+  "Horizontal Padding": "Preenchimento Horizontal"
 }

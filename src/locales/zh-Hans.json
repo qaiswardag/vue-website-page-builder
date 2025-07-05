@@ -40,5 +40,8 @@
   "Font weight": "字体粗细",
   "Font family": "字体家族",
   "Font Style": "字体样式",
-  "Opacity & Transparency": "不透明度和透明度"
+  "Opacity & Transparency": "不透明度和透明度",
+  "Padding": "内边距",
+  "Vertical Padding": "垂直内边距",
+  "Horizontal Padding": "水平内边距"
 }

@@ -40,5 +40,8 @@
   "Font weight": "Font weight",
   "Font family": "Font family",
   "Font Style": "Font Style",
-  "Opacity & Transparency": "Opacity & Transparency"
+  "Opacity & Transparency": "Opacity & Transparency",
+  "Padding": "Padding",
+  "Vertical Padding": "Vertical Padding",
+  "Horizontal Padding": "Horizontal Padding"
 }

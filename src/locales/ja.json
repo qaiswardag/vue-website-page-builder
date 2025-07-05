@@ -40,5 +40,8 @@
   "Font weight": "フォントの太さ",
   "Font family": "フォントファミリー",
   "Font Style": "フォントスタイル",
-  "Opacity & Transparency": "不透明度と透明度"
+  "Opacity & Transparency": "不透明度と透明度",
+  "Padding": "パディング",
+  "Vertical Padding": "垂直パディング",
+  "Horizontal Padding": "水平パディング"
 }

@@ -40,5 +40,8 @@
   "Font weight": "फ़ॉन्ट वजन",
   "Font family": "फ़ॉन्ट परिवार",
   "Font Style": "फ़ॉन्ट शैली",
-  "Opacity & Transparency": "अस्पष्टता और पारदर्शिता"
+  "Opacity & Transparency": "अस्पष्टता और पारदर्शिता",
+  "Padding": "पैडिंग",
+  "Vertical Padding": "वर्टिकल पैडिंग",
+  "Horizontal Padding": "हॉरिजॉन्टल पैडिंग"
 }

@@ -40,5 +40,8 @@
   "Font weight": "وزن الخط",
   "Font family": "عائلة الخط",
   "Font Style": "نمط الخط",
-  "Opacity & Transparency": "الشفافية والعتامة"
+  "Opacity & Transparency": "الشفافية والعتامة",
+  "Padding": "الحشو",
+  "Vertical Padding": "الحشو العمودي",
+  "Horizontal Padding": "الحشو الأفقي"
 }

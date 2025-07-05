@@ -75,10 +75,13 @@ provide('closeAddComponentModal', closeAddComponentModal)
 const languageSelction = ref('en')
 
 let isInitializingLang = true
+const isLoadingLang = ref(false)
 
 // Watch for changes in languageSelction
 watch(languageSelction, async (newVal) => {
   if (newVal && !isInitializingLang) {
+    isLoadingLang.value = true
+    await delay(500)
     await loadTranslations(newVal)
     pageBuilderService.changeLanguage(newVal)
 
@@ -86,6 +89,7 @@ watch(languageSelction, async (newVal) => {
     const userSettings = JSON.parse(localStorage.getItem('userSettingsPageBuilder')) || {}
     userSettings.lang = newVal
     localStorage.setItem('userSettingsPageBuilder', JSON.stringify(userSettings))
+    isLoadingLang.value = false
   }
 })
 
@@ -427,7 +431,9 @@ onMounted(async () => {
   <div
     class="pbx-font-sans pbx-max-w-full pbx-border-solid pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto pbx-h-full"
   >
-    <GlobalLoader v-if="getIsLoadingGlobal && !openAppNotStartedModal"></GlobalLoader>
+    <GlobalLoader
+      v-if="(getIsLoadingGlobal && !openAppNotStartedModal) || isLoadingLang"
+    ></GlobalLoader>
     <ModalBuilder
       title="The builder hasn’t started yet"
       :showModalBuilder="openAppNotStartedModal"
