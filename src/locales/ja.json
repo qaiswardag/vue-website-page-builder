@@ -7,5 +7,6 @@
   "Bring your vision to life and create impressive pages using a click & drop Page Builder": "クリック＆ドロップページビルダーを使用して、ビジョンを実現し、印象的なページを作成しましょう",
   "The web builder for stunning pages. Enable users to design and publish modern pages at any scale. Build responsive pages like listings, jobs or blog posts and manage content easily using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.": "素晴らしいページのためのウェブビルダー。ユーザーがあらゆる規模でモダンなページを設計および公開できるようにします。リスト、求人、またはブログ投稿のようなレスポンシブページを作成し、無料のクリック＆ドロップページビルダーを使用してコンテンツを簡単に管理します。TypeScript、Vue 3、Composition API、Pinia、CSS、Tailwind CSS、およびHTMLで開発されました。",
   "Download or install our powerful, flexible, and easy-to-use free Vue 3 Page Builder via": "強力で柔軟性があり、使いやすい無料の Vue 3 ページビルダーをダウンロードまたはインストールしてください",
-  "Save": "保存"
+  "Save": "保存",
+  "Add new Components": "新しいコンポーネントを追加"
 }
