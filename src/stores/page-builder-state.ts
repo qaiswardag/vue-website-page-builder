@@ -286,7 +286,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getHasLocalDraftForUpdate: (state: PageBuilderState): boolean => state.hasLocalDraftForUpdate,
     getIsLoadingResumeEditing: (state: PageBuilderState): boolean => state.isResumeEditing,
     getIsRestoring: (state: PageBuilderState): boolean => state.isRestoring,
-    getCurrentLanguage: (state: PageBuilderState): string => state.currentLanguage,
+    getCurrentLanguage: (state: PageBuilderState): string | null => state.currentLanguage,
   },
   actions: {
     setComponentArrayAddMethod(payload: string | null): void {
