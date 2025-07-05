@@ -16,13 +16,13 @@ async function loadTranslations(language: string) {
 }
 
 export function useTranslations() {
-  function t(key: string): string {
+  function translate(key: string): string {
     return translations.value[key] || key
   }
 
   return {
-    t,
+    translate,
     loadTranslations,
-    currentTranslations: readonly(translations)
+    currentTranslations: readonly(translations),
   }
 }
