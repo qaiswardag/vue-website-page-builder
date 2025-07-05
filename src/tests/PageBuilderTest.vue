@@ -112,7 +112,11 @@ onMounted(async () => {
       </template>
       <template #content>
         <p class="pbx-myPrimaryParagraph pbx-font-normal">
-          {{ translate('ClickDropPageBuilderDescription') }}
+          {{
+            translate(
+              "Try the powerful Click & Drop Page Builder—designed for developers and creators who want full control without the hassle. Customize layouts, fonts, and colors. Edit content visually in real time. Add media, embed YouTube videos, or export everything as clean HTML. With responsive editing, local auto-save, Tailwind support, and even Unsplash integration, it's everything you need—wrapped in one seamless builder. Build Stunning Pages in Minutes.",
+            )
+          }}
         </p>
       </template>
     </FullWidthElement>
