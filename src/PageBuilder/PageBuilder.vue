@@ -457,7 +457,7 @@ onMounted(async () => {
     ></BuilderComponents>
 
     <ModalBuilder
-      title="Preview"
+      title="{{ translate('Preview') }}"
       :showModalBuilder="openPageBuilderPreviewModal"
       @closeMainModalBuilder="firstPageBuilderPreviewModalButton"
       maxWidth="screen"
@@ -466,7 +466,7 @@ onMounted(async () => {
     </ModalBuilder>
 
     <ModalBuilder
-      title="Mobile"
+      title="{{ translate('Mobile') }}"
       :showModalBuilder="openPageBuilderPreviewMobile"
       @closeMainModalBuilder="firstPageBuilderPreviewModalButtonMobile"
       maxWidth="lg"
