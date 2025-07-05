@@ -70,5 +70,8 @@
   "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "这些是构建器应用的内联样式。添加您自己的样式，然后按 Enter 将其应用于选定的元素。",
   "Add your own style.": "添加您自己的样式。",
   "property": "属性",
-  "value": "值"
+  "value": "值",
+  "close": "关闭",
+  "Editing": "编辑",
+  "Loading...": "加载中..."
 }

@@ -133,10 +133,10 @@ const handleCloseGlobalPageStyles = async function () {
         @click="$emit('closeEditor')"
         class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
       >
-        <span class="material-symbols-outlined"> close </span>
+        <span class="material-symbols-outlined"> {{ translate('close') }} </span>
       </button>
       <p class="pbx-font-medium pbx-text-sm">
-        Editing
+        {{ translate('Editing') }}
         <span class="pbx-lowercase">&lt;{{ elementTag }}&gt;</span>
       </p>
     </div>
@@ -245,7 +245,7 @@ const handleCloseGlobalPageStyles = async function () {
             >
               <span
                 class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
-                >Loading...</span
+                >{{ translate('Loading...') }}</span
               >
             </div>
           </div>
@@ -253,8 +253,11 @@ const handleCloseGlobalPageStyles = async function () {
         <div v-if="!isLoadingPageStyles && showModalGlobalPageStyles" class="pbx-pb-12">
           <div>
             <p class="pbx-myPrimaryParagraph">
-              Apply styles that affect the entire page. These settings include global font family,
-              text color, background color, and other universal styles that apply to all sections.
+              {{
+                translate(
+                  'Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.',
+                )
+              }}
             </p>
             <article class="pbx-my-1 pbx-bg-gray-100">
               <Typography></Typography>

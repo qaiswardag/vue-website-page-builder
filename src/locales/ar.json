@@ -1,6 +1,6 @@
 {
   "Reset Page": "إعادة تعيين الصفحة",
-  "Global Page Styles": "أنماط الصفحة العالمية",
+  "Global Page Styles": "أنماط الصفحة العامة",
   "Try the powerful Click & Drop Page Builder—designed for developers and creators who want full control without the hassle. Customize layouts, fonts, and colors. Edit content visually in real time. Add media, embed YouTube videos, or export everything as clean HTML. With responsive editing, local auto-save, Tailwind support, and even Unsplash integration, it's everything you need—wrapped in one seamless builder. Build Stunning Pages in Minutes.": "جرب منشئ الصفحات القوي Click & Drop - المصمم للمطورين والمبدعين الذين يريدون التحكم الكامل دون عناء. قم بتخصيص التخطيطات والخطوط والألوان. قم بتحرير المحتوى بصريًا في الوقت الفعلي. أضف الوسائط، قم بتضمين مقاطع فيديو YouTube، أو قم بتصدير كل شيء كـ HTML نظيف. مع التحرير المتجاوب، الحفظ التلقائي المحلي، دعم Tailwind، وحتى تكامل Unsplash، إنه كل ما تحتاجه - ملفوف في منشئ واحد سلس. قم ببناء صفحات مذهلة في دقائق.",
   "A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.": "منشئ صفحات مصمم للنمو. قم ببناء صفحات موقعك الإلكتروني باستخدام مكونات جاهزة قابلة للتخصيص بالكامل ومتجاوبة دائمًا، مصممة لتلبية كل احتياجاتك. منشئ صفحات قوي للتجار والعلامات التجارية والوكالات المتنامية.",
   "Everything you need. Break free from design limitations": "كل ما تحتاجه. تحرر من قيود التصميم",
@@ -25,10 +25,10 @@
   "Remove all Components": "إزالة جميع المكونات",
   "Are you sure you want to remove all Components?": "هل أنت متأكد أنك تريد إزالة جميع المكونات؟",
   "Styles": "أنماط",
-  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "تطبيق الأنماط التي تؤثر على الصفحة بأكملها. تتضمن هذه الإعدادات عائلة الخطوط العالمية ولون النص ولون الخلفية والأنماط العالمية الأخرى التي تنطبق على جميع الأقسام.",
+  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "قم بتطبيق الأنماط التي تؤثر على الصفحة بأكملها. تتضمن هذه الإعدادات عائلة الخطوط العامة، ولون النص، ولون الخلفية، والأنماط العامة الأخرى التي تنطبق على جميع الأقسام.",
   "Update Page Styles": "تحديث أنماط الصفحة",
   "Download HTML": "تنزيل HTML",
-  "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "تصدير الصفحة بأكملها كملف HTML مستقل. يتضمن ذلك جميع الأقسام والمحتوى والأنماط المطبقة، مما يجعله جاهزًا للاستخدام أو التكامل في مكان آخر.",
+  "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "قم بتصدير الصفحة بأكملها كملف HTML مستقل. يتضمن ذلك جميع الأقسام والمحتوى والأنماط المطبقة، مما يجعلها جاهزة للاستخدام أو التكامل في مكان آخر.",
   "Download HTML file": "تنزيل ملف HTML",
   "Typographies": "الطباعة",
   "Font Appearance": "مظهر الخط",
@@ -70,5 +70,7 @@
   "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "هذه هي الأنماط المضمنة التي يطبقها المنشئ. أضف أنماطك الخاصة واضغط على Enter لتطبيقها على العنصر المحدد.",
   "Add your own style.": "أضف نمطك الخاص.",
   "property": "خاصية",
-  "value": "قيمة"
+  "value": "قيمة",
+  "Editing": "تحرير",
+  "Loading...": "جار التحميل..."
 }

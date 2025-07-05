@@ -29,7 +29,7 @@
   "Update Page Styles": "Обновить стили страницы",
   "Download HTML": "Скачать HTML",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Экспортируйте всю страницу как автономный HTML-файл. Это включает все разделы, содержимое и примененные стили, делая его готовым к использованию или интеграции в другом месте.",
-  "Download HTML file": "Скачать HTML-файл",
+  "Download HTML file": "Скачать HTML файл",
   "Typographies": "Типографии",
   "Font Appearance": "Внешний вид шрифта",
   "Font Size": "Размер шрифта",
@@ -70,5 +70,8 @@
   "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "Это встроенные стили, применяемые конструктором. Добавьте свои стили и нажмите Enter, чтобы применить их к выбранному элементу.",
   "Add your own style.": "Добавьте свой стиль.",
   "property": "свойство",
-  "value": "значение"
+  "value": "значение",
+  "close": "закрыть",
+  "Editing": "Редактирование",
+  "Loading...": "Загрузка..."
 }

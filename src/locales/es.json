@@ -70,5 +70,8 @@
   "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "Estos son los estilos en línea aplicados por el constructor. Agregue sus propios estilos y presione Enter para aplicarlos al elemento seleccionado.",
   "Add your own style.": "Agregue su propio estilo.",
   "property": "propiedad",
-  "value": "valor"
+  "value": "valor",
+  "close": "cerrar",
+  "Editing": "Editando",
+  "Loading...": "Cargando..."
 }

@@ -70,5 +70,14 @@
   "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "Estes são os estilos inline aplicados pelo construtor. Adicione seus próprios estilos e pressione Enter para aplicá-los ao elemento selecionado.",
   "Add your own style.": "Adicione seu próprio estilo.",
   "property": "propriedade",
-  "value": "valor"
+  "value": "valor",
+  "close": "fechar",
+  "Editing": "Editando",
+  "Global Page Styles": "Estilos Globais da Página",
+  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "Aplique estilos que afetam toda a página. Essas configurações incluem família de fontes globais, cor do texto, cor de fundo e outros estilos universais que se aplicam a todas as seções.",
+  "Update Page Styles": "Atualizar Estilos da Página",
+  "Download HTML": "Baixar HTML",
+  "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Exporte toda a página como um arquivo HTML independente. Isso inclui todas as seções, conteúdo e estilos aplicados, tornando-o pronto para uso ou integração em outro lugar.",
+  "Download HTML file": "Baixar arquivo HTML",
+  "Loading...": "Carregando..."
 }

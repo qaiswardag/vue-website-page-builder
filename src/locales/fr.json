@@ -25,10 +25,10 @@
   "Remove all Components": "Supprimer tous les composants",
   "Are you sure you want to remove all Components?": "Êtes-vous sûr de vouloir supprimer tous les composants ?",
   "Styles": "Styles",
-  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "Appliquer des styles qui affectent toute la page. Ces paramètres incluent la famille de polices globale, la couleur du texte, la couleur de fond et d'autres styles universels qui s'appliquent à toutes les sections.",
+  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "Appliquez des styles qui affectent toute la page. Ces paramètres incluent la famille de polices globale, la couleur du texte, la couleur de fond et d'autres styles universels qui s'appliquent à toutes les sections.",
   "Update Page Styles": "Mettre à jour les styles de page",
   "Download HTML": "Télécharger HTML",
-  "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Exporter toute la page en tant que fichier HTML autonome. Cela inclut toutes les sections, le contenu et les styles appliqués, ce qui le rend prêt à être utilisé ou intégré ailleurs.",
+  "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Exportez toute la page en tant que fichier HTML autonome. Cela inclut toutes les sections, le contenu et les styles appliqués, ce qui le rend prêt à être utilisé ou intégré ailleurs.",
   "Download HTML file": "Télécharger le fichier HTML",
   "Typographies": "Typographies",
   "Font Appearance": "Apparence de la police",
@@ -70,5 +70,8 @@
   "These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.": "Ce sont les styles en ligne appliqués par le constructeur. Ajoutez vos propres styles et appuyez sur Entrée pour les appliquer à l'élément sélectionné.",
   "Add your own style.": "Ajoutez votre propre style.",
   "property": "propriété",
-  "value": "valeur"
+  "value": "valeur",
+  "close": "fermer",
+  "Editing": "Édition",
+  "Loading...": "Chargement..."
 }
