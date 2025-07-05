@@ -12,6 +12,7 @@ import { delay } from '../composables/delay'
 import { useDebounce } from '../composables/useDebounce.ts'
 import DynamicModalBuilder from '../Components/Modals/DynamicModalBuilder.vue'
 import GlobalLoader from '../Components/Loaders/GlobalLoader.vue'
+import { useTranslations } from '../composables/useTranslations'
 import { getPageBuilder } from '../composables/builderInstance'
 const pageBuilderService = getPageBuilder()
 /**
@@ -39,6 +40,8 @@ const props = defineProps({
     default: false,
   },
 })
+
+const { translate } = useTranslations()
 
 // Use shared Pinia instance for PageBuilder package
 const internalPinia = sharedPageBuilderPinia
@@ -619,7 +622,7 @@ onMounted(async () => {
                   </span>
                 </div>
                 <div class="lg:pbx-block pbx-hidden">
-                  <span> Reset Page </span>
+                  <span> {{ translate('Reset Page') }} </span>
                 </div>
               </button>
             </template>

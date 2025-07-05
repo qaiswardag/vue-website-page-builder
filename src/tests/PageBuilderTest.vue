@@ -6,6 +6,7 @@ import DemoBuilderComponentsTest from '../tests/TestComponents/DemoBuilderCompon
 import { onMounted } from 'vue'
 import componentsArray from '../tests/componentsArray.test.json'
 import { getPageBuilder } from '../composables/builderInstance'
+
 const pageBuilderService = getPageBuilder()
 
 const features = [
