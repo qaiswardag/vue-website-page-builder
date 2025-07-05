@@ -46,5 +46,12 @@
   "Horizontal Padding": "水平パディング",
   "Margin": "マージン",
   "Vertical Margin": "垂直マージン",
-  "Horizontal Margin": "水平マージン"
+  "Horizontal Margin": "水平マージン",
+  "Border Radius": "ボーダー半径",
+  "Global": "グローバル",
+  "Specific": "特定",
+  "Border Radius top left": "ボーダー半径 左上",
+  "Border Radius top right": "ボーダー半径 右上",
+  "Border Radius bottom left": "ボーダー半径 左下",
+  "Border Radius bottom right": "ボーダー半径 右下"
 }

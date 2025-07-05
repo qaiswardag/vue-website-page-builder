@@ -778,66 +778,56 @@ onMounted(async () => {
 
         <!-- Close & Publish buttons end -->
 
-        <div class="pbx-py-6 pbx-px-4 pbx-bg-red-200 pbx-rounded-2xl pbx-m-2">
+        <template
+          v-if="
+            getPageBuilderConfig &&
+            getPageBuilderConfig.userSettings &&
+            getPageBuilderConfig.userSettings.language &&
+            !getPageBuilderConfig.userSettings.language.disableLanguageDropDown
+          "
+        >
           <template
             v-if="
               getPageBuilderConfig &&
               getPageBuilderConfig.userSettings &&
-              getPageBuilderConfig.userSettings.language &&
-              !getPageBuilderConfig.userSettings.language.disableLanguageDropDown
+              getPageBuilderConfig.userSettings.language
             "
           >
-            <template
-              v-if="
-                getPageBuilderConfig &&
-                getPageBuilderConfig.userSettings &&
-                getPageBuilderConfig.userSettings.language
-              "
-            >
-              <div class="pbx-flex pbx-justify-center pbx-items-center pbx-ml-2">
-                <div class="pbx-mr-6 pbx-text-[12px] pbx-w-max pbx-flex pbx-gap-2 pbx-flex-col">
-                  <p class="py-4">getCurrentLanguage: {{ getCurrentLanguage }}</p>
-                  <p class="py-4">
-                    default lang: {{ getPageBuilderConfig.userSettings.language.default }}
-                  </p>
-                </div>
-                <select
-                  class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
-                  v-model="languageSelction"
+            <div class="pbx-flex pbx-justify-center pbx-items-center pbx-ml-2">
+              <select
+                class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
+                v-model="languageSelction"
+              >
+                <template
+                  v-if="
+                    Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
+                    getPageBuilderConfig.userSettings.language.enable.length >= 1
+                  "
                 >
                   <template
-                    v-if="
-                      Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
-                      getPageBuilderConfig.userSettings.language.enable.length >= 1
-                    "
+                    v-for="lang in pageBuilderService
+                      .availableLanguage()
+                      .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
+                    :key="lang"
                   >
-                    <template
-                      v-for="lang in pageBuilderService
-                        .availableLanguage()
-                        .filter((l) =>
-                          getPageBuilderConfig.userSettings.language.enable.includes(l),
-                        )"
-                      :key="lang"
-                    >
-                      <option :value="lang">{{ lang }}</option>
-                    </template>
+                    <option :value="lang">{{ lang }}</option>
                   </template>
-                  <template
-                    v-if="
-                      !getPageBuilderConfig.userSettings.language.enable ||
-                      (Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
-                        getPageBuilderConfig.userSettings.language.enable.length === 0)
-                    "
-                  >
-                    <template v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
-                      <option :value="lang">{{ lang }}</option>
-                    </template>
+                </template>
+                <template
+                  v-if="
+                    !getPageBuilderConfig.userSettings.language.enable ||
+                    (Array.isArray(getPageBuilderConfig.userSettings.language.enable) &&
+                      getPageBuilderConfig.userSettings.language.enable.length === 0)
+                  "
+                >
+                  <template v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
+                    <option :value="lang">{{ lang }}</option>
                   </template>
-                </select>
-              </div>
-            </template>
+                </template>
+              </select>
+            </div>
           </template>
-        </div>
+        </template>
       </div>
 
       <!-- Top Layout Save And Reset Area - End -->

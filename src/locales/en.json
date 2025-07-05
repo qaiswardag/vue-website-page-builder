@@ -46,5 +46,12 @@
   "Horizontal Padding": "Horizontal Padding",
   "Margin": "Margin",
   "Vertical Margin": "Vertical Margin",
-  "Horizontal Margin": "Horizontal Margin"
+  "Horizontal Margin": "Horizontal Margin",
+  "Border Radius": "Border Radius",
+  "Global": "Global",
+  "Specific": "Specific",
+  "Border Radius top left": "Border Radius top left",
+  "Border Radius top right": "Border Radius top right",
+  "Border Radius bottom left": "Border Radius bottom left",
+  "Border Radius bottom right": "Border Radius bottom right"
 }

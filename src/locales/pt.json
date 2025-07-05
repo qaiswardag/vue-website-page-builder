@@ -46,5 +46,12 @@
   "Horizontal Padding": "Preenchimento Horizontal",
   "Margin": "Margem",
   "Vertical Margin": "Margem Vertical",
-  "Horizontal Margin": "Margem Horizontal"
+  "Horizontal Margin": "Margem Horizontal",
+  "Border Radius": "Raio da borda",
+  "Global": "Global",
+  "Specific": "Específico",
+  "Border Radius top left": "Raio da borda superior esquerda",
+  "Border Radius top right": "Raio da borda superior direita",
+  "Border Radius bottom left": "Raio da borda inferior esquerda",
+  "Border Radius bottom right": "Raio da borda inferior direita"
 }

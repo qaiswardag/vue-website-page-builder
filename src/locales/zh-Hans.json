@@ -46,5 +46,12 @@
   "Horizontal Padding": "水平内边距",
   "Margin": "边距",
   "Vertical Margin": "垂直边距",
-  "Horizontal Margin": "水平边距"
+  "Horizontal Margin": "水平边距",
+  "Border Radius": "边框半径",
+  "Global": "全局",
+  "Specific": "具体",
+  "Border Radius top left": "边框半径 左上",
+  "Border Radius top right": "边框半径 右上",
+  "Border Radius bottom left": "边框半径 左下",
+  "Border Radius bottom right": "边框半径 右下"
 }

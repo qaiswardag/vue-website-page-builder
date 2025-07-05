@@ -46,5 +46,12 @@
   "Horizontal Padding": "Горизонтальный отступ",
   "Margin": "Поле",
   "Vertical Margin": "Вертикальное поле",
-  "Horizontal Margin": "Горизонтальное поле"
+  "Horizontal Margin": "Горизонтальное поле",
+  "Border Radius": "Радиус границы",
+  "Global": "Глобальный",
+  "Specific": "Специфический",
+  "Border Radius top left": "Радиус границы сверху слева",
+  "Border Radius top right": "Радиус границы сверху справа",
+  "Border Radius bottom left": "Радиус границы снизу слева",
+  "Border Radius bottom right": "Радиус границы снизу справа"
 }

@@ -46,5 +46,12 @@
   "Horizontal Padding": "الحشو الأفقي",
   "Margin": "الهامش",
   "Vertical Margin": "الهامش العمودي",
-  "Horizontal Margin": "الهامش الأفقي"
+  "Horizontal Margin": "الهامش الأفقي",
+  "Border Radius": "نصف القطر الحدودي",
+  "Global": "عالمي",
+  "Specific": "محدد",
+  "Border Radius top left": "نصف القطر الحدودي العلوي الأيسر",
+  "Border Radius top right": "نصف القطر الحدودي العلوي الأيمن",
+  "Border Radius bottom left": "نصف القطر الحدودي السفلي الأيسر",
+  "Border Radius bottom right": "نصف القطر الحدودي السفلي الأيمن"
 }

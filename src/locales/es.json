@@ -46,5 +46,12 @@
   "Horizontal Padding": "Relleno Horizontal",
   "Margin": "Margen",
   "Vertical Margin": "Margen Vertical",
-  "Horizontal Margin": "Margen Horizontal"
+  "Horizontal Margin": "Margen Horizontal",
+  "Border Radius": "Radio del borde",
+  "Global": "Global",
+  "Specific": "Específico",
+  "Border Radius top left": "Radio del borde superior izquierdo",
+  "Border Radius top right": "Radio del borde superior derecho",
+  "Border Radius bottom left": "Radio del borde inferior izquierdo",
+  "Border Radius bottom right": "Radio del borde inferior derecho"
 }
