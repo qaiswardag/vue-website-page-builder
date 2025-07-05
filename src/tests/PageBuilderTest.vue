@@ -66,7 +66,11 @@ onMounted(async () => {
     <div class="pbx-myPrimaryWidthScreenModule pbx-bg-red-50 lg:pbx-block">
       <div class="pbx-myPrimaryContentSection">
         <h2 class="pbx-mySecondaryHeader">
-          Bring your vision to life and create impressive pages using a click & drop Page Builder
+          {{
+            translate(
+              'Bring your vision to life and create impressive pages using a click & drop Page Builder',
+            )
+          }}
         </h2>
         <p class="pbx-myPrimaryParagraph pbx-font-normal">
           The web builder for stunning pages. Enable users to design and publish modern pages at any
