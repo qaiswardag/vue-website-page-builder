@@ -41,7 +41,7 @@ const props = defineProps({
   },
 })
 
-const { translate } = useTranslations()
+const { translate, loadTranslations } = useTranslations()
 
 // Use shared Pinia instance for PageBuilder package
 const internalPinia = sharedPageBuilderPinia
@@ -77,8 +77,9 @@ const languageSelction = ref('en')
 let isInitializingLang = true
 
 // Watch for changes in languageSelction
-watch(languageSelction, (newVal) => {
+watch(languageSelction, async (newVal) => {
   if (newVal && !isInitializingLang) {
+    await loadTranslations(newVal)
     pageBuilderService.changeLanguage(newVal)
 
     // Ensure lang is updated within userSettings
@@ -384,6 +385,7 @@ onMounted(async () => {
     languageSelction.value = getPageBuilderConfig.value.userSettings.language.default
   }
 
+  await loadTranslations(languageSelction.value)
   isInitializingLang = false
 
   updatePanelPosition()

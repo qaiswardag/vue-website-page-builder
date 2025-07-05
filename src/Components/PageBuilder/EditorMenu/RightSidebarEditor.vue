@@ -21,6 +21,9 @@ import EditorAccordion from '../EditorMenu/EditorAccordion.vue'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
 import ModalBuilder from '../../../Components/Modals/ModalBuilder.vue'
 import { extractCleanHTMLFromPageBuilder } from '../../../composables/extractCleanHTMLFromPageBuilder'
+import { useTranslations } from '../../../composables/useTranslations'
+
+const { translate } = useTranslations()
 
 const pageBuilderService = getPageBuilder()
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -181,7 +184,7 @@ const handleCloseGlobalPageStyles = async function () {
       <!-- Global Page Styles -->
       <article class="pbx-my-1 pbx-bg-white">
         <EditorAccordion>
-          <template #title>Global Page Styles</template>
+          <template #title>{{ translate('Global Page Styles') }}</template>
           <template #content>
             <label class="pbx-myPrimaryInputLabel pbx-my-4">
               Apply styles that affect the entire page. These settings include global font family,
@@ -225,7 +228,7 @@ const handleCloseGlobalPageStyles = async function () {
       maxWidth="md"
       minHeight="pbx-min-h-[65vh] pbx-max-h-[65vh]"
       :showModalBuilder="showModalGlobalPageStyles"
-      title="Global Page Styles"
+      :title="translate('Global Page Styles')"
       @closeMainModalBuilder="handleCloseGlobalPageStyles"
     >
       <div class="pbx-flex pbx-flex-col pbx-gap-2 pbx-pt-4 pbx-pb-2">
