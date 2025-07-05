@@ -81,7 +81,7 @@ const isLoadingLang = ref(false)
 watch(languageSelction, async (newVal) => {
   if (newVal && !isInitializingLang) {
     isLoadingLang.value = true
-    await delay(500)
+    await delay(200)
     await loadTranslations(newVal)
     pageBuilderService.changeLanguage(newVal)
 

@@ -43,5 +43,8 @@
   "Opacity & Transparency": "Deckkraft & Transparenz",
   "Padding": "Abstand",
   "Vertical Padding": "Vertikaler Abstand",
-  "Horizontal Padding": "Horizontaler Abstand"
+  "Horizontal Padding": "Horizontaler Abstand",
+  "Margin": "Rand",
+  "Vertical Margin": "Vertikaler Rand",
+  "Horizontal Margin": "Horizontaler Rand"
 }

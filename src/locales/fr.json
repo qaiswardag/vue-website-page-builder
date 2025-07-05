@@ -43,5 +43,8 @@
   "Opacity & Transparency": "Opacité et Transparence",
   "Padding": "Marge intérieure",
   "Vertical Padding": "Marge intérieure verticale",
-  "Horizontal Padding": "Marge intérieure horizontale"
+  "Horizontal Padding": "Marge intérieure horizontale",
+  "Margin": "Marge",
+  "Vertical Margin": "Marge verticale",
+  "Horizontal Margin": "Marge horizontale"
 }

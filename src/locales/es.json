@@ -43,5 +43,8 @@
   "Opacity & Transparency": "Opacidad y Transparencia",
   "Padding": "Relleno",
   "Vertical Padding": "Relleno Vertical",
-  "Horizontal Padding": "Relleno Horizontal"
+  "Horizontal Padding": "Relleno Horizontal",
+  "Margin": "Margen",
+  "Vertical Margin": "Margen Vertical",
+  "Horizontal Margin": "Margen Horizontal"
 }

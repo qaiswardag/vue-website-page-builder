@@ -43,5 +43,8 @@
   "Opacity & Transparency": "不透明度と透明度",
   "Padding": "パディング",
   "Vertical Padding": "垂直パディング",
-  "Horizontal Padding": "水平パディング"
+  "Horizontal Padding": "水平パディング",
+  "Margin": "マージン",
+  "Vertical Margin": "垂直マージン",
+  "Horizontal Margin": "水平マージン"
 }

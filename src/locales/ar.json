@@ -43,5 +43,8 @@
   "Opacity & Transparency": "الشفافية والعتامة",
   "Padding": "الحشو",
   "Vertical Padding": "الحشو العمودي",
-  "Horizontal Padding": "الحشو الأفقي"
+  "Horizontal Padding": "الحشو الأفقي",
+  "Margin": "الهامش",
+  "Vertical Margin": "الهامش العمودي",
+  "Horizontal Margin": "الهامش الأفقي"
 }

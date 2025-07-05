@@ -43,5 +43,8 @@
   "Opacity & Transparency": "Непрозрачность и Прозрачность",
   "Padding": "Отступ",
   "Vertical Padding": "Вертикальный отступ",
-  "Horizontal Padding": "Горизонтальный отступ"
+  "Horizontal Padding": "Горизонтальный отступ",
+  "Margin": "Поле",
+  "Vertical Margin": "Вертикальное поле",
+  "Horizontal Margin": "Горизонтальное поле"
 }
