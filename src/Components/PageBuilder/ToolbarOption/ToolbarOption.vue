@@ -113,7 +113,7 @@ const openHTMLSettings = function () {
             }}
           </div>
           <div
-            class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal w-max break-keep"
+            class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal pbx-w-max pbx-break-keep"
           >
             {{ getPageBuilderConfig.userForPageBuilder.name }}
           </div>
@@ -143,7 +143,7 @@ const openHTMLSettings = function () {
             />
           </div>
           <div
-            class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal w-max break-keep"
+            class="pbx-hidden pbx-text-xs pbx-h-8 lg:pbx-flex pbx-items-center pbx-font-normal pbx-w-max pbx-break-keep"
           >
             {{ getPageBuilderConfig.userForPageBuilder.name }}
           </div>
