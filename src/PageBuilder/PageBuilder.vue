@@ -581,7 +581,7 @@ onMounted(async () => {
                   ></span>
                 </span>
               </div>
-              <div>Save</div>
+              <div>{{ translate('Save') }}</div>
             </button>
             <!-- Save End -->
 

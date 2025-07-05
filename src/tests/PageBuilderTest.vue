@@ -73,16 +73,20 @@ onMounted(async () => {
           }}
         </h2>
         <p class="pbx-myPrimaryParagraph pbx-font-normal">
-          The web builder for stunning pages. Enable users to design and publish modern pages at any
-          scale. Build responsive pages like listings, jobs or blog posts and manage content easily
-          using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition
-          API, Pinia, CSS, Tailwind CSS and HTML.
-
+          {{
+            translate(
+              'The web builder for stunning pages. Enable users to design and publish modern pages at any scale. Build responsive pages like listings, jobs or blog posts and manage content easily using the free click & drop Page Builder. Developed with TypeScript, Vue 3, Composition API, Pinia, CSS, Tailwind CSS and HTML.',
+            )
+          }}
           <br />
         </p>
         <div class="pbx-mt-4">
           <p class="pbx-myPrimaryParagraph pbx-font-normal">
-            Download or install our powerful, flexible, and easy-to-use free Vue 3 Page Builder via
+            {{
+              translate(
+                'Download or install our powerful, flexible, and easy-to-use free Vue 3 Page Builder via',
+              )
+            }}
             <br />
             <strong> npm:</strong>
             <a
