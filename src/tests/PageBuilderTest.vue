@@ -81,7 +81,7 @@ const configPageBuilder = {
   userSettings: {
     theme: 'light',
     language: {
-      default: 'en',
+      default: 'ru',
       enable: ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'],
       disableLanguageDropDown: false,
     },
@@ -95,7 +95,8 @@ const configPageBuilder = {
 } as const
 
 onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder, components)
+  // const result = await pageBuilderService.startBuilder(configPageBuilder, components)
+  const result = await pageBuilderService.startBuilder(configPageBuilder)
   console.log('Page Builder inspect the result for message, status, or error::', result)
 })
 </script>

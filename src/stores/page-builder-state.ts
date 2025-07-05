@@ -67,7 +67,7 @@ interface PageBuilderState {
   hasLocalDraftForUpdate: boolean
   isResumeEditing: boolean
   isRestoring: boolean
-  currentLanguage: string
+  currentLanguage: string | null
 }
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
@@ -130,7 +130,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     hasLocalDraftForUpdate: false,
     isResumeEditing: false,
     isRestoring: false,
-    currentLanguage: 'en',
+    currentLanguage: null,
   }),
   getters: {
     // Core Page Builder Getters
