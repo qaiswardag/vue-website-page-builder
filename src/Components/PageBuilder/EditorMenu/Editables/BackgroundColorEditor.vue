@@ -4,6 +4,10 @@ import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headless
 import tailwindColors from '../../../../utils/builder/tailwaind-colors'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import { getPageBuilder } from '../../../../composables/builderInstance'
+import { useTranslations } from '../../../../composables/useTranslations'
+
+const { translate } = useTranslations()
+
 const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
@@ -49,7 +53,7 @@ watch(
               class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border pbx-border-gray-800 pbx-rounded-sm"
               :class="`pbx-bg-${backgroundColor?.replace('pbx-bg-', '')}`"
             ></div>
-            <div>Background Color</div>
+            <div>{{ translate('Background Color') }}</div>
           </div>
 
           <span v-if="globalPageLayout" class="material-symbols-outlined"> chevron_right </span>
@@ -99,7 +103,7 @@ watch(
             >
               <div v-if="color === 'none'" class="pbx-flex pbx-items-center">
                 <span class="material-symbols-outlined"> ev_shadow </span>
-                <span class="pbx-ml-3">Transparent</span>
+                <span class="pbx-ml-3">{{ translate('Transparent') }}</span>
               </div>
               <div v-if="color !== 'none'" class="pbx-flex pbx-items-center">
                 <div

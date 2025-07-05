@@ -79,5 +79,7 @@
   "Download HTML": "Download HTML",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.",
   "Download HTML file": "Download HTML file",
-  "Loading...": "Loading..."
+  "Loading...": "Loading...",
+  "Background Color": "Background Color",
+  "Transparent": "Transparent"
 }
