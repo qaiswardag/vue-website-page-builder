@@ -44,9 +44,9 @@ const handleDeleteComponentsFromDOM = function () {
   gridColumnModal.value = 2
   titleModal.value = translate('Remove all Components')
   descriptionModal.value = translate('Are you sure you want to remove all Components?')
-  firstButtonModal.value = 'Close'
+  firstButtonModal.value = translate('Close')
   secondButtonModal.value = null
-  thirdButtonModal.value = 'Delete'
+  thirdButtonModal.value = translate('Delete')
 
   // handle click
   firstModalButtonFunctionDynamicModalBuilder.value = function () {

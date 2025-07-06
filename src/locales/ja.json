@@ -99,5 +99,11 @@
   "Header 2": "ヘッダー2",
   "Header 3": "ヘッダー3",
   "List": "リスト",
-  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "選択したテキストをクリック可能なハイパーリンクに変換するために有効なURLを追加してください。"
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "選択したテキストをクリック可能なハイパーリンクに変換するために有効なURLを追加してください。",
+  "Select image": "画像を選択",
+  "Manage Content": "コンテンツを管理する",
+  "Media Library": "メディアライブラリ",
+  "Reset changes": "変更をリセット",
+  "Do you want to reset this page?": "このページをリセットしますか？",
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "このページをリセットしてもよろしいですか？これにより、現在の変更が上書きされます。"
 }

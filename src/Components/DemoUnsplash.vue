@@ -5,6 +5,9 @@ import { usePageBuilderModal } from '../composables/usePageBuilderModal'
 import { delay } from '../composables/delay'
 import { preloadImage } from '../composables/preloadImage'
 import { getPageBuilder } from '../composables/builderInstance'
+import { useTranslations } from '../composables/useTranslations'
+const { translate } = useTranslations()
+
 const pageBuilderService = getPageBuilder()
 
 const { closeMediaLibraryModal } = usePageBuilderModal()
@@ -383,7 +386,7 @@ onMounted(async () => {
             class="pbx-mySecondaryButton"
             type="button"
           >
-            Close
+            {{ translate('Close') }}
           </button>
           <button
             v-if="getApplyImageToSelection && typeof getApplyImageToSelection === 'string'"
@@ -391,7 +394,7 @@ onMounted(async () => {
             class="pbx-myPrimaryButton"
             type="button"
           >
-            Select image
+            {{ translate(' Select image') }}
           </button>
         </div>
         <!-- Actions footer # end -->

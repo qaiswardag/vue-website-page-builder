@@ -113,7 +113,7 @@ const handleURL = function () {
   descriptionModal.value = translate(
     'Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.',
   )
-  firstButtonModal.value = 'Close'
+  firstButtonModal.value = translate('Close')
   secondButtonModal.value = urlEnteret.value ? 'Remove url' : null
   thirdButtonModal.value = translate('Save')
 

@@ -98,5 +98,11 @@
   "Header 2": "Header 2",
   "Header 3": "Header 3",
   "List": "List",
-  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address."
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.",
+  "Select image": "Select image",
+  "Manage Content": "Manage Content",
+  "Media Library": "Media Library",
+  "Reset changes": "Reset changes",
+  "Do you want to reset this page?": "Do you want to reset this page?",
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "Are you sure you want to reset this page? This will overwrite your current changes."
 }

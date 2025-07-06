@@ -99,5 +99,11 @@
   "Header 2": "हेडर 2",
   "Header 3": "हेडर 3",
   "List": "सूची",
-  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "चयनित पाठ को एक क्लिक करने योग्य हाइपरलिंक में बदलने के लिए एक मान्य URL जोड़ें जो उपयोगकर्ताओं को निर्दिष्ट वेब पते पर निर्देशित करता है।"
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "चयनित पाठ को एक क्लिक करने योग्य हाइपरलिंक में बदलने के लिए एक मान्य URL जोड़ें जो उपयोगकर्ताओं को निर्दिष्ट वेब पते पर निर्देशित करता है।",
+  "Select image": "छवि चुनें",
+  "Manage Content": "सामग्री प्रबंधित करें",
+  "Media Library": "मीडिया लाइब्रेरी",
+  "Reset changes": "परिवर्तन रीसेट करें",
+  "Do you want to reset this page?": "क्या आप इस पृष्ठ को रीसेट करना चाहते हैं?",
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "क्या आप वाकई इस पृष्ठ को रीसेट करना चाहते हैं? यह आपके वर्तमान परिवर्तनों को अधिलेखित कर देगा।"
 }

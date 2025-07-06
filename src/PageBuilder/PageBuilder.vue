@@ -297,12 +297,13 @@ const handleRestoreOriginalContent = async function () {
   typeModalRestore.value = 'success'
   showModalRestore.value = true
 
-  titleModalRestore.value = 'Do you want to reset this page?'
-  descriptionModalRestore.value =
-    'Are you sure you want to reset this page? This will overwrite your current changes.'
-  firstButtonRestore.value = 'Close'
+  titleModalRestore.value = translate('Do you want to reset this page?')
+  descriptionModalRestore.value = translate(
+    'Are you sure you want to reset this page? This will overwrite your current changes.',
+  )
+  firstButtonRestore.value = translate('Close')
   secondButtonRestore.value = null
-  thirdButtonRestore.value = 'Reset changes'
+  thirdButtonRestore.value = translate('Reset changes')
 
   firstModalButtonRestoreFunction.value = function () {
     showModalRestore.value = false
@@ -736,7 +737,7 @@ onMounted(async () => {
         </div>
         <!-- Options # Start -->
 
-        <!-- Close & Publish buttons start -->
+        <!-- Publish buttons start -->
         <template v-if="showPublishButton">
           <div class="pbx-flex-1 pbx-ml-2">
             <button
@@ -776,7 +777,7 @@ onMounted(async () => {
           </div>
         </template>
 
-        <!-- Close & Publish buttons end -->
+        <!-- Publish buttons end -->
 
         <template
           v-if="

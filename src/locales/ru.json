@@ -99,5 +99,11 @@
   "Header 2": "Заголовок 2",
   "Header 3": "Заголовок 3",
   "List": "Список",
-  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Добавьте действительный URL, чтобы преобразовать выделенный текст в кликабельную гиперссылку, которая направляет пользователей на указанный веб-адрес."
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Добавьте действительный URL, чтобы преобразовать выделенный текст в кликабельную гиперссылку, которая направляет пользователей на указанный веб-адрес.",
+  "Select image": "Выбрать изображение",
+  "Manage Content": "Управление контентом",
+  "Media Library": "Медиатека",
+  "Reset changes": "Сбросить изменения",
+  "Do you want to reset this page?": "Вы хотите сбросить эту страницу?",
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "Вы уверены, что хотите сбросить эту страницу? Это перезапишет ваши текущие изменения."
 }

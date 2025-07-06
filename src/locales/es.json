@@ -99,5 +99,11 @@
   "Header 2": "Encabezado 2",
   "Header 3": "Encabezado 3",
   "List": "Lista",
-  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Agregue una URL válida para transformar el texto seleccionado en un hipervínculo clicable que dirija a los usuarios a la dirección web especificada."
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Agregue una URL válida para transformar el texto seleccionado en un hipervínculo clicable que dirija a los usuarios a la dirección web especificada.",
+  "Select image": "Seleccionar imagen",
+  "Manage Content": "Gestionar contenido",
+  "Media Library": "Biblioteca de medios",
+  "Reset changes": "Restablecer cambios",
+  "Do you want to reset this page?": "¿Quieres restablecer esta página?",
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "¿Estás seguro de que deseas restablecer esta página? Esto sobrescribirá tus cambios actuales."
 }
