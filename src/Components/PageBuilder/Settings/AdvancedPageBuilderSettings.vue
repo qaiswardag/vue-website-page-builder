@@ -19,7 +19,6 @@ const current = ref('element')
 const updateCurrentTab = function (tab) {
   current.value = tab
 }
-
 function prettifyHtml(html) {
   if (!html) return ''
 
@@ -27,13 +26,14 @@ function prettifyHtml(html) {
   let indentLevel = 0
   let result = ''
 
+  // Basic HTML entity escaping
   const escapedHtml = html
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
 
+  // Split into tokens, keeping the tags
   const tokens = escapedHtml.split(/(&lt;[^&gt;]+&gt;)/g)
 
   const selfClosingTags = [
@@ -50,7 +50,7 @@ function prettifyHtml(html) {
     '&lt;param',
     '&lt;source',
     '&lt;track',
-    '&lt;wbr'
+    '&lt;wbr',
   ]
 
   tokens.forEach((token) => {
@@ -60,22 +60,36 @@ function prettifyHtml(html) {
     const isTag = trimmed.startsWith('&lt;') && trimmed.endsWith('&gt;')
     const isClosingTag = isTag && trimmed.startsWith('&lt;/')
 
+    // Adjust indentation level
     if (isClosingTag) {
       indentLevel = Math.max(0, indentLevel - 1)
     }
 
+    // Add indentation
     let line = tab.repeat(indentLevel) + trimmed
 
-    // Syntax highlighting
-    line = line.replace(/(&lt;\/?[\[:alnum:]\s="\/.':;#-\/\?]+&gt;)/g, (match) => {
-      return match
-        .replace(/(&lt;\/?[\[:alnum:]-]+)/g, '<span class="html-tag">$1</span>')
-        .replace(/([\[:alnum:]-]+)=/g, '<span class="html-attribute">$1</span>=')
-        .replace(/(&quot;[^&quot;]*&quot;)/g, '<span class="html-value">$1</span>')
-    })
+    // Syntax highlighting using spans
+    if (isTag) {
+      line = line.replace(/(&lt;\/?[[\w\s="/.':;#-\/\?]+&gt;)/g, (match) => {
+        const tagName = match.match(/&lt;\/?([\w-]+)/)?.[1]
+        let highlighted = match.replace(
+          /(&lt;\/?[\w-]+)/g,
+          `<span class="html-tag-symbol">&lt;</span><span class="html-tag-name">${tagName}</span>`,
+        )
+
+        // Highlight attributes
+        highlighted = highlighted.replace(
+          /([\w-]+)=(&quot;[^&quot;]*&quot;)/g,
+          '<span class="html-attribute-name">$1</span><span class="html-operator">=</span><span class="html-attribute-value">$2</span>',
+        )
+
+        return highlighted + '<span class="html-tag-symbol">&gt;</span>'
+      })
+    }
 
     result += line + '\n'
 
+    // Increase indent for next line
     if (isTag && !isClosingTag) {
       const isSelfClosing =
         trimmed.endsWith('/&gt;') || selfClosingTags.some((tag) => trimmed.startsWith(tag))
@@ -419,7 +433,7 @@ function prettifyHtml(html) {
                             <pre
                               class="pbx-text-xs pbx-text-gray-100 pbx-whitespace-pre-wrap pbx-font-sans pbx-flex pbx-items-start pbx-justify-left"
                             >
-                              <code class="pbx-font-sans pbx-bg-gray-800 pbx-p-4 pbx-rounded-md pbx-block pbx-w-full" v-html="prettifyHtml(component.html_code)"></code>
+                              <code class="pbx-font-sans pbx-w-full" v-html="prettifyHtml(component.html_code)"></code>
                             </pre>
                           </td>
                         </tr>

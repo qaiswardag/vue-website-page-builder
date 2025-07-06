@@ -218,7 +218,7 @@ const openHTMLSettings = function () {
     <ModalBuilder
       maxWidth="5xl"
       :showModalBuilder="showHTMLSettings"
-      title="Selected HTML"
+      :title="translate('Selected HTML')"
       @closeMainModalBuilder="handleHTMLSettings"
       minHeight=""
       maxHeight=""
