@@ -49,8 +49,8 @@ export const generateComponentPreview = (title: string): string => {
       `,
     },
 
-    '2 Vertical Images': {
-      title: '2 Vertical Images',
+    'Two Vertical Images': {
+      title: 'Two Vertical Images',
       svg: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 133.88 122.11">
           <defs>
@@ -84,8 +84,8 @@ export const generateComponentPreview = (title: string): string => {
       `,
     },
 
-    '2 Square Images': {
-      title: '2 Square Images',
+    'Two Square Images': {
+      title: 'Two Square Images',
       svg: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120.18 57.68">
           <defs>
@@ -119,8 +119,8 @@ export const generateComponentPreview = (title: string): string => {
       `,
     },
 
-    '3 Square Images': {
-      title: '3 Square Images',
+    'Three Square Images': {
+      title: 'Three Square Images',
       svg: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.28 53.92">
           <defs>
@@ -145,8 +145,8 @@ export const generateComponentPreview = (title: string): string => {
       `,
     },
 
-    '6 Square Images Grid': {
-      title: '6 Square Images Grid',
+    'Six Square Images Grid': {
+      title: 'Six Square Images Grid',
       svg: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.28 120.27">
           <defs>
@@ -210,8 +210,8 @@ export const generateComponentPreview = (title: string): string => {
       `,
     },
 
-    '3 Vertical Images': {
-      title: '3 Vertical Images',
+    'Three Vertical Images': {
+      title: 'Three Vertical Images',
       svg: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 179.84 110.72">
           <defs>
@@ -236,8 +236,8 @@ export const generateComponentPreview = (title: string): string => {
       `,
     },
 
-    '4 Square Images With Text': {
-      title: '4 Square Images With Text',
+    'Four Square Images With Text': {
+      title: 'Four Square Images With Text',
       svg: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.33 55.9">
           <defs>
@@ -278,8 +278,8 @@ export const generateComponentPreview = (title: string): string => {
       `,
     },
 
-    '3 Square Images With Text': {
-      title: '3 Square Images With Text',
+    'Three Square Images With Text': {
+      title: 'Three Square Images With Text',
       svg: `
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.28 70.84">
           <defs>
@@ -309,51 +309,6 @@ export const generateComponentPreview = (title: string): string => {
           <rect class="bg" x="123.37" y="59.92" width="53.92" height="2.93"/>
           <rect class="bg" x="123.37" y="63.91" width="53.92" height="2.93"/>
           <rect class="bg" x="123.37" y="67.91" width="53.92" height="2.93"/>
-        </svg>
-      `,
-    },
-
-    '2 Square Images With Text': {
-      title: '2 Square Images With Text',
-      svg: `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 122.18 75.79">
-          <defs>
-            <style>
-              .cls-1 {
-                fill: #384152;
-              }
-
-              .cls-2 {
-                fill: #718096;
-              }
-            </style>
-          </defs>
-          <g>
-            <g>
-              <rect class="cls-1" width="57.68" height="57.68"/>
-              <g>
-                <polygon class="cls-2" points="8.77 37.45 23.11 20.25 37.44 37.45 8.77 37.45"/>
-                <polygon class="cls-2" points="34.58 37.45 41.74 28.85 48.91 37.45 34.58 37.45"/>
-                <circle class="cls-2" cx="41.74" cy="22.62" r="2.39"/>
-              </g>
-            </g>
-            <g>
-              <rect class="cls-1" x="64.5" width="57.68" height="57.68"/>
-              <g>
-                <polygon class="cls-2" points="73.27 37.45 87.61 20.25 101.94 37.45 73.27 37.45"/>
-                <polygon class="cls-2" points="99.07 37.45 106.24 28.85 113.41 37.45 99.07 37.45"/>
-                <circle class="cls-2" cx="106.24" cy="22.62" r="2.39"/>
-              </g>
-            </g>
-          </g>
-          <g>
-            <rect class="cls-1" y="64.1" width="57.68" height="3.13"/>
-            <rect class="cls-1" y="68.38" width="57.68" height="3.13"/>
-            <rect class="cls-1" y="72.65" width="57.68" height="3.13"/>
-            <rect class="cls-1" x="64.5" y="64.1" width="57.68" height="3.13"/>
-            <rect class="cls-1" x="64.5" y="68.38" width="57.68" height="3.13"/>
-            <rect class="cls-1" x="64.5" y="72.65" width="57.68" height="3.13"/>
-          </g>
         </svg>
       `,
     },
