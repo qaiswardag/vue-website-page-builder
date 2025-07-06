@@ -194,7 +194,8 @@ const handleCloseGlobalPageStyles = async function () {
               }}
             </label>
 
-            <div class="pbx-mt-4">
+            <hr />
+            <div class="pbx-my-2 pbx-py-2">
               <button @click="handleUpdatePageStyles" type="button" class="pbx-myPrimaryButton">
                 {{ translate('Update Page Styles') }}
               </button>
@@ -219,7 +220,8 @@ const handleCloseGlobalPageStyles = async function () {
                 )
               }}
             </label>
-            <div class="pbx-mt-4">
+            <hr />
+            <div class="pbx-my-2 pbx-py-2">
               <button @click="handleDownloadHTML" type="button" class="pbx-myPrimaryButton">
                 {{ translate('Download HTML file') }}
               </button>

@@ -123,6 +123,7 @@ watch(
           </option>
         </select>
       </div>
+      <hr />
       <div class="pbx-my-2 pbx-py-2">
         <label for="border-radius-top-right" class="pbx-myPrimaryInputLabel">
           {{ translate('Border Radius top right') }}
@@ -142,6 +143,7 @@ watch(
           </option>
         </select>
       </div>
+      <hr />
       <div class="pbx-my-2 pbx-py-2">
         <label for="border-radius-bottom-left" class="pbx-myPrimaryInputLabel">
           {{ translate('Border Radius bottom left') }}
@@ -161,6 +163,7 @@ watch(
           </option>
         </select>
       </div>
+      <hr />
       <div class="pbx-my-2 pbx-py-2">
         <label for="border-radius-bottom-right" class="pbx-myPrimaryInputLabel">
           {{ translate('Border Radius bottom right') }}

@@ -328,7 +328,7 @@
   }
 
   .pbx-myPrimaryInputError {
-    @apply pbx-mt-1 pbx-myPrimaryParagraph pbx-block pbx-font-normal pbx-text-myPrimaryErrorColor pbx-text-left;
+    @apply pbx-mt-1 pbx-myPrimaryParagraph pbx-block pbx-font-normal pbx-text-myPrimaryErrorColor pbx-text-left pbx-text-sm;
   }
 
   .pbx-myPrimaryHiddenInputField {
