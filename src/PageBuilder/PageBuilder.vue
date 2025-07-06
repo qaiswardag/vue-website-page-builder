@@ -108,11 +108,14 @@ const getMenuRight = computed(() => {
   return pageBuilderStateStore.getMenuRight
 })
 const openPageBuilderPreviewModal = ref(false)
+const titleBuilderDesktop = ref('')
+const titleBuilderMobile = ref('')
 
 const previewCurrentDesign = function () {
   pageBuilderService.previewCurrentDesign()
 }
 const handlePageBuilderPreview = function () {
+  titleBuilderDesktop.value = translate('Preview')
   previewCurrentDesign()
   openPageBuilderPreviewModal.value = true
 }
@@ -123,6 +126,7 @@ const previewCurrentDesignMobile = function () {
   pageBuilderService.previewCurrentDesign()
 }
 const handlePageBuilderPreviewMobile = function () {
+  titleBuilderMobile.value = translate('Mobile')
   previewCurrentDesignMobile()
   openPageBuilderPreviewMobile.value = true
 }
@@ -457,7 +461,7 @@ onMounted(async () => {
     ></BuilderComponents>
 
     <ModalBuilder
-      title="Desktop"
+      :title="titleBuilderDesktop"
       :showModalBuilder="openPageBuilderPreviewModal"
       @closeMainModalBuilder="firstPageBuilderPreviewModalButton"
       maxWidth="screen"
@@ -466,7 +470,7 @@ onMounted(async () => {
     </ModalBuilder>
 
     <ModalBuilder
-      title="Mobile"
+      :title="titleBuilderMobile"
       :showModalBuilder="openPageBuilderPreviewMobile"
       @closeMainModalBuilder="firstPageBuilderPreviewModalButtonMobile"
       maxWidth="lg"
