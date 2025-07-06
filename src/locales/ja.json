@@ -104,5 +104,21 @@
   "Media Library": "メディアライブラリ",
   "Reset changes": "変更をリセット",
   "Do you want to reset this page?": "このページをリセットしますか？",
-  "Are you sure you want to reset this page? This will overwrite your current changes.": "このページをリセットしてもよろしいですか？これにより、現在の変更が上書きされます。"
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "このページをリセットしてもよろしいですか？これにより、現在の変更が上書きされます。",
+  "Search": "検索",
+  "Search...": "検索...",
+  "Landscape": "横向き",
+  "Portrait": "縦向き",
+  "Squarish": "正方形",
+  "Total pages": "総ページ数",
+  "Images": "画像",
+  "First page": "最初のページ",
+  "Prev": "前へ",
+  "Next": "次へ",
+  "By:": "作成者:",
+  "We did not find any images. Make a new search.": "画像が見つかりませんでした。新しい検索をしてください。",
+  "No results on current page. Navigate to First Page.": "現在のページに結果がありません。最初のページに移動してください。",
+  "Information": "情報",
+  "From:": "提供元:",
+  " Select image": " 画像を選択"
 }

@@ -104,5 +104,21 @@
   "Media Library": "मीडिया लाइब्रेरी",
   "Reset changes": "परिवर्तन रीसेट करें",
   "Do you want to reset this page?": "क्या आप इस पृष्ठ को रीसेट करना चाहते हैं?",
-  "Are you sure you want to reset this page? This will overwrite your current changes.": "क्या आप वाकई इस पृष्ठ को रीसेट करना चाहते हैं? यह आपके वर्तमान परिवर्तनों को अधिलेखित कर देगा।"
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "क्या आप वाकई इस पृष्ठ को रीसेट करना चाहते हैं? यह आपके वर्तमान परिवर्तनों को अधिलेखित कर देगा।",
+  "Search": "खोजें",
+  "Search...": "खोजें...",
+  "Landscape": "लैंडस्केप",
+  "Portrait": "पोर्ट्रेट",
+  "Squarish": "चौकोर",
+  "Total pages": "कुल पृष्ठ",
+  "Images": "छवियां",
+  "First page": "पहला पृष्ठ",
+  "Prev": "पिछला",
+  "Next": "अगला",
+  "By:": "द्वारा:",
+  "We did not find any images. Make a new search.": "हमें कोई छवि नहीं मिली। एक नई खोज करें।",
+  "No results on current page. Navigate to First Page.": "वर्तमान पृष्ठ पर कोई परिणाम नहीं। पहले पृष्ठ पर जाएं।",
+  "Information": "जानकारी",
+  "From:": "से:",
+  " Select image": " छवि चुनें"
 }

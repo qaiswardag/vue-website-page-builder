@@ -104,5 +104,21 @@
   "Media Library": "媒体库",
   "Reset changes": "重置更改",
   "Do you want to reset this page?": "您想重置此页面吗？",
-  "Are you sure you want to reset this page? This will overwrite your current changes.": "您确定要重置此页面吗？这将覆盖您当前的更改。"
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "您确定要重置此页面吗？这将覆盖您当前的更改。",
+  "Search": "搜索",
+  "Search...": "搜索...",
+  "Landscape": "横向",
+  "Portrait": "纵向",
+  "Squarish": "方形",
+  "Total pages": "总页数",
+  "Images": "图片",
+  "First page": "第一页",
+  "Prev": "上一页",
+  "Next": "下一页",
+  "By:": "作者：",
+  "We did not find any images. Make a new search.": "我们没有找到任何图片。请重新搜索。",
+  "No results on current page. Navigate to First Page.": "当前页面没有结果。导航到第一页。",
+  "Information": "信息",
+  "From:": "来自：",
+  " Select image": " 选择图片"
 }

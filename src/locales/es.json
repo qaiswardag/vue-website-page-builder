@@ -104,5 +104,21 @@
   "Media Library": "Biblioteca de medios",
   "Reset changes": "Restablecer cambios",
   "Do you want to reset this page?": "¿Quieres restablecer esta página?",
-  "Are you sure you want to reset this page? This will overwrite your current changes.": "¿Estás seguro de que deseas restablecer esta página? Esto sobrescribirá tus cambios actuales."
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "¿Estás seguro de que deseas restablecer esta página? Esto sobrescribirá tus cambios actuales.",
+  "Search": "Buscar",
+  "Search...": "Buscar...",
+  "Landscape": "Horizontal",
+  "Portrait": "Vertical",
+  "Squarish": "Cuadrado",
+  "Total pages": "Páginas totales",
+  "Images": "Imágenes",
+  "First page": "Primera página",
+  "Prev": "Anterior",
+  "Next": "Siguiente",
+  "By:": "Por:",
+  "We did not find any images. Make a new search.": "No encontramos imágenes. Realiza una nueva búsqueda.",
+  "No results on current page. Navigate to First Page.": "No hay resultados en la página actual. Navega a la primera página.",
+  "Information": "Información",
+  "From:": "De:",
+  " Select image": " Seleccionar imagen"
 }

@@ -104,5 +104,21 @@
   "Media Library": "Media Library",
   "Reset changes": "Reset changes",
   "Do you want to reset this page?": "Do you want to reset this page?",
-  "Are you sure you want to reset this page? This will overwrite your current changes.": "Are you sure you want to reset this page? This will overwrite your current changes."
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "Are you sure you want to reset this page? This will overwrite your current changes.",
+  "Search": "Search",
+  "Search...": "Search...",
+  "Landscape": "Landscape",
+  "Portrait": "Portrait",
+  "Squarish": "Squarish",
+  "Total pages": "Total pages",
+  "Images": "Images",
+  "First page": "First page",
+  "Prev": "Prev",
+  "Next": "Next",
+  "By:": "By:",
+  "We did not find any images. Make a new search.": "We did not find any images. Make a new search.",
+  "No results on current page. Navigate to First Page.": "No results on current page. Navigate to First Page.",
+  "Information": "Information",
+  "From:": "From:",
+  " Select image": " Select image"
 }

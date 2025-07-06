@@ -129,7 +129,7 @@ onMounted(async () => {
         <label
           for="default-search"
           class="pbx-mb-2 pbx-text-sm pbx-font-normal pbx-text-gray-900 pbx-sr-only dark:pbx-text-gray-300"
-          >Search</label
+          >{{ translate('Search') }}</label
         >
 
         <div class="pbx-mysearchBarWithOptions">
@@ -145,7 +145,7 @@ onMounted(async () => {
               v-model="getSearchTerm"
               class="pbx-myPrimarySearchInput"
               autocomplete="off"
-              placeholder="Search..."
+              :placeholder="translate('Search...')"
             />
           </div>
 
@@ -159,7 +159,7 @@ onMounted(async () => {
             type="submit"
             class="pbx-myPrimaryTag pbx-break-keep pbx-mr-4"
           >
-            Search
+            {{ translate('Search') }}
           </button>
         </div>
       </form>
@@ -178,7 +178,7 @@ onMounted(async () => {
                 '': getOrientationValue !== 'landscape',
               }"
             >
-              Landscape
+              {{ translate('Landscape') }}
             </button>
             <button
               @click="searchByOrientation('portrait')"
@@ -189,7 +189,7 @@ onMounted(async () => {
                 '': getOrientationValue !== 'portrait',
               }"
             >
-              Portrait
+              {{ translate('Portrait') }}
             </button>
             <button
               @click="searchByOrientation('squarish')"
@@ -200,7 +200,7 @@ onMounted(async () => {
                 '': getOrientationValue !== 'squarish',
               }"
             >
-              Squarish
+              {{ translate('Squarish') }}
             </button>
 
             <svg
@@ -221,10 +221,10 @@ onMounted(async () => {
             aria-label="Pagination"
           >
             <p class="pbx-myPrimaryParagraph pbx-text-xs pbx-italic">
-              Total pages {{ getUnsplashImages.total_pages }}
+              {{ translate('Total pages') }} {{ getUnsplashImages.total_pages }}
             </p>
             <p class="pbx-myPrimaryParagraph pbx-text-xs pbx-italic">
-              Images {{ getUnsplashImages.total }}
+              {{ translate('Images') }} {{ getUnsplashImages.total }}
             </p>
             <div
               class="pbx-flex pbx-flex-1 pbx-justify-between sm:pbx-justify-end pbx-items-center pbx-gap-2"
@@ -234,7 +234,7 @@ onMounted(async () => {
                 class="pbx-myPrimaryParagraph pbx-text-xs pbx-italic pbx-pr-2 pbx-pl-1 pbx-cursor-pointer pbx-underline"
                 @click="nextPage(Number((getCurrentPageNumber = 1)))"
               >
-                First page
+                {{ translate('First page') }}
               </span>
             </div>
             <button
@@ -244,7 +244,7 @@ onMounted(async () => {
               @click="previousPage(Number(getCurrentPageNumber--))"
             >
               {{
-                `Prev ${Number(getCurrentPageNumber) > 0 ? Number(getCurrentPageNumber) - 1 : Number(getCurrentPageNumber) - 1}`
+                `${translate('Prev')} ${Number(getCurrentPageNumber) > 0 ? Number(getCurrentPageNumber) - 1 : Number(getCurrentPageNumber) - 1}`
               }}
             </button>
 
@@ -260,7 +260,7 @@ onMounted(async () => {
               @click="nextPage(Number(getCurrentPageNumber++))"
             >
               {{
-                `Next ${Number(getCurrentPageNumber) > 0 ? Number(getCurrentPageNumber) + 1 : Number(getCurrentPageNumber) + 1}`
+                `${translate('Next')} ${Number(getCurrentPageNumber) > 0 ? Number(getCurrentPageNumber) + 1 : Number(getCurrentPageNumber) + 1}`
               }}
             </button>
           </nav>
@@ -275,7 +275,7 @@ onMounted(async () => {
                 >
                   <span
                     class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
-                    >Loading...</span
+                    >{{ translate('Loading...') }}</span
                   >
                 </div>
               </div>
@@ -297,7 +297,7 @@ onMounted(async () => {
                     :src="image.urls.thumb"
                   />
                   <p class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-mt-2">
-                    By: {{ image.user.name }}
+                    {{ translate('By:') }} {{ image.user.name }}
                   </p>
                 </div>
               </div>
@@ -312,14 +312,14 @@ onMounted(async () => {
             >
               <p class="pbx-myPrimaryParagraph pbx-py-4 pbx-px-4">
                 <span v-if="getCurrentPageNumber === 1">
-                  We did not find any images. Make a new search.
+                  {{ translate('We did not find any images. Make a new search.') }}
                 </span>
                 <span
                   v-if="getCurrentPageNumber > 1"
                   @click="nextPage(1)"
                   class="pbx-myPrimaryLink"
                 >
-                  No results on current page. Navigate to First Page.
+                  {{ translate('No results on current page. Navigate to First Page.') }}
                 </span>
               </p>
             </div>
@@ -333,7 +333,7 @@ onMounted(async () => {
                 >
                   <span
                     class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
-                    >Loading...</span
+                    >{{ translate('Loading...') }}</span
                   >
                 </div>
               </div>
@@ -347,21 +347,21 @@ onMounted(async () => {
               <div class="md:pbx-px-3 pbx-px-2">
                 <div>
                   <p class="pbx-myPrimaryParagraph pbx-font-normal pbx-text-gray-900 pbx-pt-4">
-                    Information
+                    {{ translate('Information') }}
                   </p>
                   <dl
-                    class="pbx-mt-2 pbx-border-solid pbx-border-t pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-divide-y pbx-divide-gray-200"
+                    class="pbx-mt-2 pbx-border-t pbx-border-b pbx-border-gray-200 pbx-divide-y pbx-divide-gray-200"
                   >
                     <div
                       class="pbx-py-3 pbx-flex pbx-justify-between pbx-text-sm pbx-font-normal pbx-items-center"
                     >
-                      <dt class="pbx-text-gray-500">From:</dt>
+                      <dt class="pbx-text-gray-500">{{ translate('From:') }}</dt>
                       <dd class="pbx-text-gray-900">Unsplash</dd>
                     </div>
                     <div
                       class="pbx-py-3 pbx-flex pbx-justify-between pbx-text-sm pbx-font-normal pbx-items-center"
                     >
-                      <dt class="pbx-text-gray-500">By:</dt>
+                      <dt class="pbx-text-gray-500">{{ translate('By:') }}</dt>
                       <dd class="pbx-text-gray-900">{{ getCurrentUser }}</dd>
                     </div>
                   </dl>

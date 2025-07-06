@@ -104,5 +104,21 @@
   "Media Library": "Медиатека",
   "Reset changes": "Сбросить изменения",
   "Do you want to reset this page?": "Вы хотите сбросить эту страницу?",
-  "Are you sure you want to reset this page? This will overwrite your current changes.": "Вы уверены, что хотите сбросить эту страницу? Это перезапишет ваши текущие изменения."
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "Вы уверены, что хотите сбросить эту страницу? Это перезапишет ваши текущие изменения.",
+  "Search": "Поиск",
+  "Search...": "Поиск...",
+  "Landscape": "Альбомный",
+  "Portrait": "Портретный",
+  "Squarish": "Квадратный",
+  "Total pages": "Всего страниц",
+  "Images": "Изображения",
+  "First page": "Первая страница",
+  "Prev": "Назад",
+  "Next": "Вперед",
+  "By:": "Автор:",
+  "We did not find any images. Make a new search.": "Мы не нашли изображений. Выполните новый поиск.",
+  "No results on current page. Navigate to First Page.": "На текущей странице нет результатов. Перейдите на первую страницу.",
+  "Information": "Информация",
+  "From:": "От:",
+  " Select image": " Выбрать изображение"
 }

@@ -103,5 +103,21 @@
   "Media Library": "مكتبة الوسائط",
   "Reset changes": "إعادة التغييرات",
   "Do you want to reset this page?": "هل تريد إعادة تعيين هذه الصفحة؟",
-  "Are you sure you want to reset this page? This will overwrite your current changes.": "هل أنت متأكد أنك تريد إعادة تعيين هذه الصفحة؟ سيؤدي هذا إلى الكتابة فوق التغييرات الحالية."
+  "Are you sure you want to reset this page? This will overwrite your current changes.": "هل أنت متأكد أنك تريد إعادة تعيين هذه الصفحة؟ سيؤدي هذا إلى الكتابة فوق التغييرات الحالية.",
+  "Search": "بحث",
+  "Search...": "ابحث...",
+  "Landscape": "أفقي",
+  "Portrait": "عمودي",
+  "Squarish": "مربع الشكل",
+  "Total pages": "إجمالي الصفحات",
+  "Images": "صور",
+  "First page": "الصفحة الأولى",
+  "Prev": "السابق",
+  "Next": "التالي",
+  "By:": "بواسطة:",
+  "We did not find any images. Make a new search.": "لم نجد أي صور. قم ببحث جديد.",
+  "No results on current page. Navigate to First Page.": "لا توجد نتائج في الصفحة الحالية. انتقل إلى الصفحة الأولى.",
+  "Information": "معلومات",
+  "From:": "من:",
+  " Select image": " اختر صورة"
 }
