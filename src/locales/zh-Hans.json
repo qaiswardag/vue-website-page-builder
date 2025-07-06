@@ -93,5 +93,11 @@
   "Demo Title Three": "响应式编辑",
   "Edit text and links": "编辑文本和链接",
   "Enter URL": "输入URL",
+  "Line break": "换行",
+  "Bold": "加粗",
+  "Link": "链接",
+  "Header 2": "标题2",
+  "Header 3": "标题3",
+  "List": "列表",
   "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "添加一个有效的URL，将选定的文本转换为可点击的超链接，指向指定的网页地址。"
 }

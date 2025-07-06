@@ -93,5 +93,11 @@
   "Demo Title Three": "Édition réactive",
   "Edit text and links": "Modifier le texte et les liens",
   "Enter URL": "Entrer l'URL",
+  "Line break": "Saut de ligne",
+  "Bold": "Gras",
+  "Link": "Lien",
+  "Header 2": "Titre 2",
+  "Header 3": "Titre 3",
+  "List": "Liste",
   "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Ajoutez une URL valide pour transformer le texte sélectionné en un lien hypertexte cliquable qui dirige les utilisateurs vers l'adresse Web spécifiée."
 }

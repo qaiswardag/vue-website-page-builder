@@ -93,5 +93,11 @@
   "Demo Title Three": "Адаптивное редактирование",
   "Edit text and links": "Редактировать текст и ссылки",
   "Enter URL": "Введите URL",
+  "Line break": "Разрыв строки",
+  "Bold": "Жирный",
+  "Link": "Ссылка",
+  "Header 2": "Заголовок 2",
+  "Header 3": "Заголовок 3",
+  "List": "Список",
   "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Добавьте действительный URL, чтобы преобразовать выделенный текст в кликабельную гиперссылку, которая направляет пользователей на указанный веб-адрес."
 }

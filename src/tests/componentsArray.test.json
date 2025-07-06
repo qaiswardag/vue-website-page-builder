@@ -1,6 +1,6 @@
 [
   {
-    "html_code": "<section data-componentid=\"ba0e9774-3779-467c-9c9f-5c95dd47fa6d\" data-component-title=\"Header H2\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-text-6xl lg:pbx-text-8xl\"><h2>{{ translate('Demo Content') }}</h2></div></div></div></section>",
+    "html_code": "<section data-componentid=\"ba0e9774-3779-467c-9c9f-5c95dd47fa6d\" data-component-title=\"Header H2\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-text-6xl lg:pbx-text-8xl pbx-font-medium\"><h2>{{ translate('Demo Content') }}</h2></div></div></div></section>",
     "id": "ba0e9774-3779-467c-9c9f-5c95dd47fa6d",
     "title": "Header H2"
   },

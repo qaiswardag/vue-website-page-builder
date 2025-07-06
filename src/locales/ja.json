@@ -93,5 +93,11 @@
   "Demo Title Three": "レスポンシブ編集",
   "Edit text and links": "テキストとリンクを編集",
   "Enter URL": "URLを入力",
+  "Line break": "改行",
+  "Bold": "太字",
+  "Link": "リンク",
+  "Header 2": "ヘッダー2",
+  "Header 3": "ヘッダー3",
+  "List": "リスト",
   "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "選択したテキストをクリック可能なハイパーリンクに変換するために有効なURLを追加してください。"
 }

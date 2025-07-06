@@ -91,5 +91,11 @@
   "Demo Title Three": "تحرير متجاوب",
   "Edit text and links": "تحرير النصوص والروابط",
   "Enter URL": "أدخل عنوان URL",
+  "Line break": "فاصل سطر",
+  "Bold": "غامق",
+  "Link": "رابط",
+  "Header 2": "عنوان 2",
+  "Header 3": "عنوان 3",
+  "List": "قائمة",
   "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "أضف عنوان URL صالحًا لتحويل النص المحدد إلى ارتباط تشعبي قابل للنقر يوجه المستخدمين إلى عنوان الويب المحدد."
 }

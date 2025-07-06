@@ -93,5 +93,11 @@
   "Demo Title Three": "Edición receptiva",
   "Edit text and links": "Editar texto y enlaces",
   "Enter URL": "Introducir URL",
+  "Line break": "Salto de línea",
+  "Bold": "Negrita",
+  "Link": "Enlace",
+  "Header 2": "Encabezado 2",
+  "Header 3": "Encabezado 3",
+  "List": "Lista",
   "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Agregue una URL válida para transformar el texto seleccionado en un hipervínculo clicable que dirija a los usuarios a la dirección web especificada."
 }

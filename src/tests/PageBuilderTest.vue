@@ -122,7 +122,7 @@ onMounted(async () => {
           </p>
         </div>
       </div>
-      <div class="pbx-m-4">
+      <div class="lg:pbx-m-2 pbx-m-1">
         <!--   :CustomBuilderComponents="DemoBuilderComponentsTest" -->
         <PageBuilder
           :CustomMediaLibraryComponent="DemoMediaLibraryComponentTest"

@@ -110,7 +110,9 @@ const handleURL = function () {
   typeModal.value = 'success'
   gridColumnModal.value = 2
   titleModal.value = translate('Enter URL')
-  descriptionModal.value = translate('Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.')
+  descriptionModal.value = translate(
+    'Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.',
+  )
   firstButtonModal.value = 'Close'
   secondButtonModal.value = urlEnteret.value ? 'Remove url' : null
   thirdButtonModal.value = translate('Save')
@@ -198,7 +200,8 @@ onMounted(() => {
       <header></header>
       <main>
         <div class="pbx-myInputGroup">
-          <label class="pbx-myPrimaryInputLabel" for="roles"><span>Enter URL</span></label
+          <label class="pbx-myPrimaryInputLabel" for="roles"
+            ><span>{{ translate('Enter URL') }}</span></label
           ><input
             v-model="urlEnteret"
             class="pbx-myPrimaryInput pbx-mt-1"
@@ -249,7 +252,7 @@ onMounted(() => {
                   class="pbx-myPrimaryTag"
                 >
                   <span class="material-symbols-outlined"> keyboard_return </span>
-                  <span>Line break</span>
+                  <span>{{ translate('Line break') }}</span>
                 </button>
               </div>
 
@@ -261,7 +264,7 @@ onMounted(() => {
                   :class="{ 'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('bold') }"
                 >
                   <span class="material-symbols-outlined"> format_bold </span>
-                  <span>Bold</span>
+                  <span>{{ translate('Bold') }}</span>
                 </button>
               </div>
 
@@ -273,7 +276,7 @@ onMounted(() => {
                   :class="{ 'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('link') }"
                 >
                   <span class="material-symbols-outlined"> link </span>
-                  <span>Link</span>
+                  <span>{{ translate('Link') }}</span>
                 </button>
               </div>
 
@@ -289,7 +292,7 @@ onMounted(() => {
                   }"
                 >
                   <span class="material-symbols-outlined"> titlecase </span>
-                  <span>Header 2</span>
+                  <span>{{ translate('Header 2') }}</span>
                 </button>
               </div>
 
@@ -305,7 +308,7 @@ onMounted(() => {
                   }"
                 >
                   <span class="material-symbols-outlined"> titlecase </span>
-                  <span>Header 3</span>
+                  <span>{{ translate('Header 3') }}</span>
                 </button>
               </div>
 
@@ -319,7 +322,7 @@ onMounted(() => {
                   }"
                 >
                   <span class="material-symbols-outlined"> list </span>
-                  <span>List</span>
+                  <span>{{ translate('List') }}</span>
                 </button>
               </div>
             </div>
