@@ -437,42 +437,35 @@ export class PageBuilderService {
       if (!this.pendingMountComponents) {
         // Page Builder Is initially present in DOM
         if (!passedComponentsArray && this.isPageBuilderMissingOnStart && localStorageData) {
-          console.log('1111:', internalPageBuilderCall)
           await this.completeMountProcess(localStorageData)
           return
         }
         if (passedComponentsArray && !localStorageData) {
-          console.log('2222:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify(passedComponentsArray), true)
           this.saveDomComponentsToLocalStorage()
           return
         }
 
         if (passedComponentsArray && localStorageData) {
-          console.log('3333:', internalPageBuilderCall)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           await this.completeMountProcess(JSON.stringify(passedComponentsArray), true)
           return
         }
         if (!passedComponentsArray && localStorageData && !this.savedMountComponents) {
-          console.log('4444:', internalPageBuilderCall)
           await this.completeMountProcess(localStorageData)
           return
         }
         if (!passedComponentsArray && this.savedMountComponents && localStorageData) {
-          console.log('5555:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify(this.savedMountComponents))
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
-          console.log('6666:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify([]))
           return
         }
 
         if (!this.isPageBuilderMissingOnStart && !localStorageData && !passedComponentsArray) {
-          console.log('7777:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify([]))
           return
         }
@@ -482,7 +475,6 @@ export class PageBuilderService {
       if (this.pendingMountComponents) {
         // No Page Builder Is  present in DOM initially
         if (localStorageData && this.isPageBuilderMissingOnStart) {
-          console.log('8888:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
           await delay(400)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
@@ -490,14 +482,12 @@ export class PageBuilderService {
           return
         }
         if (!localStorageData && passedComponentsArray && this.isPageBuilderMissingOnStart) {
-          console.log('9999:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
           this.saveDomComponentsToLocalStorage()
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
-          console.log('10000:', internalPageBuilderCall)
           await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
           this.saveDomComponentsToLocalStorage()
           return
@@ -792,7 +782,7 @@ export class PageBuilderService {
    * The function is used to
    * attach event listeners to each element within a 'section'
    */
-  private addListenersToEditableElements = async () => {
+  public addListenersToEditableElements = async () => {
     const elementsWithListeners = new WeakSet<Element>()
 
     const pagebuilder = document.querySelector('#pagebuilder')
