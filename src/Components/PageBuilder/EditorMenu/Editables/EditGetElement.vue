@@ -7,6 +7,9 @@ import TextColorEditor from './TextColorEditor.vue'
 import BackgroundColorEditor from './BackgroundColorEditor.vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import { getPageBuilder } from '../../../../composables/builderInstance'
+import { useTranslations } from '../../../../composables/useTranslations'
+
+const { translate } = useTranslations()
 const pageBuilderService = getPageBuilder()
 
 // Use shared store instance
@@ -53,7 +56,7 @@ const handleModalPreviewTiptap = function () {
 
   typeModal.value = 'success'
   gridColumnModal.value = 2
-  titleModal.value = 'Manage Content'
+  titleModal.value = translate('Manage Content')
   descriptionModal.value = null
   firstButtonModal.value = null
   secondButtonModal.value = null
@@ -76,8 +79,6 @@ const getBasePrimaryImage = computed(() => {
   return pageBuilderStateStore.getBasePrimaryImage
 })
 
-//
-// use media library
 const showMediaLibraryModal = ref(false)
 // modal content
 const titleMedia = ref('')
@@ -92,15 +93,13 @@ const handleAddImage = function () {
   // open modal to true
   showMediaLibraryModal.value = true
 
-  // set media library modal standards
-  titleMedia.value = `Media Library`
+  titleMedia.value = translate('Media Library')
   descriptionMedia.value = null
-  firstButtonMedia.value = 'Close'
-  secondButtonMedia.value = 'Select image'
+  firstButtonMedia.value = translate('Close')
+  secondButtonMedia.value = translate(' Select image')
 
   // handle click
   firstMediaButtonFunction.value = function () {
-    // close media library modal
     showMediaLibraryModal.value = false
   }
 }
@@ -151,7 +150,7 @@ const handleModalIframeSrc = function () {
   gridColumnModal.value = 2
   titleModal.value = 'Add video url'
   descriptionModal.value = null
-  firstButtonModal.value = 'Close'
+  firstButtonModal.value = translate('Close')
   secondButtonModal.value = 'Save'
   thirdButtonModal.value = null
 
@@ -343,7 +342,7 @@ const getRestoredElement = computed(() => {
         class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-200 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white focus-visible:pbx-ring-0"
         @click="pageBuilderService.clearHtmlSelection()"
       >
-        <span class="material-symbols-outlined"> close </span>
+        <span class="material-symbols-outlined"> close</span>
       </div>
     </div>
   </div>

@@ -4,6 +4,9 @@ import MediaLibraryModal from '../../../Modals/MediaLibraryModal.vue'
 import { sharedPageBuilderStore } from '../../../../stores/shared-store'
 import { preloadImage } from '../../../../composables/preloadImage'
 import { delay } from '../../../../composables/delay'
+import { useTranslations } from '../../../../composables/useTranslations'
+
+const { translate } = useTranslations()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -11,7 +14,6 @@ const customMediaComponent = inject('CustomMediaComponent')
 
 const getIsLoadingImage = ref(false)
 
-// use media library
 const showMediaLibraryModal = ref(false)
 // modal content
 const titleMedia = ref('')
@@ -34,15 +36,13 @@ const handleAddImage = function () {
   // open modal to true
   showMediaLibraryModal.value = true
 
-  // set media library modal standards
-  titleMedia.value = `Media Library`
+  titleMedia.value = translate('Media Library')
   descriptionMedia.value = null
-  firstButtonMedia.value = 'Close'
-  secondButtonMedia.value = 'Select image'
+  firstButtonMedia.value = translate('Close')
+  secondButtonMedia.value = translate(' Select image')
 
   // handle click
   firstMediaButtonFunction.value = function () {
-    // close media library modal
     showMediaLibraryModal.value = false
   }
   //

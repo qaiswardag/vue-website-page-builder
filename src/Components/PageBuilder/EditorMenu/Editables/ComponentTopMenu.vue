@@ -1,6 +1,6 @@
 <script setup>
 import DynamicModalBuilder from '../../../Modals/DynamicModalBuilder.vue'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { getPageBuilder } from '../../../../composables/builderInstance'
 import { useTranslations } from '../../../../composables/useTranslations'
 
