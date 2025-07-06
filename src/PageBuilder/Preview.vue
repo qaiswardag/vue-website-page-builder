@@ -28,7 +28,7 @@ watchEffect(() => {
     const doc = iframe.contentWindow.document
     doc.open()
     doc.write(
-      `<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body>${htmlPage.value}</body></html>`,
+      `<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><div class="pbx-font-sans pbx-text-black">${htmlPage.value}</div></body></html>`,
     )
     doc.close()
 

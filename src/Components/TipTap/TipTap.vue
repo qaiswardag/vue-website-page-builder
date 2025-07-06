@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { getPageBuilder } from '../../composables/builderInstance'
+import { useTranslations } from '../../composables/useTranslations'
+
+const { translate } = useTranslations()
 const pageBuilderService = getPageBuilder()
 </script>
 
@@ -15,7 +18,7 @@ const pageBuilderService = getPageBuilder()
               class="pbx-myPrimaryButton"
             >
               <span class="material-symbols-outlined"> edit </span>
-              <span>Edit text and links</span>
+              <span>{{ translate('Edit text and links') }}</span>
             </button>
           </div>
         </div>

@@ -82,5 +82,22 @@
   "Delete": "Eliminar",
   "Add to the bottom": "Agregar al final",
   "Preview": "Vista previa",
-  "Mobile": "Móvil"
+  "Mobile": "Móvil",
+  "Demo Content": "Contenido de demostración",
+  "Demo Description": "Descubra el constructor de páginas ligero y gratuito Vue Click & Drop. Cree y mejore experiencias digitales sin esfuerzo con Vue. No todo lo poderoso tiene que ser complejo. Este constructor de páginas minimalista y ligero ofrece una interfaz elegante e intuitiva centrada en la simplicidad y la velocidad. Cree páginas completamente receptivas como listados, tableros de trabajo o publicaciones de blog, y gestione su contenido fácilmente con el constructor de páginas gratuito Click & Drop.",
+  "Demo Description Two": "Un constructor de páginas diseñado para el crecimiento. Cree las páginas de su sitio web con componentes listos para usar que son totalmente personalizables y siempre receptivos, diseñados para satisfacer todas las necesidades. Un poderoso constructor de páginas para comerciantes, marcas и agencias en crecimiento.",
+  "Demo Description Three": "El constructor de sitios web amado por los diseñadores. Diseñe, obtenga una vista previa y ajuste fácilmente los diseños para cada tamaño de pantalla. Limpio. Rápido. Intuitivo. No todo lo poderoso tiene que parecer complicado.",
+  "Demo Description Four": "Asegúrese de que su sitio se vea genial en todos los dispositivos. Edite el contenido de texto en vivo y en tiempo real. Elija las fuentes perfectas que coincidan con su estilo. Experimente con confianza con la capacidad de revertir los cambios. Estilos con prefijo. No hay riesgo de conflictos de estilo entre el constructor y su aplicación.",
+  "Demo Title": "El constructor web para páginas impresionantes",
+  "Demo Title Two": "Simplemente publícalo con Vue",
+  "Demo Title Three": "Edición receptiva",
+  "Edit text and links": "Editar texto y enlaces",
+  "Enter URL": "Introducir URL",
+  "Line break": "Salto de línea",
+  "Bold": "Negrita",
+  "Link": "Enlace",
+  "Header 2": "Encabezado 2",
+  "Header 3": "Encabezado 3",
+  "List": "Lista",
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Agregue una URL válida para transformar el texto seleccionado en un hipervínculo clicable que dirija a los usuarios a la dirección web especificada."
 }

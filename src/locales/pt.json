@@ -82,5 +82,22 @@
   "Delete": "Excluir",
   "Add to the bottom": "Adicionar ao final",
   "Preview": "Pré-visualização",
-  "Mobile": "Celular"
+  "Mobile": "Celular",
+  "Demo Content": "Conteúdo de demonstração",
+  "Demo Description": "Apresentando o construtor de páginas leve e gratuito Vue Click & Drop. Crie e melhore experiências digitais sem esforço com Vue. Nem tudo que é poderoso precisa ser complexo. Este construtor de páginas minimalista e leve oferece uma interface elegante e intuitiva focada na simplicidade e velocidade. Crie páginas totalmente responsivas, como listas, quadros de empregos ou postagens de blog, e gerencie seu conteúdo com facilidade usando o construtor de páginas gratuito Click & Drop.",
+  "Demo Description Two": "Um construtor de páginas projetado para o crescimento. Crie as páginas do seu site com componentes prontos que são totalmente personalizáveis e sempre responsivos, projetados para atender a todas as necessidades. Um poderoso construtor de páginas para comerciantes, marcas e agências em crescimento.",
+  "Demo Description Three": "O construtor de sites amado pelos designers. Projete, visualize e ajuste facilmente layouts para cada tamanho de tela. Limpo. Rápido. Intuitivo. Nem tudo que é poderoso precisa parecer complicado.",
+  "Demo Description Four": "Garanta que seu site tenha uma ótima aparência em todos os dispositivos. Edite o conteúdo do texto ao vivo e em tempo real. Escolha as fontes perfeitas para combinar com seu estilo. Experimente com confiança com a capacidade de reverter as alterações. Estilos prefixados. Nenhum risco de conflitos de estilo entre o construtor e seu aplicativo.",
+  "Demo Title": "O construtor de sites para páginas impressionantes",
+  "Demo Title Two": "Basta publicá-lo com Vue",
+  "Demo Title Three": "Edição responsiva",
+  "Edit text and links": "Editar texto e links",
+  "Enter URL": "Inserir URL",
+  "Line break": "Quebra de linha",
+  "Bold": "Negrito",
+  "Link": "Link",
+  "Header 2": "Cabeçalho 2",
+  "Header 3": "Cabeçalho 3",
+  "List": "Lista",
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Adicione um URL válido para transformar o texto selecionado em um hyperlink clicável que direciona os usuários para o endereço da web especificado."
 }

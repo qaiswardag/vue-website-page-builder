@@ -81,5 +81,22 @@
   "Delete": "Delete",
   "Add to the bottom": "Add to the bottom",
   "Preview": "Preview",
-  "Mobile": "Mobile"
+  "Mobile": "Mobile",
+  "Demo Content": "Demo Content",
+  "Demo Title": "The web builder for stunning pages",
+  "Demo Title Two": "Just publish it with Vue",
+  "Demo Title Three": "Responsive Editing",
+  "Demo Description": "Introducing the Lightweight & Free Vue Click & Drop Page Builder Create and enhance digital experiences effortlessly with Vue. Not everything powerful needs to be complex. This minimalist and lightweight page builder offers an elegant, intuitive interface focused on simplicity and speed. Build fully responsive pages such as listings, job boards, or blog posts—and manage your content with ease using the free Click & Drop Page Builder.",
+  "Demo Description Two": "A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.",
+  "Demo Description Three": "The website builder loved by designers. Easily design, preview, and adjust layouts for every screen size. Clean. Fast. Intuitive. Not everything powerful has to look complicated.",
+  "Demo Description Four": "Ensure your site looks great on all devices. Edit text content live and in real-time. Choose the perfect fonts to match your style. Experiment confidently with the ability to revert changes. Styles Prefixed. No risk of style conflicts between the builder and your app.",
+  "Edit text and links": "Edit text and links",
+  "Enter URL": "Enter URL",
+  "Line break": "Line break",
+  "Bold": "Bold",
+  "Link": "Link",
+  "Header 2": "Header 2",
+  "Header 3": "Header 3",
+  "List": "List",
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address."
 }
