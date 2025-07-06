@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { sharedPageBuilderStore } from '../../../stores/shared-store'
+import { useTranslations } from '../../../composables/useTranslations'
+
+const { translate } = useTranslations()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
