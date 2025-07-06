@@ -318,7 +318,7 @@
     @apply focus:pbx-ring-2 focus:pbx-ring-myPrimaryLinkColor focus:pbx-ring-offset-2 focus:pbx-border focus:pbx-border-gray-200;
   }
   .pbx-myPrimaryInput {
-    @apply pbx-block pbx-pr-8 pbx-text-left pbx-bg-white pbx-w-full sm:pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor placeholder:pbx-font-normal placeholder:pbx-accent-gray-300 focus:pbx-bg-white pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border pbx-border-gray-300 pbx-shadow-sm focus:pbx-outline-none pbx-myPrimaryFormFocus pbx-h-full;
+    @apply pbx-block pbx-pr-8 pbx-text-left pbx-bg-white pbx-w-full sm:pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor placeholder:pbx-font-normal placeholder:pbx-accent-gray-300 focus:pbx-bg-white pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border pbx-border-gray-300 pbx-shadow-sm focus:pbx-outline-none pbx-myPrimaryFormFocus pbx-h-full pbx-border-solid;
   }
   .pbx-myPrimaryInputNoBorder {
     @apply pbx-myPrimaryInput pbx-placeholder:accent-gray-300 focus:pbx-bg-none pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border-none focus:pbx-outline-none focus:pbx-ring-0 focus:pbx-ring-offset-0 focus:pbx-border-none pbx-shadow-none;
