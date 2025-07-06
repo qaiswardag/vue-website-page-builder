@@ -22,12 +22,70 @@ const updateCurrentTab = function (tab) {
 
 function prettifyHtml(html) {
   if (!html) return ''
-  return html
+
+  const tab = '  '
+  let indentLevel = 0
+  let result = ''
+
+  const escapedHtml = html
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;')
     .replace(/'/g, '&#39;')
+
+  const tokens = escapedHtml.split(/(&lt;[^&gt;]+&gt;)/g)
+
+  const selfClosingTags = [
+    '&lt;area',
+    '&lt;base',
+    '&lt;br',
+    '&lt;col',
+    '&lt;embed',
+    '&lt;hr',
+    '&lt;img',
+    '&lt;input',
+    '&lt;link',
+    '&lt;meta',
+    '&lt;param',
+    '&lt;source',
+    '&lt;track',
+    '&lt;wbr'
+  ]
+
+  tokens.forEach((token) => {
+    const trimmed = token.trim()
+    if (!trimmed) return
+
+    const isTag = trimmed.startsWith('&lt;') && trimmed.endsWith('&gt;')
+    const isClosingTag = isTag && trimmed.startsWith('&lt;/')
+
+    if (isClosingTag) {
+      indentLevel = Math.max(0, indentLevel - 1)
+    }
+
+    let line = tab.repeat(indentLevel) + trimmed
+
+    // Syntax highlighting
+    line = line.replace(/(&lt;\/?[\[:alnum:]\s="\/.':;#-\/\?]+&gt;)/g, (match) => {
+      return match
+        .replace(/(&lt;\/?[\[:alnum:]-]+)/g, '<span class="html-tag">$1</span>')
+        .replace(/([\[:alnum:]-]+)=/g, '<span class="html-attribute">$1</span>=')
+        .replace(/(&quot;[^&quot;]*&quot;)/g, '<span class="html-value">$1</span>')
+    })
+
+    result += line + '\n'
+
+    if (isTag && !isClosingTag) {
+      const isSelfClosing =
+        trimmed.endsWith('/&gt;') || selfClosingTags.some((tag) => trimmed.startsWith(tag))
+      if (!isSelfClosing) {
+        indentLevel++
+      }
+    }
+  })
+
+  return result
 }
 </script>
 
@@ -46,8 +104,8 @@ function prettifyHtml(html) {
       <!-- Types - start -->
       <div>
         <h4 class="pbx-myPrimaryParagraph pbx-text-xs pbx-pb-2">Types</h4>
-        <div class="pbx-text-gray-100 pbx-overflow-hidden pbx-bg-stone-800">
-          <div class="pbx-flex pbx-bg-stone-800 pbx-ring-1 ring-white/5">
+        <div class="pbx-text-gray-100 pbx-overflow-hidden pbx-bg-gray-900">
+          <div class="pbx-flex pbx-bg-gray-900 pbx-ring-1 ring-white/5">
             <div
               class="pbx-mb-px pbx-flex pbx-text-xs pbx-font-medium pbx-text-myPrimaryMediumGrayColor"
             >
@@ -79,8 +137,8 @@ function prettifyHtml(html) {
       <!-- Code Block Component - start-->
       <div>
         <h4 class="pbx-myPrimaryParagraph pbx-text-xs pbx-pb-2">Content</h4>
-        <div class="pbx-overflow-hidden pbx-bg-stone-800">
-          <div class="pbx-flex pbx-bg-stone-800 pbx-ring-1 ring-white/5">
+        <div class="pbx-overflow-hidden pbx-bg-gray-900">
+          <div class="pbx-flex pbx-bg-gray-900 pbx-ring-1 ring-white/5">
             <div
               class="pbx-mb-px pbx-flex pbx-text-xs pbx-font-medium pbx-text-myPrimaryMediumGrayColor"
             >
@@ -120,11 +178,11 @@ function prettifyHtml(html) {
                 class="pbx-overflow-hidden pbx-border-solid pbx-border pbx-border-gray-100 pbx-mb-6"
               >
                 <div
-                  class="pbx-border-0 pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-solid pbx-border-b pbx-border-gray-200"
+                  class="pbx-border-0 pbx-bg-gray-900 pbx-pt-4 pbx-1 pbx-border-solid pbx-border-b pbx-border-gray-200"
                 >
                   <div class="pbx-overflow-x-auto">
                     <table class="pbx-min-w-full">
-                      <thead class="pbx-bg-stone-800">
+                      <thead class="pbx-bg-gray-900">
                         <tr>
                           <th
                             class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -133,7 +191,7 @@ function prettifyHtml(html) {
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
+                      <tbody class="pbx-bg-gray-900 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
                             class="pbx-border-0 pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-solid pbx-border-b"
@@ -146,7 +204,7 @@ function prettifyHtml(html) {
                   </div>
                   <div class="pbx-overflow-x-auto">
                     <table class="pbx-min-w-full">
-                      <thead class="pbx-bg-stone-800">
+                      <thead class="pbx-bg-gray-900">
                         <tr>
                           <th
                             class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -155,7 +213,7 @@ function prettifyHtml(html) {
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
+                      <tbody class="pbx-bg-gray-900 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
                             class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-whitespace-pre-line"
@@ -169,7 +227,7 @@ function prettifyHtml(html) {
                 </div>
                 <div class="pbx-overflow-x-auto">
                   <table class="pbx-min-w-full">
-                    <thead class="pbx-bg-stone-800">
+                    <thead class="pbx-bg-gray-900">
                       <tr>
                         <th
                           class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -178,7 +236,7 @@ function prettifyHtml(html) {
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
+                    <tbody class="pbx-bg-gray-900 pbx-divide-y pbx-divide-gray-200">
                       <tr>
                         <td
                           class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -207,11 +265,11 @@ function prettifyHtml(html) {
                 class="pbx-overflow-hidden pbx-border-solid pbx-border pbx-border-gray-100 pbx-mb-6"
               >
                 <div
-                  class="pbx-border-0 pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-solid pbx-border-b pbx-border-gray-200"
+                  class="pbx-border-0 pbx-bg-gray-900 pbx-pt-4 pbx-1 pbx-border-solid pbx-border-b pbx-border-gray-200"
                 >
                   <div class="pbx-overflow-x-auto">
                     <table class="pbx-min-w-full">
-                      <thead class="pbx-bg-stone-800">
+                      <thead class="pbx-bg-gray-900">
                         <tr>
                           <th
                             class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -220,7 +278,7 @@ function prettifyHtml(html) {
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
+                      <tbody class="pbx-bg-gray-900 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
                             class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -233,7 +291,7 @@ function prettifyHtml(html) {
                   </div>
                   <div class="pbx-overflow-x-auto">
                     <table class="pbx-min-w-full">
-                      <thead class="pbx-bg-stone-800">
+                      <thead class="pbx-bg-gray-900">
                         <tr>
                           <th
                             class="pbx-border-0 pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-solid pbx-border-t pbx-border-gray-200"
@@ -242,7 +300,7 @@ function prettifyHtml(html) {
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
+                      <tbody class="pbx-bg-gray-900 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
                             class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-whitespace-pre-line"
@@ -256,7 +314,7 @@ function prettifyHtml(html) {
                 </div>
                 <div class="pbx-overflow-x-auto">
                   <table class="pbx-min-w-full">
-                    <thead class="pbx-bg-stone-800">
+                    <thead class="pbx-bg-gray-900">
                       <tr>
                         <th
                           class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -265,15 +323,15 @@ function prettifyHtml(html) {
                         </th>
                       </tr>
                     </thead>
-                    <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
+                    <tbody class="pbx-bg-gray-900 pbx-divide-y pbx-divide-gray-200">
                       <tr>
                         <td
                           class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
                         >
                           <pre
-                            class="pbx-text-xs pbx-text-gray-100 pbx-whitespace-pre-lines pbx-font-sans pbx-flex pbx-items-start pbx-justify-left"
+                            class="pbx-text-xs pbx-text-gray-100 pbx-whitespace-pre-wrap pbx-font-sans pbx-flex pbx-items-start pbx-justify-left"
                           >
-                              <code class="pbx-font-sans" v-html="prettifyHtml(getComponent?.html_code)"></code>
+                              <code class="pbx-font-sans pbx-bg-gray-800 pbx-p-4 pbx-rounded-md pbx-block pbx-w-full" v-html="prettifyHtml(getComponent?.html_code)"></code>
                             </pre>
                         </td>
                       </tr>
@@ -295,11 +353,11 @@ function prettifyHtml(html) {
                 >
                   <!-- Id and Title above the table, styled to look connected -->
                   <div
-                    class="pbx-border-0 pbx-bg-stone-800 pbx-pt-4 pbx-1 pbx-border-solid pbx-border-b pbx-border-gray-200"
+                    class="pbx-border-0 pbx-bg-gray-900 pbx-pt-4 pbx-1 pbx-border-solid pbx-border-b pbx-border-gray-200"
                   >
                     <div class="pbx-overflow-x-auto">
                       <table class="pbx-min-w-full">
-                        <thead class="pbx-bg-stone-800">
+                        <thead class="pbx-bg-gray-900">
                           <tr>
                             <th
                               class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -308,7 +366,7 @@ function prettifyHtml(html) {
                             </th>
                           </tr>
                         </thead>
-                        <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
+                        <tbody class="pbx-bg-gray-900 pbx-divide-y pbx-divide-gray-200">
                           <tr>
                             <td
                               class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -321,7 +379,7 @@ function prettifyHtml(html) {
                     </div>
                     <div class="pbx-overflow-x-auto">
                       <table class="pbx-min-w-full">
-                        <thead class="pbx-bg-stone-800">
+                        <thead class="pbx-bg-gray-900">
                           <tr>
                             <th
                               class="pbx-border-0 pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-border-solid pbx-border-t pbx-border-gray-200"
@@ -330,7 +388,7 @@ function prettifyHtml(html) {
                             </th>
                           </tr>
                         </thead>
-                        <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
+                        <tbody class="pbx-bg-gray-900 pbx-divide-y pbx-divide-gray-200">
                           <tr>
                             <td
                               class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal pbx-whitespace-pre-line"
@@ -344,7 +402,7 @@ function prettifyHtml(html) {
                   </div>
                   <div class="pbx-overflow-x-auto">
                     <table class="pbx-min-w-full">
-                      <thead class="pbx-bg-stone-800">
+                      <thead class="pbx-bg-gray-900">
                         <tr>
                           <th
                             class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
@@ -353,15 +411,15 @@ function prettifyHtml(html) {
                           </th>
                         </tr>
                       </thead>
-                      <tbody class="pbx-bg-stone-800 pbx-divide-y pbx-divide-gray-200">
+                      <tbody class="pbx-bg-gray-900 pbx-divide-y pbx-divide-gray-200">
                         <tr>
                           <td
                             class="pbx-px-6 pbx-py-3 pbx-text-left pbx-text-xs pbx-text-gray-100 pbx-font-normal"
                           >
                             <pre
-                              class="pbx-text-xs pbx-text-gray-100 pbx-whitespace-pre-lines pbx-font-sans pbx-flex pbx-items-start pbx-justify-left"
+                              class="pbx-text-xs pbx-text-gray-100 pbx-whitespace-pre-wrap pbx-font-sans pbx-flex pbx-items-start pbx-justify-left"
                             >
-                              <code class="pbx-font-sans" v-html="prettifyHtml(component.html_code)"></code>
+                              <code class="pbx-font-sans pbx-bg-gray-800 pbx-p-4 pbx-rounded-md pbx-block pbx-w-full" v-html="prettifyHtml(component.html_code)"></code>
                             </pre>
                           </td>
                         </tr>
@@ -378,3 +436,15 @@ function prettifyHtml(html) {
     </div>
   </div>
 </template>
+
+<style>
+.html-tag {
+  color: #ff79c6;
+}
+.html-attribute {
+  color: #50fa7b;
+}
+.html-value {
+  color: #f1fa8c;
+}
+</style>
