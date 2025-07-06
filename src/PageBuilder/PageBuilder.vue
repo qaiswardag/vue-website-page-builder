@@ -515,7 +515,7 @@ onMounted(async () => {
 
     <div
       id="pagebuilder-toolbar-area"
-      class="pbx-flex pbx-items-center pbx-justify-between pbx-bg-myPrimaryLightGrayColor pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans pbx-min-w-max pbx-w-full"
+      class="pbx-flex pbx-items-center pbx-justify-between pbx-bg-myPrimaryLightGrayColor pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans pbx-w-full"
     >
       <template
         v-if="
