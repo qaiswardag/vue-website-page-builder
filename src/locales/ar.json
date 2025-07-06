@@ -88,5 +88,8 @@
   "Demo Description Four": "تأكد من أن موقعك يبدو رائعًا على جميع الأجهزة. قم بتحرير محتوى النص مباشرة وفي الوقت الفعلي. اختر الخطوط المثالية التي تناسب أسلوبك. جرب بثقة مع القدرة على التراجع عن التغييرات. أنماط مسبوقة. لا يوجد خطر من تعارض الأنماط بين المنشئ وتطبيقك.",
   "Demo Title": "منشئ الويب لصفحات مذهلة",
   "Demo Title Two": "فقط انشره مع Vue",
-  "Demo Title Three": "تحرير متجاوب"
+  "Demo Title Three": "تحرير متجاوب",
+  "Edit text and links": "تحرير النصوص والروابط",
+  "Enter URL": "أدخل عنوان URL",
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "أضف عنوان URL صالحًا لتحويل النص المحدد إلى ارتباط تشعبي قابل للنقر يوجه المستخدمين إلى عنوان الويب المحدد."
 }

@@ -109,9 +109,8 @@ const handleURL = function () {
   showModalUrl.value = true
   typeModal.value = 'success'
   gridColumnModal.value = 2
-  titleModal.value = 'Enter URL'
-  descriptionModal.value =
-    'Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.'
+  titleModal.value = translate('Enter URL')
+  descriptionModal.value = translate('Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.')
   firstButtonModal.value = 'Close'
   secondButtonModal.value = urlEnteret.value ? 'Remove url' : null
   thirdButtonModal.value = translate('Save')

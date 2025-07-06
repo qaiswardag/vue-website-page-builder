@@ -90,5 +90,8 @@
   "Demo Description Four": "Assurez-vous que votre site est superbe sur tous les appareils. Modifiez le contenu textuel en direct et en temps réel. Choisissez les polices parfaites pour correspondre à votre style. Expérimentez en toute confiance avec la possibilité d'annuler les modifications. Styles préfixés. Aucun risque de conflits de style entre le constructeur et votre application.",
   "Demo Title": "Le constructeur de sites Web pour des pages époustouflantes",
   "Demo Title Two": "Publiez-le simplement avec Vue",
-  "Demo Title Three": "Édition réactive"
+  "Demo Title Three": "Édition réactive",
+  "Edit text and links": "Modifier le texte et les liens",
+  "Enter URL": "Entrer l'URL",
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Ajoutez une URL valide pour transformer le texte sélectionné en un lien hypertexte cliquable qui dirige les utilisateurs vers l'adresse Web spécifiée."
 }

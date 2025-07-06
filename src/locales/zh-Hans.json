@@ -88,7 +88,10 @@
   "Demo Title": "令人惊叹的页面的网页构建器",
   "Demo Description Two": "为增长而设计的页面构建器。使用完全可定制且始终响应的现成组件构建您的网站页面，旨在满足所有需求。为不断发展的商家、品牌和代理商提供强大的页面构建器。",
   "Demo Description Three": "设计师喜爱的网站构建器。轻松设计、预览和调整每个屏幕尺寸的布局。干净。快速。直观。并非所有强大的东西都必须看起来很复杂。",
-  "Demo Description Four": "确保您的网站在所有设备上看起来都很棒。实时编辑文本内容。选择与您的风格相匹配的完美字体。自信地进行实验，并能够��复更改。样式前缀。构建器和您的应用程序之间没有样式冲突的风险。",
+  "Demo Description Four": "确保您的网站在所有设备上看起来都很棒。实时编辑文本内容。选择与您的风格相匹配的完美字体。自信地进行实验，并能够轻松复更改。样式前缀。构建器和您的应用程序之间没有样式冲突的风险。",
   "Demo Title Two": "只需使用Vue发布即可",
-  "Demo Title Three": "响应式编辑"
+  "Demo Title Three": "响应式编辑",
+  "Edit text and links": "编辑文本和链接",
+  "Enter URL": "输入URL",
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "添加一个有效的URL，将选定的文本转换为可点击的超链接，指向指定的网页地址。"
 }

@@ -90,5 +90,8 @@
   "Demo Description Four": "Stellen Sie sicher, dass Ihre Website auf allen Geräten gut aussieht. Bearbeiten Sie Textinhalte live und in Echtzeit. Wählen Sie die perfekten Schriftarten, die zu Ihrem Stil passen. Experimentieren Sie selbstbewusst mit der Möglichkeit, Änderungen rückgängig zu machen. Stile mit Präfix. Kein Risiko von Stilkonflikten zwischen dem Builder und Ihrer App.",
   "Demo Title": "Der Web-Builder für atemberaubende Seiten",
   "Demo Title Two": "Veröffentlichen Sie es einfach mit Vue",
-  "Demo Title Three": "Responsive Bearbeitung"
+  "Demo Title Three": "Responsive Bearbeitung",
+  "Edit text and links": "Text und Links bearbeiten",
+  "Enter URL": "URL eingeben",
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Fügen Sie eine gültige URL hinzu, um den ausgewählten Text in einen anklickbaren Hyperlink zu verwandeln, der Benutzer zur angegebenen Webadresse führt."
 }

@@ -90,5 +90,8 @@
   "Demo Description Four": "Asegúrese de que su sitio se vea genial en todos los dispositivos. Edite el contenido de texto en vivo y en tiempo real. Elija las fuentes perfectas que coincidan con su estilo. Experimente con confianza con la capacidad de revertir los cambios. Estilos con prefijo. No hay riesgo de conflictos de estilo entre el constructor y su aplicación.",
   "Demo Title": "El constructor web para páginas impresionantes",
   "Demo Title Two": "Simplemente publícalo con Vue",
-  "Demo Title Three": "Edición receptiva"
+  "Demo Title Three": "Edición receptiva",
+  "Edit text and links": "Editar texto y enlaces",
+  "Enter URL": "Introducir URL",
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "Agregue una URL válida para transformar el texto seleccionado en un hipervínculo clicable que dirija a los usuarios a la dirección web especificada."
 }

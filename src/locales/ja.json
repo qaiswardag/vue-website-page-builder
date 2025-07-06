@@ -90,5 +90,8 @@
   "Demo Description Four": "すべてのデバイスでサイトが見栄えよく表示されるようにします。テキストコンテンツをライブおよびリアルタイムで編集します。あなたのスタイルに合った完璧なフォントを選択してください。変更を元に戻す機能で自信を持って実験してください。プレフィックス付きのスタイル。ビルダーとアプリの間でスタイルの���合のリスクはありません。",
   "Demo Title": "素晴らしいページのためのウェブビルダー",
   "Demo Title Two": "Vueで公開するだけ",
-  "Demo Title Three": "レスポンシブ編集"
+  "Demo Title Three": "レスポンシブ編集",
+  "Edit text and links": "テキストとリンクを編集",
+  "Enter URL": "URLを入力",
+  "Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.": "選択したテキストをクリック可能なハイパーリンクに変換するために有効なURLを追加してください。"
 }
