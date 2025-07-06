@@ -1,11 +1,11 @@
 [
   {
-    "html_code": "<section data-componentid=\"ba0e9774-3779-467c-9c9f-5c95dd47fa6d\" data-component-title=\"Header H2\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-text-6xl lg:pbx-text-8xl\"><h2><strong>Demo Content</strong></h2></div></div></div></section>",
+    "html_code": "<section data-componentid=\"ba0e9774-3779-467c-9c9f-5c95dd47fa6d\" data-component-title=\"Header H2\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-text-6xl lg:pbx-text-8xl\"><h2>{{ translate('Demo Content') }}</h2></div></div></div></section>",
     "id": "ba0e9774-3779-467c-9c9f-5c95dd47fa6d",
     "title": "Header H2"
   },
   {
-    "html_code": "<section data-componentid=\"d9fe6bdb-60df-45e4-bed5-1a6f8edf28e5\" data-component-title=\"Text\">\n    <div class=\"pbx-relative pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\">\n    <div><p>Introducing the The Lightweight Free Vue Click &amp; Drop Page Builder create and enhance digital experiences with Vue. Not everything powerful has to look complicated. Lightweight &amp; Minimalist Page Builder with an elegant and intuitive design, focused on simplicity and speed. Build responsive pages like listings, jobs or blog posts and manage content easily using the free Click &amp; Drop Page Builder.</p></div>\n    </div>\n    </div>\n    </section>",
+    "html_code": "<section data-componentid=\"d9fe6bdb-60df-45e4-bed5-1a6f8edf28e5\" data-component-title=\"Text\">\n    <div class=\"pbx-relative pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\">\n    <div><p>{{ translate('Demo Description') }}</p></div>\n    </div>\n    </div>\n    </section>",
     "id": "d9fe6bdb-60df-45e4-bed5-1a6f8edf28e5",
     "title": "Text"
   },
@@ -15,12 +15,12 @@
     "title": "3 Vertical Images"
   },
   {
-    "html_code": "<section data-componentid=\"cd7e27ac-b152-4714-a5f7-5ad660f183bf\" data-component-title=\"Header H3\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-mt-6 pbx-font-medium pbx-text-2xl lg:pbx-text-4xl\"><h3>The web builder for stunning pages</h3></div></div></div></section>",
+    "html_code": "<section data-componentid=\"cd7e27ac-b152-4714-a5f7-5ad660f183bf\" data-component-title=\"Header H3\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-mt-6 pbx-font-medium pbx-text-2xl lg:pbx-text-4xl\"><h3>{{ translate('Demo Title') }}</h3></div></div></div></section>",
     "id": "cd7e27ac-b152-4714-a5f7-5ad660f183bf",
     "title": "Header H3"
   },
   {
-    "html_code": "<section data-componentid=\"b1e75d09-0e72-4c61-a207-a97277cbbfed\" data-component-title=\"Text\">\n    <div class=\"pbx-relative pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\">\n    <div><p>A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies.</p></div>\n    </div>\n    </div>\n    </section>",
+    "html_code": "<section data-componentid=\"b1e75d09-0e72-4c61-a207-a97277cbbfed\" data-component-title=\"Text\">\n    <div class=\"pbx-relative pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\">\n    <div><p>{{ translate('Demo Description Two') }}</p></div>\n    </div>\n    </div>\n    </section>",
     "id": "b1e75d09-0e72-4c61-a207-a97277cbbfed",
     "title": "Text"
   },
@@ -30,12 +30,12 @@
     "title": "2 Vertical Images"
   },
   {
-    "html_code": "<section data-componentid=\"f164929b-4460-4b17-9933-119b47e8bbef\" data-component-title=\"Header H3\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-mt-6 pbx-font-medium pbx-text-2xl lg:pbx-text-4xl\"><h3>Just publish it with Vue</h3></div></div></div></section>",
+    "html_code": "<section data-componentid=\"f164929b-4460-4b17-9933-119b47e8bbef\" data-component-title=\"Header H3\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-mt-6 pbx-font-medium pbx-text-2xl lg:pbx-text-4xl\"><h3>{{ translate('Demo Title Two') }}</h3></div></div></div></section>",
     "id": "f164929b-4460-4b17-9933-119b47e8bbef",
     "title": "Header H3"
   },
   {
-    "html_code": "<section data-componentid=\"fa721207-2444-4892-9de3-5260d576a34b\" data-component-title=\"Text\">\n    <div class=\"pbx-relative pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\">\n    <div class=\"\"><p>The website builder loved by designers. Easily design, preview, and adjust layouts for every screen size.<br>Clean. Fast. Intuitive. Not everything powerful has to look complicated.</p></div>\n    </div>\n    </div>\n    </section>",
+    "html_code": "<section data-componentid=\"fa721207-2444-4892-9de3-5260d576a34b\" data-component-title=\"Text\">\n    <div class=\"pbx-relative pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\">\n    <div class=\"\"><p>{{ translate('Demo Description Three') }}</p></div>\n    </div>\n    </div>\n    </section>",
     "id": "fa721207-2444-4892-9de3-5260d576a34b",
     "title": "Text"
   },
@@ -45,12 +45,12 @@
     "title": "YouTube Video"
   },
   {
-    "html_code": "<section data-componentid=\"de2208e1-5b65-4302-8ffb-b9beb7d192d7\" title=\"Header H3\" data-component-title=\"Header H3\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-text-2xl lg:pbx-text-4xl pbx-font-medium\"><h3><strong>Responsive Editing</strong></h3></div></div></div></section>",
+    "html_code": "<section data-componentid=\"de2208e1-5b65-4302-8ffb-b9beb7d192d7\" title=\"Header H3\" data-component-title=\"Header H3\"><div class=\"pbx-relative pbx-py-4\"><div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\"><div class=\"pbx-break-words pbx-text-2xl lg:pbx-text-4xl pbx-font-medium\"><h3>{{ translate('Demo Title Three') }}</h3></div></div></div></section>",
     "id": "de2208e1-5b65-4302-8ffb-b9beb7d192d7",
     "title": "Header H3"
   },
   {
-    "html_code": "<section data-componentid=\"e9a5c794-5972-473d-8181-af4345cbaabe\" title=\"Text\" data-component-title=\"Text\">\n    <div class=\"pbx-relative pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\">\n    <div><p>Ensure your site looks great on all devices. Edit text content live and in real-time. Choose the perfect fonts to match your style. Experiment confidently with the ability to revert changes. Styles Prefixed. No risk of style conflicts between the builder and your app.</p><p></p></div>\n    </div>\n    </div>\n    </section>",
+    "html_code": "<section data-componentid=\"e9a5c794-5972-473d-8181-af4345cbaabe\" title=\"Text\" data-component-title=\"Text\">\n    <div class=\"pbx-relative pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2\">\n    <div><p>{{ translate('Demo Description Four') }}</p><p></p></div>\n    </div>\n    </div>\n    </section>",
     "id": "e9a5c794-5972-473d-8181-af4345cbaabe",
     "title": "Text"
   },

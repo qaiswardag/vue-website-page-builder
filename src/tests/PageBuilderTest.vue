@@ -3,24 +3,32 @@ import FullWidthElement from '../Components/Layouts/FullWidthElement.vue'
 import PageBuilder from '../PageBuilder/PageBuilder.vue'
 import DemoMediaLibraryComponentTest from '../tests/TestComponents/DemoMediaLibraryComponentTest.vue'
 import DemoBuilderComponentsTest from '../tests/TestComponents/DemoBuilderComponentsTest.vue'
-import { onMounted } from 'vue'
+import { onMounted, computed, watch } from 'vue'
 import componentsArray from '../tests/componentsArray.test.json'
 import { getPageBuilder } from '../composables/builderInstance'
 import { useTranslations } from '../composables/useTranslations'
 
 const pageBuilderService = getPageBuilder()
-const { translate } = useTranslations()
+const { translate, currentTranslations } = useTranslations()
 
 const publishPageBuilder = function () {}
 
-// Convert componentsArray to HTML string
-const htmlString =
-  '<div id="pagebuilder" class="" style="">' +
-  componentsArray.map((c) => c.html_code).join('\n') +
-  '</div>'
+const translatedComponents = computed(() => {
+  return componentsArray.map((component) => {
+    const newComponent = { ...component }
+    newComponent.html_code = newComponent.html_code.replace(
+      /{{\s*translate\('([^']+)'\)\s*}}/g,
+      (_, key) => translate(key),
+    )
+    return newComponent
+  })
+})
 
-// Parse as HTML (not JSON)
-const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(htmlString)
+const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(
+  '<div id="pagebuilder" class="" style="">' +
+    translatedComponents.value.map((c) => c.html_code).join('\n') +
+    '</div>',
+)
 
 const configPageBuilder = {
   userForPageBuilder: {
@@ -53,6 +61,22 @@ const configPageBuilder = {
   },
   pageSettings: pageSettings,
 } as const
+
+watch(currentTranslations, async () => {
+  const { components: newComponents, pageSettings: newPageSettings } =
+    pageBuilderService.parsePageBuilderHTML(
+      '<div id="pagebuilder" class="" style="">' +
+        translatedComponents.value.map((c) => c.html_code).join('\n') +
+        '</div>',
+    )
+
+  const newConfig = {
+    ...configPageBuilder,
+    pageSettings: newPageSettings,
+  }
+
+  await pageBuilderService.startBuilder(newConfig, newComponents)
+})
 
 onMounted(async () => {
   const result = await pageBuilderService.startBuilder(configPageBuilder, components)

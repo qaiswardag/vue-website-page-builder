@@ -782,7 +782,7 @@ export class PageBuilderService {
    * The function is used to
    * attach event listeners to each element within a 'section'
    */
-  public addListenersToEditableElements = async () => {
+  private addListenersToEditableElements = async () => {
     const elementsWithListeners = new WeakSet<Element>()
 
     const pagebuilder = document.querySelector('#pagebuilder')
@@ -1570,7 +1570,7 @@ export class PageBuilderService {
               localStorage.removeItem(key)
             }
           }
-        } catch (e) {
+        } catch {
           // Ignore parse errors for unrelated keys
         }
       }

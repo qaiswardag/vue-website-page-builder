@@ -6,7 +6,10 @@ import Link from '@tiptap/extension-link'
 import DynamicModalBuilder from '../Modals/DynamicModalBuilder.vue'
 import { sharedPageBuilderStore } from '../../stores/shared-store'
 import { getPageBuilder } from '../../composables/builderInstance'
+import { useTranslations } from '../../composables/useTranslations'
 const pageBuilderService = getPageBuilder()
+
+const { translate } = useTranslations()
 
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -111,7 +114,7 @@ const handleURL = function () {
     'Add a valid URL to transform the selected text into a clickable hyperlink that directs users to the specified web address.'
   firstButtonModal.value = 'Close'
   secondButtonModal.value = urlEnteret.value ? 'Remove url' : null
-  thirdButtonModal.value = 'Save'
+  thirdButtonModal.value = translate('Save')
 
   // handle click
   firstModalButtonFunctionDynamicModalBuilder.value = function () {
@@ -232,7 +235,7 @@ onMounted(() => {
                     class="pbx-myPrimaryTag"
                   >
                     <span class="material-symbols-outlined"> save </span>
-                    <span>Save</span>
+                    <span>{{ translate('Save') }}</span>
                   </button>
                 </div>
               </div>
