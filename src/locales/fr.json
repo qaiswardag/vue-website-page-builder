@@ -120,5 +120,17 @@
   "No results on current page. Navigate to First Page.": "Aucun résultat sur la page actuelle. Naviguez vers la première page.",
   "Information": "Information",
   "From:": "De:",
-  " Select image": " Sélectionner une image"
+  " Select image": " Sélectionner une image",
+  "Layouts and visual.": "Mises en page et visuel.",
+  "Start customizing by editing this default text directly in the editor.": "Commencez à personnaliser en modifiant ce texte par défaut directement dans l'éditeur.",
+  "Single Image": "Image unique",
+  "2 Vertical Images": "2 images verticales",
+  "2 Square Images": "2 images carrées",
+  "3 Square Images": "3 images carrées",
+  "6 Square Images Grid": "Grille de 6 images carrées",
+  "Two Square Images With Text": "2 images carrées avec texte",
+  "3 Vertical Images": "3 images verticales",
+  "4 Square Images With Text": "4 images carrées avec texte",
+  "3 Square Images With Text": "3 images carrées avec texte",
+  "2 Square Images With Text": "2 images carrées avec texte"
 }

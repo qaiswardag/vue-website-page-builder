@@ -120,5 +120,17 @@
   "No results on current page. Navigate to First Page.": "На текущей странице нет результатов. Перейдите на первую страницу.",
   "Information": "Информация",
   "From:": "От:",
-  " Select image": " Выбрать изображение"
+  " Select image": " Выбрать изображение",
+  "Layouts and visual.": "Макеты и визуализация.",
+  "Start customizing by editing this default text directly in the editor.": "Начните настройку, отредактировав этот текст по умолчанию прямо в редакторе.",
+  "Single Image": "Одиночное изображение",
+  "2 Vertical Images": "2 вертикальных изображения",
+  "2 Square Images": "2 квадратных изображения",
+  "3 Square Images": "3 квадратных изображения",
+  "6 Square Images Grid": "Сетка из 6 квадратных изображений",
+  "Two Square Images With Text": "2 квадратных изображения с текстом",
+  "3 Vertical Images": "3 вертикальных изображения",
+  "4 Square Images With Text": "4 квадратных изображения с текстом",
+  "3 Square Images With Text": "3 квадратных изображения с текстом",
+  "2 Square Images With Text": "2 квадратных изображения с текстом"
 }

@@ -121,5 +121,17 @@
   "No results on current page. Navigate to First Page.": "Keine Ergebnisse auf der aktuellen Seite. Zur ersten Seite navigieren.",
   "Information": "Informationen",
   "From:": "Von:",
-  " Select image": " Bild auswählen"
+  " Select image": " Bild auswählen",
+  "Layouts and visual.": "Layouts und visuell.",
+  "Start customizing by editing this default text directly in the editor.": "Beginnen Sie mit der Anpassung, indem Sie diesen Standardtext direkt im Editor bearbeiten.",
+  "Single Image": "Einzelnes Bild",
+  "2 Vertical Images": "2 vertikale Bilder",
+  "2 Square Images": "2 quadratische Bilder",
+  "3 Square Images": "3 quadratische Bilder",
+  "6 Square Images Grid": "6 quadratische Bilder Raster",
+  "Two Square Images With Text": "2 quadratische Bilder mit Text",
+  "3 Vertical Images": "3 vertikale Bilder",
+  "4 Square Images With Text": "4 quadratische Bilder mit Text",
+  "3 Square Images With Text": "3 quadratische Bilder mit Text",
+  "2 Square Images With Text": "2 quadratische Bilder mit Text"
 }

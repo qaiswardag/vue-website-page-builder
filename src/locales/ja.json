@@ -120,5 +120,17 @@
   "No results on current page. Navigate to First Page.": "現在のページに結果がありません。最初のページに移動してください。",
   "Information": "情報",
   "From:": "提供元:",
-  " Select image": " 画像を選択"
+  " Select image": " 画像を選択",
+  "Layouts and visual.": "レイアウトとビジュアル。",
+  "Start customizing by editing this default text directly in the editor.": "エディターでこのデフォルトテキストを直接編集してカスタマイズを開始します。",
+  "Single Image": "単一画像",
+  "2 Vertical Images": "2つの縦画像",
+  "2 Square Images": "2つの正方形画像",
+  "3 Square Images": "3つの正方形画像",
+  "6 Square Images Grid": "6つの正方形画像グリッド",
+  "Two Square Images With Text": "テキスト付きの2つの正方形画像",
+  "3 Vertical Images": "3つの縦画像",
+  "4 Square Images With Text": "テキスト付きの4つの正方形画像",
+  "3 Square Images With Text": "テキスト付きの3つの正方形画像",
+  "2 Square Images With Text": "テキスト付きの2つの正方形画像"
 }

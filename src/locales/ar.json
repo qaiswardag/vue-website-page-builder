@@ -119,5 +119,17 @@
   "No results on current page. Navigate to First Page.": "لا توجد نتائج في الصفحة الحالية. انتقل إلى الصفحة الأولى.",
   "Information": "معلومات",
   "From:": "من:",
-  " Select image": " اختر صورة"
+  " Select image": " اختر صورة",
+  "Layouts and visual.": "التخطيطات والمرئيات.",
+  "Start customizing by editing this default text directly in the editor.": "ابدأ التخصيص عن طريق تحرير هذا النص الافتراضي مباشرة في المحرر.",
+  "Single Image": "صورة واحدة",
+  "2 Vertical Images": "صورتان عموديتان",
+  "2 Square Images": "صورتان مربعتان",
+  "3 Square Images": "ثلاث صور مربعة",
+  "6 Square Images Grid": "شبكة من 6 صور مربعة",
+  "Two Square Images With Text": "صورتان مربعتان مع نص",
+  "3 Vertical Images": "ثلاث صور عمودية",
+  "4 Square Images With Text": "4 صور مربعة مع نص",
+  "3 Square Images With Text": "3 صور مربعة مع نص",
+  "2 Square Images With Text": "صورتان مربعتان مع نص"
 }

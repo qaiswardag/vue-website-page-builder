@@ -24,12 +24,27 @@ const { closeAddComponentModal } = usePageBuilderModal()
 
 // Super simple component addition with professional modal closing!
 const handleDropComponent = async function (componentObject: ComponentObject) {
-  await pageBuilderService.addComponent(componentObject)
+  // Translate all occurrences of the hardcoded strings in the html_code
+  const translatedHtmlCode = componentObject.html_code
+    .replace(/Layouts and visual\./g, translate('Layouts and visual.'))
+    .replace(
+      /Start customizing by editing this default text directly in the editor\./g,
+      translate('Start customizing by editing this default text directly in the editor.'),
+    )
+
+  // Create a new component object with the translated html_code and title
+  const translatedComponentObject = {
+    ...componentObject,
+    html_code: translatedHtmlCode,
+    title: componentObject.title,
+  }
+
+  await pageBuilderService.addComponent(translatedComponentObject)
   closeAddComponentModal()
 }
 
 // Helper function to convert ComponentData to ComponentObject
-const convertToComponentObject = function (comp: any): ComponentObject {
+const convertToComponentObject = function (comp: ComponentObject): ComponentObject {
   return {
     id: null, // Generate ID when needed in PageBuilderClass
     html_code: comp.html_code,
@@ -63,7 +78,9 @@ const getSvgPreview = (title: string) => {
         >
           <div class="pbx-max-h-72 pbx-cursor-pointer pbx-object-contain pbx-bg-white pbx-mx-auto">
             <div v-if="false" class="pbx-mr-2" v-html="helper.icon"></div>
-            <h4 class="pbx-myPrimaryParagraph pbx-text-base pbx-font-medium">{{ helper.title }}</h4>
+            <h4 class="pbx-myPrimaryParagraph pbx-text-base pbx-font-medium">
+              {{ translate(helper.title) }}
+            </h4>
           </div>
           <div class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-pt-2">
             {{ translate('Click to add') }} {{ helper.title.toLowerCase() }}
@@ -93,7 +110,9 @@ const getSvgPreview = (title: string) => {
             ></div>
           </div>
           <div class="pbx-p-3">
-            <h4 class="pbx-myPrimaryParagraph pbx-text-sm pbx-font-normal">{{ comp.title }}</h4>
+            <h4 class="pbx-myPrimaryParagraph pbx-text-sm pbx-font-normal">
+              {{ translate(comp.title) }}
+            </h4>
             <div class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-pt-2">
               {{ translate('Click to add component') }}
             </div>

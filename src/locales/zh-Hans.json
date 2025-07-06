@@ -120,5 +120,17 @@
   "No results on current page. Navigate to First Page.": "当前页面没有结果。导航到第一页。",
   "Information": "信息",
   "From:": "来自：",
-  " Select image": " 选择图片"
+  " Select image": " 选择图片",
+  "Layouts and visual.": "布局和视觉。",
+  "Start customizing by editing this default text directly in the editor.": "通过直接在编辑器中编辑此默认文本开始自定义。",
+  "Single Image": "单张图片",
+  "2 Vertical Images": "2张竖图",
+  "2 Square Images": "2张方图",
+  "3 Square Images": "3张方图",
+  "6 Square Images Grid": "6张方图网格",
+  "Two Square Images With Text": "带文字的2张方图",
+  "3 Vertical Images": "3张竖图",
+  "4 Square Images With Text": "带文字的4张方图",
+  "3 Square Images With Text": "带文字的3张方图",
+  "2 Square Images With Text": "带文字的2张方图"
 }
