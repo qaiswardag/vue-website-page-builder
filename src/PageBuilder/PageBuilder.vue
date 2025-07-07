@@ -783,14 +783,15 @@ onMounted(async () => {
                     getPageBuilderConfig.userSettings.language.enable.length >= 1
                   "
                 >
-                  <div
+                  <option
                     v-for="lang in pageBuilderService
                       .availableLanguage()
                       .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
                     :key="lang"
+                    :value="lang"
                   >
-                    <option :value="lang">{{ lang }}</option>
-                  </div>
+                    {{ lang }}
+                  </option>
                 </template>
                 <template
                   v-if="
@@ -799,9 +800,13 @@ onMounted(async () => {
                       getPageBuilderConfig.userSettings.language.enable.length === 0)
                   "
                 >
-                  <div v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
-                    <option :value="lang">{{ lang }}</option>
-                  </div>
+                  <option
+                    v-for="lang in pageBuilderService.availableLanguage()"
+                    :key="lang"
+                    :value="lang"
+                  >
+                    {{ lang }}
+                  </option>
                 </template>
               </select>
             </div>
