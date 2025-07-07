@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import componentHelpers from '../../../utils/html-elements/componentHelpers'
-import components from '../../../utils/html-elements/component'
-import { usePageBuilderModal } from '../../../composables/usePageBuilderModal'
-import { generateComponentPreview } from '../../../utils/componentPreviews'
-import type { ComponentObject } from '../../../types'
-import { getPageBuilder } from '../../../composables/builderInstance'
+import componentHelpers from '../../utils/html-elements/componentHelpers'
+import components from '../../utils/html-elements/component'
+import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
+import { generateComponentPreview } from '../../utils/componentPreviews'
+import type { ComponentObject } from '../../types'
+import { getPageBuilder } from '../../composables/builderInstance'
 
-import { useTranslations } from '../../../composables/useTranslations'
+import { useTranslations } from '../../composables/useTranslations'
 
 const { translate } = useTranslations()
 

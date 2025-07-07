@@ -1,6 +1,6 @@
 <script setup>
 import { provide } from 'vue'
-import DefaultMediaLibraryComponent from '../PageBuilder/DefaultComponents/DefaultMediaLibraryComponent.vue'
+import DefaultMediaLibraryComponent from '../../tests/DefaultComponents/DefaultMediaLibraryComponent.vue'
 import ModalBuilder from './ModalBuilder.vue'
 
 defineProps({
