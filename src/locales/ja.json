@@ -160,5 +160,7 @@
   "No Components added yet": "まだコンポーネントが追加されていません",
   "All": "すべて",
   "Image": "画像",
-  "Image & Text": "画像とテキスト"
+  "Image & Text": "画像とテキスト",
+  "Four Square Images With Text": "テキスト付きの4つの正方形の画像",
+  "Four Square Images": "4つの正方形の画像"
 }
