@@ -761,21 +761,6 @@ onMounted(async () => {
           "
         >
         </template>
-        <template v-if="showCloseButton">
-          <div class="pbx-flex-1 pbx-ml-2">
-            <button
-              class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
-              @click="
-                async () => {
-                  closePageBuilder()
-                  await pageBuilderService.clearHtmlSelection()
-                }
-              "
-            >
-              <span class="material-symbols-outlined"> close </span>
-            </button>
-          </div>
-        </template>
 
         <!-- Publish buttons end -->
 
@@ -806,14 +791,14 @@ onMounted(async () => {
                     getPageBuilderConfig.userSettings.language.enable.length >= 1
                   "
                 >
-                  <template
+                  <div
                     v-for="lang in pageBuilderService
                       .availableLanguage()
                       .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
                     :key="lang"
                   >
                     <option :value="lang">{{ lang }}</option>
-                  </template>
+                  </div>
                 </template>
                 <template
                   v-if="
@@ -822,13 +807,28 @@ onMounted(async () => {
                       getPageBuilderConfig.userSettings.language.enable.length === 0)
                   "
                 >
-                  <template v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
+                  <div v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
                     <option :value="lang">{{ lang }}</option>
-                  </template>
+                  </div>
                 </template>
               </select>
             </div>
           </template>
+        </template>
+        <template v-if="showCloseButton">
+          <div class="pbx-flex-1 pbx-ml-2">
+            <button
+              class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
+              @click="
+                async () => {
+                  closePageBuilder()
+                  await pageBuilderService.clearHtmlSelection()
+                }
+              "
+            >
+              <span class="material-symbols-outlined"> close </span>
+            </button>
+          </div>
         </template>
       </div>
     </div>

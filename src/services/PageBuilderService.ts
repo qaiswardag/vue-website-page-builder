@@ -361,6 +361,7 @@ export class PageBuilderService {
     // Reactive flag signals to the UI that the builder has been successfully initialized
     // Prevents builder actions to prevent errors caused by missing DOM .
     this.pageBuilderStateStore.setBuilderStarted(true)
+    console.log('starting builder.....:')
     const pagebuilder = document.querySelector('#pagebuilder')
 
     let validation
@@ -415,10 +416,7 @@ export class PageBuilderService {
     }
   }
 
-  async completeBuilderInitialization(
-    passedComponentsArray?: BuilderResourceData,
-    internalPageBuilderCall?: boolean,
-  ): Promise<void> {
+  async completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await delay(400)
 
