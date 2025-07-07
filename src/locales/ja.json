@@ -157,5 +157,8 @@
   "ID:": "ID:",
   "Title:": "タイトル:",
   "HTML Code:": "HTMLコード:",
-  "No Components added yet": "まだコンポーネントが追加されていません"
+  "No Components added yet": "まだコンポーネントが追加されていません",
+  "All": "すべて",
+  "Image": "画像",
+  "Image & Text": "画像とテキスト"
 }

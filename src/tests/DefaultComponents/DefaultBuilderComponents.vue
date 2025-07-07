@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { ref, computed } from 'vue'
 import componentHelpers from '../../utils/html-elements/componentHelpers'
 import components from '../../utils/html-elements/component'
 import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
@@ -17,6 +18,20 @@ defineProps({
     type: Object,
     default: null,
   },
+})
+
+const selectedCategory = ref('All')
+
+const categories = computed(() => {
+  const allCategories = components[0].components.data.map((comp) => comp.category)
+  return ['All', ...new Set(allCategories)]
+})
+
+const filteredComponents = computed(() => {
+  if (selectedCategory.value === 'All') {
+    return components[0].components.data
+  }
+  return components[0].components.data.filter((comp) => comp.category === selectedCategory.value)
 })
 
 // Get modal close function
@@ -60,6 +75,19 @@ const getSvgPreview = (title: string) => {
 
 <style scoped>
 /* Add any additional styling if needed */
+.category-button {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  padding: 8px 16px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.category-button.active {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
 </style>
 
 <template>
@@ -68,7 +96,7 @@ const getSvgPreview = (title: string) => {
     <div class="pbx-mb-8">
       <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Helper Components') }}</h3>
       <div
-        class="pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 lg:pbx-grid-cols-4 pbx-gap-4"
+        class="pbx-px-2 pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 lg:pbx-grid-cols-4 pbx-gap-4"
       >
         <div
           v-for="helper in componentHelpers"
@@ -91,11 +119,22 @@ const getSvgPreview = (title: string) => {
     </div>
 
     <!-- Regular Components Section -->
-    <div v-if="customMediaComponent">
+    <div class="pbx-px-2" v-if="customMediaComponent">
       <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Layout Components') }}</h3>
+      <div class="pbx-mb-4 pbx-flex pbx-jusitify-left pbx-items-center pbx-gap-2">
+        <button
+          v-for="category in categories"
+          :key="category"
+          @click="selectedCategory = category"
+          class="pbx-mySecondaryButton pbx-px-2 pbx-text-xs"
+          :class="{ active: selectedCategory === category }"
+        >
+          {{ translate(category) }}
+        </button>
+      </div>
       <div class="pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 pbx-gap-4">
         <div
-          v-for="comp in components[0].components.data"
+          v-for="comp in filteredComponents"
           :key="comp.title"
           class="pbx-border-solid pbx-border pbx-border-gray-400 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer"
           @click="handleDropComponent(convertToComponentObject(comp))"

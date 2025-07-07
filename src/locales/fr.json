@@ -158,5 +158,8 @@
   "ID:": "ID:",
   "Title:": "Titre:",
   "HTML Code:": "Code HTML:",
-  "No Components added yet": "Aucun composant ajouté pour le moment"
+  "No Components added yet": "Aucun composant ajouté pour le moment",
+  "All": "Tous",
+  "Image": "Image",
+  "Image & Text": "Image et texte"
 }

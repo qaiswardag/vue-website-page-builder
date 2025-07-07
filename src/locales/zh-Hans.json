@@ -157,5 +157,8 @@
   "ID:": "ID:",
   "Title:": "标题:",
   "HTML Code:": "HTML代码:",
-  "No Components added yet": "尚未添加组件"
+  "No Components added yet": "尚未添加组件",
+  "All": "全部",
+  "Image": "图片",
+  "Image & Text": "图片和文字"
 }
