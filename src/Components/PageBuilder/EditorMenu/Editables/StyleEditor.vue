@@ -86,7 +86,8 @@ const handleAddStyle = async () => {
         </div>
       </div>
 
-      <div>
+      <hr />
+      <div class="pbx-my-2 pbx-py-2">
         <label for="custom-style-property" class="pbx-myPrimaryInputLabel">
           {{ translate('Add your own style.') }}
         </label>

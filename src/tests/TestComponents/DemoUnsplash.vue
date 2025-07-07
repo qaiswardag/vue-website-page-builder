@@ -1,11 +1,11 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 const unsplashKey = import.meta.env.VITE_UNSPLASH_KEY
-import { usePageBuilderModal } from '../composables/usePageBuilderModal'
-import { delay } from '../composables/delay'
-import { preloadImage } from '../composables/preloadImage'
-import { getPageBuilder } from '../composables/builderInstance'
-import { useTranslations } from '../composables/useTranslations'
+import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
+import { delay } from '../../composables/delay'
+import { preloadImage } from '../../composables/preloadImage'
+import { getPageBuilder } from '../../composables/builderInstance'
+import { useTranslations } from '../../composables/useTranslations'
 const { translate } = useTranslations()
 
 const pageBuilderService = getPageBuilder()

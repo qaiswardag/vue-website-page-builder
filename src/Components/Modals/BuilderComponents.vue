@@ -1,6 +1,6 @@
 <script setup>
 import ModalBuilder from '../Modals/ModalBuilder.vue'
-import DefaultBuilderComponents from '../PageBuilder/DefaultComponents/DefaultBuilderComponents.vue'
+import DefaultBuilderComponents from '../../tests/DefaultComponents/DefaultBuilderComponents.vue'
 import { inject } from 'vue'
 const customMediaComponent = inject('CustomMediaComponent')
 

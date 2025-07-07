@@ -73,6 +73,16 @@ export class PageBuilderService {
   private pendingMountComponents: BuilderResourceData | null = null
   private isPageBuilderMissingOnStart: boolean = false
 
+  // Add a class-level WeakMap to track elements and their listeners
+  // Use class-level WeakMap from being a local variable inside addListenersToEditableElements to a private class-level property.
+  // This ensures that the map persists across multiple calls to the method and retains knowledge of
+  // which elements already have listeners.
+  // This prevents multiple event listeners being attached to the same HTML elements
+  private elementsWithListeners = new WeakMap<
+    Element,
+    { click: EventListener; mouseover: EventListener; mouseleave: EventListener }
+  >()
+
   constructor(pageBuilderStateStore: ReturnType<typeof usePageBuilderStateStore>) {
     this.hasStartedEditing = false
     this.pageBuilderStateStore = pageBuilderStateStore
@@ -415,10 +425,7 @@ export class PageBuilderService {
     }
   }
 
-  async completeBuilderInitialization(
-    passedComponentsArray?: BuilderResourceData,
-    internalPageBuilderCall?: boolean,
-  ): Promise<void> {
+  async completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await delay(400)
 
@@ -531,7 +538,18 @@ export class PageBuilderService {
     // If cssUserSelection is undefined, just set the current state and return
     if (cssUserSelection === undefined) {
       if (typeof mutationName === 'string' && mutationName.length > 2) {
-        ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
+        // Use a type-safe approach to handle mutationName
+        if (
+          mutationName in this.pageBuilderStateStore &&
+          typeof this.pageBuilderStateStore[
+            mutationName as keyof typeof this.pageBuilderStateStore
+          ] === 'function'
+        ) {
+          const mutationFunction = this.pageBuilderStateStore[
+            mutationName as keyof typeof this.pageBuilderStateStore
+          ] as (arg: string) => void
+          mutationFunction(elementClass)
+        }
       }
       return currentCSS
     }
@@ -555,8 +573,19 @@ export class PageBuilderService {
 
     // Only call store mutations after all DOM manipulation is complete
     if (typeof mutationName === 'string' && mutationName.length > 2) {
-      ;(this.pageBuilderStateStore as any)[mutationName](elementClass)
-      this.pageBuilderStateStore.setElement(currentHTMLElement)
+      // Use a type-safe approach to handle mutationName
+      if (
+        mutationName in this.pageBuilderStateStore &&
+        typeof this.pageBuilderStateStore[
+          mutationName as keyof typeof this.pageBuilderStateStore
+        ] === 'function'
+      ) {
+        const mutationFunction = this.pageBuilderStateStore[
+          mutationName as keyof typeof this.pageBuilderStateStore
+        ] as (arg: string) => void
+        mutationFunction(elementClass)
+        this.pageBuilderStateStore.setElement(currentHTMLElement)
+      }
     }
 
     return currentCSS
@@ -718,30 +747,6 @@ export class PageBuilderService {
     }
   }
 
-  private handleElementClick = async (e: Event, element: HTMLElement): Promise<void> => {
-    e.preventDefault()
-    e.stopPropagation()
-
-    await this.handleAutoSave()
-
-    const pagebuilder = document.querySelector('#pagebuilder')
-
-    if (!pagebuilder) return
-
-    this.pageBuilderStateStore.setMenuRight(true)
-
-    const selectedElement = pagebuilder.querySelector('[selected]')
-    if (selectedElement) {
-      selectedElement.removeAttribute('selected')
-    }
-
-    element.removeAttribute('hovered')
-
-    element.setAttribute('selected', '')
-
-    this.pageBuilderStateStore.setElement(element)
-  }
-
   private handleMouseOver = (e: Event, element: HTMLElement): void => {
     e.preventDefault()
     e.stopPropagation()
@@ -783,30 +788,68 @@ export class PageBuilderService {
    * attach event listeners to each element within a 'section'
    */
   private addListenersToEditableElements = async () => {
-    const elementsWithListeners = new WeakSet<Element>()
-
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensures elements exist in the DOM.
     await nextTick()
 
     pagebuilder.querySelectorAll('section *').forEach((element) => {
-      // exclude NoneListernesTags && additional Tags for not listening
       if (this.isEditableElement(element)) {
-        if (elementsWithListeners && !elementsWithListeners.has(element)) {
-          elementsWithListeners.add(element)
-          // Type assertion to HTMLElement since we know these are DOM elements
-          const htmlElement = element as HTMLElement
-          // Attach event listeners directly to individual elements
-          htmlElement.addEventListener('click', (e) => this.handleElementClick(e, htmlElement))
-          htmlElement.addEventListener('mouseover', (e) => this.handleMouseOver(e, htmlElement))
-          htmlElement.addEventListener('mouseleave', (e) => this.handleMouseLeave(e))
-        }
-      }
+        const htmlElement = element as HTMLElement
 
-      // end for each iterating over elements
+        // Remove existing listeners if they exist
+        if (this.elementsWithListeners.has(htmlElement)) {
+          const listeners = this.elementsWithListeners.get(htmlElement)
+          if (listeners) {
+            htmlElement.removeEventListener('click', listeners.click)
+            htmlElement.removeEventListener('mouseover', listeners.mouseover)
+            htmlElement.removeEventListener('mouseleave', listeners.mouseleave)
+          }
+        }
+
+        // Define new listeners
+        const clickListener = (e: Event) => this.handleElementClick(e, htmlElement)
+        const mouseoverListener = (e: Event) => this.handleMouseOver(e, htmlElement)
+        const mouseleaveListener = (e: Event) => this.handleMouseLeave(e)
+
+        // Attach new listeners
+        htmlElement.addEventListener('click', clickListener)
+        htmlElement.addEventListener('mouseover', mouseoverListener)
+        htmlElement.addEventListener('mouseleave', mouseleaveListener)
+
+        // Store the new listeners in the WeakMap
+        this.elementsWithListeners.set(htmlElement, {
+          click: clickListener,
+          mouseover: mouseoverListener,
+          mouseleave: mouseleaveListener,
+        })
+      }
     })
+  }
+
+  private handleElementClick = async (e: Event, element: HTMLElement): Promise<void> => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    const pagebuilder = document.querySelector('#pagebuilder')
+
+    if (!pagebuilder) return
+
+    this.pageBuilderStateStore.setMenuRight(true)
+
+    const selectedElement = pagebuilder.querySelector('[selected]')
+    if (selectedElement) {
+      selectedElement.removeAttribute('selected')
+    }
+
+    element.removeAttribute('hovered')
+
+    element.setAttribute('selected', '')
+
+    this.pageBuilderStateStore.setElement(element)
+
+    await this.handleAutoSave()
   }
 
   public handleAutoSave = async () => {
@@ -1515,6 +1558,7 @@ export class PageBuilderService {
   public async handleFormSubmission() {
     await this.removeCurrentComponentsFromLocalStorage()
     this.deleteAllComponentsFromDOM()
+    this.pageBuilderStateStore.setComponents([])
   }
 
   private parseStyleString(style: string): Record<string, string> {
@@ -2123,6 +2167,7 @@ export class PageBuilderService {
       this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
 
     const userPageSettings = usePassedPageSettings ? pageSettings : null
+
     try {
       const parsedData = JSON.parse(jsonData)
       let componentsArray: ComponentObject[] = []
@@ -2428,13 +2473,14 @@ export class PageBuilderService {
 
   public async initializeElementStyles(): Promise<void> {
     // Wait for Vue to finish DOM updates before attaching event listeners.
-    // This ensure elements exist in the DOM.
+    // This ensures elements exist in the DOM.
     await nextTick()
 
     this.handleHyperlink(undefined, null, false)
     this.handleOpacity(undefined)
     this.handleBackgroundOpacity(undefined)
-    this.setBasePrimaryImageFromSelectedElement()
+    this.handleBackgroundColor(undefined)
+    this.handleTextColor(undefined)
     this.handleBorderStyle(undefined)
     this.handleBorderWidth(undefined)
     this.handleBorderColor(undefined)
@@ -2454,8 +2500,7 @@ export class PageBuilderService {
     this.handleHorizontalPadding(undefined)
     this.handleVerticalMargin(undefined)
     this.handleHorizontalMargin(undefined)
-    this.handleBackgroundColor(undefined)
-    this.handleTextColor(undefined)
+
     await this.syncCurrentClasses()
     await this.syncCurrentStyles()
   }

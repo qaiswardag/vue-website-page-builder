@@ -83,7 +83,8 @@ const handleAddClasses = async () => {
         </div>
       </div>
 
-      <div>
+      <hr />
+      <div class="pbx-my-2 pbx-py-2">
         <label for="custom-css" class="pbx-myPrimaryInputLabel">
           {{ translate('Add your CSS.') }}
           <br />

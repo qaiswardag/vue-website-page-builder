@@ -318,7 +318,7 @@
     @apply focus:pbx-ring-2 focus:pbx-ring-myPrimaryLinkColor focus:pbx-ring-offset-2 focus:pbx-border focus:pbx-border-gray-200;
   }
   .pbx-myPrimaryInput {
-    @apply pbx-block pbx-pr-8 pbx-text-left pbx-bg-white pbx-w-full sm:pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor placeholder:pbx-font-normal placeholder:pbx-accent-gray-300 focus:pbx-bg-white pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border pbx-border-gray-300 pbx-shadow-sm focus:pbx-outline-none pbx-myPrimaryFormFocus pbx-h-full pbx-border-solid;
+    @apply pbx-block pbx-pr-8 pbx-text-left pbx-bg-white pbx-w-auto sm:pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor placeholder:pbx-font-normal placeholder:pbx-accent-gray-300 focus:pbx-bg-white pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border pbx-border-gray-300 pbx-shadow-sm focus:pbx-outline-none pbx-myPrimaryFormFocus pbx-h-full pbx-border-solid;
   }
   .pbx-myPrimaryInputNoBorder {
     @apply pbx-myPrimaryInput pbx-placeholder:accent-gray-300 focus:pbx-bg-none pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border-none focus:pbx-outline-none focus:pbx-ring-0 focus:pbx-ring-offset-0 focus:pbx-border-none pbx-shadow-none;
@@ -328,7 +328,7 @@
   }
 
   .pbx-myPrimaryInputError {
-    @apply pbx-mt-1 pbx-myPrimaryParagraph pbx-block pbx-font-normal pbx-text-myPrimaryErrorColor pbx-text-left;
+    @apply pbx-mt-1 pbx-myPrimaryParagraph pbx-block pbx-font-normal pbx-text-myPrimaryErrorColor pbx-text-left pbx-text-sm;
   }
 
   .pbx-myPrimaryHiddenInputField {
@@ -356,18 +356,6 @@
   .pbx-myPrimaryColorPreview {
     @apply pbx-aspect-square pbx-border pbx-border-gray-200 pbx-cursor-pointer pbx-min-h-[1.5rem] pbx-rounded-sm;
   }
-}
-
-/* CSS for content inside page builder # start */
-#page-builder-editor .tiptap {
-  outline: none !important;
-  box-shadow: none !important;
-  background: #fff;
-  min-height: 25rem;
-  border-bottom: 1px solid #aaa;
-  padding: 0px 0px 10px 16px;
-  margin-bottom: 20px;
-  padding-bottom: 100px;
 }
 
 #page-builder-editor ol,
@@ -409,13 +397,10 @@
   height: 2.2rem;
 }
 
-/* Manage P, Link, H1, H2 # end */
-
 /* CSS for content inside page builder # start */
 #pagebuilder {
   position: relative;
   overflow-y: auto;
-  padding: 4px;
 }
 #pagebuilder a {
   pointer-events: none;
@@ -490,24 +475,4 @@
 #pagebuilder ul {
   list-style: disc !important;
   padding: 0rem;
-}
-
-#pagebuilder[data-global-selected] {
-  outline: 4px dashed #b91010 !important;
-  outline-offset: -2px !important;
-}
-
-.pbx-myPrimarySelec select {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  background-color: #fff;
-  border: 1px solid #c4c4c4;
-  border-radius: 6px;
-  padding: 10px 40px 10px 15px;
-  cursor: pointer;
-  outline: none;
-  transition: border-color 0.3s ease;
-  background-repeat: no-repeat;
-  background-position: right 12px center;
 }
