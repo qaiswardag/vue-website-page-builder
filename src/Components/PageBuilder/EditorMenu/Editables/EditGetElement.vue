@@ -301,7 +301,7 @@ const getRestoredElement = computed(() => {
         v-if="
           getElement &&
           getComponent &&
-          getBasePrimaryImage !== null &&
+          getBasePrimaryImage &&
           !pageBuilderService.ElOrFirstChildIsIframe()
         "
       >
