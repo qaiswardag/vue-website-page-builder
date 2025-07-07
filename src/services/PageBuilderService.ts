@@ -715,30 +715,6 @@ export class PageBuilderService {
     }
   }
 
-  private handleElementClick = async (e: Event, element: HTMLElement): Promise<void> => {
-    e.preventDefault()
-    e.stopPropagation()
-
-    await this.handleAutoSave()
-
-    const pagebuilder = document.querySelector('#pagebuilder')
-
-    if (!pagebuilder) return
-
-    this.pageBuilderStateStore.setMenuRight(true)
-
-    const selectedElement = pagebuilder.querySelector('[selected]')
-    if (selectedElement) {
-      selectedElement.removeAttribute('selected')
-    }
-
-    element.removeAttribute('hovered')
-
-    element.setAttribute('selected', '')
-
-    this.pageBuilderStateStore.setElement(element)
-  }
-
   private handleMouseOver = (e: Event, element: HTMLElement): void => {
     e.preventDefault()
     e.stopPropagation()
@@ -804,6 +780,31 @@ export class PageBuilderService {
 
       // end for each iterating over elements
     })
+  }
+
+  private handleElementClick = async (e: Event, element: HTMLElement): Promise<void> => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    const pagebuilder = document.querySelector('#pagebuilder')
+
+    if (!pagebuilder) return
+
+    this.pageBuilderStateStore.setMenuRight(true)
+
+    const selectedElement = pagebuilder.querySelector('[selected]')
+    if (selectedElement) {
+      selectedElement.removeAttribute('selected')
+    }
+
+    element.removeAttribute('hovered')
+
+    element.setAttribute('selected', '')
+
+    this.pageBuilderStateStore.setElement(element)
+
+    console.log('Hvor mange gang click???:')
+    await this.handleAutoSave()
   }
 
   public handleAutoSave = async () => {
