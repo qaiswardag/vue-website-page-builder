@@ -983,18 +983,18 @@ onMounted(async () => {
 <style>
 #pagebuilder [element] {
   outline: rgba(255, 255, 255, 0) dashed 4px !important;
-  outline-offset: -2px !important;
+  outline-offset: -4px !important;
 }
 #pagebuilder [hovered] {
   outline: rgb(0, 140, 14, 1) dashed 4px !important;
-  outline-offset: -2px !important;
+  outline-offset: -4px !important;
 }
 
 #pagebuilder [selected] {
   position: relative;
 
   outline: rgb(185, 16, 16) dashed 4px !important;
-  outline-offset: -2px !important;
+  outline-offset: -4px !important;
 }
 
 #pagebuilder a {
@@ -1010,5 +1010,17 @@ onMounted(async () => {
 
 .sortable-ghost > * {
   width: 100%;
+}
+
+/* CSS for content inside page builder # start */
+#page-builder-editor .tiptap {
+  outline: none !important;
+  box-shadow: none !important;
+  background: #fff;
+  min-height: 25rem;
+  border-bottom: 1px solid #aaa;
+  padding: 0px 0px 10px 16px;
+  margin-bottom: 20px;
+  padding-bottom: 100px;
 }
 </style>

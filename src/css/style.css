@@ -358,18 +358,6 @@
   }
 }
 
-/* CSS for content inside page builder # start */
-#page-builder-editor .tiptap {
-  outline: none !important;
-  box-shadow: none !important;
-  background: #fff;
-  min-height: 25rem;
-  border-bottom: 1px solid #aaa;
-  padding: 0px 0px 10px 16px;
-  margin-bottom: 20px;
-  padding-bottom: 100px;
-}
-
 #page-builder-editor ol,
 #page-builder-editor-editable-area ol,
 #page-builder-editor ul,
@@ -408,8 +396,6 @@
   padding-left: 1rem;
   height: 2.2rem;
 }
-
-/* Manage P, Link, H1, H2 # end */
 
 /* CSS for content inside page builder # start */
 #pagebuilder {
@@ -489,15 +475,4 @@
 #pagebuilder ul {
   list-style: disc !important;
   padding: 0rem;
-}
-
-#pagebuilder[data-global-selected] {
-  outline: 4px dashed #b91010 !important;
-  outline-offset: -2px !important;
-}
-
-.pbx-myPrimarySelect {
-}
-
-.pbx-myPrimarySelect:focus {
 }

@@ -63,6 +63,7 @@ const configPageBuilder = {
 } as const
 
 watch(currentTranslations, async () => {
+  console.log('må ikke køøøøøre 1')
   const { components: newComponents, pageSettings: newPageSettings } =
     pageBuilderService.parsePageBuilderHTML(
       '<div id="pagebuilder" class="" style="">' +
@@ -79,6 +80,7 @@ watch(currentTranslations, async () => {
 })
 
 onMounted(async () => {
+  console.log('må ikke køøøøøre 2')
   const result = await pageBuilderService.startBuilder(configPageBuilder, components)
   console.log('Page Builder result for message, status, or error::', result)
 })
