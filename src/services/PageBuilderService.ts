@@ -2475,7 +2475,7 @@ export class PageBuilderService {
     // Wait for Vue to finish DOM updates before attaching event listeners.
     // This ensures elements exist in the DOM.
     await nextTick()
-
+    this.setBasePrimaryImageFromSelectedElement()
     this.handleHyperlink(undefined, null, false)
     this.handleOpacity(undefined)
     this.handleBackgroundOpacity(undefined)
