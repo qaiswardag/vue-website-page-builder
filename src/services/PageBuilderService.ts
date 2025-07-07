@@ -849,7 +849,6 @@ export class PageBuilderService {
 
     this.pageBuilderStateStore.setElement(element)
 
-    console.log('Hvor mange gang click???:')
     await this.handleAutoSave()
   }
 
