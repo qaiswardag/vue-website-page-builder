@@ -61,8 +61,8 @@ const emit = defineEmits(['handleClosePageBuilder', 'handlePublishPageBuilder'])
 const closePageBuilder = function () {
   emit('handleClosePageBuilder')
 }
-const closePublish = function () {
-  pageBuilderService.handleManualSave()
+const closePublish = async function () {
+  await pageBuilderService.handleManualSave()
   emit('handlePublishPageBuilder')
 }
 
@@ -91,10 +91,6 @@ watch(languageSelction, async (newVal) => {
     localStorage.setItem('userSettingsPageBuilder', JSON.stringify(userSettings))
     isLoadingLang.value = false
   }
-})
-
-const getCurrentLanguage = computed(() => {
-  return pageBuilderStateStore.getCurrentLanguage
 })
 
 const getBuilderStarted = computed(() => {
