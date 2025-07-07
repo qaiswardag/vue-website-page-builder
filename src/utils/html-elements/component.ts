@@ -42,6 +42,11 @@ const component: Components[] = [
           cover_image: null,
         },
         {
+          title: 'Four Square Images',
+          html_code: `<section>\n<div class="w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2"> <div class="mx-auto max-w-7xl"> <div class="myPrimaryGap grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4"> <div><img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="provider"></div> <div><img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="provider"></div> <div><img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="provider"></div> <div><img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="provider"></div> </div> </div> </div>\n</section>`,
+          cover_image: null,
+        },
+        {
           title: 'Six Square Images Grid',
           html_code: `<section>\n<div class="w-full md:pt-12 md:pb-12 pt-4 pb-4 lg:px-4 px-2">\n<div class="mx-auto max-w-7xl">\n<div class="grid grid-cols-2 md:grid-cols-3 myPrimaryGap">\n\n<div>\n<img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="image">\n</div>\n\n<div>\n<img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="image">\n</div>\n\n<div>\n<img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="image">\n</div>\n\n<div>\n<img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="image">\n</div>\n\n<div>\n<img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="image">\n</div>\n\n<div>\n<img class="object-cover w-full object-top aspect-square " src="${placeholderImage}" alt="image">\n</div>\n\n</div>\n</div>\n</div>\n</section>`,
           cover_image: null,

@@ -145,6 +145,41 @@ export const generateComponentPreview = (title: string): string => {
       `,
     },
 
+    'Four Square Images': {
+      title: 'Four Square Images',
+      svg: `
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 190.34 42.55">
+          <defs>
+            <style>
+              .cls-1 {
+                fill: #394152;
+              }
+
+              .cls-2 {
+                fill: #718096;
+              }
+            </style>
+          </defs>
+          <rect class="cls-1" width="42.55" height="42.55"/>
+          <rect class="cls-1" x="49.05" width="42.55" height="42.55"/>
+          <rect class="cls-1" x="97.35" width="42.55" height="42.55"/>
+          <rect class="cls-1" x="147.79" width="42.55" height="42.55"/>
+          <polygon class="cls-2" points="6.47 27.62 17.04 14.93 27.62 27.62 6.47 27.62"/>
+          <polygon class="cls-2" points="25.5 27.62 30.79 21.28 36.07 27.62 25.5 27.62"/>
+          <circle class="cls-2" cx="30.79" cy="16.69" r="1.76"/>
+          <polygon class="cls-2" points="55.52 27.62 66.09 14.93 76.66 27.62 55.52 27.62"/>
+          <polygon class="cls-2" points="74.55 27.62 79.83 21.28 85.12 27.62 74.55 27.62"/>
+          <circle class="cls-2" cx="79.83" cy="16.69" r="1.76"/>
+          <polygon class="cls-2" points="103.82 27.62 114.39 14.93 124.97 27.62 103.82 27.62"/>
+          <polygon class="cls-2" points="122.85 27.62 128.14 21.28 133.42 27.62 122.85 27.62"/>
+          <circle class="cls-2" cx="128.14" cy="16.69" r="1.76"/>
+          <polygon class="cls-2" points="154.26 27.62 164.83 14.93 175.4 27.62 154.26 27.62"/>
+          <polygon class="cls-2" points="173.29 27.62 178.57 21.28 183.86 27.62 173.29 27.62"/>
+          <circle class="cls-2" cx="178.57" cy="16.69" r="1.76"/>
+        </svg>
+      `,
+    },
+
     'Six Square Images Grid': {
       title: 'Six Square Images Grid',
       svg: `
