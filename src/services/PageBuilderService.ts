@@ -1515,6 +1515,7 @@ export class PageBuilderService {
   public async handleFormSubmission() {
     await this.removeCurrentComponentsFromLocalStorage()
     this.deleteAllComponentsFromDOM()
+    this.pageBuilderStateStore.setComponents([])
   }
 
   private parseStyleString(style: string): Record<string, string> {
