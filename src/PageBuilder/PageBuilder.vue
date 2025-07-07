@@ -512,7 +512,7 @@ onMounted(async () => {
 
     <div
       id="pagebuilder-navbar"
-      class="pbx-w-full pbx-bg-myPrimaryLightGrayColor pbx-flex pbx-items-center pbx-justify-between pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans pbx-min-h-20"
+      class="pbx-flex-1 pbx-w-full pbx-bg-myPrimaryLightGrayColor pbx-flex pbx-items-center pbx-justify-between pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans pbx-min-h-20"
     >
       <template
         v-if="
@@ -827,7 +827,10 @@ onMounted(async () => {
     </div>
 
     <!-- Top Layout Save And Reset Area - End -->
-    <div id="pagebuilder-main" class="pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2">
+    <div
+      id="pagebuilder-main"
+      class="pbx-flex-1 pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2"
+    >
       <!-- Left menu -->
       <div
         @click.self="
@@ -949,7 +952,7 @@ onMounted(async () => {
     </div>
     <div
       id="pagebuilder-footer"
-      class="pbx-w-full pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid pbx-bg-myPrimaryLightGrayColor"
+      class="pbx-flex-1 pbx-w-full pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid pbx-bg-myPrimaryLightGrayColor"
     >
       <div
         @click="
