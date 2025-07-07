@@ -8,27 +8,18 @@ const pageBuilderService = getPageBuilder()
 
 <template>
   <div>
-    <div class="pbx-blockease-linear pbx-duration-200 pbx-block pbx-ease-linear">
-      <template v-if="pageBuilderService.isSelectedElementValidText()">
-        <hr />
-        <div class="pbx-flex pbx-items-center pbx-justify-start pbx-mb-6 pbx-pt-4">
-          <div
-            class="pbx-pr-2 pbx-pl-1 pbx-flex pbx-items-center pbx-justify-start pbx-gap-2 pbx-w-max"
-          >
-            <div
-              @click="pageBuilderService.toggleTipTapModal(true)"
-              class="pbx-myPrimaryParagraph pbx-cursor-pointer pbx-textsm pbx-flex pbx-items-center pbx-gap-2"
-            >
-              <div
-                class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
-              >
-                <span class="material-symbols-outlined"> edit </span>
-              </div>
-              <span class="pbx-text-xs">{{ translate('Edit text and links') }}</span>
-            </div>
-          </div>
+    <template v-if="pageBuilderService.isSelectedElementValidText()">
+      <div class="pbx-flex pbx-flex-col pbx-border-solid pbx-border pbx-border-gray-400">
+        <div
+          @click="pageBuilderService.toggleTipTapModal(true)"
+          class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor"
+        >
+          <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-my-0 pbx-py-0">
+            {{ translate('Text') }}
+          </p>
+          <span class="material-symbols-outlined"> chevron_right </span>
         </div>
-      </template>
-    </div>
+      </div>
+    </template>
   </div>
 </template>
