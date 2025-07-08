@@ -62,7 +62,9 @@ const closePageBuilder = function () {
   emit('handleClosePageBuilder')
 }
 const closePublish = async function () {
+  pageBuilderStateStore.setIsLoadingGlobal(true)
   await pageBuilderService.handleManualSave()
+  pageBuilderStateStore.setIsLoadingGlobal(false)
   emit('handlePublishPageBuilder')
 }
 
@@ -733,7 +735,6 @@ onMounted(async () => {
               @click="
                 async () => {
                   closePublish()
-                  await pageBuilderService.clearHtmlSelection()
                 }
               "
             >
