@@ -24,6 +24,7 @@ const getUnsplashImages = ref([])
 
 const fetchUnsplash = async function () {
   getIsLoading.value = true
+  await delay(300)
   localStorage.setItem('unsplash-query', getSearchTerm.value)
   localStorage.setItem('unsplash-page', getCurrentPageNumber.value)
 
@@ -120,8 +121,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="pbx-min-h-[85vh] pbx-h-[85vh]">
-    <div v-if="getIsLoading || isLoading">
+  <div>
+    <div v-if="getIsLoading || isLoading" class="pbx-min-h-[98vh] pbx-h-[98vh]">
       <div class="pbx-flex pbx-items-center pbx-justify-center">
         <div
           class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
@@ -142,12 +143,6 @@ onMounted(async () => {
           }
         "
       >
-        <label
-          for="default-search"
-          class="pbx-mb-2 pbx-text-sm pbx-font-normal pbx-text-gray-900 pbx-sr-only dark:pbx-text-gray-300"
-          >{{ translate('Search') }}</label
-        >
-
         <div class="pbx-mysearchBarWithOptions">
           <div class="pbx-relative pbx-w-full">
             <div
@@ -159,7 +154,7 @@ onMounted(async () => {
               type="search"
               id="search_query"
               v-model="getSearchTerm"
-              class="pbx-myPrimarySearchInput"
+              class="pbx-myPrimarySearchInput pbx-w-full"
               autocomplete="off"
               :placeholder="translate('Search...')"
             />
@@ -282,12 +277,12 @@ onMounted(async () => {
           </nav>
         </div>
 
-        <div class="pbx-min-h-[33rem] pbx-max-h-[33rem] pbx-flex pbx-gap-6">
+        <div class="pbx-min-h-full pbx-max-h-full pbx-flex pbx-gap-6">
           <div class="pbx-w-9/12 pbx-pr-1 pbx-rounded-lg pbx-overflow-y-auto">
             <div v-if="getUnsplashImages && getUnsplashImages.results">
               <div
                 v-if="!getIsLoading"
-                class="pbx-grid md:pbx-grid-cols-4 sm:pbx-grid-cols-4 pbx-grid-cols-2 pbx-gap-2"
+                class="pbx-grid lg:pbx-grid-cols-6 md:pbx-grid-cols-4 sm:pbx-grid-cols-4 pbx-grid-cols-3 pbx-gap-2"
               >
                 <div
                   v-for="image in getUnsplashImages.results"
@@ -370,38 +365,21 @@ onMounted(async () => {
                     </div>
                   </dl>
                 </div>
+                <div class="pbx-flex pbx-justify-end pbx-mt-4 pbx-w-full">
+                  <button
+                    v-if="getApplyImageToSelection && typeof getApplyImageToSelection === 'string'"
+                    @click="applySelectedImage(getApplyImageToSelection)"
+                    class="pbx-myPrimaryButton"
+                    type="button"
+                  >
+                    {{ translate(' Select image') }}
+                  </button>
+                </div>
               </div>
             </template>
           </aside>
         </div>
         <!-- Sidebar # end -->
-
-        <!-- Actions footer # start -->
-        <div
-          class="pbx-px-4 pbx-py-3 pbx-flex pbx-gap-2 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-justify-end"
-        >
-          <button
-            @click="
-              () => {
-                closeMediaLibraryModal()
-                localStorage.setItem('unsplash-page', getCurrentPageNumber)
-              }
-            "
-            class="pbx-mySecondaryButton"
-            type="button"
-          >
-            {{ translate('Close') }}
-          </button>
-          <button
-            v-if="getApplyImageToSelection && typeof getApplyImageToSelection === 'string'"
-            @click="applySelectedImage(getApplyImageToSelection)"
-            class="pbx-myPrimaryButton"
-            type="button"
-          >
-            {{ translate(' Select image') }}
-          </button>
-        </div>
-        <!-- Actions footer # end -->
       </div>
       <div>
         <button class="pbx-sr-only">Focusable fallback</button>

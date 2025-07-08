@@ -97,7 +97,7 @@ const getSvgPreview = (title: string) => {
 <template>
   <div>
     <template v-if="isLoading">
-      <div class="pbx-min-h-[85vh] pbx-h-[85vh]">
+      <div class="pbx-min-h-[90vh] pbx-h-[90vh]">
         <div class="pbx-flex pbx-items-center pbx-justify-center">
           <div
             class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
