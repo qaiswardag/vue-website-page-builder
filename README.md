@@ -708,7 +708,7 @@ The Page Builder is designed to be easy to use and flexible for any web project.
 **In short:**
 The Page Builder handles all the technical details of editing, saving, and loading pages, so your users can focus on creating great content—without worrying about losing their work or dealing with a complicated setup.
 
-<img style="max-width: 100%;" src="./public/home/page_builder_architecture.png" alt="Vue Website Page Builder - the editor" />
+<img style="max-width: 100%;" src="./public/home/for_read_me/page_builder_architecture.svg" alt="Vue Website Page Builder - the editor" />
 
 ## Contributing
 
