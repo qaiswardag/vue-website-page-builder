@@ -61,8 +61,8 @@ const emit = defineEmits(['handleClosePageBuilder', 'handlePublishPageBuilder'])
 const closePageBuilder = function () {
   emit('handleClosePageBuilder')
 }
-const closePublish = function () {
-  pageBuilderService.handleManualSave()
+const closePublish = async function () {
+  await pageBuilderService.handleManualSave()
   emit('handlePublishPageBuilder')
 }
 
@@ -91,10 +91,6 @@ watch(languageSelction, async (newVal) => {
     localStorage.setItem('userSettingsPageBuilder', JSON.stringify(userSettings))
     isLoadingLang.value = false
   }
-})
-
-const getCurrentLanguage = computed(() => {
-  return pageBuilderStateStore.getCurrentLanguage
 })
 
 const getBuilderStarted = computed(() => {
@@ -434,7 +430,7 @@ onMounted(async () => {
 
 <template>
   <div
-    class="pbx-flex pbx-flex-col pbx-font-sans pbx-text-black pbx-max-w-full pbx-border-solid pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto pbx-h-full"
+    class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-mx-auto pbx-flex pbx-flex-col pbx-font-sans pbx-text-black pbx-border-solid pbx-border pbx-border-gray-400 pbx-inset-x-0 pbx-z-10 pbx-bg-white pbx-overflow-x-auto pbx-h-full"
   >
     <GlobalLoader
       v-if="(getIsLoadingGlobal && !openAppNotStartedModal) || isLoadingLang"
@@ -516,7 +512,7 @@ onMounted(async () => {
 
     <div
       id="pagebuilder-navbar"
-      class="pbx-w-full pbx-bg-myPrimaryLightGrayColor pbx-flex pbx-items-center pbx-justify-between pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans pbx-min-h-20"
+      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[96rem] pbx-max-w-[96rem] pbx-w-[96rem] pbx-flex-1 pbx-bg-myPrimaryLightGrayColor pbx-flex pbx-items-center pbx-justify-between pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans pbx-min-h-20"
     >
       <template
         v-if="
@@ -532,7 +528,7 @@ onMounted(async () => {
               await pageBuilderService.clearHtmlSelection()
             }
           "
-          class="xl:pbx-flex pbx-hidden pbx-justify-start pbx-py-2"
+          class="pbx-flex pbx-justify-start pbx-py-2"
         >
           <img class="pbx-h-6" :src="getPageBuilderConfig.pageBuilderLogo.src" alt="Logo" />
         </div>
@@ -704,7 +700,7 @@ onMounted(async () => {
             >
               <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2">
                 <span
-                  class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
+                  class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
                 >
                   <span class="material-symbols-outlined"> phone_iphone </span>
                 </span>
@@ -783,14 +779,15 @@ onMounted(async () => {
                     getPageBuilderConfig.userSettings.language.enable.length >= 1
                   "
                 >
-                  <div
+                  <option
                     v-for="lang in pageBuilderService
                       .availableLanguage()
                       .filter((l) => getPageBuilderConfig.userSettings.language.enable.includes(l))"
                     :key="lang"
+                    :value="lang"
                   >
-                    <option :value="lang">{{ lang }}</option>
-                  </div>
+                    {{ lang }}
+                  </option>
                 </template>
                 <template
                   v-if="
@@ -799,9 +796,13 @@ onMounted(async () => {
                       getPageBuilderConfig.userSettings.language.enable.length === 0)
                   "
                 >
-                  <div v-for="lang in pageBuilderService.availableLanguage()" :key="lang">
-                    <option :value="lang">{{ lang }}</option>
-                  </div>
+                  <option
+                    v-for="lang in pageBuilderService.availableLanguage()"
+                    :key="lang"
+                    :value="lang"
+                  >
+                    {{ lang }}
+                  </option>
                 </template>
               </select>
             </div>
@@ -824,10 +825,14 @@ onMounted(async () => {
         </template>
       </div>
     </div>
-
     <!-- Top Layout Save And Reset Area - End -->
-    <div id="pagebuilder-main" class="pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2">
-      <!-- Left menu -->
+
+    <!-- Page Builder Main Start -->
+    <div
+      id="pagebuilder-main"
+      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[96rem] pbx-max-w-[96rem] pbx-w-[96rem] pbx-flex-1 pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2"
+    >
+      <!-- Left Menu Start -->
       <div
         @click.self="
           async () => {
@@ -835,7 +840,7 @@ onMounted(async () => {
           }
         "
         id="pagebuilder-left-menu"
-        class="pbx-w-14 pbx-pt-7 pbx-pb-2 pbx-bg-myPrimaryLightGrayColor pbx-rounded-r-2xl pbx-shadow-sm"
+        class="pbx-w-16 pbx-pt-7 pbx-pb-2 pbx-bg-myPrimaryLightGrayColor pbx-rounded-r-2xl pbx-shadow-sm"
       >
         <div class="pbx-mx-2 pbx-flex pbx-flex-col pbx-myPrimaryGap pbx-items-stretch">
           <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
@@ -847,7 +852,7 @@ onMounted(async () => {
                   handleAddComponent()
                 }
               "
-              class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
+              class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
             >
               <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
             </button>
@@ -863,11 +868,12 @@ onMounted(async () => {
           </div>
         </div>
       </div>
+      <!-- Left Menu End -->
 
       <main
         ref="pbxToolBar"
-        class="pbx-w-full pbx-transition-all pbx-duration-300 pbx-font-sans pbx-p-1 pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-text-black pbx-h-[100vh]"
-        :class="{ '': !getMenuRight, '': getMenuRight }"
+        class="pbx-transition-all pbx-duration-300 pbx-font-sans pbx-p-1 pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-text-black pbx-h-[100vh]"
+        :class="[getMenuRight ? 'pbx-w-full' : 'pbx-w-full']"
       >
         <div
           id="pbxEditToolbar"
@@ -908,11 +914,12 @@ onMounted(async () => {
           v-if="getMenuRight"
           aria-label="menu"
           id="pagebuilder-right-menu"
-          :class="{
-            'pbx-w-0 pbx-mr-0': !getMenuRight,
-            'pbx-w-80 pbx-bg-myPrimaryLightGrayColor pbx-items-stretch': getMenuRight,
-          }"
           class="pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-border-0 pbx-border-solid pbx-border-l-0 pbx-border-l-gray-600 pbx-rounded-l-2xl pbx-h-[100vh] pbx-pl-2"
+          :class="[
+            getMenuRight
+              ? 'pbx-w-80 pbx-bg-myPrimaryLightGrayColor pbx-items-stretch'
+              : 'bpx-w-0 pbx-mr-0',
+          ]"
         >
           <RightSidebarEditor @closeEditor="pageBuilderStateStore.setMenuRight(false)">
           </RightSidebarEditor>
@@ -924,7 +931,7 @@ onMounted(async () => {
               await pageBuilderService.clearHtmlSelection()
             }
           "
-          class="pbx-w-[10vh] pbx-bg-myPrimaryLightGrayColor pbx-pt-5 pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-border-0 pbx-border-solid pbx-border-l-0 pbx-border-l-gray-600 pbx-rounded-l-2xl pbx-h-[100vh] pbx-pl-2 pbx-pr-2"
+          class="pbx-w-16 pbx-bg-myPrimaryLightGrayColor pbx-pt-5 pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-border-0 pbx-border-solid pbx-border-l-0 pbx-border-l-gray-600 pbx-rounded-l-2xl pbx-h-[100vh] pbx-pl-2 pbx-pr-2"
         >
           <div
             @click.self="
@@ -946,9 +953,12 @@ onMounted(async () => {
         </div>
       </transition>
     </div>
+    <!-- Page Builder Main End -->
+
+    <!-- Footer Start -->
     <div
       id="pagebuilder-footer"
-      class="pbx-w-full pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid pbx-bg-myPrimaryLightGrayColor"
+      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[96rem] pbx-max-w-[96rem] pbx-w-[96rem] pbx-flex-1 pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid pbx-bg-myPrimaryLightGrayColor"
     >
       <div
         @click="
@@ -965,13 +975,14 @@ onMounted(async () => {
         <div class="pbx-flex pbx-gap-2 pbx-items-center pbx-justify-center">
           <button
             type="button"
-            class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
+            class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
           >
             <span class="pbx-myMediumIcon material-symbols-outlined"> interests </span>
           </button>
         </div>
       </div>
     </div>
+    <!-- Footer End -->
   </div>
 </template>
 

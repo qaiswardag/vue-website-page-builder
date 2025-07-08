@@ -895,9 +895,11 @@ export class PageBuilderService {
   public handleManualSave = async () => {
     this.startEditing()
     this.pageBuilderStateStore.setIsSaving(true)
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
     this.saveDomComponentsToLocalStorage()
-    await delay(400)
+    await delay(300)
     this.pageBuilderStateStore.setIsSaving(false)
+    this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
 
   public cloneCompObjForDOMInsertion(componentObject: ComponentObject): ComponentObject {

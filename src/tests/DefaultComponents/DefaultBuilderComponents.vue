@@ -20,6 +20,8 @@ defineProps({
   },
 })
 
+const isLoading = ref(false)
+
 const selectedCategory = ref('All')
 
 const categories = computed(() => {
@@ -39,6 +41,7 @@ const { closeAddComponentModal } = usePageBuilderModal()
 
 // Super simple component addition with professional modal closing!
 const handleDropComponent = async function (componentObject: ComponentObject) {
+  isLoading.value = true
   // Translate all occurrences of the hardcoded strings in the html_code
   const translatedHtmlCode = componentObject.html_code
     .replace(/Layouts and visual\./g, translate('Layouts and visual.'))
@@ -56,6 +59,7 @@ const handleDropComponent = async function (componentObject: ComponentObject) {
 
   await pageBuilderService.addComponent(translatedComponentObject)
   closeAddComponentModal()
+  isLoading.value = false
 }
 
 // Helper function to convert ComponentData to ComponentObject
@@ -91,7 +95,7 @@ const getSvgPreview = (title: string) => {
 </style>
 
 <template>
-  <div>
+  <div v-if="!isLoading">
     <!-- Helper Components Section -->
     <div class="pbx-mb-8">
       <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Helper Components') }}</h3>
@@ -159,5 +163,20 @@ const getSvgPreview = (title: string) => {
         </div>
       </div>
     </div>
+    <div>
+      <button class="pbx-sr-only">Focusable fallback</button>
+    </div>
   </div>
+  <template v-if="isLoading">
+    <div class="pbx-flex pbx-items-center pbx-justify-center">
+      <div
+        class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
+      >
+        <span
+          class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
+          >{{ translate('Loading...') }}</span
+        >
+      </div>
+    </div>
+  </template>
 </template>
