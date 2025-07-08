@@ -700,13 +700,13 @@ The Page Builder is designed to be easy to use and flexible for any web project.
   The builder saves this configuration immediately—even if the editing interface (DOM) isn’t loaded yet. This means you can safely set up the builder in advance, and it will be ready as soon as the editor appears on the page.
 
 - **Loading Content:**
-  If you have existing content (like a published page), the builder loads it so you can keep editing. If not, you start with a blank page.
+  If you have existing content (like a published page), the builder loads it so you can continue editing. If not, you start with a blank page.
 
 - **Editing Experience:**
   As you add, move, or edit components (like text, images, or sections), the builder keeps everything in sync—both in the app’s memory and in your browser’s local storage. This means your work is always saved, even if you close the browser.
 
 **In short:**
-The Page Builder handles all the technical details of editing, saving, and loading pages, so your users can focus on creating great content—without worrying about losing their work or dealing with complicated setup.
+The Page Builder handles all the technical details of editing, saving, and loading pages, so your users can focus on creating great content—without worrying about losing their work or dealing with a complicated setup.
 
 <img style="max-width: 100%;" src="./public/home/page_builder_architecture.png" alt="Vue Website Page Builder - the editor" />
 
