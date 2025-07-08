@@ -24,6 +24,7 @@
   - [Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)](#rendering-html-output-in-other-frameworks-react-nuxt-etc)
   - [Providing Configuration to the Page Builder](#providing-configuration-to-the-page-builder)
   - [Comprehensive Language Support in the Page Builder](#comprehensive-language-support-in-the-page-builder)
+      - [Default language](#default-language)
       - [Disabling the Language Dropdown](#disabling-the-language-dropdown)
   - [Local Storage \& Auto-Save](#local-storage--auto-save)
   - [Retrieving the Latest HTML Content for Form Submission](#retrieving-the-latest-html-content-for-form-submission)
@@ -354,13 +355,14 @@ The Page Builder offers robust multilingual support, enabling you to reach a glo
 | Arabic               | ar      |
 | Hindi                | hi      |
 
+#### Default language
+
 You can set a default language for your project:
 
 ```js
 userSettings: {
   language: {
     default: 'en',
-    enable: ['en', 'zh-Hans', 'fr'],
   },
 },
 ```
