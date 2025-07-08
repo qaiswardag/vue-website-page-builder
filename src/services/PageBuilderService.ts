@@ -136,20 +136,36 @@ export class PageBuilderService {
     ]
   }
 
+  /**
+   * Returns an array of available languages.
+   * @returns {AvailableLanguage[]} An array of available language codes.
+   */
   public availableLanguage(): AvailableLanguage[] {
     return AVAILABLE_LANGUAGES
   }
 
+  /**
+   * Sets the current language in the page builder state.
+   * @param {string} lang - The language code to set.
+   */
   public changeLanguage(lang: string) {
     this.pageBuilderStateStore.setCurrentLanguage(lang)
   }
-  // Deselect any selected or hovered elements in the builder UI
+  /**
+   * Deselects any selected or hovered elements in the builder UI.
+   * @returns {Promise<void>}
+   */
   async clearHtmlSelection(): Promise<void> {
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
     await this.removeHoveredAndSelected()
   }
 
+  /**
+   * Ensures that the `updateOrCreate` configuration is valid and sets default values if necessary.
+   * @param {PageBuilderConfig} config - The page builder configuration.
+   * @private
+   */
   private ensureUpdateOrCreateConfig(config: PageBuilderConfig): void {
     // Case A: updateOrCreate is missing or an empty object
     if (!config.updateOrCreate || (config.updateOrCreate && isEmptyObject(config.updateOrCreate))) {
@@ -226,6 +242,12 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Validates the user-provided components array.
+   * @param {unknown} components - The components data to validate.
+   * @returns {{error: true, warning: string, status: string} | {error: true, reason: string} | undefined} An error object if validation fails, otherwise undefined.
+   * @private
+   */
   private validateUserProvidedComponents(components: unknown) {
     const formType =
       this.pageBuilderStateStore.getPageBuilderConfig &&
@@ -278,6 +300,11 @@ export class PageBuilderService {
     return
   }
 
+  /**
+   * Ensures that the language configuration is valid and sets default values if necessary.
+   * @param {PageBuilderConfig} config - The page builder configuration.
+   * @private
+   */
   private ensureLanguage(config: PageBuilderConfig): void {
     // Set default language config if missing, empty, or language missing/empty
     const defaultLang = 'en'
@@ -327,6 +354,11 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Validates the entire page builder configuration.
+   * @param {PageBuilderConfig} config - The page builder configuration.
+   * @private
+   */
   private validateConfig(config: PageBuilderConfig): void {
     const defaultConfigValues = {
       updateOrCreate: {
@@ -347,6 +379,10 @@ export class PageBuilderService {
     this.ensureLanguage(config)
   }
 
+  /**
+   * Saves user settings to local storage.
+   * @param {string} newLang - The new language to save.
+   */
   public saveUserSettingsStorage(newLang: string) {
     localStorage.setItem(
       'userSettingsPageBuilder',
@@ -355,14 +391,10 @@ export class PageBuilderService {
   }
 
   /**
-   * - Entry point for initializing the Page Builder.
-   * - Sets the builder as started in the state store.
-   * - Shows a global loading indicator.
-   * - Stores and validates the provided configuration.
-   * - Updates the localStorage key name based on the config/resource.
-   * - Completes builder initialization if the DOM is ready.
-   *
-   * @param config - The configuration object for the Page Builder.
+   * Initializes the Page Builder.
+   * @param {PageBuilderConfig} config - The configuration object for the Page Builder.
+   * @param {BuilderResourceData} [passedComponentsArray] - Optional array of components to load.
+   * @returns {Promise<StartBuilderResult>} A result object indicating success or failure.
    */
   async startBuilder(
     config: PageBuilderConfig,
@@ -425,6 +457,11 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Completes the builder initialization process once the DOM is ready.
+   * @param {BuilderResourceData} [passedComponentsArray] - Optional array of components to load.
+   * @returns {Promise<void>}
+   */
   async completeBuilderInitialization(passedComponentsArray?: BuilderResourceData): Promise<void> {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await delay(400)
@@ -504,6 +541,12 @@ export class PageBuilderService {
     //
   }
 
+  /**
+   * Completes the mounting process by loading components into the DOM and setting up listeners.
+   * @param {string} html - The HTML string of components to mount.
+   * @param {boolean} [usePassedPageSettings] - Whether to use page settings from the passed data.
+   * @private
+   */
   private async completeMountProcess(html: string, usePassedPageSettings?: boolean) {
     await this.mountComponentsToDOM(html, usePassedPageSettings)
 
@@ -519,6 +562,14 @@ export class PageBuilderService {
     await this.addListenersToEditableElements()
   }
 
+  /**
+   * Applies CSS class changes to the currently selected element.
+   * @param {string | undefined} cssUserSelection - The user's CSS class selection.
+   * @param {string[]} CSSArray - The array of possible CSS classes for this property.
+   * @param {string} mutationName - The name of the store mutation to call.
+   * @returns {string | undefined} The previously applied CSS class.
+   * @private
+   */
   private applyElementClassChanges(
     cssUserSelection: string | undefined,
     CSSArray: string[],
@@ -591,6 +642,10 @@ export class PageBuilderService {
     return currentCSS
   }
 
+  /**
+   * Removes all CSS classes from the main page builder container.
+   * @returns {Promise<void>}
+   */
   public async clearClassesFromPage() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
@@ -600,6 +655,10 @@ export class PageBuilderService {
     this.initializeElementStyles()
     await nextTick()
   }
+  /**
+   * Removes all inline styles from the main page builder container.
+   * @returns {Promise<void>}
+   */
   public async clearInlineStylesFromPagee() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
@@ -610,6 +669,10 @@ export class PageBuilderService {
     await nextTick()
   }
 
+  /**
+   * Selects the main page builder container for global styling.
+   * @returns {Promise<void>}
+   */
   public async globalPageStyles() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
@@ -626,6 +689,10 @@ export class PageBuilderService {
     await nextTick()
   }
 
+  /**
+   * Handles changes to the font weight of the selected element.
+   * @param {string} [userSelectedFontWeight] - The selected font weight class.
+   */
   public handleFontWeight(userSelectedFontWeight?: string): void {
     this.applyElementClassChanges(
       userSelectedFontWeight,
@@ -634,10 +701,18 @@ export class PageBuilderService {
     )
   }
 
+  /**
+   * Handles changes to the base font size of the selected element.
+   * @param {string} [userSelectedFontSize] - The selected font size class.
+   */
   public handleFontSizeBase(userSelectedFontSize?: string): void {
     this.applyElementClassChanges(userSelectedFontSize, tailwindFontSizes.fontBase, 'setFontBase')
   }
 
+  /**
+   * Handles changes to the desktop font size of the selected element.
+   * @param {string} [userSelectedFontSize] - The selected font size class for desktop.
+   */
   public handleFontSizeDesktop(userSelectedFontSize?: string): void {
     const currentHTMLElement = this.getElement.value
     if (!currentHTMLElement) return
@@ -693,6 +768,11 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Applies helper CSS classes to elements, such as wrapping them or adding responsive text classes.
+   * @param {HTMLElement} element - The element to process.
+   * @private
+   */
   private applyHelperCSSToElements(element: HTMLElement): void {
     this.wrapElementInDivIfExcluded(element)
 
@@ -720,6 +800,11 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Toggles the visibility of the TipTap modal for rich text editing.
+   * @param {boolean} status - Whether to show or hide the modal.
+   * @returns {Promise<void>}
+   */
   public async toggleTipTapModal(status: boolean): Promise<void> {
     this.pageBuilderStateStore.setShowModalTipTap(status)
 
@@ -733,6 +818,11 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Wraps an element in a div if it's an excluded tag and adjacent to an image.
+   * @param {HTMLElement} element - The element to potentially wrap.
+   * @private
+   */
   private wrapElementInDivIfExcluded(element: HTMLElement): void {
     if (!element) return
 
@@ -747,6 +837,12 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Handles the mouseover event for editable elements, showing a hover state.
+   * @param {Event} e - The mouse event.
+   * @param {HTMLElement} element - The element being hovered over.
+   * @private
+   */
   private handleMouseOver = (e: Event, element: HTMLElement): void => {
     e.preventDefault()
     e.stopPropagation()
@@ -765,6 +861,11 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Handles the mouseleave event for editable elements, removing the hover state.
+   * @param {Event} e - The mouse event.
+   * @private
+   */
   private handleMouseLeave = (e: Event): void => {
     e.preventDefault()
     e.stopPropagation()
@@ -778,27 +879,32 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Checks if an element is editable based on its tag name.
+   * @param {Element | null} el - The element to check.
+   * @returns {boolean} True if the element is editable, false otherwise.
+   */
   public isEditableElement(el: Element | null): boolean {
     if (!el) return false
     return !this.NoneListernesTags.includes(el.tagName)
   }
 
   /**
-   * The function is used to
-   * attach event listeners to each element within a 'section'
+   * Attaches click, mouseover, and mouseleave event listeners to all editable elements in the page builder.
+   * @private
    */
   private addListenersToEditableElements = async () => {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensures elements exist in the DOM.
+    // Wait for the next DOM update cycle to ensure all elements are rendered.
     await nextTick()
 
     pagebuilder.querySelectorAll('section *').forEach((element) => {
       if (this.isEditableElement(element)) {
         const htmlElement = element as HTMLElement
 
-        // Remove existing listeners if they exist
+        // If the element already has listeners, remove them to avoid duplicates.
         if (this.elementsWithListeners.has(htmlElement)) {
           const listeners = this.elementsWithListeners.get(htmlElement)
           if (listeners) {
@@ -808,17 +914,17 @@ export class PageBuilderService {
           }
         }
 
-        // Define new listeners
+        // Define new listener functions.
         const clickListener = (e: Event) => this.handleElementClick(e, htmlElement)
         const mouseoverListener = (e: Event) => this.handleMouseOver(e, htmlElement)
         const mouseleaveListener = (e: Event) => this.handleMouseLeave(e)
 
-        // Attach new listeners
+        // Add the new event listeners.
         htmlElement.addEventListener('click', clickListener)
         htmlElement.addEventListener('mouseover', mouseoverListener)
         htmlElement.addEventListener('mouseleave', mouseleaveListener)
 
-        // Store the new listeners in the WeakMap
+        // Store the new listeners in the WeakMap to track them.
         this.elementsWithListeners.set(htmlElement, {
           click: clickListener,
           mouseover: mouseoverListener,
@@ -828,6 +934,12 @@ export class PageBuilderService {
     })
   }
 
+  /**
+   * Handles the click event for editable elements, setting the element as selected.
+   * @param {Event} e - The click event.
+   * @param {HTMLElement} element - The clicked element.
+   * @private
+   */
   private handleElementClick = async (e: Event, element: HTMLElement): Promise<void> => {
     e.preventDefault()
     e.stopPropagation()
@@ -852,6 +964,9 @@ export class PageBuilderService {
     await this.handleAutoSave()
   }
 
+  /**
+   * Triggers an auto-save of the current page builder content to local storage if enabled.
+   */
   public handleAutoSave = async () => {
     this.startEditing()
     const passedConfig = this.pageBuilderStateStore.getPageBuilderConfig
@@ -892,6 +1007,9 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Manually saves the current page builder content to local storage.
+   */
   public handleManualSave = async () => {
     this.pageBuilderStateStore.setIsSaving(true)
     this.clearHtmlSelection()
@@ -901,6 +1019,11 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setIsSaving(false)
   }
 
+  /**
+   * Clones a component object and prepares it for insertion into the DOM by adding unique IDs and prefixes.
+   * @param {ComponentObject} componentObject - The component object to clone.
+   * @returns {ComponentObject} The cloned and prepared component object.
+   */
   public cloneCompObjForDOMInsertion(componentObject: ComponentObject): ComponentObject {
     // Deep clone clone component
     const clonedComponent = { ...componentObject }
@@ -961,6 +1084,10 @@ export class PageBuilderService {
     return clonedComponent
   }
 
+  /**
+   * Removes the 'hovered' and 'selected' attributes from all elements in the page builder.
+   * @private
+   */
   private async removeHoveredAndSelected() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
@@ -977,6 +1104,10 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Syncs the CSS classes of the currently selected element to the state store.
+   * @private
+   */
   private async syncCurrentClasses() {
     // convert classList to array
     const classListArray = Array.from(this.getElement.value?.classList || [])
@@ -985,6 +1116,10 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setCurrentClasses(classListArray)
   }
 
+  /**
+   * Syncs the inline styles of the currently selected element to the state store.
+   * @private
+   */
   private async syncCurrentStyles() {
     const style = this.getElement.value?.getAttribute('style')
     if (style) {
@@ -995,6 +1130,10 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Adds a CSS class to the currently selected element.
+   * @param {string} userSelectedClass - The class to add.
+   */
   public handleAddClasses(userSelectedClass: string): void {
     if (
       typeof userSelectedClass === 'string' &&
@@ -1015,6 +1154,11 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Adds or updates an inline style property on the currently selected element.
+   * @param {string} property - The CSS property to add/update.
+   * @param {string} value - The value of the CSS property.
+   */
   public handleAddStyle(property: string, value: string): void {
     const element = this.getElement.value
     if (!element || !property || !value) return
@@ -1023,6 +1167,10 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setElement(element)
   }
 
+  /**
+   * Removes an inline style property from the currently selected element.
+   * @param {string} property - The CSS property to remove.
+   */
   public handleRemoveStyle(property: string): void {
     const element = this.getElement.value
     if (!element || !property) return
@@ -1031,6 +1179,10 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setElement(element)
   }
 
+  /**
+   * Handles changes to the font family of the selected element.
+   * @param {string} [userSelectedFontFamily] - The selected font family class.
+   */
   public handleFontFamily(userSelectedFontFamily?: string): void {
     this.applyElementClassChanges(
       userSelectedFontFamily,
@@ -1038,6 +1190,10 @@ export class PageBuilderService {
       'setFontFamily',
     )
   }
+  /**
+   * Handles changes to the font style of the selected element.
+   * @param {string} [userSelectedFontStyle] - The selected font style class.
+   */
   public handleFontStyle(userSelectedFontStyle?: string): void {
     this.applyElementClassChanges(
       userSelectedFontStyle,
@@ -1045,6 +1201,10 @@ export class PageBuilderService {
       'setFontStyle',
     )
   }
+  /**
+   * Handles changes to the vertical padding of the selected element.
+   * @param {string} [userSelectedVerticalPadding] - The selected vertical padding class.
+   */
   public handleVerticalPadding(userSelectedVerticalPadding?: string): void {
     this.applyElementClassChanges(
       userSelectedVerticalPadding,
@@ -1052,6 +1212,10 @@ export class PageBuilderService {
       'setFontVerticalPadding',
     )
   }
+  /**
+   * Handles changes to the horizontal padding of the selected element.
+   * @param {string} [userSelectedHorizontalPadding] - The selected horizontal padding class.
+   */
   public handleHorizontalPadding(userSelectedHorizontalPadding?: string): void {
     this.applyElementClassChanges(
       userSelectedHorizontalPadding,
@@ -1060,6 +1224,10 @@ export class PageBuilderService {
     )
   }
 
+  /**
+   * Handles changes to the vertical margin of the selected element.
+   * @param {string} [userSelectedVerticalMargin] - The selected vertical margin class.
+   */
   public handleVerticalMargin(userSelectedVerticalMargin?: string): void {
     this.applyElementClassChanges(
       userSelectedVerticalMargin,
@@ -1067,6 +1235,10 @@ export class PageBuilderService {
       'setFontVerticalMargin',
     )
   }
+  /**
+   * Handles changes to the horizontal margin of the selected element.
+   * @param {string} [userSelectedHorizontalMargin] - The selected horizontal margin class.
+   */
   public handleHorizontalMargin(userSelectedHorizontalMargin?: string): void {
     this.applyElementClassChanges(
       userSelectedHorizontalMargin,
@@ -1075,6 +1247,10 @@ export class PageBuilderService {
     )
   }
 
+  /**
+   * Handles changes to the border style of the selected element.
+   * @param {string} [borderStyle] - The selected border style class.
+   */
   public handleBorderStyle(borderStyle?: string): void {
     this.applyElementClassChanges(
       borderStyle,
@@ -1082,6 +1258,10 @@ export class PageBuilderService {
       'setBorderStyle',
     )
   }
+  /**
+   * Handles changes to the border width of the selected element.
+   * @param {string} [borderWidth] - The selected border width class.
+   */
   public handleBorderWidth(borderWidth?: string): void {
     this.applyElementClassChanges(
       borderWidth,
@@ -1089,6 +1269,10 @@ export class PageBuilderService {
       'setBorderWidth',
     )
   }
+  /**
+   * Handles changes to the border color of the selected element.
+   * @param {string} [borderColor] - The selected border color class.
+   */
   public handleBorderColor(borderColor?: string): void {
     this.applyElementClassChanges(
       borderColor,
@@ -1098,6 +1282,10 @@ export class PageBuilderService {
   }
   // border color, style & width / end
 
+  /**
+   * Handles changes to the background color of the selected element.
+   * @param {string} [color] - The selected background color class.
+   */
   public handleBackgroundColor(color?: string): void {
     this.applyElementClassChanges(
       color,
@@ -1106,10 +1294,18 @@ export class PageBuilderService {
     )
   }
 
+  /**
+   * Handles changes to the text color of the selected element.
+   * @param {string} [color] - The selected text color class.
+   */
   public handleTextColor(color?: string): void {
     this.applyElementClassChanges(color, tailwindColors.textColorVariables, 'setTextColor')
   }
 
+  /**
+   * Handles changes to the global border radius of the selected element.
+   * @param {string} [borderRadiusGlobal] - The selected global border radius class.
+   */
   handleBorderRadiusGlobal(borderRadiusGlobal?: string): void {
     this.applyElementClassChanges(
       borderRadiusGlobal,
@@ -1117,6 +1313,10 @@ export class PageBuilderService {
       'setBorderRadiusGlobal',
     )
   }
+  /**
+   * Handles changes to the top-left border radius of the selected element.
+   * @param {string} [borderRadiusTopLeft] - The selected top-left border radius class.
+   */
   handleBorderRadiusTopLeft(borderRadiusTopLeft?: string): void {
     this.applyElementClassChanges(
       borderRadiusTopLeft,
@@ -1124,6 +1324,10 @@ export class PageBuilderService {
       'setBorderRadiusTopLeft',
     )
   }
+  /**
+   * Handles changes to the top-right border radius of the selected element.
+   * @param {string} [borderRadiusTopRight] - The selected top-right border radius class.
+   */
   handleBorderRadiusTopRight(borderRadiusTopRight?: string): void {
     this.applyElementClassChanges(
       borderRadiusTopRight,
@@ -1131,6 +1335,10 @@ export class PageBuilderService {
       'setBorderRadiusTopRight',
     )
   }
+  /**
+   * Handles changes to the bottom-left border radius of the selected element.
+   * @param {string} [borderRadiusBottomleft] - The selected bottom-left border radius class.
+   */
   handleBorderRadiusBottomleft(borderRadiusBottomleft?: string): void {
     this.applyElementClassChanges(
       borderRadiusBottomleft,
@@ -1138,6 +1346,10 @@ export class PageBuilderService {
       'setBorderRadiusBottomleft',
     )
   }
+  /**
+   * Handles changes to the bottom-right border radius of the selected element.
+   * @param {string} [borderRadiusBottomRight] - The selected bottom-right border radius class.
+   */
   handleBorderRadiusBottomRight(borderRadiusBottomRight?: string): void {
     this.applyElementClassChanges(
       borderRadiusBottomRight,
@@ -1147,6 +1359,10 @@ export class PageBuilderService {
   }
   // border radius / end
 
+  /**
+   * Handles changes to the tablet font size of the selected element.
+   * @param {string} [userSelectedFontSize] - The selected font size class for tablet.
+   */
   handleFontSizeTablet(userSelectedFontSize?: string): void {
     this.applyElementClassChanges(
       userSelectedFontSize,
@@ -1154,6 +1370,10 @@ export class PageBuilderService {
       'setFontTablet',
     )
   }
+  /**
+   * Handles changes to the mobile font size of the selected element.
+   * @param {string} [userSelectedFontSize] - The selected font size class for mobile.
+   */
   handleFontSizeMobile(userSelectedFontSize?: string): void {
     this.applyElementClassChanges(
       userSelectedFontSize,
@@ -1162,6 +1382,10 @@ export class PageBuilderService {
     )
   }
 
+  /**
+   * Handles changes to the background opacity of the selected element.
+   * @param {string} [opacity] - The selected background opacity class.
+   */
   handleBackgroundOpacity(opacity?: string): void {
     this.applyElementClassChanges(
       opacity,
@@ -1169,20 +1393,18 @@ export class PageBuilderService {
       'setBackgroundOpacity',
     )
   }
+  /**
+   * Handles changes to the opacity of the selected element.
+   * @param {string} [opacity] - The selected opacity class.
+   */
   handleOpacity(opacity?: string): void {
     this.applyElementClassChanges(opacity, tailwindOpacities.opacities, 'setOpacity')
   }
 
   /**
    * Removes all components from both the builder state and the DOM.
-   *
-   * - First clears the components array in the store.
-   * - Then, as a defensive measure, also manually removes all sections elements from the DOM.
-   *
-   * This manual DOM clearing is only optional
-   *
+   * @private
    */
-
   private deleteAllComponentsFromDOM() {
     // Clear the store
     this.pageBuilderStateStore.setComponents([])
@@ -1197,6 +1419,10 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Deletes the currently selected component from the DOM and the state.
+   * @returns {Promise<void>}
+   */
   public async deleteComponentFromDOM() {
     this.syncDomToStoreOnly()
     await nextTick()
@@ -1205,17 +1431,17 @@ export class PageBuilderService {
 
     if (!components) return
 
-    // Find the index of the component to delete
+    // Find the index of the component to be deleted.
     const indexToDelete = components.findIndex(
       (component) => component.id === this.getComponent.value?.id,
     )
 
     if (indexToDelete === -1) {
-      // Component not found in the array, handle this case as needed.
+      // If the component is not found, do nothing.
       return
     }
 
-    // Create a new array without the deleted component (avoid mutating original array)
+    // Create a new array excluding the component to be deleted.
     const newComponents = [
       ...components.slice(0, indexToDelete),
       ...components.slice(indexToDelete + 1),
@@ -1223,7 +1449,7 @@ export class PageBuilderService {
 
     this.pageBuilderStateStore.setComponents(newComponents)
 
-    // Remove the section from the DOM as well
+    // Remove the component's corresponding section from the DOM.
     const pagebuilder = document.querySelector('#pagebuilder')
     if (pagebuilder && this.getComponent.value?.id) {
       const section = pagebuilder.querySelector(
@@ -1232,22 +1458,26 @@ export class PageBuilderService {
       if (section) section.remove()
     }
 
-    // Wait for Vue to finish DOM updates before attaching event listeners.
+    // Wait for the DOM to update before re-attaching event listeners.
     await nextTick()
     await this.addListenersToEditableElements()
 
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
 
-    // Optional: auto-save after deletion
+    // Trigger an auto-save after deletion.
     await this.handleAutoSave()
   }
 
+  /**
+   * Deletes the currently selected element from the DOM and stores it for potential restoration.
+   * @returns {Promise<void>}
+   */
   public async deleteElementFromDOM() {
     const element = this.getElement.value
     if (!element) return
 
-    // Remove 'selected' attribute before deletion
+    // Remove the 'selected' attribute before deletion to avoid visual artifacts.
     element.removeAttribute('selected')
 
     if (!element.parentNode) {
@@ -1256,56 +1486,64 @@ export class PageBuilderService {
       return
     }
 
-    // If the element is inside a section, but not the section itself, store info for undo/restore
+    // If the element is not a top-level section, store its information for undo functionality.
     if (element.parentElement?.tagName !== 'SECTION') {
       this.pageBuilderStateStore.setParentElement(element.parentNode as HTMLElement)
       this.pageBuilderStateStore.setRestoredElement(element.outerHTML)
       this.pageBuilderStateStore.setNextSibling(element.nextSibling as HTMLElement | null)
-      // Remove only the element itself from the DOM
+      // Remove the element from the DOM.
       element.remove()
     }
 
-    // Clear selection state
+    // Clear the selection state.
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
 
-    // Deselect any selected or hovered elements in the builder UI
+    // Deselect any selected or hovered elements in the builder UI.
     await this.clearHtmlSelection()
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    // Wait for the DOM to update before re-attaching event listeners.
     await nextTick()
-    // Attach event listeners to all editable elements in the Builder
+    // Re-attach event listeners to all editable elements.
     await this.addListenersToEditableElements()
   }
 
+  /**
+   * Restores the last deleted element to its previous position in the DOM.
+   * @returns {Promise<void>}
+   */
   public async restoreDeletedElementToDOM() {
-    // Restore the previously deleted element to the DOM
+    // Retrieve the details of the element to be restored.
     const restoredHTML = this.getRestoredElement.value
     const parent = this.getParentElement.value
     const nextSibling = this.getNextSibling.value
 
     if (restoredHTML && parent) {
-      // Create a container and parse the HTML
+      // Create a temporary container to parse the stored HTML.
       const container = document.createElement('div')
       container.innerHTML = restoredHTML
 
-      // Insert the restored element before its next sibling (or append if null)
+      // Insert the restored element back into its original position.
       if (container.firstChild) {
         parent.insertBefore(container.firstChild, nextSibling)
       }
     }
 
-    // Clear restore-related state
+    // Clear the state related to the restored element.
     this.pageBuilderStateStore.setParentElement(null)
     this.pageBuilderStateStore.setRestoredElement(null)
     this.pageBuilderStateStore.setNextSibling(null)
     this.pageBuilderStateStore.setComponent(null)
     this.pageBuilderStateStore.setElement(null)
 
-    // Wait for Vue to finish DOM updates before attaching event listeners
+    // Wait for the DOM to update before re-attaching event listeners.
     await nextTick()
     await this.addListenersToEditableElements()
   }
 
+  /**
+   * Removes a CSS class from the currently selected element.
+   * @param {string} userSelectedClass - The class to remove.
+   */
   public handleRemoveClasses(userSelectedClass: string): void {
     // remove selected class from element
     if (this.getElement.value?.classList.contains(userSelectedClass)) {
@@ -1316,38 +1554,43 @@ export class PageBuilderService {
     }
   }
 
-  // move component
-  // runs when html components are rearranged
+  /**
+   * Reorders the currently selected component up or down in the component list.
+   * @param {number} direction - The direction to move the component (-1 for up, 1 for down).
+   */
   public reorderComponent(direction: number): void {
     if (!this.getComponents.value || !this.getComponent.value) return
 
     if (this.getComponents.value.length <= 1) return
 
-    // Get the component you want to move (replace this with your actual logic)
+    // Find the component to move.
     const componentToMove = this.getComponent.value
 
-    // Determine the new index where you want to move the component
+    // Determine the current index of the component.
     const currentIndex = this.getComponents.value.findIndex(
       (component) => component.id === componentToMove.id,
     )
 
     if (currentIndex === -1) {
-      // Component not found in the array, handle this case as needed.
+      // Component not found in the array.
       return
     }
 
     const newIndex = currentIndex + direction
 
-    // Ensure the newIndex is within bounds
+    // Ensure the new index is within the bounds of the array.
     if (newIndex < 0 || newIndex >= this.getComponents.value.length) {
       return
     }
 
-    // Move the component to the new position
+    // Move the component to the new position in the array.
     this.getComponents.value.splice(currentIndex, 1)
     this.getComponents.value.splice(newIndex, 0, componentToMove)
   }
 
+  /**
+   * Ensures that a text area element has content, adding a visual indicator if it's empty.
+   */
   public ensureTextAreaHasContent = () => {
     if (!this.getElement.value) return
 
@@ -1372,6 +1615,11 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Handles text input for an element, updating its content.
+   * @param {string} textContentVueModel - The new text content from the Vue model.
+   * @returns {Promise<void>}
+   */
   public handleTextInput = async (textContentVueModel: string): Promise<void> => {
     if (typeof this.getElement.value?.innerHTML !== 'string') {
       return
@@ -1391,8 +1639,10 @@ export class PageBuilderService {
     this.ensureTextAreaHasContent()
   }
 
-  //
-  //
+  /**
+   * Checks if the selected element or its first child is an iframe.
+   * @returns {boolean} True if it is an iframe, false otherwise.
+   */
   public ElOrFirstChildIsIframe() {
     if (
       this.getElement.value?.tagName === 'IFRAME' ||
@@ -1403,9 +1653,10 @@ export class PageBuilderService {
       return false
     }
   }
-  //
-  //
-  //
+  /**
+   * Checks if the selected element is a valid text container (i.e., does not contain images or divs).
+   * @returns {boolean | undefined} True if it's a valid text element, otherwise undefined.
+   */
   public isSelectedElementValidText() {
     let reachedElseStatement = false
 
@@ -1432,6 +1683,9 @@ export class PageBuilderService {
     return reachedElseStatement
   }
 
+  /**
+   * Generates a preview of the current page design.
+   */
   public previewCurrentDesign() {
     this.pageBuilderStateStore.setElement(null)
 
@@ -1453,7 +1707,11 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setCurrentLayoutPreview(previewData)
     }
   }
-  // Helper function to sanitize title for localStorage key
+  /**
+   * Sanitizes a string to be used as a key in local storage.
+   * @param {string} input - The string to sanitize.
+   * @returns {string} The sanitized string.
+   */
   public sanitizeForLocalStorage(input: string): string {
     return input
       .trim() // Remove leading/trailing spaces
@@ -1465,9 +1723,10 @@ export class PageBuilderService {
   }
 
   /**
-   * Returns a clone of the given element with [hovered] and [selected] attributes
-   * removed from itself and all descendants. Does NOT mutate the live DOM.
-   * @param element The HTMLElement to clone and sanitize
+   * Clones an element and removes selection-related attributes from the clone.
+   * @param {HTMLElement} element - The element to clone.
+   * @returns {HTMLElement} The sanitized clone.
+   * @private
    */
   private cloneAndRemoveSelectionAttributes(element: HTMLElement): HTMLElement {
     // Deep clone the element
@@ -1484,8 +1743,8 @@ export class PageBuilderService {
   }
 
   /**
-   * Syncs the current DOM state into the in-memory store (getComponents),
-   * but does NOT save to localStorage.
+   * Syncs the current DOM state of components to the in-memory store.
+   * @private
    */
   private syncDomToStoreOnly() {
     const pagebuilder = document.querySelector('#pagebuilder')
@@ -1506,7 +1765,8 @@ export class PageBuilderService {
   }
 
   /**
-   * Saves the current DOM state (components) to localStorage.
+   * Saves the current DOM state of components to local storage.
+   * @private
    */
   private saveDomComponentsToLocalStorage() {
     this.updateLocalStorageItemName()
@@ -1546,6 +1806,10 @@ export class PageBuilderService {
       localStorage.setItem(keyForSavingFromDomToLocal, JSON.stringify(dataToSave))
     }
   }
+  /**
+   * Removes the current page's components from local storage.
+   * @private
+   */
   private async removeCurrentComponentsFromLocalStorage() {
     this.updateLocalStorageItemName()
     await nextTick()
@@ -1556,12 +1820,22 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Handles the form submission process, clearing local storage and the DOM.
+   * @returns {Promise<void>}
+   */
   public async handleFormSubmission() {
     await this.removeCurrentComponentsFromLocalStorage()
     this.deleteAllComponentsFromDOM()
     this.pageBuilderStateStore.setComponents([])
   }
 
+  /**
+   * Parses a CSS style string into a key-value object.
+   * @param {string} style - The style string to parse.
+   * @returns {Record<string, string>} The parsed style object.
+   * @private
+   */
   private parseStyleString(style: string): Record<string, string> {
     return style
       .split(';')
@@ -1577,6 +1851,9 @@ export class PageBuilderService {
       )
   }
 
+  /**
+   * Deletes old page builder data from local storage (older than 2 weeks).
+   */
   deleteOldPageBuilderLocalStorage(): void {
     const config = this.pageBuilderStateStore.getPageBuilderConfig
     const formType = config && config.updateOrCreate && config.updateOrCreate.formType
@@ -1629,12 +1906,17 @@ export class PageBuilderService {
     }
   }
 
-  // Call this when the user starts editing (e.g., on first change or when resuming a draft)
+  /**
+   * Sets a flag to indicate that the user has started editing.
+   */
   public startEditing() {
     this.hasStartedEditing = true
   }
 
-  //
+  /**
+   * Resumes editing from a draft saved in local storage.
+   * @returns {Promise<void>}
+   */
   public async resumeEditingFromDraft() {
     this.updateLocalStorageItemName()
 
@@ -1655,6 +1937,10 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setIsLoadingResumeEditing(false)
   }
 
+  /**
+   * Restores the original content that was loaded when the builder started.
+   * @returns {Promise<void>}
+   */
   public async restoreOriginalContent() {
     this.updateLocalStorageItemName()
 
@@ -1677,10 +1963,18 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setIsRestoring(false)
   }
 
+  /**
+   * Gets the local storage key for the current resource.
+   * @returns {string | null} The local storage key.
+   */
   public getStorageItemNameForResource(): string | null {
     return this.getLocalStorageItemName.value
   }
 
+  /**
+   * Retrieves the saved page HTML from local storage.
+   * @returns {string | false} The HTML string or false if not found.
+   */
   public getSavedPageHtml() {
     if (!this.getLocalStorageItemName.value) return false
 
@@ -1704,9 +1998,9 @@ export class PageBuilderService {
   }
 
   /**
-   * Applies the staged image to the currently selected element.
-   * This updates the builder state and triggers an auto-save.
-   * If no element is selected or no image is staged, nothing happens.
+   * Applies a selected image to the current element.
+   * @param {ImageObject} image - The image object to apply.
+   * @returns {Promise<void>}
    */
   public async applySelectedImage(image: ImageObject): Promise<void> {
     this.pageBuilderStateStore.setApplyImageToSelection(image)
@@ -1723,9 +2017,8 @@ export class PageBuilderService {
   }
 
   /**
-   * Inspects the currently selected element and, if it contains exactly one <img> and no <div>,
-   * sets that image's src as the base primary image in the builder state.
-   * If the element does not meet these criteria, clears the base primary image.
+   * Sets the base primary image from the currently selected element if it's an image.
+   * @private
    */
   private setBasePrimaryImageFromSelectedElement() {
     if (!this.getElement.value) return
@@ -1747,6 +2040,13 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setBasePrimaryImage(null)
   }
 
+  /**
+   * Adds or removes a hyperlink from the selected element.
+   * @param {boolean} hyperlinkEnable - Whether to enable or disable the hyperlink.
+   * @param {string | null} urlInput - The URL for the hyperlink.
+   * @param {boolean} openHyperlinkInNewTab - Whether the link should open in a new tab.
+   * @private
+   */
   private addHyperlinkToElement(
     hyperlinkEnable: boolean,
     urlInput: string | null,
@@ -1843,6 +2143,10 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Checks if the selected element contains a hyperlink and updates the state accordingly.
+   * @private
+   */
   private checkForHyperlink() {
     if (!this.getElement.value) return
 
@@ -1871,6 +2175,12 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setHyberlinkEnable(false)
   }
 
+  /**
+   * Handles all hyperlink-related actions for the selected element.
+   * @param {boolean} [hyperlinkEnable] - Whether to enable or disable the hyperlink.
+   * @param {string | null} [urlInput] - The URL for the hyperlink.
+   * @param {boolean} [openHyperlinkInNewTab] - Whether the link should open in a new tab.
+   */
   public handleHyperlink(
     hyperlinkEnable?: boolean,
     urlInput?: string | null,
@@ -1916,7 +2226,11 @@ export class PageBuilderService {
     this.addHyperlinkToElement(hyperlinkEnable, urlInput || null, openHyperlinkInNewTab || false)
   }
 
-  // Helper method for custom components to easily add components
+  /**
+   * Adds a new component to the page builder.
+   * @param {ComponentObject} componentObject - The component to add.
+   * @returns {Promise<void>}
+   */
   public async addComponent(componentObject: ComponentObject): Promise<void> {
     try {
       const clonedComponent = this.cloneCompObjForDOMInsertion({
@@ -1956,10 +2270,12 @@ export class PageBuilderService {
   }
 
   /**
-   * Automatically add Tailwind pbx- prefix to Tailwind classes in imported HTML (if not already present),
-   * process each element’s class attribute and update the classes accordingly.
+   * Adds a prefix to Tailwind CSS classes in a string.
+   * @param {string} classList - The string of classes.
+   * @param {string} [prefix='pbx-'] - The prefix to add.
+   * @returns {string} The prefixed class string.
+   * @private
    */
-
   private addTailwindPrefixToClasses(classList: string, prefix = 'pbx-'): string {
     return classList
       .split(/\s+/)
@@ -1974,6 +2290,12 @@ export class PageBuilderService {
       .join(' ')
   }
 
+  /**
+   * Converts a style object to a CSS string.
+   * @param {string | Record<string, string> | null | undefined} styleObj - The style object.
+   * @returns {string} The CSS style string.
+   * @private
+   */
   private convertStyleObjectToString(
     styleObj: string | Record<string, string> | null | undefined,
   ): string {
@@ -1990,8 +2312,6 @@ export class PageBuilderService {
 
   /**
    * Parses a string of HTML and extracts builder components and global page settings.
-   *
-   * ⚠️ **Important:**
    * - This method expects an **HTML string** containing one or more `<section>...</section>` elements (such as the output from `getSavedPageHtml()` or a previously saved builder HTML string).
    * - **Do NOT pass a JSON string** (such as the result of `JSON.stringify(componentsArray)`) to this method. Passing a JSON string to `DOMParser.parseFromString(..., 'text/html')` will not produce valid DOM nodes. Instead, it will treat the JSON as plain text, resulting in a `<html><head></head><body>{...json...}</body></html>` structure, not real HTML elements.
    * - If you pass a JSON string, you will see lots of `\n` and strange HTML, because the parser is just wrapping your JSON in a `<body>` tag as text.
@@ -2472,6 +2792,9 @@ export class PageBuilderService {
     }
   }
 
+  /**
+   * Initializes the styles for the currently selected element.
+   */
   public async initializeElementStyles(): Promise<void> {
     // Wait for Vue to finish DOM updates before attaching event listeners.
     // This ensures elements exist in the DOM.
