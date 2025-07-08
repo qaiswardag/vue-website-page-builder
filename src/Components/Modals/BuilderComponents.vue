@@ -44,7 +44,7 @@ const firstButtonBuilder = function () {
         <div v-if="CustomBuilderComponents">
           <component :is="CustomBuilderComponents" />
         </div>
-        <div class="pbx-h-[75vh]" v-else>
+        <div v-else>
           <DefaultBuilderComponents :customMediaComponent="customMediaComponent" />
         </div>
       </div>
