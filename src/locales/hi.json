@@ -94,7 +94,6 @@
   "Enter URL": "URL दर्ज करें",
   "Line break": "लाइन ब्रेक",
   "Bold": "बोल्ड",
-  "Link": "लिंक",
   "Header 2": "हेडर 2",
   "Header 3": "हेडर 3",
   "List": "सूची",
@@ -128,8 +127,7 @@
   "Two Square Images": "दो वर्ग छवियां",
   "Three Square Images": "तीन वर्ग छवियां",
   "Six Square Images Grid": "छह वर्ग छवियों की ग्रिड",
-  "Three Vertical Images": "तीन लंबवत छवियां",
-  "Four Square Images With Text": "चार वर्ग छवियां और पाठ",
+
   "Three Square Images With Text": "तीन वर्ग छवियां और पाठ",
   "Three Vertical Images": "दो वर्ग छवियां और पाठ",
   "Text": "पाठ",
@@ -163,5 +161,9 @@
   "Image": "छवि",
   "Image & Text": "छवि और पाठ",
   "Four Square Images With Text": "चार वर्गाकार चित्र पाठ के साथ",
-  "Four Square Images": "चार वर्गाकार छवियाँ"
+  "Four Square Images": "चार वर्गाकार छवियाँ",
+  "Continue Your Work?": "अपना काम जारी रखें?",
+  "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "हमने देखा कि आपके पास कुछ बदलाव हैं जो पिछली बार सहेजे नहीं गए थे। क्या आप वहीं से शुरू करना चाहेंगे जहां आपने छोड़ा था, या डेटाबेस से वर्तमान में लोड किए गए संस्करण का उपयोग करना चाहेंगे?",
+  "Use Saved Version": "सहेजा गया संस्करण उपयोग करें",
+  "Continue Where I Left Off": "वहीं से जारी रखें जहां मैंने छोड़ा ��ा"
 }
