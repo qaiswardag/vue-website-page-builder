@@ -69,7 +69,7 @@ A lightweight and minimalist Page Builder with an elegant and intuitive design, 
 
 Build responsive pages like listings, jobs, or blog posts and manage content easily.
 
-<img style="max-width: 100%;" src="./public/home/editor.jpg" alt="Vue Website Page Builder - the editor" />
+<img style="width: 100%;" src="./public/home/for_read_me/browser_boat.svg" alt="Vue Website Page Builder - the editor" />
 
 ## Get Started in Minutes
 
@@ -92,7 +92,7 @@ npm install @myissue/vue-website-page-builder
 
 A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies. And it is totally free.
 
-<img style="max-width: 100%;" src="./public/home/media_library.jpg" alt="Vue Website Page Builder - the editor" />
+<img style="width: 100%;" src="./public/home/for_read_me/browser_components.svg" alt="Vue Website Page Builder - the editor" />
 
 ## Features
 
