@@ -514,7 +514,7 @@ onMounted(async () => {
 
     <div
       id="pagebuilder-navbar"
-      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[40rem] pbx-max-w-[40rem] pbx-w-[40rem] pbx-flex-1 pbx-bg-myPrimaryLightGrayColor pbx-flex pbx-items-center pbx-justify-between pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 pbx-font-sans pbx-min-h-20"
+      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[64rem] pbx-max-w-[64rem] pbx-w-[64rem] pbx-flex-1 pbx-bg-myPrimaryLightGrayColor pbx-flex pbx-items-center pbx-justify-between pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 pbx-font-sans pbx-min-h-20"
     >
       <template
         v-if="
@@ -824,7 +824,7 @@ onMounted(async () => {
     <!-- Page Builder Main Start -->
     <div
       id="pagebuilder-main"
-      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[40rem] pbx-max-w-[40rem] pbx-w-[40rem] pbx-flex-1 pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2"
+      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[64rem] pbx-max-w-[64rem] pbx-w-[64rem] pbx-flex-1 pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2"
     >
       <!-- Left Menu Start -->
       <div
@@ -952,7 +952,7 @@ onMounted(async () => {
     <!-- Footer Start -->
     <div
       id="pagebuilder-footer"
-      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[40rem] pbx-max-w-[40rem] pbx-w-[40rem] pbx-flex-1 pbx-flex pbx-items-center pbx-justify-center pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid pbx-bg-myPrimaryLightGrayColor pbx-py-4"
+      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[64rem] pbx-max-w-[64rem] pbx-w-[64rem] pbx-flex-1 pbx-flex pbx-items-center pbx-justify-center pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid pbx-bg-myPrimaryLightGrayColor pbx-py-4"
     >
       <div
         @click="
