@@ -49,20 +49,5 @@ const firstButtonBuilder = function () {
         </div>
       </div>
     </div>
-    <div
-      class="pbx-border-0 pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4"
-    >
-      <div class="sm:pbx-w-3/6 pbx-w-full pbx-px-2 pbx-my-2 pbx-flex pbx-gap-2 pbx-justify-end">
-        <button
-          v-if="firstButtonText"
-          ref="firstButtonRef"
-          class="pbx-mySecondaryButton"
-          type="button"
-          @click="firstButtonBuilder"
-        >
-          {{ firstButtonText }}
-        </button>
-      </div>
-    </div>
   </ModalBuilder>
 </template>
