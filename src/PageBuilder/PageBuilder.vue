@@ -514,7 +514,7 @@ onMounted(async () => {
 
     <div
       id="pagebuilder-navbar"
-      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[96rem] pbx-max-w-[96rem] pbx-w-[96rem] pbx-flex-1 pbx-bg-myPrimaryLightGrayColor pbx-flex pbx-items-center pbx-justify-between pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 lg:pbx-px-6 pbx-px-4 pbx-font-sans pbx-min-h-20"
+      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[48rem] pbx-max-w-[48rem] pbx-w-[48rem] pbx-flex-1 pbx-bg-myPrimaryLightGrayColor pbx-flex pbx-items-center pbx-justify-between pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 pbx-mb-2 pbx-font-sans pbx-min-h-20"
     >
       <template
         v-if="
@@ -530,7 +530,7 @@ onMounted(async () => {
               await pageBuilderService.clearHtmlSelection()
             }
           "
-          class="pbx-flex pbx-justify-start pbx-py-2"
+          class="pbx-flex pbx-justify-start pbx-py-2 lg:pbx-ml-4 pbx-ml-2"
         >
           <img class="pbx-h-6" :src="getPageBuilderConfig.pageBuilderLogo.src" alt="Logo" />
         </div>
@@ -742,15 +742,6 @@ onMounted(async () => {
             </button>
           </div>
         </template>
-        <template
-          v-if="
-            getPageBuilderConfig &&
-            getPageBuilderConfig.userSettings &&
-            getPageBuilderConfig.userSettings.language
-          "
-        >
-        </template>
-
         <!-- Publish buttons end -->
 
         <template
@@ -768,7 +759,9 @@ onMounted(async () => {
               getPageBuilderConfig.userSettings.language
             "
           >
-            <div class="pbx-flex-1 pbx-flex pbx-justify-end pbx-items-center pbx-ml-2">
+            <div
+              class="pbx-flex-1 pbx-flex pbx-justify-end pbx-items-center pbx-ml-2 lg:pbx-mr-4 pbx-mr-2"
+            >
               <select
                 id="pbx-lang"
                 class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
@@ -831,7 +824,7 @@ onMounted(async () => {
     <!-- Page Builder Main Start -->
     <div
       id="pagebuilder-main"
-      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[96rem] pbx-max-w-[96rem] pbx-w-[96rem] pbx-flex-1 pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2"
+      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[48rem] pbx-max-w-[48rem] pbx-w-[48rem] pbx-flex-1 pbx-relative pbx-h-full pbx-flex pbx-pb-2 pbx-gap-2"
     >
       <!-- Left Menu Start -->
       <div
@@ -959,7 +952,7 @@ onMounted(async () => {
     <!-- Footer Start -->
     <div
       id="pagebuilder-footer"
-      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[96rem] pbx-max-w-[96rem] pbx-w-[96rem] pbx-flex-1 pbx-flex pbx-items-center pbx-justify-center pbx-p-4 pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid pbx-bg-myPrimaryLightGrayColor"
+      class="lg:pbx-min-w-full lg:pbx-max-w-full lg:pbx-w-full pbx-min-w-[48rem] pbx-max-w-[48rem] pbx-w-[48rem] pbx-flex-1 pbx-flex pbx-items-center pbx-justify-center pbx-border-0 pbx-border-t pbx-border-t-gray-200 pbx-border-solid pbx-bg-myPrimaryLightGrayColor pbx-py-4"
     >
       <div
         @click="
