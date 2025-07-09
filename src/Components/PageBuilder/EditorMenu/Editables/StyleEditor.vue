@@ -60,13 +60,13 @@ const handleAddStyle = async () => {
   <EditorAccordion>
     <template #title>{{ translate('Inline Styles') }}</template>
     <template #content>
-      <label class="pbx-myPrimaryInputLabel pbx-my-4">
+      <p class="pbx-myPrimaryInputLabel pbx-my-4">
         {{
           translate(
             'These are the inline styles applied by the builder. Add your own styles and press Enter to apply them to the selected element.',
           )
         }}
-      </label>
+      </p>
 
       <div class="pbx-flex pbx-flex-row pbx-flex-wrap pbx-gap-2 pbx-mt-2 pbx-mb-4">
         <div

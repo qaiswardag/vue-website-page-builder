@@ -16,6 +16,7 @@ import LinkEditor from './Editables/LinkEditor.vue'
 import TipTap from '../../TipTap/TipTap.vue'
 import EditGetElement from './Editables/EditGetElement.vue'
 import ElementEditor from './Editables/ElementEditor.vue'
+import HTMLEditor from './Editables/HTMLEditor.vue'
 import { getPageBuilder } from '../../../composables/builderInstance'
 import EditorAccordion from '../EditorMenu/EditorAccordion.vue'
 import fullHTMLContent from '../../../utils/builder/html-doc-declaration-with-components'
@@ -154,45 +155,48 @@ const handleCloseGlobalPageStyles = async function () {
         <article class="pbx-mb-1">
           <TipTap></TipTap>
         </article>
-        <article class="pbx-my-1 pbx-bg-white">
+        <article class="pbx-my-1">
           <Typography></Typography>
         </article>
 
-        <article class="pbx-my-1 pbx-bg-white">
+        <article class="pbx-my-1">
           <OpacityEditor> </OpacityEditor>
         </article>
-        <article class="pbx-my-1 pbx-bg-white">
+        <article class="pbx-my-1">
           <Padding> </Padding>
         </article>
-        <article class="pbx-my-1 pbx-bg-white">
+        <article class="pbx-my-1">
           <Margin> </Margin>
         </article>
-        <article class="pbx-my-1 pbx-bg-white">
+        <article class="pbx-my-1">
           <BorderRadius></BorderRadius>
         </article>
-        <article class="pbx-my-1 pbx-bg-white">
+        <article class="pbx-my-1">
           <Borders></Borders>
         </article>
-        <article class="pbx-my-1 pbx-bg-white">
+        <article class="pbx-my-1">
           <ClassEditor></ClassEditor>
         </article>
-        <article class="pbx-my-1 pbx-bg-white">
+        <article class="pbx-my-1">
           <StyleEditor></StyleEditor>
+        </article>
+        <article class="pbx-my-1">
+          <HTMLEditor></HTMLEditor>
         </article>
       </div>
 
       <!-- Global Page Styles -->
-      <article class="pbx-my-1 pbx-bg-white">
+      <article class="pbx-my-1">
         <EditorAccordion>
           <template #title>{{ translate('Global Page Styles') }}</template>
           <template #content>
-            <label class="pbx-myPrimaryInputLabel pbx-my-4">
+            <p class="pbx-myPrimaryInputLabel pbx-my-4">
               {{
                 translate(
                   'Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.',
                 )
               }}
-            </label>
+            </p>
 
             <hr />
             <div class="pbx-my-2 pbx-py-2">
@@ -206,20 +210,17 @@ const handleCloseGlobalPageStyles = async function () {
       <!-- Global Page Styles -->
 
       <!-- Download Layout HTML -->
-      <article
-        v-if="Array.isArray(getComponents) && getComponents.length >= 1"
-        class="pbx-my-1 pbx-bg-white"
-      >
+      <article v-if="Array.isArray(getComponents) && getComponents.length >= 1" class="pbx-my-1">
         <EditorAccordion>
           <template #title>{{ translate('Download HTML') }}</template>
           <template #content>
-            <label class="pbx-myPrimaryInputLabel pbx-my-4">
+            <p class="pbx-myPrimaryInputLabel pbx-my-4">
               {{
                 translate(
                   'Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.',
                 )
               }}
-            </label>
+            </p>
             <hr />
             <div class="pbx-my-2 pbx-py-2">
               <button @click="handleDownloadHTML" type="button" class="pbx-myPrimaryButton">
@@ -261,32 +262,35 @@ const handleCloseGlobalPageStyles = async function () {
                 )
               }}
             </p>
-            <article class="pbx-my-1 pbx-bg-gray-100">
+            <article class="pbx-my-1">
               <Typography></Typography>
             </article>
-            <article class="pbx-my-1 pbx-bg-gray-100">
+            <article class="pbx-my-1">
               <TextColorEditor :globalPageLayout="true"></TextColorEditor>
             </article>
-            <article class="pbx-my-1 pbx-bg-gray-100">
+            <article class="pbx-my-1">
               <BackgroundColorEditor :globalPageLayout="true"></BackgroundColorEditor>
             </article>
-            <article class="pbx-my-1 pbx-bg-gray-100">
+            <article class="pbx-my-1">
               <Padding> </Padding>
             </article>
-            <article class="pbx-my-1 pbx-bg-gray-100">
+            <article class="pbx-my-1">
               <Margin> </Margin>
             </article>
-            <article class="pbx-my-1 pbx-bg-gray-100">
+            <article class="pbx-my-1">
               <BorderRadius></BorderRadius>
             </article>
-            <article class="pbx-my-1 pbx-bg-gray-100">
+            <article class="pbx-my-1">
               <Borders></Borders>
             </article>
-            <article class="pbx-my-1 pbx-bg-gray-100">
+            <article class="pbx-my-1">
               <ClassEditor></ClassEditor>
             </article>
-            <article class="pbx-my-1 pbx-bg-gray-100">
+            <article class="pbx-my-1">
               <StyleEditor></StyleEditor>
+            </article>
+            <article class="pbx-my-1">
+              <HTMLEditor></HTMLEditor>
             </article>
           </div>
         </div>

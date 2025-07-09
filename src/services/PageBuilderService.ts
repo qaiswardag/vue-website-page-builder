@@ -2792,6 +2792,26 @@ export class PageBuilderService {
     }
   }
 
+  public async applyModifiedHTML(htmlString: string) {
+    console.log('den er:', htmlString)
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = htmlString.trim()
+
+    const parsedElement = tempDiv.firstElementChild as HTMLElement | null
+
+    if (!parsedElement) {
+      console.warn('Could not parse element from HTML string:', htmlString)
+      return
+    }
+
+    this.pageBuilderStateStore.setElement(parsedElement)
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.addListenersToEditableElements()
+    this.pageBuilderStateStore.setElement(parsedElement)
+  }
+
   /**
    * Initializes the styles for the currently selected element.
    */
