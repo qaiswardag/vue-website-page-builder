@@ -491,8 +491,9 @@ export class PageBuilderService {
         }
 
         if (passedComponentsArray && localStorageData) {
-          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           await this.completeMountProcess(JSON.stringify(passedComponentsArray), true)
+          await delay(500)
+          this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           return
         }
         if (!passedComponentsArray && localStorageData && !this.savedMountComponents) {
@@ -520,7 +521,7 @@ export class PageBuilderService {
         // No Page Builder Is  present in DOM initially
         if (localStorageData && this.isPageBuilderMissingOnStart) {
           await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
-          await delay(400)
+          await delay(500)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           this.pendingMountComponents = null
           return
