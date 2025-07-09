@@ -57,7 +57,6 @@ const handleSaveChanges = () => {
   </EditorAccordion>
   <ModalBuilder
     maxWidth="7xl"
-    minHeight="pbx-min-h-[65vh] pbx-max-h-[65vh]"
     :showModalBuilder="showModalHTMLEditor"
     :title="translate('HTML Editor')"
     @closeMainModalBuilder="handleCloseHTMLEditor"
