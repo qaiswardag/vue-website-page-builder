@@ -2836,7 +2836,7 @@ export class PageBuilderService {
       oldElement.replaceWith(parsedElement)
 
       // Update the element in the store (now referencing the new one)
-      await this.mountComponentsToDOM(html)
+      await this.mountComponentsToDOM(htmlString)
     } else {
       console.warn('No valid element to replace in DOM')
     }

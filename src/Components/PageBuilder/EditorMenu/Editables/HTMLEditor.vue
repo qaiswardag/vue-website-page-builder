@@ -35,6 +35,7 @@ const handleShowHTMLEditor = () => {
   if (!props.globalPage) {
     editableHtml.value = elementHTML.value
   }
+
   if (props.globalPage) {
     const comps =
       Array.isArray(getComponents.value) &&
