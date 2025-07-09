@@ -94,7 +94,6 @@
   "Enter URL": "Entrer l'URL",
   "Line break": "Saut de ligne",
   "Bold": "Gras",
-  "Link": "Lien",
   "Header 2": "Titre 2",
   "Header 3": "Titre 3",
   "List": "Liste",
@@ -128,8 +127,6 @@
   "Two Square Images": "Deux images carrées",
   "Three Square Images": "Trois images carrées",
   "Six Square Images Grid": "Grille de six images carrées",
-  "Three Vertical Images": "Trois images verticales",
-  "Four Square Images With Text": "Quatre images carrées avec texte",
   "Three Square Images With Text": "Trois images carrées avec texte",
   "Two Square Images With Text": "Deux images carrées avec texte",
   "Three Vertical Images": "Deux images carrées avec texte",
@@ -163,5 +160,9 @@
   "Image": "Image",
   "Image & Text": "Image et texte",
   "Four Square Images With Text": "Quatre images carrées avec texte",
-  "Four Square Images": "Quatre images carrées"
+  "Four Square Images": "Quatre images carrées",
+  "Continue Your Work?": "Continuer votre travail ?",
+  "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "Nous avons remarqué que vous avez des modifications qui n'ont pas été enregistrées la dernière fois. Souhaitez-vous reprendre là où vous vous êtes arrêté, ou utiliser la version actuellement chargée depuis la base de données ?",
+  "Use Saved Version": "Utiliser la version enregistrée",
+  "Continue Where I Left Off": "Continuer là où je me suis arrêté"
 }

@@ -659,7 +659,7 @@ export class PageBuilderService {
    * Removes all inline styles from the main page builder container.
    * @returns {Promise<void>}
    */
-  public async clearInlineStylesFromPagee() {
+  public async clearInlineStylesFromPage() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -1950,7 +1950,7 @@ export class PageBuilderService {
     // Restore the original content if available
     if (Array.isArray(this.originalComponents)) {
       await this.clearClassesFromPage()
-      await this.clearInlineStylesFromPagee()
+      await this.clearInlineStylesFromPage()
       await this.mountComponentsToDOM(JSON.stringify(this.originalComponents), true)
       this.removeCurrentComponentsFromLocalStorage()
     }
@@ -2790,6 +2790,32 @@ export class PageBuilderService {
         }
       }
     }
+  }
+
+  public async applyModifiedHTML(htmlString: string) {
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = htmlString.trim()
+
+    const parsedElement = tempDiv.firstElementChild as HTMLElement | null
+
+    if (!parsedElement) {
+      console.warn('Could not parse element from HTML string:', htmlString)
+      return
+    }
+
+    // Replace the actual DOM element
+    const oldElement = this.pageBuilderStateStore.getElement
+    if (oldElement && oldElement.parentElement) {
+      oldElement.replaceWith(parsedElement)
+
+      // Update the element in the store (now referencing the new one)
+      this.pageBuilderStateStore.setElement(parsedElement)
+    } else {
+      console.warn('No valid element to replace in DOM')
+    }
+
+    await this.addListenersToEditableElements()
+    await nextTick()
   }
 
   /**

@@ -4,7 +4,7 @@
     :class="{ '': expanded }"
   >
     <div
-      class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor"
+      class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 pbx-bg-white hover:pbx-bg-myPrimaryLightGrayColor"
       @click="expanded = !expanded"
     >
       <p class="pbx-myPrimaryParagraph pbx-font-medium pbx-my-0 pbx-py-0">
@@ -19,7 +19,7 @@
       </template>
     </div>
     <div
-      :class="[expanded ? 'pbx-block' : 'pbx-hidden']"
+      :class="[expanded ? 'pbx-block pbx-bg-sky-50' : 'pbx-hidden']"
       class="pbx-px-4 pbx-ease-linear pbx-duration-75 pbx-pb-8"
     >
       <slot name="content" />

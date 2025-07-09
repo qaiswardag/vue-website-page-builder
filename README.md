@@ -8,15 +8,19 @@
   - [Demo](#demo)
   - [Overview](#overview)
   - [Get Started in Minutes](#get-started-in-minutes)
-  - [Installation](#installation)
   - [About](#about)
+  - [Real-World Application Example](#real-world-application-example)
   - [Features](#features)
     - [Trusted by Freelancers and Leading Brands](#trusted-by-freelancers-and-leading-brands)
   - [Technical Details](#technical-details)
   - [Documentation](#documentation)
   - [Requirements](#requirements)
-  - [Getting Started \& Installation](#getting-started--installation)
+  - [Getting Started](#getting-started)
+  - [Installation](#installation)
   - [Quick Start](#quick-start)
+    - [Nuxt 3 Integration](#nuxt-3-integration)
+      - [Create a Nuxt Plugin](#create-a-nuxt-plugin)
+      - [Register the Plugin](#register-the-plugin)
     - [Initializing the Page Builder](#initializing-the-page-builder)
     - [Why Use the Shared Instance?](#why-use-the-shared-instance)
     - [Using the Page Builder Component](#using-the-page-builder-component)
@@ -24,6 +28,7 @@
   - [Rendering HTML Output in Other Frameworks (React, Nuxt, etc.)](#rendering-html-output-in-other-frameworks-react-nuxt-etc)
   - [Providing Configuration to the Page Builder](#providing-configuration-to-the-page-builder)
   - [Comprehensive Language Support in the Page Builder](#comprehensive-language-support-in-the-page-builder)
+      - [Default language](#default-language)
       - [Disabling the Language Dropdown](#disabling-the-language-dropdown)
   - [Local Storage \& Auto-Save](#local-storage--auto-save)
   - [Retrieving the Latest HTML Content for Form Submission](#retrieving-the-latest-html-content-for-form-submission)
@@ -78,19 +83,15 @@ Follow the [Quick Start](#quick-start) guide to begin building with just a few s
 
 ---
 
-## Installation
-
-The web builder for stunning pages. Enable users to design and publish modern pages at any scale.
-
-```bash
-npm install @myissue/vue-website-page-builder
-```
-
----
-
 ## About
 
 A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies. And it is totally free.
+
+<img style="width: 100%;" src="./public/home/for_read_me/browser_components.svg" alt="Vue Website Page Builder - the editor" />
+
+## Real-World Application Example
+
+Discover how the Vue Website Page Builder is empowering businesses to create dynamic and responsive web pages. A prime example is [myself.ae](https://www.myself.ae/stores), where the builder is utilized to create engaging and user-friendly online store pages.
 
 <img style="width: 100%;" src="./public/home/for_read_me/browser_components.svg" alt="Vue Website Page Builder - the editor" />
 
@@ -142,7 +143,7 @@ Please note that these instructions assume you have Node.js installed.
 - Vue.js ≥ 3.0.0
 - Modern browser with ES6+ support
 
-## Getting Started & Installation
+## Getting Started
 
 Make sure to install the dependencies:
 
@@ -160,10 +161,42 @@ yarn install
 bun install
 ```
 
+## Installation
+
+The web builder for stunning pages. Enable users to design and publish modern pages at any scale.
+
+```bash
+npm install @myissue/vue-website-page-builder
+```
+
 ## Quick Start
 
 Get up and running with the Vue Website Page Builder in just a few minutes.
 This section walks you through the essential steps—from installation to rendering your first page—so you can start building beautiful, dynamic content right away.
+
+### Nuxt 3 Integration
+
+To use `@myissue/vue-website-page-builder` in a Nuxt 3 project, follow these steps:
+
+#### Create a Nuxt Plugin
+
+```js
+import { defineNuxtPlugin } from '#app'
+import PageBuilder from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(PageBuilder)
+})
+```
+
+#### Register the Plugin
+
+```js
+export default defineNuxtConfig({
+  plugins: ['~/plugins/page-builder.client.ts'],
+})
+```
 
 ### Initializing the Page Builder
 
@@ -247,7 +280,6 @@ You can use the Page Builder to generate HTML and render it in any frontend fram
 To ensure your content is styled correctly, simply install the Page Builder package in your target project and import its CSS file. All builder and Tailwind-prefixed styles will be applied automatically.
 
 ```js
-// Import the builder's CSS file once in your project
 import '@myissue/vue-website-page-builder/style.css'
 ```
 
@@ -354,13 +386,14 @@ The Page Builder offers robust multilingual support, enabling you to reach a glo
 | Arabic               | ar      |
 | Hindi                | hi      |
 
+#### Default language
+
 You can set a default language for your project:
 
 ```js
 userSettings: {
   language: {
     default: 'en',
-    enable: ['en', 'zh-Hans', 'fr'],
   },
 },
 ```
@@ -570,7 +603,7 @@ function closePageBuilder() {
 
 To allow users to use the Publish button from inside the builder, use the `showPublishButton` prop and listen for the `@handlePublishPageBuilder` event.
 
-> **Note:**  
+> **Note:**
 > When the Publish button is clicked, the Page Builder will automatically save the latest changes to local storage before emitting the `@handlePublishPageBuilder` event. This ensures you always receive the most up-to-date content.
 
 ```vue
@@ -595,7 +628,7 @@ const handlePublish = () => {
 - `:showPublishButton="true"` — shows a publish button in the Page Builder toolbar.
 - `@handlePublishPageBuilder="handlePublish"` — emits after the builder auto-saves, so you always get the latest content.
 
-> **Tip:**  
+> **Tip:**
 > You can name your handler function anything you like. This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
 
 - `:showPublishButton="true"` — shows a publish button in the Page Builder toolbar.
@@ -740,3 +773,7 @@ We would greatly appreciate it if you could star the GitHub repository. Starring
 ## License
 
 [MIT License](./LICENSE)
+
+```
+
+```

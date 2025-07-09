@@ -253,12 +253,13 @@ const handlerRumeEditingForUpdate = async function () {
   typeModal.value = 'warning'
   showModalResumeEditing.value = true
 
-  titleModalResumeEditing.value = 'Continue Your Work?'
-  descriptionModalResumeEditing.value =
-    'We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?'
-  firstButtonResumeEditing.value = 'Use Saved Version'
+  titleModalResumeEditing.value = translate('Continue Your Work?')
+  descriptionModalResumeEditing.value = translate(
+    'We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?',
+  )
+  firstButtonResumeEditing.value = translate('Use Saved Version')
   secondButtonResumeEditing.value = null
-  thirdButtonResumeEditing.value = 'Continue Where I Left Off'
+  thirdButtonResumeEditing.value = translate('Continue Where I Left Off')
 
   firstModalButtonResumeEditingFunction.value = async function () {
     pageBuilderStateStore.setHasLocalDraftForUpdate(false)

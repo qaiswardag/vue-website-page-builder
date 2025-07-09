@@ -94,7 +94,6 @@
   "Enter URL": "输入URL",
   "Line break": "换行",
   "Bold": "加粗",
-  "Link": "链接",
   "Header 2": "标题2",
   "Header 3": "标题3",
   "List": "列表",
@@ -129,7 +128,6 @@
   "Three Square Images": "三张方形图片",
   "Six Square Images Grid": "六张方形图片网格",
   "Three Vertical Images": "三张竖直图片",
-  "Four Square Images With Text": "四张方形图片和文字",
   "Three Square Images With Text": "三张方形图片和文字",
   "Two Square Images With Text": "两张方形图片和文字",
   "Text": "文本",
@@ -162,5 +160,9 @@
   "Image": "图片",
   "Image & Text": "图片和文字",
   "Four Square Images With Text": "四张带文字的方形图片",
-  "Four Square Images": "四张方形图片"
+  "Four Square Images": "四张方形图片",
+  "Continue Your Work?": "继续您的工作？",
+  "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "我们注意到您上次有一些更改没有保存。您是想从上次离开的地方继续，还是使用当前从数据库加载的版本？",
+  "Use Saved Version": "使用保存的版本",
+  "Continue Where I Left Off": "从我离开的地方继续"
 }
