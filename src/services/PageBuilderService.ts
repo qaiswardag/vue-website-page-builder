@@ -2819,6 +2819,32 @@ export class PageBuilderService {
     await nextTick()
   }
 
+  public async applyModifiedComponents(htmlString: string) {
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = htmlString.trim()
+
+    const parsedElement = tempDiv.firstElementChild as HTMLElement | null
+
+    if (!parsedElement) {
+      console.warn('Could not parse element from HTML string:', htmlString)
+      return
+    }
+
+    // Replace the actual DOM element
+    const oldElement = this.pageBuilderStateStore.getElement
+    if (oldElement && oldElement.parentElement) {
+      oldElement.replaceWith(parsedElement)
+
+      // Update the element in the store (now referencing the new one)
+      await this.mountComponentsToDOM(html)
+    } else {
+      console.warn('No valid element to replace in DOM')
+    }
+
+    await this.addListenersToEditableElements()
+    await nextTick()
+  }
+
   /**
    * Initializes the styles for the currently selected element.
    */

@@ -10,7 +10,14 @@ const pageBuilderService = getPageBuilder()
 const pageBuilderStateStore = sharedPageBuilderStore
 const { translate } = useTranslations()
 
+const props = defineProps({
+  globalPage: {
+    type: Boolean,
+  },
+})
+
 const getElement = computed(() => pageBuilderStateStore.getElement)
+const getComponents = computed(() => pageBuilderStateStore.getComponents)
 
 const elementHTML = computed(() => {
   if (!getElement.value || !(getElement.value instanceof HTMLElement)) {
@@ -22,9 +29,23 @@ const elementHTML = computed(() => {
 const showModalHTMLEditor = ref(false)
 
 const editableHtml = ref('')
+const editableComponents = ref('')
 
 const handleShowHTMLEditor = () => {
-  editableHtml.value = elementHTML.value
+  if (!props.globalPage) {
+    editableHtml.value = elementHTML.value
+  }
+  if (props.globalPage) {
+    const comps =
+      Array.isArray(getComponents.value) &&
+      getComponents.value.map((comp) => {
+        return comp.html_code
+      })
+
+    editableComponents.value = comps
+
+    console.log('deeen er:', comps)
+  }
   showModalHTMLEditor.value = true
 }
 
@@ -32,9 +53,12 @@ const handleCloseHTMLEditor = () => {
   showModalHTMLEditor.value = false
 }
 
-const handleSaveChanges = () => {
+const handleSaveChangesElement = () => {
   pageBuilderService.applyModifiedHTML(editableHtml.value)
-
+  showModalHTMLEditor.value = true
+}
+const handleSaveChangesComponents = () => {
+  pageBuilderService.applyModifiedComponents(editableComponents.value)
   showModalHTMLEditor.value = true
 }
 </script>
@@ -61,27 +85,53 @@ const handleSaveChanges = () => {
     :title="translate('HTML Editor')"
     @closeMainModalBuilder="handleCloseHTMLEditor"
   >
-    <textarea
-      id="html-editor"
-      v-model="editableHtml"
-      class="pbx-h-full pbx-font-sans pbx-bg-gray-900 pbx-text-white pbx-w-full"
-      style="overflow: auto; min-height: 400px"
-    ></textarea>
-    <div
-      class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
-    >
-      <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
-        <div
-          class="sm:pbx-grid-cols-2 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full"
-        >
-          <button @click="handleCloseHTMLEditor" type="button" class="pbx-mySecondaryButton">
-            {{ translate('Close') }}
-          </button>
-          <button @click="handleSaveChanges" type="button" class="pbx-myPrimaryButton">
-            {{ translate('Save') }}
-          </button>
+    <template v-if="!globalPage">
+      <textarea
+        id="html-editor"
+        v-model="editableHtml"
+        class="pbx-h-full pbx-font-sans pbx-bg-gray-900 pbx-text-white pbx-w-full"
+        style="overflow: auto; min-height: 400px"
+      ></textarea>
+      <div
+        class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
+      >
+        <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
+          <div
+            class="sm:pbx-grid-cols-2 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full"
+          >
+            <button @click="handleCloseHTMLEditor" type="button" class="pbx-mySecondaryButton">
+              {{ translate('Close') }}
+            </button>
+            <button @click="handleSaveChangesElement" type="button" class="pbx-myPrimaryButton">
+              {{ translate('Save') }}
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </template>
+    <template v-if="globalPage">
+      <textarea
+        id="html-editor"
+        v-model="editableComponents"
+        class="pbx-h-full pbx-font-sans pbx-bg-gray-900 pbx-text-white pbx-w-full"
+        style="overflow: auto; min-height: 400px"
+      ></textarea>
+      <div
+        class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
+      >
+        <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
+          <div
+            class="sm:pbx-grid-cols-2 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full"
+          >
+            <button @click="handleCloseHTMLEditor" type="button" class="pbx-mySecondaryButton">
+              {{ translate('Close') }}
+            </button>
+            <button @click="handleSaveChangesComponents" type="button" class="pbx-myPrimaryButton">
+              {{ translate('Save') }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </template>
   </ModalBuilder>
 </template>
