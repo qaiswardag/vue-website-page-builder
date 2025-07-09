@@ -165,5 +165,7 @@
   "Continue Your Work?": "अपना काम जारी रखें?",
   "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "हमने देखा कि आपके पास कुछ बदलाव हैं जो पिछली बार सहेजे नहीं गए थे। क्या आप वहीं से शुरू करना चाहेंगे जहां आपने छोड़ा था, या डेटाबेस से वर्तमान में लोड किए गए संस्करण का उपयोग करना चाहेंगे?",
   "Use Saved Version": "सहेजा गया संस्करण उपयोग करें",
-  "Continue Where I Left Off": "वहीं से जारी रखें जहां मैंने छोड़ा ��ा"
+  "Continue Where I Left Off": "वहीं से शुरु करो जहाँ मैने छोड़ा था",
+  "HTML Editor": "HTML संपादक",
+  "Gain full control over components by editing the raw HTML.": "कच्चे HTML को संपादित करके घटकों पर पूर्ण नियंत्रण प्राप्त करें।"
 }

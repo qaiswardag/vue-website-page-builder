@@ -25,7 +25,7 @@
   "Remove all Components": "すべてのコンポーネントを削除",
   "Are you sure you want to remove all Components?": "すべてのコンポーネントを削除してもよろしいですか？",
   "Styles": "スタイル",
-  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "ページ全体に影響を与���るスタイルを適用します。これらの設定には、グローバルフォントファミリー、テキストカラー、背景色、すべてのセクションに適用されるその他のユニバーサルスタイルが含まれます。",
+  "Apply styles that affect the entire page. These settings include global font family, text color, background color, and other universal styles that apply to all sections.": "ページ全体に適用されるスタイルを適用します。これらの設定には、グローバルフォントファミリー、テキストカラー、背景色、その他すべてのセクションに適用されるユニバーサルスタイルが含まれます。",
   "Update Page Styles": "ページスタイルを更新",
   "Download HTML": "HTMLをダウンロード",
   "Export the entire page as a standalone HTML file. This includes all sections, content, and applied styles, making it ready for use or integration elsewhere.": "ページ全体をスタンドアロンのHTMLファイルとしてエクスポートします。これには、すべてのセクション、コンテンツ、および適用されたスタイルが含まれ、他の場所での使用または統合の準備が整います。",
@@ -85,7 +85,7 @@
   "Demo Content": "デモコンテンツ",
   "Demo Description": "軽量で無料のVue Click & Dropページビルダーをご紹介します。Vueを使用してデジタル体験を簡単に作成および強化します。強力なものすべてが複雑である必要はありません。このミニマリストで軽量なページビルダーは、シンプルさとスピードに焦点を当てたエレガントで直感的なインターフェイスを提供します。リスト、求人ボード、またはブログ投稿など、完全にレスポンシブなページを作成し、無料のClick & Dropページビルダーを使用してコンテンツを簡単に管理します。",
   "Demo Description Two": "成長のために設計されたページビルダー。完全にカスタマイズ可能で常に応答性があり、あらゆるニーズに対応するように設計された既製のコンポーネントを使用して、ウェブサイトのページを作成します。成長中の商人、ブランド、代理店のための強力なページビルダー。",
-  "Demo Description Three": "��ザイナーに愛されているウェブサイトビルダー。あらゆる画面サイズに合わせてレイアウトを簡単にデザイン、プレビュー、調整できます。クリーン。高速。直感的。強力なものすべてが複雑に見える必要はありません。",
+  "Demo Description Three": "デザイナーに愛されるウェブサイトビルダー。あらゆる画面サイズに合わせてレイアウトを簡単にデザイン、プレビュー、調整できます。シンプルで使いやすく、高速で、直感的です。パワフルなデザインは必ずしも複雑に見えなくても構いません。",
   "Demo Description Four": "すべてのデバイスでサイトが見栄えよく表示されるようにします。テキストコンテンツをライブおよびリアルタイムで編集します。あなたのスタイルに合った完璧なフォントを選択してください。変更を元に戻す機能で自信を持って実験してください。プレフィックス付きのスタイル。ビルダーとアプリの間でスタイルの競合のリスクはありません。",
   "Demo Title": "素晴らしいページのためのウェブビルダー",
   "Demo Title Two": "Vueで公開するだけ",
@@ -162,7 +162,9 @@
   "Four Square Images With Text": "テキスト付きの4つの正方形の画像",
   "Four Square Images": "4つの正方形の画像",
   "Continue Your Work?": "作業を続行しますか？",
-  "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "前回保存されなかった変更があります。中断したところ��ら再開しますか、それとも現在データベースから読み込まれているバージョンを使用しますか？",
+  "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "前回保存されなかった変更がいくつかあるようです。中断したところから再開しますか、それともデータベースから現在読み込まれているバージョンを使用しますか",
   "Use Saved Version": "保存されたバージョンを使用",
-  "Continue Where I Left Off": "中断したところから続行"
+  "Continue Where I Left Off": "中断したところから続行",
+  "HTML Editor": "HTMLエディター",
+  "Gain full control over components by editing the raw HTML.": "生の HTML を編集することで、コンポーネントを完全に制御できます。"
 }

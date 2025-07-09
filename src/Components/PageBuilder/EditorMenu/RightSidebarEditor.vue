@@ -290,7 +290,7 @@ const handleCloseGlobalPageStyles = async function () {
               <StyleEditor></StyleEditor>
             </article>
             <article class="pbx-my-1">
-              <HTMLEditor></HTMLEditor>
+              <HTMLEditor :globalPage="true"></HTMLEditor>
             </article>
           </div>
         </div>
