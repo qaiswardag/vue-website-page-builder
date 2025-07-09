@@ -164,5 +164,7 @@
   "Continue Your Work?": "作業を続行しますか？",
   "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "前回保存されなかった変更がいくつかあるようです。中断したところから再開しますか、それともデータベースから現在読み込まれているバージョンを使用しますか",
   "Use Saved Version": "保存されたバージョンを使用",
-  "Continue Where I Left Off": "中断したところから続行"
+  "Continue Where I Left Off": "中断したところから続行",
+  "HTML Editor": "HTMLエディター",
+  "Gain full control over components by editing the raw HTML.": "生の HTML を編集することで、コンポーネントを完全に制御できます。"
 }

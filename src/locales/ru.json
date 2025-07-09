@@ -164,5 +164,7 @@
   "Continue Your Work?": "Продолжить работу?",
   "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "Мы заметили, что у вас есть несохраненные изменения с прошлого раза. Хотите продолжить с того места, где остановились, или использовать версию, загруженную из базы данных?",
   "Use Saved Version": "Использовать сохраненную версию",
-  "Continue Where I Left Off": "Продолжить с того места, где я остановился"
+  "Continue Where I Left Off": "Продолжить с того места, где я остановился",
+  "HTML Editor": "HTML-редактор",
+  "Gain full control over components by editing the raw HTML.": "Получите полный контроль над компонентами, редактируя необработанный HTML-код."
 }

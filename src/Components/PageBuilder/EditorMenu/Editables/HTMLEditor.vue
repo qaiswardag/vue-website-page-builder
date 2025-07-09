@@ -5,6 +5,7 @@ import ModalBuilder from '../../../../Components/Modals/ModalBuilder.vue'
 import EditorAccordion from '../EditorAccordion.vue'
 import { getPageBuilder } from '../../../../composables/builderInstance'
 import { useTranslations } from '../../../../composables/useTranslations'
+import { delay } from '../../../../composables/delay'
 
 const pageBuilderService = getPageBuilder()
 const pageBuilderStateStore = sharedPageBuilderStore
@@ -32,35 +33,67 @@ const editableHtml = ref('')
 const editableComponents = ref('')
 
 const handleShowHTMLEditor = () => {
+  showModalHTMLEditor.value = true
+
   if (!props.globalPage) {
     editableHtml.value = elementHTML.value
   }
 
   if (props.globalPage) {
-    const comps =
+    const compsHTMLString =
       Array.isArray(getComponents.value) &&
-      getComponents.value.map((comp) => {
-        return comp.html_code
-      })
+      getComponents.value
+        .map((comp) => {
+          return comp.html_code
+            .replace(/data-componentid="[^"]*"/g, '') // remove data-componentid
+            .replace(/\s{2,}/g, ' ') // optional: clean up excess spaces
+        })
+        .join('\n')
 
-    editableComponents.value = comps
-
-    console.log('deeen er:', comps)
+    editableComponents.value = compsHTMLString
   }
-  showModalHTMLEditor.value = true
 }
 
 const handleCloseHTMLEditor = () => {
   showModalHTMLEditor.value = false
 }
 
-const handleSaveChangesElement = () => {
-  pageBuilderService.applyModifiedHTML(editableHtml.value)
-  showModalHTMLEditor.value = true
+const isLoading = ref(false)
+const errSaveComponents = ref(null)
+
+const handleSaveChangesElement = async () => {
+  errSaveComponents.value = null
+  isLoading.value = true
+  await delay(300)
+
+  const error = await pageBuilderService.applyModifiedHTML(editableHtml.value)
+
+  if (error) {
+    errSaveComponents.value = error
+    isLoading.value = false
+    return
+  }
+
+  showModalHTMLEditor.value = false
+  isLoading.value = false
 }
-const handleSaveChangesComponents = () => {
-  pageBuilderService.applyModifiedComponents(editableComponents.value)
-  showModalHTMLEditor.value = true
+
+const handleSaveChangesComponents = async () => {
+  errSaveComponents.value = null
+  isLoading.value = true
+  errSaveComponents.value = null
+  await delay(300)
+
+  const error = await pageBuilderService.applyModifiedComponents(editableComponents.value)
+
+  if (error) {
+    errSaveComponents.value = error
+    isLoading.value = false
+    return
+  }
+
+  showModalHTMLEditor.value = false
+  isLoading.value = false
 }
 </script>
 <template>
@@ -69,9 +102,7 @@ const handleSaveChangesComponents = () => {
     <template #content>
       <div class="pbx-my-2 pbx-py-2">
         <label for="vertical-margin" class="pbx-myPrimaryInputLabel">{{
-          translate(
-            'Gain full control over individual components by editing the raw HTML of any selected element. This feature empowers advanced users to fine-tune the HTML structure,',
-          )
+          translate('Gain full control over components by editing the raw HTML.')
         }}</label>
         <hr />
       </div>
@@ -93,23 +124,43 @@ const handleSaveChangesComponents = () => {
         class="pbx-h-full pbx-font-sans pbx-bg-gray-900 pbx-text-white pbx-w-full"
         style="overflow: auto; min-height: 400px"
       ></textarea>
+      <div class="pbx-flex pbx-justify-end pbx-min-h-6">
+        <p v-if="errSaveComponents" class="pbx-myPrimaryParagraphError">
+          Error: {{ errSaveComponents }}
+        </p>
+      </div>
       <div
-        class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
+        class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-flex pbx-items-center pbx-justify-end"
       >
         <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
           <div
             class="sm:pbx-grid-cols-2 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full"
           >
-            <button @click="handleCloseHTMLEditor" type="button" class="pbx-mySecondaryButton">
-              {{ translate('Close') }}
-            </button>
-            <button @click="handleSaveChangesElement" type="button" class="pbx-myPrimaryButton">
-              {{ translate('Save') }}
-            </button>
+            <template v-if="!isLoading">
+              <button @click="handleCloseHTMLEditor" type="button" class="pbx-mySecondaryButton">
+                {{ translate('Close') }}
+              </button>
+              <button @click="handleSaveChangesElement" type="button" class="pbx-myPrimaryButton">
+                {{ translate('Save') }}
+              </button>
+            </template>
+            <template v-if="isLoading">
+              <div class="pbx-flex pbx-items-center pbx-my-2 pbx-justify-end">
+                <div
+                  class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
+                >
+                  <span
+                    class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                  >
+                </div>
+              </div>
+            </template>
           </div>
         </div>
       </div>
     </template>
+
     <template v-if="globalPage">
       <textarea
         id="html-editor"
@@ -117,19 +168,42 @@ const handleSaveChangesComponents = () => {
         class="pbx-h-full pbx-font-sans pbx-bg-gray-900 pbx-text-white pbx-w-full"
         style="overflow: auto; min-height: 400px"
       ></textarea>
+      <div class="pbx-flex pbx-justify-end pbx-min-h-6">
+        <p v-if="errSaveComponents" class="pbx-myPrimaryParagraphError">
+          Error: {{ errSaveComponents }}
+        </p>
+      </div>
       <div
-        class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
+        class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-flex pbx-items-center pbx-justify-end"
       >
         <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
           <div
             class="sm:pbx-grid-cols-2 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full"
           >
-            <button @click="handleCloseHTMLEditor" type="button" class="pbx-mySecondaryButton">
-              {{ translate('Close') }}
-            </button>
-            <button @click="handleSaveChangesComponents" type="button" class="pbx-myPrimaryButton">
-              {{ translate('Save') }}
-            </button>
+            <template v-if="!isLoading">
+              <button @click="handleCloseHTMLEditor" type="button" class="pbx-mySecondaryButton">
+                {{ translate('Close') }}
+              </button>
+              <button
+                @click="handleSaveChangesComponents"
+                type="button"
+                class="pbx-myPrimaryButton"
+              >
+                {{ translate('Save') }}
+              </button>
+            </template>
+            <template v-if="isLoading">
+              <div class="pbx-flex pbx-items-center pbx-my-2 pbx-justify-end">
+                <div
+                  class="pbx-inline-block pbx-h-8 pbx-w-8 pbx-animate-spin pbx-rounded-full pbx-border-4 pbx-border-solid pbx-border-current pbx-border-r-transparent pbx-align-[-0.125em] motion-reduce:pbx-animate-[spin_1.5s_linear_infinite]"
+                >
+                  <span
+                    class="!pbx-absolute !pbx-m-px !pbx-h-px !pbx-w-px !pbx-overflow-hidden !pbx-whitespace-nowrap !pbx-border-0 !pbx-p-0 !pbx-[clip:rect(0,0,0,0)]"
+                    >Loading...</span
+                  >
+                </div>
+              </div>
+            </template>
           </div>
         </div>
       </div>

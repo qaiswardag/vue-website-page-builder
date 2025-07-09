@@ -164,5 +164,7 @@
   "Continue Your Work?": "Continuar seu trabalho?",
   "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "Percebemos que você tem algumas alterações que não foram salvas da última vez. Gostaria de continuar de onde parou ou usar a versão que está carregada atualmente no banco de dados?",
   "Use Saved Version": "Usar a versão salva",
-  "Continue Where I Left Off": "Continuar de onde parei"
+  "Continue Where I Left Off": "Continuar de onde parei",
+  "HTML Editor": "Editor HTML",
+  "Gain full control over components by editing the raw HTML.": "Obtenha controlo total sobre os componentes editando o HTML em bruto."
 }

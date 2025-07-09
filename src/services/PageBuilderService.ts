@@ -2793,56 +2793,55 @@ export class PageBuilderService {
     }
   }
 
-  public async applyModifiedHTML(htmlString: string) {
+  /**
+   * Applies modified components by mounting them to the DOM and attaching listeners.
+   * @param htmlString - The HTML string to apply
+   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
+   */
+  public async applyModifiedHTML(htmlString: string): Promise<string | null> {
+    if (!htmlString || (typeof htmlString === 'string' && htmlString.length === 0)) {
+      return 'No HTML content was provided. Please ensure a valid HTML string is passed.'
+    }
+
     const tempDiv = document.createElement('div')
     tempDiv.innerHTML = htmlString.trim()
 
     const parsedElement = tempDiv.firstElementChild as HTMLElement | null
 
     if (!parsedElement) {
-      console.warn('Could not parse element from HTML string:', htmlString)
-      return
+      return 'Could not parse element from HTML string.'
     }
 
     // Replace the actual DOM element
     const oldElement = this.pageBuilderStateStore.getElement
+
     if (oldElement && oldElement.parentElement) {
       oldElement.replaceWith(parsedElement)
 
       // Update the element in the store (now referencing the new one)
       this.pageBuilderStateStore.setElement(parsedElement)
-    } else {
-      console.warn('No valid element to replace in DOM')
     }
 
     await this.addListenersToEditableElements()
     await nextTick()
+    return null
   }
 
-  public async applyModifiedComponents(htmlString: string) {
-    const tempDiv = document.createElement('div')
-    tempDiv.innerHTML = htmlString.trim()
-
-    const parsedElement = tempDiv.firstElementChild as HTMLElement | null
-
-    if (!parsedElement) {
-      console.warn('Could not parse element from HTML string:', htmlString)
-      return
+  /**
+   * Applies modified components by mounting them to the DOM and attaching listeners.
+   * @param htmlString - The HTML string to apply
+   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
+   */
+  public async applyModifiedComponents(htmlString: string): Promise<string | null> {
+    if (!htmlString || (typeof htmlString === 'string' && htmlString.length === 0)) {
+      return 'No HTML content was provided. Please ensure a valid HTML string is passed.'
     }
 
-    // Replace the actual DOM element
-    const oldElement = this.pageBuilderStateStore.getElement
-    if (oldElement && oldElement.parentElement) {
-      oldElement.replaceWith(parsedElement)
-
-      // Update the element in the store (now referencing the new one)
-      await this.mountComponentsToDOM(htmlString)
-    } else {
-      console.warn('No valid element to replace in DOM')
-    }
+    await this.mountComponentsToDOM(htmlString)
 
     await this.addListenersToEditableElements()
     await nextTick()
+    return null
   }
 
   /**

@@ -165,5 +165,6 @@
   "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?",
   "Use Saved Version": "Use Saved Version",
   "Continue Where I Left Off": "Continue Where I Left Off",
-  "HTML Editor": "HTML Editor"
+  "HTML Editor": "HTML Editor",
+  "Gain full control over components by editing the raw HTML.": "Gain full control over components by editing the raw HTML."
 }

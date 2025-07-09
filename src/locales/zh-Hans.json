@@ -164,5 +164,7 @@
   "Continue Your Work?": "继续您的工作？",
   "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "我们注意到您上次有一些更改没有保存。您是想从上次离开的地方继续，还是使用当前从数据库加载的版本？",
   "Use Saved Version": "使用保存的版本",
-  "Continue Where I Left Off": "从我离开的地方继续"
+  "Continue Where I Left Off": "从我离开的地方继续",
+  "HTML Editor": "HTML 编辑器",
+  "Gain full control over components by editing the raw HTML.": "通过编辑原始 HTML 获得对组件的完全控制。"
 }

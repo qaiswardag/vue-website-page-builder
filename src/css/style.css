@@ -90,7 +90,7 @@
   }
 
   .pbx-myPrimaryParagraphError {
-    @apply pbx-myPrimaryParagraph pbx-mt-1 pbx-italic pbx-text-myPrimaryErrorColor;
+    @apply pbx-myPrimaryParagraph pbx-mt-1 pbx-italic pbx-text-myPrimaryErrorColor pbx-text-sm;
   }
 
   /*

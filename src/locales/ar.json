@@ -163,5 +163,7 @@
   "Continue Your Work?": "أترغب في متابعة عملك؟",
   "We noticed you have some changes that weren’t saved last time. Would you like to pick up where you left off, or use the version that’s currently loaded from the database?": "لاحظنا وجود بعض التغييرات التي لم تُحفظ في المرة السابقة. هل ترغب في المتابعة من حيث توقفت، أم استخدام الإصدار المُحمّل حاليًا من قاعدة البيانات؟",
   "Use Saved Version": "استخدام النسخة المحفوظة",
-  "Continue Where I Left Off": "المتابعة من حيث توقفت"
+  "Continue Where I Left Off": "المتابعة من حيث توقفت",
+  "HTML Editor": "محرر HTML",
+  "Gain full control over components by editing the raw HTML.": "احصل على التحكم الكامل في المكونات عن طريق تحرير HTML الخام."
 }
