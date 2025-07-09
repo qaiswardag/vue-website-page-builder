@@ -659,7 +659,7 @@ export class PageBuilderService {
    * Removes all inline styles from the main page builder container.
    * @returns {Promise<void>}
    */
-  public async clearInlineStylesFromPagee() {
+  public async clearInlineStylesFromPage() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -1950,7 +1950,7 @@ export class PageBuilderService {
     // Restore the original content if available
     if (Array.isArray(this.originalComponents)) {
       await this.clearClassesFromPage()
-      await this.clearInlineStylesFromPagee()
+      await this.clearInlineStylesFromPage()
       await this.mountComponentsToDOM(JSON.stringify(this.originalComponents), true)
       this.removeCurrentComponentsFromLocalStorage()
     }
