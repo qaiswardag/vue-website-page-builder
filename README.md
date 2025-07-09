@@ -8,7 +8,6 @@
   - [Demo](#demo)
   - [Overview](#overview)
   - [Get Started in Minutes](#get-started-in-minutes)
-  - [Installation](#installation)
   - [About](#about)
   - [Real-World Application Example](#real-world-application-example)
   - [Features](#features)
@@ -16,8 +15,12 @@
   - [Technical Details](#technical-details)
   - [Documentation](#documentation)
   - [Requirements](#requirements)
-  - [Getting Started \& Installation](#getting-started--installation)
+  - [Getting Started](#getting-started)
+  - [Installation](#installation)
   - [Quick Start](#quick-start)
+    - [Nuxt 3 Integration](#nuxt-3-integration)
+      - [Create a Nuxt Plugin](#create-a-nuxt-plugin)
+      - [Register the Plugin](#register-the-plugin)
     - [Initializing the Page Builder](#initializing-the-page-builder)
     - [Why Use the Shared Instance?](#why-use-the-shared-instance)
     - [Using the Page Builder Component](#using-the-page-builder-component)
@@ -77,16 +80,6 @@ Build responsive pages like listings, jobs, or blog posts and manage content eas
 
 Easy setup and instant productivity.
 Follow the [Quick Start](#quick-start) guide to begin building with just a few simple steps.
-
----
-
-## Installation
-
-The web builder for stunning pages. Enable users to design and publish modern pages at any scale.
-
-```bash
-npm install @myissue/vue-website-page-builder
-```
 
 ---
 
@@ -150,7 +143,7 @@ Please note that these instructions assume you have Node.js installed.
 - Vue.js ≥ 3.0.0
 - Modern browser with ES6+ support
 
-## Getting Started & Installation
+## Getting Started
 
 Make sure to install the dependencies:
 
@@ -168,10 +161,42 @@ yarn install
 bun install
 ```
 
+## Installation
+
+The web builder for stunning pages. Enable users to design and publish modern pages at any scale.
+
+```bash
+npm install @myissue/vue-website-page-builder
+```
+
 ## Quick Start
 
 Get up and running with the Vue Website Page Builder in just a few minutes.
 This section walks you through the essential steps—from installation to rendering your first page—so you can start building beautiful, dynamic content right away.
+
+### Nuxt 3 Integration
+
+To use `@myissue/vue-website-page-builder` in a Nuxt 3 project, follow these steps:
+
+#### Create a Nuxt Plugin
+
+```js
+import { defineNuxtPlugin } from '#app'
+import PageBuilder from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(PageBuilder)
+})
+```
+
+#### Register the Plugin
+
+```js
+export default defineNuxtConfig({
+  plugins: ['~/plugins/page-builder.client.ts'],
+})
+```
 
 ### Initializing the Page Builder
 
@@ -255,7 +280,6 @@ You can use the Page Builder to generate HTML and render it in any frontend fram
 To ensure your content is styled correctly, simply install the Page Builder package in your target project and import its CSS file. All builder and Tailwind-prefixed styles will be applied automatically.
 
 ```js
-// Import the builder's CSS file once in your project
 import '@myissue/vue-website-page-builder/style.css'
 ```
 
@@ -579,7 +603,7 @@ function closePageBuilder() {
 
 To allow users to use the Publish button from inside the builder, use the `showPublishButton` prop and listen for the `@handlePublishPageBuilder` event.
 
-> **Note:**  
+> **Note:**
 > When the Publish button is clicked, the Page Builder will automatically save the latest changes to local storage before emitting the `@handlePublishPageBuilder` event. This ensures you always receive the most up-to-date content.
 
 ```vue
@@ -604,7 +628,7 @@ const handlePublish = () => {
 - `:showPublishButton="true"` — shows a publish button in the Page Builder toolbar.
 - `@handlePublishPageBuilder="handlePublish"` — emits after the builder auto-saves, so you always get the latest content.
 
-> **Tip:**  
+> **Tip:**
 > You can name your handler function anything you like. This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
 
 - `:showPublishButton="true"` — shows a publish button in the Page Builder toolbar.
@@ -749,3 +773,7 @@ We would greatly appreciate it if you could star the GitHub repository. Starring
 ## License
 
 [MIT License](./LICENSE)
+
+```
+
+```
