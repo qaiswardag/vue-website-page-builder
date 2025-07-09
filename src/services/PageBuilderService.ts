@@ -2793,7 +2793,6 @@ export class PageBuilderService {
   }
 
   public async applyModifiedHTML(htmlString: string) {
-    console.log('den er:', htmlString)
     const tempDiv = document.createElement('div')
     tempDiv.innerHTML = htmlString.trim()
 
@@ -2804,12 +2803,19 @@ export class PageBuilderService {
       return
     }
 
-    this.pageBuilderStateStore.setElement(parsedElement)
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-    await nextTick()
-    // Attach event listeners to all editable elements in the Builder
+    // Replace the actual DOM element
+    const oldElement = this.pageBuilderStateStore.getElement
+    if (oldElement && oldElement.parentElement) {
+      oldElement.replaceWith(parsedElement)
+
+      // Update the element in the store (now referencing the new one)
+      this.pageBuilderStateStore.setElement(parsedElement)
+    } else {
+      console.warn('No valid element to replace in DOM')
+    }
+
     await this.addListenersToEditableElements()
-    this.pageBuilderStateStore.setElement(parsedElement)
+    await nextTick()
   }
 
   /**

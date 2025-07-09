@@ -65,16 +65,23 @@ const handleSaveChanges = () => {
     <textarea
       id="html-editor"
       v-model="editableHtml"
-      class="pbx-myPrimaryTextArea pbx-h-full pbx-font-sans"
-      style="overflow: hidden; min-height: 300px"
+      class="pbx-h-full pbx-font-sans pbx-bg-gray-900 pbx-text-white pbx-w-full"
+      style="overflow: auto; min-height: 400px"
     ></textarea>
     <div
       class="pbx-border-0 pbx-border-solid pbx-border-t pbx-border-gray-200 pbx-mt-4 pbx-flex pbx-items-center pbx-justify-end"
     >
       <div class="pbx-py-4 pbx-flex sm:pbx-justify-end pbx-justify-center">
-        <button @click="handleSaveChanges" type="button" class="pbx-myPrimaryButton">
-          {{ translate('Save') }}
-        </button>
+        <div
+          class="sm:pbx-grid-cols-2 sm:pbx-items-end sm:pbx-justify-end pbx-flex sm:pbx-flex-row pbx-flex-col pbx-myPrimaryGap sm:pbx-w-5/6 pbx-w-full"
+        >
+          <button @click="handleCloseHTMLEditor" type="button" class="pbx-mySecondaryButton">
+            {{ translate('Close') }}
+          </button>
+          <button @click="handleSaveChanges" type="button" class="pbx-myPrimaryButton">
+            {{ translate('Save') }}
+          </button>
+        </div>
       </div>
     </div>
   </ModalBuilder>
