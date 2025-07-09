@@ -10,6 +10,7 @@
   - [Get Started in Minutes](#get-started-in-minutes)
   - [Installation](#installation)
   - [About](#about)
+  - [Real-World Application Example](#real-world-application-example)
   - [Features](#features)
     - [Trusted by Freelancers and Leading Brands](#trusted-by-freelancers-and-leading-brands)
   - [Technical Details](#technical-details)
@@ -92,6 +93,12 @@ npm install @myissue/vue-website-page-builder
 ## About
 
 A Page Builder designed for growth. Build your website pages with ready-made components that are fully customizable and always responsive, designed to fit every need. A powerful Page Builder for growing merchants, brands, and agencies. And it is totally free.
+
+<img style="width: 100%;" src="./public/home/for_read_me/browser_components.svg" alt="Vue Website Page Builder - the editor" />
+
+## Real-World Application Example
+
+Discover how the Vue Website Page Builder is empowering businesses to create dynamic and responsive web pages. A prime example is [myself.ae](https://www.myself.ae/stores), where the builder is utilized to create engaging and user-friendly online store pages.
 
 <img style="width: 100%;" src="./public/home/for_read_me/browser_components.svg" alt="Vue Website Page Builder - the editor" />
 
