@@ -24,63 +24,47 @@ const translatedComponents = computed(() => {
   })
 })
 
-const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(
-  '<div id="pagebuilder" class="" style="">' +
-    translatedComponents.value.map((c) => c.html_code).join('\n') +
-    '</div>',
-)
-
-const configPageBuilder = {
-  userForPageBuilder: {
-    name: 'Jane Doe',
-    image: '/jane_doe.jpg',
-  },
-  updateOrCreate: {
-    formType: 'update',
-    formName: 'collection',
-  },
-  pageBuilderLogo: {
-    src: '/logo/mybuilder_new_lowercase.svg',
-  },
-  resourceData: {
-    title: 'Demo Article',
-    id: 1,
-  },
-  userSettings: {
-    theme: 'light',
-    language: {
-      default: 'en',
-      enable: ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'],
-      disableLanguageDropDown: false,
-    },
-    autoSave: true,
-  },
-
-  settings: {
-    brandColor: '#DB93B0',
-  },
-  pageSettings: pageSettings,
-} as const
-
 watch(currentTranslations, async () => {
-  const { components: newComponents, pageSettings: newPageSettings } =
+  const { components: newComponents, pageSettings: pageSettings } =
     pageBuilderService.parsePageBuilderHTML(
       '<div id="pagebuilder" class="" style="">' +
         translatedComponents.value.map((c) => c.html_code).join('\n') +
         '</div>',
     )
 
-  const newConfig = {
-    ...configPageBuilder,
-    pageSettings: newPageSettings,
-  }
+  const configPageBuilder = {
+    userForPageBuilder: {
+      name: 'Jane Doe',
+      image: '/jane_doe.jpg',
+    },
+    updateOrCreate: {
+      formType: 'update',
+      formName: 'collection',
+    },
+    pageBuilderLogo: {
+      src: '/logo/mybuilder_new_lowercase.svg',
+    },
+    resourceData: {
+      title: 'Demo Article',
+      id: 1,
+    },
+    userSettings: {
+      theme: 'light',
+      language: {
+        default: 'en',
+        enable: ['en', 'zh-Hans', 'fr', 'ja', 'ru', 'es', 'pt', 'de', 'ar', 'hi'],
+        disableLanguageDropDown: false,
+      },
+      autoSave: true,
+    },
 
-  await pageBuilderService.startBuilder(newConfig, newComponents)
-})
+    settings: {
+      brandColor: '#DB93B0',
+    },
+    pageSettings: pageSettings,
+  } as const
 
-onMounted(async () => {
-  const result = await pageBuilderService.startBuilder(configPageBuilder, components)
-  console.log('Page Builder result for message, status, or error::', result)
+  await pageBuilderService.startBuilder(configPageBuilder, newComponents)
 })
 </script>
 

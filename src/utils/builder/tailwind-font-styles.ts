@@ -12,7 +12,6 @@ const tailwindFontStyles: TailwindFontStyles = {
     'pbx-font-light',
     'pbx-font-normal',
     'pbx-font-medium',
-    'pbx-font-medium',
     'pbx-font-bold',
     'pbx-font-extrabold',
     'pbx-font-black',
