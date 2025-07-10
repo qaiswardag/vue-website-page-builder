@@ -1070,7 +1070,6 @@ export class PageBuilderService {
 
       // Set the title attribute if present
       if (clonedComponent.title) {
-        section.setAttribute('title', clonedComponent.title)
         section.setAttribute('data-component-title', clonedComponent.title)
       }
 
@@ -1992,9 +1991,24 @@ export class PageBuilderService {
       const classes = (parsed.pageSettings && parsed.pageSettings.classes) || ''
       const style = (parsed.pageSettings && parsed.pageSettings.style) || ''
 
-      const sectionsHtml = parsed.components.map((c: ComponentObject) => c.html_code).join('\n')
+      const sectionsHtml = parsed.components
+        .map((c: ComponentObject) => {
+          const parser = new DOMParser()
+          const doc = parser.parseFromString(c.html_code, 'text/html')
+          const section = doc.querySelector('section')
+
+          if (section) {
+            section.removeAttribute('data-componentid') // Remove the data-componentid attribute
+            return section.outerHTML
+          }
+
+          return c.html_code // Fallback in case section is not found
+        })
+        .join('\n')
+
       return `<div id="pagebuilder" class="${classes}" style="${style}">\n${sectionsHtml}\n</div>`
     }
+
     return false
   }
 
@@ -2371,10 +2385,7 @@ export class PageBuilderService {
       components = topLevelSections.map((section) => ({
         id: null,
         html_code: section.outerHTML.trim(),
-        title:
-          section.getAttribute('data-component-title') ||
-          section.getAttribute('title') ||
-          'Untitled Component',
+        title: section.getAttribute('data-component-title') || 'Untitled Component',
       }))
     }
     if (topLevelSections.length === 0) {
@@ -2619,10 +2630,7 @@ export class PageBuilderService {
         const componentId = htmlElement.getAttribute('data-componentid')!
 
         // Ensure data-component-title exists
-        const title =
-          htmlElement.getAttribute('title') ||
-          htmlElement.getAttribute('data-component-title') ||
-          'Untitled Component'
+        const title = htmlElement.getAttribute('data-component-title') || 'Untitled Component'
 
         htmlElement.setAttribute('data-component-title', title)
 
