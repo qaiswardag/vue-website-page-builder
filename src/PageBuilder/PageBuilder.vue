@@ -804,7 +804,7 @@ onMounted(async () => {
           </template>
         </template>
         <template v-if="showCloseButton">
-          <div class="pbx-flex-1 pbx-ml-2">
+          <div class="pbx-flex-1 pbx-ml-2 pbx-mr-2">
             <button
               class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
               @click="
