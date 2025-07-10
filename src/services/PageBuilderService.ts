@@ -1442,6 +1442,13 @@ export class PageBuilderService {
     }
   }
 
+  public async undo() {
+    console.log('handle undo ran in servide...:')
+  }
+  public async redo() {
+    console.log('handle redo ran in servide...:')
+  }
+
   /**
    * Deletes the currently selected component from the DOM and the state.
    * @returns {Promise<void>}

@@ -14,6 +14,7 @@ import DynamicModalBuilder from '../Components/Modals/DynamicModalBuilder.vue'
 import GlobalLoader from '../Components/Loaders/GlobalLoader.vue'
 import { useTranslations } from '../composables/useTranslations'
 import { getPageBuilder } from '../composables/builderInstance'
+import UndoRedo from '../Components/PageBuilder/UndoRedo/UndoRedo.vue'
 const pageBuilderService = getPageBuilder()
 /**
  * Props for PageBuilder component
@@ -165,10 +166,6 @@ const handleAddComponent = async function () {
 
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement
-})
-
-const getRestoredElement = computed(() => {
-  return pageBuilderStateStore.getRestoredElement
 })
 
 const getComponents = computed(() => {
@@ -324,14 +321,12 @@ const ensureBuilderInitialized = function () {
 }
 
 const pbxToolBar = ref(null)
-
 let lastToolbarLeft = null
 let lastToolbarTop = null
 
 function updatePanelPosition() {
   const container = pbxToolBar.value
   const editToolbarElement = container && container.querySelector('#pbxEditToolbar')
-  const restored = getRestoredElement.value
 
   if (!container || !editToolbarElement) return
 
@@ -364,11 +359,6 @@ function updatePanelPosition() {
 
     lastToolbarLeft = left
     lastToolbarTop = top
-  } else if (restored && lastToolbarLeft !== null && lastToolbarTop !== null) {
-    editToolbarElement.style.position = 'absolute'
-    editToolbarElement.style.left = `${lastToolbarLeft}px`
-    editToolbarElement.style.top = `${lastToolbarTop}px`
-    editToolbarElement.classList.add('is-visible')
   } else {
     editToolbarElement.classList.remove('is-visible')
   }
@@ -629,6 +619,7 @@ onMounted(async () => {
             </button>
           </template>
           <!-- Restore End -->
+          <UndoRedo></UndoRedo>
         </div>
       </div>
 
@@ -880,15 +871,6 @@ onMounted(async () => {
         >
           <template v-if="getElement">
             <EditGetElement></EditGetElement>
-          </template>
-          <template v-if="getRestoredElement">
-            <button
-              @click="pageBuilderService.restoreDeletedElementToDOM"
-              type="button"
-              class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-200 focus-visible:pbx-ring-0"
-            >
-              <span class="material-symbols-outlined"> undo </span>
-            </button>
           </template>
         </div>
         <!-- Element Popover toolbar end -->
