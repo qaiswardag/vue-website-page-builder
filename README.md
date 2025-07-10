@@ -194,7 +194,7 @@ app.mount('#app')
 > **Note:**
 > You only need to import the CSS file once. If you have already imported it in your app entry, you do not need to import it again in individual components.
 
-> **Note**
+> **Note:**
 > The Page Builder is implemented as a singleton service. This ensures that all page-building logic and state are managed by a single, shared instance throughout your application.
 
 ### Nuxt 3 Integration
@@ -203,7 +203,7 @@ To use `@myissue/vue-website-page-builder` in a Nuxt 3 project, follow these ste
 
 #### Create a Nuxt Plugin
 
-```js
+```typescript
 import { defineNuxtPlugin } from '#app'
 import PageBuilder from '@myissue/vue-website-page-builder'
 import '@myissue/vue-website-page-builder/style.css'
@@ -215,7 +215,7 @@ export default defineNuxtPlugin((nuxtApp) => {
 
 #### Register the Plugin
 
-```js
+```typescript
 export default defineNuxtConfig({
   plugins: ['~/plugins/page-builder.client.ts'],
 })
@@ -276,7 +276,7 @@ You can use the Page Builder to generate HTML and render it in any frontend fram
 
 To ensure your content is styled correctly, simply install the Page Builder package in your target project and import its CSS file. All builder and Tailwind-prefixed styles will be applied automatically.
 
-```js
+```typescript
 import '@myissue/vue-website-page-builder/style.css'
 ```
 
@@ -296,11 +296,16 @@ function MyPage({ html }) {
 
 ```vue
 <script setup>
+import { ref } from 'vue'
 import '@myissue/vue-website-page-builder/style.css'
-</script>
-```
 
-Then use `v-html` to render the HTML.
+const rawHtml = ref('<p>This is content from the page builder.</p>')
+</script>
+
+<template>
+  <div v-html="rawHtml"></div>
+</template>
+```
 
 > **Note:**
 > You do not need to import any Vue components if you only want to render the HTML. Just import the CSS file.
@@ -387,7 +392,7 @@ The Page Builder offers robust multilingual support, enabling you to reach a glo
 
 You can set a default language for your project:
 
-```js
+```typescript
 userSettings: {
   language: {
     default: 'en',
@@ -399,7 +404,7 @@ If you prefer to offer only a subset of these languages for users to switch betw
 
 If you do not provide the `enable` array, the Page Builder will default to showing all supported languages by default.
 
-```js
+```typescript
 userSettings: {
   language: {
     default: 'en',
@@ -414,7 +419,7 @@ If you want to completely hide the language selector from the UI (e.g., when onl
 
 Even when the dropdown is disabled, the default language will still be applied automatically. This gives you full control over localization while keeping the interface simple for your users.
 
-```js
+```typescript
 userSettings: {
   theme: 'light',
   language: {
@@ -441,7 +446,7 @@ To get the most up-to-date content, use the same `resourceData` (such as `formTy
 
 **Example:**
 
-```js
+```typescript
 const configPageBuilder = {
   updateOrCreate: {
     formType: 'create',
@@ -478,7 +483,7 @@ After successfully creating or updating a resource (such as a post, article, or 
 
 You can reset the Page Builder’s live DOM, builder state, and clear the draft with:
 
-```js
+```typescript
 await pageBuilderService.handleFormSubmission()
 ```
 
@@ -496,7 +501,7 @@ If you have previously saved or published HTML content (for example, from your d
 
 1. **Parse your saved HTML** using the builder’s helper method to extract both the components and the global page settings:
 
-   ```js
+   ```typescript
    // yourPageHTML: the full HTML string previously saved from the builder
    const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(yourPageHTML)
    ```
@@ -628,13 +633,6 @@ const handlePublish = () => {
 > **Tip:**
 > You can name your handler function anything you like. This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
 
-- `:showPublishButton="true"` — shows a publish button in the Page Builder toolbar.
-- `@handlePublishPageBuilder="yourMethod"` — emits when the close button is clicked, so you can close your modal.
-
-> **Tip:**
-> You can name your handler function anything you like.
-> This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
-
 ## Styling the Main Page Builder Container
 
 The Page Builder allows you to define and update global styles for the main wrapper (`#pagebuilder`) at any time. These settings control the overall appearance, including font family, text color, background color, and more. Whether you set them initially in your config or update them dynamically at runtime, your changes are instantly reflected across all sections.
@@ -713,7 +711,7 @@ If fonts or Material Icons are not displaying correctly, verify that:
 
 **CSS Import**: You are importing the CSS file:
 
-```js
+```typescript
 import '@myissue/vue-website-page-builder/style.css'
 ```
 
