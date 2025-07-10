@@ -119,6 +119,7 @@ The Page Builder is packed with features:
 - **Global Page Styling**: Instantly define, update, or clear global styles for the main page wrapper at initialization or dynamically at runtime. Gain full control over fonts, colors, backgrounds, and more for a dynamic user experience.
 - **Tailwind Support**: Fully compatible with Tailwind CSS (with automatic class prefixing to avoid conflicts).
 - **Scoped Styles**: To ensure clean and predictable styling, the builder uses scoped style isolation. There is no risk of style conflicts between the builder and your app.
+- **HTML Editor**: Access and edit raw HTML directly for full customization and developer-level control.
 
 ## Technical Details
 
