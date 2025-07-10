@@ -166,5 +166,6 @@
   "Use Saved Version": "使用保存的版本",
   "Continue Where I Left Off": "从我离开的地方继续",
   "HTML Editor": "HTML 编辑器",
-  "Gain full control over components by editing the raw HTML.": "通过编辑原始 HTML 获得对组件的完全控制。"
+  "Gain full control over components by editing the raw HTML.": "通过编辑原始 HTML 获得对组件的完全控制。",
+  "Large Screens Only": "仅限大屏幕"
 }

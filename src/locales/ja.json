@@ -166,5 +166,6 @@
   "Use Saved Version": "保存されたバージョンを使用",
   "Continue Where I Left Off": "中断したところから続行",
   "HTML Editor": "HTMLエディター",
-  "Gain full control over components by editing the raw HTML.": "生の HTML を編集することで、コンポーネントを完全に制御できます。"
+  "Gain full control over components by editing the raw HTML.": "生の HTML を編集することで、コンポーネントを完全に制御できます。",
+  "Large Screens Only": "大型スクリーンのみ"
 }
