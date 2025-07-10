@@ -776,7 +776,3 @@ We would greatly appreciate it if you could star the GitHub repository. Starring
 ## License
 
 [MIT License](./LICENSE)
-
-```
-
-```
