@@ -11,7 +11,6 @@
   - [About](#about)
   - [Real-World Application Example](#real-world-application-example)
   - [Features](#features)
-    - [Trusted by Freelancers and Leading Brands](#trusted-by-freelancers-and-leading-brands)
   - [Technical Details](#technical-details)
   - [Documentation](#documentation)
   - [Requirements](#requirements)
@@ -91,6 +90,8 @@ A Page Builder designed for growth. Build your website pages with ready-made com
 
 ## Real-World Application Example
 
+From solo freelancers to fast-growing startups and established enterprises, the Page Builder is trusted by teams everywhere. With its intuitive click-and-drop editor, real-time visual editing, and a rich library of reusable components, you can turn ideas into polished pages in minutes. Built for merchants, brands, and agencies, it empowers anyone to create high-impact content.
+
 Discover how the Vue Website Page Builder is empowering businesses to create dynamic and responsive web pages. A prime example is [myself.ae](https://www.myself.ae/stores), where the builder is utilized to create engaging and user-friendly online store pages.
 
 ## Features
@@ -118,10 +119,6 @@ The Page Builder is packed with features:
 - **Global Page Styling**: Instantly define, update, or clear global styles for the main page wrapper at initialization or dynamically at runtime. Gain full control over fonts, colors, backgrounds, and more for a dynamic user experience.
 - **Tailwind Support**: Fully compatible with Tailwind CSS (with automatic class prefixing to avoid conflicts).
 - **Scoped Styles**: To ensure clean and predictable styling, the builder uses scoped style isolation. There is no risk of style conflicts between the builder and your app.
-
-### Trusted by Freelancers and Leading Brands
-
-From solo freelancers to fast-growing startups and established enterprises, the Page Builder is trusted by teams everywhere. With its intuitive click-and-drop editor, real-time visual editing, and a rich library of reusable components, you can turn ideas into polished pages in minutes. Built for merchants, brands, and agencies, it empowers anyone to create high-impact content.
 
 ## Technical Details
 
