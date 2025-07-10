@@ -400,7 +400,6 @@
 /* CSS for content inside page builder # start */
 #pagebuilder {
   position: relative;
-  overflow-y: auto;
 }
 #pagebuilder a {
   pointer-events: none;
