@@ -50,6 +50,7 @@
   - [Contributing](#contributing)
   - [Security Vulnerabilities](#security-vulnerabilities)
   - [Get in Touch for Customization or Any Questions](#get-in-touch-for-customization-or-any-questions)
+  - [Report Issues or Request Features](#report-issues-or-request-features)
   - [Feedback](#feedback)
   - [Support the Project](#support-the-project)
   - [License](#license)
@@ -757,6 +758,12 @@ If you have any questions or if you're looking for customization, feel free to c
 
 - [Email](mailto:qais.wardag@outlook.com)
 - [LinkedIn](https://www.linkedin.com/in/qaiswardag)
+
+## Report Issues or Request Features
+
+Encountered a bug, have suggestions, or need a new feature? Create a GitHub issue:
+
+- [Submit an Issue](https://github.com/qaiswardag/vue-website-page-builder/issues)
 
 ## Feedback
 
