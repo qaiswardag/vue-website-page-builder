@@ -478,68 +478,97 @@ export class PageBuilderService {
     await this.clearHtmlSelection()
 
     if (formType === 'update' || formType === 'create') {
+      // Page Builder is initially present in the DOM
       if (!this.pendingMountComponents) {
-        // Page Builder Is initially present in DOM
         if (!passedComponentsArray && this.isPageBuilderMissingOnStart && localStorageData) {
           await this.completeMountProcess(localStorageData)
           return
         }
         if (passedComponentsArray && !localStorageData) {
-          await this.completeMountProcess(JSON.stringify(passedComponentsArray), true)
+          const htmlString = this.renderComponentsToHtml(passedComponentsArray)
+          await this.completeMountProcess(htmlString, true)
           this.saveDomComponentsToLocalStorage()
           return
         }
 
         if (passedComponentsArray && localStorageData) {
-          await this.completeMountProcess(JSON.stringify(passedComponentsArray), true)
+          const htmlString = this.renderComponentsToHtml(passedComponentsArray)
+          await this.completeMountProcess(htmlString, true)
           await delay(500)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           return
         }
+
         if (!passedComponentsArray && localStorageData && !this.savedMountComponents) {
           await this.completeMountProcess(localStorageData)
           return
         }
         if (!passedComponentsArray && this.savedMountComponents && localStorageData) {
-          await this.completeMountProcess(JSON.stringify(this.savedMountComponents))
+          const htmlString = this.renderComponentsToHtml(this.savedMountComponents)
+          await this.completeMountProcess(htmlString)
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
-          await this.completeMountProcess(JSON.stringify([]))
+          const htmlString = this.renderComponentsToHtml([])
+          await this.completeMountProcess(htmlString)
+
           return
         }
 
         if (!this.isPageBuilderMissingOnStart && !localStorageData && !passedComponentsArray) {
-          await this.completeMountProcess(JSON.stringify([]))
+          const htmlString = this.renderComponentsToHtml([])
+          await this.completeMountProcess(htmlString)
           return
         }
       }
 
-      // FOCUS ON: pendingMountComponents
+      // Page Builder is not initially present in the DOM
       if (this.pendingMountComponents) {
-        // No Page Builder Is  present in DOM initially
         if (localStorageData && this.isPageBuilderMissingOnStart) {
-          await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          const htmlString = this.renderComponentsToHtml(this.pendingMountComponents)
+          await this.completeMountProcess(htmlString, true)
           await delay(500)
           this.pageBuilderStateStore.setHasLocalDraftForUpdate(true)
           this.pendingMountComponents = null
           return
         }
         if (!localStorageData && passedComponentsArray && this.isPageBuilderMissingOnStart) {
-          await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          const htmlString = this.renderComponentsToHtml(this.pendingMountComponents)
+          await this.completeMountProcess(htmlString, true)
           this.saveDomComponentsToLocalStorage()
           return
         }
 
         if (!passedComponentsArray && !localStorageData && this.isPageBuilderMissingOnStart) {
-          await this.completeMountProcess(JSON.stringify(this.pendingMountComponents), true)
+          const htmlString = this.renderComponentsToHtml(this.pendingMountComponents)
+          await this.completeMountProcess(htmlString, true)
           this.saveDomComponentsToLocalStorage()
           return
         }
       }
     }
-    //
+  }
+
+  /**
+   * Converts an array of ComponentObject into a single HTML string.
+   *
+   * @returns {string} A single HTML string containing all components.
+   */
+  private renderComponentsToHtml(componentsArray: BuilderResourceData): string {
+    // If the componentsArray is empty or invalid, return a default HTML structure
+    if (!componentsArray || (Array.isArray(componentsArray) && componentsArray.length === 0)) {
+      return `<div id="pagebuilder" class="pbx-text-black pbx-font-sans"></div>`
+    }
+
+    const sectionsHtml = componentsArray
+      .map((component) => {
+        return component.html_code // Fallback in case section is not found
+      })
+      .join('\n')
+
+    // Return the combined HTML string
+    return sectionsHtml
   }
 
   /**
@@ -553,14 +582,8 @@ export class PageBuilderService {
 
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
-
     this.pageBuilderStateStore.setIsRestoring(false)
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
-
-    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
-    await nextTick()
-    // Attach event listeners to all editable elements in the Builder
-    await this.addListenersToEditableElements()
   }
 
   /**
@@ -1070,7 +1093,6 @@ export class PageBuilderService {
 
       // Set the title attribute if present
       if (clonedComponent.title) {
-        section.setAttribute('title', clonedComponent.title)
         section.setAttribute('data-component-title', clonedComponent.title)
       }
 
@@ -1952,7 +1974,8 @@ export class PageBuilderService {
     if (Array.isArray(this.originalComponents)) {
       await this.clearClassesFromPage()
       await this.clearInlineStylesFromPage()
-      await this.mountComponentsToDOM(JSON.stringify(this.originalComponents), true)
+      const htmlString = this.renderComponentsToHtml(this.originalComponents)
+      await this.mountComponentsToDOM(htmlString)
       this.removeCurrentComponentsFromLocalStorage()
     }
 
@@ -1992,9 +2015,24 @@ export class PageBuilderService {
       const classes = (parsed.pageSettings && parsed.pageSettings.classes) || ''
       const style = (parsed.pageSettings && parsed.pageSettings.style) || ''
 
-      const sectionsHtml = parsed.components.map((c: ComponentObject) => c.html_code).join('\n')
+      const sectionsHtml = parsed.components
+        .map((c: ComponentObject) => {
+          const parser = new DOMParser()
+          const doc = parser.parseFromString(c.html_code, 'text/html')
+          const section = doc.querySelector('section')
+
+          if (section) {
+            section.removeAttribute('data-componentid') // Remove the data-componentid attribute
+            return section.outerHTML
+          }
+
+          return c.html_code // Fallback in case section is not found
+        })
+        .join('\n')
+
       return `<div id="pagebuilder" class="${classes}" style="${style}">\n${sectionsHtml}\n</div>`
     }
+
     return false
   }
 
@@ -2371,10 +2409,7 @@ export class PageBuilderService {
       components = topLevelSections.map((section) => ({
         id: null,
         html_code: section.outerHTML.trim(),
-        title:
-          section.getAttribute('data-component-title') ||
-          section.getAttribute('title') ||
-          'Untitled Component',
+        title: section.getAttribute('data-component-title') || 'Untitled Component',
       }))
     }
     if (topLevelSections.length === 0) {
@@ -2418,183 +2453,69 @@ export class PageBuilderService {
   }
 
   /**
-   * Parse and set components from JSON or HTML data
+   * Mounts builder components to the DOM from an HTML string.
    *
-   * Supports:
-   * - JSON: Array of ComponentObject with html_code, id, title
-   * - HTML: String containing <section data-componentid="..."> elements
+   * Input format detection:
+   *   - If the input starts with `[` or `{`: treated as JSON (array or object).
+   *   - If the input starts with `<`: treated as HTML.
    *
-   * Auto-detects format and parses accordingly
+   * This function should be used when:
+   *   - Restoring the builder from a published HTML snapshot.
+   *   - Importing a static HTML export.
+   *   - Loading the builder from previously published or saved HTML (e.g., from `getSavedPageHtml()`).
    *
-   * @param data - JSON string (e.g., '[{"html_code":"...","id":"123","title":"..."}]')
-   *               OR HTML string (e.g., '<section data-componentid="123">...</section>')
+   * Typical use cases include restoring a published state, importing templates, or previewing published content.
    */
   private async mountComponentsToDOM(
     htmlString: string,
     usePassedPageSettings?: boolean,
   ): Promise<void> {
-    /**
-     * Mounts builder components to the DOM from either JSON or HTML input.
-     *
-     * Input format detection:
-     * - If the input starts with `[` or `{`, it is treated as JSON (array or object).
-     * - If the input starts with `<`, it is treated as HTML.
-     *
-     * When to use which format:
-     *
-     * 1. JSON input (from localStorage, API, or internal state like pina):
-     *    - Use when restoring builder state from localStorage, an API, or a previously saved draft.
-     *    - Example: `localStorage.getItem(...)` or API returns a JSON stringified array/object of components.
-     *    - This is the most common format for drafts, autosave, and programmatic state management.
-     *    - Example usage:
-     *      await this.mountComponentsToDOM(JSON.stringify(getComponents))
-     *
-     * 2. HTML input (from HTML snapshot, import, or published output):
-     *    - Use when restoring from a published HTML snapshot, importing a static HTML export, or loading the builder from a previously published HTML string.
-     *    - Example: output from `getSavedPageHtml()` or a static HTML export.
-     *    - This is used for restoring the builder from a published state, importing, or previewing published content.
-     *    - Example usage:
-     *      await this.mountComponentsToDOM(savedHtmlString)
-     *
-     * Best practice:
-     * - Use JSON for local storage drafts, autosave, and API-driven workflows.
-     * - Use HTML for published/imported content from DB or when restoring from a static HTML snapshot.
-     *
-     * The method auto-detects the format and calls the appropriate parser.
-     */
     const trimmedData = htmlString.trim()
 
+    // Return error since JSON data has been passed to mount HTML to DOM
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
-      // JSON input: Use this when restoring from localStorage, API, or internal builder state (drafts, autosave, etc.)
-      await this.parseJSONComponents(trimmedData, usePassedPageSettings)
-      return
-    }
-    if (trimmedData.startsWith('<')) {
-      // HTML input: Use this when restoring from a published HTML snapshot, import, or static HTML export
-      await this.parseHTMLComponents(trimmedData, usePassedPageSettings)
+      console.error('Error: JSON data passed to mountComponentsToDOM for the Page Builder Package.')
       return
     }
 
-    // Fallback: If format is unknown, default to JSON parser (defensive)
-    await this.parseJSONComponents(trimmedData, usePassedPageSettings)
-  }
-
-  // Private method to parse JSON components and save pageBuilderContentSavedAt to localStorage
-  private async parseJSONComponents(
-    jsonData: string,
-    usePassedPageSettings?: boolean,
-  ): Promise<void> {
-    const pageSettings =
-      this.pageBuilderStateStore.getPageBuilderConfig &&
-      this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
-
-    const userPageSettings = usePassedPageSettings ? pageSettings : null
-
-    try {
-      const parsedData = JSON.parse(jsonData)
-      let componentsArray: ComponentObject[] = []
-
-      if (Array.isArray(parsedData)) {
-        componentsArray = parsedData
-      }
-      if (parsedData && Array.isArray(parsedData.components)) {
-        componentsArray = parsedData.components
-      }
-
-      let savedCurrentDesign: ComponentObject[] = []
-
-      if (componentsArray.length > 0) {
-        savedCurrentDesign = componentsArray.map((component: ComponentObject) => {
-          const parser = new DOMParser()
-          const doc = parser.parseFromString(component.html_code, 'text/html')
-          const section = doc.querySelector('section')
-
-          if (section) {
-            // Prefix Tailwind classes
-            section.querySelectorAll('[class]').forEach((el) => {
-              el.setAttribute(
-                'class',
-                this.addTailwindPrefixToClasses(el.getAttribute('class') || '', 'pbx-'),
-              )
-            })
-
-            // Ensure IDs & titles
-            if (!section.hasAttribute('data-componentid')) {
-              const newId = uuidv4()
-              section.setAttribute('data-componentid', newId)
-              component.id = newId
-            } else {
-              component.id = section.getAttribute('data-componentid')!
-            }
-
-            const title = component.title || 'Untitled Component'
-            section.setAttribute('data-component-title', title)
-            component.title = title
-
-            // Update html_code
-            component.html_code = section.outerHTML
-          }
-          return component
-        })
-      }
-
-      this.pageBuilderStateStore.setComponents(savedCurrentDesign)
-
-      await nextTick()
-      await this.addListenersToEditableElements()
-
-      if (userPageSettings && pageSettings) {
-        const pagebuilder = document.querySelector('#pagebuilder') as HTMLElement
-        if (pagebuilder) {
-          pagebuilder.removeAttribute('class')
-          pagebuilder.removeAttribute('style')
-          pagebuilder.className = pageSettings.classes || ''
-          pagebuilder.setAttribute('style', this.convertStyleObjectToString(pageSettings.style))
-        }
-      }
-    } catch (error) {
-      console.error('Error parsing JSON components:', error)
-      this.deleteAllComponentsFromDOM()
-    }
-  }
-
-  // Private method to parse HTML components
-  private async parseHTMLComponents(
-    htmlData: string,
-    usePassedPageSettings?: boolean,
-  ): Promise<void> {
+    // HTML string
     try {
       const parser = new DOMParser()
-      const doc = parser.parseFromString(htmlData, 'text/html')
+      const doc = parser.parseFromString(htmlString, 'text/html')
 
       const importedPageBuilder = doc.querySelector('#pagebuilder') as HTMLElement | null
       const livePageBuilder = document.querySelector('#pagebuilder') as HTMLElement | null
 
-      if (livePageBuilder) {
-        const storedPageSettings =
-          this.pageBuilderStateStore.getPageBuilderConfig &&
-          this.pageBuilderStateStore.getPageBuilderConfig.pageSettings
+      // Initialize pageSettings to null
+      let pageSettings = null
 
-        // Decide which pageSettings to use
-        let pageSettings = null
-        if (usePassedPageSettings) {
-          pageSettings = storedPageSettings
-        } else if (importedPageBuilder) {
-          pageSettings = {
-            classes: importedPageBuilder.className || '',
-            style: importedPageBuilder.getAttribute('style') || '',
-          }
-        } else {
-          pageSettings = storedPageSettings
-        }
+      // Use stored page settings if the flag is true
+      if (usePassedPageSettings) {
+        pageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
+      }
 
-        // Restore page-level settings like class and style
-        if (pageSettings) {
-          livePageBuilder.removeAttribute('class')
-          livePageBuilder.removeAttribute('style')
-          livePageBuilder.className = pageSettings.classes || ''
-          livePageBuilder.setAttribute('style', this.convertStyleObjectToString(pageSettings.style))
+      // Use imported page builder settings if available and pageSettings is still null
+      if (!pageSettings && importedPageBuilder) {
+        pageSettings = {
+          classes: importedPageBuilder.className || '',
+          style: importedPageBuilder.getAttribute('style') || '',
         }
+      }
+
+      // Fallback to stored page settings if pageSettings is still null
+      if (!pageSettings) {
+        pageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
+      }
+
+      // Apply the page settings to the live page builder
+      if (pageSettings && livePageBuilder) {
+        // Remove existing class and style attributes
+        livePageBuilder.removeAttribute('class')
+        livePageBuilder.removeAttribute('style')
+
+        // Apply new classes and styles
+        livePageBuilder.className = pageSettings.classes || ''
+        livePageBuilder.setAttribute('style', this.convertStyleObjectToString(pageSettings.style))
       }
 
       // Select all <section> elements
@@ -2619,10 +2540,7 @@ export class PageBuilderService {
         const componentId = htmlElement.getAttribute('data-componentid')!
 
         // Ensure data-component-title exists
-        const title =
-          htmlElement.getAttribute('title') ||
-          htmlElement.getAttribute('data-component-title') ||
-          'Untitled Component'
+        const title = htmlElement.getAttribute('data-component-title') || 'Untitled Component'
 
         htmlElement.setAttribute('data-component-title', title)
 
@@ -2642,6 +2560,10 @@ export class PageBuilderService {
     } catch (error) {
       console.error('Error parsing HTML components:', error)
       this.deleteAllComponentsFromDOM()
+      // Clear selections and re-bind events
+      await this.clearHtmlSelection()
+      await nextTick()
+      await this.addListenersToEditableElements()
     }
   }
 

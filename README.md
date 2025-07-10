@@ -11,17 +11,16 @@
   - [About](#about)
   - [Real-World Application Example](#real-world-application-example)
   - [Features](#features)
-    - [Trusted by Freelancers and Leading Brands](#trusted-by-freelancers-and-leading-brands)
   - [Technical Details](#technical-details)
   - [Documentation](#documentation)
   - [Requirements](#requirements)
   - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Quick Start](#quick-start)
+    - [Initializing the Page Builder](#initializing-the-page-builder)
     - [Nuxt 3 Integration](#nuxt-3-integration)
       - [Create a Nuxt Plugin](#create-a-nuxt-plugin)
       - [Register the Plugin](#register-the-plugin)
-    - [Initializing the Page Builder](#initializing-the-page-builder)
     - [Why Use the Shared Instance?](#why-use-the-shared-instance)
     - [Using the Page Builder Component](#using-the-page-builder-component)
   - [Important: CSS Prefixing (`pbx-`)](#important-css-prefixing-pbx-)
@@ -51,6 +50,7 @@
   - [Contributing](#contributing)
   - [Security Vulnerabilities](#security-vulnerabilities)
   - [Get in Touch for Customization or Any Questions](#get-in-touch-for-customization-or-any-questions)
+  - [Report Issues or Request Features](#report-issues-or-request-features)
   - [Feedback](#feedback)
   - [Support the Project](#support-the-project)
   - [License](#license)
@@ -91,9 +91,9 @@ A Page Builder designed for growth. Build your website pages with ready-made com
 
 ## Real-World Application Example
 
-Discover how the Vue Website Page Builder is empowering businesses to create dynamic and responsive web pages. A prime example is [myself.ae](https://www.myself.ae/stores), where the builder is utilized to create engaging and user-friendly online store pages.
+From solo freelancers to fast-growing startups and established enterprises, the Page Builder is trusted by teams everywhere. With its intuitive click-and-drop editor, real-time visual editing, and a rich library of reusable components, you can turn ideas into polished pages in minutes. Built for merchants, brands, and agencies, it empowers anyone to create high-impact content.
 
-<img style="width: 100%;" src="./public/home/for_read_me/browser_components.svg" alt="Vue Website Page Builder - the editor" />
+Discover how the Vue Website Page Builder is empowering businesses to create dynamic and responsive web pages. A prime example is [myself.ae](https://www.myself.ae/stores), where the builder is utilized to create engaging and user-friendly online store pages.
 
 ## Features
 
@@ -120,10 +120,7 @@ The Page Builder is packed with features:
 - **Global Page Styling**: Instantly define, update, or clear global styles for the main page wrapper at initialization or dynamically at runtime. Gain full control over fonts, colors, backgrounds, and more for a dynamic user experience.
 - **Tailwind Support**: Fully compatible with Tailwind CSS (with automatic class prefixing to avoid conflicts).
 - **Scoped Styles**: To ensure clean and predictable styling, the builder uses scoped style isolation. There is no risk of style conflicts between the builder and your app.
-
-### Trusted by Freelancers and Leading Brands
-
-From solo freelancers to fast-growing startups and established enterprises, the Page Builder is trusted by teams everywhere. With its intuitive click-and-drop editor, real-time visual editing, and a rich library of reusable components, you can turn ideas into polished pages in minutes. Built for merchants, brands, and agencies, it empowers anyone to create high-impact content.
+- **HTML Editor**: Access and edit raw HTML directly for full customization and developer-level control.
 
 ## Technical Details
 
@@ -174,30 +171,6 @@ npm install @myissue/vue-website-page-builder
 Get up and running with the Vue Website Page Builder in just a few minutes.
 This section walks you through the essential steps—from installation to rendering your first page—so you can start building beautiful, dynamic content right away.
 
-### Nuxt 3 Integration
-
-To use `@myissue/vue-website-page-builder` in a Nuxt 3 project, follow these steps:
-
-#### Create a Nuxt Plugin
-
-```js
-import { defineNuxtPlugin } from '#app'
-import PageBuilder from '@myissue/vue-website-page-builder'
-import '@myissue/vue-website-page-builder/style.css'
-
-export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(PageBuilder)
-})
-```
-
-#### Register the Plugin
-
-```js
-export default defineNuxtConfig({
-  plugins: ['~/plugins/page-builder.client.ts'],
-})
-```
-
 ### Initializing the Page Builder
 
 To get started with the Page Builder, follow these steps:
@@ -221,8 +194,32 @@ app.mount('#app')
 > **Note:**
 > You only need to import the CSS file once. If you have already imported it in your app entry, you do not need to import it again in individual components.
 
-> **Note**
+> **Note:**
 > The Page Builder is implemented as a singleton service. This ensures that all page-building logic and state are managed by a single, shared instance throughout your application.
+
+### Nuxt 3 Integration
+
+To use `@myissue/vue-website-page-builder` in a Nuxt 3 project, follow these steps:
+
+#### Create a Nuxt Plugin
+
+```typescript
+import { defineNuxtPlugin } from '#app'
+import PageBuilder from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(PageBuilder)
+})
+```
+
+#### Register the Plugin
+
+```typescript
+export default defineNuxtConfig({
+  plugins: ['~/plugins/page-builder.client.ts'],
+})
+```
 
 ### Why Use the Shared Instance?
 
@@ -279,7 +276,7 @@ You can use the Page Builder to generate HTML and render it in any frontend fram
 
 To ensure your content is styled correctly, simply install the Page Builder package in your target project and import its CSS file. All builder and Tailwind-prefixed styles will be applied automatically.
 
-```js
+```typescript
 import '@myissue/vue-website-page-builder/style.css'
 ```
 
@@ -299,11 +296,16 @@ function MyPage({ html }) {
 
 ```vue
 <script setup>
+import { ref } from 'vue'
 import '@myissue/vue-website-page-builder/style.css'
-</script>
-```
 
-Then use `v-html` to render the HTML.
+const rawHtml = ref('<p>This is content from the page builder.</p>')
+</script>
+
+<template>
+  <div v-html="rawHtml"></div>
+</template>
+```
 
 > **Note:**
 > You do not need to import any Vue components if you only want to render the HTML. Just import the CSS file.
@@ -390,7 +392,7 @@ The Page Builder offers robust multilingual support, enabling you to reach a glo
 
 You can set a default language for your project:
 
-```js
+```typescript
 userSettings: {
   language: {
     default: 'en',
@@ -402,7 +404,7 @@ If you prefer to offer only a subset of these languages for users to switch betw
 
 If you do not provide the `enable` array, the Page Builder will default to showing all supported languages by default.
 
-```js
+```typescript
 userSettings: {
   language: {
     default: 'en',
@@ -417,7 +419,7 @@ If you want to completely hide the language selector from the UI (e.g., when onl
 
 Even when the dropdown is disabled, the default language will still be applied automatically. This gives you full control over localization while keeping the interface simple for your users.
 
-```js
+```typescript
 userSettings: {
   theme: 'light',
   language: {
@@ -444,7 +446,7 @@ To get the most up-to-date content, use the same `resourceData` (such as `formTy
 
 **Example:**
 
-```js
+```typescript
 const configPageBuilder = {
   updateOrCreate: {
     formType: 'create',
@@ -481,7 +483,7 @@ After successfully creating or updating a resource (such as a post, article, or 
 
 You can reset the Page Builder’s live DOM, builder state, and clear the draft with:
 
-```js
+```typescript
 await pageBuilderService.handleFormSubmission()
 ```
 
@@ -499,7 +501,7 @@ If you have previously saved or published HTML content (for example, from your d
 
 1. **Parse your saved HTML** using the builder’s helper method to extract both the components and the global page settings:
 
-   ```js
+   ```typescript
    // yourPageHTML: the full HTML string previously saved from the builder
    const { components, pageSettings } = pageBuilderService.parsePageBuilderHTML(yourPageHTML)
    ```
@@ -631,13 +633,6 @@ const handlePublish = () => {
 > **Tip:**
 > You can name your handler function anything you like. This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
 
-- `:showPublishButton="true"` — shows a publish button in the Page Builder toolbar.
-- `@handlePublishPageBuilder="yourMethod"` — emits when the close button is clicked, so you can close your modal.
-
-> **Tip:**
-> You can name your handler function anything you like.
-> This pattern makes it easy to embed the builder in modals, dialogs, or overlays in any Vue app.
-
 ## Styling the Main Page Builder Container
 
 The Page Builder allows you to define and update global styles for the main wrapper (`#pagebuilder`) at any time. These settings control the overall appearance, including font family, text color, background color, and more. Whether you set them initially in your config or update them dynamically at runtime, your changes are instantly reflected across all sections.
@@ -716,7 +711,7 @@ If fonts or Material Icons are not displaying correctly, verify that:
 
 **CSS Import**: You are importing the CSS file:
 
-```js
+```typescript
 import '@myissue/vue-website-page-builder/style.css'
 ```
 
@@ -762,6 +757,12 @@ If you have any questions or if you're looking for customization, feel free to c
 - [Email](mailto:qais.wardag@outlook.com)
 - [LinkedIn](https://www.linkedin.com/in/qaiswardag)
 
+## Report Issues or Request Features
+
+Encountered a bug, have suggestions, or need a new feature? Create a GitHub issue:
+
+- [Submit an Issue](https://github.com/qaiswardag/vue-website-page-builder/issues)
+
 ## Feedback
 
 Suggestions or any issues you encounter while using this app. Feel free to reach out.
@@ -773,7 +774,3 @@ We would greatly appreciate it if you could star the GitHub repository. Starring
 ## License
 
 [MIT License](./LICENSE)
-
-```
-
-```

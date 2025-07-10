@@ -166,5 +166,6 @@
   "Use Saved Version": "Использовать сохраненную версию",
   "Continue Where I Left Off": "Продолжить с того места, где я остановился",
   "HTML Editor": "HTML-редактор",
-  "Gain full control over components by editing the raw HTML.": "Получите полный контроль над компонентами, редактируя необработанный HTML-код."
+  "Gain full control over components by editing the raw HTML.": "Получите полный контроль над компонентами, редактируя необработанный HTML-код.",
+  "Large Screens Only": "Только большие экраны"
 }

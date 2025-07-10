@@ -804,7 +804,7 @@ onMounted(async () => {
           </template>
         </template>
         <template v-if="showCloseButton">
-          <div class="pbx-flex-1 pbx-ml-2">
+          <div class="pbx-flex-1 pbx-ml-2 pbx-mr-2">
             <button
               class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white hover:pbx-fill-white focus-visible:pbx-ring-0"
               @click="
@@ -867,7 +867,7 @@ onMounted(async () => {
 
       <main
         ref="pbxToolBar"
-        class="pbx-transition-all pbx-duration-300 pbx-font-sans pbx-p-1 pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-text-black pbx-h-[100vh]"
+        class="pbx-transition-all pbx-duration-300 pbx-font-sans pbx-p-1 pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-text-black pbx-h-[100vh] pbx-overflow-y-auto"
         :class="[getMenuRight ? 'pbx-w-full' : 'pbx-w-full']"
       >
         <div

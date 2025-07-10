@@ -67,6 +67,12 @@ watch(
     <template #title>{{ translate('Margin') }}</template>
     <template #content>
       <div class="pbx-my-2 pbx-py-2">
+        <div class="pbx-pt-4 pbx-pb-2 pbx-mb-4">
+          <p class="pbx-myPrimaryInputLabel pbx-font-medium pbx-italic">
+            {{ translate('Large Screens Only') }}
+          </p>
+          <hr />
+        </div>
         <label for="vertical-margin" class="pbx-myPrimaryInputLabel">{{
           translate('Vertical Margin')
         }}</label>
