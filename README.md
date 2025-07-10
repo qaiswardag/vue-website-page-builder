@@ -18,10 +18,10 @@
   - [Getting Started](#getting-started)
   - [Installation](#installation)
   - [Quick Start](#quick-start)
+    - [Initializing the Page Builder](#initializing-the-page-builder)
     - [Nuxt 3 Integration](#nuxt-3-integration)
       - [Create a Nuxt Plugin](#create-a-nuxt-plugin)
       - [Register the Plugin](#register-the-plugin)
-    - [Initializing the Page Builder](#initializing-the-page-builder)
     - [Why Use the Shared Instance?](#why-use-the-shared-instance)
     - [Using the Page Builder Component](#using-the-page-builder-component)
   - [Important: CSS Prefixing (`pbx-`)](#important-css-prefixing-pbx-)
@@ -92,8 +92,6 @@ A Page Builder designed for growth. Build your website pages with ready-made com
 ## Real-World Application Example
 
 Discover how the Vue Website Page Builder is empowering businesses to create dynamic and responsive web pages. A prime example is [myself.ae](https://www.myself.ae/stores), where the builder is utilized to create engaging and user-friendly online store pages.
-
-<img style="width: 100%;" src="./public/home/for_read_me/browser_components.svg" alt="Vue Website Page Builder - the editor" />
 
 ## Features
 
@@ -174,30 +172,6 @@ npm install @myissue/vue-website-page-builder
 Get up and running with the Vue Website Page Builder in just a few minutes.
 This section walks you through the essential steps—from installation to rendering your first page—so you can start building beautiful, dynamic content right away.
 
-### Nuxt 3 Integration
-
-To use `@myissue/vue-website-page-builder` in a Nuxt 3 project, follow these steps:
-
-#### Create a Nuxt Plugin
-
-```js
-import { defineNuxtPlugin } from '#app'
-import PageBuilder from '@myissue/vue-website-page-builder'
-import '@myissue/vue-website-page-builder/style.css'
-
-export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(PageBuilder)
-})
-```
-
-#### Register the Plugin
-
-```js
-export default defineNuxtConfig({
-  plugins: ['~/plugins/page-builder.client.ts'],
-})
-```
-
 ### Initializing the Page Builder
 
 To get started with the Page Builder, follow these steps:
@@ -223,6 +197,30 @@ app.mount('#app')
 
 > **Note**
 > The Page Builder is implemented as a singleton service. This ensures that all page-building logic and state are managed by a single, shared instance throughout your application.
+
+### Nuxt 3 Integration
+
+To use `@myissue/vue-website-page-builder` in a Nuxt 3 project, follow these steps:
+
+#### Create a Nuxt Plugin
+
+```js
+import { defineNuxtPlugin } from '#app'
+import PageBuilder from '@myissue/vue-website-page-builder'
+import '@myissue/vue-website-page-builder/style.css'
+
+export default defineNuxtPlugin((nuxtApp) => {
+  nuxtApp.vueApp.use(PageBuilder)
+})
+```
+
+#### Register the Plugin
+
+```js
+export default defineNuxtConfig({
+  plugins: ['~/plugins/page-builder.client.ts'],
+})
+```
 
 ### Why Use the Shared Instance?
 
