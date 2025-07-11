@@ -1632,7 +1632,7 @@ export class PageBuilderService {
    * Reorders the currently selected component up or down in the component list.
    * @param {number} direction - The direction to move the component (-1 for up, 1 for down).
    */
-  public reorderComponent(direction: number): void {
+  public async reorderComponent(direction: number): Promise<void> {
     if (!this.getComponents.value || !this.getComponent.value) return
 
     if (this.getComponents.value.length <= 1) return
@@ -1660,6 +1660,19 @@ export class PageBuilderService {
     // Move the component to the new position in the array.
     this.getComponents.value.splice(currentIndex, 1)
     this.getComponents.value.splice(newIndex, 0, componentToMove)
+
+    // Wait for the DOM to update after reordering
+    await nextTick()
+
+    // Scroll to the moved component
+    const pageBuilderWrapper = document.querySelector('#page-builder-wrapper')
+    const movedComponentElement = pageBuilderWrapper?.querySelector(
+      `section[data-componentid="${componentToMove.id}"]`,
+    )
+
+    if (movedComponentElement) {
+      movedComponentElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
   }
 
   /**
