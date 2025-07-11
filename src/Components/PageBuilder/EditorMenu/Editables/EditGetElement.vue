@@ -188,10 +188,6 @@ const handleModalIframeSrc = function () {
     showModalIframeSrc.value = false
   }
 }
-
-const getRestoredElement = computed(() => {
-  return pageBuilderStateStore.getRestoredElement
-})
 </script>
 <template v-if="getElement">
   <div>

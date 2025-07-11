@@ -32,9 +32,6 @@ interface PageBuilderState {
   opacity: string | null
   backgroundOpacity: string | null
   textAreaVueModel: string | null
-  nextSibling: HTMLElement | null
-  parentElement: HTMLElement | null
-  restoredElement: string | null
   currentClasses: string[]
   currentStyles: Record<string, string>
   fontVerticalPadding: string | null
@@ -95,9 +92,6 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     opacity: null,
     backgroundOpacity: null,
     textAreaVueModel: null,
-    nextSibling: null,
-    parentElement: null,
-    restoredElement: null,
     currentClasses: [],
     currentStyles: {},
     fontVerticalPadding: null,
@@ -200,15 +194,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getTextAreaVueModel(state: PageBuilderState): string | null {
       return state.textAreaVueModel
     },
-    getNextSibling(state: PageBuilderState): HTMLElement | null {
-      return state.nextSibling
-    },
-    getParentElement(state: PageBuilderState): HTMLElement | null {
-      return state.parentElement
-    },
-    getRestoredElement(state: PageBuilderState): string | null {
-      return state.restoredElement
-    },
+
     getCurrentClasses(state: PageBuilderState): string[] {
       return state.currentClasses
     },
@@ -355,15 +341,7 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     setTextAreaVueModel(payload: string | null): void {
       this.textAreaVueModel = payload
     },
-    setNextSibling(payload: HTMLElement | null): void {
-      this.nextSibling = payload
-    },
-    setParentElement(payload: HTMLElement | null): void {
-      this.parentElement = payload
-    },
-    setRestoredElement(payload: string | null): void {
-      this.restoredElement = payload
-    },
+
     setClass(payload: string): void {
       this.currentClasses = [...this.currentClasses, payload]
     },

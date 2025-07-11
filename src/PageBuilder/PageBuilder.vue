@@ -14,6 +14,7 @@ import DynamicModalBuilder from '../Components/Modals/DynamicModalBuilder.vue'
 import GlobalLoader from '../Components/Loaders/GlobalLoader.vue'
 import { useTranslations } from '../composables/useTranslations'
 import { getPageBuilder } from '../composables/builderInstance'
+import UndoRedo from '../Components/PageBuilder/UndoRedo/UndoRedo.vue'
 const pageBuilderService = getPageBuilder()
 /**
  * Props for PageBuilder component
@@ -165,10 +166,6 @@ const handleAddComponent = async function () {
 
 const getElement = computed(() => {
   return pageBuilderStateStore.getElement
-})
-
-const getRestoredElement = computed(() => {
-  return pageBuilderStateStore.getRestoredElement
 })
 
 const getComponents = computed(() => {
@@ -323,15 +320,13 @@ const ensureBuilderInitialized = function () {
   }
 }
 
-const pbxToolBar = ref(null)
-
+const pageBuilderWrapper = ref(null)
 let lastToolbarLeft = null
 let lastToolbarTop = null
 
 function updatePanelPosition() {
-  const container = pbxToolBar.value
+  const container = pageBuilderWrapper.value
   const editToolbarElement = container && container.querySelector('#pbxEditToolbar')
-  const restored = getRestoredElement.value
 
   if (!container || !editToolbarElement) return
 
@@ -364,11 +359,6 @@ function updatePanelPosition() {
 
     lastToolbarLeft = left
     lastToolbarTop = top
-  } else if (restored && lastToolbarLeft !== null && lastToolbarTop !== null) {
-    editToolbarElement.style.position = 'absolute'
-    editToolbarElement.style.left = `${lastToolbarLeft}px`
-    editToolbarElement.style.top = `${lastToolbarTop}px`
-    editToolbarElement.classList.add('is-visible')
   } else {
     editToolbarElement.classList.remove('is-visible')
   }
@@ -399,7 +389,7 @@ onMounted(async () => {
   updatePanelPosition()
 
   // Set up MutationObserver and event listeners
-  const container = pbxToolBar.value
+  const container = pageBuilderWrapper.value
   if (!container) return
 
   const observer = new MutationObserver(updatePanelPosition)
@@ -537,6 +527,8 @@ onMounted(async () => {
         </div>
       </template>
       <!-- Logo # end -->
+
+      <UndoRedo></UndoRedo>
 
       <div
         @click.self="
@@ -866,7 +858,8 @@ onMounted(async () => {
       <!-- Left Menu End -->
 
       <main
-        ref="pbxToolBar"
+        ref="pageBuilderWrapper"
+        id="page-builder-wrapper"
         class="pbx-transition-all pbx-duration-300 pbx-font-sans pbx-p-1 pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-text-black pbx-h-[100vh] pbx-overflow-y-auto"
         :class="[getMenuRight ? 'pbx-w-full' : 'pbx-w-full']"
       >
@@ -880,15 +873,6 @@ onMounted(async () => {
         >
           <template v-if="getElement">
             <EditGetElement></EditGetElement>
-          </template>
-          <template v-if="getRestoredElement">
-            <button
-              @click="pageBuilderService.restoreDeletedElementToDOM"
-              type="button"
-              class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white pbx-bg-gray-200 focus-visible:pbx-ring-0"
-            >
-              <span class="material-symbols-outlined"> undo </span>
-            </button>
           </template>
         </div>
         <!-- Element Popover toolbar end -->
@@ -926,7 +910,7 @@ onMounted(async () => {
               await pageBuilderService.clearHtmlSelection()
             }
           "
-          class="pbx-w-16 pbx-bg-myPrimaryLightGrayColor pbx-pt-5 pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-border-0 pbx-border-solid pbx-border-l-0 pbx-border-l-gray-600 pbx-rounded-l-2xl pbx-h-[100vh] pbx-pl-2 pbx-pr-2"
+          class="pbx-w-18 pbx-bg-myPrimaryLightGrayColor pbx-pt-5 pbx-z-20 pbx-flex-shrink-0 pbx-overflow-hidden pbx-border-0 pbx-border-solid pbx-border-l-0 pbx-border-l-gray-600 pbx-rounded-l-2xl pbx-h-[100vh] pbx-pl-2 pbx-pr-2"
         >
           <div
             @click.self="
