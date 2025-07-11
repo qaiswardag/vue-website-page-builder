@@ -26,7 +26,7 @@ const handleRedo = async function () {
 </script>
 
 <template>
-  <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-border-gray-200 pbx-mx-8">
+  <div class="pbx-flex pbx-items-center pbx-justify-center pbx-gap-2 pbx-border-gray-200 pbx-ml-12">
     <!-- Undo Start -->
     <button @click="handleUndo" type="button">
       <div
