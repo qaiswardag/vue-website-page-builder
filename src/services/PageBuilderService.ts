@@ -1676,6 +1676,30 @@ export class PageBuilderService {
   }
 
   /**
+   * Checks if the currently selected component can be moved up.
+   * @returns {boolean} True if the component can be moved up, false otherwise.
+   */
+  public canMoveUp(): boolean {
+    if (!this.getComponents.value || !this.getComponent.value) return false
+    const currentIndex = this.getComponents.value.findIndex(
+      (component) => component.id === this.getComponent.value?.id,
+    )
+    return currentIndex > 0
+  }
+
+  /**
+   * Checks if the currently selected component can be moved down.
+   * @returns {boolean} True if the component can be moved down, false otherwise.
+   */
+  public canMoveDown(): boolean {
+    if (!this.getComponents.value || !this.getComponent.value) return false
+    const currentIndex = this.getComponents.value.findIndex(
+      (component) => component.id === this.getComponent.value?.id,
+    )
+    return currentIndex < this.getComponents.value.length - 1
+  }
+
+  /**
    * Ensures that a text area element has content, adding a visual indicator if it's empty.
    */
   public ensureTextAreaHasContent = () => {

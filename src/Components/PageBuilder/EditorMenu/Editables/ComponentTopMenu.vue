@@ -1,6 +1,6 @@
 <script setup>
 import DynamicModalBuilder from '../../../Modals/DynamicModalBuilder.vue'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { getPageBuilder } from '../../../../composables/builderInstance'
 import { useTranslations } from '../../../../composables/useTranslations'
 
@@ -21,6 +21,9 @@ const thirdButtonModal = ref(null)
 const firstModalButtonFunctionDynamicModalBuilder = ref(null)
 const secondModalButtonFunctionDynamicModalBuilder = ref(null)
 const thirdModalButtonFunctionDynamicModalBuilder = ref(null)
+
+const canMoveUp = computed(() => pageBuilderService.canMoveUp())
+const canMoveDown = computed(() => pageBuilderService.canMoveDown())
 
 // remove component
 const handleDelete = function () {
@@ -78,14 +81,26 @@ const handleDelete = function () {
     <button
       type="button"
       @click="pageBuilderService.reorderComponent(-1)"
-      class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
+      :disabled="!canMoveUp"
+      class="pbx-h-10 pbx-w-10 pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square pbx-text-black"
+      :class="[
+        canMoveUp
+          ? 'hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0'
+          : 'pbx-cursor-not-allowed pbx-bg-opacity-20 hover:pbx-bg-gray-200',
+      ]"
     >
       <span class="material-symbols-outlined"> move_up </span>
     </button>
     <button
       type="button"
       @click="pageBuilderService.reorderComponent(1)"
-      class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
+      :disabled="!canMoveDown"
+      class="pbx-h-10 pbx-w-10 pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square pbx-text-black"
+      :class="[
+        canMoveDown
+          ? 'hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white focus-visible:pbx-ring-0'
+          : 'pbx-cursor-not-allowed pbx-bg-opacity-20 hover:pbx-bg-gray-200',
+      ]"
     >
       <span class="material-symbols-outlined"> move_down </span>
     </button>
