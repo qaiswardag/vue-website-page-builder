@@ -33,31 +33,33 @@ const handleRedo = async function () {
 
 <template>
   <GlobalLoader v-if="getIsLoadingGlobal"></GlobalLoader>
-  <div class="pbx-flex-1 pbx-flex pbx-justify-center pbx-items-center pbx-py-2 pbx-w-full gap-2">
-    <!-- Undo Start -->
-    <button @click="handleUndo" type="button" :disabled="!canUndo">
+  <template v-if="historyIndex > 0 && historyLength > 0">
+    <div class="pbx-flex-1 pbx-flex pbx-justify-center pbx-items-center pbx-py-2 pbx-w-full gap-2">
+      <!-- Undo Start -->
+      <button @click="handleUndo" type="button" :disabled="!canUndo">
+        <div
+          class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
+          :class="{ 'opacity-50 cursor-not-allowed': !canUndo }"
+        >
+          <span class="material-symbols-outlined"> undo </span>
+        </div>
+      </button>
+      <!-- Undo End -->
       <div
-        class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
-        :class="{ 'opacity-50 cursor-not-allowed': !canUndo }"
+        class="pbx-text-xs pbx-text-gray-600 pbx-mx-2 pbx-py-4 pbx-px-2 pbx-border-solid pbx-border pbx-border-gray-200 pbx-rounded-full"
       >
-        <span class="material-symbols-outlined"> undo </span>
+        {{ historyIndex }}/{{ historyLength }}
       </div>
-    </button>
-    <!-- Undo End -->
-    <div
-      class="pbx-text-xs pbx-text-gray-600 pbx-mx-2 pbx-py-4 pbx-px-2 pbx-border-solid pbx-border pbx-border-gray-200 pbx-rounded-full"
-    >
-      {{ historyIndex + 1 }}/{{ historyLength }}
+      <!-- Redo Start -->
+      <button @click="handleRedo" type="button" :disabled="!canRedo">
+        <div
+          class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
+          :class="{ 'opacity-50 cursor-not-allowed': !canRedo }"
+        >
+          <span class="material-symbols-outlined"> redo </span>
+        </div>
+      </button>
+      <!-- Redo End -->
     </div>
-    <!-- Redo Start -->
-    <button @click="handleRedo" type="button" :disabled="!canRedo">
-      <div
-        class="pbx-h-10 pbx-w-10 pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-50 pbx-aspect-square hover:pbx-bg-myPrimaryLinkColor focus-visible:pbx-ring-0 pbx-text-black hover:pbx-text-white"
-        :class="{ 'opacity-50 cursor-not-allowed': !canRedo }"
-      >
-        <span class="material-symbols-outlined"> redo </span>
-      </div>
-    </button>
-    <!-- Redo End -->
-  </div>
+  </template>
 </template>
