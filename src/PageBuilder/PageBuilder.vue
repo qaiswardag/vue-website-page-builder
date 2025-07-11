@@ -872,10 +872,6 @@ onMounted(async () => {
         <div
           id="pbxEditToolbar"
           class="pbx-z-30 lg:pbx-mx-20 pbx-flex pbx-gap-2 pbx-justify-center pbx-items-center pbx-rounded pbx-px-4 pbx-bg-red-200 pbx-h-0"
-          style="
-            box-shadow: 0 0 0 10px oklch(86.9% 0.005 56.366);
-            background: oklch(86.9% 0.005 56.366);
-          "
         >
           <template v-if="getElement">
             <EditGetElement></EditGetElement>
