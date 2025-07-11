@@ -320,12 +320,12 @@ const ensureBuilderInitialized = function () {
   }
 }
 
-const pbxToolBar = ref(null)
+const pageBuilderWrapper = ref(null)
 let lastToolbarLeft = null
 let lastToolbarTop = null
 
 function updatePanelPosition() {
-  const container = pbxToolBar.value
+  const container = pageBuilderWrapper.value
   const editToolbarElement = container && container.querySelector('#pbxEditToolbar')
 
   if (!container || !editToolbarElement) return
@@ -389,7 +389,7 @@ onMounted(async () => {
   updatePanelPosition()
 
   // Set up MutationObserver and event listeners
-  const container = pbxToolBar.value
+  const container = pageBuilderWrapper.value
   if (!container) return
 
   const observer = new MutationObserver(updatePanelPosition)
@@ -857,7 +857,8 @@ onMounted(async () => {
       <!-- Left Menu End -->
 
       <main
-        ref="pbxToolBar"
+        ref="pageBuilderWrapper"
+        id="page-builder-wrapper"
         class="pbx-transition-all pbx-duration-300 pbx-font-sans pbx-p-1 pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-text-black pbx-h-[100vh] pbx-overflow-y-auto"
         :class="[getMenuRight ? 'pbx-w-full' : 'pbx-w-full']"
       >

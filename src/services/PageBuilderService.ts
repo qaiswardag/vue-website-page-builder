@@ -1052,12 +1052,12 @@ export class PageBuilderService {
     // Deep clone clone component
     const clonedComponent = { ...componentObject }
 
-    const pageBuilder = document.querySelector('#pagebuilder')
+    const pageBuilderWrapper = document.querySelector('#page-builder-wrapper')
     //  scoll to top or bottom
-    if (pageBuilder) {
+    if (pageBuilderWrapper) {
       // push to top
       if (this.getComponentArrayAddMethod.value === 'unshift') {
-        pageBuilder.scrollTo({
+        pageBuilderWrapper.scrollTo({
           top: 0,
           behavior: 'smooth',
         })
@@ -2292,13 +2292,14 @@ export class PageBuilderService {
           : 'push',
       })
 
-      const pageBuilder = document.querySelector('#pagebuilder')
+      const pageBuilderWrapper = document.querySelector('#page-builder-wrapper')
+      console.log('pageBuilderWrapper:', pageBuilderWrapper)
       //  scoll to top or bottom
-      if (pageBuilder) {
+      if (pageBuilderWrapper) {
         // push to bottom
         if (this.getComponentArrayAddMethod.value === 'push') {
-          pageBuilder.scrollTo({
-            top: pageBuilder.scrollHeight + 50,
+          pageBuilderWrapper.scrollTo({
+            top: pageBuilderWrapper.scrollHeight + 50,
             behavior: 'smooth',
           })
         }
