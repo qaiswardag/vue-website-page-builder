@@ -322,8 +322,13 @@ const ensureBuilderInitialized = function () {
 
 const pbxBuilderWrapper = ref(null)
 
-let lastToolbarLeft = null
-let lastToolbarTop = null
+const hideToolbar = function () {
+  const toolbar = document.querySelector('#pbxEditToolbar')
+  if (toolbar) {
+    toolbar.classList.remove('is-visible')
+    toolbar.removeAttribute('style')
+  }
+}
 
 function updatePanelPosition() {
   const container = pbxBuilderWrapper.value
@@ -357,16 +362,9 @@ function updatePanelPosition() {
     editToolbarElement.style.left = `${left}px`
     editToolbarElement.style.top = `${top}px`
     editToolbarElement.classList.add('is-visible')
-
-    lastToolbarLeft = left
-    lastToolbarTop = top
-  } else if (lastToolbarLeft !== null && lastToolbarTop !== null) {
-    editToolbarElement.style.position = 'absolute'
-    editToolbarElement.style.left = `${lastToolbarLeft}px`
-    editToolbarElement.style.top = `${lastToolbarTop}px`
-    editToolbarElement.classList.add('is-visible')
   } else {
     editToolbarElement.classList.remove('is-visible')
+    editToolbarElement.removeAttribute('style') // Ensure all styles are removed
   }
 }
 
@@ -534,7 +532,7 @@ onMounted(async () => {
       </template>
       <!-- Logo # end -->
 
-      <UndoRedo></UndoRedo>
+      <UndoRedo @toolbar-hide-request="hideToolbar"></UndoRedo>
 
       <div
         @click.self="

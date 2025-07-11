@@ -6,6 +6,8 @@ import { getPageBuilder } from '../../../composables/builderInstance'
 
 const pageBuilderService = getPageBuilder()
 
+const emit = defineEmits(['toolbar-hide-request'])
+
 // Use shared store instance
 const pageBuilderStateStore = sharedPageBuilderStore
 
@@ -20,20 +22,20 @@ const canUndo = computed(() => historyIndex.value > 0)
 const canRedo = computed(() => historyIndex.value < historyLength.value - 1)
 
 const handleUndo = async function () {
-  const toolbar = document.querySelector('#pbxEditToolbar')
-  if (toolbar) {
-    toolbar.classList.remove('is-visible')
-    toolbar.removeAttribute('style')
-  }
-
   if (canUndo.value) {
+    // Emit event to hide toolbar
+    emit('toolbar-hide-request')
     await pageBuilderService.undo()
+    await pageBuilderService.clearHtmlSelection()
   }
 }
 
 const handleRedo = async function () {
   if (canRedo.value) {
+    // Emit event to hide toolbar
+    emit('toolbar-hide-request')
     await pageBuilderService.redo()
+    await pageBuilderService.clearHtmlSelection()
   }
 }
 </script>
