@@ -1671,7 +1671,33 @@ export class PageBuilderService {
     )
 
     if (movedComponentElement) {
+      // Apply highlight to the moved element
+      movedComponentElement.classList.add('pbx-reorder-highlight')
+
+      // Highlight its new neighbors (if they exist)
+      const prevSibling = movedComponentElement.previousElementSibling as HTMLElement
+      const nextSibling = movedComponentElement.nextElementSibling as HTMLElement
+
+      if (prevSibling && prevSibling.tagName === 'SECTION') {
+        prevSibling.classList.add('pbx-sibling-highlight')
+      }
+      if (nextSibling && nextSibling.tagName === 'SECTION') {
+        nextSibling.classList.add('pbx-sibling-highlight')
+      }
+
+      // Scroll to the moved component
       movedComponentElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+      // Remove highlights after a delay
+      setTimeout(() => {
+        movedComponentElement.classList.remove('pbx-reorder-highlight')
+        if (prevSibling && prevSibling.tagName === 'SECTION') {
+          prevSibling.classList.remove('pbx-sibling-highlight')
+        }
+        if (nextSibling && nextSibling.tagName === 'SECTION') {
+          nextSibling.classList.remove('pbx-sibling-highlight')
+        }
+      }, 1000) // Adjust delay as needed
     }
   }
 

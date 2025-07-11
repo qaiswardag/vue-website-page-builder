@@ -42,7 +42,14 @@ const handleRedo = async function () {
 
 <template>
   <GlobalLoader v-if="getIsLoadingGlobal"></GlobalLoader>
-  <div class="pbx-flex-1 pbx-flex pbx-justify-center pbx-items-center pbx-py-2 pbx-w-full gap-2">
+  <div
+    @click="
+      async () => {
+        await pageBuilderService.clearHtmlSelection()
+      }
+    "
+    class="pbx-flex-1 pbx-flex pbx-justify-center pbx-items-center pbx-py-2 pbx-w-full gap-1"
+  >
     <!-- Undo Start -->
     <button @click="handleUndo" type="button" :disabled="!canUndo">
       <div
