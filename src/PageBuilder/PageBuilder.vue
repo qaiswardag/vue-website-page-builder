@@ -321,6 +321,7 @@ const ensureBuilderInitialized = function () {
 }
 
 const pbxBuilderWrapper = ref(null)
+
 let lastToolbarLeft = null
 let lastToolbarTop = null
 
@@ -359,6 +360,11 @@ function updatePanelPosition() {
 
     lastToolbarLeft = left
     lastToolbarTop = top
+  } else if (lastToolbarLeft !== null && lastToolbarTop !== null) {
+    editToolbarElement.style.position = 'absolute'
+    editToolbarElement.style.left = `${lastToolbarLeft}px`
+    editToolbarElement.style.top = `${lastToolbarTop}px`
+    editToolbarElement.classList.add('is-visible')
   } else {
     editToolbarElement.classList.remove('is-visible')
   }
