@@ -65,6 +65,8 @@ interface PageBuilderState {
   isResumeEditing: boolean
   isRestoring: boolean
   currentLanguage: string | null
+  historyIndex: number
+  historyLength: number
 }
 
 export const usePageBuilderStateStore = defineStore('pageBuilderState', {
@@ -125,6 +127,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     isResumeEditing: false,
     isRestoring: false,
     currentLanguage: null,
+    historyIndex: -1,
+    historyLength: 0,
   }),
   getters: {
     // Core Page Builder Getters
@@ -273,6 +277,8 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     getIsLoadingResumeEditing: (state: PageBuilderState): boolean => state.isResumeEditing,
     getIsRestoring: (state: PageBuilderState): boolean => state.isRestoring,
     getCurrentLanguage: (state: PageBuilderState): string | null => state.currentLanguage,
+    getHistoryIndex: (state: PageBuilderState): number => state.historyIndex,
+    getHistoryLength: (state: PageBuilderState): number => state.historyLength,
   },
   actions: {
     setComponentArrayAddMethod(payload: string | null): void {
@@ -472,6 +478,12 @@ export const usePageBuilderStateStore = defineStore('pageBuilderState', {
     },
     setCurrentLanguage(payload: string): void {
       this.currentLanguage = payload
+    },
+    setHistoryIndex(payload: number): void {
+      this.historyIndex = payload
+    },
+    setHistoryLength(payload: number): void {
+      this.historyLength = payload
     },
   },
 })

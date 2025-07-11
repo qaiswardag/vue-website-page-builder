@@ -984,7 +984,6 @@ export class PageBuilderService {
     await this.handleAutoSave()
   }
 
-  private historyIndex: number = -1
   private getHistoryBaseKey(): string | null {
     return this.getLocalStorageItemName.value
   }
@@ -993,7 +992,8 @@ export class PageBuilderService {
     const baseKey = this.getHistoryBaseKey()
     if (baseKey) {
       const history = LocalStorageManager.getHistory(baseKey)
-      this.historyIndex = history.length - 1
+      this.pageBuilderStateStore.setHistoryIndex(history.length - 1)
+      this.pageBuilderStateStore.setHistoryLength(history.length)
     }
   }
 
@@ -1458,9 +1458,9 @@ export class PageBuilderService {
     if (!baseKey) return
 
     const history = LocalStorageManager.getHistory(baseKey)
-    if (history.length > 1 && this.historyIndex > 0) {
-      this.historyIndex--
-      const data = history[this.historyIndex]
+    if (history.length > 1 && this.pageBuilderStateStore.getHistoryIndex > 0) {
+      this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex - 1)
+      const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
       await this.mountComponentsToDOM(htmlString)
     }
@@ -1474,9 +1474,9 @@ export class PageBuilderService {
     if (!baseKey) return
 
     const history = LocalStorageManager.getHistory(baseKey)
-    if (history.length > 0 && this.historyIndex < history.length - 1) {
-      this.historyIndex++
-      const data = history[this.historyIndex]
+    if (history.length > 0 && this.pageBuilderStateStore.getHistoryIndex < history.length - 1) {
+      this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex + 1)
+      const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
       await this.mountComponentsToDOM(htmlString)
     }
@@ -1890,15 +1890,16 @@ export class PageBuilderService {
         }
       }
 
-      if (this.historyIndex < history.length - 1) {
-        history = history.slice(0, this.historyIndex + 1)
+      if (this.pageBuilderStateStore.getHistoryIndex < history.length - 1) {
+        history = history.slice(0, this.pageBuilderStateStore.getHistoryIndex + 1)
       }
       history.push(dataToSave)
       if (history.length > 10) {
         history = history.slice(history.length - 10)
       }
       localStorage.setItem(baseKey + '-history', JSON.stringify(history))
-      this.historyIndex = history.length - 1
+      this.pageBuilderStateStore.setHistoryIndex(history.length - 1)
+      this.pageBuilderStateStore.setHistoryLength(history.length)
     }
   }
   /**
