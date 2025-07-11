@@ -30,6 +30,7 @@ const handleUndo = async function () {
     await pageBuilderService.undo()
   }
 }
+
 const handleRedo = async function () {
   if (canRedo.value) {
     await pageBuilderService.redo()
