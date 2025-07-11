@@ -528,6 +528,8 @@ onMounted(async () => {
       </template>
       <!-- Logo # end -->
 
+      <UndoRedo></UndoRedo>
+
       <div
         @click.self="
           async () => {
@@ -619,7 +621,6 @@ onMounted(async () => {
             </button>
           </template>
           <!-- Restore End -->
-          <UndoRedo></UndoRedo>
         </div>
       </div>
 

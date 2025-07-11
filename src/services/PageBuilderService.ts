@@ -1,3 +1,4 @@
+import { LocalStorageManager } from './LocalStorageManager'
 import type {
   BuilderResourceData,
   ComponentObject,
@@ -60,9 +61,6 @@ export class PageBuilderService {
   private getComponents: ComputedRef<ComponentObject[] | null>
   private getComponent: ComputedRef<ComponentObject | null>
   private getElement: ComputedRef<HTMLElement | null>
-  private getNextSibling: ComputedRef<HTMLElement | null>
-  private getParentElement: ComputedRef<HTMLElement | null>
-  private getRestoredElement: ComputedRef<string | null>
   private getComponentArrayAddMethod: ComputedRef<string | null>
   private NoneListernesTags: string[]
   private hasStartedEditing: boolean = false
@@ -98,9 +96,6 @@ export class PageBuilderService {
     this.getComponent = computed(() => this.pageBuilderStateStore.getComponent)
 
     this.getElement = computed(() => this.pageBuilderStateStore.getElement)
-    this.getNextSibling = computed(() => this.pageBuilderStateStore.getNextSibling)
-    this.getParentElement = computed(() => this.pageBuilderStateStore.getParentElement)
-    this.getRestoredElement = computed(() => this.pageBuilderStateStore.getRestoredElement)
 
     this.getComponentArrayAddMethod = computed(
       () => this.pageBuilderStateStore.getComponentArrayAddMethod,
@@ -416,6 +411,7 @@ export class PageBuilderService {
 
       // Update the localStorage key name based on the config/resource
       this.updateLocalStorageItemName()
+      this.initializeHistory()
 
       if (passedComponentsArray) {
         this.savedMountComponents = passedComponentsArray
@@ -988,6 +984,19 @@ export class PageBuilderService {
     await this.handleAutoSave()
   }
 
+  private historyIndex: number = -1
+  private getHistoryBaseKey(): string | null {
+    return this.getLocalStorageItemName.value
+  }
+
+  private initializeHistory() {
+    const baseKey = this.getHistoryBaseKey()
+    if (baseKey) {
+      const history = LocalStorageManager.getHistory(baseKey)
+      this.historyIndex = history.length - 1
+    }
+  }
+
   /**
    * Triggers an auto-save of the current page builder content to local storage if enabled.
    */
@@ -1441,12 +1450,41 @@ export class PageBuilderService {
         .forEach((section) => section.remove())
     }
   }
-
+  //
   public async undo() {
-    console.log('handle undo ran in servide...:')
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
+    await delay(300)
+    const baseKey = this.getHistoryBaseKey()
+    if (!baseKey) return
+
+    const history = LocalStorageManager.getHistory(baseKey)
+    if (history.length > 1 && this.historyIndex > 0) {
+      this.historyIndex--
+      const data = history[this.historyIndex]
+      const htmlString = this.renderComponentsToHtml(data.components)
+      await this.mountComponentsToDOM(htmlString)
+    } else if (history.length > 0 && this.historyIndex === 1) {
+      const data = history[this.historyIndex]
+      const htmlString = this.renderComponentsToHtml(data.components)
+      await this.mountComponentsToDOM(htmlString)
+    }
+    this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
+
   public async redo() {
-    console.log('handle redo ran in servide...:')
+    this.pageBuilderStateStore.setIsLoadingGlobal(true)
+    await delay(300)
+    const baseKey = this.getHistoryBaseKey()
+    if (!baseKey) return
+
+    const history = LocalStorageManager.getHistory(baseKey)
+    if (history.length > 0 && this.historyIndex < history.length - 1) {
+      this.historyIndex++
+      const data = history[this.historyIndex]
+      const htmlString = this.renderComponentsToHtml(data.components)
+      await this.mountComponentsToDOM(htmlString)
+    }
+    this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
 
   /**
@@ -1518,11 +1556,9 @@ export class PageBuilderService {
 
     // If the element is not a top-level section, store its information for undo functionality.
     if (element.parentElement?.tagName !== 'SECTION') {
-      this.pageBuilderStateStore.setParentElement(element.parentNode as HTMLElement)
-      this.pageBuilderStateStore.setRestoredElement(element.outerHTML)
-      this.pageBuilderStateStore.setNextSibling(element.nextSibling as HTMLElement | null)
       // Remove the element from the DOM.
       element.remove()
+      this.handleAutoSave()
     }
 
     // Clear the selection state.
@@ -1534,39 +1570,6 @@ export class PageBuilderService {
     // Wait for the DOM to update before re-attaching event listeners.
     await nextTick()
     // Re-attach event listeners to all editable elements.
-    await this.addListenersToEditableElements()
-  }
-
-  /**
-   * Restores the last deleted element to its previous position in the DOM.
-   * @returns {Promise<void>}
-   */
-  public async restoreDeletedElementToDOM() {
-    // Retrieve the details of the element to be restored.
-    const restoredHTML = this.getRestoredElement.value
-    const parent = this.getParentElement.value
-    const nextSibling = this.getNextSibling.value
-
-    if (restoredHTML && parent) {
-      // Create a temporary container to parse the stored HTML.
-      const container = document.createElement('div')
-      container.innerHTML = restoredHTML
-
-      // Insert the restored element back into its original position.
-      if (container.firstChild) {
-        parent.insertBefore(container.firstChild, nextSibling)
-      }
-    }
-
-    // Clear the state related to the restored element.
-    this.pageBuilderStateStore.setParentElement(null)
-    this.pageBuilderStateStore.setRestoredElement(null)
-    this.pageBuilderStateStore.setNextSibling(null)
-    this.pageBuilderStateStore.setComponent(null)
-    this.pageBuilderStateStore.setElement(null)
-
-    // Wait for the DOM to update before re-attaching event listeners.
-    await nextTick()
     await this.addListenersToEditableElements()
   }
 
@@ -1830,10 +1833,31 @@ export class PageBuilderService {
       pageSettings,
     }
 
-    const keyForSavingFromDomToLocal = this.getLocalStorageItemName.value
+    const baseKey = this.getHistoryBaseKey()
+    if (baseKey) {
+      localStorage.setItem(baseKey, JSON.stringify(dataToSave))
+      let history = LocalStorageManager.getHistory(baseKey)
 
-    if (keyForSavingFromDomToLocal && typeof keyForSavingFromDomToLocal === 'string') {
-      localStorage.setItem(keyForSavingFromDomToLocal, JSON.stringify(dataToSave))
+      const lastState = history[history.length - 1]
+      if (lastState) {
+        const lastComponents = JSON.stringify(lastState.components)
+        const newComponents = JSON.stringify(dataToSave.components)
+        const lastSettings = JSON.stringify(lastState.pageSettings)
+        const newSettings = JSON.stringify(dataToSave.pageSettings)
+        if (lastComponents === newComponents && lastSettings === newSettings) {
+          return // Do not save duplicate state
+        }
+      }
+
+      if (this.historyIndex < history.length - 1) {
+        history = history.slice(0, this.historyIndex + 1)
+      }
+      history.push(dataToSave)
+      if (history.length > 10) {
+        history = history.slice(history.length - 10)
+      }
+      localStorage.setItem(baseKey + '-history', JSON.stringify(history))
+      this.historyIndex = history.length - 1
     }
   }
   /**
