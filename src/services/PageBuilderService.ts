@@ -1463,10 +1463,6 @@ export class PageBuilderService {
       const data = history[this.historyIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
       await this.mountComponentsToDOM(htmlString)
-    } else if (history.length > 0 && this.historyIndex === 1) {
-      const data = history[this.historyIndex]
-      const htmlString = this.renderComponentsToHtml(data.components)
-      await this.mountComponentsToDOM(htmlString)
     }
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
@@ -1487,6 +1483,29 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
 
+  private hasVisibleContent(element: HTMLElement): boolean {
+    if (!element) return false
+
+    // Check for meaningful elements
+    const meaningfulContentSelector =
+      'img, video, iframe, input, button, a, h1, h2, h3, h4, h5, h6, p, li, blockquote, pre, code, table'
+    if (element.querySelector(meaningfulContentSelector)) return true
+
+    // Check for non-empty text nodes
+    const walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT, null)
+    while (walker.nextNode()) {
+      if (walker.currentNode.nodeValue && walker.currentNode.nodeValue.trim() !== '') {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  private isSectionEmpty(section: HTMLElement): boolean {
+    return !this.hasVisibleContent(section)
+  }
+
   /**
    * Deletes the currently selected component from the DOM and the state.
    * @returns {Promise<void>}
@@ -1495,13 +1514,13 @@ export class PageBuilderService {
     this.syncDomToStoreOnly()
     await nextTick()
 
-    const components = this.getComponents.value
+    const components = this.pageBuilderStateStore.getComponents
 
     if (!components) return
 
     // Find the index of the component to be deleted.
     const indexToDelete = components.findIndex(
-      (component) => component.id === this.getComponent.value?.id,
+      (component: ComponentObject) => component.id === this.getComponent.value?.id,
     )
 
     if (indexToDelete === -1) {
@@ -1554,12 +1573,34 @@ export class PageBuilderService {
       return
     }
 
-    // If the element is not a top-level section, store its information for undo functionality.
-    if (element.parentElement?.tagName !== 'SECTION') {
-      // Remove the element from the DOM.
+    const parentSection = element.closest('section')
+
+    // If the element to be deleted is the section itself
+    if (element.tagName === 'SECTION') {
+      this.deleteComponentFromDOM()
+    } else {
+      // If the element is inside a section
       element.remove()
-      this.handleAutoSave()
+      if (parentSection && this.isSectionEmpty(parentSection)) {
+        const componentId = parentSection.getAttribute('data-componentid')
+        if (componentId) {
+          const components = this.pageBuilderStateStore.getComponents
+          if (components) {
+            const indexToDelete = components.findIndex((c: ComponentObject) => c.id === componentId)
+            if (indexToDelete !== -1) {
+              const newComponents = [
+                ...components.slice(0, indexToDelete),
+                ...components.slice(indexToDelete + 1),
+              ]
+              this.pageBuilderStateStore.setComponents(newComponents)
+              parentSection.remove() // Directly remove from DOM
+            }
+          }
+        }
+      }
     }
+
+    this.handleAutoSave()
 
     // Clear the selection state.
     this.pageBuilderStateStore.setComponent(null)
@@ -2317,7 +2358,6 @@ export class PageBuilderService {
       })
 
       const pageBuilderWrapper = document.querySelector('#page-builder-wrapper')
-      console.log('pageBuilderWrapper:', pageBuilderWrapper)
       //  scoll to top or bottom
       if (pageBuilderWrapper) {
         // push to bottom
