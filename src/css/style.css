@@ -395,6 +395,8 @@
   padding-right: 1rem;
   padding-left: 1rem;
   height: 2.2rem;
+  box-shadow: 0 0 0 10px oklch(86.9% 0.005 56.366);
+  background: oklch(86.9% 0.005 56.366);
 }
 
 /* CSS for content inside page builder # start */
@@ -475,4 +477,30 @@
 #pagebuilder ul {
   list-style: disc !important;
   padding: 0rem;
+}
+
+.pbx-reorder-highlight {
+  animation: pbx-reorder-flash 0.4s ease-in-out;
+}
+
+@keyframes pbx-reorder-flash {
+  0% {
+    box-shadow: 0 0 0 0px rgba(66, 153, 225, 0.7);
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(66, 153, 225, 0);
+    transform: scale(0.2); /* Even more shrink */
+    opacity: 0.8;
+  }
+  100% {
+    box-shadow: 0 0 0 0px rgba(66, 153, 225, 0);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.pbx-sibling-highlight {
+  border: 2px dashed #4299e1; /* Blue dashed border */
 }

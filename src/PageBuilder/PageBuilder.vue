@@ -320,12 +320,18 @@ const ensureBuilderInitialized = function () {
   }
 }
 
-const pageBuilderWrapper = ref(null)
-let lastToolbarLeft = null
-let lastToolbarTop = null
+const pbxBuilderWrapper = ref(null)
+
+const hideToolbar = function () {
+  const toolbar = document.querySelector('#pbxEditToolbar')
+  if (toolbar) {
+    toolbar.classList.remove('is-visible')
+    toolbar.removeAttribute('style')
+  }
+}
 
 function updatePanelPosition() {
-  const container = pageBuilderWrapper.value
+  const container = pbxBuilderWrapper.value
   const editToolbarElement = container && container.querySelector('#pbxEditToolbar')
 
   if (!container || !editToolbarElement) return
@@ -356,11 +362,9 @@ function updatePanelPosition() {
     editToolbarElement.style.left = `${left}px`
     editToolbarElement.style.top = `${top}px`
     editToolbarElement.classList.add('is-visible')
-
-    lastToolbarLeft = left
-    lastToolbarTop = top
   } else {
     editToolbarElement.classList.remove('is-visible')
+    editToolbarElement.removeAttribute('style') // Ensure all styles are removed
   }
 }
 
@@ -389,7 +393,7 @@ onMounted(async () => {
   updatePanelPosition()
 
   // Set up MutationObserver and event listeners
-  const container = pageBuilderWrapper.value
+  const container = pbxBuilderWrapper.value
   if (!container) return
 
   const observer = new MutationObserver(updatePanelPosition)
@@ -528,7 +532,7 @@ onMounted(async () => {
       </template>
       <!-- Logo # end -->
 
-      <UndoRedo></UndoRedo>
+      <UndoRedo @toolbar-hide-request="hideToolbar"></UndoRedo>
 
       <div
         @click.self="
@@ -858,18 +862,14 @@ onMounted(async () => {
       <!-- Left Menu End -->
 
       <main
-        ref="pageBuilderWrapper"
+        ref="pbxBuilderWrapper"
         id="page-builder-wrapper"
-        class="pbx-transition-all pbx-duration-300 pbx-font-sans pbx-p-1 pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-text-black pbx-h-[100vh] pbx-overflow-y-auto"
+        class="pbx-transition-all pbx-duration-300 pbx-font-sans pbx-p-1 pbx-flex pbx-flex-col pbx-grow pbx-rounded-tr-2xl pbx-rounded-tl-2xl pbx-border-solid pbx-border pbx-border-gray-200 pbx-items-stretch pbx-text-black pbx-h-[100vh] pbx-overflow-y-scroll pbx-relative pbx-pt-14"
         :class="[getMenuRight ? 'pbx-w-full' : 'pbx-w-full']"
       >
         <div
           id="pbxEditToolbar"
           class="pbx-z-30 lg:pbx-mx-20 pbx-flex pbx-gap-2 pbx-justify-center pbx-items-center pbx-rounded pbx-px-4 pbx-bg-red-200 pbx-h-0"
-          style="
-            box-shadow: 0 0 0 10px oklch(86.9% 0.005 56.366);
-            background: oklch(86.9% 0.005 56.366);
-          "
         >
           <template v-if="getElement">
             <EditGetElement></EditGetElement>

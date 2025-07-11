@@ -984,7 +984,6 @@ export class PageBuilderService {
     await this.handleAutoSave()
   }
 
-  private historyIndex: number = -1
   private getHistoryBaseKey(): string | null {
     return this.getLocalStorageItemName.value
   }
@@ -993,7 +992,8 @@ export class PageBuilderService {
     const baseKey = this.getHistoryBaseKey()
     if (baseKey) {
       const history = LocalStorageManager.getHistory(baseKey)
-      this.historyIndex = history.length - 1
+      this.pageBuilderStateStore.setHistoryIndex(history.length - 1)
+      this.pageBuilderStateStore.setHistoryLength(history.length)
     }
   }
 
@@ -1458,9 +1458,9 @@ export class PageBuilderService {
     if (!baseKey) return
 
     const history = LocalStorageManager.getHistory(baseKey)
-    if (history.length > 1 && this.historyIndex > 0) {
-      this.historyIndex--
-      const data = history[this.historyIndex]
+    if (history.length > 1 && this.pageBuilderStateStore.getHistoryIndex > 0) {
+      this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex - 1)
+      const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
       await this.mountComponentsToDOM(htmlString)
     }
@@ -1474,9 +1474,9 @@ export class PageBuilderService {
     if (!baseKey) return
 
     const history = LocalStorageManager.getHistory(baseKey)
-    if (history.length > 0 && this.historyIndex < history.length - 1) {
-      this.historyIndex++
-      const data = history[this.historyIndex]
+    if (history.length > 0 && this.pageBuilderStateStore.getHistoryIndex < history.length - 1) {
+      this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex + 1)
+      const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
       await this.mountComponentsToDOM(htmlString)
     }
@@ -1632,7 +1632,7 @@ export class PageBuilderService {
    * Reorders the currently selected component up or down in the component list.
    * @param {number} direction - The direction to move the component (-1 for up, 1 for down).
    */
-  public reorderComponent(direction: number): void {
+  public async reorderComponent(direction: number): Promise<void> {
     if (!this.getComponents.value || !this.getComponent.value) return
 
     if (this.getComponents.value.length <= 1) return
@@ -1660,6 +1660,69 @@ export class PageBuilderService {
     // Move the component to the new position in the array.
     this.getComponents.value.splice(currentIndex, 1)
     this.getComponents.value.splice(newIndex, 0, componentToMove)
+
+    // Wait for the DOM to update after reordering
+    await nextTick()
+
+    // Scroll to the moved component
+    const pageBuilderWrapper = document.querySelector('#page-builder-wrapper')
+    const movedComponentElement = pageBuilderWrapper?.querySelector(
+      `section[data-componentid="${componentToMove.id}"]`,
+    )
+
+    if (movedComponentElement) {
+      // Apply highlight to the moved element
+      movedComponentElement.classList.add('pbx-reorder-highlight')
+
+      // Highlight its new neighbors (if they exist)
+      const prevSibling = movedComponentElement.previousElementSibling as HTMLElement
+      const nextSibling = movedComponentElement.nextElementSibling as HTMLElement
+
+      if (prevSibling && prevSibling.tagName === 'SECTION') {
+        prevSibling.classList.add('pbx-sibling-highlight')
+      }
+      if (nextSibling && nextSibling.tagName === 'SECTION') {
+        nextSibling.classList.add('pbx-sibling-highlight')
+      }
+
+      // Scroll to the moved component
+      movedComponentElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+
+      // Remove highlights after a delay
+      setTimeout(() => {
+        movedComponentElement.classList.remove('pbx-reorder-highlight')
+        if (prevSibling && prevSibling.tagName === 'SECTION') {
+          prevSibling.classList.remove('pbx-sibling-highlight')
+        }
+        if (nextSibling && nextSibling.tagName === 'SECTION') {
+          nextSibling.classList.remove('pbx-sibling-highlight')
+        }
+      }, 1000) // Adjust delay as needed
+    }
+  }
+
+  /**
+   * Checks if the currently selected component can be moved up.
+   * @returns {boolean} True if the component can be moved up, false otherwise.
+   */
+  public canMoveUp(): boolean {
+    if (!this.getComponents.value || !this.getComponent.value) return false
+    const currentIndex = this.getComponents.value.findIndex(
+      (component) => component.id === this.getComponent.value?.id,
+    )
+    return currentIndex > 0
+  }
+
+  /**
+   * Checks if the currently selected component can be moved down.
+   * @returns {boolean} True if the component can be moved down, false otherwise.
+   */
+  public canMoveDown(): boolean {
+    if (!this.getComponents.value || !this.getComponent.value) return false
+    const currentIndex = this.getComponents.value.findIndex(
+      (component) => component.id === this.getComponent.value?.id,
+    )
+    return currentIndex < this.getComponents.value.length - 1
   }
 
   /**
@@ -1890,15 +1953,16 @@ export class PageBuilderService {
         }
       }
 
-      if (this.historyIndex < history.length - 1) {
-        history = history.slice(0, this.historyIndex + 1)
+      if (this.pageBuilderStateStore.getHistoryIndex < history.length - 1) {
+        history = history.slice(0, this.pageBuilderStateStore.getHistoryIndex + 1)
       }
       history.push(dataToSave)
       if (history.length > 10) {
         history = history.slice(history.length - 10)
       }
       localStorage.setItem(baseKey + '-history', JSON.stringify(history))
-      this.historyIndex = history.length - 1
+      this.pageBuilderStateStore.setHistoryIndex(history.length - 1)
+      this.pageBuilderStateStore.setHistoryLength(history.length)
     }
   }
   /**

@@ -147,7 +147,7 @@ const getSvgPreview = (title: string) => {
             v-for="category in categories"
             :key="category"
             @click="selectedCategory = category"
-            class="pbx-mySecondaryButton pbx-px-2 pbx-text-xs"
+            class="pbx-mySecondaryButton pbx-text-xs pbx-px-4"
             :class="{ active: selectedCategory === category }"
           >
             {{ translate(category) }}
