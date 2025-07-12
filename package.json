@@ -52,12 +52,12 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/qaiswardag/vue-website-page-builder.git"
+    "url": "git+ssh://git@github.com/myissue-org/vue-website-page-builder.git"
   },
   "bugs": {
-    "url": "https://github.com/qaiswardag/vue-website-page-builder/issues"
+    "url": "https://github.com/myissue-org/vue-website-page-builder/issues"
   },
-  "homepage": "https://mybuilder.dev",
+  "homepage": "https://www.mybuilder.dev",
   "engines": {
     "node": ">=18.0.0",
     "npm": ">=8.0.0"
