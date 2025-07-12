@@ -1697,7 +1697,7 @@ export class PageBuilderService {
         if (nextSibling && nextSibling.tagName === 'SECTION') {
           nextSibling.classList.remove('pbx-sibling-highlight')
         }
-      }, 1000) // Adjust delay as needed
+      }, 300) // Adjust delay as needed
     }
   }
 
