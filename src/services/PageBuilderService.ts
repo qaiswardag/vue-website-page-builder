@@ -1945,8 +1945,31 @@ export class PageBuilderService {
     }
 
     const baseKey = this.getHistoryBaseKey()
-    console.log('den er:', baseKey)
+
     if (baseKey) {
+      const currentDataRaw = localStorage.getItem(baseKey)
+      if (currentDataRaw) {
+        const currentData = JSON.parse(currentDataRaw)
+
+        // Compare components
+        const currentComponents = currentData.components || []
+        const newComponents = dataToSave.components || []
+
+        const hasChanges = newComponents.some((newComponent, index) => {
+          const currentComponent = currentComponents[index]
+          return (
+            !currentComponent || // New component added
+            currentComponent.html_code !== newComponent.html_code // Component HTML changed
+          )
+        })
+
+        if (!hasChanges) {
+          console.log('No changes detected in components. Skipping local storage update.')
+          return
+        }
+        console.log('there was neeeeeeew changes...:')
+      }
+
       localStorage.setItem(baseKey, JSON.stringify(dataToSave))
       let history = LocalStorageManager.getHistory(baseKey)
 
@@ -2597,6 +2620,107 @@ export class PageBuilderService {
   }
 
   /**
+   * Applies modified components by mounting them to the DOM and attaching listeners.
+   * @param htmlString - The HTML string to apply
+   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
+   */
+  public async applyModifiedHTML(htmlString: string): Promise<string | null> {
+    if (!htmlString || (typeof htmlString === 'string' && htmlString.length === 0)) {
+      return 'No HTML content was provided. Please ensure a valid HTML string is passed.'
+    }
+
+    // Check if the htmlString contains any <section> tags
+    if (/<section[\s>]/i.test(htmlString)) {
+      return 'Error: The <section> tag cannot be used here as it is already included inside a component.'
+    }
+
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = htmlString.trim()
+
+    const parsedElement = tempDiv.firstElementChild as HTMLElement | null
+
+    if (!parsedElement) {
+      return 'Could not parse element from HTML string.'
+    }
+
+    // Replace the actual DOM element
+    const oldElement = this.pageBuilderStateStore.getElement
+
+    if (oldElement && oldElement.parentElement) {
+      oldElement.replaceWith(parsedElement)
+
+      // Update the element in the store (now referencing the new one)
+      this.pageBuilderStateStore.setElement(parsedElement)
+    }
+
+    await this.addListenersToEditableElements()
+    await nextTick()
+    return null
+  }
+
+  private validateMountingHTML(
+    htmlString: string,
+    options?: { logError?: boolean },
+  ): string | null {
+    console.log('html string er::', htmlString)
+    const sectionMatches = htmlString.match(/<section\b[^>]*>/gi) || []
+    const closingSectionMatches = htmlString.match(/<\/section>/gi) || []
+
+    if (!htmlString || htmlString.trim().length === 0) {
+      const error = 'No HTML content was provided. Please ensure a valid HTML string is passed.'
+      if (options && options.logError) {
+        console.error(error)
+        // Behavior
+        return error
+      }
+      // default behavior
+      return error
+    }
+
+    if (sectionMatches.length === 0) {
+      const error = 'No <section> tags found. Each component must be wrapped in a <section> tag.'
+      if (options && options.logError) {
+        console.error(error)
+        return error
+      }
+      return error
+    }
+
+    if (sectionMatches.length !== closingSectionMatches.length) {
+      const error =
+        'Uneven <section> tags detected in the provided HTML. Each component must be wrapped in its own properly paired <section>...</section>. ' +
+        'Ensure that all <section> tags have a matching closing </section> tag.'
+
+      if (options && options.logError) {
+        console.error(error)
+        return error
+      }
+
+      return error
+    }
+
+    return null
+  }
+
+  /**
+   * Applies modified components by mounting them to the DOM and attaching listeners.
+   * @param htmlString - The HTML string to apply
+   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
+   */
+  public async applyModifiedComponents(htmlString: string): Promise<string | null> {
+    // Trim HTML string
+    const trimmedData = htmlString.trim()
+
+    const validationError = this.validateMountingHTML(trimmedData)
+    if (validationError) return validationError
+
+    await this.mountComponentsToDOM(trimmedData) // also fixed to use `trimmedData`
+    await this.addListenersToEditableElements()
+    await nextTick()
+    return null
+  }
+
+  /**
    * Mounts builder components to the DOM from an HTML string.
    *
    * Input format detection:
@@ -2614,7 +2738,11 @@ export class PageBuilderService {
     htmlString: string,
     usePassedPageSettings?: boolean,
   ): Promise<void> {
+    // Trim HTML string
     const trimmedData = htmlString.trim()
+
+    const validationError = this.validateMountingHTML(trimmedData, { logError: true })
+    if (validationError) return
 
     // Return error since JSON data has been passed to mount HTML to DOM
     if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
@@ -2857,57 +2985,6 @@ export class PageBuilderService {
         }
       }
     }
-  }
-
-  /**
-   * Applies modified components by mounting them to the DOM and attaching listeners.
-   * @param htmlString - The HTML string to apply
-   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
-   */
-  public async applyModifiedHTML(htmlString: string): Promise<string | null> {
-    if (!htmlString || (typeof htmlString === 'string' && htmlString.length === 0)) {
-      return 'No HTML content was provided. Please ensure a valid HTML string is passed.'
-    }
-
-    const tempDiv = document.createElement('div')
-    tempDiv.innerHTML = htmlString.trim()
-
-    const parsedElement = tempDiv.firstElementChild as HTMLElement | null
-
-    if (!parsedElement) {
-      return 'Could not parse element from HTML string.'
-    }
-
-    // Replace the actual DOM element
-    const oldElement = this.pageBuilderStateStore.getElement
-
-    if (oldElement && oldElement.parentElement) {
-      oldElement.replaceWith(parsedElement)
-
-      // Update the element in the store (now referencing the new one)
-      this.pageBuilderStateStore.setElement(parsedElement)
-    }
-
-    await this.addListenersToEditableElements()
-    await nextTick()
-    return null
-  }
-
-  /**
-   * Applies modified components by mounting them to the DOM and attaching listeners.
-   * @param htmlString - The HTML string to apply
-   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
-   */
-  public async applyModifiedComponents(htmlString: string): Promise<string | null> {
-    if (!htmlString || (typeof htmlString === 'string' && htmlString.length === 0)) {
-      return 'No HTML content was provided. Please ensure a valid HTML string is passed.'
-    }
-
-    await this.mountComponentsToDOM(htmlString)
-
-    await this.addListenersToEditableElements()
-    await nextTick()
-    return null
   }
 
   /**
