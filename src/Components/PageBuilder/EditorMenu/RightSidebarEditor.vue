@@ -88,23 +88,27 @@ const generateHTML = function (filename, HTML) {
 
   // Add your custom CSS
   const customCSS = `
-        <style>
-            #pagebuilder blockquote,
-            #pagebuilder dl,
-            #pagebuilder dd,
-            #pagebuilder pre,
-            #pagebuilder hr,
-            #pagebuilder figure,
-            #pagebuilder p,
-            #pagebuilder h1,
-            #pagebuilder h2,
-            #pagebuilder h3,
-            #pagebuilder h4,
-            #pagebuilder h5,
-            #pagebuilder h6 {
-                margin: 0;
-            }
-        </style>
+      <style>
+        #pagebuilder blockquote,
+        #pagebuilder dl,
+        #pagebuilder dd,
+        #pagebuilder pre,
+        #pagebuilder hr,
+        #pagebuilder figure,
+        #pagebuilder p,
+        #pagebuilder h1,
+        #pagebuilder h2,
+        #pagebuilder h3,
+        #pagebuilder h4,
+        #pagebuilder h5,
+        #pagebuilder h6,
+        #pagebuilder ul,
+        #pagebuilder ol,
+        #pagebuilder li {
+          margin: 0;
+          padding: 0; /* Often useful for ul/ol too */
+        }
+      </style>
     `
 
   // Combine existing styles and custom CSS

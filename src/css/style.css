@@ -314,11 +314,8 @@
     @apply pbx-my-0 pbx-block pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor pbx-text-left pbx-mb-2;
   }
 
-  .pbx-myPrimaryFormFocus {
-    @apply focus:pbx-ring-2 focus:pbx-ring-myPrimaryLinkColor focus:pbx-ring-offset-2 focus:pbx-border focus:pbx-border-gray-200;
-  }
   .pbx-myPrimaryInput {
-    @apply pbx-block pbx-pr-8 pbx-text-left pbx-bg-white pbx-w-auto sm:pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor placeholder:pbx-font-normal placeholder:pbx-accent-gray-300 focus:pbx-bg-white pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border pbx-border-gray-300 pbx-shadow-sm focus:pbx-outline-none pbx-myPrimaryFormFocus pbx-h-full pbx-border-solid;
+    @apply pbx-block pbx-pr-8 pbx-text-left pbx-bg-white pbx-w-auto sm:pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor placeholder:pbx-font-normal placeholder:pbx-accent-gray-300 focus:pbx-bg-white pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border pbx-border-gray-300 pbx-shadow-sm focus:pbx-outline-none pbx-h-full pbx-border-solid pbx-font-sans;
   }
   .pbx-myPrimaryInputNoBorder {
     @apply pbx-myPrimaryInput placeholder:pbx-accent-gray-300 focus:pbx-bg-none pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border-none focus:pbx-outline-none focus:pbx-ring-0 focus:pbx-ring-offset-0 focus:pbx-border-none pbx-shadow-none;
@@ -356,20 +353,6 @@
   .pbx-myPrimaryColorPreview {
     @apply pbx-aspect-square pbx-border pbx-border-gray-200 pbx-cursor-pointer pbx-min-h-[1.5rem] pbx-rounded-sm;
   }
-}
-
-#page-builder-editor ol,
-#page-builder-editor-editable-area ol,
-#page-builder-editor ul,
-#page-builder-editor-editable-area ul {
-  list-style: disc !important;
-  padding: 0 0 0 1rem;
-}
-
-#page-builder-editor li,
-#page-builder-editor-editable-area li {
-  line-height: 1.2;
-  margin-left: 1em; /* Adjust this value as needed */
 }
 
 #pbxEditToolbar {
@@ -471,14 +454,6 @@
   font-weight: 500;
 }
 
-#page-builder-editor ol,
-#pagebuilder ol,
-#page-builder-editor ul,
-#pagebuilder ul {
-  list-style: disc !important;
-  padding: 0rem;
-}
-
 .pbx-reorder-highlight {
   animation: pbx-reorder-flash 0.4s ease-in-out;
 }
@@ -501,6 +476,27 @@
 .pbx-sibling-highlight {
 }
 
+.pbx-myPrimaryInput,
+.pbx-myPrimarySelect {
+}
+
+.pbx-myPrimaryInput:focus,
+.pbx-myPrimarySelect:focus {
+  --tw-ring-inset: inset;
+  --tw-ring-opacity: 1;
+  /* Use the hex color with opacity variable */
+  --tw-ring-color: rgba(22, 163, 74, var(--tw-ring-opacity, 1));
+
+  --tw-ring-shadow: 0 0 0 4px var(--tw-ring-color);
+
+  --tw-ring-offset-width: 2px;
+  --tw-ring-offset-color: white;
+  --tw-ring-offset-shadow: 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow);
+  border: 1px #dee6f0 solid;
+}
+
 #pagebuilder blockquote,
 #pagebuilder dl,
 #pagebuilder dd,
@@ -513,6 +509,28 @@
 #pagebuilder h3,
 #pagebuilder h4,
 #pagebuilder h5,
-#pagebuilder h6 {
+#pagebuilder h6,
+#pagebuilder ul,
+#pagebuilder ol,
+#pagebuilder li {
   margin: 0;
+}
+
+#page-builder-editor ol,
+#pagebuilder ol,
+#page-builder-editor ul,
+#pagebuilder ul {
+  list-style: disc !important;
+  padding: 1rem 0 0 1rem;
+  margin-left: 1em;
+  line-height: 1.2;
+}
+
+#page-builder-editor ol,
+#page-builder-editor-editable-area ol,
+#page-builder-editor ul,
+#page-builder-editor-editable-area ul {
+  list-style: disc !important;
+  padding: 1rem 0 0 1rem;
+  line-height: 1.2;
 }
