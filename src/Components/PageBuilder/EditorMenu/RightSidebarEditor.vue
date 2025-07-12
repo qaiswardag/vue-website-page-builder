@@ -73,13 +73,64 @@ function onScroll() {
   }
 }
 
-// generate HTML
 const generateHTML = function (filename, HTML) {
+  // Extract existing styles from the page
+  const existingStyles = Array.from(document.querySelectorAll('style, link[rel="stylesheet"]'))
+    .map((style) => {
+      if (style.tagName === 'STYLE') {
+        return style.outerHTML // Inline styles
+      } else if (style.tagName === 'LINK') {
+        return `<link rel="stylesheet" href="${style.href}">` // External stylesheets
+      }
+      return ''
+    })
+    .join('\n')
+
+  // Add your custom CSS
+  const customCSS = `
+        <style>
+            #pagebuilder blockquote,
+            #pagebuilder dl,
+            #pagebuilder dd,
+            #pagebuilder pre,
+            #pagebuilder hr,
+            #pagebuilder figure,
+            #pagebuilder p,
+            #pagebuilder h1,
+            #pagebuilder h2,
+            #pagebuilder h3,
+            #pagebuilder h4,
+            #pagebuilder h5,
+            #pagebuilder h6 {
+                margin: 0;
+            }
+        </style>
+    `
+
+  // Combine existing styles and custom CSS
+  const css = `${existingStyles}\n${customCSS}`
+
+  // Generate the full HTML
+  const fullHTML = `
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Downloaded HTML</title>
+            ${css}
+        </head>
+        <body>
+            <div id="pagebuilder" class="pbx-font-sans pbx-text-black">
+                ${HTML}
+            </div>
+        </body>
+        </html>
+    `
+
+  // Create and trigger the download
   const element = document.createElement('a')
-  element.setAttribute(
-    'href',
-    'data:text/html;charset=utf-8,' + encodeURIComponent(fullHTMLContent(HTML)),
-  )
+  element.setAttribute('href', 'data:text/html;charset=utf-8,' + encodeURIComponent(fullHTML))
   element.setAttribute('download', filename)
 
   element.style.display = 'none'

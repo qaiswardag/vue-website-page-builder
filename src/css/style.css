@@ -500,3 +500,19 @@
 
 .pbx-sibling-highlight {
 }
+
+#pagebuilder blockquote,
+#pagebuilder dl,
+#pagebuilder dd,
+#pagebuilder pre,
+#pagebuilder hr,
+#pagebuilder figure,
+#pagebuilder p,
+#pagebuilder h1,
+#pagebuilder h2,
+#pagebuilder h3,
+#pagebuilder h4,
+#pagebuilder h5,
+#pagebuilder h6 {
+  margin: 0;
+}
