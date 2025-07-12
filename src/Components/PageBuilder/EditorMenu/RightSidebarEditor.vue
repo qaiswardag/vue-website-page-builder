@@ -147,7 +147,21 @@ const handleDownloadHTML = function () {
     return
   }
 
-  const html = extractCleanHTMLFromPageBuilder(pagebuilder)
+  // Extract clean HTML
+  let html = extractCleanHTMLFromPageBuilder(pagebuilder)
+
+  // Create a temporary DOM element to manipulate the HTML
+  const tempDiv = document.createElement('div')
+  tempDiv.innerHTML = html
+
+  // Remove 'hovered' and 'selected' attributes
+  tempDiv.querySelectorAll('[hovered], [selected]').forEach((el) => {
+    el.removeAttribute('hovered')
+    el.removeAttribute('selected')
+  })
+
+  // Get the cleaned HTML back
+  html = tempDiv.innerHTML
 
   generateHTML('downloaded_html.html', html)
 }
