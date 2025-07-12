@@ -1667,10 +1667,12 @@ export class PageBuilderService {
     await nextTick()
 
     // Scroll to the moved component
-    const pageBuilderWrapper = document.querySelector('#page-builder-wrapper')
+    const pageBuilderWrapper = document.querySelector(
+      '#page-builder-wrapper',
+    ) as HTMLElement | null
     const movedComponentElement = pageBuilderWrapper?.querySelector(
       `section[data-componentid="${componentToMove.id}"]`,
-    )
+    ) as HTMLElement
 
     if (movedComponentElement) {
       // Apply highlight to the moved element
@@ -1689,7 +1691,8 @@ export class PageBuilderService {
 
       if (pageBuilderWrapper) {
         // Scroll to the moved component
-        pageBuilderWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        const topPos = movedComponentElement.offsetTop - pageBuilderWrapper.offsetTop
+        pageBuilderWrapper.scrollTop = topPos - pageBuilderWrapper.clientHeight / 2
 
         // Remove highlights after a delay
         setTimeout(() => {
