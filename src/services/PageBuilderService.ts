@@ -1043,9 +1043,11 @@ export class PageBuilderService {
   /**
    * Manually saves the current page builder content to local storage.
    */
-  public handleManualSave = async () => {
+  public handleManualSave = async (doNoClearHTML?: boolean) => {
     this.pageBuilderStateStore.setIsSaving(true)
-    this.clearHtmlSelection()
+    if (!doNoClearHTML) {
+      this.clearHtmlSelection()
+    }
     this.startEditing()
     this.saveDomComponentsToLocalStorage()
     await delay(300)
@@ -1697,7 +1699,9 @@ export class PageBuilderService {
         if (nextSibling && nextSibling.tagName === 'SECTION') {
           nextSibling.classList.remove('pbx-sibling-highlight')
         }
-      }, 400) // Adjust delay as needed
+      }, 200) // Adjust delay as needed
+
+      this.handleManualSave(true)
     }
   }
 
@@ -1919,6 +1923,9 @@ export class PageBuilderService {
 
     pagebuilder.querySelectorAll('section[data-componentid]').forEach((section) => {
       const sanitizedSection = this.cloneAndRemoveSelectionAttributes(section as HTMLElement)
+
+      // Remove the data-componentid attribute
+      sanitizedSection.removeAttribute('data-componentid')
 
       componentsToSave.push({
         html_code: sanitizedSection.outerHTML,
