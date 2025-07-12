@@ -1945,6 +1945,7 @@ export class PageBuilderService {
     }
 
     const baseKey = this.getHistoryBaseKey()
+    console.log('den er:', baseKey)
     if (baseKey) {
       localStorage.setItem(baseKey, JSON.stringify(dataToSave))
       let history = LocalStorageManager.getHistory(baseKey)
