@@ -485,22 +485,18 @@
 
 @keyframes pbx-reorder-flash {
   0% {
-    box-shadow: 0 0 0 0px rgba(66, 153, 225, 0.7);
     transform: scale(1);
     opacity: 1;
   }
   50% {
-    box-shadow: 0 0 0 10px rgba(66, 153, 225, 0);
-    transform: scale(0.2); /* Even more shrink */
-    opacity: 0.8;
+    transform: scale(0.8);
+    opacity: 0.6;
   }
   100% {
-    box-shadow: 0 0 0 0px rgba(66, 153, 225, 0);
     transform: scale(1);
     opacity: 1;
   }
 }
 
 .pbx-sibling-highlight {
-  border: 2px dashed #4299e1; /* Blue dashed border */
 }

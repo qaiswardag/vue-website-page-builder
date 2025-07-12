@@ -1043,9 +1043,11 @@ export class PageBuilderService {
   /**
    * Manually saves the current page builder content to local storage.
    */
-  public handleManualSave = async () => {
+  public handleManualSave = async (doNoClearHTML?: boolean) => {
     this.pageBuilderStateStore.setIsSaving(true)
-    this.clearHtmlSelection()
+    if (!doNoClearHTML) {
+      this.clearHtmlSelection()
+    }
     this.startEditing()
     this.saveDomComponentsToLocalStorage()
     await delay(300)
@@ -1665,10 +1667,12 @@ export class PageBuilderService {
     await nextTick()
 
     // Scroll to the moved component
-    const pageBuilderWrapper = document.querySelector('#page-builder-wrapper')
+    const pageBuilderWrapper = document.querySelector(
+      '#page-builder-wrapper',
+    ) as HTMLElement | null
     const movedComponentElement = pageBuilderWrapper?.querySelector(
       `section[data-componentid="${componentToMove.id}"]`,
-    )
+    ) as HTMLElement
 
     if (movedComponentElement) {
       // Apply highlight to the moved element
@@ -1685,19 +1689,22 @@ export class PageBuilderService {
         nextSibling.classList.add('pbx-sibling-highlight')
       }
 
-      // Scroll to the moved component
-      movedComponentElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      if (pageBuilderWrapper) {
+        // Scroll to the moved component
+        const topPos = movedComponentElement.offsetTop - pageBuilderWrapper.offsetTop
+        pageBuilderWrapper.scrollTop = topPos - pageBuilderWrapper.clientHeight / 2
 
-      // Remove highlights after a delay
-      setTimeout(() => {
-        movedComponentElement.classList.remove('pbx-reorder-highlight')
-        if (prevSibling && prevSibling.tagName === 'SECTION') {
-          prevSibling.classList.remove('pbx-sibling-highlight')
-        }
-        if (nextSibling && nextSibling.tagName === 'SECTION') {
-          nextSibling.classList.remove('pbx-sibling-highlight')
-        }
-      }, 1000) // Adjust delay as needed
+        // Remove highlights after a delay
+        setTimeout(() => {
+          movedComponentElement.classList.remove('pbx-reorder-highlight')
+          if (prevSibling && prevSibling.tagName === 'SECTION') {
+            prevSibling.classList.remove('pbx-sibling-highlight')
+          }
+          if (nextSibling && nextSibling.tagName === 'SECTION') {
+            nextSibling.classList.remove('pbx-sibling-highlight')
+          }
+        }, 200)
+      }
     }
   }
 
@@ -1920,6 +1927,9 @@ export class PageBuilderService {
     pagebuilder.querySelectorAll('section[data-componentid]').forEach((section) => {
       const sanitizedSection = this.cloneAndRemoveSelectionAttributes(section as HTMLElement)
 
+      // Remove the data-componentid attribute
+      sanitizedSection.removeAttribute('data-componentid')
+
       componentsToSave.push({
         html_code: sanitizedSection.outerHTML,
         title: sanitizedSection.getAttribute('data-component-title') || 'Untitled Component',
@@ -1938,7 +1948,29 @@ export class PageBuilderService {
     }
 
     const baseKey = this.getHistoryBaseKey()
+
     if (baseKey) {
+      const currentDataRaw = localStorage.getItem(baseKey)
+      if (currentDataRaw) {
+        const currentData = JSON.parse(currentDataRaw)
+
+        // Compare components
+        const currentComponents = currentData.components || []
+        const newComponents = dataToSave.components || []
+
+        const hasChanges = newComponents.some((newComponent, index) => {
+          const currentComponent = currentComponents[index]
+          return (
+            !currentComponent || // New component added
+            currentComponent.html_code !== newComponent.html_code // Component HTML changed
+          )
+        })
+
+        if (!hasChanges) {
+          return
+        }
+      }
+
       localStorage.setItem(baseKey, JSON.stringify(dataToSave))
       let history = LocalStorageManager.getHistory(baseKey)
 
@@ -2589,6 +2621,134 @@ export class PageBuilderService {
   }
 
   /**
+   * Applies modified components by mounting them to the DOM and attaching listeners.
+   * @param htmlString - The HTML string to apply
+   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
+   */
+  public async applyModifiedHTML(htmlString: string): Promise<string | null> {
+    if (!htmlString || (typeof htmlString === 'string' && htmlString.length === 0)) {
+      return 'No HTML content was provided. Please ensure a valid HTML string is passed.'
+    }
+
+    // Check if the htmlString contains any <section> tags
+    if (/<section[\s>]/i.test(htmlString)) {
+      return 'Error: The <section> tag cannot be used as it is already included inside this component.'
+    }
+
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = htmlString.trim()
+
+    const parsedElement = tempDiv.firstElementChild as HTMLElement | null
+
+    if (!parsedElement) {
+      return 'Could not parse element from HTML string.'
+    }
+
+    // Replace the actual DOM element
+    const oldElement = this.pageBuilderStateStore.getElement
+
+    if (oldElement && oldElement.parentElement) {
+      oldElement.replaceWith(parsedElement)
+
+      // Update the element in the store (now referencing the new one)
+      this.pageBuilderStateStore.setElement(parsedElement)
+    }
+
+    await this.addListenersToEditableElements()
+    await nextTick()
+    return null
+  }
+
+  private validateMountingHTML(
+    htmlString: string,
+    options?: { logError?: boolean },
+  ): string | null {
+    // Trim HTML string
+    const trimmedData = htmlString.trim()
+    const openingSectionMatches = htmlString.match(/<section\b[^>]*>/gi) || []
+    const closingSectionMatches = htmlString.match(/<\/section>/gi) || []
+
+    if (!htmlString || htmlString.trim().length === 0) {
+      const error = 'No HTML content was provided. Please ensure a valid HTML string is passed.'
+      if (options && options.logError) {
+        console.error(error)
+        // Behavior
+        return error
+      }
+      // default behavior
+      return error
+    }
+
+    if (openingSectionMatches.length !== closingSectionMatches.length) {
+      const error =
+        'Uneven <section> tags detected in the provided HTML. Each component must be wrapped in its own properly paired <section>...</section>. ' +
+        'Ensure that all <section> tags have a matching closing </section> tag.'
+
+      if (options && options.logError) {
+        console.error(error)
+        return error
+      }
+
+      return error
+    }
+
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = trimmedData
+    const nestedSection = tempDiv.querySelector('section section')
+    if (nestedSection) {
+      const error =
+        'Nested <section> tags are not allowed. Please ensure that no <section> is placed inside another <section>.'
+      if (options && options.logError) {
+        console.error(error)
+        return error
+      }
+      return error
+    }
+
+    // Return error since JSON data has been passed to mount HTML to DOM
+    if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
+      const error =
+        'Brackets [] or curly braces {} are not valid HTML. They are used for data formats like JSON.'
+      if (options && options.logError) {
+        console.error(error)
+        return error
+      }
+
+      return error
+    }
+
+    return null
+  }
+
+  /**
+   * Applies modified components by mounting them to the DOM and attaching listeners.
+   * @param htmlString - The HTML string to apply
+   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
+   */
+  public async applyModifiedComponents(htmlString: string): Promise<string | null> {
+    // Trim HTML string
+    const trimmedData = htmlString.trim()
+
+    const openingSectionMatches = htmlString.match(/<section\b[^>]*>/gi) || []
+
+    if (openingSectionMatches.length === 0) {
+      const error = 'No <section> tags found. Each component must be wrapped in a <section> tag.'
+      if (error) {
+        return error
+      }
+    }
+
+    const validationError = this.validateMountingHTML(trimmedData)
+    if (validationError) return validationError
+
+    // also fixed to use `trimmedData`
+    await this.mountComponentsToDOM(trimmedData)
+    await this.addListenersToEditableElements()
+    await nextTick()
+    return null
+  }
+
+  /**
    * Mounts builder components to the DOM from an HTML string.
    *
    * Input format detection:
@@ -2606,13 +2766,11 @@ export class PageBuilderService {
     htmlString: string,
     usePassedPageSettings?: boolean,
   ): Promise<void> {
+    // Trim HTML string
     const trimmedData = htmlString.trim()
 
-    // Return error since JSON data has been passed to mount HTML to DOM
-    if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
-      console.error('Error: JSON data passed to mountComponentsToDOM for the Page Builder Package.')
-      return
-    }
+    const validationError = this.validateMountingHTML(trimmedData, { logError: true })
+    if (validationError) return
 
     // HTML string
     try {
@@ -2849,57 +3007,6 @@ export class PageBuilderService {
         }
       }
     }
-  }
-
-  /**
-   * Applies modified components by mounting them to the DOM and attaching listeners.
-   * @param htmlString - The HTML string to apply
-   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
-   */
-  public async applyModifiedHTML(htmlString: string): Promise<string | null> {
-    if (!htmlString || (typeof htmlString === 'string' && htmlString.length === 0)) {
-      return 'No HTML content was provided. Please ensure a valid HTML string is passed.'
-    }
-
-    const tempDiv = document.createElement('div')
-    tempDiv.innerHTML = htmlString.trim()
-
-    const parsedElement = tempDiv.firstElementChild as HTMLElement | null
-
-    if (!parsedElement) {
-      return 'Could not parse element from HTML string.'
-    }
-
-    // Replace the actual DOM element
-    const oldElement = this.pageBuilderStateStore.getElement
-
-    if (oldElement && oldElement.parentElement) {
-      oldElement.replaceWith(parsedElement)
-
-      // Update the element in the store (now referencing the new one)
-      this.pageBuilderStateStore.setElement(parsedElement)
-    }
-
-    await this.addListenersToEditableElements()
-    await nextTick()
-    return null
-  }
-
-  /**
-   * Applies modified components by mounting them to the DOM and attaching listeners.
-   * @param htmlString - The HTML string to apply
-   * @returns {Promise<string | null>} - Returns error message if failed, otherwise null
-   */
-  public async applyModifiedComponents(htmlString: string): Promise<string | null> {
-    if (!htmlString || (typeof htmlString === 'string' && htmlString.length === 0)) {
-      return 'No HTML content was provided. Please ensure a valid HTML string is passed.'
-    }
-
-    await this.mountComponentsToDOM(htmlString)
-
-    await this.addListenersToEditableElements()
-    await nextTick()
-    return null
   }
 
   /**

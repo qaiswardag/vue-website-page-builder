@@ -761,7 +761,7 @@ If you have any questions or if you're looking for customization, feel free to c
 
 Encountered a bug, have suggestions, or need a new feature? Create a GitHub issue:
 
-- [Submit an Issue](https://github.com/qaiswardag/vue-website-page-builder/issues)
+- [Submit an Issue](https://github.com/myissue-org/vue-website-page-builder/issues)
 
 ## Feedback
 
