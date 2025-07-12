@@ -1687,21 +1687,21 @@ export class PageBuilderService {
         nextSibling.classList.add('pbx-sibling-highlight')
       }
 
-      // Scroll to the moved component
-      movedComponentElement.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      if (pageBuilderWrapper) {
+        // Scroll to the moved component
+        pageBuilderWrapper.scrollIntoView({ behavior: 'smooth', block: 'center' })
 
-      // Remove highlights after a delay
-      setTimeout(() => {
-        movedComponentElement.classList.remove('pbx-reorder-highlight')
-        if (prevSibling && prevSibling.tagName === 'SECTION') {
-          prevSibling.classList.remove('pbx-sibling-highlight')
-        }
-        if (nextSibling && nextSibling.tagName === 'SECTION') {
-          nextSibling.classList.remove('pbx-sibling-highlight')
-        }
-      }, 200) // Adjust delay as needed
-
-      this.handleManualSave(true)
+        // Remove highlights after a delay
+        setTimeout(() => {
+          movedComponentElement.classList.remove('pbx-reorder-highlight')
+          if (prevSibling && prevSibling.tagName === 'SECTION') {
+            prevSibling.classList.remove('pbx-sibling-highlight')
+          }
+          if (nextSibling && nextSibling.tagName === 'SECTION') {
+            nextSibling.classList.remove('pbx-sibling-highlight')
+          }
+        }, 200)
+      }
     }
   }
 
@@ -1964,10 +1964,8 @@ export class PageBuilderService {
         })
 
         if (!hasChanges) {
-          console.log('No changes detected in components. Skipping local storage update.')
           return
         }
-        console.log('there was neeeeeeew changes...:')
       }
 
       localStorage.setItem(baseKey, JSON.stringify(dataToSave))
@@ -2631,7 +2629,7 @@ export class PageBuilderService {
 
     // Check if the htmlString contains any <section> tags
     if (/<section[\s>]/i.test(htmlString)) {
-      return 'Error: The <section> tag cannot be used here as it is already included inside a component.'
+      return 'Error: The <section> tag cannot be used as it is already included inside this component.'
     }
 
     const tempDiv = document.createElement('div')
@@ -2662,8 +2660,9 @@ export class PageBuilderService {
     htmlString: string,
     options?: { logError?: boolean },
   ): string | null {
-    console.log('html string er::', htmlString)
-    const sectionMatches = htmlString.match(/<section\b[^>]*>/gi) || []
+    // Trim HTML string
+    const trimmedData = htmlString.trim()
+    const openingSectionMatches = htmlString.match(/<section\b[^>]*>/gi) || []
     const closingSectionMatches = htmlString.match(/<\/section>/gi) || []
 
     if (!htmlString || htmlString.trim().length === 0) {
@@ -2677,8 +2676,25 @@ export class PageBuilderService {
       return error
     }
 
-    if (sectionMatches.length === 0) {
-      const error = 'No <section> tags found. Each component must be wrapped in a <section> tag.'
+    if (openingSectionMatches.length !== closingSectionMatches.length) {
+      const error =
+        'Uneven <section> tags detected in the provided HTML. Each component must be wrapped in its own properly paired <section>...</section>. ' +
+        'Ensure that all <section> tags have a matching closing </section> tag.'
+
+      if (options && options.logError) {
+        console.error(error)
+        return error
+      }
+
+      return error
+    }
+
+    const tempDiv = document.createElement('div')
+    tempDiv.innerHTML = trimmedData
+    const nestedSection = tempDiv.querySelector('section section')
+    if (nestedSection) {
+      const error =
+        'Nested <section> tags are not allowed. Please ensure that no <section> is placed inside another <section>.'
       if (options && options.logError) {
         console.error(error)
         return error
@@ -2686,11 +2702,10 @@ export class PageBuilderService {
       return error
     }
 
-    if (sectionMatches.length !== closingSectionMatches.length) {
+    // Return error since JSON data has been passed to mount HTML to DOM
+    if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
       const error =
-        'Uneven <section> tags detected in the provided HTML. Each component must be wrapped in its own properly paired <section>...</section>. ' +
-        'Ensure that all <section> tags have a matching closing </section> tag.'
-
+        'Brackets [] or curly braces {} are not valid HTML. They are used for data formats like JSON.'
       if (options && options.logError) {
         console.error(error)
         return error
@@ -2711,10 +2726,20 @@ export class PageBuilderService {
     // Trim HTML string
     const trimmedData = htmlString.trim()
 
+    const openingSectionMatches = htmlString.match(/<section\b[^>]*>/gi) || []
+
+    if (openingSectionMatches.length === 0) {
+      const error = 'No <section> tags found. Each component must be wrapped in a <section> tag.'
+      if (error) {
+        return error
+      }
+    }
+
     const validationError = this.validateMountingHTML(trimmedData)
     if (validationError) return validationError
 
-    await this.mountComponentsToDOM(trimmedData) // also fixed to use `trimmedData`
+    // also fixed to use `trimmedData`
+    await this.mountComponentsToDOM(trimmedData)
     await this.addListenersToEditableElements()
     await nextTick()
     return null
@@ -2743,12 +2768,6 @@ export class PageBuilderService {
 
     const validationError = this.validateMountingHTML(trimmedData, { logError: true })
     if (validationError) return
-
-    // Return error since JSON data has been passed to mount HTML to DOM
-    if (trimmedData.startsWith('[') || trimmedData.startsWith('{')) {
-      console.error('Error: JSON data passed to mountComponentsToDOM for the Page Builder Package.')
-      return
-    }
 
     // HTML string
     try {
