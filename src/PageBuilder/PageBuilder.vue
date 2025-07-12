@@ -879,11 +879,11 @@ onMounted(async () => {
 
         <div id="pagebuilder" class="pbx-text-black pbx-font-sans">
           <template v-for="component in getComponents" :key="component.id">
-            <section
+            <div
               v-if="component.html_code"
               v-html="component.html_code"
               @mouseup="handleSelectComponent(component)"
-            ></section>
+            ></div>
           </template>
         </div>
       </main>
