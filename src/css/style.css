@@ -541,3 +541,8 @@
   padding: 1rem 0 0 1rem;
   line-height: 1.2;
 }
+
+.pbx-headless-dropdown {
+  list-style: none;
+  padding: 0;
+}
