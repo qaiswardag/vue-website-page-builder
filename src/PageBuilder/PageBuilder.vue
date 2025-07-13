@@ -761,7 +761,7 @@ onMounted(async () => {
             >
               <select
                 id="pbx-lang"
-                class="pbx-myPrimarySelect pbx-min-w-24"
+                class="pbx-myPrimarySelect pbx-min-w-20"
                 v-model="languageSelction"
               >
                 <template
