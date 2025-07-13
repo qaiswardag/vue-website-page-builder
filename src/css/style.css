@@ -478,9 +478,6 @@
 
 .pbx-myPrimaryInput,
 .pbx-myPrimarySelect {
-  background-repeat: no-repeat;
-  background-size: 1rem;
-  padding-right: 1rem;
 }
 
 .pbx-myPrimaryInput:focus,
