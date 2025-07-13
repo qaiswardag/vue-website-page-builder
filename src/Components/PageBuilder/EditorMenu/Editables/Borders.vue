@@ -121,11 +121,6 @@ watch(
                 ></div>
                 <span class="pbx-block pbx-truncate">{{ borderColor }}</span>
               </span>
-              <span
-                class="pbx-pointer-events-none pbx-absolute pbx-inset-y-0 pbx-right-0 pbx-ml-3 pbx-flex pbx-items-center pbx-pr-2"
-              >
-                <span class="material-symbols-outlined"> keyboard_arrow_down </span>
-              </span>
             </ListboxButton>
 
             <transition

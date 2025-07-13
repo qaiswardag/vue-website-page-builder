@@ -315,21 +315,11 @@
   }
 
   .pbx-myPrimaryInput {
-    @apply pbx-block pbx-pr-8 pbx-text-left pbx-bg-white pbx-w-auto sm:pbx-text-sm pbx-font-normal pbx-text-myPrimaryDarkGrayColor placeholder:pbx-font-normal placeholder:pbx-accent-gray-300 focus:pbx-bg-white pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border pbx-border-gray-300 pbx-shadow-sm focus:pbx-outline-none pbx-h-full pbx-border-solid pbx-font-sans;
-  }
-  .pbx-myPrimaryInputNoBorder {
-    @apply pbx-myPrimaryInput placeholder:pbx-accent-gray-300 focus:pbx-bg-none pbx-rounded-md pbx-py-3 pbx-px-3 pbx-border-none focus:pbx-outline-none focus:pbx-ring-0 focus:pbx-ring-offset-0 focus:pbx-border-none pbx-shadow-none;
-  }
-  .pbx-myPrimaryInputReadonly {
-    @apply pbx-myPrimaryInput pbx-bg-gray-50 focus:pbx-ring-0 focus:pbx-bg-myPrimaryLightGrayColor focus:pbx-border-myPrimaryMediumGrayColor;
+    @apply pbx-w-full pbx-font-sans;
   }
 
   .pbx-myPrimaryInputError {
     @apply pbx-mt-1 pbx-myPrimaryParagraph pbx-block pbx-font-normal pbx-text-myPrimaryErrorColor pbx-text-left pbx-text-sm;
-  }
-
-  .pbx-myPrimaryHiddenInputField {
-    @apply pbx-px-0;
   }
 
   .pbx-myPrimaryTextArea {
@@ -341,7 +331,7 @@
   }
 
   .pbx-myPrimarySelect {
-    @apply pbx-relative pbx-myPrimaryInput pbx-w-full;
+    @apply pbx-myPrimaryInput;
   }
   .pbx-myPrimaryFakeSelect {
     @apply hover:pbx-ring-myPrimaryLinkColor pbx-border pbx-border-gray-300 pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-myPrimaryGap pbx-py-2.5 pbx-pl-3 pbx-pr-1 pbx-cursor-pointer hover:pbx-border-transparent hover:pbx-ring-2 pbx-rounded-md;
@@ -478,6 +468,24 @@
 
 .pbx-myPrimaryInput,
 .pbx-myPrimarySelect {
+  border: 1px solid #e9e9e9;
+  padding: 0.40625rem 0.625rem;
+  padding-right: 1.75rem;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  line-height: 1.5;
+}
+
+.pbx-myPrimarySelect {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg width='8' height='6' viewBox='0 0 8 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M0.292893 0.792893C0.683417 0.402369 1.31658 0.402369 1.70711 0.792893L4 3.08579L6.29289 0.792893C6.68342 0.402369 7.31658 0.402369 7.70711 0.792893C8.09763 1.18342 8.09763 1.81658 7.70711 2.20711L4.70711 5.20711C4.31658 5.59763 3.68342 5.59763 3.29289 5.20711L0.292893 2.20711C-0.0976311 1.81658 -0.0976311 1.18342 0.292893 0.792893Z' fill='%2335261C' fill-opacity='0.3'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.625rem center;
+  background-size: 0.5rem;
 }
 
 .pbx-myPrimaryInput:focus,
@@ -497,6 +505,12 @@
   border: 1px #dee6f0 solid;
 }
 
+#pagebuilder-right-menu hr {
+  border: none;
+  height: 1px;
+  background: oklch(93.6% 0.032 17.717);
+  box-shadow: oklch(93.6% 0.032 17.717);
+}
 #page-builder-wrapper blockquote,
 #page-builder-wrapper dl,
 #page-builder-wrapper dd,
