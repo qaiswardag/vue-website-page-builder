@@ -40,7 +40,7 @@
     "title": "Text"
   },
   {
-    "html_code": "<section data-component-title=\"YouTube Video\">\n    <div class=\"pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl pbx-pt-6 pbx-pb-6\">\n    <div id=\"youtube-video\" class=\"pbx-w-full pbx-aspect-video pbx-p-4\">\n\n    <iframe frameborder=\"0\" allowfullscreen=\"\" class=\"pbx-w-full pbx-aspect-video\" src=\"https://www.youtube.com/embed/pJvwV1Fm0vU\" allow=\"accelerometer; autoplay; clipboard-write;\">\n    </iframe>\n    </div>\n    </div>\n    </div>\n    </section>",
+    "html_code": "<section data-component-title=\"YouTube Video\">\n    <div class=\"pbx-py-4\">\n    <div class=\"pbx-mx-auto pbx-max-w-7xl pbx-pt-6 pbx-pb-6\">\n    <div id=\"youtube-video\" class=\"pbx-aspect-video pbx-p-4\">\n\n    <iframe frameborder=\"0\" allowfullscreen=\"\" class=\"pbx-w-full pbx-aspect-video\" src=\"https://www.youtube.com/embed/pJvwV1Fm0vU\" allow=\"accelerometer; autoplay; clipboard-write;\">\n    </iframe>\n    </div>\n    </div>\n    </div>\n    </section>",
     "id": "33a26684-eb95-43c9-adb4-d7bce0ca60f7",
     "title": "YouTube Video"
   },
