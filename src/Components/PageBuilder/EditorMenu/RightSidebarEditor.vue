@@ -308,7 +308,7 @@ const handleCloseGlobalPageStyles = async function () {
       :title="translate('Global Page Styles')"
       @closeMainModalBuilder="handleCloseGlobalPageStyles"
     >
-      <div class="pbx-flex pbx-flex-col pbx-gap-2 pbx-pt-4 pbx-pb-2">
+      <div id="pagebuilder-right-menu" class="pbx-flex pbx-flex-col pbx-gap-2 pbx-pt-4 pbx-pb-2">
         <div v-if="isLoadingPageStyles">
           <div class="pbx-flex pbx-items-center pbx-my-2 pbx-py-4 pbx-px-2 pbx-justify-center">
             <div

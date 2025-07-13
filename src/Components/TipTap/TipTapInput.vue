@@ -204,7 +204,7 @@ onMounted(() => {
             ><span>{{ translate('Enter URL') }}</span></label
           ><input
             v-model="urlEnteret"
-            class="pbx-myPrimaryInput pbx-mt-1"
+            class="pbx-myPrimaryInput pbx-mt-1 pbx-w-full"
             type="url"
             placeholder="url"
           />
