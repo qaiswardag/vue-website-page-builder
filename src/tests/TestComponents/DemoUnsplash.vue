@@ -183,7 +183,7 @@ onMounted(async () => {
             <button
               @click="searchByOrientation('landscape')"
               type="button"
-              class="pbx-myPrimaryTag"
+              class="pbx-myPrimaryTag pbx-cursor-pointer"
               :class="{
                 'pbx-bg-myPrimaryBrandColor pbx-text-white': getOrientationValue === 'landscape',
                 '': getOrientationValue !== 'landscape',
@@ -194,7 +194,7 @@ onMounted(async () => {
             <button
               @click="searchByOrientation('portrait')"
               type="button"
-              class="pbx-myPrimaryTag"
+              class="pbx-myPrimaryTag pbx-cursor-pointer"
               :class="{
                 'pbx-bg-myPrimaryBrandColor pbx-text-white': getOrientationValue === 'portrait',
                 '': getOrientationValue !== 'portrait',
@@ -205,7 +205,7 @@ onMounted(async () => {
             <button
               @click="searchByOrientation('squarish')"
               type="button"
-              class="pbx-myPrimaryTag"
+              class="pbx-myPrimaryTag pbx-cursor-pointer"
               :class="{
                 'pbx-bg-myPrimaryBrandColor pbx-text-white': getOrientationValue === 'squarish',
                 '': getOrientationValue !== 'squarish',
@@ -251,7 +251,7 @@ onMounted(async () => {
             <button
               v-if="Number(getCurrentPageNumber) > 1"
               :disabled="Number(getCurrentPageNumber) < 1"
-              class="pbx-myPrimaryTag"
+              class="pbx-myPrimaryTag pbx-cursor-pointer"
               @click="previousPage(Number(getCurrentPageNumber--))"
             >
               {{
@@ -264,7 +264,7 @@ onMounted(async () => {
             </span>
             <button
               :disabled="Number(getCurrentPageNumber) >= getUnsplashImages.total_pages"
-              class="pbx-myPrimaryTag"
+              class="pbx-myPrimaryTag pbx-cursor-pointer"
               :class="{
                 'pbx-opacity-50': Number(getCurrentPageNumber) >= getUnsplashImages.total_pages,
               }"
