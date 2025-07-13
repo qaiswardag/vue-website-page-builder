@@ -234,7 +234,7 @@ onMounted(() => {
                   <button
                     @click="pageBuilderService.toggleTipTapModal(false)"
                     type="button"
-                    class="pbx-myPrimaryTag"
+                    class="pbx-myPrimaryTag pbx-cursor-pointer"
                   >
                     <span class="material-symbols-outlined"> save </span>
                     <span>{{ translate('Save') }}</span>
@@ -249,7 +249,7 @@ onMounted(() => {
                 <button
                   @click="editor.chain().focus().setHardBreak().run()"
                   type="button"
-                  class="pbx-myPrimaryTag"
+                  class="pbx-myPrimaryTag pbx-cursor-pointer"
                 >
                   <span class="material-symbols-outlined"> keyboard_return </span>
                   <span>{{ translate('Line break') }}</span>
@@ -260,7 +260,7 @@ onMounted(() => {
                 <button
                   @click="editor.chain().focus().toggleBold().run()"
                   type="button"
-                  class="pbx-myPrimaryTag"
+                  class="pbx-myPrimaryTag pbx-cursor-pointer"
                   :class="{ 'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('bold') }"
                 >
                   <span class="material-symbols-outlined"> format_bold </span>
@@ -272,7 +272,7 @@ onMounted(() => {
                 <button
                   @click="handleURL"
                   type="button"
-                  class="pbx-myPrimaryTag"
+                  class="pbx-myPrimaryTag pbx-cursor-pointer"
                   :class="{ 'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('link') }"
                 >
                   <span class="material-symbols-outlined"> link </span>
@@ -284,7 +284,7 @@ onMounted(() => {
                 <button
                   @click="editor.chain().focus().toggleHeading({ level: 2 }).run()"
                   type="button"
-                  class="pbx-myPrimaryTag"
+                  class="pbx-myPrimaryTag pbx-cursor-pointer"
                   :class="{
                     'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('heading', {
                       level: 2,
@@ -300,7 +300,7 @@ onMounted(() => {
                 <button
                   @click="editor.chain().focus().toggleHeading({ level: 3 }).run()"
                   type="button"
-                  class="pbx-myPrimaryTag"
+                  class="pbx-myPrimaryTag pbx-cursor-pointer"
                   :class="{
                     'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('heading', {
                       level: 3,
@@ -316,7 +316,7 @@ onMounted(() => {
                 <button
                   @click="editor.chain().focus().toggleBulletList().run()"
                   type="button"
-                  class="pbx-myPrimaryTag"
+                  class="pbx-myPrimaryTag pbx-cursor-pointer"
                   :class="{
                     'pbx-bg-myPrimaryLinkColor pbx-text-white': editor.isActive('bulletList'),
                   }"
