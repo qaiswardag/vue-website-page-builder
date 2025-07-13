@@ -478,10 +478,6 @@
 
 .pbx-myPrimaryInput,
 .pbx-myPrimarySelect {
-  appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-
   background-repeat: no-repeat;
   background-size: 1rem;
   padding-right: 1rem;
@@ -504,22 +500,22 @@
   border: 1px #dee6f0 solid;
 }
 
-#pagebuilder blockquote,
-#pagebuilder dl,
-#pagebuilder dd,
-#pagebuilder pre,
-#pagebuilder hr,
-#pagebuilder figure,
-#pagebuilder p,
-#pagebuilder h1,
-#pagebuilder h2,
-#pagebuilder h3,
-#pagebuilder h4,
-#pagebuilder h5,
-#pagebuilder h6,
-#pagebuilder ul,
-#pagebuilder ol,
-#pagebuilder li {
+#page-builder-wrapper blockquote,
+#page-builder-wrapper dl,
+#page-builder-wrapper dd,
+#page-builder-wrapper pre,
+#page-builder-wrapper hr,
+#page-builder-wrapper figure,
+#page-builder-wrapper p,
+#page-builder-wrapper h1,
+#page-builder-wrapper h2,
+#page-builder-wrapper h3,
+#page-builder-wrapper h4,
+#page-builder-wrapper h5,
+#page-builder-wrapper h6,
+#page-builder-wrapper ul,
+#page-builder-wrapper ol,
+#page-builder-wrapper li {
   margin: 0;
 }
 
