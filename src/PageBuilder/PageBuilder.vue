@@ -761,7 +761,7 @@ onMounted(async () => {
             >
               <select
                 id="pbx-lang"
-                class="pbx-myPrimarySelect pbx-min-w-20 pbx-max-w-2pbx-min-w-20 pbx-w-max"
+                class="pbx-myPrimarySelect pbx-min-w-24"
                 v-model="languageSelction"
               >
                 <template
@@ -1003,7 +1003,7 @@ onMounted(async () => {
   box-shadow: none !important;
   background: #fff;
   min-height: 25rem;
-  border-bottom: 1px solid #aaa;
+  border-bottom: 1px solid #f1f1f1;
   padding: 0px 0px 10px 16px;
   margin-bottom: 20px;
   padding-bottom: 100px;

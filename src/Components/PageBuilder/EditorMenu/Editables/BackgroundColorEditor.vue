@@ -46,11 +46,11 @@ watch(
       >
         <ListboxButton
           v-if="globalPageLayout"
-          class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor"
+          class="pbx-flex pbx-flex-row pbx-justify-between pbx-items-center pbx-pl-3 pbx-pr-3 pbx-py-5 pbx-cursor-pointer pbx-duration-200 hover:pbx-bg-myPrimaryLightGrayColor pbx-bg-white hover:pbx-text-black pbx-text-black pbx-font-sans pbx-font-medium"
         >
           <div class="pbx-flex pbx-justify-start pbx-items-center pbx-gap-2">
             <div
-              class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border pbx-border-gray-800 pbx-rounded-sm"
+              class="pbx-aspect-square pbx-w-6 pbx-h-6 pbx-border pbx-border-gray-600 pbx-rounded-sm pbx-bg-none pbx-border-solid"
               :class="`pbx-bg-${backgroundColor?.replace('pbx-bg-', '')}`"
             ></div>
             <div>{{ translate('Background Color') }}</div>
@@ -61,7 +61,7 @@ watch(
 
         <ListboxButton
           v-if="!globalPageLayout"
-          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-200 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white focus-visible:pbx-ring-0"
+          class="pbx-h-10 pbx-w-10 pbx-flex-end pbx-cursor-pointer pbx-rounded-full pbx-flex pbx-items-center pbx-border-none pbx-justify-center pbx-bg-gray-200 pbx-aspect-square hover:pbx-bg-gray-100 hover:pbx-fill-white focus-visible:pbx-ring-0 pbx-text-myPrimaryDarkGrayColor"
         >
           <div class="pbx-flex pbx-flex-col">
             <div class="pbx-flex pbx-gap-2 pbx-items-center">
@@ -83,7 +83,7 @@ watch(
         leave-to-class="pbx-opacity-0"
       >
         <ListboxOptions
-          class="pbx-absolute pbx-min-w-[12rem] pbx-z-40 pbx-mt-1 pbx-max-h-56 pbx-w-full pbx-overflow-auto pbx-rounded-md pbx-bg-gray-50 pbx-py-1 pbx-text-base pbx-shadow-lg pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 focus:pbx-outline-none sm:pbx-text-sm"
+          class="pbx-headless-dropdown pbx-absolute pbx-min-w-[12rem] pbx-z-40 pbx-mt-1 pbx-max-h-56 pbx-w-full pbx-overflow-auto pbx-rounded-md pbx-bg-gray-50 pbx-py-1 pbx-text-base pbx-shadow-lg pbx-ring-1 pbx-ring-black pbx-ring-opacity-5 focus:pbx-outline-none sm:pbx-text-sm"
         >
           <ListboxOption
             as="template"

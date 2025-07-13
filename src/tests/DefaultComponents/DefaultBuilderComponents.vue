@@ -163,7 +163,7 @@ const getSvgPreview = (title: string) => {
             @click="handleDropComponent(convertToComponentObject(comp))"
           >
             <div
-              class="pbx-overflow-hidden pbx-whitespace-pre-line pbx-flex-1 pbx-h-auto pbx-border-solid pbx-border-b pbx-border-gray-200 lg:pbx-py-10 pbx-py-8 pbx-px-2"
+              class="pbx-overflow-hidden pbx-whitespace-pre-line pbx-flex-1 pbx-h-auto pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 lg:pbx-py-10 pbx-py-8 pbx-px-2"
             >
               <!-- Use SVG preview instead of external images -->
               <div

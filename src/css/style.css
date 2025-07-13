@@ -478,6 +478,13 @@
 
 .pbx-myPrimaryInput,
 .pbx-myPrimarySelect {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-repeat: no-repeat;
+  background-size: 1rem;
+  padding-right: 1rem;
 }
 
 .pbx-myPrimaryInput:focus,
@@ -533,4 +540,9 @@
   list-style: disc !important;
   padding: 1rem 0 0 1rem;
   line-height: 1.2;
+}
+
+.pbx-headless-dropdown {
+  list-style: none;
+  padding: 0;
 }
