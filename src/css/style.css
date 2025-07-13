@@ -581,20 +581,20 @@
   margin: 0;
 }
 
-#page-builder-wrapper img {
+#pagebuilder img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-#page-builder-wrapper a {
+#pagebuilder a {
   color: inherit;
   text-decoration: none;
 }
-#page-builder-wrapper code,
-#page-builder-wrapper pre,
-#page-builder-wrapper strong,
-#page-builder-wrapper em {
+#pagebuilder code,
+#pagebuilder pre,
+#pagebuilder strong,
+#pagebuilder em {
   font: inherit;
   font-weight: inherit;
 }
