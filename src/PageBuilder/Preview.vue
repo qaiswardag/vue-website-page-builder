@@ -28,7 +28,7 @@ watchEffect(() => {
     const doc = iframe.contentWindow.document
     doc.open()
     doc.write(
-      `<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><div class="pbx-font-sans pbx-text-black">${htmlPage.value}</div></body></html>`,
+      `<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width, initial-scale=1.0"></head><body><div  id="page-builder-wrapper" class="pbx-font-sans pbx-text-black">${htmlPage.value}</div></body></html>`,
     )
     doc.close()
 
@@ -46,7 +46,7 @@ watchEffect(() => {
       <div
         class="pbx-text-black pbx-w-full pbx-inset-x-0 pbx-h-[90vh] pbx-bg-white pbx-overflow-x-scroll lg:pbx-pt-2 pbx-pt-2"
       >
-        <div id="page-builder-editor">
+        <div id="page-builder-wrapper">
           <div class="" v-html="htmlPage"></div>
         </div>
       </div>
