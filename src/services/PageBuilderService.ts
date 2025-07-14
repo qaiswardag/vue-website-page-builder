@@ -1667,9 +1667,7 @@ export class PageBuilderService {
     await nextTick()
 
     // Scroll to the moved component
-    const pageBuilderWrapper = document.querySelector(
-      '#page-builder-wrapper',
-    ) as HTMLElement | null
+    const pageBuilderWrapper = document.querySelector('#page-builder-wrapper') as HTMLElement | null
     const movedComponentElement = pageBuilderWrapper?.querySelector(
       `section[data-componentid="${componentToMove.id}"]`,
     ) as HTMLElement
@@ -1961,40 +1959,49 @@ export class PageBuilderService {
         const hasChanges = newComponents.some((newComponent, index) => {
           const currentComponent = currentComponents[index]
           return (
-            !currentComponent || // New component added
-            currentComponent.html_code !== newComponent.html_code // Component HTML changed
+            // New component added
+            !currentComponent ||
+            // Component HTML changed
+            currentComponent.html_code !== newComponent.html_code
           )
         })
 
-        if (!hasChanges) {
+        // Compare pageSettings
+        const hasPageSettingsChanges =
+          (currentData.pageSettings &&
+            currentData.pageSettings.classes !== dataToSave.pageSettings.classes) ||
+          (currentData.pageSettings &&
+            currentData.pageSettings.style !== dataToSave.pageSettings.style)
+
+        // Only save to local storage if there's a difference between the existing saved data and the current DOM data
+        if (hasChanges || hasPageSettingsChanges) {
+          localStorage.setItem(baseKey, JSON.stringify(dataToSave))
+          let history = LocalStorageManager.getHistory(baseKey)
+
+          const lastState = history[history.length - 1]
+          if (lastState) {
+            const lastComponents = JSON.stringify(lastState.components)
+            const newComponents = JSON.stringify(dataToSave.components)
+            const lastSettings = JSON.stringify(lastState.pageSettings)
+            const newSettings = JSON.stringify(dataToSave.pageSettings)
+            if (lastComponents === newComponents && lastSettings === newSettings) {
+              return // Do not save duplicate state
+            }
+          }
+
+          if (this.pageBuilderStateStore.getHistoryIndex < history.length - 1) {
+            history = history.slice(0, this.pageBuilderStateStore.getHistoryIndex + 1)
+          }
+          history.push(dataToSave)
+          if (history.length > 10) {
+            history = history.slice(history.length - 10)
+          }
+          localStorage.setItem(baseKey + '-history', JSON.stringify(history))
+          this.pageBuilderStateStore.setHistoryIndex(history.length - 1)
+          this.pageBuilderStateStore.setHistoryLength(history.length)
           return
         }
       }
-
-      localStorage.setItem(baseKey, JSON.stringify(dataToSave))
-      let history = LocalStorageManager.getHistory(baseKey)
-
-      const lastState = history[history.length - 1]
-      if (lastState) {
-        const lastComponents = JSON.stringify(lastState.components)
-        const newComponents = JSON.stringify(dataToSave.components)
-        const lastSettings = JSON.stringify(lastState.pageSettings)
-        const newSettings = JSON.stringify(dataToSave.pageSettings)
-        if (lastComponents === newComponents && lastSettings === newSettings) {
-          return // Do not save duplicate state
-        }
-      }
-
-      if (this.pageBuilderStateStore.getHistoryIndex < history.length - 1) {
-        history = history.slice(0, this.pageBuilderStateStore.getHistoryIndex + 1)
-      }
-      history.push(dataToSave)
-      if (history.length > 10) {
-        history = history.slice(history.length - 10)
-      }
-      localStorage.setItem(baseKey + '-history', JSON.stringify(history))
-      this.pageBuilderStateStore.setHistoryIndex(history.length - 1)
-      this.pageBuilderStateStore.setHistoryLength(history.length)
     }
   }
   /**
