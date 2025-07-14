@@ -2782,7 +2782,6 @@ export class PageBuilderService {
     // Trim HTML string
     const trimmedData = htmlString.trim()
 
-    console.log('deeen er:', pageSettingsFromHistory)
     const validationError = this.validateMountingHTML(trimmedData, { logError: true })
     if (validationError) return
 
@@ -2794,36 +2793,53 @@ export class PageBuilderService {
       const importedPageBuilder = doc.querySelector('#pagebuilder') as HTMLElement | null
       const livePageBuilder = document.querySelector('#pagebuilder') as HTMLElement | null
 
-      // Initialize pageSettings to null
-      let pageSettings = null
+      // Initialize configPageSettings to null
+      let configPageSettings = null
 
       // Use stored page settings if the flag is true
       if (usePassedPageSettings) {
-        pageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
+        configPageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
       }
 
       // Use imported page builder settings if available and pageSettings is still null
-      if (!pageSettings && importedPageBuilder) {
-        pageSettings = {
+      if (!pageSettingsFromHistory && !configPageSettings && importedPageBuilder) {
+        configPageSettings = {
           classes: importedPageBuilder.className || '',
           style: importedPageBuilder.getAttribute('style') || '',
         }
       }
 
       // Fallback to stored page settings if pageSettings is still null
-      if (!pageSettings) {
-        pageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
+      if (!configPageSettings) {
+        configPageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
       }
 
       // Apply the page settings to the live page builder
-      if (pageSettings && livePageBuilder) {
+      if (!pageSettingsFromHistory && configPageSettings && livePageBuilder) {
         // Remove existing class and style attributes
         livePageBuilder.removeAttribute('class')
         livePageBuilder.removeAttribute('style')
 
         // Apply new classes and styles
-        livePageBuilder.className = pageSettings.classes || ''
-        livePageBuilder.setAttribute('style', this.convertStyleObjectToString(pageSettings.style))
+        livePageBuilder.className = configPageSettings.classes || ''
+        livePageBuilder.setAttribute(
+          'style',
+          this.convertStyleObjectToString(configPageSettings.style),
+        )
+      }
+
+      // Apply the page settings to the live page builder
+      if (pageSettingsFromHistory && livePageBuilder) {
+        // Remove existing class and style attributes
+        livePageBuilder.removeAttribute('class')
+        livePageBuilder.removeAttribute('style')
+
+        // Apply new classes and styles
+        livePageBuilder.className = pageSettingsFromHistory.classes || ''
+        livePageBuilder.setAttribute(
+          'style',
+          this.convertStyleObjectToString(pageSettingsFromHistory.style),
+        )
       }
 
       // Select all <section> elements
