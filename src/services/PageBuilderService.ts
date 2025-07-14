@@ -570,11 +570,11 @@ export class PageBuilderService {
   /**
    * Completes the mounting process by loading components into the DOM and setting up listeners.
    * @param {string} html - The HTML string of components to mount.
-   * @param {boolean} [usePassedPageSettings] - Whether to use page settings from the passed data.
+   * @param {boolean} [useConfigPageSettings] - Whether to use page settings from the passed data.
    * @private
    */
-  private async completeMountProcess(html: string, usePassedPageSettings?: boolean) {
-    await this.mountComponentsToDOM(html, usePassedPageSettings)
+  private async completeMountProcess(html: string, useConfigPageSettings?: boolean) {
+    await this.mountComponentsToDOM(html, useConfigPageSettings)
 
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
@@ -1464,7 +1464,7 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex - 1)
       const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
-      await this.mountComponentsToDOM(htmlString, true)
+      await this.mountComponentsToDOM(htmlString, false, data.pageSettings)
     }
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
@@ -1480,7 +1480,7 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex + 1)
       const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
-      await this.mountComponentsToDOM(htmlString, true)
+      await this.mountComponentsToDOM(htmlString, false, data.pageSettings)
     }
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
@@ -1916,12 +1916,8 @@ export class PageBuilderService {
     if (!pagebuilder) return
 
     const hoveredElement = pagebuilder.querySelector('[hovered]')
-    const selectedElement = pagebuilder.querySelector('[selected]')
     if (hoveredElement) {
       hoveredElement.removeAttribute('hovered')
-    }
-    if (selectedElement) {
-      selectedElement.removeAttribute('selected')
     }
 
     const componentsToSave: { html_code: string; title: string }[] = []
@@ -2777,13 +2773,16 @@ export class PageBuilderService {
    *
    * Typical use cases include restoring a published state, importing templates, or previewing published content.
    */
+
   private async mountComponentsToDOM(
     htmlString: string,
     usePassedPageSettings?: boolean,
+    pageSettingsFromHistory?: PageSettings,
   ): Promise<void> {
     // Trim HTML string
     const trimmedData = htmlString.trim()
 
+    console.log('deeen er:', pageSettingsFromHistory)
     const validationError = this.validateMountingHTML(trimmedData, { logError: true })
     if (validationError) return
 
@@ -2875,7 +2874,6 @@ export class PageBuilderService {
       await this.addListenersToEditableElements()
     }
   }
-
   private updateLocalStorageItemName(): void {
     const formtype =
       this.pageBuilderStateStore.getPageBuilderConfig &&
