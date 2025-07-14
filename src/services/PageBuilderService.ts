@@ -1981,8 +1981,6 @@ export class PageBuilderService {
           (currentData.pageSettings &&
             currentData.pageSettings.style !== dataToSave.pageSettings.style)
 
-        console.log('hasChanges:', hasChanges)
-        console.log('hasPageSettingsChanges:', hasPageSettingsChanges)
         // Only save to local storage if there's a difference between the existing saved data and the current DOM data
         if (hasChanges || hasPageSettingsChanges) {
           localStorage.setItem(baseKey, JSON.stringify(dataToSave))
