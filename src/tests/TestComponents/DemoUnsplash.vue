@@ -144,20 +144,20 @@ onMounted(async () => {
         "
       >
         <div class="pbx-mysearchBarWithOptions">
-          <div class="pbx-relative pbx-w-full">
+          <div class="pbx-relative pbx-w-full pbx-flex pbx-gap-2">
+            <input
+              type="search"
+              id="search_query"
+              v-model="getSearchTerm"
+              class="pbx-myPrimarySearchInput pbx-w-full pbx-pl-10 pbx-border-0"
+              autocomplete="off"
+              :placeholder="translate('Search...')"
+            />
             <div
               class="pbx-flex pbx-absolute pbx-inset-y-0 pbx-left-0 pbx-items-center pbx-pl-3 pbx-pointer-events-none"
             >
               <span class="material-symbols-outlined"> search </span>
             </div>
-            <input
-              type="search"
-              id="search_query"
-              v-model="getSearchTerm"
-              class="pbx-myPrimarySearchInput pbx-w-full"
-              autocomplete="off"
-              :placeholder="translate('Search...')"
-            />
           </div>
 
           <button
