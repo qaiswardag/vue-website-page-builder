@@ -1916,8 +1916,12 @@ export class PageBuilderService {
     if (!pagebuilder) return
 
     const hoveredElement = pagebuilder.querySelector('[hovered]')
+    const selectedElement = pagebuilder.querySelector('[selected]')
     if (hoveredElement) {
       hoveredElement.removeAttribute('hovered')
+    }
+    if (selectedElement) {
+      selectedElement.removeAttribute('selected')
     }
 
     const componentsToSave: { html_code: string; title: string }[] = []
@@ -1949,7 +1953,10 @@ export class PageBuilderService {
 
     if (baseKey) {
       const currentDataRaw = localStorage.getItem(baseKey)
-      console.log('currentDataRaw er:', currentDataRaw)
+
+      if (!currentDataRaw) {
+        localStorage.setItem(baseKey, JSON.stringify(dataToSave))
+      }
       if (currentDataRaw) {
         const currentData = JSON.parse(currentDataRaw)
 
@@ -2004,8 +2011,6 @@ export class PageBuilderService {
           this.pageBuilderStateStore.setHistoryLength(history.length)
           return
         }
-      }
-      if (!currentDataRaw) {
       }
     }
   }
