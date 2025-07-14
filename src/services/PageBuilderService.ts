@@ -2005,6 +2005,8 @@ export class PageBuilderService {
           return
         }
       }
+      if (!currentDataRaw) {
+      }
     }
   }
   /**
