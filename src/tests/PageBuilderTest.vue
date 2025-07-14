@@ -27,7 +27,7 @@ const translatedComponents = computed(() => {
 watch(currentTranslations, async () => {
   const { components: newComponents, pageSettings: pageSettings } =
     pageBuilderService.parsePageBuilderHTML(
-      '<div id="pagebuilder" class="pbx-bg-red-100" style="padding:100px;">' +
+      '<div id="pagebuilder" class="" style="">' +
         translatedComponents.value.map((c) => c.html_code).join('\n') +
         '</div>',
     )
