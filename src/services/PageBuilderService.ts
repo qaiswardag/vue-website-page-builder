@@ -1452,7 +1452,7 @@ export class PageBuilderService {
         .forEach((section) => section.remove())
     }
   }
-  //
+
   public async undo() {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await delay(300)
