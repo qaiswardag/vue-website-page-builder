@@ -1464,7 +1464,7 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex - 1)
       const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
-      await this.mountComponentsToDOM(htmlString)
+      await this.mountComponentsToDOM(htmlString, true)
     }
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
@@ -1480,7 +1480,7 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex + 1)
       const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
-      await this.mountComponentsToDOM(htmlString)
+      await this.mountComponentsToDOM(htmlString, true)
     }
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
@@ -1949,6 +1949,7 @@ export class PageBuilderService {
 
     if (baseKey) {
       const currentDataRaw = localStorage.getItem(baseKey)
+      console.log('currentDataRaw er:', currentDataRaw)
       if (currentDataRaw) {
         const currentData = JSON.parse(currentDataRaw)
 
@@ -1973,6 +1974,8 @@ export class PageBuilderService {
           (currentData.pageSettings &&
             currentData.pageSettings.style !== dataToSave.pageSettings.style)
 
+        console.log('hasChanges:', hasChanges)
+        console.log('hasPageSettingsChanges:', hasPageSettingsChanges)
         // Only save to local storage if there's a difference between the existing saved data and the current DOM data
         if (hasChanges || hasPageSettingsChanges) {
           localStorage.setItem(baseKey, JSON.stringify(dataToSave))
