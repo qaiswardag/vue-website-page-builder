@@ -367,7 +367,7 @@
   min-width: 4rem;
   padding-right: 1rem;
   padding-left: 1rem;
-  height: 2.2rem;
+  height: 2rem;
   box-shadow: 0 0 0 10px oklch(86.9% 0.005 56.366);
   background: oklch(86.9% 0.005 56.366);
 }
@@ -376,6 +376,7 @@
 #pagebuilder {
   position: relative;
   max-height: 100%;
+  min-height: fit-content;
 }
 #pagebuilder a {
   pointer-events: none;
@@ -537,7 +538,7 @@
   padding: 0;
 }
 
-/* Page Builder Start*/
+/* Page Builder Reset Default Browser Styles Start*/
 #pagebuilder input,
 #pagebuilder button,
 #pagebuilder textarea,
@@ -580,4 +581,22 @@
   padding: 0;
   margin: 0;
 }
-/* Page Builder End*/
+
+#pagebuilder img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+#pagebuilder a {
+  color: inherit;
+  text-decoration: none;
+}
+#pagebuilder code,
+#pagebuilder pre,
+#pagebuilder strong,
+#pagebuilder em {
+  font: inherit;
+  font-weight: inherit;
+}
+/* Page Builder Reset Default Browser Styles End*/

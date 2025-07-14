@@ -570,11 +570,11 @@ export class PageBuilderService {
   /**
    * Completes the mounting process by loading components into the DOM and setting up listeners.
    * @param {string} html - The HTML string of components to mount.
-   * @param {boolean} [usePassedPageSettings] - Whether to use page settings from the passed data.
+   * @param {boolean} [useConfigPageSettings] - Whether to use page settings from the passed data.
    * @private
    */
-  private async completeMountProcess(html: string, usePassedPageSettings?: boolean) {
-    await this.mountComponentsToDOM(html, usePassedPageSettings)
+  private async completeMountProcess(html: string, useConfigPageSettings?: boolean) {
+    await this.mountComponentsToDOM(html, useConfigPageSettings)
 
     // Clean up any old localStorage items related to previous builder sessions
     this.deleteOldPageBuilderLocalStorage()
@@ -1452,7 +1452,7 @@ export class PageBuilderService {
         .forEach((section) => section.remove())
     }
   }
-  //
+
   public async undo() {
     this.pageBuilderStateStore.setIsLoadingGlobal(true)
     await delay(300)
@@ -1464,7 +1464,7 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex - 1)
       const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
-      await this.mountComponentsToDOM(htmlString)
+      await this.mountComponentsToDOM(htmlString, false, data.pageSettings)
     }
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
@@ -1480,7 +1480,7 @@ export class PageBuilderService {
       this.pageBuilderStateStore.setHistoryIndex(this.pageBuilderStateStore.getHistoryIndex + 1)
       const data = history[this.pageBuilderStateStore.getHistoryIndex]
       const htmlString = this.renderComponentsToHtml(data.components)
-      await this.mountComponentsToDOM(htmlString)
+      await this.mountComponentsToDOM(htmlString, false, data.pageSettings)
     }
     this.pageBuilderStateStore.setIsLoadingGlobal(false)
   }
@@ -1667,9 +1667,7 @@ export class PageBuilderService {
     await nextTick()
 
     // Scroll to the moved component
-    const pageBuilderWrapper = document.querySelector(
-      '#page-builder-wrapper',
-    ) as HTMLElement | null
+    const pageBuilderWrapper = document.querySelector('#page-builder-wrapper') as HTMLElement | null
     const movedComponentElement = pageBuilderWrapper?.querySelector(
       `section[data-componentid="${componentToMove.id}"]`,
     ) as HTMLElement
@@ -1951,6 +1949,10 @@ export class PageBuilderService {
 
     if (baseKey) {
       const currentDataRaw = localStorage.getItem(baseKey)
+
+      if (!currentDataRaw) {
+        localStorage.setItem(baseKey, JSON.stringify(dataToSave))
+      }
       if (currentDataRaw) {
         const currentData = JSON.parse(currentDataRaw)
 
@@ -1961,40 +1963,49 @@ export class PageBuilderService {
         const hasChanges = newComponents.some((newComponent, index) => {
           const currentComponent = currentComponents[index]
           return (
-            !currentComponent || // New component added
-            currentComponent.html_code !== newComponent.html_code // Component HTML changed
+            // New component added
+            !currentComponent ||
+            // Component HTML changed
+            currentComponent.html_code !== newComponent.html_code
           )
         })
 
-        if (!hasChanges) {
+        // Compare pageSettings
+        const hasPageSettingsChanges =
+          (currentData.pageSettings &&
+            currentData.pageSettings.classes !== dataToSave.pageSettings.classes) ||
+          (currentData.pageSettings &&
+            currentData.pageSettings.style !== dataToSave.pageSettings.style)
+
+        // Only save to local storage if there's a difference between the existing saved data and the current DOM data
+        if (hasChanges || hasPageSettingsChanges) {
+          localStorage.setItem(baseKey, JSON.stringify(dataToSave))
+          let history = LocalStorageManager.getHistory(baseKey)
+
+          const lastState = history[history.length - 1]
+          if (lastState) {
+            const lastComponents = JSON.stringify(lastState.components)
+            const newComponents = JSON.stringify(dataToSave.components)
+            const lastSettings = JSON.stringify(lastState.pageSettings)
+            const newSettings = JSON.stringify(dataToSave.pageSettings)
+            if (lastComponents === newComponents && lastSettings === newSettings) {
+              return // Do not save duplicate state
+            }
+          }
+
+          if (this.pageBuilderStateStore.getHistoryIndex < history.length - 1) {
+            history = history.slice(0, this.pageBuilderStateStore.getHistoryIndex + 1)
+          }
+          history.push(dataToSave)
+          if (history.length > 10) {
+            history = history.slice(history.length - 10)
+          }
+          localStorage.setItem(baseKey + '-history', JSON.stringify(history))
+          this.pageBuilderStateStore.setHistoryIndex(history.length - 1)
+          this.pageBuilderStateStore.setHistoryLength(history.length)
           return
         }
       }
-
-      localStorage.setItem(baseKey, JSON.stringify(dataToSave))
-      let history = LocalStorageManager.getHistory(baseKey)
-
-      const lastState = history[history.length - 1]
-      if (lastState) {
-        const lastComponents = JSON.stringify(lastState.components)
-        const newComponents = JSON.stringify(dataToSave.components)
-        const lastSettings = JSON.stringify(lastState.pageSettings)
-        const newSettings = JSON.stringify(dataToSave.pageSettings)
-        if (lastComponents === newComponents && lastSettings === newSettings) {
-          return // Do not save duplicate state
-        }
-      }
-
-      if (this.pageBuilderStateStore.getHistoryIndex < history.length - 1) {
-        history = history.slice(0, this.pageBuilderStateStore.getHistoryIndex + 1)
-      }
-      history.push(dataToSave)
-      if (history.length > 10) {
-        history = history.slice(history.length - 10)
-      }
-      localStorage.setItem(baseKey + '-history', JSON.stringify(history))
-      this.pageBuilderStateStore.setHistoryIndex(history.length - 1)
-      this.pageBuilderStateStore.setHistoryLength(history.length)
     }
   }
   /**
@@ -2762,9 +2773,11 @@ export class PageBuilderService {
    *
    * Typical use cases include restoring a published state, importing templates, or previewing published content.
    */
+
   private async mountComponentsToDOM(
     htmlString: string,
     usePassedPageSettings?: boolean,
+    pageSettingsFromHistory?: PageSettings,
   ): Promise<void> {
     // Trim HTML string
     const trimmedData = htmlString.trim()
@@ -2780,36 +2793,53 @@ export class PageBuilderService {
       const importedPageBuilder = doc.querySelector('#pagebuilder') as HTMLElement | null
       const livePageBuilder = document.querySelector('#pagebuilder') as HTMLElement | null
 
-      // Initialize pageSettings to null
-      let pageSettings = null
+      // Initialize configPageSettings to null
+      let configPageSettings = null
 
       // Use stored page settings if the flag is true
       if (usePassedPageSettings) {
-        pageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
+        configPageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
       }
 
       // Use imported page builder settings if available and pageSettings is still null
-      if (!pageSettings && importedPageBuilder) {
-        pageSettings = {
+      if (!pageSettingsFromHistory && !configPageSettings && importedPageBuilder) {
+        configPageSettings = {
           classes: importedPageBuilder.className || '',
           style: importedPageBuilder.getAttribute('style') || '',
         }
       }
 
       // Fallback to stored page settings if pageSettings is still null
-      if (!pageSettings) {
-        pageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
+      if (!configPageSettings) {
+        configPageSettings = this.pageBuilderStateStore.getPageBuilderConfig?.pageSettings || null
       }
 
       // Apply the page settings to the live page builder
-      if (pageSettings && livePageBuilder) {
+      if (!pageSettingsFromHistory && configPageSettings && livePageBuilder) {
         // Remove existing class and style attributes
         livePageBuilder.removeAttribute('class')
         livePageBuilder.removeAttribute('style')
 
         // Apply new classes and styles
-        livePageBuilder.className = pageSettings.classes || ''
-        livePageBuilder.setAttribute('style', this.convertStyleObjectToString(pageSettings.style))
+        livePageBuilder.className = configPageSettings.classes || ''
+        livePageBuilder.setAttribute(
+          'style',
+          this.convertStyleObjectToString(configPageSettings.style),
+        )
+      }
+
+      // Apply the page settings to the live page builder
+      if (pageSettingsFromHistory && livePageBuilder) {
+        // Remove existing class and style attributes
+        livePageBuilder.removeAttribute('class')
+        livePageBuilder.removeAttribute('style')
+
+        // Apply new classes and styles
+        livePageBuilder.className = pageSettingsFromHistory.classes || ''
+        livePageBuilder.setAttribute(
+          'style',
+          this.convertStyleObjectToString(pageSettingsFromHistory.style),
+        )
       }
 
       // Select all <section> elements
@@ -2860,7 +2890,6 @@ export class PageBuilderService {
       await this.addListenersToEditableElements()
     }
   }
-
   private updateLocalStorageItemName(): void {
     const formtype =
       this.pageBuilderStateStore.getPageBuilderConfig &&
