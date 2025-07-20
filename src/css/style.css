@@ -476,6 +476,7 @@
   border-radius: 0.5rem;
   cursor: pointer;
   line-height: 1.5;
+  font-weight: normal;
 }
 
 .pbx-myPrimarySelect {
