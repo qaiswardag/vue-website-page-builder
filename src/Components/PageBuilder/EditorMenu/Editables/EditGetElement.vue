@@ -210,8 +210,14 @@ const handleModalIframeSrc = function () {
         <div class="pbx-myInputGroup">
           <div class="pbx-myPrimaryFormOrganizationHeaderDescriptionSection">
             <div class="pbx-myPrimaryFormOrganizationHeader">
-              <label for="video" class="pbx-myPrimaryInputLabel">Video url:</label>
-              <input v-model="iframeSrc" type="text" class="pbx-myPrimaryInput" name="video" />
+              <label for="youtube-video" class="pbx-myPrimaryInputLabel">Video url:</label>
+              <input
+                id="youtube-video"
+                v-model="iframeSrc"
+                type="text"
+                class="pbx-myPrimaryInput"
+                name="video"
+              />
               <div
                 v-if="urlError"
                 class="pbx-min-h-[2.5rem] pbx-flex pbx-items-center pbx-justify-start"
