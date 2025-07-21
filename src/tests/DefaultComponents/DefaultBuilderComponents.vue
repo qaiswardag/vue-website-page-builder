@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue'
 import componentHelpers from '../../utils/html-elements/componentHelpers'
 import components from '../../utils/html-elements/component'
+import themes from '../../utils/html-elements/themes'
 import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
 import type { ComponentObject } from '../../types'
 import { getPageBuilder } from '../../composables/builderInstance'
@@ -19,8 +20,6 @@ defineProps({
 })
 
 const isLoading = ref(false)
-
-const themeSelection = ref(false)
 
 const selectedThemeSelection = ref('Components')
 
@@ -113,7 +112,7 @@ const convertToComponentObject = function (comp: any): ComponentObject {
         <button
           v-for="category in componentOrThemes"
           :key="category"
-          @click="themeSelection = !themeSelection"
+          @click="selectedThemeSelection = category"
           class="pbx-mySecondaryButton pbx-text-xs pbx-px-4"
           :class="[
             selectedThemeSelection === category
@@ -126,19 +125,46 @@ const convertToComponentObject = function (comp: any): ComponentObject {
       </div>
 
       <!-- theme is selected start -->
-      <template v-if="themeSelection">
+      <template v-if="selectedThemeSelection === 'Themes'">
         <div class="pbx-mb-8">
           <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Themes') }}</h3>
           <div
             class="pbx-px-2 pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 lg:pbx-grid-cols-4 pbx-gap-4"
           >
-            <p>i will display themes here....</p>
+            <div
+              class="pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 pbx-gap-4 pbx-pb-4"
+            >
+              <div
+                v-for="comp in filteredComponents"
+                :key="comp.title"
+                class="pbx-border-solid pbx-border pbx-border-gray-400 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer"
+                @click="handleDropComponent(convertToComponentObject(comp))"
+              >
+                <div
+                  class="pbx-overflow-hidden pbx-whitespace-pre-line pbx-flex-1 pbx-h-auto pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 lg:pbx-py-10 pbx-py-8 pbx-px-2"
+                >
+                  <!-- Use SVG preview instead of external images -->
+                  <div
+                    class="pbx-max-h-72 pbx-cursor-pointer pbx-bg-white pbx-mx-auto pbx-flex pbx-items-center pbx-justify-center"
+                    v-html="comp.cover_image"
+                  ></div>
+                </div>
+                <div class="pbx-p-3">
+                  <h4 class="pbx-myPrimaryParagraph pbx-text-sm pbx-font-normal">
+                    {{ translate(comp.title) }}
+                  </h4>
+                  <div class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-pt-2">
+                    {{ translate('Click to add component') }}
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </template>
       <!-- theme is selected end -->
 
-      <template v-if="!themeSelection">
+      <template v-if="selectedThemeSelection === 'Components'">
         <!-- Helper Components Section -->
         <div class="pbx-mb-8">
           <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Helper Components') }}</h3>
