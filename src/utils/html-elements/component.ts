@@ -364,6 +364,42 @@ const component: Components[] = [
                       </svg>
                     `,
         },
+        {
+          title: 'Article',
+          html_code: `<section data-component-title="Header H2"><div class="pbx-relative pbx-py-4"><div class="pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2"><div class="pbx-break-words pbx-font-medium pbx-text-3xl lg:pbx-text-6xl"><h2>Inceptos himenaeos</h2></div></div></div></section> <section data-component-title="Text"> <div class="pbx-relative pbx-py-4"> <div class="pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2"> <div><p>Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra.<br><br>Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.</p></div> </div> </div> </section> <section data-component-title="Header H3" class=""><div class="pbx-relative pbx-py-4"><div class="pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2"><div class="pbx-break-words pbx-text-1xl lg:pbx-text-3xl pbx-font-medium"><h3>Fringilla lacus nec metus</h3></div></div></div></section> <section data-component-title="Text" class=""> <div class="pbx-relative pbx-py-4"> <div class="pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2"> <div><p>Sapien vitae pellentesque sem placerat. In id cursus mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra.</p><ul><li><p><strong>Blorf nizgat quarnip veloop</strong></p></li><li><p><strong>Dramble froop with lartic spindles</strong></p></li><li><p><strong>Quibber on flemt zarglo dynamics</strong></p></li><li><p><strong>Slooped jarnix under flibble zones</strong></p></li><li><p><strong>Plonk-ready trizzit with garm logic</strong></p><p><br></p></li></ul><p>Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.</p></div> </div> </div> </section> <section data-component-title="Header H3" class=""><div class="pbx-relative pbx-py-4"><div class="pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2"><div class="pbx-break-words pbx-text-1xl lg:pbx-text-3xl pbx-font-medium"><h3>Conubia nostra inceptos</h3></div></div></div></section> <section data-component-title="Text"> <div class="pbx-relative pbx-py-4"> <div class="pbx-mx-auto pbx-max-w-7xl lg:pbx-px-4 pbx-px-2"> <div><p>Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. <br><br>Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. Tempus leo eu aenean sed diam urna tempor. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos. <br><br>Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra. Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.</p></div> </div> </div> </section>`,
+          category: 'Article',
+          cover_image: `
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 177.28 70.84">
+                        <defs>
+                          <style>
+                            .bg { fill: #384152; }
+                            .fg { fill: #718096; }
+                          </style>
+                        </defs>
+                        <rect class="bg" width="53.92" height="53.92"/>
+                        <rect class="bg" x="62.15" width="53.92" height="53.92"/>
+                        <rect class="bg" x="123.37" width="53.92" height="53.92"/>
+                        <polygon class="fg" points="8.2 35 21.6 18.92 35 35"/>
+                        <polygon class="fg" points="32.32 35 39.02 26.96 45.71 35"/>
+                        <circle class="fg" cx="39.02" cy="21.15" r="2.23"/>
+                        <polygon class="fg" points="70.36 35 83.75 18.92 97.15 35"/>
+                        <polygon class="fg" points="94.47 35 101.17 26.96 107.87 35"/>
+                        <circle class="fg" cx="101.17" cy="21.15" r="2.23"/>
+                        <polygon class="fg" points="131.57 35 144.96 18.92 158.36 35"/>
+                        <polygon class="fg" points="155.68 35 162.38 26.96 169.08 35"/>
+                        <circle class="fg" cx="162.38" cy="21.15" r="2.23"/>
+                        <rect class="bg" y="59.92" width="53.92" height="2.93"/>
+                        <rect class="bg" y="63.91" width="53.92" height="2.93"/>
+                        <rect class="bg" y="67.91" width="53.92" height="2.93"/>
+                        <rect class="bg" x="62.15" y="59.92" width="53.92" height="2.93"/>
+                        <rect class="bg" x="62.15" y="63.91" width="53.92" height="2.93"/>
+                        <rect class="bg" x="62.15" y="67.91" width="53.92" height="2.93"/>
+                        <rect class="bg" x="123.37" y="59.92" width="53.92" height="2.93"/>
+                        <rect class="bg" x="123.37" y="63.91" width="53.92" height="2.93"/>
+                        <rect class="bg" x="123.37" y="67.91" width="53.92" height="2.93"/>
+                      </svg>
+                    `,
+        },
       ],
     },
   },

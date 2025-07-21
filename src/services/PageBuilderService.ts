@@ -2444,6 +2444,17 @@ export class PageBuilderService {
     this.addHyperlinkToElement(hyperlinkEnable, urlInput || null, openHyperlinkInNewTab || false)
   }
 
+  public async addTheme(components: string): Promise<void> {
+    try {
+      if (components) {
+        await this.applyModifiedComponents(components)
+      }
+      await this.handleAutoSave()
+    } catch (error) {
+      console.error('Error adding component:', error)
+    }
+  }
+
   /**
    * Adds a new component to the page builder.
    * @param {ComponentObject} componentObject - The component to add.

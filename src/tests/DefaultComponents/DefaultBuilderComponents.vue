@@ -38,8 +38,31 @@ const filteredComponents = computed(() => {
   return components[0].components.data.filter((comp) => comp.category === selectedCategory.value)
 })
 
+const selectedThemeCategory = ref('All')
+
+const themeCategories = computed(() => {
+  const allCategories = themes[0].themes.data.map((comp) => comp.category)
+  return ['All', ...new Set(allCategories)]
+})
+
+const filteredThemes = computed(() => {
+  if (selectedThemeCategory.value === 'All') {
+    return themes[0].themes.data
+  }
+  return themes[0].themes.data.filter((comp) => comp.category === selectedThemeCategory.value)
+})
+
 // Get modal close function
 const { closeAddComponentModal } = usePageBuilderModal()
+
+// Super simple component addition with professional modal closing!
+const handleDropTheme = async function (components: string) {
+  isLoading.value = true
+
+  await pageBuilderService.addTheme(components)
+  closeAddComponentModal()
+  isLoading.value = false
+}
 
 // Super simple component addition with professional modal closing!
 const handleDropComponent = async function (componentObject: ComponentObject) {
@@ -128,34 +151,46 @@ const convertToComponentObject = function (comp: any): ComponentObject {
       <template v-if="selectedThemeSelection === 'Themes'">
         <div class="pbx-mb-8">
           <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Themes') }}</h3>
+          <div class="pbx-mb-4 pbx-flex pbx-jusitify-left pbx-items-center pbx-gap-2">
+            <button
+              v-for="category in themeCategories"
+              :key="category"
+              @click="selectedThemeCategory = category"
+              class="pbx-mySecondaryButton pbx-text-xs pbx-px-4"
+              :class="[
+                selectedThemeCategory === category
+                  ? 'pbx-bg-myPrimaryLinkColor pbx-text-white hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white'
+                  : 'hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white',
+              ]"
+            >
+              {{ translate(category) }}
+            </button>
+          </div>
+
           <div
             class="pbx-px-2 pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 lg:pbx-grid-cols-4 pbx-gap-4"
           >
             <div
-              class="pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 pbx-gap-4 pbx-pb-4"
+              v-for="theme in filteredThemes"
+              :key="theme.title"
+              class="pbx-border-solid pbx-border pbx-border-gray-400 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer"
+              @click="handleDropTheme(theme.html_code)"
             >
               <div
-                v-for="comp in filteredComponents"
-                :key="comp.title"
-                class="pbx-border-solid pbx-border pbx-border-gray-400 pbx-overflow-hidden hover:pbx-border-myPrimaryLinkColor pbx-duration-100 pbx-cursor-pointer"
-                @click="handleDropComponent(convertToComponentObject(comp))"
+                class="pbx-overflow-hidden pbx-whitespace-pre-line pbx-flex-1 pbx-h-auto pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 lg:pbx-py-10 pbx-py-8 pbx-px-2"
               >
+                <!-- Use SVG preview instead of external images -->
                 <div
-                  class="pbx-overflow-hidden pbx-whitespace-pre-line pbx-flex-1 pbx-h-auto pbx-border-0 pbx-border-solid pbx-border-b pbx-border-gray-200 lg:pbx-py-10 pbx-py-8 pbx-px-2"
-                >
-                  <!-- Use SVG preview instead of external images -->
-                  <div
-                    class="pbx-max-h-72 pbx-cursor-pointer pbx-bg-white pbx-mx-auto pbx-flex pbx-items-center pbx-justify-center"
-                    v-html="comp.cover_image"
-                  ></div>
-                </div>
-                <div class="pbx-p-3">
-                  <h4 class="pbx-myPrimaryParagraph pbx-text-sm pbx-font-normal">
-                    {{ translate(comp.title) }}
-                  </h4>
-                  <div class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-pt-2">
-                    {{ translate('Click to add component') }}
-                  </div>
+                  class="pbx-max-h-72 pbx-cursor-pointer pbx-bg-white pbx-mx-auto pbx-flex pbx-items-center pbx-justify-center"
+                  v-html="theme.cover_image"
+                ></div>
+              </div>
+              <div class="pbx-p-3">
+                <h4 class="pbx-myPrimaryParagraph pbx-text-sm pbx-font-normal">
+                  {{ translate(theme.title) }}
+                </h4>
+                <div class="pbx-myPrimaryParagraph pbx-text-xs pbx-font-normal pbx-pt-2">
+                  {{ translate('Click to add theme') }}
                 </div>
               </div>
             </div>
