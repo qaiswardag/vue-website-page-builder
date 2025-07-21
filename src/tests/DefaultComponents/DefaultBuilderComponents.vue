@@ -3,7 +3,6 @@ import { ref, computed } from 'vue'
 import componentHelpers from '../../utils/html-elements/componentHelpers'
 import components from '../../utils/html-elements/component'
 import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
-import { generateComponentPreview } from '../../utils/componentPreviews'
 import type { ComponentObject } from '../../types'
 import { getPageBuilder } from '../../composables/builderInstance'
 import { useTranslations } from '../../composables/useTranslations'
@@ -68,11 +67,6 @@ const convertToComponentObject = function (comp: any): ComponentObject {
     html_code: comp.html_code,
     title: comp.title,
   }
-}
-
-// Get SVG preview for component
-const getSvgPreview = (title: string) => {
-  return generateComponentPreview(title)
 }
 </script>
 
@@ -167,7 +161,7 @@ const getSvgPreview = (title: string) => {
               <!-- Use SVG preview instead of external images -->
               <div
                 class="pbx-max-h-72 pbx-cursor-pointer pbx-bg-white pbx-mx-auto pbx-flex pbx-items-center pbx-justify-center"
-                v-html="getSvgPreview(comp.title)"
+                v-html="comp.cover_image"
               ></div>
             </div>
             <div class="pbx-p-3">
