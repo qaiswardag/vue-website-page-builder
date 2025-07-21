@@ -141,7 +141,11 @@ const convertToComponentObject = function (comp: any): ComponentObject {
             :key="category"
             @click="selectedCategory = category"
             class="pbx-mySecondaryButton pbx-text-xs pbx-px-4"
-            :class="{ active: selectedCategory === category }"
+            :class="[
+              selectedCategory === category
+                ? 'pbx-bg-myPrimaryLinkColor pbx-text-white hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white'
+                : 'hover:pbx-bg-myPrimaryLinkColor hover:pbx-text-white',
+            ]"
           >
             {{ translate(category) }}
           </button>
