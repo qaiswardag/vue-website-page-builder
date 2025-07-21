@@ -65,6 +65,8 @@ Create and enhance digital experiences with Vue on any backend.
 Experience the power and simplicity of the Vue Website Page Builder in action.
 Try the live demo to explore real-time visual updates and smooth content management.
 
+<img style="width: 100%;" src="./public/home/for_read_me/pb_gif.gif" alt="Vue Website Page Builder - the editor" />
+
 [Play around with the Page Builder](https://mybuilder.dev)
 
 ## Overview
