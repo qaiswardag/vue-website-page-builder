@@ -2447,7 +2447,7 @@ export class PageBuilderService {
   public async addTheme(components: string): Promise<void> {
     try {
       if (components) {
-        await this.applyModifiedComponents(components)
+        await this.mountComponentsToDOM(components)
       }
       await this.handleAutoSave()
     } catch (error) {
