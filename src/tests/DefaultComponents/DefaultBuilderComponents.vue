@@ -109,16 +109,6 @@ const convertToComponentObject = function (comp: any): ComponentObject {
       </div>
     </template>
     <div v-if="!isLoading">
-      <!-- theme is selected start -->
-      <template v-if="themeSelection">
-        <div class="pbx-mb-8">
-          <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Themes') }}</h3>
-          <div
-            class="pbx-px-2 pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 lg:pbx-grid-cols-4 pbx-gap-4"
-          ></div>
-        </div>
-      </template>
-
       <div class="pbx-mb-4 pbx-flex pbx-jusitify-left pbx-items-center pbx-gap-2">
         <button
           v-for="category in componentOrThemes"
@@ -135,7 +125,19 @@ const convertToComponentObject = function (comp: any): ComponentObject {
         </button>
       </div>
 
+      <!-- theme is selected start -->
+      <template v-if="themeSelection">
+        <div class="pbx-mb-8">
+          <h3 class="pbx-myQuaternaryHeader pbx-mb-4">{{ translate('Themes') }}</h3>
+          <div
+            class="pbx-px-2 pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 md:pbx-grid-cols-3 lg:pbx-grid-cols-4 pbx-gap-4"
+          >
+            <p>i will display themes here....</p>
+          </div>
+        </div>
+      </template>
       <!-- theme is selected end -->
+
       <template v-if="!themeSelection">
         <!-- Helper Components Section -->
         <div class="pbx-mb-8">
