@@ -6,7 +6,6 @@ import { usePageBuilderModal } from '../../composables/usePageBuilderModal'
 import { generateComponentPreview } from '../../utils/componentPreviews'
 import type { ComponentObject } from '../../types'
 import { getPageBuilder } from '../../composables/builderInstance'
-
 import { useTranslations } from '../../composables/useTranslations'
 
 const { translate } = useTranslations()
