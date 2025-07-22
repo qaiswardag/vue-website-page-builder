@@ -350,9 +350,28 @@ const component: Components[] = [
                     `,
         },
         {
+          title: 'Split with image',
+          html_code: `<section data-component-title="Two Square Images"> <div class="md:pbx-pt-12 md:pbx-pb-12 pbx-pt-4 pbx-pb-4 lg:pbx-px-4 pbx-px-2"><div class="pbx-mx-auto pbx-max-w-7xl"><div class="pbx-myPrimaryGap pbx-grid pbx-grid-cols-1 sm:pbx-grid-cols-2 lg:pbx-grid-cols-2"> <div class="pbx-flex-1 pbx-py-2"> <img class="pbx-object-cover pbx-w-full pbx-object-top pbx-aspect-square " src="${getPlaceholderImageDataUrl()}" alt="provider"> </div> <div> <div class=""> <p class="pbx-font-semibold">Our track record</p> </div> <div class="pbx-font-medium pbx-text-2xl lg:pbx-text-4xl"><p>Trusted by thousands of creators worldwide</p></div> <div><p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.</p></div> <div class="pbx-mt-16 pbx-grid pbx-max-w-xl pbx-grid-cols-1 pbx-gap-8 sm:pbx-mt-20 sm:pbx-grid-cols-2 xl:pbx-mt-16"> <div class="pbx-flex pbx-flex-col pbx-gap-y-3 pbx-border-l pbx-border-gray-900/10 pbx-pl-6"> <div><p>Creators on the platform</p></div> <div class="pbx-font-medium pbx-text-lg lg:pbx-text-2xl"><p>8,000+</p></div> </div> <div class="pbx-flex pbx-flex-col pbx-gap-y-3 pbx-border-l pbx-border-gray-900/10 pbx-pl-6"> <div> <p class="pbx-text-sm/6 pbx-text-gray-600">Flat platform fee</p> </div> <div class="pbx-font-medium pbx-text-lg lg:pbx-text-2xl"><p>3%</p></div> </div> <div class="pbx-flex pbx-flex-col pbx-gap-y-3 pbx-border-l pbx-border-gray-900/10 pbx-pl-6"> <div> <p class="pbx-text-sm/6 pbx-text-gray-600">Uptime guarantee</p> </div> <div class="pbx-text-lg lg:pbx-text-2xl pbx-font-medium"><p>99.9%</p></div> </div> <div class="pbx-flex pbx-flex-col pbx-gap-y-3 pbx-border-l pbx-border-gray-900/10 pbx-pl-6"> <div> <p class="pbx-text-sm/6 pbx-text-gray-600">Paid out to creators</p> </div> <div class="pbx-text-lg lg:pbx-text-2xl pbx-font-medium"><p>$70M</p></div> </div> </div> </div></div> </div></div> </section>`,
+          category: 'Marketing',
+          cover_image: `
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="103.953 200.017 225.995 103.408" width="225.995px" height="103.408px">
+                        <rect class="bg" x="103.953" width="103.408" height="103.408" style="fill: rgb(56, 65, 82); stroke-width: 1;" y="200.017"/>
+                        <polygon class="fg" points="119.698 267.14 145.377 236.302 171.076 267.14" style="fill: rgb(113, 128, 150); stroke-width: 1;"/>
+                        <polygon class="fg" points="165.937 267.14 178.786 251.721 191.636 267.14" style="fill: rgb(113, 128, 150); stroke-width: 1;"/>
+                        <circle class="fg" cx="178.786" cy="240.579" r="4.277" style="fill: rgb(113, 128, 150); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;" y="200.017"/>
+                        <rect class="bg" x="226.54" y="207.688" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" y="223.011" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;" y="230.62"/>
+                        <rect class="bg" x="226.54" y="238.291" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" y="215.499" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                      </svg>
+                    `,
+        },
+        {
           title: 'Show Single Product',
-          html_code: `<section data-component-title="Three Square Images With Text" > <div class="md:pbx-pt-12 md:pbx-pb-12 pbx-pt-4 pbx-pb-4 lg:pbx-px-4 pbx-px-2"><div class="pbx-mx-auto pbx-max-w-7xl"><div class="pbx-myPrimaryGap"> <div class="pbx-flex-1 pbx-py-2"> <img class="pbx-object-cover pbx-w-full pbx-object-top pbx-aspect-square " src="${getPlaceholderImageDataUrl()}" alt="provider"> <div class="pbx-break-words pbx-py-2"><p>Layouts and visual.</p><p>Start customizing by editing this default text directly in the editor.</p></div> </div> </div> </div> </div> </section>`,
-          category: 'Product',
+          html_code: `<section> <div class="md:pbx-pt-12 md:pbx-pb-12 pbx-pt-4 pbx-pb-4 lg:pbx-px-4 pbx-px-2"><div class="pbx-mx-auto pbx-max-w-7xl"><div class="pbx-myPrimaryGap"> <div class="pbx-flex-1 pbx-py-2"> <img class="pbx-object-cover pbx-w-full pbx-object-top pbx-aspect-square " src="${getPlaceholderImageDataUrl()}" alt="provider"> <div class="pbx-break-words pbx-py-2"><p>Layouts and visual.</p><p>Start customizing by editing this default text directly in the editor.</p></div> </div> </div> </div> </div> </section>`,
+          category: 'Products',
           cover_image: `
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="122.319 300.3 122.364 160.763" width="122.364px" height="160.763px">
                       <rect class="bg" width="122.364" height="122.364" style="fill: rgb(56, 65, 82); stroke-width: 1;" x="122.319" y="300.3"/>
