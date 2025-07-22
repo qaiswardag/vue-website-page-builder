@@ -1605,7 +1605,9 @@ export class PageBuilderService {
         if (componentId) {
           const components = this.pageBuilderStateStore.getComponents
           if (components) {
-            const componentIndex = components.findIndex((c: ComponentObject) => c.id === componentId)
+            const componentIndex = components.findIndex(
+              (c: ComponentObject) => c.id === componentId,
+            )
             if (componentIndex !== -1) {
               const updatedComponent = {
                 ...components[componentIndex],
@@ -2466,14 +2468,11 @@ export class PageBuilderService {
   }
 
   public async addTheme(components: string): Promise<void> {
-    try {
-      if (components) {
-        await this.mountComponentsToDOM(components)
-      }
-      await this.handleAutoSave()
-    } catch (error) {
-      console.error('Error adding component:', error)
+    if (components) {
+      this.validateMountingHTML(components)
+      await this.mountComponentsToDOM(components)
     }
+    await this.handleAutoSave()
   }
 
   /**
