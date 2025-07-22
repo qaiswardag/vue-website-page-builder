@@ -1599,6 +1599,27 @@ export class PageBuilderService {
             }
           }
         }
+      } else if (parentSection) {
+        // If the section is not empty, update its HTML content in the store
+        const componentId = parentSection.getAttribute('data-componentid')
+        if (componentId) {
+          const components = this.pageBuilderStateStore.getComponents
+          if (components) {
+            const componentIndex = components.findIndex((c: ComponentObject) => c.id === componentId)
+            if (componentIndex !== -1) {
+              const updatedComponent = {
+                ...components[componentIndex],
+                html_code: parentSection.outerHTML,
+              }
+              const newComponents = [
+                ...components.slice(0, componentIndex),
+                updatedComponent,
+                ...components.slice(componentIndex + 1),
+              ]
+              this.pageBuilderStateStore.setComponents(newComponents)
+            }
+          }
+        }
       }
     }
 
