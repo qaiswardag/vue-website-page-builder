@@ -440,10 +440,6 @@
   width: 100%;
   cursor: pointer;
 }
-#page-builder-editor strong,
-#pagebuilder strong {
-  font-weight: 500;
-}
 
 .pbx-reorder-highlight {
   animation: pbx-reorder-flash 0.4s ease-in-out;
@@ -520,18 +516,9 @@
 #page-builder-editor ul,
 #pagebuilder ul {
   list-style: disc !important;
-  padding: 1rem 0 0 1rem;
+  padding: 1rem 0 0 1.4rem;
   margin-left: 1em;
-  line-height: 1.2;
-}
-
-#page-builder-editor ol,
-#page-builder-editor-editable-area ol,
-#page-builder-editor ul,
-#page-builder-editor-editable-area ul {
-  list-style: disc !important;
-  padding: 1rem 0 0 1rem;
-  line-height: 1.2;
+  line-height: 2rem;
 }
 
 .pbx-headless-dropdown {
@@ -593,9 +580,15 @@
   color: inherit;
   text-decoration: none;
 }
+
+#page-builder-editor strong,
+#pagebuilder strong {
+  font: inherit;
+  font-weight: 500;
+}
+
 #pagebuilder code,
 #pagebuilder pre,
-#pagebuilder strong,
 #pagebuilder em {
   font: inherit;
   font-weight: inherit;
