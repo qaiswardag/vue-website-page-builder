@@ -1911,7 +1911,7 @@ export class PageBuilderService {
    * Syncs the current DOM state of components to the in-memory store.
    * @private
    */
-  private syncDomToStoreOnly() {
+  public syncDomToStoreOnly() {
     const pagebuilder = document.querySelector('#pagebuilder')
     if (!pagebuilder) return
 
@@ -1927,6 +1927,30 @@ export class PageBuilderService {
     })
 
     this.pageBuilderStateStore.setComponents(componentsToSave)
+  }
+
+  public async getLatestComponentsAsHtml(): Promise<string> {
+    this.syncDomToStoreOnly()
+    await nextTick()
+
+    const components = this.pageBuilderStateStore.getComponents
+
+    if (!Array.isArray(components)) {
+      return ''
+    }
+
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.addListenersToEditableElements()
+
+    return components
+      .map((comp) => {
+        return comp.html_code
+          .replace(/data-componentid="[^"]*"/g, '') // remove data-componentid
+          .replace(/\s{2,}/g, ' ') // optional: clean up excess spaces
+      })
+      .join('\n')
   }
 
   /**
@@ -2189,6 +2213,15 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setIsRestoring(false)
   }
 
+  public async returnLatestComponents() {
+    this.syncDomToStoreOnly()
+    // Wait for Vue to finish DOM updates before attaching event listeners. This ensure elements exist in the DOM.
+    await nextTick()
+    // Attach event listeners to all editable elements in the Builder
+    await this.addListenersToEditableElements()
+
+    return this.pageBuilderStateStore.getComponents
+  }
   /**
    * Gets the local storage key for the current resource.
    * @returns {string | null} The local storage key.
