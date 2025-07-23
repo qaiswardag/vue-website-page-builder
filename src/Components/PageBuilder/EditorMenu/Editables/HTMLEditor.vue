@@ -18,7 +18,6 @@ const props = defineProps({
 })
 
 const getElement = computed(() => pageBuilderStateStore.getElement)
-const getComponents = computed(() => pageBuilderStateStore.getComponents)
 
 const elementHTML = computed(() => {
   if (!getElement.value || !(getElement.value instanceof HTMLElement)) {
@@ -40,7 +39,7 @@ const handleShowHTMLEditor = async () => {
     return
   }
 
-  editableComponents.value = await pageBuilderService.getLatestComponentsAsHtml()
+  editableComponents.value = await pageBuilderService.generateHtmlFromComponents()
 }
 
 const handleCloseHTMLEditor = () => {

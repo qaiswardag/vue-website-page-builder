@@ -1929,7 +1929,7 @@ export class PageBuilderService {
     this.pageBuilderStateStore.setComponents(componentsToSave)
   }
 
-  public async getLatestComponentsAsHtml(): Promise<string> {
+  public async generateHtmlFromComponents(): Promise<string> {
     this.syncDomToStoreOnly()
     await nextTick()
 
