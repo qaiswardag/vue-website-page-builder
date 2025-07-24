@@ -407,6 +407,25 @@ const component: Components[] = [
                     `,
         },
         {
+          title: 'Timeline Simple',
+          html_code: `<section><div class="pbx-bg-white pbx-py-24 sm:pbx-py-32"> <div class="pbx-mx-auto pbx-max-w-7xl pbx-px-6 lg:pbx-px-8"> <div class="pbx-mx-auto pbx-grid pbx-max-w-2xl pbx-grid-cols-1 pbx-gap-8 pbx-overflow-hidden lg:pbx-mx-0 lg:pbx-max-w-none lg:pbx-grid-cols-4"> <div> <div class="pbx-flex pbx-items-center pbx-text-sm/6 pbx-font-semibold pbx-text-indigo-600"> <div class="pbx-text-black"><p>Aug 2021</p></div>  </div> <div class="pbx-mt-6 pbx-text-lg/8 pbx-font-semibold pbx-tracking-tight pbx-text-black"><p>Founded company</p></div> <div class="pbx-mt-1 pbx-text-base/7 pbx-text-black"><p>Nihil aut nam. Dignissimos a pariatur et quos omnis. Aspernatur asperiores et dolorem dolorem optio voluptate repudiandae.</p></div> </div> <div> <div class="pbx-flex pbx-items-center pbx-text-sm/6 pbx-font-semibold pbx-text-indigo-600"> <div class="pbx-text-black"><p>Dec 2021</p></div>  </div> <div class="pbx-mt-6 pbx-text-lg/8 pbx-font-semibold pbx-tracking-tight pbx-text-black"><p>Secured $65m in funding</p></div> <div class="pbx-mt-1 pbx-text-base/7 pbx-text-black"> <p>Provident quia ut esse. Vero vel eos repudiandae aspernatur. Cumque minima impedit sapiente a architecto nihil.</p> </div> </div> <div> <div class="pbx-flex pbx-items-center pbx-text-sm/6 pbx-font-semibold pbx-text-indigo-600"> <div class="pbx-text-black"><p>Feb 2022</p></div>  </div> <div class="pbx-mt-6 pbx-text-lg/8 pbx-font-semibold pbx-tracking-tight pbx-text-black"><p>Released beta</p></div> <div class="pbx-mt-1 pbx-text-base/7 pbx-text-black"> <p>Sunt perspiciatis incidunt. Non necessitatibus aliquid. Consequatur ut officiis earum eum quia facilis. Hic deleniti dolorem quia et.</p> </div> </div> <div> <div class="pbx-flex pbx-items-center pbx-text-sm/6 pbx-font-semibold pbx-text-indigo-600"> <div class="pbx-text-black"><p>Dec 2022</p></div>  </div> <div class="pbx-mt-6 pbx-text-lg/8 pbx-font-semibold pbx-tracking-tight pbx-text-black"> <p>Global launch of product</p> </div> <div class="pbx-mt-1 pbx-text-base/7 pbx-text-black"><p>Ut ipsa sint distinctio quod itaque nam qui. Possimus aut unde id architecto voluptatem hic aut pariatur velit.</p></div> </div> </div> </div> </div></section>`,
+          category: 'Marketing',
+          cover_image: `
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="103.953 200.017 225.995 103.408" width="225.995px" height="103.408px">
+                        <rect class="bg" x="103.953" width="103.408" height="103.408" style="fill: rgb(56, 65, 82); stroke-width: 1;" y="200.017"/>
+                        <polygon class="fg" points="119.698 267.14 145.377 236.302 171.076 267.14" style="fill: rgb(113, 128, 150); stroke-width: 1;"/>
+                        <polygon class="fg" points="165.937 267.14 178.786 251.721 191.636 267.14" style="fill: rgb(113, 128, 150); stroke-width: 1;"/>
+                        <circle class="fg" cx="178.786" cy="240.579" r="4.277" style="fill: rgb(113, 128, 150); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;" y="200.017"/>
+                        <rect class="bg" x="226.54" y="207.688" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" y="223.011" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;" y="230.62"/>
+                        <rect class="bg" x="226.54" y="238.291" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" y="215.499" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                      </svg>
+                    `,
+        },
+        {
           title: 'Show Single Product',
           html_code: `<section> <div class="md:pbx-pt-12 md:pbx-pb-12 pbx-pt-4 pbx-pb-4 lg:pbx-px-4 pbx-px-2"><div class="pbx-mx-auto pbx-max-w-7xl"><div class="pbx-myPrimaryGap"> <div class="pbx-flex-1 pbx-py-2"> <img class="pbx-object-cover pbx-w-full pbx-object-top pbx-aspect-square " src="${getPlaceholderImageDataUrl()}" alt="provider"> <div class="pbx-break-words pbx-py-2"><p>Layouts and visual.</p><p>Start customizing by editing this default text directly in the editor.</p></div> </div> </div> </div> </div> </section>`,
           category: 'Products',
