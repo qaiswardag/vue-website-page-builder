@@ -369,6 +369,25 @@ const component: Components[] = [
                     `,
         },
         {
+          title: 'Stats Stepped',
+          html_code: `<section><div class="pbx-relative pbx-py-4 pbx-bg-slate-200"><div class="pbx-mx-auto pbx-max-w-7xl pbx-px-6 lg:pbx-px-8 pbx-pt-12"> <div class="pbx-mx-auto pbx-max-w-2xl lg:pbx-mx-0"><div class="pbx-text-2xl lg:pbx-text-4xl pbx-font-medium"><h2>We approach work as a place to make the world better</h2></div><div><p>Diam nunc lacus lacus aliquam turpis enim. Eget hac velit est euismod lacus. Est non placerat nam arcu. Cras purus nibh cursus sit eu in id. Integer vel nibh.</p></div> </div> <div class="pbx-mx-auto pbx-mt-16 pbx-flex pbx-max-w-2xl pbx-flex-col pbx-gap-8 lg:pbx-mx-0 lg:pbx-mt-20 lg:pbx-max-w-none lg:pbx-flex-row lg:pbx-items-end pbx-pb-20"> <div class="pbx-flex pbx-flex-col-reverse pbx-justify-between pbx-gap-x-16 pbx-gap-y-8 pbx-rounded-2xl pbx-bg-gray-50 pbx-p-8 sm:pbx-w-3/4 sm:pbx-max-w-md sm:pbx-flex-row-reverse sm:pbx-items-end lg:pbx-w-72 lg:pbx-max-w-none lg:pbx-flex-none lg:pbx-flex-col lg:pbx-items-start"><div class="pbx-text-lg lg:pbx-text-2xl"><p>250k</p></div><div><p>Users on the platform</p><p>Vel labore deleniti veniam consequuntur sunt nobis.</p></div> </div> <div class="pbx-flex pbx-flex-col-reverse pbx-justify-between pbx-gap-x-16 pbx-gap-y-8 pbx-rounded-2xl pbx-bg-gray-900 pbx-p-8 sm:pbx-flex-row-reverse sm:pbx-items-end lg:pbx-w-full lg:pbx-max-w-sm lg:pbx-flex-auto lg:pbx-flex-col lg:pbx-items-start lg:pbx-gap-y-44"><div class="pbx-text-white pbx-text-lg lg:pbx-text-2xl"><p>$8.9 billion</p></div><div class="sm:pbx-w-80 sm:pbx-shrink lg:pbx-w-auto lg:pbx-flex-none pbx-text-white"><p>We’re that our customers have made over $8 billion in total revenue.</p><p>Eu duis porta aliquam ornare. Elementum eget magna egestas.</p></div> </div> <div class="pbx-flex pbx-flex-col-reverse pbx-justify-between pbx-gap-x-16 pbx-gap-y-8 pbx-rounded-2xl pbx-bg-indigo-600 pbx-p-8 sm:pbx-w-11/12 sm:pbx-max-w-xl sm:pbx-flex-row-reverse sm:pbx-items-end lg:pbx-w-full lg:pbx-max-w-none lg:pbx-flex-auto lg:pbx-flex-col lg:pbx-items-start lg:pbx-gap-y-28"><div class="pbx-text-white pbx-text-lg lg:pbx-text-2xl"><p>401,000</p></div><div class="sm:pbx-w-80 sm:pbx-shrink lg:pbx-w-auto lg:pbx-flex-none pbx-text-white"><p>Transactions this year</p><p>Eu duis porta aliquam ornare. Elementum eget magna egestas. Eu duis porta aliquam ornare.</p></div> </div> </div> </div></div></section>`,
+          category: 'Marketing',
+          cover_image: `
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="103.953 200.017 225.995 103.408" width="225.995px" height="103.408px">
+                        <rect class="bg" x="103.953" width="103.408" height="103.408" style="fill: rgb(56, 65, 82); stroke-width: 1;" y="200.017"/>
+                        <polygon class="fg" points="119.698 267.14 145.377 236.302 171.076 267.14" style="fill: rgb(113, 128, 150); stroke-width: 1;"/>
+                        <polygon class="fg" points="165.937 267.14 178.786 251.721 191.636 267.14" style="fill: rgb(113, 128, 150); stroke-width: 1;"/>
+                        <circle class="fg" cx="178.786" cy="240.579" r="4.277" style="fill: rgb(113, 128, 150); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;" y="200.017"/>
+                        <rect class="bg" x="226.54" y="207.688" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" y="223.011" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;" y="230.62"/>
+                        <rect class="bg" x="226.54" y="238.291" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                        <rect class="bg" x="226.54" y="215.499" width="103.408" height="5.619" style="fill: rgb(56, 65, 82); stroke-width: 1;"/>
+                      </svg>
+                    `,
+        },
+        {
           title: 'Show Single Product',
           html_code: `<section> <div class="md:pbx-pt-12 md:pbx-pb-12 pbx-pt-4 pbx-pb-4 lg:pbx-px-4 pbx-px-2"><div class="pbx-mx-auto pbx-max-w-7xl"><div class="pbx-myPrimaryGap"> <div class="pbx-flex-1 pbx-py-2"> <img class="pbx-object-cover pbx-w-full pbx-object-top pbx-aspect-square " src="${getPlaceholderImageDataUrl()}" alt="provider"> <div class="pbx-break-words pbx-py-2"><p>Layouts and visual.</p><p>Start customizing by editing this default text directly in the editor.</p></div> </div> </div> </div> </div> </section>`,
           category: 'Products',
